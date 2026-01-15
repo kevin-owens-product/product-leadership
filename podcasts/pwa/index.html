@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#6366f1">
+    <title>Tech Leadership Unpacked</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --alex-color: #3b82f6;
+            --sam-color: #10b981;
+            --border: #333;
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            min-height: 100dvh;
+            line-height: 1.5;
+            overflow-x: hidden;
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
+        }
+
+        /* Views */
+        .view {
+            display: none;
+            min-height: 100vh;
+            min-height: 100dvh;
+        }
+
+        .view.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Episode List View */
+        .episode-list-view {
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .app-header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+        }
+
+        .app-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .app-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .offline-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+
+        .episode-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .episode-card:hover, .episode-card:active {
+            background: var(--bg-tertiary);
+            transform: scale(0.98);
+        }
+
+        .episode-card .ep-number {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .episode-card .ep-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .episode-card .ep-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .episode-card .ep-duration {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        /* Player View */
+        .player-view {
+            padding: 20px;
+            padding-bottom: 20px;
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background: var(--bg-secondary);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-title {
+            flex: 1;
+        }
+
+        .player-title h2 {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+
+        .player-title .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Voice Settings */
+        .voice-panel {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .voice-panel h3 {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .voice-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .voice-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .voice-select-wrapper {
+            flex: 1;
+        }
+
+        .voice-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+
+        .voice-label .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .voice-label.alex .dot { background: var(--alex-color); }
+        .voice-label.sam .dot { background: var(--sam-color); }
+
+        .voice-select {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        /* Playback Controls */
+        .controls-panel {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+        }
+
+        .status-dot.speaking {
+            background: var(--accent);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        .status-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .ctrl-btn {
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: all 0.15s;
+        }
+
+        .ctrl-btn:active {
+            transform: scale(0.9);
+            background: var(--accent);
+        }
+
+        .ctrl-btn.small {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+        }
+
+        .ctrl-btn.large {
+            width: 72px;
+            height: 72px;
+            font-size: 2rem;
+            background: var(--accent);
+        }
+
+        /* Progress */
+        .progress-section {
+            margin-bottom: 16px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--alex-color), var(--sam-color));
+            border-radius: 4px;
+            transition: width 0.1s;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Speed Control */
+        .speed-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .speed-section label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .speed-slider {
+            width: 120px;
+            accent-color: var(--accent);
+        }
+
+        .speed-value {
+            min-width: 45px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Transcript */
+        .transcript-panel {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+            max-height: 40vh;
+        }
+
+        .transcript-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .transcript-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .transcript-line {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            background: var(--bg-tertiary);
+            transition: all 0.2s;
+        }
+
+        .transcript-line.current {
+            background: var(--bg-primary);
+            border-left: 3px solid var(--accent);
+        }
+
+        .transcript-line .speaker {
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+
+        .transcript-line.alex .speaker { color: var(--alex-color); }
+        .transcript-line.sam .speaker { color: var(--sam-color); }
+
+        .transcript-line.direction {
+            font-style: italic;
+            color: var(--text-secondary);
+            background: transparent;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .transcript-line .text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .transcript-line.current .text {
+            color: var(--text-primary);
+        }
+
+        /* Loading */
+        .loading-text {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+
+        /* Install prompt */
+        .install-prompt {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent);
+            border-radius: 16px;
+            padding: 16px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .install-prompt.show {
+            display: block;
+        }
+
+        .install-prompt p {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .install-prompt .btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .install-prompt button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .install-prompt .install-btn {
+            background: var(--accent);
+            color: white;
+        }
+
+        .install-prompt .dismiss-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Episode List View -->
+    <div id="list-view" class="view active episode-list-view">
+        <header class="app-header">
+            <h1>Tech Leadership Unpacked</h1>
+            <p>10-Hour Podcast Series for Product Leaders</p>
+            <span class="offline-badge" id="offline-badge" style="display:none">Works Offline</span>
+        </header>
+
+        <div id="episode-list">
+            <p class="loading-text">Loading episodes...</p>
+        </div>
+    </div>
+
+    <!-- Player View -->
+    <div id="player-view" class="view player-view">
+        <div class="player-header">
+            <button class="back-btn" id="back-to-list">←</button>
+            <div class="player-title">
+                <h2 id="player-episode-title">Episode</h2>
+                <p class="subtitle" id="player-episode-subtitle">Subtitle</p>
+            </div>
+        </div>
+
+        <div class="voice-panel">
+            <h3>Voices</h3>
+            <div class="voice-row">
+                <div class="voice-select-wrapper">
+                    <div class="voice-label alex"><span class="dot"></span>Alex</div>
+                    <select class="voice-select" id="alex-voice"></select>
+                </div>
+                <div class="voice-select-wrapper">
+                    <div class="voice-label sam"><span class="dot"></span>Sam</div>
+                    <select class="voice-select" id="sam-voice"></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-panel">
+            <div class="status-row">
+                <div class="status-dot" id="status-dot"></div>
+                <span class="status-text" id="status-text">Ready</span>
+            </div>
+
+            <div class="control-buttons">
+                <button class="ctrl-btn small" id="prev-btn">⏮</button>
+                <button class="ctrl-btn small" id="back-btn">↺</button>
+                <button class="ctrl-btn large" id="play-btn">▶</button>
+                <button class="ctrl-btn small" id="fwd-btn">↻</button>
+                <button class="ctrl-btn small" id="next-btn">⏭</button>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+                </div>
+                <div class="progress-labels">
+                    <span id="current-pos">Line 0</span>
+                    <span id="total-pos">of 0</span>
+                </div>
+            </div>
+
+            <div class="speed-section">
+                <label>Speed</label>
+                <input type="range" class="speed-slider" id="speed-slider" min="0.5" max="2" step="0.1" value="1">
+                <span class="speed-value" id="speed-value">1.0x</span>
+            </div>
+        </div>
+
+        <div class="transcript-panel">
+            <div class="transcript-header">Live Transcript</div>
+            <div class="transcript-content" id="transcript-content">
+                <p class="loading-text">Loading transcript...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install Prompt -->
+    <div class="install-prompt" id="install-prompt">
+        <p>Install this app for offline use during your flight!</p>
+        <div class="btns">
+            <button class="dismiss-btn" id="dismiss-install">Later</button>
+            <button class="install-btn" id="do-install">Install</button>
+        </div>
+    </div>
+
+    <script src="episodes.js"></script>
+    <script>
+        // State
+        let currentEpisode = null;
+        let dialogueLines = [];
+        let currentLineIndex = 0;
+        let isPlaying = false;
+        let isPaused = false;
+        let voices = [];
+        let alexVoice = null;
+        let samVoice = null;
+        let speechRate = 1.0;
+        const synth = window.speechSynthesis;
+
+        // DOM Elements
+        const listView = document.getElementById('list-view');
+        const playerView = document.getElementById('player-view');
+        const episodeListEl = document.getElementById('episode-list');
+        const transcriptContent = document.getElementById('transcript-content');
+
+        // Load voices
+        function loadVoices() {
+            voices = synth.getVoices();
+            if (voices.length === 0) {
+                setTimeout(loadVoices, 100);
+                return;
+            }
+
+            const alexSelect = document.getElementById('alex-voice');
+            const samSelect = document.getElementById('sam-voice');
+            alexSelect.innerHTML = '';
+            samSelect.innerHTML = '';
+
+            // Find good voices for each character
+            const maleVoices = [];
+            const femaleVoices = [];
+
+            voices.forEach((voice, index) => {
+                const name = voice.name.toLowerCase();
+                if (name.includes('male') || name.includes('david') || name.includes('james') ||
+                    name.includes('daniel') || name.includes('guy') || name.includes('aaron') ||
+                    name.includes('google us english') || name.includes('english (united states)')) {
+                    maleVoices.push({ voice, index });
+                } else if (name.includes('female') || name.includes('samantha') || name.includes('karen') ||
+                           name.includes('victoria') || name.includes('fiona') || name.includes('moira')) {
+                    femaleVoices.push({ voice, index });
+                }
+            });
+
+            // Add all voices to both selects
+            voices.forEach((voice, index) => {
+                const opt1 = document.createElement('option');
+                opt1.value = index;
+                opt1.textContent = `${voice.name}`;
+                alexSelect.appendChild(opt1);
+
+                const opt2 = document.createElement('option');
+                opt2.value = index;
+                opt2.textContent = `${voice.name}`;
+                samSelect.appendChild(opt2);
+            });
+
+            // Set defaults
+            if (maleVoices.length > 0) {
+                alexSelect.value = maleVoices[0].index;
+                alexVoice = voices[maleVoices[0].index];
+            } else if (voices.length > 0) {
+                alexVoice = voices[0];
+            }
+
+            if (femaleVoices.length > 0) {
+                samSelect.value = femaleVoices[0].index;
+                samVoice = voices[femaleVoices[0].index];
+            } else if (voices.length > 1) {
+                samSelect.value = 1;
+                samVoice = voices[1];
+            }
+        }
+
+        if (synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = loadVoices;
+        }
+        loadVoices();
+
+        // Voice change handlers
+        document.getElementById('alex-voice').addEventListener('change', e => {
+            alexVoice = voices[e.target.value];
+        });
+        document.getElementById('sam-voice').addEventListener('change', e => {
+            samVoice = voices[e.target.value];
+        });
+
+        // Parse markdown to dialogue
+        function parseMarkdown(content) {
+            const lines = content.split('\n');
+            const dialogue = [];
+            let currentSpeaker = null;
+
+            for (const line of lines) {
+                const trimmed = line.trim();
+                if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('|') ||
+                    trimmed.startsWith('---') || trimmed.startsWith('*Next') || trimmed.startsWith('[Read')) {
+                    continue;
+                }
+
+                const alexMatch = trimmed.match(/^\*?\*?ALEX:?\*?\*?\s*(.+)/i);
+                const samMatch = trimmed.match(/^\*?\*?SAM:?\*?\*?\s*(.+)/i);
+                const dirMatch = trimmed.match(/^\*?\*?\[(.+)\]\*?\*?$/);
+
+                if (alexMatch) {
+                    dialogue.push({ speaker: 'ALEX', text: cleanText(alexMatch[1]), type: 'alex' });
+                    currentSpeaker = 'alex';
+                } else if (samMatch) {
+                    dialogue.push({ speaker: 'SAM', text: cleanText(samMatch[1]), type: 'sam' });
+                    currentSpeaker = 'sam';
+                } else if (dirMatch) {
+                    dialogue.push({ speaker: '', text: dirMatch[1], type: 'direction' });
+                } else if (currentSpeaker && trimmed.length > 0 && !trimmed.startsWith('*') && !trimmed.startsWith('-')) {
+                    if (dialogue.length > 0 && dialogue[dialogue.length - 1].type === currentSpeaker) {
+                        dialogue[dialogue.length - 1].text += ' ' + cleanText(trimmed);
+                    }
+                }
+            }
+            return dialogue;
+        }
+
+        function cleanText(text) {
+            return text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/`/g, '')
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+                .replace(/```[\s\S]*?```/g, 'code block').trim();
+        }
+
+        // Render episode list
+        function renderEpisodeList() {
+            if (typeof EPISODES === 'undefined') {
+                episodeListEl.innerHTML = '<p class="loading-text">Error loading episodes</p>';
+                return;
+            }
+
+            episodeListEl.innerHTML = '';
+            EPISODES.forEach(ep => {
+                const card = document.createElement('div');
+                card.className = 'episode-card';
+                card.innerHTML = `
+                    <div class="ep-number">EPISODE ${ep.id}</div>
+                    <div class="ep-title">${ep.title}</div>
+                    <div class="ep-subtitle">${ep.subtitle}</div>
+                    <div class="ep-duration">~60 min</div>
+                `;
+                card.addEventListener('click', () => openEpisode(ep));
+                episodeListEl.appendChild(card);
+            });
+        }
+
+        // Open episode
+        function openEpisode(episode) {
+            currentEpisode = episode;
+            dialogueLines = parseMarkdown(episode.content);
+            currentLineIndex = 0;
+
+            document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
+            document.getElementById('player-episode-subtitle').textContent = episode.subtitle;
+
+            renderTranscript();
+            updateProgress();
+            setStatus('Ready');
+
+            listView.classList.remove('active');
+            playerView.classList.add('active');
+        }
+
+        // Back to list
+        document.getElementById('back-to-list').addEventListener('click', () => {
+            stopPlayback();
+            playerView.classList.remove('active');
+            listView.classList.add('active');
+        });
+
+        // Render transcript
+        function renderTranscript() {
+            transcriptContent.innerHTML = '';
+            dialogueLines.forEach((line, index) => {
+                const div = document.createElement('div');
+                div.className = `transcript-line ${line.type}`;
+                div.dataset.index = index;
+
+                if (line.type === 'direction') {
+                    div.innerHTML = `<div class="text">${line.text}</div>`;
+                } else {
+                    div.innerHTML = `<div class="speaker">${line.speaker}</div><div class="text">${line.text}</div>`;
+                }
+                div.addEventListener('click', () => jumpToLine(index));
+                transcriptContent.appendChild(div);
+            });
+        }
+
+        // Update progress
+        function updateProgress() {
+            const pct = dialogueLines.length > 0 ? (currentLineIndex / dialogueLines.length) * 100 : 0;
+            document.getElementById('progress-fill').style.width = `${pct}%`;
+            document.getElementById('current-pos').textContent = `Line ${currentLineIndex + 1}`;
+            document.getElementById('total-pos').textContent = `of ${dialogueLines.length}`;
+
+            document.querySelectorAll('.transcript-line').forEach((el, i) => {
+                el.classList.toggle('current', i === currentLineIndex);
+            });
+
+            const currentEl = document.querySelector('.transcript-line.current');
+            if (currentEl) {
+                currentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Status
+        function setStatus(text, speaking = false) {
+            document.getElementById('status-text').textContent = text;
+            document.getElementById('status-dot').classList.toggle('speaking', speaking);
+        }
+
+        // Speech
+        function speak(text, speaker) {
+            return new Promise((resolve, reject) => {
+                const utt = new SpeechSynthesisUtterance(text);
+                if (speaker === 'alex' && alexVoice) utt.voice = alexVoice;
+                else if (speaker === 'sam' && samVoice) utt.voice = samVoice;
+                utt.rate = speechRate;
+                utt.pitch = speaker === 'alex' ? 0.9 : 1.1;
+                utt.onend = () => resolve();
+                utt.onerror = (e) => reject(e);
+                synth.speak(utt);
+            });
+        }
+
+        // Playback
+        async function startPlayback() {
+            if (dialogueLines.length === 0) return;
+
+            isPlaying = true;
+            isPaused = false;
+            document.getElementById('play-btn').textContent = '⏸';
+
+            while (currentLineIndex < dialogueLines.length && isPlaying) {
+                if (isPaused) {
+                    await new Promise(r => setTimeout(r, 100));
+                    continue;
+                }
+
+                const line = dialogueLines[currentLineIndex];
+                updateProgress();
+                setStatus(`${line.speaker || 'Narration'}: Speaking...`, true);
+
+                try {
+                    await speak(line.text, line.type);
+                } catch (e) {
+                    console.error('Speech error:', e);
+                }
+
+                if (isPlaying && !isPaused) {
+                    currentLineIndex++;
+                    await new Promise(r => setTimeout(r, 300));
+                }
+            }
+
+            if (currentLineIndex >= dialogueLines.length) {
+                setStatus('Episode complete!');
+                currentLineIndex = 0;
+            }
+
+            isPlaying = false;
+            isPaused = false;
+            document.getElementById('play-btn').textContent = '▶';
+            setStatus('Ready');
+        }
+
+        function stopPlayback() {
+            isPlaying = false;
+            isPaused = false;
+            synth.cancel();
+            document.getElementById('play-btn').textContent = '▶';
+        }
+
+        function togglePlayPause() {
+            if (!isPlaying) {
+                startPlayback();
+            } else if (isPaused) {
+                isPaused = false;
+                synth.resume();
+                document.getElementById('play-btn').textContent = '⏸';
+            } else {
+                isPaused = true;
+                synth.pause();
+                document.getElementById('play-btn').textContent = '▶';
+                setStatus('Paused');
+            }
+        }
+
+        function jumpToLine(index) {
+            synth.cancel();
+            currentLineIndex = Math.max(0, Math.min(index, dialogueLines.length - 1));
+            updateProgress();
+        }
+
+        function skipLines(n) {
+            jumpToLine(currentLineIndex + n);
+        }
+
+        // Button handlers
+        document.getElementById('play-btn').addEventListener('click', togglePlayPause);
+        document.getElementById('prev-btn').addEventListener('click', () => skipLines(-10));
+        document.getElementById('next-btn').addEventListener('click', () => skipLines(10));
+        document.getElementById('back-btn').addEventListener('click', () => skipLines(-5));
+        document.getElementById('fwd-btn').addEventListener('click', () => skipLines(5));
+
+        // Speed
+        document.getElementById('speed-slider').addEventListener('input', e => {
+            speechRate = parseFloat(e.target.value);
+            document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
+        });
+
+        // Progress bar click
+        document.getElementById('progress-bar').addEventListener('click', e => {
+            const rect = e.target.getBoundingClientRect();
+            const pct = (e.clientX - rect.left) / rect.width;
+            jumpToLine(Math.floor(pct * dialogueLines.length));
+        });
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(reg => {
+                console.log('SW registered');
+                document.getElementById('offline-badge').style.display = 'inline-block';
+            }).catch(err => console.log('SW error:', err));
+        }
+
+        // Install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', e => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('install-prompt').classList.add('show');
+        });
+
+        document.getElementById('do-install').addEventListener('click', () => {
+            document.getElementById('install-prompt').classList.remove('show');
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(result => {
+                    deferredPrompt = null;
+                });
+            }
+        });
+
+        document.getElementById('dismiss-install').addEventListener('click', () => {
+            document.getElementById('install-prompt').classList.remove('show');
+        });
+
+        // Initialize
+        renderEpisodeList();
+    </script>
+</body>
+</html>

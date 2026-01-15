@@ -1479,7 +1479,7 @@
 
     <script>
         // ===== APP VERSION =====
-        const APP_VERSION = '2.0.3';
+        const APP_VERSION = '2.0.4';
 
         // ===== AUTO-UPDATE CHECK =====
         // Runs immediately - fetches version from server bypassing all caches
@@ -1886,6 +1886,8 @@
             const lines = content.split('\n');
             const dialogue = [];
             let currentSpeaker = null;
+            let speakerCount = 0;
+            const speakerMap = {}; // Maps speaker names to 'alex' or 'sam' voice
 
             for (const line of lines) {
                 const trimmed = line.trim();
@@ -1894,19 +1896,36 @@
                     continue;
                 }
 
-                const alexMatch = trimmed.match(/^\*?\*?ALEX:?\*?\*?\s*(.+)/i);
-                const samMatch = trimmed.match(/^\*?\*?SAM:?\*?\*?\s*(.+)/i);
+                // Match any speaker pattern: **NAME:** or **NAME:** text
+                const speakerMatch = trimmed.match(/^\*\*([A-Z]+):\*\*\s*(.*)$/);
                 const dirMatch = trimmed.match(/^\*?\*?\[(.+)\]\*?\*?$/);
 
-                if (alexMatch) {
-                    dialogue.push({ speaker: 'ALEX', text: cleanText(alexMatch[1]), type: 'alex' });
-                    currentSpeaker = 'alex';
-                } else if (samMatch) {
-                    dialogue.push({ speaker: 'SAM', text: cleanText(samMatch[1]), type: 'sam' });
-                    currentSpeaker = 'sam';
+                if (speakerMatch) {
+                    const speakerName = speakerMatch[1];
+                    const text = speakerMatch[2];
+
+                    // Assign voice type (alternating between alex and sam voices)
+                    if (!speakerMap[speakerName]) {
+                        speakerMap[speakerName] = speakerCount % 2 === 0 ? 'alex' : 'sam';
+                        speakerCount++;
+                    }
+
+                    const voiceType = speakerMap[speakerName];
+
+                    if (text && text.trim()) {
+                        dialogue.push({
+                            speaker: speakerName,
+                            text: cleanText(text),
+                            type: voiceType
+                        });
+                    }
+                    currentSpeaker = voiceType;
                 } else if (dirMatch) {
-                    dialogue.push({ speaker: '', text: dirMatch[1], type: 'direction' });
+                    // Stage directions like [MUSIC FADES] - skip these, don't speak them
+                    // dialogue.push({ speaker: '', text: dirMatch[1], type: 'direction' });
+                    continue;
                 } else if (currentSpeaker && trimmed.length > 0 && !trimmed.startsWith('*') && !trimmed.startsWith('-')) {
+                    // Continuation of previous speaker's text
                     if (dialogue.length > 0 && dialogue[dialogue.length - 1].type === currentSpeaker) {
                         dialogue[dialogue.length - 1].text += ' ' + cleanText(trimmed);
                     }

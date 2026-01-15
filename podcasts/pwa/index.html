@@ -784,6 +784,225 @@
         .complete-actions button {
             width: 100%;
         }
+
+        /* Bookmarks & Chapters Panel */
+        .nav-panel {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            color: var(--accent);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-content {
+            max-height: 200px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-content[data-tab]:not(.active) {
+            display: none;
+        }
+
+        /* Chapters List */
+        .chapter-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .chapter-item:last-child {
+            border-bottom: none;
+        }
+
+        .chapter-item:active {
+            background: var(--bg-tertiary);
+        }
+
+        .chapter-item.current {
+            background: var(--bg-tertiary);
+            border-left: 3px solid var(--accent);
+        }
+
+        .chapter-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .chapter-item.current .chapter-number {
+            background: var(--accent);
+            color: white;
+        }
+
+        .chapter-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .chapter-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chapter-time {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Bookmarks List */
+        .bookmark-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .bookmark-item:last-child {
+            border-bottom: none;
+        }
+
+        .bookmark-content {
+            flex: 1;
+            cursor: pointer;
+            min-width: 0;
+        }
+
+        .bookmark-position {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 2px;
+        }
+
+        .bookmark-note {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .bookmark-preview {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .bookmark-delete {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 4px;
+            flex-shrink: 0;
+        }
+
+        .bookmark-delete:active {
+            color: #ef4444;
+        }
+
+        .no-items {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .add-bookmark-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border: 1px dashed var(--border);
+            border-radius: 10px;
+            margin: 12px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .add-bookmark-btn:active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Bookmark Modal */
+        .bookmark-modal input {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 16px;
+        }
+
+        .bookmark-modal input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .bookmark-modal .context-preview {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            max-height: 80px;
+            overflow: hidden;
+        }
+
+        /* Current chapter indicator */
+        .current-chapter-badge {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -839,11 +1058,29 @@
             </div>
         </div>
 
+        <!-- Chapters & Bookmarks Panel -->
+        <div class="nav-panel">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="chapters">Chapters</button>
+                <button class="nav-tab" data-tab="bookmarks">Bookmarks</button>
+            </div>
+            <div class="nav-content active" data-tab="chapters" id="chapters-list">
+                <div class="no-items">Loading chapters...</div>
+            </div>
+            <div class="nav-content" data-tab="bookmarks" id="bookmarks-list">
+                <button class="add-bookmark-btn" id="add-bookmark-btn">+ Add Bookmark Here</button>
+                <div class="no-items">No bookmarks yet</div>
+            </div>
+        </div>
+
         <!-- Controls Panel -->
         <div class="panel controls-panel">
             <div class="status-row">
                 <div class="status-dot" id="status-dot"></div>
-                <span class="status-text" id="status-text">Ready</span>
+                <div style="flex:1">
+                    <span class="status-text" id="status-text">Ready</span>
+                    <div class="current-chapter-badge" id="current-chapter-badge"></div>
+                </div>
             </div>
 
             <div class="control-buttons">
@@ -927,6 +1164,20 @@
             <div class="complete-actions">
                 <button class="primary-btn" id="play-next-episode">Play Next Episode</button>
                 <button class="secondary-btn" id="back-to-episodes">Back to Episodes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bookmark Modal -->
+    <div class="modal-overlay" id="bookmark-modal">
+        <div class="modal bookmark-modal">
+            <h3>Add Bookmark</h3>
+            <p id="bookmark-position-text">Line 0 of 0</p>
+            <div class="context-preview" id="bookmark-context"></div>
+            <input type="text" id="bookmark-note-input" placeholder="Add a note (optional)">
+            <div class="btns">
+                <button class="secondary-btn" id="cancel-bookmark">Cancel</button>
+                <button class="primary-btn" id="save-bookmark">Save</button>
             </div>
         </div>
     </div>
@@ -1228,6 +1479,7 @@
         function openEpisode(episode) {
             currentEpisode = episode;
             dialogueLines = parseMarkdown(episode.content);
+            chapters = parseChapters(episode.content);
 
             // Restore progress
             const state = loadState();
@@ -1238,6 +1490,8 @@
             document.getElementById('player-episode-subtitle').textContent = episode.subtitle;
 
             renderTranscript();
+            renderChapters();
+            renderBookmarks();
             updateProgress();
             setStatus('Ready - Tap play to start');
 
@@ -1302,6 +1556,9 @@
             if (currentLineIndex % 10 === 0) {
                 saveState();
             }
+
+            // Update chapter indicator
+            updateCurrentChapter();
         }
 
         // Transcript search
@@ -1658,6 +1915,253 @@
 
         document.getElementById('dismiss-install').addEventListener('click', () => {
             document.getElementById('install-modal').classList.remove('show');
+        });
+
+        // ===== CHAPTERS =====
+        let chapters = [];
+
+        function parseChapters(content) {
+            const lines = content.split('\n');
+            const chaps = [];
+            let currentLine = 0;
+            let dialogueLine = 0;
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+
+                // Track dialogue lines for position mapping
+                if (line.match(/^\*?\*?ALEX:?\*?\*?\s/i) || line.match(/^\*?\*?SAM:?\*?\*?\s/i)) {
+                    // Check if this line follows a chapter header
+                    for (let j = chaps.length - 1; j >= 0; j--) {
+                        if (chaps[j].lineIndex === -1) {
+                            chaps[j].lineIndex = dialogueLine;
+                            break;
+                        }
+                    }
+                    dialogueLine++;
+                }
+
+                // Find chapter headers (### SEGMENT, ### INTRO, etc.)
+                const chapterMatch = line.match(/^###\s+(.+)/);
+                if (chapterMatch) {
+                    let title = chapterMatch[1].trim();
+                    // Clean up the title
+                    title = title.replace(/\*\*/g, '').replace(/\(\d+\s*minutes?\)/i, '').trim();
+                    title = title.replace(/:\s*$/, '');
+
+                    chaps.push({
+                        title: title,
+                        lineIndex: -1, // Will be set when we find the next dialogue
+                        rawLine: i
+                    });
+                }
+            }
+
+            // Assign line index to any remaining chapters
+            chaps.forEach((chap, idx) => {
+                if (chap.lineIndex === -1) {
+                    chap.lineIndex = idx === 0 ? 0 : dialogueLine;
+                }
+            });
+
+            // Add estimated times based on lines
+            const avgSecsPerLine = 3;
+            chaps.forEach((chap, idx) => {
+                const nextChap = chaps[idx + 1];
+                const endLine = nextChap ? nextChap.lineIndex : dialogueLine;
+                const lines = endLine - chap.lineIndex;
+                const mins = Math.round((lines * avgSecsPerLine) / 60);
+                chap.duration = mins;
+            });
+
+            return chaps;
+        }
+
+        function renderChapters() {
+            const container = document.getElementById('chapters-list');
+            container.innerHTML = '';
+
+            if (chapters.length === 0) {
+                container.innerHTML = '<div class="no-items">No chapters found</div>';
+                return;
+            }
+
+            chapters.forEach((chap, idx) => {
+                const item = document.createElement('div');
+                item.className = 'chapter-item';
+                item.dataset.index = idx;
+
+                item.innerHTML = `
+                    <div class="chapter-number">${idx + 1}</div>
+                    <div class="chapter-info">
+                        <div class="chapter-title">${chap.title}</div>
+                        <div class="chapter-time">~${chap.duration} min</div>
+                    </div>
+                `;
+
+                item.addEventListener('click', () => {
+                    jumpToLine(chap.lineIndex);
+                    if (!isPlaying) {
+                        startPlayback();
+                    }
+                });
+
+                container.appendChild(item);
+            });
+
+            updateCurrentChapter();
+        }
+
+        function updateCurrentChapter() {
+            // Find current chapter based on line
+            let currentChapIdx = 0;
+            for (let i = chapters.length - 1; i >= 0; i--) {
+                if (currentLineIndex >= chapters[i].lineIndex) {
+                    currentChapIdx = i;
+                    break;
+                }
+            }
+
+            // Update chapter list highlighting
+            document.querySelectorAll('.chapter-item').forEach((el, idx) => {
+                el.classList.toggle('current', idx === currentChapIdx);
+            });
+
+            // Update badge
+            if (chapters.length > 0 && chapters[currentChapIdx]) {
+                document.getElementById('current-chapter-badge').textContent =
+                    `Chapter ${currentChapIdx + 1}: ${chapters[currentChapIdx].title}`;
+            } else {
+                document.getElementById('current-chapter-badge').textContent = '';
+            }
+        }
+
+        // ===== BOOKMARKS =====
+        function getBookmarks() {
+            const state = loadState();
+            return state.bookmarks || {};
+        }
+
+        function saveBookmark(episodeId, lineIndex, note) {
+            const state = loadState();
+            if (!state.bookmarks) state.bookmarks = {};
+            if (!state.bookmarks[episodeId]) state.bookmarks[episodeId] = [];
+
+            state.bookmarks[episodeId].push({
+                lineIndex,
+                note: note || '',
+                timestamp: Date.now()
+            });
+
+            // Sort by line index
+            state.bookmarks[episodeId].sort((a, b) => a.lineIndex - b.lineIndex);
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function deleteBookmark(episodeId, timestamp) {
+            const state = loadState();
+            if (state.bookmarks && state.bookmarks[episodeId]) {
+                state.bookmarks[episodeId] = state.bookmarks[episodeId].filter(b => b.timestamp !== timestamp);
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function renderBookmarks() {
+            const container = document.getElementById('bookmarks-list');
+            container.innerHTML = '';
+
+            // Add bookmark button first
+            const addBtn = document.createElement('button');
+            addBtn.className = 'add-bookmark-btn';
+            addBtn.id = 'add-bookmark-btn';
+            addBtn.textContent = '+ Add Bookmark Here';
+            addBtn.addEventListener('click', showAddBookmarkModal);
+            container.appendChild(addBtn);
+
+            if (!currentEpisode) return;
+
+            const bookmarks = getBookmarks();
+            const epBookmarks = bookmarks[currentEpisode.id] || [];
+
+            if (epBookmarks.length === 0) {
+                container.innerHTML += '<div class="no-items">No bookmarks yet</div>';
+                return;
+            }
+
+            epBookmarks.forEach(bm => {
+                const item = document.createElement('div');
+                item.className = 'bookmark-item';
+
+                // Get preview text from dialogue
+                const line = dialogueLines[bm.lineIndex];
+                const preview = line ? line.text.substring(0, 60) + (line.text.length > 60 ? '...' : '') : '';
+
+                item.innerHTML = `
+                    <div class="bookmark-content">
+                        <div class="bookmark-position">Line ${bm.lineIndex + 1}</div>
+                        <div class="bookmark-note">${bm.note || 'Bookmark'}</div>
+                        <div class="bookmark-preview">${preview}</div>
+                    </div>
+                    <button class="bookmark-delete" data-ts="${bm.timestamp}">×</button>
+                `;
+
+                item.querySelector('.bookmark-content').addEventListener('click', () => {
+                    jumpToLine(bm.lineIndex);
+                    if (!isPlaying) {
+                        startPlayback();
+                    }
+                });
+
+                item.querySelector('.bookmark-delete').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteBookmark(currentEpisode.id, bm.timestamp);
+                    renderBookmarks();
+                });
+
+                container.appendChild(item);
+            });
+        }
+
+        function showAddBookmarkModal() {
+            const modal = document.getElementById('bookmark-modal');
+            document.getElementById('bookmark-position-text').textContent =
+                `Line ${currentLineIndex + 1} of ${dialogueLines.length}`;
+
+            const line = dialogueLines[currentLineIndex];
+            document.getElementById('bookmark-context').textContent =
+                line ? `${line.speaker ? line.speaker + ': ' : ''}${line.text.substring(0, 100)}...` : '';
+
+            document.getElementById('bookmark-note-input').value = '';
+            modal.classList.add('show');
+            document.getElementById('bookmark-note-input').focus();
+        }
+
+        document.getElementById('save-bookmark').addEventListener('click', () => {
+            if (!currentEpisode) return;
+            const note = document.getElementById('bookmark-note-input').value;
+            saveBookmark(currentEpisode.id, currentLineIndex, note);
+            document.getElementById('bookmark-modal').classList.remove('show');
+            renderBookmarks();
+        });
+
+        document.getElementById('cancel-bookmark').addEventListener('click', () => {
+            document.getElementById('bookmark-modal').classList.remove('show');
+        });
+
+        // Tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+
+                // Update tab buttons
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Update content
+                document.querySelectorAll('.nav-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`.nav-content[data-tab="${tabName}"]`).classList.add('active');
+            });
         });
 
         // ===== INIT =====

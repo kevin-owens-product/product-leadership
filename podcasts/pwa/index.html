@@ -1443,6 +1443,11 @@
         let searchIndex = 0;
         const synth = window.speechSynthesis;
 
+        // Audio playback state (for pre-generated audio)
+        let audioManifest = null;  // null = use TTS, array = use audio files
+        let audioElement = null;
+        let useAudio = false;  // true when pre-generated audio is available
+
         // ===== PODCASTS HOME =====
         function renderPodcastsList(filter = '') {
             if (typeof PODCASTS === 'undefined') {
@@ -1845,7 +1850,7 @@
         });
 
         // ===== PLAYER =====
-        function openEpisode(episode) {
+        async function openEpisode(episode) {
             currentEpisode = episode;
             dialogueLines = parseMarkdown(episode.content);
             chapters = parseChapters(episode.content);
@@ -1856,17 +1861,49 @@
             const progress = state.episodeProgress?.[epKey];
             currentLineIndex = progress?.line || 0;
 
+            // Check for pre-generated audio
+            await loadAudioManifest(episode);
+
             document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
             document.getElementById('player-episode-subtitle').textContent = episode.subtitle;
+
+            // Show audio mode indicator
+            const audioIndicator = useAudio ? ' 🎧' : ' 🔊';
+            document.getElementById('player-episode-subtitle').textContent = episode.subtitle + audioIndicator;
 
             renderTranscript();
             renderChapters();
             renderBookmarks();
             updateProgress();
-            setStatus('Ready - Tap play to start');
+            setStatus(useAudio ? 'Ready - High quality audio' : 'Ready - Tap play to start');
 
             document.getElementById('list-view').classList.remove('active');
             document.getElementById('player-view').classList.add('active');
+        }
+
+        // Load audio manifest for pre-generated audio
+        async function loadAudioManifest(episode) {
+            audioManifest = null;
+            useAudio = false;
+
+            if (!currentPodcast || !episode) return;
+
+            // Construct manifest URL based on episode filename pattern
+            const epNum = String(episode.id).padStart(2, '0');
+            const epSlug = episode.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+            const manifestUrl = `/audio/${currentPodcast.id}/episode-${epNum}-${epSlug}/manifest.json`;
+
+            try {
+                const response = await fetch(manifestUrl);
+                if (response.ok) {
+                    audioManifest = await response.json();
+                    useAudio = true;
+                    console.log(`Loaded audio manifest: ${audioManifest.length} segments`);
+                }
+            } catch (e) {
+                // No audio available, will use TTS
+                console.log('No pre-generated audio, using TTS');
+            }
         }
 
         document.getElementById('back-to-list').addEventListener('click', () => {
@@ -1996,6 +2033,16 @@
         }
 
         function speak(text, speaker) {
+            // Use pre-generated audio if available
+            if (useAudio && audioManifest && audioManifest[currentLineIndex]) {
+                return speakWithAudio(currentLineIndex);
+            }
+
+            // Fall back to TTS
+            return speakWithTTS(text, speaker);
+        }
+
+        function speakWithTTS(text, speaker) {
             return new Promise((resolve, reject) => {
                 const utt = new SpeechSynthesisUtterance(text);
                 if (speaker === 'alex' && alexVoice) utt.voice = alexVoice;
@@ -2005,6 +2052,42 @@
                 utt.onend = () => resolve();
                 utt.onerror = (e) => reject(e);
                 synth.speak(utt);
+            });
+        }
+
+        function speakWithAudio(lineIndex) {
+            return new Promise((resolve, reject) => {
+                const segment = audioManifest[lineIndex];
+                if (!segment) {
+                    reject(new Error('No audio segment'));
+                    return;
+                }
+
+                // Construct audio URL
+                const epNum = String(currentEpisode.id).padStart(2, '0');
+                const epSlug = currentEpisode.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+                const audioUrl = `/audio/${currentPodcast.id}/episode-${epNum}-${epSlug}/${segment.file}`;
+
+                // Clean up previous audio element
+                if (audioElement) {
+                    audioElement.pause();
+                    audioElement.src = '';
+                }
+
+                audioElement = new Audio(audioUrl);
+                audioElement.playbackRate = speechRate;
+
+                audioElement.onended = () => resolve();
+                audioElement.onerror = (e) => {
+                    console.warn('Audio playback failed, falling back to TTS');
+                    // Fallback to TTS
+                    speakWithTTS(segment.text, segment.speaker).then(resolve).catch(reject);
+                };
+
+                audioElement.play().catch(err => {
+                    console.warn('Audio play failed:', err);
+                    speakWithTTS(segment.text, segment.speaker).then(resolve).catch(reject);
+                });
             });
         }
 
@@ -2064,6 +2147,11 @@
             isPlaying = false;
             isPaused = false;
             synth.cancel();
+            // Also stop audio if playing
+            if (audioElement) {
+                audioElement.pause();
+                audioElement.src = '';
+            }
             document.getElementById('play-btn').textContent = '▶';
             saveState();
         }
@@ -2073,11 +2161,19 @@
                 startPlayback();
             } else if (isPaused) {
                 isPaused = false;
-                synth.resume();
+                if (useAudio && audioElement) {
+                    audioElement.play();
+                } else {
+                    synth.resume();
+                }
                 document.getElementById('play-btn').textContent = '⏸';
             } else {
                 isPaused = true;
-                synth.pause();
+                if (useAudio && audioElement) {
+                    audioElement.pause();
+                } else {
+                    synth.pause();
+                }
                 document.getElementById('play-btn').textContent = '▶';
                 setStatus('Paused');
                 saveState();
@@ -2090,6 +2186,11 @@
             isPlaying = false;
             isPaused = false;
             synth.cancel();
+            // Also stop audio if playing
+            if (audioElement) {
+                audioElement.pause();
+                audioElement.src = '';
+            }
 
             currentLineIndex = Math.max(0, Math.min(index, dialogueLines.length - 1));
             updateProgress();
@@ -2120,6 +2221,10 @@
         document.getElementById('speed-slider').addEventListener('input', e => {
             speechRate = parseFloat(e.target.value);
             document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
+            // Update audio playback rate if using audio
+            if (useAudio && audioElement) {
+                audioElement.playbackRate = speechRate;
+            }
             saveState();
         });
 

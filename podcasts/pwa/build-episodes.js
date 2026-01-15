@@ -88,6 +88,37 @@ filesToCopy.forEach(file => {
     }
 });
 
+// Copy audio files if they exist
+const audioSrcDir = path.join(__dirname, 'audio');
+const audioDistDir = path.join(distDir, 'audio');
+
+function copyDirRecursive(src, dest) {
+    if (!fs.existsSync(src)) return 0;
+    if (!fs.existsSync(dest)) {
+        fs.mkdirSync(dest, { recursive: true });
+    }
+    let count = 0;
+    const entries = fs.readdirSync(src, { withFileTypes: true });
+    for (const entry of entries) {
+        const srcPath = path.join(src, entry.name);
+        const destPath = path.join(dest, entry.name);
+        if (entry.isDirectory()) {
+            count += copyDirRecursive(srcPath, destPath);
+        } else {
+            fs.copyFileSync(srcPath, destPath);
+            count++;
+        }
+    }
+    return count;
+}
+
+if (fs.existsSync(audioSrcDir)) {
+    const audioCount = copyDirRecursive(audioSrcDir, audioDistDir);
+    if (audioCount > 0) {
+        console.log(`✓ Copied: ${audioCount} audio files`);
+    }
+}
+
 // Create README
 const readmeContent = `# PodLearn - Custom Podcast Player
 

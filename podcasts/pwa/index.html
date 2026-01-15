@@ -2084,15 +2084,29 @@
             }
         }
 
-        function jumpToLine(index) {
+        function jumpToLine(index, autoStart = false) {
+            const wasPlaying = isPlaying && !isPaused;
+            // Stop any current playback cleanly
+            isPlaying = false;
+            isPaused = false;
             synth.cancel();
+
             currentLineIndex = Math.max(0, Math.min(index, dialogueLines.length - 1));
             updateProgress();
             saveState();
+
+            // Update UI
+            document.getElementById('play-btn').textContent = '▶';
+            setStatus('Ready');
+
+            // Auto-start if requested or was playing before
+            if (autoStart || wasPlaying) {
+                setTimeout(() => startPlayback(), 100);
+            }
         }
 
         function skipLines(n) {
-            jumpToLine(currentLineIndex + n);
+            jumpToLine(currentLineIndex + n, isPlaying && !isPaused);
         }
 
         // Controls
@@ -2113,7 +2127,8 @@
         document.getElementById('progress-bar').addEventListener('click', e => {
             const rect = e.target.getBoundingClientRect();
             const pct = (e.clientX - rect.left) / rect.width;
-            jumpToLine(Math.floor(pct * dialogueLines.length));
+            const wasPlaying = isPlaying && !isPaused;
+            jumpToLine(Math.floor(pct * dialogueLines.length), wasPlaying);
         });
 
         // Auto-play toggle
@@ -2363,10 +2378,7 @@
                 `;
 
                 item.addEventListener('click', () => {
-                    jumpToLine(chap.lineIndex);
-                    if (!isPlaying) {
-                        startPlayback();
-                    }
+                    jumpToLine(chap.lineIndex, true);
                 });
 
                 container.appendChild(item);
@@ -2475,10 +2487,7 @@
                 `;
 
                 item.querySelector('.bookmark-content').addEventListener('click', () => {
-                    jumpToLine(bm.lineIndex);
-                    if (!isPlaying) {
-                        startPlayback();
-                    }
+                    jumpToLine(bm.lineIndex, true);
                 });
 
                 item.querySelector('.bookmark-delete').addEventListener('click', (e) => {

@@ -1,4 +1,12 @@
 # Episode 6: Testing & Debugging
+## "Write Better Tests, Find Bugs Faster"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and I'll admit, writing tests and debugging issues are probably where I spend a huge chunk of my time. If Claude can help here, that's a big deal.
 
 **ALEX:** It's one of the most impactful areas for Claude assistance. By the end of this episode, you'll know how to write better tests faster and debug issues more efficiently.
+
+---
+
+### SEGMENT 1: WHY TESTING WITH AI MAKES SENSE (4 minutes)
 
 ## Why Testing with AI Makes Sense
 
@@ -21,6 +33,10 @@
 **JAMIE:** That sounds almost too good. Does it actually work?
 
 **ALEX:** It works surprisingly well. Not perfectly, you should always review and understand the tests. But Claude can get you 80 percent of the way there quickly.
+
+---
+
+### SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)
 
 ## Running Tests with Claude
 
@@ -40,6 +56,10 @@
 
 **ALEX:** Yes. The output comes back to Claude, so it can analyze results. "Three tests failed." Claude can tell you which ones and why.
 
+---
+
+### SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)
+
 ## Understanding Test Failures
 
 **JAMIE:** That's where it gets interesting. How does Claude help with failures?
@@ -57,6 +77,10 @@
 **JAMIE:** So it might be the test that's wrong, not the code.
 
 **ALEX:** Right. Claude can distinguish between code bugs and test bugs. Sometimes the test has incorrect expectations.
+
+---
+
+### SEGMENT 4: WRITING NEW TESTS (4 minutes)
 
 ## Writing New Tests
 
@@ -76,6 +100,10 @@
 
 **ALEX:** Claude typically generates tests for the happy path, common edge cases, and error conditions. For a function that divides numbers, you'd get tests for normal division, division by zero, negative numbers, and so on.
 
+---
+
+### SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)
+
 ## Test Coverage and Edge Cases
 
 **JAMIE:** How do I make sure tests cover edge cases?
@@ -94,6 +122,10 @@
 
 **ALEX:** Claude handles async well. It knows about promises, async/await, callbacks, and the various patterns for testing them. It will generate tests with proper async handling.
 
+---
+
+### SEGMENT 6: TEST-DRIVEN DEVELOPMENT (3 minutes)
+
 ## Test-Driven Development
 
 **JAMIE:** Can Claude help with TDD? Writing tests before code?
@@ -107,6 +139,10 @@
 **JAMIE:** Does Claude understand the red-green-refactor cycle?
 
 **ALEX:** It does. You can say "I want to do TDD for this feature" and Claude will guide you through writing tests first, then implementation, then refactoring.
+
+---
+
+### SEGMENT 7: DEBUGGING BASICS (4 minutes)
 
 ## Debugging Basics
 
@@ -126,6 +162,10 @@
 
 **ALEX:** Claude is good at hypothesizing. "Unexpected logouts could be caused by session timeout, token expiration, or a race condition. Let me check each possibility."
 
+---
+
+### SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)
+
 ## Error Message Analysis
 
 **JAMIE:** What about analyzing error messages and stack traces?
@@ -143,6 +183,10 @@
 **JAMIE:** "Cannot read property undefined of undefined" finally explained?
 
 **ALEX:** Ha! Yes. Claude will tell you exactly which variable is undefined and why it got that way.
+
+---
+
+### SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)
 
 ## Debugging Strategies
 
@@ -162,6 +206,10 @@
 
 **ALEX:** Yes. "Add logging to the checkout process so I can trace the bug." Claude will add console.log or your language's equivalent at key points.
 
+---
+
+### SEGMENT 10: REPRODUCING ISSUES (3 minutes)
+
 ## Reproducing Issues
 
 **JAMIE:** Sometimes the hardest part is reproducing a bug. Can Claude help?
@@ -175,6 +223,10 @@
 **JAMIE:** Test as bug documentation.
 
 **ALEX:** Exactly. The test serves as proof and prevents regression.
+
+---
+
+### SEGMENT 11: COMMON BUG PATTERNS (4 minutes)
 
 ## Common Bug Patterns
 
@@ -190,6 +242,10 @@
 
 **ALEX:** And when Claude finds a security issue, it explains the risk and shows how to fix it properly.
 
+---
+
+### SEGMENT 12: PERFORMANCE DEBUGGING (4 minutes)
+
 ## Performance Debugging
 
 **JAMIE:** What about performance issues? Slow code?
@@ -203,6 +259,10 @@
 **JAMIE:** Without me having to profile first?
 
 **ALEX:** Claude can suggest where to profile based on code analysis. But for complex performance issues, actual profiling data helps Claude give better advice.
+
+---
+
+### SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)
 
 ## Debugging Workflow
 
@@ -226,6 +286,10 @@
 
 **ALEX:** And step five: add a test for the bug so it doesn't regress. Claude can help with that too.
 
+---
+
+### SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)
+
 ## Tips for Effective Testing and Debugging
 
 **JAMIE:** What are your top tips?
@@ -244,6 +308,10 @@
 
 **ALEX:** Exactly. You and Claude work together. Your knowledge of the system plus Claude's analytical power.
 
+---
+
+### SEGMENT 15: PRACTICE EXERCISE (3 minutes)
+
 ## Practice Exercise
 
 **JAMIE:** What should listeners practice?
@@ -253,6 +321,10 @@
 **JAMIE:** Full test lifecycle.
 
 **ALEX:** For debugging practice, find a past bug you fixed and pretend it's new. Describe it to Claude and see if it can identify the same fix you found.
+
+---
+
+### SEGMENT 16: WHAT'S NEXT (3 minutes)
 
 ## What's Next
 

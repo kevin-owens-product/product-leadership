@@ -1,4 +1,12 @@
 # Episode 7: Project Setup & Configuration
+## "Tailoring Claude Code to Your Project's DNA"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and I've been wondering about this. Every project has its own conventions, quirks, and requirements. Can Claude adapt to that?
 
 **ALEX:** Absolutely. By the end of this episode, you'll know how to configure Claude Code with project-specific instructions, set up permissions, and customize its behavior for your workflow.
+
+---
+
+### SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)
 
 ## The CLAUDE.md File
 
@@ -25,6 +37,10 @@
 **JAMIE:** So Claude reads it like a new team member would?
 
 **ALEX:** Right. Think about what you'd tell a new developer on day one. That's what goes in CLAUDE.md.
+
+---
+
+### SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)
 
 ## What to Include in CLAUDE.md
 
@@ -48,6 +64,10 @@
 
 **ALEX:** Exactly. All that context that lives in senior developers' heads, written down for Claude.
 
+---
+
+### SEGMENT 3: CONFIGURATION HIERARCHY (4 minutes)
+
 ## Configuration Hierarchy
 
 **JAMIE:** Can I have different configurations for different contexts?
@@ -61,6 +81,10 @@
 **JAMIE:** So I don't have to reconfigure for each project?
 
 **ALEX:** Right. Claude automatically picks up the right context based on where you're working.
+
+---
+
+### SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)
 
 ## Setting Allowed and Disallowed Tools
 
@@ -80,6 +104,10 @@
 
 **ALEX:** Yes. You can say "allow npm commands but not rm" or "only allow git commands." Fine-grained control is possible.
 
+---
+
+### SEGMENT 5: PERMISSION PRESETS (3 minutes)
+
 ## Permission Presets
 
 **JAMIE:** You mentioned permissions earlier in the series. How do they relate to project configuration?
@@ -93,6 +121,10 @@
 **JAMIE:** Balancing speed and safety.
 
 **ALEX:** Exactly. As you build trust with Claude in a project, you might loosen restrictions. Start tight, then open up as you get comfortable.
+
+---
+
+### SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)
 
 ## Custom Instructions
 
@@ -112,6 +144,10 @@
 
 **ALEX:** Right. You're training Claude to be the kind of collaborator you want.
 
+---
+
+### SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)
+
 ## Environment and Dependencies
 
 **JAMIE:** What about environment setup? Like making sure Claude knows about dependencies?
@@ -130,6 +166,10 @@
 
 **ALEX:** Right. Secrets stay secret unless you explicitly share them.
 
+---
+
+### SEGMENT 8: BUILD AND RUN CONFIGURATION (3 minutes)
+
 ## Build and Run Configuration
 
 **JAMIE:** What about telling Claude how to build and run the project?
@@ -143,6 +183,10 @@
 **JAMIE:** What if the commands are non-standard?
 
 **ALEX:** Even more important to document. "We use a custom build script: ./scripts/build.sh with arguments for environment."
+
+---
+
+### SEGMENT 9: TEAM CONFIGURATION (4 minutes)
 
 ## Team Configuration
 
@@ -160,6 +204,10 @@
 
 **JAMIE:** Best of both worlds.
 
+---
+
+### SEGMENT 10: MANAGING MULTIPLE PROJECTS (4 minutes)
+
 ## Managing Multiple Projects
 
 **JAMIE:** I work on several projects. How do I manage that?
@@ -173,6 +221,10 @@
 **JAMIE:** What if projects share some configuration?
 
 **ALEX:** Common patterns can go in your global config. Only project-specific details go in CLAUDE.md. Keep each CLAUDE.md focused on what's unique to that project.
+
+---
+
+### SEGMENT 11: EVOLVING YOUR CONFIGURATION (3 minutes)
 
 ## Evolving Your Configuration
 
@@ -188,6 +240,10 @@
 
 **ALEX:** Yes. CLAUDE.md should evolve with your project. New architectural decisions, new conventions, new team knowledge. Keep it current.
 
+---
+
+### SEGMENT 12: COMMON CONFIGURATION PATTERNS (4 minutes)
+
 ## Common Configuration Patterns
 
 **JAMIE:** What do most teams configure?
@@ -201,6 +257,10 @@
 **JAMIE:** The stuff that's hard to figure out from code alone.
 
 **ALEX:** Right. If understanding requires context beyond the code itself, it belongs in CLAUDE.md.
+
+---
+
+### SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)
 
 ## Tips for Good Configuration
 
@@ -220,6 +280,10 @@
 
 **ALEX:** And fourth, test your configuration. Work with Claude on the project and see if it follows your guidelines. Refine based on what actually happens.
 
+---
+
+### SEGMENT 14: PRACTICE EXERCISE (3 minutes)
+
 ## Practice Exercise
 
 **JAMIE:** What should listeners practice?
@@ -229,6 +293,10 @@
 **JAMIE:** A starter configuration.
 
 **ALEX:** Then use Claude Code on that project and see how the configuration affects Claude's behavior. Iterate from there.
+
+---
+
+### SEGMENT 15: WHAT'S NEXT (3 minutes)
 
 ## What's Next
 

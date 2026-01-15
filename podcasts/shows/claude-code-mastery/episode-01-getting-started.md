@@ -1,4 +1,12 @@
 # Episode 1: Getting Started with Claude Code
+## "Your Journey to AI-Powered Development Begins"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -9,6 +17,10 @@
 **ALEX:** That's the perfect perspective, Jamie. A lot of developers are in your shoes right now. They've heard about these AI coding tools, maybe even tried a few, but haven't really integrated them into their daily workflow. By the end of this series, that's going to change completely.
 
 **JAMIE:** So let's start at the very beginning. What exactly is Claude Code, and why should developers care about it?
+
+---
+
+### SEGMENT 1: WHAT IS CLAUDE CODE? (7 minutes)
 
 ## What is Claude Code?
 
@@ -25,6 +37,10 @@
 **JAMIE:** That's reassuring. So I won't wake up to find Claude has rewritten my entire codebase overnight?
 
 **ALEX:** Ha! No, definitely not. Every action requires your explicit consent. And you can configure what types of actions it can take automatically versus what needs approval. We'll cover that in detail in a later episode.
+
+---
+
+### SEGMENT 2: INSTALLATION (5 minutes)
 
 ## Installation
 
@@ -44,6 +60,10 @@
 
 **ALEX:** Right, Windows Subsystem for Linux. Claude Code runs in a Unix-like environment, so Windows users should use WSL. It's straightforward to set up, and honestly, if you're doing serious development on Windows, you probably already have WSL configured.
 
+---
+
+### SEGMENT 3: FIRST RUN AND AUTHENTICATION (4 minutes)
+
 ## First Run and Authentication
 
 **JAMIE:** Okay, I've run the install command. What happens when I type "claude" for the first time?
@@ -57,6 +77,10 @@
 **JAMIE:** And after authentication, I'm good to go?
 
 **ALEX:** Pretty much! The credentials are stored securely on your machine, so you won't need to log in every time. You'll see Claude Code's interface appear, and you can start having conversations immediately.
+
+---
+
+### SEGMENT 4: UNDERSTANDING THE INTERFACE (5 minutes)
 
 ## Understanding the Interface
 
@@ -75,6 +99,10 @@
 **JAMIE:** So I should cd into my project directory before starting Claude?
 
 **ALEX:** Yes, that's the recommended workflow. Navigate to your project root, then start Claude Code. It will automatically detect things like your package.json, git configuration, README files, and use those to understand your project context.
+
+---
+
+### SEGMENT 5: THE PERMISSION SYSTEM (6 minutes)
 
 ## The Permission System
 
@@ -98,6 +126,10 @@
 
 **ALEX:** That's exactly how it usually goes. Most developers start cautious and then gradually give Claude more autonomy as they build trust in the workflow.
 
+---
+
+### SEGMENT 6: SLASH COMMANDS OVERVIEW (5 minutes)
+
 ## Slash Commands Overview
 
 **JAMIE:** I've heard there are special commands you can use. What's that about?
@@ -120,6 +152,10 @@
 
 **ALEX:** Exactly. Use whatever feels natural. Most of the time, I just type what I want in plain English. The slash commands are there when I want to be quick and direct.
 
+---
+
+### SEGMENT 7: IDE INTEGRATION (4 minutes)
+
 ## IDE Integration
 
 **JAMIE:** I spend most of my time in VS Code. Can Claude Code work with my editor?
@@ -137,6 +173,10 @@
 **JAMIE:** That flexibility is nice. Not everyone uses VS Code.
 
 **ALEX:** Right. The terminal-based approach means Claude Code isn't tied to any specific editor. That's a deliberate design choice. Developers have strong preferences about their tools, and Claude Code respects that.
+
+---
+
+### SEGMENT 8: YOUR FIRST CONVERSATION (6 minutes)
 
 ## Your First Conversation
 
@@ -160,6 +200,10 @@
 
 **ALEX:** Exactly. Then you can gradually give Claude more complex tasks. Refactor this function. Add a new API endpoint. Fix this failing test. As you see Claude succeed at these tasks, you'll naturally become more comfortable with bigger changes.
 
+---
+
+### SEGMENT 9: COMMON FIRST-DAY QUESTIONS (5 minutes)
+
 ## Common First-Day Questions
 
 **JAMIE:** What are some questions new users commonly have on day one?
@@ -182,6 +226,10 @@
 
 **ALEX:** There are rate limits on the API, but they're generous for normal usage. You'd have to be doing something unusual to hit them. If you're on a team or enterprise plan, the limits are even higher.
 
+---
+
+### SEGMENT 10: TIPS FOR DAY ONE SUCCESS (5 minutes)
+
 ## Tips for Day One Success
 
 **JAMIE:** Any tips for making that first day really successful?
@@ -199,6 +247,10 @@
 **JAMIE:** It's a real dialogue, not just one-shot queries.
 
 **ALEX:** Precisely. The best results come from iterating together. Claude suggests something, you refine or redirect, and together you arrive at the best solution. It's collaborative.
+
+---
+
+### SEGMENT 11: WHAT'S COMING NEXT (5 minutes)
 
 ## What's Coming Next
 

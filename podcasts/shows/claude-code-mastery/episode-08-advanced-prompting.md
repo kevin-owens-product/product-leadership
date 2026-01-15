@@ -1,4 +1,12 @@
 # Episode 8: Advanced Prompting Techniques
+## "The Art of Communicating with Claude"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and I've definitely noticed that some prompts work better than others. Sometimes Claude nails it, other times it misses the mark. What's the secret?
 
 **ALEX:** It's a skill you can develop. By the end of this episode, you'll have techniques for crafting prompts that get exactly what you want from Claude.
+
+---
+
+### SEGMENT 1: THE FOUNDATION: CLARITY (4 minutes)
 
 ## The Foundation: Clarity
 
@@ -22,6 +34,10 @@
 
 **ALEX:** Right. And here's the key insight: being specific isn't more work for you. It just means thinking clearly about what you actually want before asking.
 
+---
+
+### SEGMENT 2: PROVIDING CONTEXT (4 minutes)
+
 ## Providing Context
 
 **JAMIE:** What about context? How much should I give?
@@ -35,6 +51,10 @@
 **JAMIE:** So not just what to do, but why and within what boundaries.
 
 **ALEX:** Exactly. Claude makes much better decisions when it understands the full picture.
+
+---
+
+### SEGMENT 3: BEING EXPLICIT ABOUT FORMAT (3 minutes)
 
 ## Being Explicit About Format
 
@@ -50,6 +70,10 @@
 
 **ALEX:** And you can set these preferences in your configuration so you don't have to repeat them every time.
 
+---
+
+### SEGMENT 4: BREAKING DOWN COMPLEX TASKS (4 minutes)
+
 ## Breaking Down Complex Tasks
 
 **JAMIE:** What about really complex tasks? Sometimes I have big features to implement.
@@ -64,6 +88,10 @@
 
 **ALEX:** It is. And it gives you checkpoints to review. After each step, verify it's correct before moving on.
 
+---
+
+### SEGMENT 5: USING TODO LISTS (3 minutes)
+
 ## Using Todo Lists
 
 **JAMIE:** You mentioned planning. How does the todo list feature fit in?
@@ -77,6 +105,10 @@
 **JAMIE:** Can I modify the list?
 
 **ALEX:** Absolutely. Add items, remove them, reorder priorities. It's a collaborative planning tool.
+
+---
+
+### SEGMENT 6: ITERATIVE REFINEMENT (4 minutes)
 
 ## Iterative Refinement
 
@@ -96,6 +128,10 @@
 
 **ALEX:** Very much so. Understanding Claude's thought process makes it easier to redirect.
 
+---
+
+### SEGMENT 7: WHEN TO INTERVENE (3 minutes)
+
 ## When to Intervene
 
 **JAMIE:** How do I know when to let Claude keep working versus when to step in?
@@ -109,6 +145,10 @@
 **JAMIE:** What if Claude asks questions?
 
 **ALEX:** Answer them! Claude asking for clarification is good. It means it's trying to understand rather than guessing. Take the time to give clear answers.
+
+---
+
+### SEGMENT 8: PROMPT PATTERNS THAT WORK (5 minutes)
 
 ## Prompt Patterns That Work
 
@@ -128,6 +168,10 @@
 
 **ALEX:** And the "constraint" pattern: "Do this but without adding new dependencies" or "do this in a way that's backward compatible." Constraints often lead to more creative, appropriate solutions.
 
+---
+
+### SEGMENT 9: AVOIDING COMMON PROMPTING MISTAKES (4 minutes)
+
 ## Avoiding Common Prompting Mistakes
 
 **JAMIE:** What mistakes should I avoid?
@@ -144,6 +188,10 @@
 
 **JAMIE:** Let the process complete.
 
+---
+
+### SEGMENT 10: RECOVERING FROM MISTAKES (3 minutes)
+
 ## Recovering from Mistakes
 
 **JAMIE:** What if Claude has gone down a wrong path?
@@ -157,6 +205,10 @@
 **JAMIE:** Clear communication to reset.
 
 **ALEX:** And don't be afraid to start fresh. If a conversation has gotten too muddled, "slash clear" and begin again with a cleaner prompt.
+
+---
+
+### SEGMENT 11: HANDLING AMBIGUITY (3 minutes)
 
 ## Handling Ambiguity
 
@@ -172,6 +224,10 @@
 
 **ALEX:** Some of the best conversations start with "I don't know exactly what I need" and end with a clear solution to a well-defined problem.
 
+---
+
+### SEGMENT 12: COMMUNICATION STYLE (3 minutes)
+
 ## Communication Style
 
 **JAMIE:** Does it matter how I phrase things? Formal versus casual?
@@ -185,6 +241,10 @@
 **JAMIE:** Find the balance.
 
 **ALEX:** And be polite if you want! Saying "please" and "thanks" is fine. Claude doesn't mind either way, but some people find it helps them frame requests more thoughtfully.
+
+---
+
+### SEGMENT 13: PROMPTING FOR DIFFERENT TASKS (4 minutes)
 
 ## Prompting for Different Tasks
 
@@ -200,6 +260,10 @@
 
 **ALEX:** And for creative work, like designing a feature, invite collaboration. "I'm thinking about adding X feature. Let's brainstorm how to implement it."
 
+---
+
+### SEGMENT 14: ADVANCED: METACOGNITIVE PROMPTS (3 minutes)
+
 ## Advanced: Metacognitive Prompts
 
 **JAMIE:** Any advanced techniques?
@@ -213,6 +277,10 @@
 **JAMIE:** Using Claude to improve my own prompts.
 
 **ALEX:** Exactly. Claude can help you become a better prompter.
+
+---
+
+### SEGMENT 15: TIPS FOR PROMPTING MASTERY (4 minutes)
 
 ## Tips for Prompting Mastery
 
@@ -232,6 +300,10 @@
 
 **ALEX:** And fourth, learn from good conversations. When Claude gives you exactly what you want, notice what made that prompt work. Apply those patterns again.
 
+---
+
+### SEGMENT 16: PRACTICE EXERCISE (3 minutes)
+
 ## Practice Exercise
 
 **JAMIE:** What should listeners practice?
@@ -241,6 +313,10 @@
 **JAMIE:** Deliberate prompting.
 
 **ALEX:** Compare results to when you just type whatever comes to mind. You'll likely see a significant quality difference with the deliberate approach.
+
+---
+
+### SEGMENT 17: WHAT'S NEXT (3 minutes)
 
 ## What's Next
 

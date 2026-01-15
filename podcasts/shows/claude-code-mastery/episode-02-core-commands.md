@@ -1,4 +1,12 @@
 # Episode 2: Core Commands & Navigation
+## "Understanding How Claude Navigates Code"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** And I'm Jamie. After installing Claude Code from last episode, I've been playing around with it, and I'm amazed at how much it just seems to know about my project. But I want to understand what's happening under the hood.
 
 **ALEX:** That's exactly what we're covering today. By the end of this episode, you'll understand the tools Claude uses to read and search your code, and you'll have practical techniques for getting around large projects efficiently.
+
+---
+
+### SEGMENT 1: HOW CLAUDE READS YOUR CODEBASE (4 minutes)
 
 ## How Claude Reads Your Codebase
 
@@ -21,6 +33,10 @@
 **JAMIE:** That makes sense from an efficiency standpoint. You wouldn't want to process a million lines of code just to answer a simple question.
 
 **ALEX:** Right. And it keeps the context focused. By only including relevant files, Claude can give you better, more targeted answers without getting distracted by unrelated code.
+
+---
+
+### SEGMENT 2: THE READ TOOL (5 minutes)
 
 ## The Read Tool
 
@@ -44,6 +60,10 @@
 
 **ALEX:** That's where the search capabilities come in. Claude might first search the file for a function name, find it's on line 847, then read from that line. It's a combination of search and read that makes navigation efficient.
 
+---
+
+### SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)
+
 ## Understanding the Glob Tool
 
 **JAMIE:** Speaking of search, I've heard about something called Glob. What's that?
@@ -61,6 +81,10 @@
 **JAMIE:** That's really powerful for quickly mapping out what files exist.
 
 **ALEX:** It is. And it's fast because it's just looking at file names and paths, not actually reading file contents. Claude can glob for hundreds of files in milliseconds.
+
+---
+
+### SEGMENT 4: THE GREP TOOL (4 minutes)
 
 ## The Grep Tool
 
@@ -80,6 +104,10 @@
 
 **ALEX:** Definitely. I use this constantly. "Find everywhere we call the deprecated API" or "show me all places where we catch errors." Grep makes these searches trivial.
 
+---
+
+### SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)
+
 ## Combining Search Strategies
 
 **JAMIE:** So in practice, how do these tools work together?
@@ -97,6 +125,10 @@
 **JAMIE:** That's so much faster than me manually searching through files.
 
 **ALEX:** It really is. And Claude is doing this automatically based on your natural language question. You don't have to think about glob patterns or grep syntax. Just ask what you want to know.
+
+---
+
+### SEGMENT 6: THE BASH TOOL (5 minutes)
 
 ## The Bash Tool
 
@@ -120,6 +152,10 @@
 
 **ALEX:** Exactly! That loop of run, observe, fix is incredibly powerful. We'll dive much deeper into testing workflows in episode six.
 
+---
+
+### SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)
+
 ## Working Directory Context
 
 **JAMIE:** You mentioned last episode that Claude understands the working directory. How deep does that go?
@@ -137,6 +173,10 @@
 **JAMIE:** So it knows the conventions of my ecosystem.
 
 **ALEX:** Right. If you're in a React project, Claude knows about components, hooks, JSX. In a Django project, it understands views, models, templates. This contextual awareness makes the assistance much more relevant.
+
+---
+
+### SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)
 
 ## Efficient Navigation Techniques
 
@@ -156,6 +196,10 @@
 
 **ALEX:** Right. And fourth, use references. "Where is UserContext used?" Claude will grep for usages and show you everywhere that context is consumed. Great for understanding dependencies.
 
+---
+
+### SEGMENT 9: ASKING GOOD QUESTIONS (4 minutes)
+
 ## Asking Good Questions
 
 **JAMIE:** How do I phrase questions to get the best navigation results?
@@ -169,6 +213,10 @@
 **JAMIE:** The why helps as much as the what.
 
 **ALEX:** Exactly. And don't be afraid to ask follow-up questions. If Claude's first response isn't quite what you needed, just say "not that one, I mean the validation logic" or "go deeper on the error handling part."
+
+---
+
+### SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)
 
 ## Keyboard Shortcuts and Efficiency
 
@@ -188,6 +236,10 @@
 
 **ALEX:** It does. A conversation that's been going for hours about many different topics can get muddled. Claude might confuse which file you're talking about now versus earlier. Fresh starts help.
 
+---
+
+### SEGMENT 11: MULTI-FILE OPERATIONS (3 minutes)
+
 ## Multi-File Operations
 
 **JAMIE:** What about when I need to work across multiple files?
@@ -201,6 +253,10 @@
 **JAMIE:** That's helpful for understanding how components interact.
 
 **ALEX:** Very much so. A lot of bugs happen at the boundaries between components. Seeing multiple files together helps Claude spot inconsistencies or suggest better patterns.
+
+---
+
+### SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)
 
 ## Understanding Project Scale
 
@@ -220,6 +276,10 @@
 
 **ALEX:** Absolutely. The same practices that help human developers, clear naming, logical structure, good documentation, also help Claude be more effective.
 
+---
+
+### SEGMENT 13: PRACTICAL EXERCISE (4 minutes)
+
 ## Practical Exercise
 
 **JAMIE:** Can we do a quick exercise listeners can try at home?
@@ -233,6 +293,10 @@
 **JAMIE:** Getting the lay of the land.
 
 **ALEX:** Finally, pick any feature in your app and ask "how does the feature X work end to end?" Watch how Claude traces through multiple files to explain the flow. That's the power of intelligent navigation.
+
+---
+
+### SEGMENT 14: WHAT'S COMING NEXT (3 minutes)
 
 ## What's Coming Next
 

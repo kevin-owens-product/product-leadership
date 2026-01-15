@@ -304,6 +304,11 @@
             background: var(--accent);
         }
 
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
         .player-title {
             flex: 1;
             min-width: 0;
@@ -1330,7 +1335,10 @@
                 <p class="breadcrumb" id="player-breadcrumb">Home › Podcast › Episode</p>
                 <h2 id="player-episode-title">Episode</h2>
             </div>
-            <button class="header-btn" id="home-from-player" title="Go to Home">🏠</button>
+            <div class="header-actions">
+                <button class="header-btn" id="sleep-timer-btn" title="Sleep Timer">💤</button>
+                <button class="header-btn" id="home-from-player" title="Go to Home">🏠</button>
+            </div>
         </div>
 
         <!-- Voice Panel -->
@@ -1511,7 +1519,7 @@
 
     <script>
         // ===== APP VERSION =====
-        const APP_VERSION = '2.0.5';
+        const APP_VERSION = '2.0.6';
 
         // ===== AUTO-UPDATE CHECK =====
         // Runs immediately - fetches version from server bypassing all caches

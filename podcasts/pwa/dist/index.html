@@ -1627,60 +1627,85 @@
                 return;
             }
 
+            console.log('Available voices:', voices.length, voices.map(v => v.name));
+
             const alexSelect = document.getElementById('alex-voice');
             const samSelect = document.getElementById('sam-voice');
             alexSelect.innerHTML = '';
             samSelect.innerHTML = '';
 
+            // Categorize voices
+            const maleKeywords = ['male', 'david', 'james', 'daniel', 'guy', 'aaron', 'mark', 'matthew', 'google us english', 'google uk english male'];
+            const femaleKeywords = ['female', 'samantha', 'karen', 'victoria', 'fiona', 'zira', 'susan', 'google uk english female'];
+
             const maleVoices = [];
             const femaleVoices = [];
+            const englishVoices = [];
 
             voices.forEach((voice, index) => {
                 const name = voice.name.toLowerCase();
-                if (name.includes('male') || name.includes('david') || name.includes('james') ||
-                    name.includes('daniel') || name.includes('guy') || name.includes('aaron') ||
-                    name.includes('google us english')) {
+                const lang = voice.lang.toLowerCase();
+
+                // Prefer English voices
+                if (lang.startsWith('en')) {
+                    englishVoices.push({ voice, index });
+                }
+
+                if (maleKeywords.some(k => name.includes(k))) {
                     maleVoices.push({ voice, index });
-                } else if (name.includes('female') || name.includes('samantha') || name.includes('karen') ||
-                           name.includes('victoria') || name.includes('fiona')) {
+                } else if (femaleKeywords.some(k => name.includes(k))) {
                     femaleVoices.push({ voice, index });
                 }
             });
 
+            // Populate select options
             voices.forEach((voice, index) => {
                 const opt1 = document.createElement('option');
                 opt1.value = index;
-                opt1.textContent = voice.name;
+                opt1.textContent = `${voice.name} (${voice.lang})`;
                 alexSelect.appendChild(opt1);
 
                 const opt2 = document.createElement('option');
                 opt2.value = index;
-                opt2.textContent = voice.name;
+                opt2.textContent = `${voice.name} (${voice.lang})`;
                 samSelect.appendChild(opt2);
             });
 
             // Restore saved voices or use defaults
             const state = loadState();
-            if (state.alexVoiceIndex !== undefined && voices[state.alexVoiceIndex]) {
-                alexSelect.value = state.alexVoiceIndex;
-                alexVoice = voices[state.alexVoiceIndex];
+            let alexIdx = 0;
+            let samIdx = voices.length > 1 ? 1 : 0;
+
+            // Try to get saved voices
+            if (state.alexVoiceIndex !== undefined && voices[parseInt(state.alexVoiceIndex, 10)]) {
+                alexIdx = parseInt(state.alexVoiceIndex, 10);
             } else if (maleVoices.length > 0) {
-                alexSelect.value = maleVoices[0].index;
-                alexVoice = voices[maleVoices[0].index];
-            } else if (voices.length > 0) {
-                alexVoice = voices[0];
+                alexIdx = maleVoices[0].index;
+            } else if (englishVoices.length > 0) {
+                alexIdx = englishVoices[0].index;
             }
 
-            if (state.samVoiceIndex !== undefined && voices[state.samVoiceIndex]) {
-                samSelect.value = state.samVoiceIndex;
-                samVoice = voices[state.samVoiceIndex];
+            if (state.samVoiceIndex !== undefined && voices[parseInt(state.samVoiceIndex, 10)]) {
+                samIdx = parseInt(state.samVoiceIndex, 10);
             } else if (femaleVoices.length > 0) {
-                samSelect.value = femaleVoices[0].index;
-                samVoice = voices[femaleVoices[0].index];
-            } else if (voices.length > 1) {
-                samSelect.value = 1;
-                samVoice = voices[1];
+                samIdx = femaleVoices[0].index;
+            } else if (englishVoices.length > 1) {
+                // Pick a different English voice than Alex
+                samIdx = englishVoices.find(v => v.index !== alexIdx)?.index || (alexIdx === 0 ? 1 : 0);
             }
+
+            // Ensure different voices if possible
+            if (samIdx === alexIdx && voices.length > 1) {
+                samIdx = alexIdx === 0 ? 1 : 0;
+            }
+
+            alexSelect.value = alexIdx;
+            samSelect.value = samIdx;
+            alexVoice = voices[alexIdx];
+            samVoice = voices[samIdx];
+
+            console.log('Alex voice:', alexVoice?.name);
+            console.log('Sam voice:', samVoice?.name);
         }
 
         if (synth.onvoiceschanged !== undefined) {
@@ -1689,11 +1714,15 @@
         loadVoices();
 
         document.getElementById('alex-voice').addEventListener('change', e => {
-            alexVoice = voices[e.target.value];
+            const idx = parseInt(e.target.value, 10);
+            alexVoice = voices[idx];
+            console.log('Alex voice set to:', alexVoice?.name);
             saveState();
         });
         document.getElementById('sam-voice').addEventListener('change', e => {
-            samVoice = voices[e.target.value];
+            const idx = parseInt(e.target.value, 10);
+            samVoice = voices[idx];
+            console.log('Sam voice set to:', samVoice?.name);
             saveState();
         });
 

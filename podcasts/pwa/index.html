@@ -148,6 +148,19 @@
             color: var(--text-secondary);
         }
 
+        .badge.version {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            font-family: monospace;
+            font-size: 0.7rem;
+        }
+
+        .podcast-count {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
         /* Search Bar */
         .search-container {
             margin-bottom: 20px;
@@ -1236,11 +1249,13 @@
             <p>Your Custom Podcast Player</p>
             <div class="badges">
                 <span class="badge offline" id="offline-badge-home" style="display:none">Offline Ready</span>
+                <span class="badge version" id="version-badge">v--</span>
                 <button class="badge refresh-btn" id="refresh-btn" onclick="forceRefresh()">↻ Refresh</button>
             </div>
             <div id="update-banner" class="update-banner" style="display:none">
                 New content available! <button onclick="applyUpdate()">Update Now</button>
             </div>
+            <div id="podcast-count" class="podcast-count"></div>
         </header>
 
         <div class="search-container">
@@ -1462,8 +1477,21 @@
         </div>
     </div>
 
-    <script src="podcasts.js"></script>
     <script>
+        // Load podcasts.js with cache-busting
+        (function() {
+            const script = document.createElement('script');
+            script.src = 'podcasts.js?v=' + Date.now();
+            script.onload = function() {
+                if (typeof initApp === 'function') initApp();
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
+    <script>
+        // ===== APP VERSION =====
+        const APP_VERSION = '2.0.1';
+
         // ===== STATE =====
         let currentPodcast = null;
         let currentEpisode = null;
@@ -1489,10 +1517,18 @@
 
         // ===== PODCASTS HOME =====
         function renderPodcastsList(filter = '') {
+            // Update version badge
+            document.getElementById('version-badge').textContent = 'v' + APP_VERSION;
+
             if (typeof PODCASTS === 'undefined') {
-                document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">No podcasts found</p>';
+                document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">No podcasts found. Try refreshing.</p>';
+                document.getElementById('podcast-count').textContent = '0 podcasts loaded';
                 return;
             }
+
+            // Show podcast count
+            const totalEpisodes = PODCASTS.reduce((sum, p) => sum + p.episodes.length, 0);
+            document.getElementById('podcast-count').textContent = `${PODCASTS.length} podcasts · ${totalEpisodes} episodes`;
 
             const state = loadState();
             const listEl = document.getElementById('podcasts-list');

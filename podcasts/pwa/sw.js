@@ -1,4 +1,4 @@
-const CACHE_NAME = 'podlearn-v11';
+const CACHE_NAME = 'podlearn-v12';
 const STATIC_ASSETS = [
     '/index.html',
     '/manifest.json',
@@ -48,6 +48,12 @@ self.addEventListener('activate', event => {
 // Smart fetch strategy
 self.addEventListener('fetch', event => {
     const url = new URL(event.request.url);
+
+    // NEVER cache version.json - always go to network
+    if (url.pathname.endsWith('version.json')) {
+        event.respondWith(fetch(event.request));
+        return;
+    }
 
     // For network-first resources (podcasts.js, root), try network first
     if (NETWORK_FIRST.some(path => url.pathname === path || url.pathname.endsWith(path))) {

@@ -1479,7 +1479,49 @@
 
     <script>
         // ===== APP VERSION =====
-        const APP_VERSION = '2.0.2';
+        const APP_VERSION = '2.0.3';
+
+        // ===== AUTO-UPDATE CHECK =====
+        // Runs immediately - fetches version from server bypassing all caches
+        // If version mismatch, clears everything and reloads
+        (async function checkForUpdates() {
+            try {
+                const response = await fetch('version.json?_=' + Date.now(), {
+                    cache: 'no-store',
+                    headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Version check - Local:', APP_VERSION, 'Server:', data.version);
+
+                    if (data.version !== APP_VERSION) {
+                        console.log('Update available! Clearing caches and reloading...');
+
+                        // Unregister all service workers
+                        if ('serviceWorker' in navigator) {
+                            const registrations = await navigator.serviceWorker.getRegistrations();
+                            for (const reg of registrations) {
+                                await reg.unregister();
+                            }
+                        }
+
+                        // Clear all caches
+                        if ('caches' in window) {
+                            const cacheNames = await caches.keys();
+                            for (const name of cacheNames) {
+                                await caches.delete(name);
+                            }
+                        }
+
+                        // Hard reload
+                        window.location.reload(true);
+                        return;
+                    }
+                }
+            } catch (e) {
+                console.log('Version check skipped (offline?):', e.message);
+            }
+        })();
 
         // Flag to track if podcasts are loaded
         let podcastsLoaded = false;

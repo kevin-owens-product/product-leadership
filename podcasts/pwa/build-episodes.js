@@ -78,7 +78,7 @@ fs.writeFileSync(path.join(distDir, 'podcasts.js'), podcastsJs);
 console.log('\n✓ Generated: podcasts.js');
 
 // Copy other files
-const filesToCopy = ['index.html', 'manifest.json', 'sw.js', 'icon.svg', '_headers'];
+const filesToCopy = ['index.html', 'manifest.json', 'sw.js', 'icon.svg', '_headers', 'version.json'];
 filesToCopy.forEach(file => {
     const src = path.join(__dirname, file);
     const dest = path.join(distDir, file);

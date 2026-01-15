@@ -9,6 +9,7 @@
     <title>Tech Leadership Unpacked</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
     <style>
         :root {
             --bg-primary: #0f0f0f;
@@ -20,6 +21,8 @@
             --accent-hover: #818cf8;
             --alex-color: #3b82f6;
             --sam-color: #10b981;
+            --success: #22c55e;
+            --warning: #f59e0b;
             --border: #333;
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
@@ -42,6 +45,7 @@
             overflow-x: hidden;
             padding-top: var(--safe-top);
             padding-bottom: var(--safe-bottom);
+            touch-action: pan-y;
         }
 
         /* Views */
@@ -65,7 +69,7 @@
         .app-header {
             text-align: center;
             padding: 30px 20px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .app-header h1 {
@@ -82,16 +86,59 @@
             font-size: 0.95rem;
         }
 
-        .offline-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
-            margin-top: 10px;
         }
 
+        .badge.offline {
+            background: var(--accent);
+            color: white;
+        }
+
+        .badge.progress {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Episode Cards */
         .episode-card {
             background: var(--bg-secondary);
             border-radius: 16px;
@@ -100,6 +147,8 @@
             cursor: pointer;
             transition: transform 0.2s, background 0.2s;
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
 
         .episode-card:hover, .episode-card:active {
@@ -107,12 +156,53 @@
             transform: scale(0.98);
         }
 
+        .episode-card.completed {
+            border-color: var(--success);
+        }
+
+        .episode-card.in-progress {
+            border-color: var(--warning);
+        }
+
+        .episode-card .ep-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .episode-card .ep-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
         .episode-card .ep-number {
             font-size: 0.75rem;
             color: var(--accent);
             font-weight: 700;
             letter-spacing: 1px;
-            margin-bottom: 6px;
+        }
+
+        .episode-card .ep-status {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .episode-card .ep-status.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .episode-card .ep-status.in-progress {
+            background: var(--warning);
+            color: black;
         }
 
         .episode-card .ep-title {
@@ -126,10 +216,12 @@
             font-size: 0.9rem;
         }
 
-        .episode-card .ep-duration {
-            color: var(--text-secondary);
+        .episode-card .ep-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
             font-size: 0.8rem;
-            margin-top: 8px;
+            color: var(--text-secondary);
         }
 
         /* Player View */
@@ -141,62 +233,97 @@
         .player-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
-        .back-btn {
+        .header-btn {
             background: var(--bg-secondary);
             border: none;
             width: 44px;
             height: 44px;
             border-radius: 12px;
             color: var(--text-primary);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .header-btn:active {
+            background: var(--accent);
         }
 
         .player-title {
             flex: 1;
+            min-width: 0;
         }
 
         .player-title h2 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .player-title .subtitle {
             color: var(--text-secondary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
-        /* Voice Settings */
-        .voice-panel {
+        /* Collapsible Panels */
+        .panel {
             background: var(--bg-secondary);
             border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            overflow: hidden;
         }
 
-        .voice-panel h3 {
+        .panel-header {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .panel-header h3 {
             font-size: 0.8rem;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 12px;
         }
 
+        .panel-toggle {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+
+        .panel.collapsed .panel-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .panel-content {
+            padding: 0 16px 16px;
+            transition: max-height 0.3s, opacity 0.2s;
+            overflow: hidden;
+        }
+
+        .panel.collapsed .panel-content {
+            max-height: 0 !important;
+            padding: 0 16px;
+            opacity: 0;
+        }
+
+        /* Voice Settings */
         .voice-row {
             display: flex;
             gap: 12px;
-            margin-bottom: 10px;
-        }
-
-        .voice-row:last-child {
-            margin-bottom: 0;
         }
 
         .voice-select-wrapper {
@@ -228,15 +355,69 @@
             border: 1px solid var(--border);
             border-radius: 10px;
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        /* Playback Controls */
+        .preview-btn {
+            margin-top: 12px;
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .preview-btn:active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Timer Settings */
+        .timer-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .timer-btn {
+            flex: 1;
+            min-width: 60px;
+            padding: 10px 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .timer-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .timer-display {
+            margin-top: 12px;
+            text-align: center;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .timer-display.active {
+            color: var(--warning);
+        }
+
+        /* Controls Panel */
         .controls-panel {
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
+            padding: 16px;
         }
 
         .status-row {
@@ -255,6 +436,7 @@
             height: 10px;
             border-radius: 50%;
             background: var(--text-secondary);
+            flex-shrink: 0;
         }
 
         .status-dot.speaking {
@@ -269,14 +451,15 @@
 
         .status-text {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            text-align: center;
         }
 
         .control-buttons {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 20px;
         }
 
@@ -298,15 +481,15 @@
         }
 
         .ctrl-btn.small {
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
+            width: 48px;
+            height: 48px;
+            font-size: 1.1rem;
         }
 
         .ctrl-btn.large {
-            width: 72px;
-            height: 72px;
-            font-size: 2rem;
+            width: 68px;
+            height: 68px;
+            font-size: 1.8rem;
             background: var(--accent);
         }
 
@@ -339,49 +522,106 @@
             color: var(--text-secondary);
         }
 
-        /* Speed Control */
+        /* Speed & Options Row */
+        .options-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
         .speed-section {
+            flex: 1;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .speed-section label {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .speed-slider {
-            width: 120px;
+            flex: 1;
             accent-color: var(--accent);
         }
 
         .speed-value {
-            min-width: 45px;
+            min-width: 40px;
             text-align: center;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .auto-play-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .auto-play-toggle.active {
+            background: var(--accent);
+            color: white;
         }
 
         /* Transcript */
         .transcript-panel {
-            background: var(--bg-secondary);
-            border-radius: 16px;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 200px;
-            max-height: 40vh;
+            max-height: 35vh;
         }
 
-        .transcript-header {
-            padding: 12px 16px;
+        .transcript-panel .panel-header {
             border-bottom: 1px solid var(--border);
-            font-size: 0.8rem;
+        }
+
+        .transcript-search {
+            padding: 0 16px 12px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .transcript-search input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        .transcript-search input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .search-nav {
+            display: flex;
+            gap: 4px;
+        }
+
+        .search-nav button {
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .search-nav button:active {
+            background: var(--accent);
+            color: white;
         }
 
         .transcript-content {
@@ -404,6 +644,15 @@
             border-left: 3px solid var(--accent);
         }
 
+        .transcript-line.search-match {
+            border: 1px solid var(--warning);
+        }
+
+        .transcript-line.search-current {
+            border: 2px solid var(--warning);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
         .transcript-line .speaker {
             font-weight: 600;
             font-size: 0.8rem;
@@ -423,12 +672,19 @@
 
         .transcript-line .text {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
         .transcript-line.current .text {
             color: var(--text-primary);
+        }
+
+        .highlight {
+            background: var(--warning);
+            color: black;
+            padding: 0 2px;
+            border-radius: 2px;
         }
 
         /* Loading */
@@ -438,35 +694,48 @@
             color: var(--text-secondary);
         }
 
-        /* Install prompt */
-        .install-prompt {
+        /* Install & Sleep Prompts */
+        .modal-overlay {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--accent);
-            border-radius: 16px;
-            padding: 16px;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
             display: none;
+            align-items: center;
+            justify-content: center;
             z-index: 1000;
+            padding: 20px;
         }
 
-        .install-prompt.show {
-            display: block;
+        .modal-overlay.show {
+            display: flex;
         }
 
-        .install-prompt p {
+        .modal {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .modal h3 {
             margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .modal p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
             font-size: 0.95rem;
         }
 
-        .install-prompt .btns {
+        .modal .btns {
             display: flex;
             gap: 10px;
         }
 
-        .install-prompt button {
+        .modal button {
             flex: 1;
             padding: 12px;
             border: none;
@@ -475,14 +744,45 @@
             cursor: pointer;
         }
 
-        .install-prompt .install-btn {
+        .modal .primary-btn {
             background: var(--accent);
             color: white;
         }
 
-        .install-prompt .dismiss-btn {
+        .modal .secondary-btn {
             background: var(--bg-tertiary);
             color: var(--text-secondary);
+        }
+
+        /* Swipe indicator */
+        .swipe-hint {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .swipe-hint.left { left: 20px; }
+        .swipe-hint.right { right: 20px; }
+        .swipe-hint.show { opacity: 1; }
+
+        /* Episode complete modal */
+        .complete-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .complete-actions button {
+            width: 100%;
         }
     </style>
 </head>
@@ -492,8 +792,15 @@
         <header class="app-header">
             <h1>Tech Leadership Unpacked</h1>
             <p>10-Hour Podcast Series for Product Leaders</p>
-            <span class="offline-badge" id="offline-badge" style="display:none">Works Offline</span>
+            <div class="badges">
+                <span class="badge offline" id="offline-badge" style="display:none">Offline Ready</span>
+                <span class="badge progress" id="total-progress-badge">0% Complete</span>
+            </div>
         </header>
+
+        <div class="search-container">
+            <input type="text" class="search-input" id="episode-search" placeholder="Search episodes...">
+        </div>
 
         <div id="episode-list">
             <p class="loading-text">Loading episodes...</p>
@@ -503,39 +810,48 @@
     <!-- Player View -->
     <div id="player-view" class="view player-view">
         <div class="player-header">
-            <button class="back-btn" id="back-to-list">←</button>
+            <button class="header-btn" id="back-to-list">←</button>
             <div class="player-title">
                 <h2 id="player-episode-title">Episode</h2>
                 <p class="subtitle" id="player-episode-subtitle">Subtitle</p>
             </div>
+            <button class="header-btn" id="sleep-timer-btn">💤</button>
         </div>
 
-        <div class="voice-panel">
-            <h3>Voices</h3>
-            <div class="voice-row">
-                <div class="voice-select-wrapper">
-                    <div class="voice-label alex"><span class="dot"></span>Alex</div>
-                    <select class="voice-select" id="alex-voice"></select>
+        <!-- Voice Panel -->
+        <div class="panel" id="voice-panel">
+            <div class="panel-header">
+                <h3>Voices</h3>
+                <span class="panel-toggle">▼</span>
+            </div>
+            <div class="panel-content" style="max-height: 200px;">
+                <div class="voice-row">
+                    <div class="voice-select-wrapper">
+                        <div class="voice-label alex"><span class="dot"></span>Alex</div>
+                        <select class="voice-select" id="alex-voice"></select>
+                    </div>
+                    <div class="voice-select-wrapper">
+                        <div class="voice-label sam"><span class="dot"></span>Sam</div>
+                        <select class="voice-select" id="sam-voice"></select>
+                    </div>
                 </div>
-                <div class="voice-select-wrapper">
-                    <div class="voice-label sam"><span class="dot"></span>Sam</div>
-                    <select class="voice-select" id="sam-voice"></select>
-                </div>
+                <button class="preview-btn" id="preview-voices">Preview Voices</button>
             </div>
         </div>
 
-        <div class="controls-panel">
+        <!-- Controls Panel -->
+        <div class="panel controls-panel">
             <div class="status-row">
                 <div class="status-dot" id="status-dot"></div>
                 <span class="status-text" id="status-text">Ready</span>
             </div>
 
             <div class="control-buttons">
-                <button class="ctrl-btn small" id="prev-btn">⏮</button>
-                <button class="ctrl-btn small" id="back-btn">↺</button>
-                <button class="ctrl-btn large" id="play-btn">▶</button>
-                <button class="ctrl-btn small" id="fwd-btn">↻</button>
-                <button class="ctrl-btn small" id="next-btn">⏭</button>
+                <button class="ctrl-btn small" id="prev-btn" title="Back 10 lines">⏮</button>
+                <button class="ctrl-btn small" id="back-btn" title="Back 5 lines">↺</button>
+                <button class="ctrl-btn large" id="play-btn" title="Play/Pause">▶</button>
+                <button class="ctrl-btn small" id="fwd-btn" title="Forward 5 lines">↻</button>
+                <button class="ctrl-btn small" id="next-btn" title="Forward 10 lines">⏭</button>
             </div>
 
             <div class="progress-section">
@@ -544,37 +860,92 @@
                 </div>
                 <div class="progress-labels">
                     <span id="current-pos">Line 0</span>
+                    <span id="time-remaining">~60 min left</span>
                     <span id="total-pos">of 0</span>
                 </div>
             </div>
 
-            <div class="speed-section">
-                <label>Speed</label>
-                <input type="range" class="speed-slider" id="speed-slider" min="0.5" max="2" step="0.1" value="1">
-                <span class="speed-value" id="speed-value">1.0x</span>
+            <div class="options-row">
+                <div class="speed-section">
+                    <label>Speed</label>
+                    <input type="range" class="speed-slider" id="speed-slider" min="0.5" max="2" step="0.1" value="1">
+                    <span class="speed-value" id="speed-value">1.0x</span>
+                </div>
+                <div class="auto-play-toggle" id="auto-play-toggle" title="Auto-play next episode">
+                    <span>Auto</span>
+                </div>
             </div>
         </div>
 
-        <div class="transcript-panel">
-            <div class="transcript-header">Live Transcript</div>
+        <!-- Transcript Panel -->
+        <div class="panel transcript-panel" id="transcript-panel">
+            <div class="panel-header">
+                <h3>Transcript</h3>
+                <span class="panel-toggle">▼</span>
+            </div>
+            <div class="transcript-search">
+                <input type="text" id="transcript-search-input" placeholder="Search transcript...">
+                <div class="search-nav">
+                    <button id="search-prev">↑</button>
+                    <button id="search-next">↓</button>
+                </div>
+            </div>
             <div class="transcript-content" id="transcript-content">
                 <p class="loading-text">Loading transcript...</p>
             </div>
         </div>
     </div>
 
+    <!-- Swipe Hints -->
+    <div class="swipe-hint left" id="swipe-left">⏪</div>
+    <div class="swipe-hint right" id="swipe-right">⏩</div>
+
+    <!-- Sleep Timer Modal -->
+    <div class="modal-overlay" id="sleep-modal">
+        <div class="modal">
+            <h3>Sleep Timer</h3>
+            <p>Auto-stop playback after:</p>
+            <div class="timer-row">
+                <button class="timer-btn" data-minutes="15">15m</button>
+                <button class="timer-btn" data-minutes="30">30m</button>
+                <button class="timer-btn" data-minutes="45">45m</button>
+                <button class="timer-btn" data-minutes="60">1hr</button>
+            </div>
+            <div class="timer-display" id="timer-display">No timer set</div>
+            <div class="btns" style="margin-top: 16px;">
+                <button class="secondary-btn" id="cancel-timer">Cancel Timer</button>
+                <button class="primary-btn" id="close-sleep-modal">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Episode Complete Modal -->
+    <div class="modal-overlay" id="complete-modal">
+        <div class="modal">
+            <h3>Episode Complete! 🎉</h3>
+            <p id="complete-message">Great job finishing this episode!</p>
+            <div class="complete-actions">
+                <button class="primary-btn" id="play-next-episode">Play Next Episode</button>
+                <button class="secondary-btn" id="back-to-episodes">Back to Episodes</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Install Prompt -->
-    <div class="install-prompt" id="install-prompt">
-        <p>Install this app for offline use during your flight!</p>
-        <div class="btns">
-            <button class="dismiss-btn" id="dismiss-install">Later</button>
-            <button class="install-btn" id="do-install">Install</button>
+    <div class="modal-overlay" id="install-modal">
+        <div class="modal">
+            <h3>Install App</h3>
+            <p>Install for offline use during your flight!</p>
+            <div class="btns">
+                <button class="secondary-btn" id="dismiss-install">Later</button>
+                <button class="primary-btn" id="do-install">Install</button>
+            </div>
         </div>
     </div>
 
     <script src="episodes.js"></script>
     <script>
-        // State
+        // ===== STATE =====
         let currentEpisode = null;
         let dialogueLines = [];
         let currentLineIndex = 0;
@@ -584,15 +955,82 @@
         let alexVoice = null;
         let samVoice = null;
         let speechRate = 1.0;
+        let autoPlayNext = true;
+        let sleepTimer = null;
+        let sleepEndTime = null;
+        let searchMatches = [];
+        let searchIndex = 0;
         const synth = window.speechSynthesis;
 
-        // DOM Elements
-        const listView = document.getElementById('list-view');
-        const playerView = document.getElementById('player-view');
-        const episodeListEl = document.getElementById('episode-list');
-        const transcriptContent = document.getElementById('transcript-content');
+        // ===== PERSISTENCE =====
+        const STORAGE_KEY = 'tlu_podcast_state';
 
-        // Load voices
+        function saveState() {
+            const state = {
+                episodeProgress: {},
+                completedEpisodes: [],
+                speechRate,
+                autoPlayNext,
+                alexVoiceIndex: document.getElementById('alex-voice').value,
+                samVoiceIndex: document.getElementById('sam-voice').value
+            };
+
+            // Save current episode progress
+            if (currentEpisode) {
+                state.currentEpisodeId = currentEpisode.id;
+                state.currentLineIndex = currentLineIndex;
+            }
+
+            // Get existing progress
+            const existing = loadState();
+            if (existing.episodeProgress) {
+                state.episodeProgress = existing.episodeProgress;
+            }
+            if (existing.completedEpisodes) {
+                state.completedEpisodes = existing.completedEpisodes;
+            }
+
+            // Update current episode progress
+            if (currentEpisode && dialogueLines.length > 0) {
+                const pct = Math.round((currentLineIndex / dialogueLines.length) * 100);
+                state.episodeProgress[currentEpisode.id] = {
+                    line: currentLineIndex,
+                    percent: pct,
+                    timestamp: Date.now()
+                };
+
+                // Mark complete if >= 95%
+                if (pct >= 95 && !state.completedEpisodes.includes(currentEpisode.id)) {
+                    state.completedEpisodes.push(currentEpisode.id);
+                }
+            }
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadState() {
+            try {
+                return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+            } catch {
+                return {};
+            }
+        }
+
+        function restoreState() {
+            const state = loadState();
+            if (state.speechRate) {
+                speechRate = state.speechRate;
+                document.getElementById('speed-slider').value = speechRate;
+                document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
+            }
+            if (state.autoPlayNext !== undefined) {
+                autoPlayNext = state.autoPlayNext;
+                document.getElementById('auto-play-toggle').classList.toggle('active', autoPlayNext);
+            }
+            return state;
+        }
+
+        // ===== VOICE LOADING =====
         function loadVoices() {
             voices = synth.getVoices();
             if (voices.length === 0) {
@@ -605,7 +1043,6 @@
             alexSelect.innerHTML = '';
             samSelect.innerHTML = '';
 
-            // Find good voices for each character
             const maleVoices = [];
             const femaleVoices = [];
 
@@ -613,36 +1050,42 @@
                 const name = voice.name.toLowerCase();
                 if (name.includes('male') || name.includes('david') || name.includes('james') ||
                     name.includes('daniel') || name.includes('guy') || name.includes('aaron') ||
-                    name.includes('google us english') || name.includes('english (united states)')) {
+                    name.includes('google us english')) {
                     maleVoices.push({ voice, index });
                 } else if (name.includes('female') || name.includes('samantha') || name.includes('karen') ||
-                           name.includes('victoria') || name.includes('fiona') || name.includes('moira')) {
+                           name.includes('victoria') || name.includes('fiona')) {
                     femaleVoices.push({ voice, index });
                 }
             });
 
-            // Add all voices to both selects
             voices.forEach((voice, index) => {
                 const opt1 = document.createElement('option');
                 opt1.value = index;
-                opt1.textContent = `${voice.name}`;
+                opt1.textContent = voice.name;
                 alexSelect.appendChild(opt1);
 
                 const opt2 = document.createElement('option');
                 opt2.value = index;
-                opt2.textContent = `${voice.name}`;
+                opt2.textContent = voice.name;
                 samSelect.appendChild(opt2);
             });
 
-            // Set defaults
-            if (maleVoices.length > 0) {
+            // Restore saved voices or use defaults
+            const state = loadState();
+            if (state.alexVoiceIndex !== undefined && voices[state.alexVoiceIndex]) {
+                alexSelect.value = state.alexVoiceIndex;
+                alexVoice = voices[state.alexVoiceIndex];
+            } else if (maleVoices.length > 0) {
                 alexSelect.value = maleVoices[0].index;
                 alexVoice = voices[maleVoices[0].index];
             } else if (voices.length > 0) {
                 alexVoice = voices[0];
             }
 
-            if (femaleVoices.length > 0) {
+            if (state.samVoiceIndex !== undefined && voices[state.samVoiceIndex]) {
+                samSelect.value = state.samVoiceIndex;
+                samVoice = voices[state.samVoiceIndex];
+            } else if (femaleVoices.length > 0) {
                 samSelect.value = femaleVoices[0].index;
                 samVoice = voices[femaleVoices[0].index];
             } else if (voices.length > 1) {
@@ -656,15 +1099,33 @@
         }
         loadVoices();
 
-        // Voice change handlers
         document.getElementById('alex-voice').addEventListener('change', e => {
             alexVoice = voices[e.target.value];
+            saveState();
         });
         document.getElementById('sam-voice').addEventListener('change', e => {
             samVoice = voices[e.target.value];
+            saveState();
         });
 
-        // Parse markdown to dialogue
+        // Preview voices
+        document.getElementById('preview-voices').addEventListener('click', () => {
+            synth.cancel();
+            const alexUtter = new SpeechSynthesisUtterance("Hi, I'm Alex, your technical expert.");
+            if (alexVoice) alexUtter.voice = alexVoice;
+            alexUtter.rate = speechRate;
+            alexUtter.pitch = 0.9;
+
+            const samUtter = new SpeechSynthesisUtterance("And I'm Sam, asking the questions you're thinking.");
+            if (samVoice) samUtter.voice = samVoice;
+            samUtter.rate = speechRate;
+            samUtter.pitch = 1.1;
+
+            synth.speak(alexUtter);
+            synth.speak(samUtter);
+        });
+
+        // ===== MARKDOWN PARSING =====
         function parseMarkdown(content) {
             const lines = content.split('\n');
             const dialogue = [];
@@ -704,55 +1165,99 @@
                 .replace(/```[\s\S]*?```/g, 'code block').trim();
         }
 
-        // Render episode list
-        function renderEpisodeList() {
+        // ===== EPISODE LIST =====
+        function renderEpisodeList(filter = '') {
             if (typeof EPISODES === 'undefined') {
-                episodeListEl.innerHTML = '<p class="loading-text">Error loading episodes</p>';
+                document.getElementById('episode-list').innerHTML = '<p class="loading-text">Error loading episodes</p>';
                 return;
             }
 
-            episodeListEl.innerHTML = '';
+            const state = loadState();
+            const listEl = document.getElementById('episode-list');
+            listEl.innerHTML = '';
+
+            const filterLower = filter.toLowerCase();
+            let totalProgress = 0;
+            let shown = 0;
+
             EPISODES.forEach(ep => {
+                // Filter
+                if (filter && !ep.title.toLowerCase().includes(filterLower) &&
+                    !ep.subtitle.toLowerCase().includes(filterLower)) {
+                    return;
+                }
+                shown++;
+
+                const progress = state.episodeProgress?.[ep.id] || { percent: 0 };
+                const isComplete = state.completedEpisodes?.includes(ep.id);
+                const inProgress = progress.percent > 0 && progress.percent < 95;
+
+                totalProgress += isComplete ? 100 : progress.percent;
+
                 const card = document.createElement('div');
-                card.className = 'episode-card';
+                card.className = 'episode-card' + (isComplete ? ' completed' : '') + (inProgress ? ' in-progress' : '');
                 card.innerHTML = `
-                    <div class="ep-number">EPISODE ${ep.id}</div>
+                    <div class="ep-progress-bar" style="width: ${progress.percent}%"></div>
+                    <div class="ep-header">
+                        <span class="ep-number">EPISODE ${ep.id}</span>
+                        ${isComplete ? '<span class="ep-status completed">Complete</span>' :
+                          inProgress ? `<span class="ep-status in-progress">${progress.percent}%</span>` : ''}
+                    </div>
                     <div class="ep-title">${ep.title}</div>
                     <div class="ep-subtitle">${ep.subtitle}</div>
-                    <div class="ep-duration">~60 min</div>
+                    <div class="ep-meta">
+                        <span>~60 min</span>
+                        ${progress.percent > 0 ? `<span>${Math.round((100 - progress.percent) * 0.6)} min left</span>` : ''}
+                    </div>
                 `;
                 card.addEventListener('click', () => openEpisode(ep));
-                episodeListEl.appendChild(card);
+                listEl.appendChild(card);
             });
+
+            // Update total progress badge
+            const avgProgress = EPISODES.length > 0 ? Math.round(totalProgress / EPISODES.length) : 0;
+            document.getElementById('total-progress-badge').textContent = `${avgProgress}% Complete`;
         }
 
-        // Open episode
+        // Episode search
+        document.getElementById('episode-search').addEventListener('input', e => {
+            renderEpisodeList(e.target.value);
+        });
+
+        // ===== PLAYER =====
         function openEpisode(episode) {
             currentEpisode = episode;
             dialogueLines = parseMarkdown(episode.content);
-            currentLineIndex = 0;
+
+            // Restore progress
+            const state = loadState();
+            const progress = state.episodeProgress?.[episode.id];
+            currentLineIndex = progress?.line || 0;
 
             document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
             document.getElementById('player-episode-subtitle').textContent = episode.subtitle;
 
             renderTranscript();
             updateProgress();
-            setStatus('Ready');
+            setStatus('Ready - Tap play to start');
 
-            listView.classList.remove('active');
-            playerView.classList.add('active');
+            document.getElementById('list-view').classList.remove('active');
+            document.getElementById('player-view').classList.add('active');
         }
 
-        // Back to list
         document.getElementById('back-to-list').addEventListener('click', () => {
             stopPlayback();
-            playerView.classList.remove('active');
-            listView.classList.add('active');
+            saveState();
+            document.getElementById('player-view').classList.remove('active');
+            document.getElementById('list-view').classList.add('active');
+            renderEpisodeList();
         });
 
-        // Render transcript
+        // ===== TRANSCRIPT =====
         function renderTranscript() {
-            transcriptContent.innerHTML = '';
+            const content = document.getElementById('transcript-content');
+            content.innerHTML = '';
+
             dialogueLines.forEach((line, index) => {
                 const div = document.createElement('div');
                 div.className = `transcript-line ${line.type}`;
@@ -764,34 +1269,105 @@
                     div.innerHTML = `<div class="speaker">${line.speaker}</div><div class="text">${line.text}</div>`;
                 }
                 div.addEventListener('click', () => jumpToLine(index));
-                transcriptContent.appendChild(div);
+                content.appendChild(div);
             });
+
+            updateProgress();
         }
 
-        // Update progress
         function updateProgress() {
             const pct = dialogueLines.length > 0 ? (currentLineIndex / dialogueLines.length) * 100 : 0;
             document.getElementById('progress-fill').style.width = `${pct}%`;
             document.getElementById('current-pos').textContent = `Line ${currentLineIndex + 1}`;
             document.getElementById('total-pos').textContent = `of ${dialogueLines.length}`;
 
+            // Estimate time remaining (avg ~3 seconds per line at 1x speed)
+            const linesLeft = dialogueLines.length - currentLineIndex;
+            const secondsLeft = (linesLeft * 3) / speechRate;
+            const minsLeft = Math.round(secondsLeft / 60);
+            document.getElementById('time-remaining').textContent = `~${minsLeft} min left`;
+
+            // Update highlighting
             document.querySelectorAll('.transcript-line').forEach((el, i) => {
                 el.classList.toggle('current', i === currentLineIndex);
             });
 
+            // Scroll into view
             const currentEl = document.querySelector('.transcript-line.current');
             if (currentEl) {
                 currentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
+
+            // Periodic save
+            if (currentLineIndex % 10 === 0) {
+                saveState();
+            }
         }
 
-        // Status
+        // Transcript search
+        function searchTranscript(query) {
+            searchMatches = [];
+            searchIndex = 0;
+
+            document.querySelectorAll('.transcript-line').forEach(el => {
+                el.classList.remove('search-match', 'search-current');
+                const textEl = el.querySelector('.text');
+                if (textEl) {
+                    textEl.innerHTML = textEl.textContent; // Remove highlights
+                }
+            });
+
+            if (!query) return;
+
+            const queryLower = query.toLowerCase();
+            dialogueLines.forEach((line, index) => {
+                if (line.text.toLowerCase().includes(queryLower)) {
+                    searchMatches.push(index);
+                    const el = document.querySelector(`.transcript-line[data-index="${index}"]`);
+                    if (el) {
+                        el.classList.add('search-match');
+                        const textEl = el.querySelector('.text');
+                        if (textEl) {
+                            const regex = new RegExp(`(${query})`, 'gi');
+                            textEl.innerHTML = textEl.textContent.replace(regex, '<span class="highlight">$1</span>');
+                        }
+                    }
+                }
+            });
+
+            if (searchMatches.length > 0) {
+                highlightSearchResult(0);
+            }
+        }
+
+        function highlightSearchResult(idx) {
+            document.querySelectorAll('.transcript-line.search-current').forEach(el => {
+                el.classList.remove('search-current');
+            });
+
+            if (searchMatches.length === 0) return;
+            searchIndex = (idx + searchMatches.length) % searchMatches.length;
+
+            const lineIdx = searchMatches[searchIndex];
+            const el = document.querySelector(`.transcript-line[data-index="${lineIdx}"]`);
+            if (el) {
+                el.classList.add('search-current');
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        document.getElementById('transcript-search-input').addEventListener('input', e => {
+            searchTranscript(e.target.value);
+        });
+        document.getElementById('search-prev').addEventListener('click', () => highlightSearchResult(searchIndex - 1));
+        document.getElementById('search-next').addEventListener('click', () => highlightSearchResult(searchIndex + 1));
+
+        // ===== PLAYBACK =====
         function setStatus(text, speaking = false) {
             document.getElementById('status-text').textContent = text;
             document.getElementById('status-dot').classList.toggle('speaking', speaking);
         }
 
-        // Speech
         function speak(text, speaker) {
             return new Promise((resolve, reject) => {
                 const utt = new SpeechSynthesisUtterance(text);
@@ -805,7 +1381,6 @@
             });
         }
 
-        // Playback
         async function startPlayback() {
             if (dialogueLines.length === 0) return;
 
@@ -814,6 +1389,15 @@
             document.getElementById('play-btn').textContent = '⏸';
 
             while (currentLineIndex < dialogueLines.length && isPlaying) {
+                // Check sleep timer
+                if (sleepEndTime && Date.now() >= sleepEndTime) {
+                    stopPlayback();
+                    sleepEndTime = null;
+                    updateSleepDisplay();
+                    setStatus('Sleep timer ended');
+                    break;
+                }
+
                 if (isPaused) {
                     await new Promise(r => setTimeout(r, 100));
                     continue;
@@ -835,15 +1419,18 @@
                 }
             }
 
-            if (currentLineIndex >= dialogueLines.length) {
-                setStatus('Episode complete!');
-                currentLineIndex = 0;
+            // Episode complete
+            if (currentLineIndex >= dialogueLines.length && isPlaying) {
+                isPlaying = false;
+                isPaused = false;
+                saveState();
+                showCompleteModal();
+            } else {
+                isPlaying = false;
+                isPaused = false;
+                document.getElementById('play-btn').textContent = '▶';
+                setStatus('Ready');
             }
-
-            isPlaying = false;
-            isPaused = false;
-            document.getElementById('play-btn').textContent = '▶';
-            setStatus('Ready');
         }
 
         function stopPlayback() {
@@ -851,6 +1438,7 @@
             isPaused = false;
             synth.cancel();
             document.getElementById('play-btn').textContent = '▶';
+            saveState();
         }
 
         function togglePlayPause() {
@@ -865,6 +1453,7 @@
                 synth.pause();
                 document.getElementById('play-btn').textContent = '▶';
                 setStatus('Paused');
+                saveState();
             }
         }
 
@@ -872,13 +1461,14 @@
             synth.cancel();
             currentLineIndex = Math.max(0, Math.min(index, dialogueLines.length - 1));
             updateProgress();
+            saveState();
         }
 
         function skipLines(n) {
             jumpToLine(currentLineIndex + n);
         }
 
-        // Button handlers
+        // Controls
         document.getElementById('play-btn').addEventListener('click', togglePlayPause);
         document.getElementById('prev-btn').addEventListener('click', () => skipLines(-10));
         document.getElementById('next-btn').addEventListener('click', () => skipLines(10));
@@ -889,6 +1479,7 @@
         document.getElementById('speed-slider').addEventListener('input', e => {
             speechRate = parseFloat(e.target.value);
             document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
+            saveState();
         });
 
         // Progress bar click
@@ -898,37 +1489,179 @@
             jumpToLine(Math.floor(pct * dialogueLines.length));
         });
 
-        // Service Worker
+        // Auto-play toggle
+        document.getElementById('auto-play-toggle').addEventListener('click', () => {
+            autoPlayNext = !autoPlayNext;
+            document.getElementById('auto-play-toggle').classList.toggle('active', autoPlayNext);
+            saveState();
+        });
+
+        // ===== SLEEP TIMER =====
+        document.getElementById('sleep-timer-btn').addEventListener('click', () => {
+            document.getElementById('sleep-modal').classList.add('show');
+        });
+
+        document.getElementById('close-sleep-modal').addEventListener('click', () => {
+            document.getElementById('sleep-modal').classList.remove('show');
+        });
+
+        document.querySelectorAll('.timer-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const mins = parseInt(btn.dataset.minutes);
+                sleepEndTime = Date.now() + mins * 60 * 1000;
+                updateSleepDisplay();
+            });
+        });
+
+        document.getElementById('cancel-timer').addEventListener('click', () => {
+            sleepEndTime = null;
+            document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
+            updateSleepDisplay();
+        });
+
+        function updateSleepDisplay() {
+            const display = document.getElementById('timer-display');
+            if (sleepEndTime) {
+                const minsLeft = Math.max(0, Math.round((sleepEndTime - Date.now()) / 60000));
+                display.textContent = `Stopping in ${minsLeft} minutes`;
+                display.classList.add('active');
+            } else {
+                display.textContent = 'No timer set';
+                display.classList.remove('active');
+            }
+        }
+
+        // Update timer display every minute
+        setInterval(updateSleepDisplay, 60000);
+
+        // ===== EPISODE COMPLETE MODAL =====
+        function showCompleteModal() {
+            document.getElementById('play-btn').textContent = '▶';
+            setStatus('Episode complete! 🎉');
+
+            const state = loadState();
+            const nextEp = EPISODES.find(e => e.id === currentEpisode.id + 1);
+
+            if (autoPlayNext && nextEp) {
+                document.getElementById('complete-message').textContent = `Starting "${nextEp.title}" in 5 seconds...`;
+                document.getElementById('play-next-episode').textContent = 'Play Now';
+                document.getElementById('complete-modal').classList.add('show');
+
+                setTimeout(() => {
+                    if (document.getElementById('complete-modal').classList.contains('show')) {
+                        playNextEpisode();
+                    }
+                }, 5000);
+            } else if (nextEp) {
+                document.getElementById('complete-message').textContent = `Up next: "${nextEp.title}"`;
+                document.getElementById('play-next-episode').textContent = 'Play Next Episode';
+                document.getElementById('complete-modal').classList.add('show');
+            } else {
+                document.getElementById('complete-message').textContent = 'You\'ve completed all episodes! 🏆';
+                document.getElementById('play-next-episode').style.display = 'none';
+                document.getElementById('complete-modal').classList.add('show');
+            }
+        }
+
+        function playNextEpisode() {
+            document.getElementById('complete-modal').classList.remove('show');
+            const nextEp = EPISODES.find(e => e.id === currentEpisode.id + 1);
+            if (nextEp) {
+                openEpisode(nextEp);
+                setTimeout(() => startPlayback(), 500);
+            }
+        }
+
+        document.getElementById('play-next-episode').addEventListener('click', playNextEpisode);
+        document.getElementById('back-to-episodes').addEventListener('click', () => {
+            document.getElementById('complete-modal').classList.remove('show');
+            document.getElementById('back-to-list').click();
+        });
+
+        // ===== SWIPE GESTURES =====
+        let touchStartX = 0;
+        let touchStartY = 0;
+        const swipeThreshold = 80;
+
+        document.getElementById('player-view').addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.getElementById('player-view').addEventListener('touchmove', e => {
+            if (!touchStartX) return;
+            const diffX = e.touches[0].clientX - touchStartX;
+            const diffY = Math.abs(e.touches[0].clientY - touchStartY);
+
+            // Only show hint if horizontal swipe
+            if (Math.abs(diffX) > 30 && diffY < 50) {
+                if (diffX > 0) {
+                    document.getElementById('swipe-left').classList.add('show');
+                    document.getElementById('swipe-right').classList.remove('show');
+                } else {
+                    document.getElementById('swipe-right').classList.add('show');
+                    document.getElementById('swipe-left').classList.remove('show');
+                }
+            }
+        }, { passive: true });
+
+        document.getElementById('player-view').addEventListener('touchend', e => {
+            document.getElementById('swipe-left').classList.remove('show');
+            document.getElementById('swipe-right').classList.remove('show');
+
+            if (!touchStartX) return;
+            const diffX = e.changedTouches[0].clientX - touchStartX;
+            const diffY = Math.abs(e.changedTouches[0].clientY - touchStartY);
+
+            if (Math.abs(diffX) > swipeThreshold && diffY < 50) {
+                if (diffX > 0) {
+                    skipLines(-10); // Swipe right = go back
+                } else {
+                    skipLines(10); // Swipe left = go forward
+                }
+            }
+            touchStartX = 0;
+        }, { passive: true });
+
+        // ===== COLLAPSIBLE PANELS =====
+        document.querySelectorAll('.panel-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        // ===== SERVICE WORKER =====
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').then(reg => {
                 console.log('SW registered');
-                document.getElementById('offline-badge').style.display = 'inline-block';
+                document.getElementById('offline-badge').style.display = 'inline-flex';
             }).catch(err => console.log('SW error:', err));
         }
 
-        // Install prompt
+        // ===== INSTALL PROMPT =====
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', e => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('install-prompt').classList.add('show');
+            document.getElementById('install-modal').classList.add('show');
         });
 
         document.getElementById('do-install').addEventListener('click', () => {
-            document.getElementById('install-prompt').classList.remove('show');
+            document.getElementById('install-modal').classList.remove('show');
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(result => {
-                    deferredPrompt = null;
-                });
+                deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
             }
         });
 
         document.getElementById('dismiss-install').addEventListener('click', () => {
-            document.getElementById('install-prompt').classList.remove('show');
+            document.getElementById('install-modal').classList.remove('show');
         });
 
-        // Initialize
+        // ===== INIT =====
+        restoreState();
         renderEpisodeList();
     </script>
 </body>

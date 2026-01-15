@@ -1,4 +1,4 @@
-const CACHE_NAME = 'podlearn-v2';
+const CACHE_NAME = 'podlearn-v3';
 const urlsToCache = [
     '/',
     '/index.html',

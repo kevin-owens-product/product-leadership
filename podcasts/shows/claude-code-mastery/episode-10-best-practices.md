@@ -1,4 +1,12 @@
 # Episode 10: Best Practices & Productivity Tips
+## "Master Your AI-Assisted Development Workflow"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and wow, we've covered so much. From installation to MCP servers. I feel like a completely different developer than when we started.
 
 **ALEX:** That's the goal. Today we're synthesizing everything into a cohesive workflow. Best practices, productivity tips, and how to keep improving with Claude Code.
+
+---
+
+### SEGMENT 1: THE DAILY WORKFLOW (5 minutes)
 
 ## The Daily Workflow
 
@@ -25,6 +37,10 @@
 **JAMIE:** Integrated throughout.
 
 **ALEX:** And at the end of the day, sometimes I ask Claude to summarize what we accomplished. Good for standups and keeping track of progress.
+
+---
+
+### SEGMENT 2: STAYING IN CONTROL (4 minutes)
 
 ## Staying in Control
 
@@ -46,6 +62,10 @@
 
 **JAMIE:** Still a developer, with better tools.
 
+---
+
+### SEGMENT 3: CODE REVIEW WITH CLAUDE (3 minutes)
+
 ## Code Review with Claude
 
 **JAMIE:** How do you use Claude for code review?
@@ -59,6 +79,10 @@
 **JAMIE:** Augmented review, not replaced review.
 
 **ALEX:** Right. Claude might catch technical issues, but you still need human judgment about design choices, maintainability, and fit with the broader system.
+
+---
+
+### SEGMENT 4: LEARNING AND GROWING (4 minutes)
 
 ## Learning and Growing
 
@@ -74,6 +98,10 @@
 
 **ALEX:** And when Claude suggests something I don't understand, I always ask why. "Why did you use this pattern instead of the obvious approach?" The explanations teach me.
 
+---
+
+### SEGMENT 5: EFFECTIVE COLLABORATION (3 minutes)
+
 ## Effective Collaboration
 
 **JAMIE:** How do you balance Claude and working with human teammates?
@@ -87,6 +115,10 @@
 **JAMIE:** Team awareness.
 
 **ALEX:** And I share what I learn. When Claude shows me a better pattern, I bring it to the team. The whole team can benefit from AI-assisted insights.
+
+---
+
+### SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)
 
 ## Debugging Efficiently
 
@@ -104,6 +136,10 @@
 
 **JAMIE:** Test-confirmed fixes.
 
+---
+
+### SEGMENT 7: AVOIDING OVER-RELIANCE (4 minutes)
+
 ## Avoiding Over-Reliance
 
 **JAMIE:** Is there a risk of becoming too dependent on Claude?
@@ -117,6 +153,10 @@
 **JAMIE:** Practice without the assistant.
 
 **ALEX:** And remember that Claude can be wrong. If something doesn't feel right, trust your instincts. You know your project better than Claude does.
+
+---
+
+### SEGMENT 8: PERFORMANCE AND EFFICIENCY (3 minutes)
 
 ## Performance and Efficiency
 
@@ -132,6 +172,10 @@
 
 **ALEX:** And I pay attention to what works. When a certain prompting style gets good results, I reuse it. Over time, you develop efficient patterns.
 
+---
+
+### SEGMENT 9: BUILDING TRUST (3 minutes)
+
 ## Building Trust
 
 **JAMIE:** How do you build trust with Claude?
@@ -146,6 +190,10 @@
 
 **ALEX:** And if Claude makes a mistake, understand why. Was the prompt unclear? Did you give bad context? Learning from mistakes makes future interactions better.
 
+---
+
+### SEGMENT 10: PROJECT ORGANIZATION FOR AI (3 minutes)
+
 ## Project Organization for AI
 
 **JAMIE:** Does code organization matter for Claude effectiveness?
@@ -159,6 +207,10 @@
 **JAMIE:** Document for humans and AI.
 
 **ALEX:** And keep related code together. If your auth logic is scattered across ten folders, Claude has to work harder. Cohesive organization helps everyone.
+
+---
+
+### SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)
 
 ## Future-Proofing Your Skills
 
@@ -175,6 +227,10 @@
 **ALEX:** Stay curious and adaptable. The tools will evolve. New capabilities will emerge. Keep learning and experimenting.
 
 **JAMIE:** Continuous learning.
+
+---
+
+### SEGMENT 12: TOP TEN TIPS (6 minutes)
 
 ## Top Ten Tips
 
@@ -220,6 +276,10 @@
 
 **JAMIE:** Ten. Great list.
 
+---
+
+### SEGMENT 13: COMMUNITY AND RESOURCES (3 minutes)
+
 ## Community and Resources
 
 **JAMIE:** Where can people learn more?
@@ -233,6 +293,10 @@
 **JAMIE:** Learn from peers.
 
 **ALEX:** And keep experimenting. The best way to learn Claude Code is to use it. Try things, make mistakes, figure out what works for you.
+
+---
+
+### SEGMENT 14: CLOSING THOUGHTS (5 minutes)
 
 ## Closing Thoughts
 

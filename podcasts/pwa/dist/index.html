@@ -108,6 +108,41 @@
             color: white;
         }
 
+        .badge.refresh-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .badge.refresh-btn:hover, .badge.refresh-btn:active {
+            background: var(--accent);
+        }
+
+        .update-banner {
+            background: var(--success);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 0.9rem;
+        }
+
+        .update-banner button {
+            background: white;
+            color: var(--success);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         .badge.progress {
             background: var(--bg-tertiary);
             color: var(--text-secondary);
@@ -1201,6 +1236,10 @@
             <p>Your Custom Podcast Player</p>
             <div class="badges">
                 <span class="badge offline" id="offline-badge-home" style="display:none">Offline Ready</span>
+                <button class="badge refresh-btn" id="refresh-btn" onclick="forceRefresh()">↻ Refresh</button>
+            </div>
+            <div id="update-banner" class="update-banner" style="display:none">
+                New content available! <button onclick="applyUpdate()">Update Now</button>
             </div>
         </header>
 
@@ -2651,13 +2690,79 @@
         restoreState();
         renderPodcastsList();
 
-        // Service worker registration
+        // Service worker registration with update handling
+        let swRegistration = null;
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').then(reg => {
                 console.log('SW registered');
+                swRegistration = reg;
                 document.getElementById('offline-badge-home').style.display = 'inline-flex';
                 document.getElementById('offline-badge').style.display = 'inline-flex';
+
+                // Check for updates periodically
+                setInterval(() => reg.update(), 60000);
+
+                // Listen for new service worker
+                reg.addEventListener('updatefound', () => {
+                    const newWorker = reg.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // New content available
+                            document.getElementById('update-banner').style.display = 'flex';
+                        }
+                    });
+                });
             }).catch(err => console.log('SW error:', err));
+
+            // Listen for SW messages
+            navigator.serviceWorker.addEventListener('message', event => {
+                if (event.data.type === 'SW_UPDATED') {
+                    console.log('SW updated to:', event.data.version);
+                    // Reload to get fresh content
+                    window.location.reload();
+                }
+            });
+
+            // Handle controller change (new SW took over)
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                console.log('New SW controller, reloading...');
+                window.location.reload();
+            });
+        }
+
+        // Force refresh - clears cache and reloads
+        function forceRefresh() {
+            const btn = document.getElementById('refresh-btn');
+            btn.textContent = '↻ Refreshing...';
+            btn.disabled = true;
+
+            // Clear caches
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    return Promise.all(names.map(name => caches.delete(name)));
+                }).then(() => {
+                    console.log('All caches cleared');
+                    // Unregister service worker and reload
+                    if (swRegistration) {
+                        swRegistration.unregister().then(() => {
+                            window.location.reload(true);
+                        });
+                    } else {
+                        window.location.reload(true);
+                    }
+                });
+            } else {
+                window.location.reload(true);
+            }
+        }
+
+        // Apply pending update
+        function applyUpdate() {
+            if (swRegistration && swRegistration.waiting) {
+                swRegistration.waiting.postMessage('SKIP_WAITING');
+            }
+            window.location.reload();
         }
     </script>
 </body>

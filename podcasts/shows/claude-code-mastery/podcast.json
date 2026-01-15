@@ -1,0 +1,20 @@
+{
+  "id": "claude-code-mastery",
+  "title": "Claude Code Mastery",
+  "subtitle": "Master AI-Powered Software Development",
+  "description": "Learn to leverage Claude Code for faster, smarter software development. From basic commands to advanced workflows, become a power user of Anthropic's AI coding assistant.",
+  "color": "#6366f1",
+  "icon": "🤖",
+  "episodes": [
+    {"id": 1, "file": "episode-01-getting-started.md", "title": "Getting Started with Claude Code"},
+    {"id": 2, "file": "episode-02-core-commands.md", "title": "Core Commands & Navigation"},
+    {"id": 3, "file": "episode-03-code-editing.md", "title": "Code Reading & Editing"},
+    {"id": 4, "file": "episode-04-search-explore.md", "title": "Search & Codebase Exploration"},
+    {"id": 5, "file": "episode-05-git-workflow.md", "title": "Git Workflow & Collaboration"},
+    {"id": 6, "file": "episode-06-testing-debugging.md", "title": "Testing & Debugging"},
+    {"id": 7, "file": "episode-07-project-setup.md", "title": "Project Setup & Configuration"},
+    {"id": 8, "file": "episode-08-advanced-prompting.md", "title": "Advanced Prompting Techniques"},
+    {"id": 9, "file": "episode-09-mcp-tools.md", "title": "MCP Servers & Custom Tools"},
+    {"id": 10, "file": "episode-10-best-practices.md", "title": "Best Practices & Productivity Tips"}
+  ]
+}

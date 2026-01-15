@@ -403,12 +403,34 @@
 
         .voice-select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 14px;
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
             border-radius: 10px;
             color: var(--text-primary);
-            font-size: 0.85rem;
+            font-size: 1rem;
+            /* Ensure native dropdown works on mobile */
+            -webkit-appearance: menulist;
+            -moz-appearance: menulist;
+            appearance: menulist;
+            cursor: pointer;
+            min-height: 44px; /* Touch-friendly size */
+        }
+
+        .voice-info {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            padding: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .voice-count {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
         }
 
         .preview-btn {
@@ -1347,18 +1369,24 @@
                 <h3>Voices</h3>
                 <span class="panel-toggle">▼</span>
             </div>
-            <div class="panel-content" style="max-height: 200px;">
+            <div class="panel-content" style="max-height: 300px;">
+                <div class="voice-count" id="voice-count">Loading voices...</div>
                 <div class="voice-row">
                     <div class="voice-select-wrapper">
-                        <div class="voice-label alex"><span class="dot"></span>Alex</div>
+                        <div class="voice-label alex"><span class="dot"></span>Host 1</div>
                         <select class="voice-select" id="alex-voice"></select>
                     </div>
                     <div class="voice-select-wrapper">
-                        <div class="voice-label sam"><span class="dot"></span>Sam</div>
+                        <div class="voice-label sam"><span class="dot"></span>Host 2</div>
                         <select class="voice-select" id="sam-voice"></select>
                     </div>
                 </div>
                 <button class="preview-btn" id="preview-voices">Preview Voices</button>
+                <div class="voice-info" id="voice-info">
+                    <strong>Tip:</strong> On Android, each voice in this list represents a downloaded voice pack.
+                    To change the voice variant (I, II, III), go to Settings → Accessibility → Text-to-Speech →
+                    tap the gear icon next to your TTS engine.
+                </div>
             </div>
         </div>
 
@@ -1519,7 +1547,7 @@
 
     <script>
         // ===== APP VERSION =====
-        const APP_VERSION = '2.0.6';
+        const APP_VERSION = '2.0.8';
 
         // ===== AUTO-UPDATE CHECK =====
         // Runs immediately - fetches version from server bypassing all caches
@@ -1807,6 +1835,11 @@
             }
 
             console.log('Available voices:', voices.length, voices.map(v => v.name));
+
+            // Update voice count display
+            const voiceCountEl = document.getElementById('voice-count');
+            const englishCount = voices.filter(v => v.lang.toLowerCase().startsWith('en')).length;
+            voiceCountEl.textContent = `${voices.length} voices available (${englishCount} English)`;
 
             const alexSelect = document.getElementById('alex-voice');
             const samSelect = document.getElementById('sam-voice');

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'podlearn-v13';
+const CACHE_NAME = 'podlearn-v14';
 const STATIC_ASSETS = [
     '/index.html',
     '/manifest.json',

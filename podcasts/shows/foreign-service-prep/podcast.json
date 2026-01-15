@@ -1,0 +1,47 @@
+{
+  "id": "foreign-service-prep",
+  "title": "The Diplomat's Edge",
+  "subtitle": "Your Complete FSOT Preparation Guide",
+  "description": "Master the Foreign Service Officer Test with engaging discussions, real scenarios, and expert insights. Two hosts - a former FSO and an aspiring diplomat - break down everything you need to know.",
+  "author": "PodLearn",
+  "color": "#1e40af",
+  "icon": "🌍",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-situational-judgment.md",
+      "title": "Mastering Situational Judgment",
+      "subtitle": "Think Like a Diplomat"
+    },
+    {
+      "id": 2,
+      "file": "episode-02-foreign-service-history.md",
+      "title": "History of the Foreign Service",
+      "subtitle": "From Franklin to Today"
+    },
+    {
+      "id": 3,
+      "file": "episode-03-world-history-geography.md",
+      "title": "World History & Geography",
+      "subtitle": "The Global Landscape"
+    },
+    {
+      "id": 4,
+      "file": "episode-04-political-systems.md",
+      "title": "Political Systems & International Relations",
+      "subtitle": "How the World Works"
+    },
+    {
+      "id": 5,
+      "file": "episode-05-grammar-mastery.md",
+      "title": "Grammar Mastery",
+      "subtitle": "Writing with Precision"
+    },
+    {
+      "id": 6,
+      "file": "episode-06-sentence-structure.md",
+      "title": "Sentence Structure & Style",
+      "subtitle": "The Art of Clear Communication"
+    }
+  ]
+}

@@ -1,30 +1,62 @@
-# Deployment Instructions
+# PodLearn - Custom Podcast Player
 
-## Quick Deploy to Netlify
+## Deployment
 
-1. Go to https://app.netlify.com/drop
-2. Drag and drop this entire 'dist' folder
-3. Done! You'll get a URL like https://random-name.netlify.app
+### Quick Deploy to Netlify
+1. Connect your GitHub repo to Netlify
+2. Set build command to: `cd podcasts/pwa && node build-episodes.js`
+3. Set publish directory to: `podcasts/pwa/dist`
 
-## Add to Home Screen on Android
+### Manual Deploy
+1. Run `node build-episodes.js` in this directory
+2. Deploy the `dist/` folder
 
-1. Open the deployed URL in Chrome
-2. Tap the menu (three dots)
-3. Tap "Add to Home Screen" or "Install App"
-4. The app will work offline!
+## Creating Your Own Podcasts
 
-## Icons
+1. Create a new folder in `shows/` (e.g., `shows/my-podcast/`)
 
-The app uses icon.svg. For better PWA support, convert it to PNG:
-- icon-192.png (192x192)
-- icon-512.png (512x512)
+2. Add a `podcast.json` file:
+```json
+{
+  "id": "my-podcast",
+  "title": "My Podcast Title",
+  "subtitle": "A great podcast",
+  "description": "What this podcast is about",
+  "author": "Your Name",
+  "color": "#6366f1",
+  "icon": "🎙️",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01.md",
+      "title": "Episode Title",
+      "subtitle": "Episode subtitle"
+    }
+  ]
+}
+```
 
-You can use https://cloudconvert.com/svg-to-png
+3. Add episode markdown files with dialogue format:
+```markdown
+# Episode 1: Title
 
-## Files in this folder
+### INTRO
 
-- index.html - The main app
-- episodes.js - All 10 episodes embedded
-- manifest.json - PWA manifest
-- sw.js - Service worker for offline support
-- icon.svg - App icon
+**ALEX:** Welcome to the show!
+
+**SAM:** Great to be here.
+
+### SEGMENT 1: Topic Name
+
+**ALEX:** Let's talk about...
+```
+
+4. Run `node build-episodes.js` to rebuild
+
+## Files
+
+- `index.html` - Main app
+- `podcasts.js` - All podcasts and episodes (auto-generated)
+- `manifest.json` - PWA manifest
+- `sw.js` - Service worker for offline
+- `icon.svg` - App icon

@@ -3,20 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const episodeMeta = [
-    { id: 1, file: 'episode-01-ai-machine-learning-fundamentals.md', title: 'AI & Machine Learning Fundamentals', subtitle: "The CPO's Guide to the AI Revolution" },
-    { id: 2, file: 'episode-02-large-language-models.md', title: 'Large Language Models Deep Dive', subtitle: 'LLMs Demystified' },
-    { id: 3, file: 'episode-03-software-engineering-excellence.md', title: 'Software Engineering Excellence', subtitle: 'Building World-Class Teams' },
-    { id: 4, file: 'episode-04-software-architecture-patterns.md', title: 'Software Architecture Patterns', subtitle: 'Building Systems That Last' },
-    { id: 5, file: 'episode-05-systems-design-at-scale.md', title: 'Systems Design at Scale', subtitle: 'Building for Millions' },
-    { id: 6, file: 'episode-06-monorepos-code-organization.md', title: 'Monorepos & Code Organization', subtitle: 'One Repo to Rule Them All?' },
-    { id: 7, file: 'episode-07-design-systems.md', title: 'Design Systems & Components', subtitle: 'Building Consistent UI at Scale' },
-    { id: 8, file: 'episode-08-testing-strategy.md', title: 'Testing Strategy', subtitle: 'Building Confidence in Your Code' },
-    { id: 9, file: 'episode-09-api-design-best-practices.md', title: 'API Design Best Practices', subtitle: 'Interfaces Developers Love' },
-    { id: 10, file: 'episode-10-security-development-methodologies.md', title: 'Security & Methodologies', subtitle: 'The Grand Finale' }
-];
-
-const podcastsDir = path.join(__dirname, '..');
+const showsDir = path.join(__dirname, '..', 'shows');
 const distDir = path.join(__dirname, 'dist');
 
 // Create dist directory
@@ -24,32 +11,71 @@ if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir, { recursive: true });
 }
 
-console.log('Building podcast PWA...\n');
+console.log('Building PodLearn Multi-Podcast App...\n');
 
-// Read and process episodes
-const episodes = episodeMeta.map(meta => {
-    const filePath = path.join(podcastsDir, meta.file);
-    console.log(`Processing: ${meta.file}`);
+// Find all podcasts
+const podcasts = [];
 
-    let content = fs.readFileSync(filePath, 'utf8');
-    // Escape backticks and dollar signs for template literal
-    content = content.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
+if (fs.existsSync(showsDir)) {
+    const dirs = fs.readdirSync(showsDir, { withFileTypes: true })
+        .filter(d => d.isDirectory() && !d.name.startsWith('_'));
 
-    return {
-        id: meta.id,
-        title: meta.title,
-        subtitle: meta.subtitle,
-        content: content
-    };
-});
+    for (const dir of dirs) {
+        const podcastDir = path.join(showsDir, dir.name);
+        const manifestPath = path.join(podcastDir, 'podcast.json');
 
-// Generate episodes.js
-const episodesJs = `// Auto-generated episode data - ${new Date().toISOString()}
-const EPISODES = ${JSON.stringify(episodes, null, 2)};
+        if (fs.existsSync(manifestPath)) {
+            console.log(`\n📻 Processing podcast: ${dir.name}`);
+
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const podcastData = {
+                id: manifest.id,
+                title: manifest.title,
+                subtitle: manifest.subtitle,
+                description: manifest.description,
+                author: manifest.author || 'Unknown',
+                color: manifest.color || '#6366f1',
+                icon: manifest.icon || '🎙️',
+                episodes: []
+            };
+
+            // Process each episode
+            for (const epMeta of manifest.episodes) {
+                const epPath = path.join(podcastDir, epMeta.file);
+
+                if (fs.existsSync(epPath)) {
+                    console.log(`   ✓ ${epMeta.file}`);
+                    let content = fs.readFileSync(epPath, 'utf8');
+                    // Escape for template literal
+                    content = content.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
+
+                    podcastData.episodes.push({
+                        id: epMeta.id,
+                        title: epMeta.title,
+                        subtitle: epMeta.subtitle,
+                        content: content
+                    });
+                } else {
+                    console.log(`   ✗ Missing: ${epMeta.file}`);
+                }
+            }
+
+            podcasts.push(podcastData);
+        }
+    }
+}
+
+if (podcasts.length === 0) {
+    console.log('\n⚠️  No podcasts found. Create shows/<name>/podcast.json to add podcasts.');
+}
+
+// Generate podcasts.js
+const podcastsJs = `// Auto-generated podcast data - ${new Date().toISOString()}
+const PODCASTS = ${JSON.stringify(podcasts, null, 2)};
 `;
 
-fs.writeFileSync(path.join(distDir, 'episodes.js'), episodesJs);
-console.log('\nGenerated: episodes.js');
+fs.writeFileSync(path.join(distDir, 'podcasts.js'), podcastsJs);
+console.log('\n✓ Generated: podcasts.js');
 
 // Copy other files
 const filesToCopy = ['index.html', 'manifest.json', 'sw.js', 'icon.svg'];
@@ -58,44 +84,77 @@ filesToCopy.forEach(file => {
     const dest = path.join(distDir, file);
     if (fs.existsSync(src)) {
         fs.copyFileSync(src, dest);
-        console.log(`Copied: ${file}`);
+        console.log(`✓ Copied: ${file}`);
     }
 });
 
-// Create a simple PNG placeholder instruction
-const readmeContent = `# Deployment Instructions
+// Create README
+const readmeContent = `# PodLearn - Custom Podcast Player
 
-## Quick Deploy to Netlify
+## Deployment
 
-1. Go to https://app.netlify.com/drop
-2. Drag and drop this entire 'dist' folder
-3. Done! You'll get a URL like https://random-name.netlify.app
+### Quick Deploy to Netlify
+1. Connect your GitHub repo to Netlify
+2. Set build command to: \`cd podcasts/pwa && node build-episodes.js\`
+3. Set publish directory to: \`podcasts/pwa/dist\`
 
-## Add to Home Screen on Android
+### Manual Deploy
+1. Run \`node build-episodes.js\` in this directory
+2. Deploy the \`dist/\` folder
 
-1. Open the deployed URL in Chrome
-2. Tap the menu (three dots)
-3. Tap "Add to Home Screen" or "Install App"
-4. The app will work offline!
+## Creating Your Own Podcasts
 
-## Icons
+1. Create a new folder in \`shows/\` (e.g., \`shows/my-podcast/\`)
 
-The app uses icon.svg. For better PWA support, convert it to PNG:
-- icon-192.png (192x192)
-- icon-512.png (512x512)
+2. Add a \`podcast.json\` file:
+\`\`\`json
+{
+  "id": "my-podcast",
+  "title": "My Podcast Title",
+  "subtitle": "A great podcast",
+  "description": "What this podcast is about",
+  "author": "Your Name",
+  "color": "#6366f1",
+  "icon": "🎙️",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01.md",
+      "title": "Episode Title",
+      "subtitle": "Episode subtitle"
+    }
+  ]
+}
+\`\`\`
 
-You can use https://cloudconvert.com/svg-to-png
+3. Add episode markdown files with dialogue format:
+\`\`\`markdown
+# Episode 1: Title
 
-## Files in this folder
+### INTRO
 
-- index.html - The main app
-- episodes.js - All 10 episodes embedded
-- manifest.json - PWA manifest
-- sw.js - Service worker for offline support
-- icon.svg - App icon
+**ALEX:** Welcome to the show!
+
+**SAM:** Great to be here.
+
+### SEGMENT 1: Topic Name
+
+**ALEX:** Let's talk about...
+\`\`\`
+
+4. Run \`node build-episodes.js\` to rebuild
+
+## Files
+
+- \`index.html\` - Main app
+- \`podcasts.js\` - All podcasts and episodes (auto-generated)
+- \`manifest.json\` - PWA manifest
+- \`sw.js\` - Service worker for offline
+- \`icon.svg\` - App icon
 `;
 
 fs.writeFileSync(path.join(distDir, 'README.md'), readmeContent);
-console.log('Created: README.md');
+console.log('✓ Created: README.md');
 
-console.log('\n✓ Build complete! Deploy the dist/ folder to Netlify.\n');
+console.log(`\n✓ Build complete! ${podcasts.length} podcast(s) with ${podcasts.reduce((sum, p) => sum + p.episodes.length, 0)} total episodes.`);
+console.log('Deploy the dist/ folder to Netlify.\n');

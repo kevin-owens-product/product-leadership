@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#6366f1">
-    <title>Tech Leadership Unpacked</title>
+    <title>PodLearn - Custom Podcast Player</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon.svg">
     <link rel="icon" type="image/svg+xml" href="icon.svg">
@@ -1003,14 +1003,224 @@
             color: var(--accent);
             margin-top: 4px;
         }
+
+        /* Podcasts View */
+        .podcasts-view {
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .podcast-card {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podcast-card:hover, .podcast-card:active {
+            background: var(--bg-tertiary);
+            transform: scale(0.98);
+        }
+
+        .podcast-card-header {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .podcast-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .podcast-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .podcast-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .podcast-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .podcast-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .podcast-progress-bar {
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .podcast-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .back-to-podcasts {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .back-to-podcasts:active {
+            opacity: 0.7;
+        }
+
+        /* Add Podcast Button */
+        .add-podcast-card {
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-podcast-card:active {
+            background: var(--bg-tertiary);
+            border-color: var(--accent);
+        }
+
+        .add-podcast-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .add-podcast-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Create Podcast Modal */
+        .create-modal .modal {
+            max-width: 400px;
+        }
+
+        .create-modal textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .create-modal textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .create-modal input {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .create-modal input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .create-modal label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .color-option {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .color-option.selected {
+            border-color: white;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
-    <!-- Episode List View -->
-    <div id="list-view" class="view active episode-list-view">
+    <!-- Podcasts Home View -->
+    <div id="podcasts-view" class="view active podcasts-view">
         <header class="app-header">
-            <h1>Tech Leadership Unpacked</h1>
-            <p>10-Hour Podcast Series for Product Leaders</p>
+            <h1>PodLearn</h1>
+            <p>Your Custom Podcast Player</p>
+            <div class="badges">
+                <span class="badge offline" id="offline-badge-home" style="display:none">Offline Ready</span>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-input" id="podcast-search" placeholder="Search podcasts...">
+        </div>
+
+        <div id="podcasts-list">
+            <p class="loading-text">Loading podcasts...</p>
+        </div>
+    </div>
+
+    <!-- Episode List View -->
+    <div id="list-view" class="view episode-list-view">
+        <div class="back-to-podcasts" id="back-to-podcasts">
+            <span>←</span> All Podcasts
+        </div>
+        <header class="app-header" id="podcast-header">
+            <h1 id="current-podcast-title">Podcast</h1>
+            <p id="current-podcast-subtitle">Subtitle</p>
             <div class="badges">
                 <span class="badge offline" id="offline-badge" style="display:none">Offline Ready</span>
                 <span class="badge progress" id="total-progress-badge">0% Complete</span>
@@ -1194,9 +1404,29 @@
         </div>
     </div>
 
-    <script src="episodes.js"></script>
+    <!-- Create Podcast Info Modal -->
+    <div class="modal-overlay create-modal" id="create-modal">
+        <div class="modal">
+            <h3>Create Your Own Podcast</h3>
+            <p style="margin-bottom: 16px;">To add your own podcasts, follow these steps:</p>
+            <div style="text-align: left; background: var(--bg-tertiary); padding: 16px; border-radius: 10px; font-size: 0.85rem; line-height: 1.8;">
+                <p><strong>1.</strong> Create a new folder in <code>shows/</code></p>
+                <p><strong>2.</strong> Add a <code>podcast.json</code> file with your podcast info</p>
+                <p><strong>3.</strong> Add episode <code>.md</code> files with dialogue</p>
+                <p><strong>4.</strong> Run <code>node build-episodes.js</code></p>
+                <p><strong>5.</strong> Push to GitHub to deploy</p>
+            </div>
+            <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-secondary);">See the template in <code>shows/_template/</code></p>
+            <div class="btns" style="margin-top: 16px;">
+                <button class="primary-btn" id="close-create-modal">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="podcasts.js"></script>
     <script>
         // ===== STATE =====
+        let currentPodcast = null;
         let currentEpisode = null;
         let dialogueLines = [];
         let currentLineIndex = 0;
@@ -1213,6 +1443,106 @@
         let searchIndex = 0;
         const synth = window.speechSynthesis;
 
+        // ===== PODCASTS HOME =====
+        function renderPodcastsList(filter = '') {
+            if (typeof PODCASTS === 'undefined') {
+                document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">No podcasts found</p>';
+                return;
+            }
+
+            const state = loadState();
+            const listEl = document.getElementById('podcasts-list');
+            listEl.innerHTML = '';
+
+            const filterLower = filter.toLowerCase();
+
+            PODCASTS.forEach(podcast => {
+                if (filter && !podcast.title.toLowerCase().includes(filterLower) &&
+                    !podcast.subtitle.toLowerCase().includes(filterLower)) {
+                    return;
+                }
+
+                // Calculate podcast progress
+                let totalProgress = 0;
+                const epCount = podcast.episodes.length;
+                podcast.episodes.forEach(ep => {
+                    const epKey = `${podcast.id}-${ep.id}`;
+                    const progress = state.episodeProgress?.[epKey] || { percent: 0 };
+                    const isComplete = state.completedEpisodes?.includes(epKey);
+                    totalProgress += isComplete ? 100 : progress.percent;
+                });
+                const avgProgress = epCount > 0 ? Math.round(totalProgress / epCount) : 0;
+
+                const card = document.createElement('div');
+                card.className = 'podcast-card';
+                card.innerHTML = `
+                    <div class="podcast-card-header">
+                        <div class="podcast-icon" style="background: ${podcast.color}20; color: ${podcast.color}">
+                            ${podcast.icon || '🎙️'}
+                        </div>
+                        <div class="podcast-info">
+                            <div class="podcast-title">${podcast.title}</div>
+                            <div class="podcast-subtitle">${podcast.subtitle}</div>
+                            <div class="podcast-meta">
+                                <span>${epCount} episodes</span>
+                                <span>~${epCount * 60} min</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="podcast-progress-bar">
+                        <div class="podcast-progress-fill" style="width: ${avgProgress}%"></div>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => openPodcast(podcast));
+                listEl.appendChild(card);
+            });
+
+            // Add "Create Podcast" card
+            const addCard = document.createElement('div');
+            addCard.className = 'add-podcast-card';
+            addCard.innerHTML = `
+                <div class="add-podcast-icon">+</div>
+                <div class="add-podcast-text">Create Your Own Podcast</div>
+            `;
+            addCard.addEventListener('click', () => {
+                document.getElementById('create-modal').classList.add('show');
+            });
+            listEl.appendChild(addCard);
+        }
+
+        function openPodcast(podcast) {
+            currentPodcast = podcast;
+            document.getElementById('current-podcast-title').textContent = podcast.title;
+            document.getElementById('current-podcast-subtitle').textContent = podcast.subtitle;
+
+            // Update accent color
+            document.documentElement.style.setProperty('--accent', podcast.color || '#6366f1');
+
+            document.getElementById('podcasts-view').classList.remove('active');
+            document.getElementById('list-view').classList.add('active');
+            renderEpisodeList();
+        }
+
+        document.getElementById('back-to-podcasts').addEventListener('click', () => {
+            stopPlayback();
+            saveState();
+            currentPodcast = null;
+            document.getElementById('list-view').classList.remove('active');
+            document.getElementById('podcasts-view').classList.add('active');
+            // Reset accent color
+            document.documentElement.style.setProperty('--accent', '#6366f1');
+            renderPodcastsList();
+        });
+
+        document.getElementById('podcast-search').addEventListener('input', e => {
+            renderPodcastsList(e.target.value);
+        });
+
+        document.getElementById('close-create-modal').addEventListener('click', () => {
+            document.getElementById('create-modal').classList.remove('show');
+        });
+
         // ===== PERSISTENCE =====
         const STORAGE_KEY = 'tlu_podcast_state';
 
@@ -1220,13 +1550,17 @@
             const state = {
                 episodeProgress: {},
                 completedEpisodes: [],
+                bookmarks: {},
                 speechRate,
                 autoPlayNext,
                 alexVoiceIndex: document.getElementById('alex-voice').value,
                 samVoiceIndex: document.getElementById('sam-voice').value
             };
 
-            // Save current episode progress
+            // Save current podcast/episode
+            if (currentPodcast) {
+                state.currentPodcastId = currentPodcast.id;
+            }
             if (currentEpisode) {
                 state.currentEpisodeId = currentEpisode.id;
                 state.currentLineIndex = currentLineIndex;
@@ -1240,19 +1574,23 @@
             if (existing.completedEpisodes) {
                 state.completedEpisodes = existing.completedEpisodes;
             }
+            if (existing.bookmarks) {
+                state.bookmarks = existing.bookmarks;
+            }
 
-            // Update current episode progress
-            if (currentEpisode && dialogueLines.length > 0) {
+            // Update current episode progress (with podcast-scoped key)
+            if (currentPodcast && currentEpisode && dialogueLines.length > 0) {
+                const epKey = `${currentPodcast.id}-${currentEpisode.id}`;
                 const pct = Math.round((currentLineIndex / dialogueLines.length) * 100);
-                state.episodeProgress[currentEpisode.id] = {
+                state.episodeProgress[epKey] = {
                     line: currentLineIndex,
                     percent: pct,
                     timestamp: Date.now()
                 };
 
                 // Mark complete if >= 95%
-                if (pct >= 95 && !state.completedEpisodes.includes(currentEpisode.id)) {
-                    state.completedEpisodes.push(currentEpisode.id);
+                if (pct >= 95 && !state.completedEpisodes.includes(epKey)) {
+                    state.completedEpisodes.push(epKey);
                 }
             }
 
@@ -1418,11 +1756,12 @@
 
         // ===== EPISODE LIST =====
         function renderEpisodeList(filter = '') {
-            if (typeof EPISODES === 'undefined') {
-                document.getElementById('episode-list').innerHTML = '<p class="loading-text">Error loading episodes</p>';
+            if (!currentPodcast || !currentPodcast.episodes) {
+                document.getElementById('episode-list').innerHTML = '<p class="loading-text">No episodes found</p>';
                 return;
             }
 
+            const episodes = currentPodcast.episodes;
             const state = loadState();
             const listEl = document.getElementById('episode-list');
             listEl.innerHTML = '';
@@ -1431,7 +1770,7 @@
             let totalProgress = 0;
             let shown = 0;
 
-            EPISODES.forEach(ep => {
+            episodes.forEach(ep => {
                 // Filter
                 if (filter && !ep.title.toLowerCase().includes(filterLower) &&
                     !ep.subtitle.toLowerCase().includes(filterLower)) {
@@ -1439,8 +1778,9 @@
                 }
                 shown++;
 
-                const progress = state.episodeProgress?.[ep.id] || { percent: 0 };
-                const isComplete = state.completedEpisodes?.includes(ep.id);
+                const epKey = `${currentPodcast.id}-${ep.id}`;
+                const progress = state.episodeProgress?.[epKey] || { percent: 0 };
+                const isComplete = state.completedEpisodes?.includes(epKey);
                 const inProgress = progress.percent > 0 && progress.percent < 95;
 
                 totalProgress += isComplete ? 100 : progress.percent;
@@ -1466,7 +1806,7 @@
             });
 
             // Update total progress badge
-            const avgProgress = EPISODES.length > 0 ? Math.round(totalProgress / EPISODES.length) : 0;
+            const avgProgress = episodes.length > 0 ? Math.round(totalProgress / episodes.length) : 0;
             document.getElementById('total-progress-badge').textContent = `${avgProgress}% Complete`;
         }
 
@@ -1481,9 +1821,10 @@
             dialogueLines = parseMarkdown(episode.content);
             chapters = parseChapters(episode.content);
 
-            // Restore progress
+            // Restore progress (with podcast-scoped key)
             const state = loadState();
-            const progress = state.episodeProgress?.[episode.id];
+            const epKey = currentPodcast ? `${currentPodcast.id}-${episode.id}` : episode.id;
+            const progress = state.episodeProgress?.[epKey];
             currentLineIndex = progress?.line || 0;
 
             document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
@@ -1798,8 +2139,8 @@
             document.getElementById('play-btn').textContent = '▶';
             setStatus('Episode complete! 🎉');
 
-            const state = loadState();
-            const nextEp = EPISODES.find(e => e.id === currentEpisode.id + 1);
+            const episodes = currentPodcast?.episodes || [];
+            const nextEp = episodes.find(e => e.id === currentEpisode.id + 1);
 
             if (autoPlayNext && nextEp) {
                 document.getElementById('complete-message').textContent = `Starting "${nextEp.title}" in 5 seconds...`;
@@ -1824,7 +2165,8 @@
 
         function playNextEpisode() {
             document.getElementById('complete-modal').classList.remove('show');
-            const nextEp = EPISODES.find(e => e.id === currentEpisode.id + 1);
+            const episodes = currentPodcast?.episodes || [];
+            const nextEp = episodes.find(e => e.id === currentEpisode.id + 1);
             if (nextEp) {
                 openEpisode(nextEp);
                 setTimeout(() => startPlayback(), 500);
@@ -1888,14 +2230,6 @@
                 header.parentElement.classList.toggle('collapsed');
             });
         });
-
-        // ===== SERVICE WORKER =====
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').then(reg => {
-                console.log('SW registered');
-                document.getElementById('offline-badge').style.display = 'inline-flex';
-            }).catch(err => console.log('SW error:', err));
-        }
 
         // ===== INSTALL PROMPT =====
         let deferredPrompt;
@@ -2042,27 +2376,31 @@
             return state.bookmarks || {};
         }
 
-        function saveBookmark(episodeId, lineIndex, note) {
+        function getEpisodeKey() {
+            return currentPodcast && currentEpisode ? `${currentPodcast.id}-${currentEpisode.id}` : null;
+        }
+
+        function saveBookmark(epKey, lineIndex, note) {
             const state = loadState();
             if (!state.bookmarks) state.bookmarks = {};
-            if (!state.bookmarks[episodeId]) state.bookmarks[episodeId] = [];
+            if (!state.bookmarks[epKey]) state.bookmarks[epKey] = [];
 
-            state.bookmarks[episodeId].push({
+            state.bookmarks[epKey].push({
                 lineIndex,
                 note: note || '',
                 timestamp: Date.now()
             });
 
             // Sort by line index
-            state.bookmarks[episodeId].sort((a, b) => a.lineIndex - b.lineIndex);
+            state.bookmarks[epKey].sort((a, b) => a.lineIndex - b.lineIndex);
 
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         }
 
-        function deleteBookmark(episodeId, timestamp) {
+        function deleteBookmark(epKey, timestamp) {
             const state = loadState();
-            if (state.bookmarks && state.bookmarks[episodeId]) {
-                state.bookmarks[episodeId] = state.bookmarks[episodeId].filter(b => b.timestamp !== timestamp);
+            if (state.bookmarks && state.bookmarks[epKey]) {
+                state.bookmarks[epKey] = state.bookmarks[epKey].filter(b => b.timestamp !== timestamp);
             }
             localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
         }
@@ -2079,10 +2417,11 @@
             addBtn.addEventListener('click', showAddBookmarkModal);
             container.appendChild(addBtn);
 
-            if (!currentEpisode) return;
+            const epKey = getEpisodeKey();
+            if (!epKey) return;
 
             const bookmarks = getBookmarks();
-            const epBookmarks = bookmarks[currentEpisode.id] || [];
+            const epBookmarks = bookmarks[epKey] || [];
 
             if (epBookmarks.length === 0) {
                 container.innerHTML += '<div class="no-items">No bookmarks yet</div>';
@@ -2115,7 +2454,7 @@
 
                 item.querySelector('.bookmark-delete').addEventListener('click', (e) => {
                     e.stopPropagation();
-                    deleteBookmark(currentEpisode.id, bm.timestamp);
+                    deleteBookmark(epKey, bm.timestamp);
                     renderBookmarks();
                 });
 
@@ -2138,9 +2477,10 @@
         }
 
         document.getElementById('save-bookmark').addEventListener('click', () => {
-            if (!currentEpisode) return;
+            const epKey = getEpisodeKey();
+            if (!epKey) return;
             const note = document.getElementById('bookmark-note-input').value;
-            saveBookmark(currentEpisode.id, currentLineIndex, note);
+            saveBookmark(epKey, currentLineIndex, note);
             document.getElementById('bookmark-modal').classList.remove('show');
             renderBookmarks();
         });
@@ -2166,7 +2506,16 @@
 
         // ===== INIT =====
         restoreState();
-        renderEpisodeList();
+        renderPodcastsList();
+
+        // Service worker registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(reg => {
+                console.log('SW registered');
+                document.getElementById('offline-badge-home').style.display = 'inline-flex';
+                document.getElementById('offline-badge').style.display = 'inline-flex';
+            }).catch(err => console.log('SW error:', err));
+        }
     </script>
 </body>
 </html>

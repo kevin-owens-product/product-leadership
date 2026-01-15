@@ -1,0 +1,23 @@
+{
+  "id": "my-podcast",
+  "title": "My Podcast Title",
+  "subtitle": "A brief description of your podcast",
+  "description": "A longer description explaining what this podcast covers and who it's for.",
+  "author": "Host Name & Co-Host Name",
+  "color": "#6366f1",
+  "icon": "🎙️",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-getting-started.md",
+      "title": "Getting Started",
+      "subtitle": "Introduction to the topic"
+    },
+    {
+      "id": 2,
+      "file": "episode-02-deep-dive.md",
+      "title": "Deep Dive",
+      "subtitle": "Exploring the details"
+    }
+  ]
+}

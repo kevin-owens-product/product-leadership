@@ -1,11 +1,10 @@
-const CACHE_NAME = 'tlu-podcast-v1';
+const CACHE_NAME = 'podlearn-v2';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/episodes.js',
+    '/podcasts.js',
     '/manifest.json',
-    '/icon-192.png',
-    '/icon-512.png'
+    '/icon.svg'
 ];
 
 // Install service worker and cache resources

@@ -1478,19 +1478,30 @@
     </div>
 
     <script>
+        // ===== APP VERSION =====
+        const APP_VERSION = '2.0.2';
+
+        // Flag to track if podcasts are loaded
+        let podcastsLoaded = false;
+
         // Load podcasts.js with cache-busting
         (function() {
             const script = document.createElement('script');
             script.src = 'podcasts.js?v=' + Date.now();
             script.onload = function() {
-                if (typeof initApp === 'function') initApp();
+                console.log('podcasts.js loaded, PODCASTS:', typeof PODCASTS !== 'undefined' ? PODCASTS.length + ' podcasts' : 'undefined');
+                podcastsLoaded = true;
+                // Re-render now that podcasts are loaded
+                if (typeof renderPodcastsList === 'function') {
+                    renderPodcastsList();
+                }
+            };
+            script.onerror = function() {
+                console.error('Failed to load podcasts.js');
+                document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">Failed to load podcasts. Try refreshing.</p>';
             };
             document.head.appendChild(script);
         })();
-    </script>
-    <script>
-        // ===== APP VERSION =====
-        const APP_VERSION = '2.0.1';
 
         // ===== STATE =====
         let currentPodcast = null;
@@ -1521,8 +1532,13 @@
             document.getElementById('version-badge').textContent = 'v' + APP_VERSION;
 
             if (typeof PODCASTS === 'undefined') {
-                document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">No podcasts found. Try refreshing.</p>';
-                document.getElementById('podcast-count').textContent = '0 podcasts loaded';
+                if (!podcastsLoaded) {
+                    document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">Loading podcasts...</p>';
+                    document.getElementById('podcast-count').textContent = 'Loading...';
+                } else {
+                    document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">No podcasts found. Try refreshing.</p>';
+                    document.getElementById('podcast-count').textContent = '0 podcasts loaded';
+                }
                 return;
             }
 

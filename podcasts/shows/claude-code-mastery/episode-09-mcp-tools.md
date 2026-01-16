@@ -1,4 +1,12 @@
 # Episode 9: MCP Servers & Custom Tools
+## "Extending Claude Code Beyond Its Built-In Powers"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and I'm really curious about this. Claude Code already does so much. What more could you add?
 
 **ALEX:** The possibilities are vast. Database queries, API integrations, specialized tools for your workflow. By the end of this episode, you'll understand MCP and how to leverage it.
+
+---
+
+### SEGMENT 1: WHAT IS MCP? (5 minutes)
 
 ## What is MCP?
 
@@ -26,6 +38,10 @@
 
 **ALEX:** Right. This means there's a growing ecosystem of MCP servers you can use, and you can build your own.
 
+---
+
+### SEGMENT 2: BUILT-IN MCP CAPABILITIES (4 minutes)
+
 ## Built-in MCP Capabilities
 
 **JAMIE:** What comes built into Claude Code?
@@ -40,6 +56,10 @@
 
 **ALEX:** Very handy. You're not limited to Claude's training data. You can get real-time information when needed.
 
+---
+
+### SEGMENT 3: ADDING EXTERNAL MCP SERVERS (4 minutes)
+
 ## Adding External MCP Servers
 
 **JAMIE:** How do I add more capabilities?
@@ -53,6 +73,10 @@
 **JAMIE:** Any you particularly recommend?
 
 **ALEX:** It depends on your needs. For web work, having a browser automation server is powerful. For data work, database connectors are essential. For DevOps, cloud provider tools are invaluable.
+
+---
+
+### SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)
 
 ## Configuring MCP Servers
 
@@ -72,6 +96,10 @@
 
 **ALEX:** Just configuration. No code changes to Claude Code itself. Add the server to config, restart Claude Code, and the new tools are available.
 
+---
+
+### SEGMENT 5: COMMON MCP USE CASES (5 minutes)
+
 ## Common MCP Use Cases
 
 **JAMIE:** What are the most popular use cases?
@@ -89,6 +117,10 @@
 **JAMIE:** What about third-party APIs?
 
 **ALEX:** Absolutely. You can connect Claude to Slack, Jira, GitHub, or any API. "Create a Jira ticket for this bug" or "post this update to Slack."
+
+---
+
+### SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)
 
 ## Web Search and Fetching
 
@@ -108,6 +140,10 @@
 
 **ALEX:** Very useful. Instead of copying and pasting documentation, just give Claude the URL.
 
+---
+
+### SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)
+
 ## Security Considerations
 
 **JAMIE:** All this external access makes me think about security. What should I be aware of?
@@ -125,6 +161,10 @@
 **JAMIE:** Don't install random tools from the internet.
 
 **ALEX:** Right. And fourth, understand what data flows where. When Claude uses an MCP server, data passes through that server. Make sure that's acceptable for your use case.
+
+---
+
+### SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)
 
 ## Building Custom MCP Servers
 
@@ -144,6 +184,10 @@
 
 **ALEX:** Clear tool definitions so Claude knows what each tool does. Good error handling so failures are communicated clearly. And appropriate security so sensitive operations require confirmation.
 
+---
+
+### SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)
+
 ## Enterprise MCP Patterns
 
 **JAMIE:** How do larger teams use MCP?
@@ -162,6 +206,10 @@
 
 **ALEX:** Exactly. Configuration as code, versioned and shared.
 
+---
+
+### SEGMENT 10: TROUBLESHOOTING MCP (3 minutes)
+
 ## Troubleshooting MCP
 
 **JAMIE:** What if an MCP server isn't working?
@@ -175,6 +223,10 @@
 **JAMIE:** How do I know if Claude is even trying to use the server?
 
 **ALEX:** Ask Claude! "What MCP tools do you have available?" Claude will list the connected servers and their tools.
+
+---
+
+### SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)
 
 ## Best Practices for MCP
 
@@ -194,6 +246,10 @@
 
 **ALEX:** And fourth, keep servers updated. MCP servers evolve, and updates often include security fixes and improvements.
 
+---
+
+### SEGMENT 12: THE FUTURE OF MCP (3 minutes)
+
 ## The Future of MCP
 
 **JAMIE:** Where is MCP heading?
@@ -204,6 +260,10 @@
 
 **ALEX:** Exactly. Claude Code becomes a platform that adapts to your specific needs through MCP extensions.
 
+---
+
+### SEGMENT 13: PRACTICE EXERCISE (3 minutes)
+
 ## Practice Exercise
 
 **JAMIE:** What should listeners practice?
@@ -213,6 +273,10 @@
 **JAMIE:** Starting with what's already there.
 
 **ALEX:** Then, explore the MCP server ecosystem. Find one that's relevant to your work and try setting it up. The configuration experience is valuable.
+
+---
+
+### SEGMENT 14: WHAT'S NEXT (4 minutes)
 
 ## What's Next
 

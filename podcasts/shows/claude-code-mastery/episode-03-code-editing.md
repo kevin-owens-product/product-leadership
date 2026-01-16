@@ -1,4 +1,12 @@
 # Episode 3: Code Reading & Editing
+## "Master the Art of Safe Code Modification"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and this is the episode I've been waiting for. Reading and navigating code is great, but the real productivity gains come from Claude helping me write and edit code, right?
 
 **ALEX:** Absolutely. By the end of this episode, you'll understand the three main tools Claude uses to modify files: Read, Edit, and Write. You'll know when to use each one and how to review changes safely.
+
+---
+
+### SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)
 
 ## The Read Tool in Depth
 
@@ -30,6 +42,10 @@
 
 **ALEX:** Exactly. Claude mimics the patterns experienced developers use. Skim for structure, then dive into details where needed.
 
+---
+
+### SEGMENT 2: THE EDIT TOOL (4 minutes)
+
 ## The Edit Tool
 
 **JAMIE:** Okay, let's talk about actually changing code. How does the Edit tool work?
@@ -47,6 +63,10 @@
 **JAMIE:** So Claude has to include enough context to be unique?
 
 **ALEX:** Right. Instead of just "data," Claude might specify "const data = fetchUser" as the old string, which is much more likely to be unique in the file.
+
+---
+
+### SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)
 
 ## Watching an Edit in Action
 
@@ -66,6 +86,10 @@
 
 **ALEX:** That's the whole point. Claude is powerful, but you stay in control. Review every change, especially when you're first learning the workflow.
 
+---
+
+### SEGMENT 4: THE WRITE TOOL (4 minutes)
+
 ## The Write Tool
 
 **JAMIE:** What about creating entirely new files? Is that different?
@@ -83,6 +107,10 @@
 **JAMIE:** Good. I wouldn't want to accidentally clobber an existing file.
 
 **ALEX:** Right. In practice, Claude tries to use Edit for existing files because it's less destructive. Write is reserved for new files or complete rewrites.
+
+---
+
+### SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)
 
 ## Edit vs Write: Making the Right Choice
 
@@ -102,6 +130,10 @@
 
 **ALEX:** Exactly. I usually prefer Claude to make a series of edits rather than one big rewrite. It's easier to catch issues and rollback if needed.
 
+---
+
+### SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)
+
 ## Handling Multiple File Edits
 
 **JAMIE:** What about changes that span multiple files? Like adding a feature that touches the model, controller, and view?
@@ -119,6 +151,10 @@
 **JAMIE:** So I might need to help Claude get back on track?
 
 **ALEX:** Sometimes. You might say "read the file again" or "the function was renamed, look for newFunctionName instead." It's a collaboration.
+
+---
+
+### SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)
 
 ## Reviewing Proposed Changes
 
@@ -138,6 +174,10 @@
 
 **ALEX:** Right. And don't hesitate to say "no, try a different approach." Claude can suggest alternatives. The first proposal isn't always the best one.
 
+---
+
+### SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)
+
 ## Common Editing Patterns
 
 **JAMIE:** What are some common editing patterns you use with Claude?
@@ -155,6 +195,10 @@
 **JAMIE:** Does Claude handle renaming well?
 
 **ALEX:** Yes! "Rename the function from handleClick to handleButtonClick everywhere" is a great prompt. Claude will use Grep to find all usages and update them consistently.
+
+---
+
+### SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)
 
 ## Working with Different File Types
 
@@ -174,6 +218,10 @@
 
 **ALEX:** Yes! Claude has specific support for notebook files. It can read cells, understand the flow of a notebook, and edit individual cells. There's even a specialized NotebookEdit tool for this.
 
+---
+
+### SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)
+
 ## Safety and Rollback
 
 **JAMIE:** What if Claude makes a change I don't like? How do I undo it?
@@ -191,6 +239,10 @@
 **JAMIE:** That's handy. The same tool that made the changes can unmake them.
 
 **ALEX:** And honestly, mistakes are part of learning. Don't be afraid to experiment knowing you can always roll back.
+
+---
+
+### SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)
 
 ## Tips for Effective Editing
 
@@ -210,6 +262,10 @@
 
 **ALEX:** And fourth, use your editor alongside Claude. Keep the file open in your IDE. When Claude makes a change, you'll see it update. You can also make manual tweaks and tell Claude about them.
 
+---
+
+### SEGMENT 12: COMMON PITFALLS (5 minutes)
+
 ## Common Pitfalls
 
 **JAMIE:** What mistakes do new users commonly make with editing?
@@ -228,6 +284,10 @@
 
 **ALEX:** Exactly. And finally, not using version control. If you're making significant changes, commit frequently. It's your safety net.
 
+---
+
+### SEGMENT 13: PRACTICE EXERCISE (3 minutes)
+
 ## Practice Exercise
 
 **JAMIE:** Can we give listeners an exercise to practice editing?
@@ -241,6 +301,10 @@
 **JAMIE:** And we've practiced the full edit cycle.
 
 **ALEX:** Exactly. Read, request change, review, approve. That's the pattern you'll use for all edits.
+
+---
+
+### SEGMENT 14: WHAT'S NEXT (3 minutes)
 
 ## What's Next
 

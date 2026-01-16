@@ -1,4 +1,12 @@
 # Episode 5: Git Workflow & Collaboration
+## "Version Control Made Effortless"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and I have to admit, Git is something I use but don't always love. Remembering commands, writing good commit messages, dealing with merge conflicts. Can Claude really make this easier?
 
 **ALEX:** Absolutely. By the end of this episode, you'll be using Claude to create perfect commits, generate pull requests, review code, and handle complex Git operations without memorizing commands.
+
+---
+
+### SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)
 
 ## Git Status and Understanding Your Changes
 
@@ -23,6 +35,10 @@
 **ALEX:** And Claude's summaries are often clearer than raw Git output. Instead of a wall of diff text, Claude might say "You've modified the user authentication in login.ts and added a new helper function in utils.ts."
 
 **JAMIE:** Human-readable summaries. Nice.
+
+---
+
+### SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)
 
 ## Creating Commits with Claude
 
@@ -46,6 +62,10 @@
 
 **ALEX:** Yes. For complex changes, Claude will create a subject line plus a body that explains the why and how. "Refactor database connection pooling. The previous implementation could exhaust connections under high load. This change introduces a queue system."
 
+---
+
+### SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)
+
 ## The Slash Commit Command
 
 **JAMIE:** I've heard about slash commit. What's that?
@@ -64,6 +84,10 @@
 
 **ALEX:** They are. They make code review easier and make it simpler to revert specific changes if needed.
 
+---
+
+### SEGMENT 4: BRANCH MANAGEMENT (4 minutes)
+
 ## Branch Management
 
 **JAMIE:** What about working with branches?
@@ -81,6 +105,10 @@
 **JAMIE:** What about deleting old branches?
 
 **ALEX:** "Delete the old feature-x branch" or "clean up my merged branches." Claude can help you tidy up. It will be careful to warn you before deleting anything not fully merged.
+
+---
+
+### SEGMENT 5: CREATING PULL REQUESTS (5 minutes)
 
 ## Creating Pull Requests
 
@@ -104,6 +132,10 @@
 
 **ALEX:** You can guide Claude. "Create a PR, make sure to mention the performance improvement" or "create a PR with a section about database changes." Claude will incorporate your requirements.
 
+---
+
+### SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)
+
 ## Code Review Assistance
 
 **JAMIE:** Can Claude help me review other people's code?
@@ -125,6 +157,10 @@
 **JAMIE:** That's probably wise. Don't want AI comments flooding PRs.
 
 **ALEX:** Right. Claude assists your review process. You make the final call on what feedback to share.
+
+---
+
+### SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)
 
 ## Handling Merge Conflicts
 
@@ -152,6 +188,10 @@
 
 **ALEX:** Much better. The context Claude provides is invaluable when you're trying to merge someone else's changes.
 
+---
+
+### SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)
+
 ## Interactive Rebase and History
 
 **JAMIE:** What about more advanced Git operations like rebasing?
@@ -170,6 +210,10 @@
 
 **ALEX:** Claude knows this too. If you try to amend a pushed commit, Claude will warn you about the implications.
 
+---
+
+### SEGMENT 9: VIEWING HISTORY AND LOGS (4 minutes)
+
 ## Viewing History and Logs
 
 **JAMIE:** Sometimes I need to understand what happened in the past. Can Claude help with git log?
@@ -183,6 +227,10 @@
 **JAMIE:** What about git blame?
 
 **ALEX:** "Who wrote this function" or "when was this line added." Claude can run git blame and explain the results. It's great for understanding code ownership and history.
+
+---
+
+### SEGMENT 10: GIT SAFETY AND BEST PRACTICES (4 minutes)
 
 ## Git Safety and Best Practices
 
@@ -198,6 +246,10 @@
 
 **ALEX:** And Claude won't skip Git hooks or bypass verification unless you explicitly request it. It respects your project's workflow configuration.
 
+---
+
+### SEGMENT 11: WORKFLOW INTEGRATION (4 minutes)
+
 ## Workflow Integration
 
 **JAMIE:** How does Claude fit into a typical development workflow?
@@ -211,6 +263,10 @@
 **JAMIE:** Does this work with CI/CD pipelines?
 
 **ALEX:** Claude doesn't directly interact with CI/CD, but it can help you understand pipeline results. "The build failed, what went wrong?" Claude can analyze error logs and help you fix issues.
+
+---
+
+### SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)
 
 ## Tips for Git Mastery
 
@@ -230,6 +286,10 @@
 
 **ALEX:** And fourth, don't be afraid to ask about Git concepts. "What's the difference between merge and rebase?" Claude can explain Git fundamentals whenever you need a refresher.
 
+---
+
+### SEGMENT 13: PRACTICE EXERCISE (3 minutes)
+
 ## Practice Exercise
 
 **JAMIE:** What should listeners practice?
@@ -239,6 +299,10 @@
 **JAMIE:** Full Git lifecycle.
 
 **ALEX:** This builds muscle memory for using Claude with Git operations.
+
+---
+
+### SEGMENT 14: WHAT'S NEXT (3 minutes)
 
 ## What's Next
 

@@ -1,4 +1,12 @@
 # Episode 4: Search & Codebase Exploration
+## "Navigate Unfamiliar Code with Confidence"
+
+**Duration:** ~60 minutes
+**Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
+
+---
+
+### INTRO (3 minutes)
 
 ## Introduction
 
@@ -7,6 +15,10 @@
 **JAMIE:** I'm Jamie, and I'm really excited about this one. I often get thrown into unfamiliar codebases at work, and anything that helps me ramp up faster is gold.
 
 **ALEX:** That's exactly what we're covering. By the end of this episode, you'll be able to quickly find anything in any codebase and understand how unfamiliar systems work.
+
+---
+
+### SEGMENT 1: WHY SEARCH MATTERS (4 minutes)
 
 ## Why Search Matters
 
@@ -21,6 +33,10 @@
 **JAMIE:** And Claude can help with that understanding, not just finding text.
 
 **ALEX:** Exactly. Claude doesn't just locate code. It explains what it found. That combination of search plus explanation is incredibly powerful.
+
+---
+
+### SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)
 
 ## Grep Patterns for Content Search
 
@@ -48,6 +64,10 @@
 
 **ALEX:** They do, but here's the good news: you usually don't have to write them yourself. Just tell Claude "find all calls to the fetchUser function" and it will construct the appropriate grep pattern.
 
+---
+
+### SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)
+
 ## Glob Patterns for File Discovery
 
 **JAMIE:** What about Glob for finding files? What patterns should I know?
@@ -69,6 +89,10 @@
 **JAMIE:** Smart defaults.
 
 **ALEX:** And if you need to search those folders specifically, you can ask explicitly. "Search in node_modules for" will override the default exclusion.
+
+---
+
+### SEGMENT 4: THE EXPLORE AGENT (5 minutes)
 
 ## The Explore Agent
 
@@ -92,6 +116,10 @@
 
 **ALEX:** Use direct Grep when you know exactly what you're looking for. A specific function name, a particular error message, an exact string. Use Explore when you have a conceptual question or need to understand relationships.
 
+---
+
+### SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)
+
 ## Understanding Unfamiliar Codebases
 
 **JAMIE:** Let's talk about jumping into unfamiliar code. What's your strategy?
@@ -114,6 +142,10 @@
 
 **ALEX:** Right. You don't need to understand everything. Just the parts relevant to your current task.
 
+---
+
+### SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)
+
 ## Architecture Discovery
 
 **JAMIE:** What if the codebase doesn't have good documentation?
@@ -131,6 +163,10 @@
 **JAMIE:** That's faster than googling each one.
 
 **ALEX:** Much faster. And Claude can tell you how the project uses each library, not just what the library does in general.
+
+---
+
+### SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)
 
 ## Finding Where Things Are Defined
 
@@ -150,6 +186,10 @@
 
 **ALEX:** And if something is defined in your code but seems to shadow or wrap a library function, Claude will explain that relationship.
 
+---
+
+### SEGMENT 8: UNDERSTANDING DATA FLOW (4 minutes)
+
 ## Understanding Data Flow
 
 **JAMIE:** How do I trace how data moves through an application?
@@ -164,6 +204,10 @@
 
 **ALEX:** Extremely useful. When data is wrong somewhere, you need to find where it went wrong. Tracing the flow helps you identify the problematic step.
 
+---
+
+### SEGMENT 9: FINDING ALL USAGES (4 minutes)
+
 ## Finding All Usages
 
 **JAMIE:** What about finding everywhere something is used?
@@ -177,6 +221,10 @@
 **JAMIE:** That helps understand how something is being used, not just where.
 
 **ALEX:** Right. And you can ask follow-up questions. "Show me the different ways formatCurrency is called" and Claude will analyze the usages and categorize them.
+
+---
+
+### SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)
 
 ## Search Strategies for Complex Questions
 
@@ -196,6 +244,10 @@
 
 **ALEX:** Exactly. It's iterative. You and Claude work together to narrow in on what you need.
 
+---
+
+### SEGMENT 11: PERFORMANCE CONSIDERATIONS (4 minutes)
+
 ## Performance Considerations
 
 **JAMIE:** Do searches ever get slow?
@@ -209,6 +261,10 @@
 **JAMIE:** Constraints speed things up.
 
 **ALEX:** Also, Claude caches some context during a session. If you're doing repeated searches in the same area, later searches can be faster.
+
+---
+
+### SEGMENT 12: PRACTICAL TIPS (4 minutes)
 
 ## Practical Tips
 
@@ -228,6 +284,10 @@
 
 **ALEX:** And fourth, ask Claude to explain what it found. Don't just take the search results. Ask "explain how this caching code works" after finding it.
 
+---
+
+### SEGMENT 13: PRACTICE EXERCISE (3 minutes)
+
 ## Practice Exercise
 
 **JAMIE:** Let's give listeners something to practice.
@@ -237,6 +297,10 @@
 **JAMIE:** Three questions that build understanding.
 
 **ALEX:** Do this with different projects to practice. Each codebase will teach you something about how Claude explores and explains.
+
+---
+
+### SEGMENT 14: WHAT'S COMING NEXT (3 minutes)
 
 ## What's Coming Next
 

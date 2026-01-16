@@ -2016,7 +2016,7 @@
 
     <script>
         // ===== APP VERSION =====
-        const APP_VERSION = '2.1.1';
+        const APP_VERSION = '2.1.2';
 
         // ===== AUTO-UPDATE CHECK =====
         // Runs immediately - fetches version from server bypassing all caches
@@ -2126,6 +2126,41 @@
 
         // Mini player state
         let showMiniPlayer = false;
+
+        // Wake Lock API for keeping screen on during playback
+        let wakeLock = null;
+
+        // Request wake lock to prevent device from sleeping
+        async function requestWakeLock() {
+            if (!('wakeLock' in navigator)) {
+                console.log('Wake Lock API not supported');
+                return;
+            }
+
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+                console.log('Wake Lock acquired');
+
+                wakeLock.addEventListener('release', () => {
+                    console.log('Wake Lock released');
+                });
+            } catch (err) {
+                console.warn('Wake Lock request failed:', err);
+            }
+        }
+
+        // Release wake lock when playback stops
+        async function releaseWakeLock() {
+            if (wakeLock) {
+                try {
+                    await wakeLock.release();
+                    wakeLock = null;
+                    console.log('Wake Lock released manually');
+                } catch (err) {
+                    console.warn('Wake Lock release failed:', err);
+                }
+            }
+        }
 
         // ===== PODCASTS HOME =====
         function renderPodcastsList(filter = '') {
@@ -2874,11 +2909,21 @@
 
                 // Enable background audio playback
                 audioElement.setAttribute('playsinline', '');
+                // Keep audio playing when screen locks
+                audioElement.setAttribute('x-webkit-airplay', 'allow');
+                // Prevent auto-pause on lock screen
+                audioElement.preservesPitch = true;
 
                 // Setup Web Audio API for voice boost if enabled
                 if (voiceBoostEnabled && !audioContext) {
                     setupWebAudio();
                 }
+
+                // Handle when audio starts playing
+                audioElement.onplay = () => {
+                    console.log('Audio started playing');
+                    updateMediaSession();
+                };
 
                 audioElement.onended = () => resolve();
                 audioElement.onerror = (e) => {
@@ -2897,7 +2942,7 @@
                         setStatus('Paused (interrupted)');
                         updateMediaSession();
                     }
-                }, { once: true });
+                });
 
                 audioElement.play().catch(err => {
                     console.warn('Audio play failed:', err);
@@ -2912,6 +2957,9 @@
             isPlaying = true;
             isPaused = false;
             document.getElementById('play-btn').textContent = '⏸';
+
+            // Request wake lock to keep device awake during playback
+            await requestWakeLock();
 
             while (currentLineIndex < dialogueLines.length && isPlaying) {
                 // Check sleep timer
@@ -2948,17 +2996,19 @@
             if (currentLineIndex >= dialogueLines.length && isPlaying) {
                 isPlaying = false;
                 isPaused = false;
+                await releaseWakeLock();
                 saveState();
                 showCompleteModal();
             } else {
                 isPlaying = false;
                 isPaused = false;
+                await releaseWakeLock();
                 document.getElementById('play-btn').textContent = '▶';
                 setStatus('Ready');
             }
         }
 
-        function stopPlayback() {
+        async function stopPlayback() {
             isPlaying = false;
             isPaused = false;
             synth.cancel();
@@ -2967,6 +3017,8 @@
                 audioElement.pause();
                 audioElement.src = '';
             }
+            // Release wake lock when stopping playback
+            await releaseWakeLock();
             document.getElementById('play-btn').textContent = '▶';
             saveState();
         }
@@ -3983,7 +4035,7 @@
         }, 1000);
 
         // Handle visibility changes (tab switching, minimizing)
-        document.addEventListener('visibilitychange', () => {
+        document.addEventListener('visibilitychange', async () => {
             if (!backgroundHandlersEnabled) return;
 
             if (document.hidden) {
@@ -3996,8 +4048,26 @@
                 console.log('Audio will continue playing in background');
             } else {
                 // App came to foreground
-                console.log('App came to foreground');
-                // Playback continues seamlessly
+                console.log('App came to foreground, wasPlaying:', wasPlayingBeforeBackground);
+
+                // Re-acquire wake lock if playback is active
+                if (isPlaying && !isPaused) {
+                    await requestWakeLock();
+
+                    // Resume audio if it was paused by system
+                    if (useAudio && audioElement && audioElement.paused) {
+                        console.log('Resuming audio playback after background');
+                        audioElement.play().catch(err => {
+                            console.warn('Failed to resume audio:', err);
+                        });
+                    }
+
+                    // Resume speech synthesis if it was paused
+                    if (!useAudio && synth.paused) {
+                        console.log('Resuming speech synthesis after background');
+                        synth.resume();
+                    }
+                }
             }
         }, { passive: true });
 

@@ -2931,17 +2931,31 @@
         // ===== BACKGROUND MODE HANDLING =====
         // Track playback state before going to background
         let wasPlayingBeforeBackground = false;
+        let backgroundHandlersEnabled = false;
+
+        // Enable background handlers after a short delay to avoid interfering with initial load
+        setTimeout(() => {
+            backgroundHandlersEnabled = true;
+            console.log('Background mode handlers enabled');
+        }, 1000);
 
         // Handle visibility changes (tab switching, minimizing)
         document.addEventListener('visibilitychange', () => {
+            if (!backgroundHandlersEnabled) return;
+
             if (document.hidden) {
                 // App went to background
-                console.log('App went to background');
+                console.log('App went to background, isPlaying:', isPlaying, 'isPaused:', isPaused);
                 wasPlayingBeforeBackground = isPlaying && !isPaused;
 
                 // Pause playback if currently playing
                 if (wasPlayingBeforeBackground) {
-                    togglePlayPause();
+                    console.log('Pausing playback due to background');
+                    // Directly pause instead of toggling to be more explicit
+                    isPaused = true;
+                    synth.pause();
+                    document.getElementById('play-btn').textContent = '▶';
+                    setStatus('Paused');
                 }
 
                 // Save current state
@@ -2952,21 +2966,25 @@
                 // Note: We don't auto-resume playback to avoid unexpected audio
                 // Users can manually press play when ready
             }
-        });
+        }, { passive: true });
 
         // Handle page hide event (navigating away, closing tab)
-        window.addEventListener('pagehide', () => {
-            console.log('Page hide - saving state');
+        window.addEventListener('pagehide', (e) => {
+            if (!backgroundHandlersEnabled) return;
+
+            console.log('Page hide - saving state, persisted:', e.persisted);
             saveState();
 
-            // Pause playback if active
-            if (isPlaying && !isPaused) {
+            // Only cancel speech if actually playing (not just paused)
+            if (isPlaying && !isPaused && synth.speaking) {
+                console.log('Canceling speech synthesis on pagehide');
                 synth.cancel();
             }
-        });
+        }, { passive: true });
 
         // Fallback: beforeunload for saving state
         window.addEventListener('beforeunload', () => {
+            if (!backgroundHandlersEnabled) return;
             console.log('Before unload - saving state');
             saveState();
         });

@@ -2649,7 +2649,7 @@
                 const line = lines[i].trim();
 
                 // Track dialogue lines for position mapping
-                if (line.match(/^\*?\*?ALEX:?\*?\*?\s/i) || line.match(/^\*?\*?SAM:?\*?\*?\s/i)) {
+                if (line.match(/^\*?\*?ALEX:?\*?\*?\s/i) || line.match(/^\*?\*?SAM:?\*?\*?\s/i) || line.match(/^\*?\*?JAMIE:?\*?\*?\s/i)) {
                     // Check if this line follows a chapter header
                     for (let j = chaps.length - 1; j >= 0; j--) {
                         if (chaps[j].lineIndex === -1) {

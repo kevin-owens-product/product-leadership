@@ -645,6 +645,327 @@
             color: white;
         }
 
+        /* Speed Presets */
+        .speed-presets {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .speed-preset-btn {
+            flex: 1;
+            min-width: 50px;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .speed-preset-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .speed-preset-btn:hover,
+        .speed-preset-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Settings Panel */
+        .settings-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+
+        .setting-label {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .setting-value {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .setting-input {
+            width: 60px;
+            padding: 6px 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Queue & Mini Player */
+        .mini-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border);
+            padding: 12px 16px;
+            padding-bottom: calc(12px + var(--safe-bottom));
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 900;
+            cursor: pointer;
+        }
+
+        .mini-player.active {
+            display: flex;
+        }
+
+        .mini-player-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mini-player-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .mini-player-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .mini-player-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mini-ctrl-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .mini-ctrl-btn:active {
+            transform: scale(0.9);
+        }
+
+        .queue-panel {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .queue-item {
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .queue-item.playing {
+            border-left: 3px solid var(--accent);
+        }
+
+        .queue-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .queue-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .queue-title {
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .queue-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .queue-remove {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .queue-remove:active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Statistics View */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle:active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Light Theme */
+        body.light-theme {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --bg-tertiary: #e5e5e5;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border: #d0d0d0;
+        }
+
+        /* Share & Export */
+        .share-buttons {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .share-btn {
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .share-btn:active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Filter Controls */
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 14px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .sort-select {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
         /* Transcript */
         .transcript-panel {
             flex: 1;
@@ -1344,6 +1665,20 @@
             <input type="text" class="search-input" id="episode-search" placeholder="Search episodes...">
         </div>
 
+        <div class="filter-row">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="unplayed">Unplayed</button>
+            <button class="filter-btn" data-filter="in-progress">In Progress</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+            <select class="sort-select" id="episode-sort">
+                <option value="default">Default Order</option>
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="title">Title A-Z</option>
+                <option value="progress">By Progress</option>
+            </select>
+        </div>
+
         <div id="episode-list">
             <p class="loading-text">Loading episodes...</p>
         </div>
@@ -1358,6 +1693,8 @@
                 <h2 id="player-episode-title">Episode</h2>
             </div>
             <div class="header-actions">
+                <button class="header-btn" id="share-btn" title="Share & Export">📤</button>
+                <button class="header-btn" id="stats-btn" title="Statistics">📊</button>
                 <button class="header-btn" id="sleep-timer-btn" title="Sleep Timer">💤</button>
                 <button class="header-btn" id="home-from-player" title="Go to Home">🏠</button>
             </div>
@@ -1395,6 +1732,7 @@
             <div class="nav-tabs">
                 <button class="nav-tab active" data-tab="chapters">Chapters</button>
                 <button class="nav-tab" data-tab="bookmarks">Bookmarks</button>
+                <button class="nav-tab" data-tab="queue">Queue</button>
             </div>
             <div class="nav-content active" data-tab="chapters" id="chapters-list">
                 <div class="no-items">Loading chapters...</div>
@@ -1402,6 +1740,61 @@
             <div class="nav-content" data-tab="bookmarks" id="bookmarks-list">
                 <button class="add-bookmark-btn" id="add-bookmark-btn">+ Add Bookmark Here</button>
                 <div class="no-items">No bookmarks yet</div>
+            </div>
+            <div class="nav-content" data-tab="queue">
+                <div class="queue-panel" id="queue-list">
+                    <div class="no-items">Queue is empty</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="panel collapsed" id="settings-panel">
+            <div class="panel-header">
+                <h3>Settings</h3>
+                <span class="panel-toggle">▼</span>
+            </div>
+            <div class="panel-content">
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <span class="setting-label">Skip Forward</span>
+                        <div class="setting-value">
+                            <input type="number" class="setting-input" id="skip-forward-interval" value="10" min="5" max="60" step="5">
+                            <span>sec</span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Skip Backward</span>
+                        <div class="setting-value">
+                            <input type="number" class="setting-input" id="skip-backward-interval" value="10" min="5" max="60" step="5">
+                            <span>sec</span>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Voice Boost</span>
+                        <div class="setting-value">
+                            <div class="auto-play-toggle" id="voice-boost-toggle">
+                                <span>Off</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Silence Trim</span>
+                        <div class="setting-value">
+                            <div class="auto-play-toggle" id="silence-trim-toggle">
+                                <span>Off</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <span class="setting-label">Theme</span>
+                        <div class="setting-value">
+                            <div class="theme-toggle" id="theme-toggle">
+                                <span>🌙 Dark</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1432,6 +1825,14 @@
                     <span id="time-remaining">~60 min left</span>
                     <span id="total-pos">of 0</span>
                 </div>
+            </div>
+
+            <div class="speed-presets">
+                <button class="speed-preset-btn" data-speed="0.75">0.75x</button>
+                <button class="speed-preset-btn active" data-speed="1">1x</button>
+                <button class="speed-preset-btn" data-speed="1.25">1.25x</button>
+                <button class="speed-preset-btn" data-speed="1.5">1.5x</button>
+                <button class="speed-preset-btn" data-speed="2">2x</button>
             </div>
 
             <div class="options-row">
@@ -1545,9 +1946,77 @@
         </div>
     </div>
 
+    <!-- Share/Export Modal -->
+    <div class="modal-overlay" id="share-modal">
+        <div class="modal">
+            <h3>Share & Export</h3>
+            <p style="margin-bottom: 16px; font-size: 0.9rem;">Share this episode or export your data</p>
+            <div class="share-buttons">
+                <button class="share-btn" id="share-timestamp-btn">
+                    📍 Share Current Position
+                </button>
+                <button class="share-btn" id="share-episode-btn">
+                    🎧 Share Episode
+                </button>
+                <button class="share-btn" id="export-bookmarks-btn">
+                    📚 Export Bookmarks
+                </button>
+                <button class="share-btn" id="export-progress-btn">
+                    💾 Export Progress
+                </button>
+            </div>
+            <div class="btns" style="margin-top: 16px;">
+                <button class="primary-btn" id="close-share-modal">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Modal -->
+    <div class="modal-overlay" id="stats-modal">
+        <div class="modal" style="max-width: 400px;">
+            <h3>Listening Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-total-time">0h</div>
+                    <div class="stat-label">Total Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-episodes-completed">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-current-streak">0</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-avg-speed">1.0x</div>
+                    <div class="stat-label">Avg Speed</div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding: 16px; background: var(--bg-tertiary); border-radius: 10px;">
+                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">Time Saved (at current speed)</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);" id="stat-time-saved">0h 0m</div>
+            </div>
+            <div class="btns" style="margin-top: 16px;">
+                <button class="primary-btn" id="close-stats-modal">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini Player -->
+    <div class="mini-player" id="mini-player">
+        <div class="mini-player-info">
+            <div class="mini-player-title" id="mini-player-title">Episode Title</div>
+            <div class="mini-player-subtitle" id="mini-player-subtitle">Podcast Name</div>
+        </div>
+        <div class="mini-player-controls">
+            <button class="mini-ctrl-btn" id="mini-play-btn">▶</button>
+        </div>
+    </div>
+
     <script>
         // ===== APP VERSION =====
-        const APP_VERSION = '2.0.8';
+        const APP_VERSION = '2.1.0';
 
         // ===== AUTO-UPDATE CHECK =====
         // Runs immediately - fetches version from server bypassing all caches
@@ -1637,6 +2106,26 @@
         let useAudio = false;  // true when pre-generated audio is available
         let audioSegmentDurations = [];  // actual duration of each audio segment in seconds
         let totalAudioDuration = 0;  // total duration of all audio segments
+
+        // New feature state
+        let skipForwardInterval = parseInt(localStorage.getItem('skipForwardInterval') || '10');
+        let skipBackwardInterval = parseInt(localStorage.getItem('skipBackwardInterval') || '10');
+        let voiceBoostEnabled = localStorage.getItem('voiceBoostEnabled') === 'true';
+        let silenceTrimEnabled = localStorage.getItem('silenceTrimEnabled') === 'true';
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        let currentFilter = 'all';
+        let currentSort = 'default';
+        let playQueue = JSON.parse(localStorage.getItem('playQueue') || '[]');
+        let listeningStats = JSON.parse(localStorage.getItem('listeningStats') || '{"totalTime": 0, "episodesCompleted": 0, "lastListenDate": null, "currentStreak": 0, "speedSum": 0, "speedCount": 0}');
+
+        // Web Audio API for enhancements
+        let audioContext = null;
+        let gainNode = null;
+        let audioSource = null;
+        let analyser = null;
+
+        // Mini player state
+        let showMiniPlayer = false;
 
         // ===== PODCASTS HOME =====
         function renderPodcastsList(filter = '') {
@@ -1800,6 +2289,9 @@
                 // Mark complete if >= 98%
                 if (pct >= 98 && !state.completedEpisodes.includes(epKey)) {
                     state.completedEpisodes.push(epKey);
+                    // Track in stats
+                    listeningStats.episodesCompleted += 1;
+                    localStorage.setItem('listeningStats', JSON.stringify(listeningStats));
                 }
             }
 
@@ -1820,6 +2312,10 @@
                 speechRate = state.speechRate;
                 document.getElementById('speed-slider').value = speechRate;
                 document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
+                // Update speed preset button highlights
+                document.querySelectorAll('.speed-preset-btn').forEach(b => {
+                    b.classList.toggle('active', Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01);
+                });
             }
             if (state.autoPlayNext !== undefined) {
                 autoPlayNext = state.autoPlayNext;
@@ -2106,6 +2602,8 @@
 
             document.getElementById('list-view').classList.remove('active');
             document.getElementById('player-view').classList.add('active');
+            // Hide mini player when entering player view
+            document.getElementById('mini-player').classList.remove('active');
         }
 
         // Load audio manifest for pre-generated audio
@@ -2177,21 +2675,25 @@
         }
 
         document.getElementById('back-to-list').addEventListener('click', () => {
-            stopPlayback();
             saveState();
             document.getElementById('player-view').classList.remove('active');
             document.getElementById('list-view').classList.add('active');
+            // Show mini player if still playing
+            const showMini = currentPodcast && currentEpisode && (isPlaying || isPaused);
+            document.getElementById('mini-player').classList.toggle('active', showMini);
+            if (showMini) updateMiniPlayer();
             renderEpisodeList();
         });
 
         // Home button from player - go all the way back to podcasts list
         document.getElementById('home-from-player').addEventListener('click', () => {
-            stopPlayback();
             saveState();
-            currentPodcast = null;
-            currentEpisode = null;
             document.getElementById('player-view').classList.remove('active');
             document.getElementById('podcasts-view').classList.add('active');
+            // Show mini player if still playing
+            const showMini = currentPodcast && currentEpisode && (isPlaying || isPaused);
+            document.getElementById('mini-player').classList.toggle('active', showMini);
+            if (showMini) updateMiniPlayer();
             renderPodcastsList();
         });
 
@@ -2481,6 +2983,7 @@
                 setStatus('Paused');
                 saveState();
             }
+            updateMiniPlayer();
         }
 
         function jumpToLine(index, autoStart = false) {
@@ -2528,6 +3031,10 @@
             if (useAudio && audioElement) {
                 audioElement.playbackRate = speechRate;
             }
+            // Update speed preset button highlights
+            document.querySelectorAll('.speed-preset-btn').forEach(b => {
+                b.classList.toggle('active', Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01);
+            });
             saveState();
         });
 
@@ -2712,6 +3219,421 @@
         document.getElementById('dismiss-install').addEventListener('click', () => {
             document.getElementById('install-modal').classList.remove('show');
         });
+
+        // ===== NEW FEATURES =====
+
+        // Initialize theme
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+
+        // Speed Presets
+        document.querySelectorAll('.speed-preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const speed = parseFloat(btn.dataset.speed);
+                speechRate = speed;
+                document.getElementById('speed-slider').value = speed;
+                document.getElementById('speed-value').textContent = `${speed.toFixed(1)}x`;
+                if (useAudio && audioElement) {
+                    audioElement.playbackRate = speed;
+                }
+                document.querySelectorAll('.speed-preset-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                saveState();
+            });
+        });
+
+        // Theme Toggle
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.body.classList.toggle('light-theme');
+            document.getElementById('theme-toggle').querySelector('span').textContent =
+                currentTheme === 'dark' ? '🌙 Dark' : '☀️ Light';
+            localStorage.setItem('theme', currentTheme);
+        });
+
+        // Settings Panel
+        document.getElementById('skip-forward-interval').addEventListener('change', e => {
+            skipForwardInterval = parseInt(e.target.value);
+            localStorage.setItem('skipForwardInterval', skipForwardInterval);
+            updateSkipButtonTitles();
+        });
+
+        document.getElementById('skip-backward-interval').addEventListener('change', e => {
+            skipBackwardInterval = parseInt(e.target.value);
+            localStorage.setItem('skipBackwardInterval', skipBackwardInterval);
+            updateSkipButtonTitles();
+        });
+
+        function updateSkipButtonTitles() {
+            document.getElementById('next-btn').title = `Forward ${skipForwardInterval}s`;
+            document.getElementById('prev-btn').title = `Back ${skipBackwardInterval}s`;
+        }
+
+        // Voice Boost Toggle
+        document.getElementById('voice-boost-toggle').addEventListener('click', () => {
+            voiceBoostEnabled = !voiceBoostEnabled;
+            document.getElementById('voice-boost-toggle').classList.toggle('active', voiceBoostEnabled);
+            document.getElementById('voice-boost-toggle').querySelector('span').textContent =
+                voiceBoostEnabled ? 'On' : 'Off';
+            localStorage.setItem('voiceBoostEnabled', voiceBoostEnabled);
+            if (voiceBoostEnabled && audioElement && !audioContext) {
+                setupWebAudio();
+            }
+        });
+
+        // Silence Trim Toggle
+        document.getElementById('silence-trim-toggle').addEventListener('click', () => {
+            silenceTrimEnabled = !silenceTrimEnabled;
+            document.getElementById('silence-trim-toggle').classList.toggle('active', silenceTrimEnabled);
+            document.getElementById('silence-trim-toggle').querySelector('span').textContent =
+                silenceTrimEnabled ? 'On' : 'Off';
+            localStorage.setItem('silenceTrimEnabled', silenceTrimEnabled);
+        });
+
+        // Episode Filters
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentFilter = btn.dataset.filter;
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterAndSortEpisodes();
+            });
+        });
+
+        document.getElementById('episode-sort').addEventListener('change', e => {
+            currentSort = e.target.value;
+            filterAndSortEpisodes();
+        });
+
+        function filterAndSortEpisodes() {
+            if (!currentPodcast) return;
+            const container = document.getElementById('episode-list');
+            const cards = Array.from(container.querySelectorAll('.episode-card'));
+
+            // Filter
+            cards.forEach(card => {
+                const status = card.classList.contains('completed') ? 'completed' :
+                              card.classList.contains('in-progress') ? 'in-progress' : 'unplayed';
+                const show = currentFilter === 'all' ||
+                            (currentFilter === 'completed' && status === 'completed') ||
+                            (currentFilter === 'in-progress' && status === 'in-progress') ||
+                            (currentFilter === 'unplayed' && status === 'unplayed');
+                card.style.display = show ? '' : 'none';
+            });
+
+            // Sort
+            if (currentSort !== 'default') {
+                const sortedCards = cards.sort((a, b) => {
+                    const aNum = parseInt(a.querySelector('.ep-number').textContent.match(/\d+/)[0]);
+                    const bNum = parseInt(b.querySelector('.ep-number').textContent.match(/\d+/)[0]);
+                    const aTitle = a.querySelector('.ep-title').textContent;
+                    const bTitle = b.querySelector('.ep-title').textContent;
+                    const aProgress = parseFloat(a.querySelector('.ep-progress-bar').style.width) || 0;
+                    const bProgress = parseFloat(b.querySelector('.ep-progress-bar').style.width) || 0;
+
+                    switch(currentSort) {
+                        case 'newest': return bNum - aNum;
+                        case 'oldest': return aNum - bNum;
+                        case 'title': return aTitle.localeCompare(bTitle);
+                        case 'progress': return bProgress - aProgress;
+                        default: return 0;
+                    }
+                });
+                sortedCards.forEach(card => container.appendChild(card));
+            }
+        }
+
+        // Queue Management
+        function addToQueue(podcast, episode) {
+            playQueue.push({ podcastId: podcast.id, episodeNum: episode.id, addedAt: Date.now() });
+            localStorage.setItem('playQueue', JSON.stringify(playQueue));
+            updateQueueDisplay();
+        }
+
+        function removeFromQueue(index) {
+            playQueue.splice(index, 1);
+            localStorage.setItem('playQueue', JSON.stringify(playQueue));
+            updateQueueDisplay();
+        }
+
+        function updateQueueDisplay() {
+            const queueList = document.getElementById('queue-list');
+            if (playQueue.length === 0) {
+                queueList.innerHTML = '<div class="no-items">Queue is empty</div>';
+                return;
+            }
+
+            queueList.innerHTML = playQueue.map((item, index) => {
+                const podcast = PODCASTS?.find(p => p.id === item.podcastId);
+                const episode = podcast?.episodes.find(e => e.id === item.episodeNum);
+                if (!podcast || !episode) return '';
+
+                const isPlaying = currentPodcast?.id === item.podcastId && currentEpisode?.id === item.episodeNum;
+
+                return `
+                    <div class="queue-item ${isPlaying ? 'playing' : ''}" data-index="${index}">
+                        <div class="queue-number">${index + 1}</div>
+                        <div class="queue-info">
+                            <div class="queue-title">${episode.title}</div>
+                            <div class="queue-subtitle">${podcast.name}</div>
+                        </div>
+                        <button class="queue-remove" data-index="${index}">×</button>
+                    </div>
+                `;
+            }).join('');
+
+            // Add click handlers
+            queueList.querySelectorAll('.queue-item').forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('queue-remove')) {
+                        const queueItem = playQueue[index];
+                        const podcast = PODCASTS.find(p => p.id === queueItem.podcastId);
+                        const episode = podcast.episodes.find(e => e.id === queueItem.episodeNum);
+                        openPodcast(podcast);
+                        setTimeout(() => openEpisode(episode), 100);
+                    }
+                });
+            });
+
+            queueList.querySelectorAll('.queue-remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    removeFromQueue(parseInt(btn.dataset.index));
+                });
+            });
+        }
+
+        // Nav tabs for queue
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                document.querySelectorAll('.nav-content').forEach(content => {
+                    content.classList.toggle('active', content.dataset.tab === targetTab);
+                });
+                if (targetTab === 'queue') {
+                    updateQueueDisplay();
+                }
+            });
+        });
+
+        // Share & Export
+        document.getElementById('share-btn').addEventListener('click', () => {
+            document.getElementById('share-modal').classList.add('show');
+        });
+
+        document.getElementById('close-share-modal').addEventListener('click', () => {
+            document.getElementById('share-modal').classList.remove('show');
+        });
+
+        document.getElementById('share-timestamp-btn').addEventListener('click', () => {
+            const url = new URL(window.location.href);
+            url.searchParams.set('podcast', currentPodcast.id);
+            url.searchParams.set('episode', currentEpisode.id);
+            url.searchParams.set('line', currentLineIndex);
+
+            if (navigator.share) {
+                navigator.share({
+                    title: `${currentEpisode.title} - ${currentPodcast.name}`,
+                    text: `Listen from line ${currentLineIndex}`,
+                    url: url.toString()
+                });
+            } else {
+                navigator.clipboard.writeText(url.toString());
+                alert('Link copied to clipboard!');
+            }
+        });
+
+        document.getElementById('share-episode-btn').addEventListener('click', () => {
+            const url = new URL(window.location.href);
+            url.searchParams.set('podcast', currentPodcast.id);
+            url.searchParams.set('episode', currentEpisode.id);
+
+            if (navigator.share) {
+                navigator.share({
+                    title: `${currentEpisode.title} - ${currentPodcast.name}`,
+                    text: currentEpisode.subtitle,
+                    url: url.toString()
+                });
+            } else {
+                navigator.clipboard.writeText(url.toString());
+                alert('Link copied to clipboard!');
+            }
+        });
+
+        document.getElementById('export-bookmarks-btn').addEventListener('click', () => {
+            const bookmarks = JSON.parse(localStorage.getItem(`bookmarks-${currentPodcast.id}-${currentEpisode.id}`) || '[]');
+            const data = {
+                podcast: currentPodcast.name,
+                episode: currentEpisode.title,
+                bookmarks: bookmarks.map(b => ({
+                    line: b.line,
+                    note: b.note,
+                    context: b.context
+                }))
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bookmarks-${currentPodcast.id}-${currentEpisode.id}.json`;
+            a.click();
+        });
+
+        document.getElementById('export-progress-btn').addEventListener('click', () => {
+            const allProgress = {};
+            for (let key in localStorage) {
+                if (key.startsWith('state-')) {
+                    allProgress[key] = JSON.parse(localStorage[key]);
+                }
+            }
+            const blob = new Blob([JSON.stringify(allProgress, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'podcast-progress.json';
+            a.click();
+        });
+
+        // Statistics
+        document.getElementById('stats-btn').addEventListener('click', () => {
+            updateStatisticsDisplay();
+            document.getElementById('stats-modal').classList.add('show');
+        });
+
+        document.getElementById('close-stats-modal').addEventListener('click', () => {
+            document.getElementById('stats-modal').classList.remove('show');
+        });
+
+        function updateListeningStats(secondsListened) {
+            listeningStats.totalTime += secondsListened;
+            listeningStats.speedSum += speechRate;
+            listeningStats.speedCount += 1;
+
+            const today = new Date().toDateString();
+            if (listeningStats.lastListenDate !== today) {
+                if (listeningStats.lastListenDate === new Date(Date.now() - 86400000).toDateString()) {
+                    listeningStats.currentStreak += 1;
+                } else {
+                    listeningStats.currentStreak = 1;
+                }
+                listeningStats.lastListenDate = today;
+            }
+
+            localStorage.setItem('listeningStats', JSON.stringify(listeningStats));
+        }
+
+        function updateStatisticsDisplay() {
+            const hours = Math.floor(listeningStats.totalTime / 3600);
+            const mins = Math.floor((listeningStats.totalTime % 3600) / 60);
+            document.getElementById('stat-total-time').textContent = `${hours}h ${mins}m`;
+            document.getElementById('stat-episodes-completed').textContent = listeningStats.episodesCompleted;
+            document.getElementById('stat-current-streak').textContent = listeningStats.currentStreak;
+
+            const avgSpeed = listeningStats.speedCount > 0 ?
+                (listeningStats.speedSum / listeningStats.speedCount).toFixed(1) : '1.0';
+            document.getElementById('stat-avg-speed').textContent = avgSpeed + 'x';
+
+            const normalTime = listeningStats.totalTime * (parseFloat(avgSpeed));
+            const timeSaved = normalTime - listeningStats.totalTime;
+            const savedHours = Math.floor(timeSaved / 3600);
+            const savedMins = Math.floor((timeSaved % 3600) / 60);
+            document.getElementById('stat-time-saved').textContent = `${savedHours}h ${savedMins}m`;
+        }
+
+        // Track time listened
+        let lastStatsUpdate = Date.now();
+        setInterval(() => {
+            if (isPlaying && !isPaused) {
+                const now = Date.now();
+                const elapsed = (now - lastStatsUpdate) / 1000;
+                updateListeningStats(elapsed);
+                lastStatsUpdate = now;
+            }
+        }, 10000); // Update every 10 seconds
+
+        // Mini Player
+        function updateMiniPlayer() {
+            if (currentPodcast && currentEpisode) {
+                document.getElementById('mini-player-title').textContent = currentEpisode.title;
+                document.getElementById('mini-player-subtitle').textContent = currentPodcast.name;
+                document.getElementById('mini-play-btn').textContent = (isPlaying && !isPaused) ? '⏸' : '▶';
+            }
+        }
+
+        document.getElementById('mini-player').addEventListener('click', (e) => {
+            if (!e.target.classList.contains('mini-ctrl-btn') && currentPodcast && currentEpisode) {
+                showView('player-view');
+            }
+        });
+
+        document.getElementById('mini-play-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            togglePlayPause();
+        });
+
+        // Web Audio API Setup
+        function setupWebAudio() {
+            if (!audioContext && audioElement && voiceBoostEnabled) {
+                try {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    audioSource = audioContext.createMediaElementSource(audioElement);
+                    gainNode = audioContext.createGain();
+                    analyser = audioContext.createAnalyser();
+
+                    // Voice boost: increase mid-range frequencies
+                    gainNode.gain.value = 1.3;
+
+                    audioSource.connect(gainNode);
+                    gainNode.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                } catch (e) {
+                    console.error('Web Audio API setup failed:', e);
+                }
+            }
+        }
+
+        // Load from URL parameters
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const podcastId = params.get('podcast');
+            const episodeNum = params.get('episode');
+            const lineNum = params.get('line');
+
+            if (podcastId && PODCASTS) {
+                const podcast = PODCASTS.find(p => p.id === podcastId);
+                if (podcast && episodeNum) {
+                    const episode = podcast.episodes.find(e => e.id === parseInt(episodeNum));
+                    if (episode) {
+                        openPodcast(podcast);
+                        setTimeout(() => {
+                            openEpisode(episode);
+                            if (lineNum) {
+                                setTimeout(() => {
+                                    jumpToLine(parseInt(lineNum), false);
+                                }, 500);
+                            }
+                        }, 100);
+                    }
+                }
+            }
+        });
+
+        // Initialize settings
+        document.getElementById('skip-forward-interval').value = skipForwardInterval;
+        document.getElementById('skip-backward-interval').value = skipBackwardInterval;
+        if (voiceBoostEnabled) {
+            document.getElementById('voice-boost-toggle').classList.add('active');
+            document.getElementById('voice-boost-toggle').querySelector('span').textContent = 'On';
+        }
+        if (silenceTrimEnabled) {
+            document.getElementById('silence-trim-toggle').classList.add('active');
+            document.getElementById('silence-trim-toggle').querySelector('span').textContent = 'On';
+        }
+        updateSkipButtonTitles();
+        updateQueueDisplay();
 
         // ===== CHAPTERS =====
         let chapters = [];

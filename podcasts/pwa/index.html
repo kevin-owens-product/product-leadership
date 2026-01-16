@@ -1795,8 +1795,8 @@
                     timestamp: Date.now()
                 };
 
-                // Mark complete if >= 95%
-                if (pct >= 95 && !state.completedEpisodes.includes(epKey)) {
+                // Mark complete if >= 98%
+                if (pct >= 98 && !state.completedEpisodes.includes(epKey)) {
                     state.completedEpisodes.push(epKey);
                 }
             }
@@ -2041,7 +2041,7 @@
                 const epKey = `${currentPodcast.id}-${ep.id}`;
                 const progress = state.episodeProgress?.[epKey] || { percent: 0 };
                 const isComplete = state.completedEpisodes?.includes(epKey);
-                const inProgress = progress.percent > 0 && progress.percent < 95;
+                const inProgress = progress.percent > 0 && progress.percent < 98;
 
                 totalProgress += isComplete ? 100 : progress.percent;
 
@@ -2570,6 +2570,16 @@
             }
         }
 
+        function playPreviousEpisode() {
+            const episodes = currentPodcast?.episodes || [];
+            const prevEp = episodes.find(e => e.id === currentEpisode.id - 1);
+            if (prevEp) {
+                stopPlayback();
+                openEpisode(prevEp);
+                setTimeout(() => startPlayback(), 500);
+            }
+        }
+
         document.getElementById('play-next-episode').addEventListener('click', playNextEpisode);
         document.getElementById('back-to-episodes').addEventListener('click', () => {
             document.getElementById('complete-modal').classList.remove('show');
@@ -3073,15 +3083,13 @@
             });
 
             navigator.mediaSession.setActionHandler('previoustrack', () => {
-                // Jump back to start or previous section
-                const newIndex = Math.max(0, currentLineIndex - 10);
-                jumpToLine(newIndex);
+                // Navigate to previous episode
+                playPreviousEpisode();
             });
 
             navigator.mediaSession.setActionHandler('nexttrack', () => {
-                // Jump forward to next section
-                const newIndex = Math.min(dialogueLines.length - 1, currentLineIndex + 10);
-                jumpToLine(newIndex);
+                // Navigate to next episode
+                playNextEpisode();
             });
 
             // Update playback state

@@ -1635,6 +1635,8 @@
         let audioManifest = null;  // null = use TTS, array = use audio files
         let audioElement = null;
         let useAudio = false;  // true when pre-generated audio is available
+        let audioSegmentDurations = [];  // actual duration of each audio segment in seconds
+        let totalAudioDuration = 0;  // total duration of all audio segments
 
         // ===== PODCASTS HOME =====
         function renderPodcastsList(filter = '') {
@@ -2110,6 +2112,8 @@
         async function loadAudioManifest(episode) {
             audioManifest = null;
             useAudio = false;
+            audioSegmentDurations = [];
+            totalAudioDuration = 0;
 
             if (!currentPodcast || !episode) return;
 
@@ -2124,11 +2128,52 @@
                     audioManifest = await response.json();
                     useAudio = true;
                     console.log(`Loaded audio manifest: ${audioManifest.length} segments`);
+
+                    // Load duration metadata for all segments
+                    await loadAudioDurations(episode);
                 }
             } catch (e) {
                 // No audio available, will use TTS
                 console.log('No pre-generated audio, using TTS');
             }
+        }
+
+        // Load duration metadata for audio segments
+        async function loadAudioDurations(episode) {
+            if (!audioManifest || audioManifest.length === 0) return;
+
+            const epNum = String(episode.id).padStart(2, '0');
+            const epSlug = episode.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+
+            console.log('Loading audio durations...');
+            const durationPromises = audioManifest.map((segment, index) => {
+                return new Promise((resolve) => {
+                    const audioUrl = `/audio/${currentPodcast.id}/episode-${epNum}-${epSlug}/${segment.file}`;
+                    const audio = new Audio();
+
+                    audio.addEventListener('loadedmetadata', () => {
+                        resolve({ index, duration: audio.duration });
+                    });
+
+                    audio.addEventListener('error', () => {
+                        // If audio fails to load, estimate based on text length
+                        // Roughly 150 words per minute, average 5 chars per word
+                        const estimatedDuration = (segment.text.length / 5) / 150 * 60;
+                        resolve({ index, duration: estimatedDuration });
+                    });
+
+                    audio.src = audioUrl;
+                });
+            });
+
+            const results = await Promise.all(durationPromises);
+
+            // Sort by index and extract durations
+            results.sort((a, b) => a.index - b.index);
+            audioSegmentDurations = results.map(r => r.duration);
+            totalAudioDuration = audioSegmentDurations.reduce((sum, d) => sum + d, 0);
+
+            console.log(`Loaded durations: ${totalAudioDuration.toFixed(0)}s total (${(totalAudioDuration/60).toFixed(1)} min)`);
         }
 
         document.getElementById('back-to-list').addEventListener('click', () => {
@@ -2178,9 +2223,19 @@
             document.getElementById('current-pos').textContent = `Line ${currentLineIndex + 1}`;
             document.getElementById('total-pos').textContent = `of ${dialogueLines.length}`;
 
-            // Estimate time remaining (avg ~3 seconds per line at 1x speed)
+            // Calculate time remaining using actual audio durations or estimate
             const linesLeft = dialogueLines.length - currentLineIndex;
-            const secondsLeft = (linesLeft * 3) / speechRate;
+            let secondsLeft;
+
+            if (audioSegmentDurations.length > 0 && currentLineIndex < audioSegmentDurations.length) {
+                // Use actual audio durations for remaining segments
+                const remainingDurations = audioSegmentDurations.slice(currentLineIndex);
+                secondsLeft = remainingDurations.reduce((sum, d) => sum + d, 0) / speechRate;
+            } else {
+                // Fall back to estimated 3 seconds per line
+                secondsLeft = (linesLeft * 3) / speechRate;
+            }
+
             const minsLeft = Math.round(secondsLeft / 60);
             document.getElementById('time-remaining').textContent = `~${minsLeft} min left`;
 
@@ -2705,14 +2760,33 @@
                 }
             });
 
-            // Add estimated times based on lines
-            const avgSecsPerLine = 3;
+            // Add estimated times based on actual audio duration or line count
+            let avgSecsPerLine = 3;  // default fallback
+
+            // If we have actual audio durations, calculate accurate average
+            if (audioSegmentDurations.length > 0 && dialogueLine > 0) {
+                avgSecsPerLine = totalAudioDuration / dialogueLine;
+                console.log(`Using actual duration: ${avgSecsPerLine.toFixed(2)}s per line`);
+            } else {
+                console.log('Using estimated duration: 3s per line');
+            }
+
             chaps.forEach((chap, idx) => {
                 const nextChap = chaps[idx + 1];
                 const endLine = nextChap ? nextChap.lineIndex : dialogueLine;
                 const lines = endLine - chap.lineIndex;
-                const mins = Math.round((lines * avgSecsPerLine) / 60);
-                chap.duration = mins;
+
+                // Calculate duration in minutes
+                let mins = Math.round((lines * avgSecsPerLine) / 60);
+
+                // If using actual audio durations, calculate precise segment duration
+                if (audioSegmentDurations.length > 0) {
+                    const segmentDuration = audioSegmentDurations.slice(chap.lineIndex, endLine)
+                        .reduce((sum, d) => sum + d, 0);
+                    mins = Math.round(segmentDuration / 60);
+                }
+
+                chap.duration = mins > 0 ? mins : 1;  // minimum 1 minute
             });
 
             return chaps;
@@ -2987,11 +3061,9 @@
             console.log('Page hide - saving state, persisted:', e.persisted);
             saveState();
 
-            // Only cancel speech if actually playing (not just paused)
-            if (isPlaying && !isPaused && synth.speaking) {
-                console.log('Canceling speech synthesis on pagehide');
-                synth.cancel();
-            }
+            // Don't cancel speech/audio - allow background playback to continue
+            // Audio elements and Media Session API will handle background playback
+            console.log('Page hidden, audio continues in background');
         }, { passive: true });
 
         // Fallback: beforeunload for saving state

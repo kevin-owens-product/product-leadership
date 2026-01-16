@@ -1,13 +1,15 @@
-const CACHE_NAME = 'podlearn-v14';
+const CACHE_NAME = 'podlearn-v2.1.1';
 const STATIC_ASSETS = [
-    '/index.html',
     '/manifest.json',
     '/icon.svg'
 ];
 
 // Files that should always check network first (content that changes)
 const NETWORK_FIRST = [
+    '/index.html',
+    '/pwa/index.html',
     '/podcasts.js',
+    '/dist/podcasts.js',
     '/'
 ];
 

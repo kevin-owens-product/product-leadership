@@ -2320,6 +2320,18 @@
                     speakWithTTS(segment.text, segment.speaker).then(resolve).catch(reject);
                 };
 
+                // Handle audio interruptions from other apps
+                audioElement.addEventListener('pause', (e) => {
+                    // Only handle if this was an external interruption (not user-initiated)
+                    if (isPlaying && !isPaused && !document.hidden) {
+                        console.log('Audio interrupted by another app');
+                        isPaused = true;
+                        document.getElementById('play-btn').textContent = '▶';
+                        setStatus('Paused (interrupted)');
+                        updateMediaSession();
+                    }
+                }, { once: true });
+
                 audioElement.play().catch(err => {
                     console.warn('Audio play failed:', err);
                     speakWithTTS(segment.text, segment.speaker).then(resolve).catch(reject);
@@ -2944,27 +2956,17 @@
             if (!backgroundHandlersEnabled) return;
 
             if (document.hidden) {
-                // App went to background
+                // App went to background - continue playing audio
                 console.log('App went to background, isPlaying:', isPlaying, 'isPaused:', isPaused);
                 wasPlayingBeforeBackground = isPlaying && !isPaused;
 
-                // Pause playback if currently playing
-                if (wasPlayingBeforeBackground) {
-                    console.log('Pausing playback due to background');
-                    // Directly pause instead of toggling to be more explicit
-                    isPaused = true;
-                    synth.pause();
-                    document.getElementById('play-btn').textContent = '▶';
-                    setStatus('Paused');
-                }
-
-                // Save current state
+                // Save current state but DO NOT pause - allow background playback
                 saveState();
+                console.log('Audio will continue playing in background');
             } else {
                 // App came to foreground
                 console.log('App came to foreground');
-                // Note: We don't auto-resume playback to avoid unexpected audio
-                // Users can manually press play when ready
+                // Playback continues seamlessly
             }
         }, { passive: true });
 
@@ -3022,6 +3024,92 @@
             }
             window.location.reload();
         }
+
+        // ===== MEDIA SESSION API =====
+        // Enables lock screen controls, notification controls, and handles audio interruptions
+        function updateMediaSession() {
+            if (!('mediaSession' in navigator)) {
+                console.log('Media Session API not supported');
+                return;
+            }
+
+            if (!currentPodcast || !currentEpisode) {
+                return;
+            }
+
+            // Update metadata
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: currentEpisode.title,
+                artist: currentPodcast.title,
+                album: 'PodLearn',
+                artwork: [
+                    { src: '/icon.svg', sizes: '512x512', type: 'image/svg+xml' }
+                ]
+            });
+
+            // Set up action handlers
+            navigator.mediaSession.setActionHandler('play', () => {
+                if (!isPlaying || isPaused) {
+                    togglePlayPause();
+                }
+            });
+
+            navigator.mediaSession.setActionHandler('pause', () => {
+                if (isPlaying && !isPaused) {
+                    togglePlayPause();
+                }
+            });
+
+            navigator.mediaSession.setActionHandler('seekbackward', () => {
+                // Jump back 10 seconds worth of lines
+                const newIndex = Math.max(0, currentLineIndex - 5);
+                jumpToLine(newIndex);
+            });
+
+            navigator.mediaSession.setActionHandler('seekforward', () => {
+                // Jump forward 10 seconds worth of lines
+                const newIndex = Math.min(dialogueLines.length - 1, currentLineIndex + 5);
+                jumpToLine(newIndex);
+            });
+
+            navigator.mediaSession.setActionHandler('previoustrack', () => {
+                // Jump back to start or previous section
+                const newIndex = Math.max(0, currentLineIndex - 10);
+                jumpToLine(newIndex);
+            });
+
+            navigator.mediaSession.setActionHandler('nexttrack', () => {
+                // Jump forward to next section
+                const newIndex = Math.min(dialogueLines.length - 1, currentLineIndex + 10);
+                jumpToLine(newIndex);
+            });
+
+            // Update playback state
+            navigator.mediaSession.playbackState = (isPlaying && !isPaused) ? 'playing' : 'paused';
+
+            console.log('Media Session API initialized');
+        }
+
+        // Call updateMediaSession when playback state changes
+        const originalTogglePlayPause = togglePlayPause;
+        togglePlayPause = function() {
+            originalTogglePlayPause();
+            updateMediaSession();
+        };
+
+        const originalStartPlayback = startPlayback;
+        startPlayback = function() {
+            originalStartPlayback();
+            updateMediaSession();
+        };
+
+        const originalStopPlayback = stopPlayback;
+        stopPlayback = function() {
+            originalStopPlayback();
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.playbackState = 'paused';
+            }
+        };
     </script>
 </body>
 </html>

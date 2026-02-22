@@ -1,0 +1,16 @@
+{
+  "id": "the-forge-podcast",
+  "title": "The Forge Podcast",
+  "subtitle": "PE, Software Transformation & the AI-Native Future",
+  "description": "A deep dive into the intersection of private equity, software transformation, and the AI-native future. Exploring how PE firms create value in software companies, multi-agent architecture, platform dynamics, AI-native product management, and systematic frameworks for legacy-to-AI transformation.",
+  "author": "Alex & Kevin",
+  "color": "#f59e0b",
+  "icon": "🔥",
+  "episodes": [
+    {"id": 1, "file": "episode-01-pe-value-creation.md", "title": "The PE Operating Partner Playbook", "subtitle": "How Private Equity Firms Create (and Destroy) Value Through Technology"},
+    {"id": 2, "file": "episode-02-multi-agent-architecture.md", "title": "Multi-Agent Architecture for Enterprise Software", "subtitle": "Designing Systems Where AI Agents Collaborate on Complex Business Problems"},
+    {"id": 3, "file": "episode-03-platform-power-dynamics.md", "title": "Platform Power Dynamics and Data Moats", "subtitle": "How B2B SaaS Companies Protect Their Value When Everyone Wants Their Data"},
+    {"id": 4, "file": "episode-04-ai-native-product-management.md", "title": "AI-Native Product Management", "subtitle": "How the Role of the Product Manager Fundamentally Changes in an AI-First World"},
+    {"id": 5, "file": "episode-05-the-forge-method.md", "title": "The Forge Method", "subtitle": "A Systematic Framework for Transforming Software Companies from Legacy to AI-Native"}
+  ]
+}

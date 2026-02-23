@@ -1,0 +1,800 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome to the final episode of Tech Leadership Unpacked. I'm Sam Rivera, and what a journey it's been. We've covered AI, LLMs, engineering culture, architecture, systems design, monorepos, design systems, testing, and APIs. Now we're wrapping up with two crucial topics: security and development methodologies.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen. And I saved security for last intentionally. After understanding how systems are built, you can better understand how they're attacked and defended. And methodologies are about how teams work together to deliver all of this effectively.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "Let's dive in. Security first?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "Let's do it.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "Why should a CPO care about security? Isn't that what we have security teams for?",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Security is everyone's responsibility. A breach doesn't just cause technical damage - it destroys customer trust, triggers regulatory penalties, and can end companies. Equifax, Capital One, SolarWinds - these weren't small organizations with weak security teams. Security is a product concern.",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "What should I understand about the landscape?",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "Let's cover the fundamentals.",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "sam",
+    "text": "What are common threat actors?",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "sam",
+    "text": "What are they after?",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Data - customer PII, payment information, trade secrets.",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "Defense in depth. No single security measure is enough. Layer defenses so that breaching one layer doesn't mean total compromise.",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "sam",
+    "text": "What layers?",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "sam",
+    "text": "What's the biggest vulnerability?",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Honestly? People. Phishing attacks, social engineering, credential theft. The most sophisticated technical defenses can be bypassed by an employee clicking the wrong link.",
+    "chapter": "SEGMENT 1: SECURITY FUNDAMENTALS (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "sam",
+    "text": "I've heard of OWASP. What is it and why does it matter?",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "OWASP - Open Web Application Security Project - publishes the Top 10 web application security risks. It's the industry standard reference for what to protect against.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "sam",
+    "text": "Walk me through them.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "I'll cover the current top 10.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "sam",
+    "text": "This seems basic.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "It is, and it's the number one vulnerability. Authorization bugs are incredibly common and incredibly damaging.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "alex",
+    "text": "2. Cryptographic Failures. Sensitive data exposed due to weak or missing encryption. Passwords stored in plain text. Data transmitted without TLS. Weak algorithms.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "3. Injection. Malicious input interpreted as code. SQL injection: entering '; DROP TABLE users; -- in a form field. Command injection. LDAP injection.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "sam",
+    "text": "This is the classic attack, right?",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "Classic and still prevalent. Modern frameworks help, but it still happens.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "alex",
+    "text": "4. Insecure Design. Security flaws from design decisions, not implementation bugs. An architecture that trusts client-side validation. A flow that allows unlimited password attempts.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "5. Security Misconfiguration. Default passwords, unnecessary features enabled, overly permissive settings, missing security headers.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "alex",
+    "text": "6. Vulnerable and Outdated Components. Using libraries with known vulnerabilities. Dependencies that haven't been updated.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "sam",
+    "text": "SBOM?",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "alex",
+    "text": "Software Bill of Materials - a list of all components in your software. Critical for knowing if you're affected when vulnerabilities are announced.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "7. Identification and Authentication Failures. Weak password requirements, credential stuffing vulnerability, session hijacking.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "alex",
+    "text": "8. Software and Data Integrity Failures. Trusting untrusted sources. CI/CD pipelines that don't verify code integrity. Auto-updates without verification.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "9. Security Logging and Monitoring Failures. Not logging security events. Not detecting active attacks. Logs that aren't reviewed.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "alex",
+    "text": "10. Server-Side Request Forgery (SSRF). Tricking the server into making requests to unintended destinations. Attacker makes your server request internal resources.",
+    "chapter": "SEGMENT 2: THE OWASP TOP 10 (12 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "sam",
+    "text": "How do you build security into the development process?",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "alex",
+    "text": "This is called \"shifting left\" - addressing security early in the lifecycle rather than at the end.",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "sam",
+    "text": "Who does threat modeling?",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "alex",
+    "text": "Ideally, the engineering team with security input. Several frameworks exist: STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege) is popular.",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Development phase:",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "sam",
+    "text": "What's SAST?",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Tools that analyze source code for vulnerabilities. Semgrep, SonarQube, CodeQL. Run in CI, flag issues before merge.",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "alex",
+    "text": "Testing phase:",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "sam",
+    "text": "How often should you pentest?",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "alex",
+    "text": "At least annually. After major changes. Before launching new products. Mix of automated scanning and human testers - humans find what scanners miss.",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Deployment:",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "alex",
+    "text": "Production:",
+    "chapter": "SEGMENT 3: SECURITY IN THE DEVELOPMENT LIFECYCLE (10 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "sam",
+    "text": "Let's get specific. What should every application have?",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "alex",
+    "text": "Let me give you a security checklist.",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "sam",
+    "text": "What about SSO?",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "alex",
+    "text": "Single Sign-On through established providers (Google, Okta, Auth0) is often more secure than building your own. They have dedicated security teams.",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Authorization:",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "alex",
+    "text": "Data protection:",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Input handling:",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "sam",
+    "text": "CSP headers?",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "Content Security Policy tells browsers what sources of content are allowed. Blocks inline scripts, restricts where scripts can load from. Major XSS mitigation.",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "alex",
+    "text": "Secrets management:",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Logging and monitoring:",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "sam",
+    "text": "What about compliance - GDPR, SOC 2?",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Security and compliance overlap but aren't identical. Compliance is demonstrating you follow standards. Security is actually being secure. You can be compliant but insecure, or secure but not compliant. Aim for both.",
+    "chapter": "SEGMENT 4: PRACTICAL SECURITY MEASURES (10 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "sam",
+    "text": "Shifting to methodologies. Agile has dominated for years. What should leaders understand?",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Agile is a philosophy, not a process. The manifesto values:",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "sam",
+    "text": "That seems abstract. What's practical?",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "The implementations matter. Scrum is most common - sprints, standups, retrospectives, defined roles.",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "sam",
+    "text": "Does Scrum still work?",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "It can, but many teams are evolving past strict Scrum. Common issues: sprint ceremonies become theater, story points become productivity metrics, sprints create artificial deadlines.",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "sam",
+    "text": "What's replacing it?",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "Several trends:",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "sam",
+    "text": "Should we abandon Scrum?",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Not necessarily. Scrum works well for teams learning to be agile, teams with clear sprint-sized work, or organizations that need predictability. But adapt it - don't cargo cult.",
+    "chapter": "SEGMENT 5: AGILE AND BEYOND (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "sam",
+    "text": "DevOps was huge. Is it still relevant?",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "DevOps - the culture and practices of unifying development and operations - is more relevant than ever. But the implementation is evolving.",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "sam",
+    "text": "What does that look like practically?",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "Teams responsible for:",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "sam",
+    "text": "What's changing?",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Platform Engineering is the evolution. The idea: don't make every team build their own CI/CD, observability, deployment infrastructure. Build internal platforms that make the right thing easy.",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "sam",
+    "text": "How's that different from having an ops team?",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Ops teams did work for you. Platform teams build tools for you. They provide self-service platforms that development teams use independently. Autonomy with guardrails.",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "alex",
+    "text": "Internal Developer Platforms (IDPs) include:",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "sam",
+    "text": "Who builds these platforms?",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "alex",
+    "text": "Dedicated platform teams. They treat internal developers as customers. Build products, not just tools.",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "sam",
+    "text": "What about SRE?",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "alex",
+    "text": "Site Reliability Engineering - Google's approach to operations. SREs are software engineers who work on reliability. They define SLOs (Service Level Objectives), manage error budgets, and build automation.",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "sam",
+    "text": "Error budgets?",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "alex",
+    "text": "If your SLO is 99.9% availability, you have 0.1% error budget. While you have budget, you can move fast. If you've spent it, slow down and focus on reliability. It creates balance between velocity and stability.",
+    "chapter": "SEGMENT 6: DEVOPS AND PLATFORM ENGINEERING (10 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "sam",
+    "text": "We talked about team structure in engineering culture. Any more to add?",
+    "chapter": "SEGMENT 7: TEAM TOPOLOGIES (8 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "alex",
+    "text": "Team Topologies is a framework worth knowing. It defines four fundamental team types:",
+    "chapter": "SEGMENT 7: TEAM TOPOLOGIES (8 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "sam",
+    "text": "How do they interact?",
+    "chapter": "SEGMENT 7: TEAM TOPOLOGIES (8 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "alex",
+    "text": "Three interaction modes:",
+    "chapter": "SEGMENT 7: TEAM TOPOLOGIES (8 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "sam",
+    "text": "Why does this matter?",
+    "chapter": "SEGMENT 7: TEAM TOPOLOGIES (8 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "alex",
+    "text": "Team structure affects what software gets built. If you want independent services, you need independent teams. If you want shared platforms, you need platform teams. Organization design and software design are inseparable.",
+    "chapter": "SEGMENT 7: TEAM TOPOLOGIES (8 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "sam",
+    "text": "Let's talk about what it means to deliver well. What does excellence look like?",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "Several characteristics:",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "sam",
+    "text": "How do you measure delivery?",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "DORA metrics again: deployment frequency, lead time, change failure rate, time to restore. Track them. Improve them.",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "Flow efficiency. How much time is work actively worked on versus waiting? Most organizations have terrible flow efficiency - work waits in queues more than it's being done.",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "alex",
+    "text": "Customer focus. Shipping features nobody wants is not delivery excellence. Measure outcomes, not outputs. Are users adopting features? Are metrics improving?",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "sam",
+    "text": "What practices enable this?",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "sam",
+    "text": "Any anti-patterns?",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Feature branches that live for weeks - merge hell, big bang risk.",
+    "chapter": "SEGMENT 8: DELIVERY EXCELLENCE (8 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "sam",
+    "text": "Final segment. Let's tie this all together. We've covered an enormous amount across ten episodes. What's the synthesis?",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Here's my integrated view.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "sam",
+    "text": "What about technical excellence?",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Excellence is sustainable. Technical debt catches up. Security breaches happen. Fragile systems break. Invest in quality, testing, security, and infrastructure. It's not overhead - it's the foundation that makes speed sustainable.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "alex",
+    "text": "Teams are the unit of delivery. Individual brilliance matters less than team effectiveness. Invest in team structure, collaboration, psychological safety, and empowerment.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "sam",
+    "text": "What about the AI revolution?",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "alex",
+    "text": "AI changes everything and nothing. It changes what's possible, how fast you can build, what problems are tractable. It doesn't change the fundamentals: understand your users, design carefully, test thoroughly, deploy safely, measure outcomes.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "sam",
+    "text": "If someone walked away from this series remembering one thing?",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "alex",
+    "text": "Complexity is the enemy. Every technology, pattern, process, tool adds complexity. Embrace complexity when it creates proportional value. Ruthlessly eliminate complexity that doesn't. The best systems, teams, and products are elegantly simple beneath the surface.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "sam",
+    "text": "And for product leaders specifically?",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "alex",
+    "text": "Bridge the gap. Product leaders who understand technology deeply make better decisions, ask better questions, and create better products. You don't need to code. You need to understand how software is built, what's hard, what's risky, and what's possible.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "sam",
+    "text": "Any final thoughts?",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "alex",
+    "text": "Just this: what we've covered in ten hours is a starting point, not an endpoint. Technology evolves constantly. The specifics will change. But the thinking patterns - understanding tradeoffs, designing for change, investing in quality, focusing on outcomes - those endure.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0111.mp3"
+  },
+  {
+    "index": 112,
+    "speaker": "sam",
+    "text": "Alex, it's been an incredible journey. Thanks for sharing your expertise.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0112.mp3"
+  },
+  {
+    "index": 113,
+    "speaker": "alex",
+    "text": "Thanks for the great questions, Sam. Enjoy the rest of your flight, everyone. Go build something great.",
+    "chapter": "SEGMENT 9: BRINGING IT ALL TOGETHER (8 minutes)",
+    "file": "0113.mp3"
+  }
+]

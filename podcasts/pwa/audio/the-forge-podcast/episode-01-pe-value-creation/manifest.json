@@ -1,0 +1,163 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome to The Forge Podcast, a deep dive into the intersection of private equity, software transformation, and the AI-native future. I'm Alex, and with me today is Kevin, who's spent the last 25 years in software and product leadership, and is now focused on one of the most interesting and underexplored questions in tech: how do private equity firms actually create value in software companies? Kevin, let's start with the basics. Most people in tech think of PE as the bad guys. They buy companies, cut costs, and flip them. Is that actually what happens?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "kevin",
+    "text": "It's a great question, and the honest answer is: sometimes, yes. But the sophisticated PE firms, the ones generating the best returns, have moved way past the cost-cutting playbook. Let me break down how PE value creation actually works, because it's more nuanced than most tech people realize.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "Let's go deeper on each of those. Starting with revenue growth. What does that actually look like in a PE-owned software company?",
+    "chapter": "SEGMENT 1: THE REVENUE GROWTH LEVER (12 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "kevin",
+    "text": "So revenue growth in a PE context is different from how a VC-backed startup thinks about growth. PE firms are typically buying companies that are already doing 50 million, 100 million, 500 million in revenue. These aren't early-stage bets. The revenue growth playbook usually involves a few key strategies.",
+    "chapter": "SEGMENT 1: THE REVENUE GROWTH LEVER (12 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "That's a great segue into margin expansion. What does that lever look like?",
+    "chapter": "SEGMENT 2: MARGIN EXPANSION AND AI-DRIVEN EFFICIENCY (8 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "kevin",
+    "text": "Margin expansion is where PE has historically spent most of its energy, and it's also where the \"PE destroys companies\" narrative comes from, because the crude version of margin expansion is just cutting headcount and reducing investment.",
+    "chapter": "SEGMENT 2: MARGIN EXPANSION AND AI-DRIVEN EFFICIENCY (8 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Let's talk about multiple expansion. That seems like the most abstract of the four levers. How do PE firms actually influence their valuation multiples?",
+    "chapter": "SEGMENT 3: MULTIPLE EXPANSION AND THE AI NARRATIVE (10 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "kevin",
+    "text": "This is where it gets really strategic, and frankly, this is where most technology leaders don't think enough about how their work translates to value. Your exit multiple is driven by a few key factors: your growth rate, your margin profile, your market position, your competitive moat, and increasingly, your AI story.",
+    "chapter": "SEGMENT 3: MULTIPLE EXPANSION AND THE AI NARRATIVE (10 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "That's a massive number. Let's put some real numbers around this. If a company is doing 200 million in revenue and you add 3 turns of multiple, what does that actually mean?",
+    "chapter": "SEGMENT 3: MULTIPLE EXPANSION AND THE AI NARRATIVE (10 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "kevin",
+    "text": "It means you've just added 600 million dollars to the enterprise value. At a 200 million dollar revenue company trading at 8x, you're worth 1.6 billion. Move that to 11x and you're at 2.2 billion. That 600 million delta is almost entirely attributable to perception of quality, growth trajectory, and strategic positioning.",
+    "chapter": "SEGMENT 3: MULTIPLE EXPANSION AND THE AI NARRATIVE (10 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Let's shift gears and talk about the organizational model. How do PE firms actually structure their technology oversight? What is an operating partner versus a portfolio company CPTO?",
+    "chapter": "SEGMENT 4: PE ORGANIZATIONAL MODEL AND TECHNOLOGY LEADERSHIP (7 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "kevin",
+    "text": "This is a really important distinction that a lot of people don't understand. There are essentially three layers of technology leadership in a PE context.",
+    "chapter": "SEGMENT 4: PE ORGANIZATIONAL MODEL AND TECHNOLOGY LEADERSHIP (7 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "That third model sounds like what you've been developing with the Forge Method. Can you explain how that framework works?",
+    "chapter": "SEGMENT 5: THE FORGE METHOD FRAMEWORK (8 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "kevin",
+    "text": "Absolutely. The Forge Method is a four-phase framework for transforming software companies from legacy or traditional development practices to AI-native operations. Let me walk through each phase.",
+    "chapter": "SEGMENT 5: THE FORGE METHOD FRAMEWORK (8 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "How does this translate to actual financial returns for the PE firm?",
+    "chapter": "SEGMENT 6: THE VALUE CREATION MATH (4 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "kevin",
+    "text": "Let me give you the math with a realistic example. Say a PE firm acquires a B2B SaaS company doing 100 million in ARR with 65 percent gross margins, growing at 12 percent annually, and trading at an 8x revenue multiple. That's an 800 million dollar enterprise value at acquisition.",
+    "chapter": "SEGMENT 6: THE VALUE CREATION MATH (4 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Let's talk about the practical challenges. What goes wrong when PE firms try to do technology transformation?",
+    "chapter": "SEGMENT 7: COMMON FAILURES IN PE TECHNOLOGY TRANSFORMATION (5 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "kevin",
+    "text": "Several things consistently go wrong, and I've seen all of them firsthand.",
+    "chapter": "SEGMENT 7: COMMON FAILURES IN PE TECHNOLOGY TRANSFORMATION (5 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "What's your advice for technology leaders who are considering PE-backed roles?",
+    "chapter": "SEGMENT 8: ADVICE FOR TECHNOLOGY LEADERS IN PE (5 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "kevin",
+    "text": "A few things. First, understand the economics. Ask about the fund timeline, the current equity stack, and the exit thesis. If the PE firm acquired the company 7 years ago and is looking to exit in 12 to 18 months, you're walking into a very different situation than if they acquired it last year and are planning a 5-year hold. The timeline determines what kind of impact you can have and what kind of equity upside is realistic.",
+    "chapter": "SEGMENT 8: ADVICE FOR TECHNOLOGY LEADERS IN PE (5 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Kevin, this has been an incredibly detailed look at PE value creation. For our listeners, what's the one thing you want them to take away?",
+    "chapter": "SEGMENT 8: ADVICE FOR TECHNOLOGY LEADERS IN PE (5 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "kevin",
+    "text": "The biggest insight is that technology leadership in a PE context is fundamentally different from technology leadership in a venture context. In venture, your job is to find product-market fit and grow fast. In PE, your job is to create measurable enterprise value. Every decision you make should be evaluated through the lens of \"does this increase the exit value of this company?\" And the exciting part is that with AI, the opportunity to create value has never been larger. The PE firms and technology leaders who figure out how to systematically deploy AI-native practices across portfolio companies are going to generate returns that make the traditional cost-cutting playbook look quaint by comparison.",
+    "chapter": "SEGMENT 8: ADVICE FOR TECHNOLOGY LEADERS IN PE (5 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Kevin, thank you. We'll be back with Episode 2, where we go deep on multi-agent architecture and how to design systems where multiple AI agents work together on complex business problems. See you then.",
+    "chapter": "SEGMENT 8: ADVICE FOR TECHNOLOGY LEADERS IN PE (5 minutes)",
+    "file": "0022.mp3"
+  }
+]

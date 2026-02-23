@@ -1,0 +1,779 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to Claude Code Mastery. I'm Alex, and today we're covering something every developer uses daily: Git. We'll explore how Claude Code supercharges your version control workflow.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jamie",
+    "text": "I'm Jamie, and I have to admit, Git is something I use but don't always love. Remembering commands, writing good commit messages, dealing with merge conflicts. Can Claude really make this easier?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "Absolutely. By the end of this episode, you'll be using Claude to create perfect commits, generate pull requests, review code, and handle complex Git operations without memorizing commands.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jamie",
+    "text": "Let's start with the basics. How does Claude help me understand what I've changed?",
+    "chapter": "SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "You can ask Claude \"what's my current Git status\" or simply \"what have I changed?\" Claude will run git status and git diff for you and summarize the results in plain English.",
+    "chapter": "SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jamie",
+    "text": "So I don't need to remember the commands?",
+    "chapter": "SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Right. Claude knows all the Git commands. You just describe what you want to know. \"Show me what files I've modified.\" \"What's the difference between my version and the last commit?\" \"Have I staged anything?\"",
+    "chapter": "SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jamie",
+    "text": "That's much more natural than remembering flags.",
+    "chapter": "SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "And Claude's summaries are often clearer than raw Git output. Instead of a wall of diff text, Claude might say \"You've modified the user authentication in login.ts and added a new helper function in utils.ts.\"",
+    "chapter": "SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jamie",
+    "text": "Human-readable summaries. Nice.",
+    "chapter": "SEGMENT 1: GIT STATUS AND UNDERSTANDING YOUR CHANGES (4 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "jamie",
+    "text": "What about actually creating commits? That's where I struggle with writing good messages.",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "This is one of my favorite Claude Code features. You can say \"commit my changes\" and Claude will analyze your modifications and propose an appropriate commit message.",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "jamie",
+    "text": "It writes the message for me?",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "alex",
+    "text": "It proposes one. You can accept it, modify it, or ask for alternatives. Claude looks at what actually changed in the code, not just the file names, to write something meaningful.",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "jamie",
+    "text": "So it's not just \"updated files\" or \"fixed stuff\"?",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "alex",
+    "text": "Definitely not. Claude will write something like \"Add email validation to user registration form\" or \"Fix race condition in websocket connection handling.\" Specific, descriptive messages that capture the actual change.",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "jamie",
+    "text": "What about the commit message format? Some projects have conventions.",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "alex",
+    "text": "Claude can adapt. Tell it \"we use conventional commits\" and it will format messages like \"feat: add email validation\" or \"fix: resolve race condition.\" It knows popular conventions.",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "jamie",
+    "text": "Can it handle longer commit messages with body text?",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "alex",
+    "text": "Yes. For complex changes, Claude will create a subject line plus a body that explains the why and how. \"Refactor database connection pooling. The previous implementation could exhaust connections under high load. This change introduces a queue system.\"",
+    "chapter": "SEGMENT 2: CREATING COMMITS WITH CLAUDE (5 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "jamie",
+    "text": "I've heard about slash commit. What's that?",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "alex",
+    "text": "Slash commit is a quick shortcut that triggers Claude to create a commit. It's equivalent to saying \"commit my staged changes with a good message.\" Very handy for quick commits.",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "jamie",
+    "text": "Does it automatically stage files?",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "alex",
+    "text": "It can stage and commit together if you ask. \"Stage and commit all my changes\" or \"commit everything including untracked files.\" Claude will handle the staging before committing.",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "jamie",
+    "text": "What if I only want to commit some files?",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "alex",
+    "text": "Be specific. \"Commit only the changes to auth.ts\" or \"stage the test files and commit them separately.\" Claude will create targeted commits for exactly what you specify.",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "jamie",
+    "text": "Granular commits are good practice anyway.",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "alex",
+    "text": "They are. They make code review easier and make it simpler to revert specific changes if needed.",
+    "chapter": "SEGMENT 3: THE SLASH COMMIT COMMAND (4 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "jamie",
+    "text": "What about working with branches?",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "alex",
+    "text": "Claude can help with all branch operations. \"Create a new branch called feature-user-profile\" or \"switch to the development branch\" or \"show me all branches.\"",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "jamie",
+    "text": "Can it help me name branches well?",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "alex",
+    "text": "Yes! If you describe what you're working on, Claude can suggest a good branch name. \"I'm adding dark mode support, what should I call the branch?\" Claude might suggest \"feature/dark-mode\" or \"add-dark-theme\" depending on your project's naming conventions.",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "jamie",
+    "text": "Does it detect existing conventions?",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "alex",
+    "text": "It tries. If your existing branches use prefixes like \"feature/\" or \"bugfix/\", Claude will follow that pattern.",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "jamie",
+    "text": "What about deleting old branches?",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "alex",
+    "text": "\"Delete the old feature-x branch\" or \"clean up my merged branches.\" Claude can help you tidy up. It will be careful to warn you before deleting anything not fully merged.",
+    "chapter": "SEGMENT 4: BRANCH MANAGEMENT (4 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "jamie",
+    "text": "Now for the big one: pull requests. Can Claude help create PRs?",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "alex",
+    "text": "This is incredibly powerful. You can say \"create a pull request\" and Claude will generate a PR with a title, description, and proper formatting.",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "jamie",
+    "text": "It uses the GitHub CLI under the hood?",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "alex",
+    "text": "Yes, Claude uses the gh command-line tool for GitHub operations. It can also work with GitLab and other platforms if you have the appropriate CLI tools set up.",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "jamie",
+    "text": "What goes into the PR description?",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "alex",
+    "text": "Claude analyzes all the commits being included in the PR and synthesizes a summary. It describes what changed, why it changed, and often includes a section for testing notes.",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "jamie",
+    "text": "Does it look at individual commits or the overall diff?",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "alex",
+    "text": "Both. It looks at each commit message for context, but also the actual code changes. If your commits are messy but the final code is clean, the PR description will focus on the end result.",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "jamie",
+    "text": "What if I want to customize the description?",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "alex",
+    "text": "You can guide Claude. \"Create a PR, make sure to mention the performance improvement\" or \"create a PR with a section about database changes.\" Claude will incorporate your requirements.",
+    "chapter": "SEGMENT 5: CREATING PULL REQUESTS (5 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "jamie",
+    "text": "Can Claude help me review other people's code?",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "alex",
+    "text": "Yes! You can point Claude at a PR and ask for a review. \"Review pull request 123\" and Claude will fetch the changes and give you feedback.",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "jamie",
+    "text": "What kind of feedback does it give?",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "alex",
+    "text": "It varies based on the changes. Claude might highlight potential bugs, suggest better approaches, note missing error handling, or praise well-structured code. It's like having a thorough code reviewer.",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "jamie",
+    "text": "Does it catch subtle issues?",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "alex",
+    "text": "Often, yes. Claude can spot things like unused variables, inconsistent naming, potential null pointer issues, or logic that might fail edge cases. It's not perfect, but it catches a lot.",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "jamie",
+    "text": "Can it leave comments on the PR directly?",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "alex",
+    "text": "Not automatically. Claude will show you the feedback, and you can then add those comments yourself. This keeps you in control of what actually gets posted.",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "jamie",
+    "text": "That's probably wise. Don't want AI comments flooding PRs.",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "alex",
+    "text": "Right. Claude assists your review process. You make the final call on what feedback to share.",
+    "chapter": "SEGMENT 6: CODE REVIEW ASSISTANCE (5 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "jamie",
+    "text": "Let's talk about the scary one: merge conflicts.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "alex",
+    "text": "Merge conflicts don't have to be scary. Claude can help you understand what's conflicting and resolve it sensibly.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "jamie",
+    "text": "Walk me through a typical scenario.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "alex",
+    "text": "You try to merge or rebase, and Git says there are conflicts. You ask Claude \"help me resolve the merge conflicts.\" Claude will show you each conflicted file and explain what's happening.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "jamie",
+    "text": "It explains the conflict?",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "alex",
+    "text": "Yes. \"In auth.ts, the main branch added rate limiting while your branch added logging. Both changed the same function.\" Now you understand why there's a conflict.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "jamie",
+    "text": "And then it suggests a resolution?",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "alex",
+    "text": "Claude will propose a merged version that incorporates both changes if possible. Or it will ask you which version you prefer if they're truly incompatible.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "jamie",
+    "text": "Can it just fix them automatically?",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "alex",
+    "text": "It can propose fixes, but you should review them. Merge conflicts often require human judgment about which behavior is correct. Claude helps you understand and suggests solutions.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "jamie",
+    "text": "Better than staring at conflict markers trying to figure out what happened.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "alex",
+    "text": "Much better. The context Claude provides is invaluable when you're trying to merge someone else's changes.",
+    "chapter": "SEGMENT 7: HANDLING MERGE CONFLICTS (5 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "jamie",
+    "text": "What about more advanced Git operations like rebasing?",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "alex",
+    "text": "Claude can help with rebasing, though interactive rebase requires some care. You might say \"rebase my branch onto main\" and Claude will run the appropriate command.",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "jamie",
+    "text": "What if I want to squash commits?",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "alex",
+    "text": "\"Squash my last three commits into one\" or \"clean up my commit history before merging.\" Claude can guide you through squashing. It will often suggest a new combined commit message.",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "jamie",
+    "text": "What about amending commits?",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "alex",
+    "text": "\"Amend my last commit to include this file\" or \"update the last commit message.\" Claude handles these common scenarios. Just be careful with commits you've already pushed.",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "jamie",
+    "text": "Right, rewriting history that others have pulled is dangerous.",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "alex",
+    "text": "Claude knows this too. If you try to amend a pushed commit, Claude will warn you about the implications.",
+    "chapter": "SEGMENT 8: INTERACTIVE REBASE AND HISTORY (4 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "jamie",
+    "text": "Sometimes I need to understand what happened in the past. Can Claude help with git log?",
+    "chapter": "SEGMENT 9: VIEWING HISTORY AND LOGS (4 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "alex",
+    "text": "Absolutely. \"Show me the recent commits\" or \"what changed in the last week\" or \"who modified this file recently.\" Claude will query the git history and present it clearly.",
+    "chapter": "SEGMENT 9: VIEWING HISTORY AND LOGS (4 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "jamie",
+    "text": "Can it find specific commits?",
+    "chapter": "SEGMENT 9: VIEWING HISTORY AND LOGS (4 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "alex",
+    "text": "Yes. \"Find the commit that added the payment feature\" or \"when did we change the API rate limit.\" Claude will search commit messages and show you the relevant commits.",
+    "chapter": "SEGMENT 9: VIEWING HISTORY AND LOGS (4 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "jamie",
+    "text": "What about git blame?",
+    "chapter": "SEGMENT 9: VIEWING HISTORY AND LOGS (4 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "alex",
+    "text": "\"Who wrote this function\" or \"when was this line added.\" Claude can run git blame and explain the results. It's great for understanding code ownership and history.",
+    "chapter": "SEGMENT 9: VIEWING HISTORY AND LOGS (4 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "jamie",
+    "text": "Are there dangerous Git commands Claude will protect me from?",
+    "chapter": "SEGMENT 10: GIT SAFETY AND BEST PRACTICES (4 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "alex",
+    "text": "Yes. Claude is cautious about destructive operations. Force pushes, hard resets, history rewrites on shared branches. Claude will warn you and confirm before running these.",
+    "chapter": "SEGMENT 10: GIT SAFETY AND BEST PRACTICES (4 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "jamie",
+    "text": "What if I really need to force push?",
+    "chapter": "SEGMENT 10: GIT SAFETY AND BEST PRACTICES (4 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "alex",
+    "text": "You can, but Claude will make sure you understand the implications. It won't force push to main or master without serious confirmation.",
+    "chapter": "SEGMENT 10: GIT SAFETY AND BEST PRACTICES (4 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "jamie",
+    "text": "Good guardrails.",
+    "chapter": "SEGMENT 10: GIT SAFETY AND BEST PRACTICES (4 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "alex",
+    "text": "And Claude won't skip Git hooks or bypass verification unless you explicitly request it. It respects your project's workflow configuration.",
+    "chapter": "SEGMENT 10: GIT SAFETY AND BEST PRACTICES (4 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "jamie",
+    "text": "How does Claude fit into a typical development workflow?",
+    "chapter": "SEGMENT 11: WORKFLOW INTEGRATION (4 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "alex",
+    "text": "Here's my workflow. I start work on a branch. As I code, I periodically ask Claude \"what have I changed.\" When a logical chunk is complete, \"commit these changes.\" When the feature is done, \"create a PR.\"",
+    "chapter": "SEGMENT 11: WORKFLOW INTEGRATION (4 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "jamie",
+    "text": "So Claude is there at each Git touchpoint.",
+    "chapter": "SEGMENT 11: WORKFLOW INTEGRATION (4 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "Exactly. And for reviewing others' work, I'll ask Claude to review the PR before I look at it myself. Claude's feedback primes my thinking.",
+    "chapter": "SEGMENT 11: WORKFLOW INTEGRATION (4 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "jamie",
+    "text": "Does this work with CI/CD pipelines?",
+    "chapter": "SEGMENT 11: WORKFLOW INTEGRATION (4 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "Claude doesn't directly interact with CI/CD, but it can help you understand pipeline results. \"The build failed, what went wrong?\" Claude can analyze error logs and help you fix issues.",
+    "chapter": "SEGMENT 11: WORKFLOW INTEGRATION (4 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "jamie",
+    "text": "What are your top tips for using Claude with Git?",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "alex",
+    "text": "First, commit early and often. Small commits are easier to manage, and Claude writes better messages for focused changes.",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "jamie",
+    "text": "Atomic commits.",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "alex",
+    "text": "Second, let Claude write the first draft of commit messages and PR descriptions. Then edit as needed. It's faster than starting from scratch.",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "jamie",
+    "text": "AI first draft, human polish.",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "alex",
+    "text": "Third, use Claude to understand before you act. \"What would happen if I rebased onto main?\" is a valid question. Claude can explain the implications.",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "jamie",
+    "text": "Preview before execute.",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "alex",
+    "text": "And fourth, don't be afraid to ask about Git concepts. \"What's the difference between merge and rebase?\" Claude can explain Git fundamentals whenever you need a refresher.",
+    "chapter": "SEGMENT 12: TIPS FOR GIT MASTERY (4 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "jamie",
+    "text": "What should listeners practice?",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "alex",
+    "text": "Here's a good exercise. Make some changes to a project, then ask Claude to \"create a commit with a good message.\" Review what Claude proposes. Then ask \"show me the commit history for this file.\" Finally, create a test branch and practice merging it.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "jamie",
+    "text": "Full Git lifecycle.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "alex",
+    "text": "This builds muscle memory for using Claude with Git operations.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "jamie",
+    "text": "Great coverage of Git workflows. What's coming up?",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "alex",
+    "text": "Episode six is all about testing and debugging. We'll cover how Claude helps you write tests, run them, understand failures, and debug tricky issues.",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "jamie",
+    "text": "Finding and fixing bugs with AI help.",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "alex",
+    "text": "Exactly. See you in episode six!",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "jamie",
+    "text": "Happy committing!",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0110.mp3"
+  }
+]

@@ -1,0 +1,1052 @@
+[
+  {
+    "index": 0,
+    "speaker": "maya",
+    "text": "Welcome back to \"The Diplomat's Edge.\" I'm Maya Torres, and today we're tackling something that might seem less glamorous than geopolitics but is absolutely essential - grammar.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jordan",
+    "text": "I'm Jordan Hayes, and I cannot overstate how important this is. As a diplomat, you will write constantly - cables, reports, briefings, talking points. Your writing represents the United States government. Grammatical errors undermine your credibility.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "maya",
+    "text": "The FSOT has an English Expression section specifically testing grammar and usage. What should we expect?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jordan",
+    "text": "You'll see sentences with underlined portions. You need to identify whether there's an error and, if so, which portion contains it. You're not rewriting sentences - you're spotting problems.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "maya",
+    "text": "So this is about developing a sharp eye for errors.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jordan",
+    "text": "Exactly. Let's train that eye.",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "maya",
+    "text": "Let's start with the basics. Subject-verb agreement.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jordan",
+    "text": "The rule is simple: singular subjects take singular verbs; plural subjects take plural verbs. But in practice, the test writers will make it tricky.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "maya",
+    "text": "How?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jordan",
+    "text": "By putting words between the subject and verb. Look at this sentence: \"The collection of antique maps are valuable.\" What's wrong?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "maya",
+    "text": "Let me think. \"Collection\" is the subject, right? Not \"maps\"?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "jordan",
+    "text": "Exactly. \"Collection\" is singular, so it should be \"is valuable,\" not \"are valuable.\" The phrase \"of antique maps\" is a prepositional phrase that modifies \"collection\" - it's not the subject.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "maya",
+    "text": "So I need to strip away the modifiers to find the real subject.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "jordan",
+    "text": "That's the key skill. Here's another: \"The report, along with its appendices, were submitted late.\" What's wrong?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "maya",
+    "text": "\"Report\" is the subject. \"Along with its appendices\" is just an aside. So it should be \"was submitted.\"",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "jordan",
+    "text": "Perfect. Phrases like \"along with,\" \"together with,\" \"as well as,\" and \"in addition to\" don't change the number of the subject. They're not the same as \"and.\"",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "maya",
+    "text": "What about \"and\"?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "jordan",
+    "text": "\"And\" usually creates a compound subject that takes a plural verb. \"The report and its appendices were submitted.\" But there's an exception: when two nouns refer to the same thing. \"The CEO and founder is speaking today\" - if it's one person who is both CEO and founder.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "maya",
+    "text": "Tricky. What other agreement issues come up?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "jordan",
+    "text": "Indefinite pronouns are common traps. Some are always singular: \"each,\" \"every,\" \"everyone,\" \"everybody,\" \"anyone,\" \"anybody,\" \"no one,\" \"nobody,\" \"someone,\" \"somebody,\" \"either,\" \"neither.\"",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "maya",
+    "text": "So \"Everyone are going\" is wrong?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "jordan",
+    "text": "Right, it should be \"Everyone is going.\" This trips people up because \"everyone\" refers to multiple people, but grammatically it's singular.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "maya",
+    "text": "What about \"none\"?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "jordan",
+    "text": "\"None\" is interesting. Traditionally singular, but now often used as plural when referring to countable items. \"None of the reports was submitted\" is traditional; \"None of the reports were submitted\" is common in modern usage. For the test, I'd lean toward singular.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "maya",
+    "text": "What about \"either\" and \"neither\"?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "jordan",
+    "text": "When used alone, they're singular. \"Either is acceptable.\" \"Neither was approved.\" But in \"either...or\" and \"neither...nor\" constructions, the verb agrees with the closer subject: \"Neither the manager nor the employees were happy.\" \"Neither the employees nor the manager was happy.\"",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "maya",
+    "text": "The order matters?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "jordan",
+    "text": "The order matters for which sounds right, but grammatically you match the closer noun.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "maya",
+    "text": "What about collective nouns like \"team\" or \"committee\"?",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "jordan",
+    "text": "In American English, they're usually singular. \"The committee has decided.\" \"The team is winning.\" In British English, they're often plural: \"The team are playing well.\" For the FSOT, use American conventions - singular.",
+    "chapter": "SEGMENT 1: SUBJECT-VERB AGREEMENT (12 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "maya",
+    "text": "Let's talk about pronouns.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "jordan",
+    "text": "Pronouns must agree with their antecedents in number and gender. And the antecedent must be clear.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "maya",
+    "text": "Give me an example of an agreement error.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "jordan",
+    "text": "\"Each diplomat must submit their credentials.\" This is increasingly common in speech, but grammatically, \"each\" is singular, so traditional grammar says it should be \"his or her credentials.\"",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "maya",
+    "text": "But isn't \"their\" used as a singular pronoun now?",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "jordan",
+    "text": "This is evolving. Singular \"they\" is widely accepted in informal writing and when the gender is unknown or non-binary. But in formal contexts and on the FSOT, traditional agreement is safer. \"Each diplomat must submit his or her credentials\" or rephrase: \"All diplomats must submit their credentials.\"",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "maya",
+    "text": "What about unclear antecedents?",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "jordan",
+    "text": "Very common error. \"When the ambassador met with the foreign minister, he expressed concern.\" Who expressed concern? The pronoun \"he\" could refer to either person.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "maya",
+    "text": "How do you fix it?",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "jordan",
+    "text": "Name the person: \"When the ambassador met with the foreign minister, the ambassador expressed concern.\" Or restructure: \"The ambassador expressed concern during his meeting with the foreign minister.\"",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "maya",
+    "text": "What about pronoun case errors?",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "jordan",
+    "text": "These show up too. \"Between you and I\" is wrong - it should be \"between you and me.\" \"You and me\" are objects of the preposition \"between,\" so you use objective case.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "maya",
+    "text": "I hear \"between you and I\" all the time.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "jordan",
+    "text": "It's hypercorrection. People learn that \"me\" is often wrong (\"Me and him went to the store\" should be \"He and I went\"), so they overcorrect. Test yourself by removing the other person: \"Between I\" sounds wrong; \"between me\" is correct.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "maya",
+    "text": "What about \"who\" versus \"whom\"?",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "jordan",
+    "text": "\"Who\" is subjective case (like \"he\"); \"whom\" is objective case (like \"him\"). \"Who wrote this report?\" - \"who\" is the subject. \"To whom should I send this?\" - \"whom\" is the object of \"to.\"",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "maya",
+    "text": "Is there a trick to remember?",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "jordan",
+    "text": "The \"he/him\" test. Rephrase the question as a statement using \"he\" or \"him.\" If \"him\" fits, use \"whom.\" \"I should send this to him\" - so \"to whom.\"",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "maya",
+    "text": "What about \"whoever\" and \"whomever\"?",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "jordan",
+    "text": "Same logic. \"Whoever\" is subjective, \"whomever\" is objective. But here's the trick: look at the whole clause. \"Give it to whoever wants it.\" Even though it follows \"to,\" the subject of \"wants it\" is \"whoever,\" so it's correct.",
+    "chapter": "SEGMENT 2: PRONOUN PROBLEMS (10 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "maya",
+    "text": "What about tense errors?",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "jordan",
+    "text": "Verb tense should be consistent within a passage unless there's a logical reason to shift. \"The ambassador arrived at the meeting and presents his credentials\" - that's wrong because it shifts from past to present.",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "maya",
+    "text": "That seems obvious.",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "jordan",
+    "text": "It is when it's that clear. The FSOT will be subtler. The issue is often sequence of tenses - making sure past, past perfect, and other tenses relate correctly.",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "maya",
+    "text": "Explain past perfect.",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "jordan",
+    "text": "Past perfect (\"had done\") describes something that happened before another past event. \"By the time the summit began, the negotiators had already reached an agreement.\" The reaching happened before the beginning, so \"had reached.\"",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "maya",
+    "text": "When do I need past perfect?",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "jordan",
+    "text": "When you're describing two past events and need to show which happened first. \"I realized I left my passport at home\" is fine in casual speech, but \"I realized I had left my passport\" is more precise - the leaving happened before the realizing.",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "maya",
+    "text": "What about conditional tenses?",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "jordan",
+    "text": "Common error source. \"If I would have known, I would have attended.\" This is wrong. The correct form is \"If I had known, I would have attended.\" The \"if\" clause takes past perfect, not \"would have.\"",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "maya",
+    "text": "That one sounds wrong even when it's right.",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "jordan",
+    "text": "It's a frequent error in speech. But the pattern is: \"If [past perfect], [would have + past participle].\" \"If she had asked, I would have helped.\"",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "maya",
+    "text": "What about present vs. past in reported speech?",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "jordan",
+    "text": "In formal writing, reported speech usually shifts back in time. \"He said that he was ready\" (not \"is ready\"). But if something is still true, present tense is acceptable: \"She explained that the Earth is round.\"",
+    "chapter": "SEGMENT 3: TENSE CONSISTENCY (8 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "maya",
+    "text": "Let's talk about parallelism. What is it?",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "jordan",
+    "text": "Parallelism means using the same grammatical structure for items in a list or comparison. It makes writing clearer and more elegant.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "maya",
+    "text": "Give me an example of a parallelism error.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "jordan",
+    "text": "\"The new policy is efficient, cost-effective, and reduces waste.\" See the problem?",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "maya",
+    "text": "The first two are adjectives, but the third is a verb phrase.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "jordan",
+    "text": "Exactly. It should be \"efficient, cost-effective, and waste-reducing\" or restructured: \"The new policy is efficient and cost-effective and reduces waste.\"",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "maya",
+    "text": "What about longer constructions?",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "jordan",
+    "text": "The same principle. \"The training program includes lectures on history, workshops to develop skills, and case study analysis.\" The three items have different structures: noun phrase, infinitive phrase, noun phrase. Better: \"The training program includes lectures on history, workshops on skills development, and analyses of case studies.\"",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "maya",
+    "text": "Is this a common test item?",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "jordan",
+    "text": "Very common. Look for lists of three or more items and check that they all have the same grammatical form.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "maya",
+    "text": "What about comparisons?",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "jordan",
+    "text": "Comparisons need parallel elements too. \"She likes reading more than to write\" is wrong. It should be \"She likes reading more than writing\" or \"She likes to read more than to write.\"",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "maya",
+    "text": "Both forms compared should match.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "jordan",
+    "text": "Right. And make sure comparisons are complete and logical. \"The policy in France is different from America\" is wrong - you're comparing a policy to a country. It should be \"different from the policy in America\" or \"different from America's.\"",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "maya",
+    "text": "What about correlative conjunctions?",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "jordan",
+    "text": "Correlative conjunctions are pairs that work together: \"both...and,\" \"either...or,\" \"neither...nor,\" \"not only...but also,\" \"whether...or.\" Whatever follows the first must be grammatically parallel to what follows the second.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "maya",
+    "text": "Give me an example.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "jordan",
+    "text": "\"The report not only analyzed the data but also recommendations were made.\" Wrong. What follows \"not only\" is a verb phrase; what follows \"but also\" starts with a noun. Correct: \"The report not only analyzed the data but also made recommendations.\"",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "maya",
+    "text": "So I look for what comes right after each part of the pair.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "jordan",
+    "text": "Exactly. \"Both the ambassador and the consul\" - two nouns. \"Either accept the terms or negotiate further\" - two verb phrases. The elements must match.",
+    "chapter": "SEGMENT 4: PARALLELISM (10 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "maya",
+    "text": "What about modifier problems?",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "jordan",
+    "text": "Two main issues: dangling modifiers and misplaced modifiers. Both can create confusing or unintentionally funny sentences.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "maya",
+    "text": "What's a dangling modifier?",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "jordan",
+    "text": "A modifier \"dangles\" when the word it's supposed to modify isn't actually in the sentence, or isn't in the right position. Classic example: \"Walking into the room, the painting caught my eye.\" Who's walking? The painting?",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "maya",
+    "text": "So \"walking into the room\" should modify whoever is walking.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "jordan",
+    "text": "Right. \"Walking into the room, I noticed the painting\" - now \"I\" is right after the modifier and is the one doing the walking.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "maya",
+    "text": "These can be tricky to spot.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "jordan",
+    "text": "They can. The key is asking: \"Who or what is doing the action in the modifier?\" and making sure that person or thing appears right after the modifier.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "maya",
+    "text": "What about misplaced modifiers?",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "jordan",
+    "text": "A misplaced modifier is in the sentence but in the wrong place. \"The diplomat only speaks French\" means she does nothing but speak French - she doesn't write it or read it. \"The diplomat speaks only French\" means French is the only language she speaks.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "maya",
+    "text": "Placement of \"only\" is a big one.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "jordan",
+    "text": "It changes meaning significantly. Put \"only\" immediately before the word or phrase it modifies. \"He only recommended three books\" vs. \"He recommended only three books.\"",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "maya",
+    "text": "Any other common modifier issues?",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "jordan",
+    "text": "Squinting modifiers - ones that could modify what comes before or after. \"Employees who work quickly get promoted\" - does \"quickly\" modify \"work\" or \"get promoted\"? Restructure for clarity: \"Employees who work at a quick pace get promoted.\"",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "maya",
+    "text": "What about phrases like \"having been...\"?",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "jordan",
+    "text": "These need to modify the right noun. \"Having been revised several times, the committee finally approved the document.\" Who was revised? The committee? No - the document was revised. Better: \"Having been revised several times, the document was finally approved by the committee.\"",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "maya",
+    "text": "So the subject of the main clause should be what the opening phrase modifies.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "jordan",
+    "text": "That's the rule. When you see a sentence starting with a participial phrase, immediately check that the subject of the main clause is what's doing the action in that phrase.",
+    "chapter": "SEGMENT 5: MODIFIERS (10 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "maya",
+    "text": "What are other common errors on the FSOT?",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "jordan",
+    "text": "Let's go through some frequent ones. Affect vs. Effect: \"Affect\" is usually a verb; \"effect\" is usually a noun. \"The policy will affect the economy.\" \"The policy will have an effect on the economy.\"",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "maya",
+    "text": "Are there exceptions?",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "jordan",
+    "text": "A few. \"Effect\" can be a verb meaning \"to bring about\" - \"to effect change.\" \"Affect\" as a noun is a psychology term. But 95% of the time, affect is a verb and effect is a noun.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "maya",
+    "text": "What else?",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "jordan",
+    "text": "Fewer vs. Less: \"Fewer\" for countable things; \"less\" for uncountable things. \"Fewer reports\" but \"less information.\" \"Fewer dollars\" but \"less money.\"",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "maya",
+    "text": "That one I know from grocery stores.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "jordan",
+    "text": "laughs \"10 items or fewer\" - they often get it wrong! Next: Farther vs. Further. \"Farther\" for physical distance; \"further\" for metaphorical extent. \"The embassy is farther down the street.\" \"Let's discuss this further.\"",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "maya",
+    "text": "Are these tested often?",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "jordan",
+    "text": "They come up. Here's another: Lie vs. Lay. \"Lie\" means to recline (no object): \"I lie down.\" Past tense: \"I lay down yesterday.\" \"Lay\" means to put something down (requires an object): \"I lay the book on the table.\" Past tense: \"I laid the book on the table.\"",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0111.mp3"
+  },
+  {
+    "index": 112,
+    "speaker": "maya",
+    "text": "This one is confusing because \"lay\" appears in both.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0112.mp3"
+  },
+  {
+    "index": 113,
+    "speaker": "jordan",
+    "text": "It's the most confused pair in English. \"The book is lying on the table\" - present tense, no object. \"She laid the documents on the desk\" - past tense, has an object.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0113.mp3"
+  },
+  {
+    "index": 114,
+    "speaker": "maya",
+    "text": "Any other pairs?",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0114.mp3"
+  },
+  {
+    "index": 115,
+    "speaker": "jordan",
+    "text": "Who vs. That: Use \"who\" for people, \"that\" for things. \"The diplomat who wrote the report\" not \"that wrote.\" But \"the report that was submitted\" is correct.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0115.mp3"
+  },
+  {
+    "index": 116,
+    "speaker": "maya",
+    "text": "What about which vs. that?",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0116.mp3"
+  },
+  {
+    "index": 117,
+    "speaker": "jordan",
+    "text": "For things, \"that\" introduces essential information (no commas), \"which\" introduces non-essential information (with commas). \"Reports that are late will be rejected\" - we're specifying which reports. \"The report, which was submitted late, was still accepted\" - we're adding extra information about a specific report.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0117.mp3"
+  },
+  {
+    "index": 118,
+    "speaker": "maya",
+    "text": "The comma is the key.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0118.mp3"
+  },
+  {
+    "index": 119,
+    "speaker": "jordan",
+    "text": "Exactly. If you can remove the clause and the sentence still makes sense and has the same meaning, use \"which\" with commas.",
+    "chapter": "SEGMENT 6: COMMON USAGE ERRORS (10 minutes)",
+    "file": "0119.mp3"
+  },
+  {
+    "index": 120,
+    "speaker": "maya",
+    "text": "What about double negatives?",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0120.mp3"
+  },
+  {
+    "index": 121,
+    "speaker": "jordan",
+    "text": "In standard English, double negatives are generally wrong. \"I don't have no concerns\" should be \"I don't have any concerns\" or \"I have no concerns.\"",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0121.mp3"
+  },
+  {
+    "index": 122,
+    "speaker": "maya",
+    "text": "That seems straightforward.",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0122.mp3"
+  },
+  {
+    "index": 123,
+    "speaker": "jordan",
+    "text": "The tricky ones are subtler. \"Hardly\" and \"scarcely\" are already negative, so \"I can't hardly wait\" is a double negative - it should be \"I can hardly wait.\"",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0123.mp3"
+  },
+  {
+    "index": 124,
+    "speaker": "maya",
+    "text": "I didn't think of those as negatives.",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0124.mp3"
+  },
+  {
+    "index": 125,
+    "speaker": "jordan",
+    "text": "They're quasi-negatives. Same with \"barely\" and \"rarely.\" Don't add \"not\" or \"n't\" to them.",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0125.mp3"
+  },
+  {
+    "index": 126,
+    "speaker": "maya",
+    "text": "What about comparisons?",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0126.mp3"
+  },
+  {
+    "index": 127,
+    "speaker": "jordan",
+    "text": "Several issues. First, compare like things. \"The GDP of China is larger than Japan\" - wrong, because you're comparing GDP to a country. \"The GDP of China is larger than that of Japan.\"",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0127.mp3"
+  },
+  {
+    "index": 128,
+    "speaker": "maya",
+    "text": "Use \"that of\" to refer back.",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0128.mp3"
+  },
+  {
+    "index": 129,
+    "speaker": "jordan",
+    "text": "Right. Also, be complete with comparisons. \"The new policy is better\" - better than what? In formal writing, complete the comparison: \"better than the previous policy.\"",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0129.mp3"
+  },
+  {
+    "index": 130,
+    "speaker": "maya",
+    "text": "What about superlatives?",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0130.mp3"
+  },
+  {
+    "index": 131,
+    "speaker": "jordan",
+    "text": "Use comparatives for two things, superlatives for three or more. \"Between the two options, this is the better one\" - not \"best.\" \"Among all the options, this is the best.\"",
+    "chapter": "SEGMENT 7: DOUBLE NEGATIVES AND FAULTY COMPARISONS (5 minutes)",
+    "file": "0131.mp3"
+  },
+  {
+    "index": 132,
+    "speaker": "maya",
+    "text": "Any specific tips for the English Expression section?",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0132.mp3"
+  },
+  {
+    "index": 133,
+    "speaker": "jordan",
+    "text": "Several. First, read the entire sentence before looking at the underlined portions. Understand the whole meaning first.",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0133.mp3"
+  },
+  {
+    "index": 134,
+    "speaker": "maya",
+    "text": "Why?",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0134.mp3"
+  },
+  {
+    "index": 135,
+    "speaker": "jordan",
+    "text": "Because errors often relate to other parts of the sentence. A verb might be wrong because of a subject that appears much earlier. A pronoun might be unclear because you need to know all the possible antecedents.",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0135.mp3"
+  },
+  {
+    "index": 136,
+    "speaker": "maya",
+    "text": "What next?",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0136.mp3"
+  },
+  {
+    "index": 137,
+    "speaker": "jordan",
+    "text": "Check each underlined portion systematically. Ask: Is this a subject-verb agreement situation? Is there a pronoun issue? Is there a modifier problem? Go through your checklist.",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0137.mp3"
+  },
+  {
+    "index": 138,
+    "speaker": "maya",
+    "text": "And if nothing seems wrong?",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0138.mp3"
+  },
+  {
+    "index": 139,
+    "speaker": "jordan",
+    "text": "\"No error\" is always an option, and it's often correct. Don't second-guess yourself into finding errors that aren't there. If nothing violates the rules we've discussed, choose \"no error.\"",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0139.mp3"
+  },
+  {
+    "index": 140,
+    "speaker": "maya",
+    "text": "How much time should I spend?",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0140.mp3"
+  },
+  {
+    "index": 141,
+    "speaker": "jordan",
+    "text": "Don't rush, but don't agonize. If you're stuck on a question, mark it and move on. Come back if you have time. Your first instinct is often right.",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0141.mp3"
+  },
+  {
+    "index": 142,
+    "speaker": "maya",
+    "text": "Should I practice?",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0142.mp3"
+  },
+  {
+    "index": 143,
+    "speaker": "jordan",
+    "text": "Absolutely. Find practice tests - there are FSOT prep resources available. The more sentences you analyze, the faster you'll spot errors.",
+    "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
+    "file": "0143.mp3"
+  },
+  {
+    "index": 144,
+    "speaker": "maya",
+    "text": "Jordan, this has been incredibly detailed. My head is swimming with rules.",
+    "chapter": "CLOSING",
+    "file": "0144.mp3"
+  },
+  {
+    "index": 145,
+    "speaker": "jordan",
+    "text": "That's normal. Grammar mastery takes practice. But you now have the framework. Keep practicing, and these rules will become instinctive.",
+    "chapter": "CLOSING",
+    "file": "0145.mp3"
+  },
+  {
+    "index": 146,
+    "speaker": "maya",
+    "text": "Next episode is our last one - sentence structure and style. How to write clearly and effectively.",
+    "chapter": "CLOSING",
+    "file": "0146.mp3"
+  },
+  {
+    "index": 147,
+    "speaker": "jordan",
+    "text": "We'll cover everything from sentence variety to wordiness to common style problems. It's the finishing touch on your writing toolkit.",
+    "chapter": "CLOSING",
+    "file": "0147.mp3"
+  },
+  {
+    "index": 148,
+    "speaker": "maya",
+    "text": "Thanks for listening, everyone. Until next time, keep practicing those sentences.",
+    "chapter": "CLOSING",
+    "file": "0148.mp3"
+  },
+  {
+    "index": 149,
+    "speaker": "jordan",
+    "text": "See you next time on The Diplomat's Edge.",
+    "chapter": "CLOSING",
+    "file": "0149.mp3"
+  }
+]

@@ -2106,6 +2106,8 @@
         let useAudio = false;  // true when pre-generated audio is available
         let audioSegmentDurations = [];  // actual duration of each audio segment in seconds
         let totalAudioDuration = 0;  // total duration of all audio segments
+        let playbackSessionId = 0;  // prevents concurrent playback loops
+        let activeUtterance = null; // tracks current TTS utterance
 
         // New feature state
         let skipForwardInterval = parseInt(localStorage.getItem('skipForwardInterval') || '10');
@@ -2622,6 +2624,7 @@
 
         // ===== PLAYER =====
         async function openEpisode(episode) {
+            await stopPlayback();
             currentEpisode = episode;
             dialogueLines = parseMarkdown(episode.content);
             chapters = parseChapters(episode.content);
@@ -2885,13 +2888,24 @@
 
         function speakWithTTS(text, speaker) {
             return new Promise((resolve, reject) => {
+                // Enforce single-utterance playback to avoid overlapping voices on some engines
+                synth.cancel();
+                activeUtterance = null;
+
                 const utt = new SpeechSynthesisUtterance(text);
                 if (speaker === 'alex' && alexVoice) utt.voice = alexVoice;
                 else if (speaker === 'sam' && samVoice) utt.voice = samVoice;
                 utt.rate = speechRate;
                 utt.pitch = speaker === 'alex' ? 0.9 : 1.1;
-                utt.onend = () => resolve();
-                utt.onerror = (e) => reject(e);
+                activeUtterance = utt;
+                utt.onend = () => {
+                    if (activeUtterance === utt) activeUtterance = null;
+                    resolve();
+                };
+                utt.onerror = (e) => {
+                    if (activeUtterance === utt) activeUtterance = null;
+                    reject(e);
+                };
                 synth.speak(utt);
             });
         }
@@ -2940,6 +2954,8 @@
                 audioElement.onended = () => resolve();
                 audioElement.onerror = (e) => {
                     console.warn('Audio playback failed, falling back to TTS');
+                    audioElement.pause();
+                    audioElement.src = '';
                     // Fallback to TTS
                     speakWithTTS(segment.text, segment.speaker).then(resolve).catch(reject);
                 };
@@ -2958,6 +2974,8 @@
 
                 audioElement.play().catch(err => {
                     console.warn('Audio play failed:', err);
+                    audioElement.pause();
+                    audioElement.src = '';
                     speakWithTTS(segment.text, segment.speaker).then(resolve).catch(reject);
                 });
             });
@@ -2965,6 +2983,9 @@
 
         async function startPlayback() {
             if (dialogueLines.length === 0) return;
+            if (isPlaying && !isPaused) return;
+
+            const sessionId = ++playbackSessionId;
 
             isPlaying = true;
             isPaused = false;
@@ -2974,6 +2995,8 @@
             await requestWakeLock();
 
             while (currentLineIndex < dialogueLines.length && isPlaying) {
+                if (sessionId !== playbackSessionId) break;
+
                 // Check sleep timer
                 if (sleepEndTime && Date.now() >= sleepEndTime) {
                     stopPlayback();
@@ -2998,11 +3021,15 @@
                     console.error('Speech error:', e);
                 }
 
+                if (sessionId !== playbackSessionId) break;
+
                 if (isPlaying && !isPaused) {
                     currentLineIndex++;
                     await new Promise(r => setTimeout(r, 300));
                 }
             }
+
+            if (sessionId !== playbackSessionId) return;
 
             // Episode complete
             if (currentLineIndex >= dialogueLines.length && isPlaying) {
@@ -3021,9 +3048,11 @@
         }
 
         async function stopPlayback() {
+            playbackSessionId++;
             isPlaying = false;
             isPaused = false;
             synth.cancel();
+            activeUtterance = null;
             // Also stop audio if playing
             if (audioElement) {
                 audioElement.pause();
@@ -3077,9 +3106,11 @@
         async function jumpToLine(index, autoStart = false) {
             const wasPlaying = isPlaying && !isPaused;
             // Stop any current playback cleanly
+            playbackSessionId++;
             isPlaying = false;
             isPaused = false;
             synth.cancel();
+            activeUtterance = null;
             // Also stop audio if playing
             if (audioElement) {
                 audioElement.pause();
@@ -3212,23 +3243,22 @@
             }
         }
 
-        function playNextEpisode() {
+        async function playNextEpisode() {
             document.getElementById('complete-modal').classList.remove('show');
             const episodes = currentPodcast?.episodes || [];
             const nextEp = episodes.find(e => e.id === currentEpisode.id + 1);
             if (nextEp) {
-                openEpisode(nextEp);
-                setTimeout(() => startPlayback(), 500);
+                await openEpisode(nextEp);
+                startPlayback();
             }
         }
 
-        function playPreviousEpisode() {
+        async function playPreviousEpisode() {
             const episodes = currentPodcast?.episodes || [];
             const prevEp = episodes.find(e => e.id === currentEpisode.id - 1);
             if (prevEp) {
-                stopPlayback();
-                openEpisode(prevEp);
-                setTimeout(() => startPlayback(), 500);
+                await openEpisode(prevEp);
+                startPlayback();
             }
         }
 
@@ -4233,22 +4263,25 @@
         // Call updateMediaSession when playback state changes
         const originalTogglePlayPause = togglePlayPause;
         togglePlayPause = function() {
-            originalTogglePlayPause();
+            const result = originalTogglePlayPause();
             updateMediaSession();
+            return result;
         };
 
         const originalStartPlayback = startPlayback;
         startPlayback = function() {
-            originalStartPlayback();
+            const result = originalStartPlayback();
             updateMediaSession();
+            return result;
         };
 
         const originalStopPlayback = stopPlayback;
         stopPlayback = function() {
-            originalStopPlayback();
+            const result = originalStopPlayback();
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.playbackState = 'paused';
             }
+            return result;
         };
     </script>
 </body>

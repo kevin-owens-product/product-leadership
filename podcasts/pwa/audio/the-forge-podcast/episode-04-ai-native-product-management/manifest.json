@@ -1,0 +1,93 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to The Forge Podcast. Today we're talking about something that affects everyone in product and engineering: how the product management role is changing when AI is no longer a feature you add to a product, but the foundation you build on. Kevin, you've been leading AI transformation at GWI with 20 squads across 4 offices, and you've been developing training programs for PMs and designers on this exact topic. What's changing?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "kevin",
+    "text": "The fundamental shift is this: for the last 20 years, product management has been about defining requirements for humans to build. You write a PRD, engineers implement it, designers make it usable, QA validates it, and you ship it. The PM's core skill was translating user needs into detailed specifications that a human team could execute.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "Let's get concrete. Walk me through how a PM's daily workflow changes in an AI-native product organization.",
+    "chapter": "SEGMENT 1: The Five Activities of AI-Native PM Workflow (22 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "kevin",
+    "text": "Let me contrast the traditional PM workflow with the AI-native version across five key activities.",
+    "chapter": "SEGMENT 1: The Five Activities of AI-Native PM Workflow (22 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "You mentioned training PMs and designers for this new world. What does that training look like?",
+    "chapter": "SEGMENT 2: Training PMs and Designers for the AI-Native World (12 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "kevin",
+    "text": "We built a training program at GWI that I think is transferable to most product organizations. It covers four modules.",
+    "chapter": "SEGMENT 2: Training PMs and Designers for the AI-Native World (12 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "How does the relationship between PM and Design change in an AI-native world?",
+    "chapter": "SEGMENT 3: Redesigning the PM-Design Partnership (6 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "kevin",
+    "text": "This is an underappreciated dimension. In traditional product development, the designer's job is to make the product usable. They design interfaces, interaction patterns, visual hierarchies, and user flows. In an AI-native world, the designer's job expands to designing trust.",
+    "chapter": "SEGMENT 3: Redesigning the PM-Design Partnership (6 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Let's talk about the organizational implications. If AI is changing the PM role this fundamentally, how does the org structure need to change?",
+    "chapter": "SEGMENT 4: Organizational Restructuring for AI-Native Teams (7 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "kevin",
+    "text": "A few things need to evolve. First, you need to break down the wall between product and data science. In many organizations, the data science team is a separate function that product can \"request\" work from. In an AI-native org, data science capabilities need to be embedded in product squads. Every squad that's building AI-powered features needs direct access to someone who understands model evaluation, prompt engineering, and data pipeline management.",
+    "chapter": "SEGMENT 4: Organizational Restructuring for AI-Native Teams (7 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "What advice would you give to a PM who's listening to this and thinking \"I need to level up fast\"?",
+    "chapter": "SEGMENT 5: Leveling Up as an AI-Native PM (5 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "kevin",
+    "text": "Three things. First, start using AI tools aggressively in your own work today. Don't wait for your company to roll out an AI strategy. Use Claude or ChatGPT to do your competitive analysis, to synthesize research, to draft specifications, to prototype features. The best way to understand how AI changes product work is to experience it firsthand. Start every task by asking \"can AI do the first pass on this?\" Build the habit of AI first, human in the lead.",
+    "chapter": "SEGMENT 5: Leveling Up as an AI-Native PM (5 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Kevin, this has been an incredibly practical guide to AI-native product management. In our final episode, we're going to tie everything together with a deep dive into The Forge Method itself, your systematic framework for transforming software companies from legacy to AI-native. See you then.",
+    "chapter": "SEGMENT 5: Leveling Up as an AI-Native PM (5 minutes)",
+    "file": "0012.mp3"
+  }
+]

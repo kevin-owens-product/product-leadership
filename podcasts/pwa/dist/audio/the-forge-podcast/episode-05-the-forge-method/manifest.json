@@ -1,0 +1,149 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome to our final episode of The Forge Podcast. Over the past four episodes, we've covered PE value creation, multi-agent architecture, platform power dynamics, and AI-native product management. Now we're tying it all together with a deep dive into The Forge Method, which is Kevin's systematic framework for transforming software companies from traditional to AI-native operations. Kevin, give us the elevator pitch. What is the Forge Method and why does it exist?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "kevin",
+    "text": "The Forge Method exists because every software company in the world is facing the same challenge right now, and most of them are handling it badly. The challenge is: how do you take an existing software product, with its existing codebase, its existing team, its existing customers, and transform it into an AI-native product that can compete in a world where AI capabilities are table stakes?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "Walk us through the four phases.",
+    "chapter": "SEGMENT 1: PHASE ONE — DISCOVER (10 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "kevin",
+    "text": "The four phases are Discover, Assess, Transform, and Accelerate. Each phase has specific inputs, activities, deliverables, and decision gates. Let me go deep on each one.",
+    "chapter": "SEGMENT 1: PHASE ONE — DISCOVER (10 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "Okay, so you've got the ARS Score. What happens next in the Assess phase?",
+    "chapter": "SEGMENT 2: PHASE TWO — ASSESS (8 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "kevin",
+    "text": "Phase two is Assess, and it takes four to six weeks. Assess is where you go from understanding the current state to designing the transformation roadmap. If Discover is \"where are we?\" then Assess is \"where are we going and how do we get there?\"",
+    "chapter": "SEGMENT 2: PHASE TWO — ASSESS (8 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Let's move into the Transform phase. This is where the actual work happens, right?",
+    "chapter": "SEGMENT 3: PHASE THREE — TRANSFORM (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "kevin",
+    "text": "Transform is the execution phase, and it takes 12 to 26 weeks depending on the scope. This is where theory becomes practice. The Transform phase follows a very deliberate sequence, and the sequence matters because each step builds on the one before it.",
+    "chapter": "SEGMENT 3: PHASE THREE — TRANSFORM (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Tell us about the final phase, Accelerate.",
+    "chapter": "SEGMENT 4: PHASE FOUR — ACCELERATE (5 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "kevin",
+    "text": "Accelerate is the ongoing phase that begins once the core transformation is complete. The goal is threefold: compound the gains, build self-sufficiency, and continuously expand the AI capabilities.",
+    "chapter": "SEGMENT 4: PHASE FOUR — ACCELERATE (5 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "How does the Forge Method scale across a PE portfolio? If a PE firm has 30 software companies, can you deploy this across all of them?",
+    "chapter": "SEGMENT 5: PORTFOLIO-LEVEL DEPLOYMENT (7 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "kevin",
+    "text": "This is where the Forge Method's value proposition really comes alive. The answer is yes, but with important nuances.",
+    "chapter": "SEGMENT 5: PORTFOLIO-LEVEL DEPLOYMENT (7 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "What's the most common pushback you get on the Forge Method?",
+    "chapter": "SEGMENT 6: OVERCOMING OBJECTIONS (5 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "kevin",
+    "text": "Three objections come up repeatedly.",
+    "chapter": "SEGMENT 6: OVERCOMING OBJECTIONS (5 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Let's talk about measuring success. How do you know the Forge Method is working?",
+    "chapter": "SEGMENT 7: MEASURING SUCCESS (5 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "kevin",
+    "text": "We measure success at three levels.",
+    "chapter": "SEGMENT 7: MEASURING SUCCESS (5 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Final question, Kevin. Looking forward 3 to 5 years, what does the software landscape look like if the Forge Method thesis is correct?",
+    "chapter": "SEGMENT 8: THE FUTURE LANDSCAPE (5 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "kevin",
+    "text": "If the thesis is correct, and I believe it is, three things happen.",
+    "chapter": "SEGMENT 8: THE FUTURE LANDSCAPE (5 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "Kevin, this has been an extraordinary five-episode deep dive. For anyone listening who wants to learn more, where should they start?",
+    "chapter": "SEGMENT 8: THE FUTURE LANDSCAPE (5 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "kevin",
+    "text": "Start by applying the AI-first principle to your own work tomorrow. Whatever your first task is in the morning, before you do it the way you've always done it, ask \"could an AI do the first pass on this?\" Build that habit. Then start observing how your product and your organization could benefit from the same approach. The transformation starts with individual behavior change and scales from there.",
+    "chapter": "SEGMENT 8: THE FUTURE LANDSCAPE (5 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Kevin, thank you. That's a wrap on The Forge Podcast. Safe travels, and we'll talk soon.",
+    "chapter": "SEGMENT 8: THE FUTURE LANDSCAPE (5 minutes)",
+    "file": "0020.mp3"
+  }
+]

@@ -1,0 +1,737 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to Claude Code Mastery. I'm Alex, and today we're diving into customization. How to make Claude Code work exactly the way you need for your specific projects.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jamie",
+    "text": "I'm Jamie, and I've been wondering about this. Every project has its own conventions, quirks, and requirements. Can Claude adapt to that?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "Absolutely. By the end of this episode, you'll know how to configure Claude Code with project-specific instructions, set up permissions, and customize its behavior for your workflow.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jamie",
+    "text": "I've heard about a CLAUDE.md file. What's that?",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "CLAUDE.md is a special file you can put in your project root that contains instructions for Claude. When Claude Code starts in that directory, it reads this file to understand your project's context and conventions.",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jamie",
+    "text": "Like a README but for Claude?",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Exactly! It's documentation that Claude uses to work better with your codebase. You can include information about your architecture, coding standards, testing requirements, and anything else Claude should know.",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jamie",
+    "text": "What kinds of things should go in there?",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Project overview: what the project does, its main technologies. Architectural decisions: why you structured things a certain way. Coding conventions: naming patterns, formatting rules. Common gotchas: things that might trip up someone new to the project.",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jamie",
+    "text": "So Claude reads it like a new team member would?",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Right. Think about what you'd tell a new developer on day one. That's what goes in CLAUDE.md.",
+    "chapter": "SEGMENT 1: THE CLAUDE.MD FILE (5 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "jamie",
+    "text": "Can you give specific examples?",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Sure. You might write: \"This is a Next.js application with TypeScript. We use the App Router, not Pages Router. All API routes are in app/api. Database queries go through Prisma.\"",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "jamie",
+    "text": "Architecture overview.",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Then coding conventions: \"We use camelCase for functions, PascalCase for components. All components should have TypeScript props interfaces. Prefer async/await over promise chains.\"",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "jamie",
+    "text": "Style guidance.",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Testing requirements: \"All new features need tests. We use Jest with React Testing Library. Run tests with npm run test before committing.\"",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "jamie",
+    "text": "Process requirements.",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "And project-specific knowledge: \"The auth module was written by a contractor and is complex. Ask questions before modifying it. The config in legacy-config.js is deprecated but still used by some features.\"",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "jamie",
+    "text": "Tribal knowledge captured in writing.",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Exactly. All that context that lives in senior developers' heads, written down for Claude.",
+    "chapter": "SEGMENT 2: WHAT TO INCLUDE IN CLAUDE.MD (5 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "jamie",
+    "text": "Can I have different configurations for different contexts?",
+    "chapter": "SEGMENT 3: CONFIGURATION HIERARCHY (4 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Yes! Claude Code has a hierarchy of configuration. Global settings apply everywhere. Project settings in CLAUDE.md override globals. And you can have directory-specific settings too.",
+    "chapter": "SEGMENT 3: CONFIGURATION HIERARCHY (4 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "jamie",
+    "text": "Give me an example of where that's useful.",
+    "chapter": "SEGMENT 3: CONFIGURATION HIERARCHY (4 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "Say you work on multiple projects. Globally, you might set your preferred response length and formatting. But one project uses Python with specific linting rules, another uses TypeScript with different conventions. Each project's CLAUDE.md captures those specifics.",
+    "chapter": "SEGMENT 3: CONFIGURATION HIERARCHY (4 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "jamie",
+    "text": "So I don't have to reconfigure for each project?",
+    "chapter": "SEGMENT 3: CONFIGURATION HIERARCHY (4 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "Right. Claude automatically picks up the right context based on where you're working.",
+    "chapter": "SEGMENT 3: CONFIGURATION HIERARCHY (4 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "jamie",
+    "text": "What about controlling what Claude can do?",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "You can configure which tools Claude can use. Maybe in a production environment, you want to restrict file writes. Or you want to prevent certain bash commands from running.",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "jamie",
+    "text": "How do I set those restrictions?",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "In your CLAUDE.md or configuration files, you can specify allowed tools and disallowed tools. For example, you might allow Read and Grep but disallow Bash in a sensitive repository.",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "jamie",
+    "text": "That's useful for security-conscious environments.",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Exactly. Enterprise teams often lock down what Claude can do to match their security policies.",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "jamie",
+    "text": "Can I restrict specific commands within Bash?",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Yes. You can say \"allow npm commands but not rm\" or \"only allow git commands.\" Fine-grained control is possible.",
+    "chapter": "SEGMENT 4: SETTING ALLOWED AND DISALLOWED TOOLS (4 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "jamie",
+    "text": "You mentioned permissions earlier in the series. How do they relate to project configuration?",
+    "chapter": "SEGMENT 5: PERMISSION PRESETS (3 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Permissions can be configured at the project level. You might set up a preset that says \"always allow file reads in this project without prompting\" while keeping write permissions manual.",
+    "chapter": "SEGMENT 5: PERMISSION PRESETS (3 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "jamie",
+    "text": "So I don't have to approve every single read?",
+    "chapter": "SEGMENT 5: PERMISSION PRESETS (3 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Right. Once you trust Claude with certain operations in a project, you can streamline them. But you can keep prompts for higher-risk operations like writes or command execution.",
+    "chapter": "SEGMENT 5: PERMISSION PRESETS (3 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "jamie",
+    "text": "Balancing speed and safety.",
+    "chapter": "SEGMENT 5: PERMISSION PRESETS (3 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Exactly. As you build trust with Claude in a project, you might loosen restrictions. Start tight, then open up as you get comfortable.",
+    "chapter": "SEGMENT 5: PERMISSION PRESETS (3 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "jamie",
+    "text": "Can I give Claude ongoing instructions beyond CLAUDE.md?",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "Yes. You can set custom instructions that persist across conversations. Things like \"always explain your reasoning\" or \"prefer functional programming patterns\" or \"be very conservative with changes.\"",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "jamie",
+    "text": "Where do these get set?",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "In Claude Code's settings or in project configuration. They're persistent, so you don't have to repeat them each session.",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "jamie",
+    "text": "What kinds of instructions are most useful?",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "Communication style preferences: verbose explanations versus terse responses. Technical preferences: certain patterns you always want or never want. Workflow preferences: always run tests after edits, always show diffs before changes.",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "jamie",
+    "text": "Shaping how Claude works.",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Right. You're training Claude to be the kind of collaborator you want.",
+    "chapter": "SEGMENT 6: CUSTOM INSTRUCTIONS (4 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "jamie",
+    "text": "What about environment setup? Like making sure Claude knows about dependencies?",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Claude reads your dependency files automatically. Package.json, requirements.txt, Cargo.toml. It understands what's available in your project.",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "jamie",
+    "text": "But what about environment variables or local setup?",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "You can document those in CLAUDE.md. \"This project requires a DATABASE_URL environment variable.\" \"Run docker-compose up before testing.\" Claude will know what's expected.",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "jamie",
+    "text": "Does Claude have access to my environment variables?",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "Only if you share them. Claude Code doesn't automatically read your environment. But if relevant, you can tell Claude what variables are set.",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "jamie",
+    "text": "Good for security.",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Right. Secrets stay secret unless you explicitly share them.",
+    "chapter": "SEGMENT 7: ENVIRONMENT AND DEPENDENCIES (4 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "jamie",
+    "text": "What about telling Claude how to build and run the project?",
+    "chapter": "SEGMENT 8: BUILD AND RUN CONFIGURATION (3 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Include that in CLAUDE.md. \"Build with npm run build. Run development server with npm run dev. Run production build with npm run start.\"",
+    "chapter": "SEGMENT 8: BUILD AND RUN CONFIGURATION (3 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "jamie",
+    "text": "So Claude knows the commands.",
+    "chapter": "SEGMENT 8: BUILD AND RUN CONFIGURATION (3 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Exactly. Then when you say \"start the dev server,\" Claude knows to run npm run dev rather than guessing.",
+    "chapter": "SEGMENT 8: BUILD AND RUN CONFIGURATION (3 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "jamie",
+    "text": "What if the commands are non-standard?",
+    "chapter": "SEGMENT 8: BUILD AND RUN CONFIGURATION (3 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Even more important to document. \"We use a custom build script: ./scripts/build.sh with arguments for environment.\"",
+    "chapter": "SEGMENT 8: BUILD AND RUN CONFIGURATION (3 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "jamie",
+    "text": "What about sharing configuration across a team?",
+    "chapter": "SEGMENT 9: TEAM CONFIGURATION (4 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "CLAUDE.md can be committed to your repository. Everyone who uses Claude Code in that project gets the same context and instructions.",
+    "chapter": "SEGMENT 9: TEAM CONFIGURATION (4 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "jamie",
+    "text": "Consistency across the team.",
+    "chapter": "SEGMENT 9: TEAM CONFIGURATION (4 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "Right. It's especially valuable when you have a team using Claude Code together. Everyone gets the same guardrails and guidance.",
+    "chapter": "SEGMENT 9: TEAM CONFIGURATION (4 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "jamie",
+    "text": "What about personal preferences that differ per developer?",
+    "chapter": "SEGMENT 9: TEAM CONFIGURATION (4 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Those can be in your global configuration, which isn't committed. So team settings in CLAUDE.md, personal preferences in your local config.",
+    "chapter": "SEGMENT 9: TEAM CONFIGURATION (4 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "jamie",
+    "text": "Best of both worlds.",
+    "chapter": "SEGMENT 9: TEAM CONFIGURATION (4 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "jamie",
+    "text": "I work on several projects. How do I manage that?",
+    "chapter": "SEGMENT 10: MANAGING MULTIPLE PROJECTS (4 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "alex",
+    "text": "Each project has its own CLAUDE.md with project-specific configuration. When you cd into a project and start Claude Code, it automatically picks up that project's settings.",
+    "chapter": "SEGMENT 10: MANAGING MULTIPLE PROJECTS (4 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "jamie",
+    "text": "Seamless context switching.",
+    "chapter": "SEGMENT 10: MANAGING MULTIPLE PROJECTS (4 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "alex",
+    "text": "Right. You don't have to remember to load different configs. It just works.",
+    "chapter": "SEGMENT 10: MANAGING MULTIPLE PROJECTS (4 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "jamie",
+    "text": "What if projects share some configuration?",
+    "chapter": "SEGMENT 10: MANAGING MULTIPLE PROJECTS (4 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "alex",
+    "text": "Common patterns can go in your global config. Only project-specific details go in CLAUDE.md. Keep each CLAUDE.md focused on what's unique to that project.",
+    "chapter": "SEGMENT 10: MANAGING MULTIPLE PROJECTS (4 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "jamie",
+    "text": "How do I know what to configure?",
+    "chapter": "SEGMENT 11: EVOLVING YOUR CONFIGURATION (3 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "alex",
+    "text": "Start minimal. Use Claude Code on your project and notice friction points. When you find yourself repeatedly correcting Claude about something, add it to CLAUDE.md.",
+    "chapter": "SEGMENT 11: EVOLVING YOUR CONFIGURATION (3 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "jamie",
+    "text": "Let pain points guide configuration.",
+    "chapter": "SEGMENT 11: EVOLVING YOUR CONFIGURATION (3 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "alex",
+    "text": "Exactly. Don't try to think of everything upfront. Let your actual usage reveal what needs to be documented.",
+    "chapter": "SEGMENT 11: EVOLVING YOUR CONFIGURATION (3 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "jamie",
+    "text": "And update it over time?",
+    "chapter": "SEGMENT 11: EVOLVING YOUR CONFIGURATION (3 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "alex",
+    "text": "Yes. CLAUDE.md should evolve with your project. New architectural decisions, new conventions, new team knowledge. Keep it current.",
+    "chapter": "SEGMENT 11: EVOLVING YOUR CONFIGURATION (3 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "jamie",
+    "text": "What do most teams configure?",
+    "chapter": "SEGMENT 12: COMMON CONFIGURATION PATTERNS (4 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "alex",
+    "text": "Almost everyone documents build and test commands. That's table stakes. Most document coding conventions, especially if they're non-obvious.",
+    "chapter": "SEGMENT 12: COMMON CONFIGURATION PATTERNS (4 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "jamie",
+    "text": "What else?",
+    "chapter": "SEGMENT 12: COMMON CONFIGURATION PATTERNS (4 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "alex",
+    "text": "Architecture overviews for complex projects. Security-sensitive areas that need extra care. Integration points with external services. Deployment requirements.",
+    "chapter": "SEGMENT 12: COMMON CONFIGURATION PATTERNS (4 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "jamie",
+    "text": "The stuff that's hard to figure out from code alone.",
+    "chapter": "SEGMENT 12: COMMON CONFIGURATION PATTERNS (4 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "alex",
+    "text": "Right. If understanding requires context beyond the code itself, it belongs in CLAUDE.md.",
+    "chapter": "SEGMENT 12: COMMON CONFIGURATION PATTERNS (4 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "jamie",
+    "text": "What are your tips for effective configuration?",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "alex",
+    "text": "First, be specific. \"Follow best practices\" isn't helpful. \"Use early returns instead of nested ifs\" is specific and actionable.",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "jamie",
+    "text": "Concrete over abstract.",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "Second, explain why, not just what. \"We use dependency injection because it makes testing easier\" helps Claude understand the purpose, not just the rule.",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "jamie",
+    "text": "Context for decisions.",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "Third, update when things change. Outdated configuration is worse than no configuration. If you refactor something, update CLAUDE.md.",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "jamie",
+    "text": "Keep it fresh.",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "alex",
+    "text": "And fourth, test your configuration. Work with Claude on the project and see if it follows your guidelines. Refine based on what actually happens.",
+    "chapter": "SEGMENT 13: TIPS FOR GOOD CONFIGURATION (4 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "jamie",
+    "text": "What should listeners practice?",
+    "chapter": "SEGMENT 14: PRACTICE EXERCISE (3 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "alex",
+    "text": "Create a CLAUDE.md for one of your projects. Include at least: a project overview, build and test commands, two or three coding conventions, and one piece of architectural knowledge that's not obvious from the code.",
+    "chapter": "SEGMENT 14: PRACTICE EXERCISE (3 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "jamie",
+    "text": "A starter configuration.",
+    "chapter": "SEGMENT 14: PRACTICE EXERCISE (3 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "alex",
+    "text": "Then use Claude Code on that project and see how the configuration affects Claude's behavior. Iterate from there.",
+    "chapter": "SEGMENT 14: PRACTICE EXERCISE (3 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "jamie",
+    "text": "Great episode on configuration. What's coming up?",
+    "chapter": "SEGMENT 15: WHAT'S NEXT (3 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "alex",
+    "text": "Episode eight is about advanced prompting techniques. How to communicate with Claude effectively to get the best possible results.",
+    "chapter": "SEGMENT 15: WHAT'S NEXT (3 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "jamie",
+    "text": "The art of asking.",
+    "chapter": "SEGMENT 15: WHAT'S NEXT (3 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "alex",
+    "text": "Exactly. See you in episode eight!",
+    "chapter": "SEGMENT 15: WHAT'S NEXT (3 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "jamie",
+    "text": "Happy configuring!",
+    "chapter": "SEGMENT 15: WHAT'S NEXT (3 minutes)",
+    "file": "0104.mp3"
+  }
+]

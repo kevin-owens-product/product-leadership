@@ -1,0 +1,786 @@
+[
+  {
+    "index": 0,
+    "speaker": "maya",
+    "text": "Welcome back to \"The Diplomat's Edge.\" I'm Maya Torres, and today we're getting into the mechanics of how governments and the international system actually work.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jordan",
+    "text": "I'm Jordan Hayes. Last episode, we covered history and geography - the \"what happened\" and \"where.\" Today, we're covering political systems - the \"how\" and \"why\" of government and international relations.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "maya",
+    "text": "This feels fundamental to diplomatic work.",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jordan",
+    "text": "It is. Every day, diplomats work with foreign governments, international organizations, and non-state actors. Understanding how these entities work - their structures, motivations, and constraints - is essential.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "maya",
+    "text": "Let's get into it.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "maya",
+    "text": "Let's start with the basics. What are the main types of political systems?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "jordan",
+    "text": "The fundamental distinction is between democracies and non-democracies. But within each category, there's enormous variety.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "maya",
+    "text": "Start with democracies.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "jordan",
+    "text": "In a democracy, power ultimately flows from the people. But democracies organize power differently. The biggest distinction is between presidential systems and parliamentary systems.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "maya",
+    "text": "What's the difference?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "jordan",
+    "text": "In a presidential system - like the United States - the executive (the president) is elected separately from the legislature. The president has a fixed term and can't be easily removed. There's a strong separation of powers.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "maya",
+    "text": "And parliamentary systems?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "jordan",
+    "text": "In a parliamentary system - like the UK, Canada, or Germany - the executive (the prime minister) emerges from the legislature. The party or coalition that controls parliament chooses the prime minister. The executive can be removed by a vote of no confidence.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "maya",
+    "text": "Which works better?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "jordan",
+    "text": "There's genuine debate. Parliamentary systems can be more efficient - fewer gridlocks. But presidential systems have stronger checks on executive power. Most new democracies have adopted variations of one or the other, sometimes mixing elements.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "maya",
+    "text": "What about federal vs. unitary systems?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "jordan",
+    "text": "Great distinction. In a federal system - like the U.S., Germany, or India - power is divided between national and regional governments. States or provinces have real constitutional authority. In a unitary system - like France or Japan - the central government holds primary power and can override local authorities.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "maya",
+    "text": "Does this matter for diplomacy?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "jordan",
+    "text": "Absolutely. In federal systems, you sometimes need to deal with regional governments on certain issues. Trade, for example - Canadian provinces have significant authority over some trade matters. Understanding where power actually lies is crucial.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "maya",
+    "text": "What about non-democracies?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "jordan",
+    "text": "Non-democracies also vary enormously. Authoritarian regimes concentrate power but may allow some limited pluralism. China is authoritarian - the Communist Party controls everything, but there's debate within the party and some space for private economic activity.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "maya",
+    "text": "And worse?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "jordan",
+    "text": "Totalitarian regimes attempt to control all aspects of life, including private thought and behavior. North Korea is close to this model. Then you have military dictatorships, theocracies like Iran, monarchies - both absolute like Saudi Arabia and constitutional like the UK - and various hybrid systems.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "maya",
+    "text": "Some countries don't fit neatly into categories?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "jordan",
+    "text": "Many don't. There are \"competitive authoritarian\" systems that hold elections but ensure the ruling party always wins. There are democracies with weak institutions where elected leaders become authoritarian. Political scientists debate these categories constantly.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "maya",
+    "text": "Why does this matter for the FSOT?",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "jordan",
+    "text": "Understanding a country's political system tells you who makes decisions, how to engage with them, and what constraints they operate under. A diplomat dealing with China engages differently than one dealing with Germany or one dealing with Saudi Arabia.",
+    "chapter": "SEGMENT 1: TYPES OF POLITICAL SYSTEMS (12 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "maya",
+    "text": "Let's focus on the U.S. system since we're preparing to represent it.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "jordan",
+    "text": "Essential knowledge. The U.S. has a presidential system with strong federalism and separation of powers. Three branches: executive, legislative, judicial.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "maya",
+    "text": "How does foreign policy work in this system?",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "jordan",
+    "text": "The Constitution creates what scholars call \"an invitation to struggle.\" The President is commander-in-chief and conducts diplomacy. But Congress declares war, controls funding, confirms ambassadors, and ratifies treaties. The courts sometimes weigh in on issues like executive agreements and war powers.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "maya",
+    "text": "So foreign policy requires cooperation between branches?",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "jordan",
+    "text": "Ideally, yes. In practice, there's often tension. Presidents prefer to act alone when they can. They use executive agreements instead of treaties (which need Senate approval). They interpret their commander-in-chief powers broadly. Congress pushes back through funding decisions and oversight.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "maya",
+    "text": "Where does the State Department fit?",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "jordan",
+    "text": "The State Department is the lead foreign policy agency, but it's one of many. The Defense Department has enormous resources and presence abroad. The intelligence community - CIA, NSA, and others - gathers information and conducts operations. The Treasury Department handles sanctions. USAID does development work.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "maya",
+    "text": "That sounds complicated.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "jordan",
+    "text": "It's very complicated. Interagency coordination is a constant challenge. Different agencies have different perspectives and sometimes different policies. A diplomat needs to understand the whole system, not just the State Department.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "maya",
+    "text": "What about the National Security Council?",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "jordan",
+    "text": "The NSC coordinates national security policy for the President. The National Security Advisor is often the most powerful foreign policy voice, competing with the Secretary of State for influence. Different administrations balance these relationships differently.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "maya",
+    "text": "How does politics affect foreign policy?",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "jordan",
+    "text": "Enormously. Elections matter. A new president can dramatically change policy direction - think of the shifts between Obama, Trump, and Biden on issues like climate change, Iran, and international institutions. Diplomats have to implement the policy of the elected government, even if it changes.",
+    "chapter": "SEGMENT 2: THE U.S. GOVERNMENT (10 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "maya",
+    "text": "Let's talk about international organizations, starting with the UN.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "jordan",
+    "text": "The United Nations was created in 1945 to prevent another world war and promote international cooperation. It has 193 member states - essentially every country in the world.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "maya",
+    "text": "How is it structured?",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "jordan",
+    "text": "The main organs are the General Assembly, where all members have one vote; the Security Council, the most powerful body for peace and security; the Secretariat, the administrative bureaucracy led by the Secretary-General; and various councils, courts, and specialized agencies.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "maya",
+    "text": "Tell me about the Security Council.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "jordan",
+    "text": "The Security Council has 15 members. Five are permanent - the U.S., UK, France, Russia, and China - the P5. These five have veto power: any one of them can block any substantive resolution. Ten other members rotate in two-year terms.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "maya",
+    "text": "The veto seems controversial.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "jordan",
+    "text": "It is. It reflects 1945 power realities, not today's. There are constant calls for reform - adding new permanent members like India, Germany, Brazil, or Japan; limiting the veto; expanding the Council. But any reform requires the P5's approval, and they're reluctant to dilute their power.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "maya",
+    "text": "What can the Security Council actually do?",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "jordan",
+    "text": "It can authorize military action, impose sanctions, establish peacekeeping missions, refer cases to the International Criminal Court, and make binding resolutions. It's the only international body that can authorize the use of force under international law.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "maya",
+    "text": "And the General Assembly?",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "jordan",
+    "text": "The General Assembly is more democratic - one country, one vote. But its resolutions are non-binding. It's a forum for debate, setting normative standards, and occasionally highlighting issues through votes. Diplomats spend a lot of time at the General Assembly, especially during the annual opening session when heads of state speak.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "maya",
+    "text": "What about UN agencies?",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "jordan",
+    "text": "The UN has many specialized agencies and programs. The World Health Organization handles global health. UNHCR deals with refugees. UNICEF focuses on children. The World Food Programme addresses hunger. Each has its own governance structure and relationship with the main UN.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "maya",
+    "text": "How effective is the UN?",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "jordan",
+    "text": "Mixed record, honestly. It's been effective at some peacekeeping, establishing international law norms, and coordinating humanitarian responses. It's been less effective at preventing wars between or within major powers. The veto often paralyzes action. But most countries see it as essential - the main forum for international cooperation.",
+    "chapter": "SEGMENT 3: THE UNITED NATIONS SYSTEM (10 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "maya",
+    "text": "What other organizations should we know?",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "jordan",
+    "text": "Let's start with NATO - the North Atlantic Treaty Organization. It's a military alliance founded in 1949, originally to defend Western Europe against the Soviet Union. Article 5 states that an attack on one member is an attack on all.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "maya",
+    "text": "Has Article 5 ever been invoked?",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "jordan",
+    "text": "Once - after September 11, 2001. NATO allies came to America's defense. NATO has since expanded to 32 members, including former Soviet satellites in Eastern Europe. This expansion is deeply contentious with Russia.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "maya",
+    "text": "What about economic organizations?",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "jordan",
+    "text": "Several key ones. The World Trade Organization (WTO) governs international trade rules. The International Monetary Fund (IMF) provides financial stability and loans to countries in crisis. The World Bank funds development projects in poorer countries.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "maya",
+    "text": "I've heard of the G7 and G20.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "jordan",
+    "text": "Good ones to know. The G7 is a forum of seven major advanced democracies - U.S., UK, France, Germany, Italy, Canada, Japan - plus the EU. They meet to coordinate on major issues. The G20 includes those plus major emerging economies like China, India, Brazil, Russia, and others - covering about 80% of the world economy.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "maya",
+    "text": "Regional organizations?",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "jordan",
+    "text": "Many are important. The European Union is the most integrated - it's more than an organization; it's almost a federation with a single market, shared currency for many members, and increasingly coordinated foreign policy.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "maya",
+    "text": "What about other regions?",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "jordan",
+    "text": "The African Union promotes cooperation among African states. ASEAN - the Association of Southeast Asian Nations - coordinates among ten Southeast Asian countries. The Organization of American States (OAS) brings together countries of the Americas. Each region has its own dynamics.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "maya",
+    "text": "Are there non-governmental actors diplomats work with?",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "jordan",
+    "text": "Many. NGOs like the International Committee of the Red Cross, Doctors Without Borders, and Human Rights Watch are important players. Multinational corporations increasingly affect foreign policy. Even terrorist organizations and criminal networks are sometimes relevant diplomatic concerns.",
+    "chapter": "SEGMENT 4: OTHER KEY ORGANIZATIONS (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "maya",
+    "text": "What theories or concepts help explain how states behave?",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "jordan",
+    "text": "Several schools of thought. Realism emphasizes power. States act in their own interest, primarily concerned with security. Alliances are temporary conveniences. Morality matters less than survival.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "maya",
+    "text": "That sounds cynical.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "jordan",
+    "text": "Realists would say it's just realistic. The international system has no higher authority - it's anarchy, in the technical sense. States must protect themselves because no one else will.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "maya",
+    "text": "What's the alternative view?",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "jordan",
+    "text": "Liberalism in international relations emphasizes cooperation. Yes, states compete, but they also benefit from cooperation - trade, shared institutions, international law. Democracies in particular may behave more peacefully, at least toward each other.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "maya",
+    "text": "Is that true?",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "jordan",
+    "text": "The \"democratic peace\" is a well-documented pattern - democracies rarely if ever fight wars against each other. Why is debated, but the pattern is strong.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "maya",
+    "text": "Other theories?",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "jordan",
+    "text": "Constructivism emphasizes ideas and identity. How states define themselves and others shapes their behavior. International norms can change state behavior over time - think of how colonialism went from acceptable to illegitimate over decades.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "maya",
+    "text": "What about specific concepts?",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "jordan",
+    "text": "A few key ones. Hard power is military and economic strength - the ability to coerce. Soft power is attraction - culture, values, policies that make others want what you want. Smart power combines both.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "maya",
+    "text": "What else?",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "jordan",
+    "text": "Deterrence - preventing aggression through credible threats. Containment - limiting an adversary's expansion without direct war. Engagement - using interaction to change behavior. Sanctions - economic pressure to coerce policy change.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "maya",
+    "text": "These are tools diplomats use?",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "jordan",
+    "text": "Exactly. Different situations call for different tools. A diplomat needs to understand the full toolkit and when each is appropriate.",
+    "chapter": "SEGMENT 5: FOREIGN POLICY CONCEPTS (10 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "maya",
+    "text": "What are the big issues facing diplomats today?",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "jordan",
+    "text": "The U.S.-China relationship is probably the defining challenge. We're in what some call a \"great power competition.\" China's rise, its assertiveness in the South China Sea, its treatment of Uighurs, its stance on Taiwan, its technology policies - all are contested.",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "maya",
+    "text": "How should we think about this?",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "jordan",
+    "text": "The debate is between those who see China as an adversary that must be contained and those who see it as a competitor we must also cooperate with on issues like climate change. Most policymakers try to balance competition and cooperation.",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "maya",
+    "text": "What about Russia?",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "jordan",
+    "text": "Russia's invasion of Ukraine in 2022 changed the picture dramatically. Before, there was debate about how to engage Russia. Now, the focus is on supporting Ukraine, maintaining sanctions, and deterring further aggression. NATO is more unified than it's been in decades.",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "maya",
+    "text": "Climate change?",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "jordan",
+    "text": "A defining issue. Climate change affects everything - security, migration, development, trade. The Paris Agreement set the framework for international cooperation, but implementation is the challenge. Diplomats work on this at the UN, in bilateral relationships, and in specialized forums.",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "maya",
+    "text": "Terrorism and security threats?",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "jordan",
+    "text": "Still relevant, though different from 20 years ago. ISIS was largely defeated territorially but exists as an ideology. Al-Qaeda remains. New threats emerge in various regions. The challenge is addressing threats without overcommitting resources or trampling rights.",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "maya",
+    "text": "What about emerging issues?",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "jordan",
+    "text": "Technology governance is huge. Artificial intelligence, cybersecurity, data flows, platform regulation - all require international cooperation but also reflect different values. Space is increasingly contested. Pandemic preparedness matters more after COVID. Migration continues to generate both humanitarian needs and political tensions.",
+    "chapter": "SEGMENT 6: CURRENT MAJOR ISSUES (10 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "maya",
+    "text": "Given all this, what do diplomats actually do?",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "jordan",
+    "text": "Four main functions, classically. Representation - speaking for your country abroad. Negotiation - making agreements between countries. Reporting - gathering information and sending it home. Protection - helping your citizens abroad.",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "maya",
+    "text": "How has this changed?",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "jordan",
+    "text": "Technology changed everything. Information that once required diplomats to gather is often available online. Negotiations can happen via video. But human relationships still matter. A diplomat who knows people - who understands their concerns and has built trust - has advantages no technology can replace.",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "maya",
+    "text": "What makes a good diplomat?",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "jordan",
+    "text": "Cultural intelligence - understanding how others think and adapting your approach. Patience - diplomacy often moves slowly. Creativity - finding solutions others miss. Integrity - being trusted to keep confidences and honor commitments. And resilience - because diplomatic life is demanding.",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "maya",
+    "text": "How do the 13 dimensions connect to all this?",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "jordan",
+    "text": "They're the practical competencies that make this possible. Information integration helps you understand complex situations. Judgment helps you navigate difficult choices. Cultural adaptability helps you work across differences. Working with others helps you build coalitions. They all connect.",
+    "chapter": "SEGMENT 7: THE DIPLOMAT'S ROLE (8 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "maya",
+    "text": "Jordan, we've covered a lot of ground today - political systems, organizations, theories, and current issues.",
+    "chapter": "CLOSING",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "jordan",
+    "text": "And we've only scratched the surface of each. The key is having a framework to understand new information as you encounter it.",
+    "chapter": "CLOSING",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "maya",
+    "text": "Next episode, we're shifting gears to something very practical - grammar. The FSOT has an English Expression section that tests your command of the language.",
+    "chapter": "CLOSING",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "jordan",
+    "text": "Grammar might seem boring compared to geopolitics, but clear writing is essential for diplomacy. Every cable, every memo, every report - they all depend on solid grammar.",
+    "chapter": "CLOSING",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "maya",
+    "text": "See you next time on The Diplomat's Edge.",
+    "chapter": "CLOSING",
+    "file": "0111.mp3"
+  }
+]

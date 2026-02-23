@@ -1,0 +1,688 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to Claude Code Mastery. I'm Alex, and today we're exploring how to extend Claude Code beyond its built-in capabilities.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jamie",
+    "text": "I'm Jamie, and I'm really curious about this. Claude Code already does so much. What more could you add?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "The possibilities are vast. Database queries, API integrations, specialized tools for your workflow. By the end of this episode, you'll understand MCP and how to leverage it.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jamie",
+    "text": "Let's start with the basics. What is MCP?",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "MCP stands for Model Context Protocol. It's a standard way to give Claude access to external tools and data sources. Think of it as a plugin system for Claude.",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jamie",
+    "text": "So Claude can learn new skills?",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Exactly. By connecting MCP servers, you can teach Claude to search the web, query databases, access APIs, and much more. It's extensibility without modifying Claude itself.",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jamie",
+    "text": "Why is it called a protocol?",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Because it's a standardized way for Claude to communicate with these extensions. Any tool that speaks MCP can work with Claude. It's not tied to specific implementations.",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jamie",
+    "text": "An open standard.",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Right. This means there's a growing ecosystem of MCP servers you can use, and you can build your own.",
+    "chapter": "SEGMENT 1: WHAT IS MCP? (5 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "jamie",
+    "text": "What comes built into Claude Code?",
+    "chapter": "SEGMENT 2: BUILT-IN MCP CAPABILITIES (4 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Claude Code has several built-in capabilities that use MCP under the hood. Web search, web fetching, and more. These are ready to use without any configuration.",
+    "chapter": "SEGMENT 2: BUILT-IN MCP CAPABILITIES (4 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "jamie",
+    "text": "Web search is built in?",
+    "chapter": "SEGMENT 2: BUILT-IN MCP CAPABILITIES (4 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Yes! You can ask Claude to search the web for current information. \"What's the latest version of React?\" Claude can search and give you up-to-date info.",
+    "chapter": "SEGMENT 2: BUILT-IN MCP CAPABILITIES (4 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "jamie",
+    "text": "That's handy for checking documentation.",
+    "chapter": "SEGMENT 2: BUILT-IN MCP CAPABILITIES (4 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Very handy. You're not limited to Claude's training data. You can get real-time information when needed.",
+    "chapter": "SEGMENT 2: BUILT-IN MCP CAPABILITIES (4 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "jamie",
+    "text": "How do I add more capabilities?",
+    "chapter": "SEGMENT 3: ADDING EXTERNAL MCP SERVERS (4 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "You configure MCP servers in Claude Code's settings. Each server provides specific tools. A database server gives you query capabilities. An API server lets you interact with external services.",
+    "chapter": "SEGMENT 3: ADDING EXTERNAL MCP SERVERS (4 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "jamie",
+    "text": "Where do I find MCP servers?",
+    "chapter": "SEGMENT 3: ADDING EXTERNAL MCP SERVERS (4 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "There's a growing community creating them. You can find them on GitHub, in package registries, and through Anthropic's documentation. Some common ones: database connectors, CI/CD integrations, cloud service tools.",
+    "chapter": "SEGMENT 3: ADDING EXTERNAL MCP SERVERS (4 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "jamie",
+    "text": "Any you particularly recommend?",
+    "chapter": "SEGMENT 3: ADDING EXTERNAL MCP SERVERS (4 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "It depends on your needs. For web work, having a browser automation server is powerful. For data work, database connectors are essential. For DevOps, cloud provider tools are invaluable.",
+    "chapter": "SEGMENT 3: ADDING EXTERNAL MCP SERVERS (4 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "jamie",
+    "text": "Walk me through setting one up.",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "First, install the MCP server. It's usually an npm package or standalone tool. Then, add it to your Claude Code configuration with its connection details.",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "jamie",
+    "text": "What connection details?",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "Typically a path to the server executable and any required credentials or configuration. For a database server, you'd provide connection strings. For an API server, authentication tokens.",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "jamie",
+    "text": "And then Claude can use it?",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "Yes. Once configured, Claude gains new tools. You'll see them available in your session, and Claude can use them to accomplish tasks.",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "jamie",
+    "text": "Does it require code changes?",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Just configuration. No code changes to Claude Code itself. Add the server to config, restart Claude Code, and the new tools are available.",
+    "chapter": "SEGMENT 4: CONFIGURING MCP SERVERS (4 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "jamie",
+    "text": "What are the most popular use cases?",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Database access is huge. Being able to ask Claude \"show me users who signed up last week\" and have it query your database directly. No more writing SQL by hand for ad-hoc questions.",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "jamie",
+    "text": "That sounds powerful and maybe dangerous?",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "It requires trust and good configuration. You typically set up read-only access or limit what queries can be run. Claude will also ask permission before executing queries.",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "jamie",
+    "text": "Good guardrails.",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Another popular use case: cloud provider integration. \"Check the status of our AWS services\" or \"show me the logs from the production server.\" Claude can interact with cloud APIs.",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "jamie",
+    "text": "What about third-party APIs?",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Absolutely. You can connect Claude to Slack, Jira, GitHub, or any API. \"Create a Jira ticket for this bug\" or \"post this update to Slack.\"",
+    "chapter": "SEGMENT 5: COMMON MCP USE CASES (5 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "jamie",
+    "text": "Let's talk more about web capabilities.",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Web search lets Claude find current information. You ask a question that requires up-to-date data, and Claude searches the web to answer it.",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "jamie",
+    "text": "How accurate is it?",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "It's fetching real web results, so accuracy depends on the sources. Claude will typically cite where information came from so you can verify.",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "jamie",
+    "text": "What about fetching specific pages?",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Web fetch lets Claude read specific URLs. \"Read the documentation at this URL\" and Claude will fetch and process that page.",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "jamie",
+    "text": "Useful for reading docs.",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "Very useful. Instead of copying and pasting documentation, just give Claude the URL.",
+    "chapter": "SEGMENT 6: WEB SEARCH AND FETCHING (4 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "jamie",
+    "text": "All this external access makes me think about security. What should I be aware of?",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Security is paramount. First, credential management. Never put sensitive tokens directly in configuration files that get committed to repos.",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "jamie",
+    "text": "Use environment variables or secrets managers?",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Exactly. Second, principle of least privilege. Only give MCP servers the access they need. Read-only database access if you don't need writes.",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "jamie",
+    "text": "Minimize potential damage.",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Third, be careful with what tools you install. Only use MCP servers from trusted sources. Review what they do before running them.",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "jamie",
+    "text": "Don't install random tools from the internet.",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "Right. And fourth, understand what data flows where. When Claude uses an MCP server, data passes through that server. Make sure that's acceptable for your use case.",
+    "chapter": "SEGMENT 7: SECURITY CONSIDERATIONS (5 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "jamie",
+    "text": "Can I build my own MCP server?",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Absolutely! If you have internal tools or APIs that you want Claude to access, you can create custom MCP servers for them.",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "jamie",
+    "text": "How complex is that?",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "It varies. The MCP specification is well-documented. A simple server that exposes one or two tools can be built in a day. Complex integrations take more time.",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "jamie",
+    "text": "What languages can I use?",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "The protocol is language-agnostic. There are SDKs and examples in TypeScript, Python, and other languages. Use whatever your team is comfortable with.",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "jamie",
+    "text": "What makes a good custom MCP server?",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Clear tool definitions so Claude knows what each tool does. Good error handling so failures are communicated clearly. And appropriate security so sensitive operations require confirmation.",
+    "chapter": "SEGMENT 8: BUILDING CUSTOM MCP SERVERS (5 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "jamie",
+    "text": "How do larger teams use MCP?",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Enterprise teams often create standardized MCP servers for internal systems. A company might have MCP servers for their internal APIs, documentation systems, and deployment tools.",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "jamie",
+    "text": "Everyone on the team uses the same extensions?",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "Right. It creates consistency. All developers have access to the same capabilities through Claude.",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "jamie",
+    "text": "How do they manage it?",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Central configuration distributed through the project setup. When a developer starts Claude Code on a company project, the standard MCP servers are automatically available.",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "jamie",
+    "text": "Sounds like the CLAUDE.md pattern but for tools.",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Exactly. Configuration as code, versioned and shared.",
+    "chapter": "SEGMENT 9: ENTERPRISE MCP PATTERNS (4 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "jamie",
+    "text": "What if an MCP server isn't working?",
+    "chapter": "SEGMENT 10: TROUBLESHOOTING MCP (3 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "Start with logs. MCP servers typically log their activity. Check for connection errors or authentication issues.",
+    "chapter": "SEGMENT 10: TROUBLESHOOTING MCP (3 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "jamie",
+    "text": "Common problems?",
+    "chapter": "SEGMENT 10: TROUBLESHOOTING MCP (3 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Credential issues are the most common. Expired tokens, wrong permissions. Next is connectivity: firewalls, network issues. Then version mismatches between the MCP server and Claude Code.",
+    "chapter": "SEGMENT 10: TROUBLESHOOTING MCP (3 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "jamie",
+    "text": "How do I know if Claude is even trying to use the server?",
+    "chapter": "SEGMENT 10: TROUBLESHOOTING MCP (3 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Ask Claude! \"What MCP tools do you have available?\" Claude will list the connected servers and their tools.",
+    "chapter": "SEGMENT 10: TROUBLESHOOTING MCP (3 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "jamie",
+    "text": "What are your best practices?",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "First, start with one server at a time. Add, test, and verify before adding more. Debugging multiple new servers at once is frustrating.",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "jamie",
+    "text": "Incremental additions.",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "Second, test with low-stakes tasks first. Make sure the integration works before relying on it for important work.",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "jamie",
+    "text": "Build confidence.",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "Third, document your MCP setup. When you configure servers, note why and how in your project documentation.",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "jamie",
+    "text": "For team knowledge.",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "And fourth, keep servers updated. MCP servers evolve, and updates often include security fixes and improvements.",
+    "chapter": "SEGMENT 11: BEST PRACTICES FOR MCP (4 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "jamie",
+    "text": "Where is MCP heading?",
+    "chapter": "SEGMENT 12: THE FUTURE OF MCP (3 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "The ecosystem is growing rapidly. More pre-built servers, better tooling, richer capabilities. The vision is that Claude can be extended to do almost anything through MCP.",
+    "chapter": "SEGMENT 12: THE FUTURE OF MCP (3 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "jamie",
+    "text": "A platform, not just a tool.",
+    "chapter": "SEGMENT 12: THE FUTURE OF MCP (3 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "Exactly. Claude Code becomes a platform that adapts to your specific needs through MCP extensions.",
+    "chapter": "SEGMENT 12: THE FUTURE OF MCP (3 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "jamie",
+    "text": "What should listeners practice?",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "If you haven't already, try the built-in web search. Ask Claude a question that requires current information and see how it handles it.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "jamie",
+    "text": "Starting with what's already there.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "Then, explore the MCP server ecosystem. Find one that's relevant to your work and try setting it up. The configuration experience is valuable.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "jamie",
+    "text": "Great introduction to MCP. What's our final episode about?",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (4 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "Episode ten wraps up the series with best practices and productivity tips. Everything we've learned, synthesized into a workflow that maximizes your effectiveness.",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (4 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "jamie",
+    "text": "Bringing it all together.",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (4 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Exactly. See you in the finale!",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (4 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "jamie",
+    "text": "Happy extending!",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (4 minutes)",
+    "file": "0097.mp3"
+  }
+]

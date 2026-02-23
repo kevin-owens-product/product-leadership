@@ -1,0 +1,765 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to Claude Code Mastery. I'm Alex, and in today's episode, we're diving deep into how Claude Code actually understands and navigates your codebase.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jamie",
+    "text": "And I'm Jamie. After installing Claude Code from last episode, I've been playing around with it, and I'm amazed at how much it just seems to know about my project. But I want to understand what's happening under the hood.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "That's exactly what we're covering today. By the end of this episode, you'll understand the tools Claude uses to read and search your code, and you'll have practical techniques for getting around large projects efficiently.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jamie",
+    "text": "So when I start Claude Code in my project directory, what's actually happening? Is it reading every file?",
+    "chapter": "SEGMENT 1: HOW CLAUDE READS YOUR CODEBASE (4 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "Not immediately. Claude Code is smart about this. It doesn't just slurp up your entire codebase into memory. Instead, it reads files on demand, when they're relevant to what you're asking about.",
+    "chapter": "SEGMENT 1: HOW CLAUDE READS YOUR CODEBASE (4 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jamie",
+    "text": "So it's lazy loading, in a sense?",
+    "chapter": "SEGMENT 1: HOW CLAUDE READS YOUR CODEBASE (4 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Exactly. When you ask a question like \"how does the user authentication work,\" Claude will figure out which files are likely relevant and read those. It might look at your file structure first, identify files with names like \"auth\" or \"user\" or \"login,\" and then read those specifically.",
+    "chapter": "SEGMENT 1: HOW CLAUDE READS YOUR CODEBASE (4 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jamie",
+    "text": "That makes sense from an efficiency standpoint. You wouldn't want to process a million lines of code just to answer a simple question.",
+    "chapter": "SEGMENT 1: HOW CLAUDE READS YOUR CODEBASE (4 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Right. And it keeps the context focused. By only including relevant files, Claude can give you better, more targeted answers without getting distracted by unrelated code.",
+    "chapter": "SEGMENT 1: HOW CLAUDE READS YOUR CODEBASE (4 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jamie",
+    "text": "You mentioned Claude \"reads\" files. Is that a specific operation?",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Yes! Under the hood, Claude Code uses what's called the Read tool. When Claude needs to see the contents of a file, it invokes this tool and requests permission to read that file.",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "jamie",
+    "text": "That's the permission prompt we talked about last episode?",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Exactly. You'll see something like \"Claude wants to read src/auth/login.js\" and you can approve or deny. Once approved, Claude sees the full file contents and can discuss them with you.",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "jamie",
+    "text": "Can I tell Claude to read a specific file proactively?",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Absolutely. You can say \"read the file src/components/Header.jsx\" or \"show me what's in package.json\" and Claude will use the Read tool to fetch that file. It's a great way to bring specific code into the conversation.",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "jamie",
+    "text": "What if the file is really long?",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Claude handles large files intelligently. The Read tool can read portions of files, specifying a starting line and a number of lines. So for a ten thousand line file, Claude might read the first few hundred lines, or jump to a specific function.",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "jamie",
+    "text": "How does it know where to jump?",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "That's where the search capabilities come in. Claude might first search the file for a function name, find it's on line 847, then read from that line. It's a combination of search and read that makes navigation efficient.",
+    "chapter": "SEGMENT 2: THE READ TOOL (5 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "jamie",
+    "text": "Speaking of search, I've heard about something called Glob. What's that?",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Glob is a file pattern matching tool. It helps Claude find files based on their names and paths, not their contents. The name comes from glob patterns, which are like wildcards for file paths.",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "jamie",
+    "text": "Can you give me an example?",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Sure. If Claude needs to find all JavaScript files in your project, it might use a pattern like \"star star slash star dot js.\" That means any file ending in .js, in any directory, at any depth.",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "jamie",
+    "text": "And star star means any number of directories?",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "Exactly. Single star matches anything within one directory level, double star matches across multiple levels. So \"src slash star star slash star dot test dot js\" would find all test files anywhere under the src folder.",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "jamie",
+    "text": "That's really powerful for quickly mapping out what files exist.",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "It is. And it's fast because it's just looking at file names and paths, not actually reading file contents. Claude can glob for hundreds of files in milliseconds.",
+    "chapter": "SEGMENT 3: UNDERSTANDING THE GLOB TOOL (4 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "jamie",
+    "text": "What about searching inside files? Looking for specific code?",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "That's where Grep comes in. Named after the classic Unix grep command, this tool searches file contents for patterns. It's how Claude finds where a function is defined, where a variable is used, or where an error message appears.",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "jamie",
+    "text": "So Grep looks inside files while Glob looks at file names?",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Exactly right. They complement each other. Often Claude will use Glob first to narrow down which files to search, then Grep to find specific content within those files.",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "jamie",
+    "text": "Can Grep use regular expressions?",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Yes, it supports full regex syntax. So you can search for complex patterns, not just simple strings. Want to find all function definitions that start with \"handle\"? You could use a pattern like \"function handle\" followed by word characters.",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "jamie",
+    "text": "That's great for refactoring, finding all usages of something.",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Definitely. I use this constantly. \"Find everywhere we call the deprecated API\" or \"show me all places where we catch errors.\" Grep makes these searches trivial.",
+    "chapter": "SEGMENT 4: THE GREP TOOL (4 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "jamie",
+    "text": "So in practice, how do these tools work together?",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Let me walk through a realistic scenario. Say you ask Claude \"where is the shopping cart total calculated?\" Here's what might happen behind the scenes.",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "jamie",
+    "text": "Okay, I'm following.",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "First, Claude might Glob for files with \"cart\" in the name. It finds cart.js, CartComponent.jsx, cartUtils.ts. Then it Greps those files for \"total\" or \"calculate.\" It finds a function called calculateCartTotal in cartUtils.ts at line 45.",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "jamie",
+    "text": "So it narrowed from the entire codebase to exactly the right function.",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Right. Then it uses Read to show you that function with some surrounding context. The whole process takes seconds, and you get a precise answer with the actual code.",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "jamie",
+    "text": "That's so much faster than me manually searching through files.",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "It really is. And Claude is doing this automatically based on your natural language question. You don't have to think about glob patterns or grep syntax. Just ask what you want to know.",
+    "chapter": "SEGMENT 5: COMBINING SEARCH STRATEGIES (4 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "jamie",
+    "text": "What about running actual commands? Can Claude do that?",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Yes, Claude Code has a Bash tool that can execute shell commands. This is incredibly powerful for things like running your build, executing tests, checking git status, or any other terminal operation.",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "jamie",
+    "text": "That seems like it could be dangerous if misused.",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "That's why it's carefully permissioned. Every bash command Claude wants to run is shown to you first. You see exactly what command will be executed, and you have to approve it. Claude won't run anything without your explicit consent.",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "jamie",
+    "text": "What are common use cases for the Bash tool?",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Running tests is huge. You can say \"run the tests for the auth module\" and Claude will figure out the right test command and execute it. Same with builds. \"Build the project and show me any errors.\"",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "jamie",
+    "text": "And it can see the output?",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Yes, the command output comes back to Claude, so it can analyze test failures, build errors, or any other results. That's what makes it agentic. It can take action, observe the result, and continue working.",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "jamie",
+    "text": "Like running a test, seeing it fail, then fixing the code.",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Exactly! That loop of run, observe, fix is incredibly powerful. We'll dive much deeper into testing workflows in episode six.",
+    "chapter": "SEGMENT 6: THE BASH TOOL (5 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "jamie",
+    "text": "You mentioned last episode that Claude understands the working directory. How deep does that go?",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "Very deep. When you start Claude Code in a directory, it becomes aware of that as your project root. All file paths are relative to that location. If you ask about \"the src folder,\" Claude knows you mean the src folder in your current project.",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "jamie",
+    "text": "What if I'm in a subdirectory?",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Claude still understands the project root. Even if you're in src/components, Claude can access files from anywhere in the project. The working directory sets the context but doesn't limit access.",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "jamie",
+    "text": "Does it detect what kind of project it is?",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Yes! Claude looks for telltale files. A package.json suggests Node or JavaScript. A Cargo.toml means Rust. A pom.xml indicates Java Maven. A requirements.txt or pyproject.toml points to Python. This detection helps Claude give appropriate advice.",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "jamie",
+    "text": "So it knows the conventions of my ecosystem.",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Right. If you're in a React project, Claude knows about components, hooks, JSX. In a Django project, it understands views, models, templates. This contextual awareness makes the assistance much more relevant.",
+    "chapter": "SEGMENT 7: WORKING DIRECTORY CONTEXT (5 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "jamie",
+    "text": "Let's get practical. What are your go-to techniques for navigating a codebase with Claude?",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "The first technique I'd recommend is the overview question. When I join a new project or come back to one after a while, I ask Claude \"give me an overview of this codebase structure.\" It reads key files and gives me a map of how things are organized.",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "jamie",
+    "text": "Like an instant onboarding.",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Exactly. Second technique: follow the flow. If you're trying to understand how something works end to end, ask Claude to trace it. \"Walk me through what happens when a user submits the contact form.\" Claude will follow the code path and explain each step.",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "jamie",
+    "text": "That's great for understanding complex features.",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "Third technique: definition jumping. When you see a function being called and want to know what it does, just ask \"what does the processOrder function do?\" Claude will find the definition and explain it.",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "jamie",
+    "text": "Like IDE \"go to definition\" but with an explanation attached.",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Right. And fourth, use references. \"Where is UserContext used?\" Claude will grep for usages and show you everywhere that context is consumed. Great for understanding dependencies.",
+    "chapter": "SEGMENT 8: EFFICIENT NAVIGATION TECHNIQUES (6 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "jamie",
+    "text": "How do I phrase questions to get the best navigation results?",
+    "chapter": "SEGMENT 9: ASKING GOOD QUESTIONS (4 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Specificity helps a lot. Instead of \"tell me about the database,\" try \"how do we connect to the database and where is the configuration?\" That gives Claude a clearer target.",
+    "chapter": "SEGMENT 9: ASKING GOOD QUESTIONS (4 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "jamie",
+    "text": "More specific means less ambiguity.",
+    "chapter": "SEGMENT 9: ASKING GOOD QUESTIONS (4 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "Also, include what you're trying to accomplish. \"I need to add a new field to user profiles, where should I make that change?\" Now Claude isn't just finding code, it's guiding you to the right place for your goal.",
+    "chapter": "SEGMENT 9: ASKING GOOD QUESTIONS (4 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "jamie",
+    "text": "The why helps as much as the what.",
+    "chapter": "SEGMENT 9: ASKING GOOD QUESTIONS (4 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Exactly. And don't be afraid to ask follow-up questions. If Claude's first response isn't quite what you needed, just say \"not that one, I mean the validation logic\" or \"go deeper on the error handling part.\"",
+    "chapter": "SEGMENT 9: ASKING GOOD QUESTIONS (4 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "jamie",
+    "text": "Are there keyboard shortcuts I should know?",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Yes! In the Claude Code interface, Control-C cancels the current operation if something is taking too long. Control-L clears the screen while keeping conversation history. These basic ones are essential.",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "jamie",
+    "text": "What about scrolling through long responses?",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "Your terminal's normal scrolling works. Page up, page down, or mouse scrolling depending on your terminal. For really long outputs, you might pipe to less or a file, but usually the terminal handles it fine.",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "jamie",
+    "text": "Any tips for managing conversation length?",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "Use slash clear when you're switching to a completely different task. Use slash compact when you want to keep some context but reduce the length. I typically compact after every major feature or bug fix.",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "jamie",
+    "text": "Starting fresh keeps things focused?",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "It does. A conversation that's been going for hours about many different topics can get muddled. Claude might confuse which file you're talking about now versus earlier. Fresh starts help.",
+    "chapter": "SEGMENT 10: KEYBOARD SHORTCUTS AND EFFICIENCY (4 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "jamie",
+    "text": "What about when I need to work across multiple files?",
+    "chapter": "SEGMENT 11: MULTI-FILE OPERATIONS (3 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "Claude handles this naturally. You can say \"I need to add a new API endpoint, which files will I need to modify?\" Claude will identify the router file, possibly a controller, maybe a model, and any test files.",
+    "chapter": "SEGMENT 11: MULTI-FILE OPERATIONS (3 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "jamie",
+    "text": "And then I can work through them one by one?",
+    "chapter": "SEGMENT 11: MULTI-FILE OPERATIONS (3 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "Yes, or Claude can read several at once and help you see the big picture. \"Show me the User model and the User controller together\" is a valid request. Claude will read both and understand their relationship.",
+    "chapter": "SEGMENT 11: MULTI-FILE OPERATIONS (3 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "jamie",
+    "text": "That's helpful for understanding how components interact.",
+    "chapter": "SEGMENT 11: MULTI-FILE OPERATIONS (3 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "Very much so. A lot of bugs happen at the boundaries between components. Seeing multiple files together helps Claude spot inconsistencies or suggest better patterns.",
+    "chapter": "SEGMENT 11: MULTI-FILE OPERATIONS (3 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "jamie",
+    "text": "Does project size affect how I should use Claude Code?",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Somewhat. For small projects, Claude can practically understand the whole thing. For very large monorepos with millions of lines, you'll want to guide Claude more specifically to the relevant sections.",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "jamie",
+    "text": "How do I guide it?",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "Be specific about paths. Instead of \"find the auth code,\" say \"look in the services/auth directory.\" Instead of \"fix the tests,\" say \"fix the tests in packages/api/tests.\" This helps Claude focus its search.",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "jamie",
+    "text": "Does Claude ever get lost in large codebases?",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "It can struggle if the project is poorly organized or if naming conventions are inconsistent. If auth logic is spread across ten unrelated folders, Claude has to work harder to piece it together.",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "jamie",
+    "text": "So good code organization pays dividends with AI tools too.",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Absolutely. The same practices that help human developers, clear naming, logical structure, good documentation, also help Claude be more effective.",
+    "chapter": "SEGMENT 12: UNDERSTANDING PROJECT SCALE (4 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "jamie",
+    "text": "Can we do a quick exercise listeners can try at home?",
+    "chapter": "SEGMENT 13: PRACTICAL EXERCISE (4 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Great idea. Here's a navigation exercise. Open Claude Code in any project you have. First, ask \"what is the main entry point of this application?\" Notice how Claude finds and explains it.",
+    "chapter": "SEGMENT 13: PRACTICAL EXERCISE (4 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "jamie",
+    "text": "Starting from the entry point makes sense.",
+    "chapter": "SEGMENT 13: PRACTICAL EXERCISE (4 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Then ask \"what are the main dependencies this project uses?\" Claude will likely read your package.json or equivalent and summarize them.",
+    "chapter": "SEGMENT 13: PRACTICAL EXERCISE (4 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "jamie",
+    "text": "Getting the lay of the land.",
+    "chapter": "SEGMENT 13: PRACTICAL EXERCISE (4 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Finally, pick any feature in your app and ask \"how does the feature X work end to end?\" Watch how Claude traces through multiple files to explain the flow. That's the power of intelligent navigation.",
+    "chapter": "SEGMENT 13: PRACTICAL EXERCISE (4 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "jamie",
+    "text": "This was super practical. I feel like I understand how Claude navigates code now. What's next?",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "Episode three is all about code editing. Now that you know how to navigate and understand code, we'll cover how to actually make changes. The Read tool, the Edit tool, the Write tool, and when to use each one.",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "jamie",
+    "text": "Moving from reading to writing.",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "alex",
+    "text": "Exactly. We'll cover how to safely make edits, how to review Claude's proposed changes, and patterns for effective refactoring.",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "jamie",
+    "text": "Can't wait. Thanks for listening everyone, and we'll see you in episode three!",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "Happy navigating!",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0108.mp3"
+  }
+]

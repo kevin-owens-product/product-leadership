@@ -1,0 +1,947 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome back to Tech Leadership Unpacked. I'm Sam Rivera. If you've been following along, we've covered AI, LLMs, engineering culture, and architecture patterns. Now we're tackling what happens when your architecture meets reality - millions of users, petabytes of data, and things that go wrong at 3 AM.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen. And I love this topic because systems design is where theory meets the messy real world. Your beautiful architecture diagram doesn't account for network failures, disk failures, the thundering herd of users when a celebrity tweets about your product, or that one database query that suddenly starts taking 30 seconds.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "You sound like you've been there.",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "laughs Many times. Let's make sure your listeners learn from those experiences.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "Let's start with the basics. What does \"scale\" actually mean?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Scale typically refers to three dimensions:",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "And these are different problems?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "Related but different. You might handle millions of users but have small data. Or have petabytes of data but few users. Different scaling challenges require different solutions.",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "sam",
+    "text": "What's the difference between vertical and horizontal scaling?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "alex",
+    "text": "Vertical scaling means getting a bigger machine. More CPU, more RAM, more disk. Simple, but there are limits - eventually you can't buy a bigger machine.",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "sam",
+    "text": "When do you choose each?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "Start vertical. It's simpler. A beefy server can handle a lot - thousands of requests per second, hundreds of gigabytes of RAM. Only go horizontal when you've outgrown what one machine can handle, or when you need redundancy.",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "sam",
+    "text": "What are the key metrics to monitor for scale?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "alex",
+    "text": "Several things:",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "sam",
+    "text": "Why percentiles over averages?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "alex",
+    "text": "Averages hide problems. If your average is 100ms but your P99 is 5 seconds, you have a serious problem for 1% of requests. That's potentially millions of slow requests per day.",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Throughput - requests per second, transactions per minute. Are you keeping up with demand?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "sam",
+    "text": "What's the relationship between these?",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "They interact. As throughput increases, latency often increases too - queuing effects. High utilization leads to higher latency and eventually errors. You need headroom for spikes.",
+    "chapter": "SEGMENT 1: FUNDAMENTALS OF SCALE (12 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "sam",
+    "text": "Okay, let's talk about spreading load across machines. How does load balancing work?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "A load balancer sits in front of your servers and distributes incoming requests across them. The simplest is round-robin - request 1 goes to server A, request 2 to server B, etc.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "sam",
+    "text": "Are there smarter approaches?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Several. Least connections - send to the server with fewest active requests. Good when request duration varies.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "sam",
+    "text": "What happens if a server goes down?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "The load balancer detects it (via health checks) and removes it from the pool. Traffic redistributes to healthy servers. Your system stays up because no single server is a single point of failure.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "sam",
+    "text": "What about the load balancer itself? Isn't that a single point of failure?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "Good instinct. In practice, you run multiple load balancers. DNS returns multiple IP addresses (DNS round-robin), or you use BGP anycast for multiple geographic entry points. Cloud load balancers are managed and automatically redundant.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "sam",
+    "text": "How do you scale the application layer?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "Design for statelessness. If each request contains everything needed to process it (or can look it up in a shared store), you can route any request to any server. State is the enemy of horizontal scaling.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "sam",
+    "text": "What about sessions? Login state?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Don't store them on the application server. Use: Cookies with signed tokens (like JWTs), Centralized session store (Redis), or Database storage. The application server should be ephemeral - you should be able to kill any instance without losing data.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "sam",
+    "text": "How do you deploy updates to horizontally scaled systems?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Rolling deployment - update instances gradually while keeping others serving traffic. Old and new versions coexist briefly. Your code must handle this compatibility.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "sam",
+    "text": "What problems does this introduce?",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Mixed versions mean you need backward-compatible changes. If new code writes data that old code can't read, you have problems during the transition. Database migrations must work with both versions.",
+    "chapter": "SEGMENT 2: LOAD BALANCING AND HORIZONTAL SCALING (12 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "sam",
+    "text": "The database seems like a common bottleneck. How do you scale databases?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Databases are often the hardest to scale because data has gravity - it's hard to move and needs consistency.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "sam",
+    "text": "How do applications use replicas?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "You configure your database client to route writes to primary, reads to replicas. Or use a connection proxy that handles routing automatically.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "sam",
+    "text": "What about eventual consistency?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Replication has lag - writes to primary take time to appear on replicas. If a user writes something and immediately reads, they might not see it. Solutions: read from primary for critical reads, or route a user's reads to the same replica as their writes.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "sam",
+    "text": "What if one database machine isn't enough for writes?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "Now you're in sharding territory. You split data across multiple databases. Users A-M on shard 1, N-Z on shard 2. Each shard is an independent database handling a subset of data.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "sam",
+    "text": "That sounds complicated.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "It is. Challenges include:",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "sam",
+    "text": "When should you shard?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "As late as possible. It adds significant complexity. First try: read replicas, caching, query optimization, vertical scaling. Shard when you truly can't avoid it.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "sam",
+    "text": "What about NoSQL databases? Aren't they easier to scale?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Some are designed for horizontal scaling from the start - Cassandra, DynamoDB, MongoDB (with its cluster mode). They make different tradeoffs: often eventual consistency, limited query capabilities, denormalized data models.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "sam",
+    "text": "When would you choose those?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "When you have clear access patterns that fit their model. Key-value lookups at massive scale - DynamoDB. Time-series data with high write throughput - Cassandra. Document storage with flexible schema - MongoDB.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "sam",
+    "text": "What about connection pooling?",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Critical at scale. Database connections are expensive to establish. You maintain a pool of connections and reuse them. Without pooling, each request creates a new connection, and you'll hit connection limits quickly.",
+    "chapter": "SEGMENT 3: DATABASE SCALING (12 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "sam",
+    "text": "Caching seems like a key technique. How should we think about it?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "The fastest request is one you don't make. Caching stores computed results so you don't recompute them. It's one of the most powerful scaling tools.",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "sam",
+    "text": "What are the caching layers?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Several levels:",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "sam",
+    "text": "What cache should I use?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Redis is the Swiss Army knife. It's fast, versatile, supports various data structures. Use it for: session storage, rate limiting, leaderboards, real-time features, general-purpose caching.",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "sam",
+    "text": "What are the cache invalidation strategies?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "\"There are only two hard things in computer science: cache invalidation and naming things.\" It's genuinely hard.",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "sam",
+    "text": "What problems does caching introduce?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Stale data - cache might not reflect the latest database state. Cache stampede - if cache expires and many requests hit simultaneously, they all hit the database. Cold cache - after restart, cache is empty and database is slammed.",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "sam",
+    "text": "How do you handle those?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "For stampede: use locking so only one request recomputes, others wait. Or probabilistically refresh before expiration. For cold cache: warm the cache before exposing to traffic, or roll out gradually.",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "sam",
+    "text": "What's a CDN and why does it matter?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "CDN servers are distributed globally. They cache your content close to users. Instead of every request going to your origin servers in one region, the CDN serves cached content from the nearest edge location.",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "sam",
+    "text": "The impact?",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Massive. Latency drops from hundreds of milliseconds to tens. Your origin handles less load. You get DDoS protection. For anything static - images, CSS, JavaScript - use a CDN. For dynamic content, some CDNs can cache that too with careful configuration.",
+    "chapter": "SEGMENT 4: CACHING STRATEGIES (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "sam",
+    "text": "What about work that doesn't need to happen immediately?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Async processing is a key scaling pattern. If something doesn't need to complete in the request/response cycle, don't do it there.",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "sam",
+    "text": "Examples?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "Sending emails, generating reports, processing images, updating analytics, webhook deliveries. The user doesn't need to wait for these.",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "sam",
+    "text": "How does it work?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "You use a message queue. The web request puts a message on the queue - \"send welcome email to user 123\" - and returns immediately. Worker processes pull from the queue and do the work.",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "sam",
+    "text": "What are the benefits?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Faster response times - don't make users wait. Decoupling - producers and consumers don't need to know about each other. Load smoothing - queues absorb spikes, workers process at their own pace. Reliability - if a worker dies, the message stays in queue for another worker.",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "sam",
+    "text": "What queuing technologies are common?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "RabbitMQ - traditional message broker, flexible routing. Amazon SQS - managed, simple, reliable. Apache Kafka - high-throughput, distributed log, great for event streaming. Redis - can do basic queuing with lists or streams.",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "sam",
+    "text": "When would you choose each?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "SQS if you're on AWS and want managed simplicity. Kafka if you need high throughput, want to replay events, or have stream processing needs. RabbitMQ for complex routing patterns. Redis if you're already using it and needs are simple.",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "sam",
+    "text": "What about failure handling?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "Critical to get right. If a worker fails mid-processing, what happens to the message?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "sam",
+    "text": "Idempotent means...?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "Doing it twice has the same effect as once. Sending the same email twice is annoying. Charging the same credit card twice is a disaster. Design processing to be safe when executed multiple times.",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "sam",
+    "text": "What about order?",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "Most queues don't guarantee order. If order matters, you need to handle it - process messages for the same entity sequentially, use sequence numbers, or use ordered queues (Kafka partitions guarantee order within a partition).",
+    "chapter": "SEGMENT 5: ASYNCHRONOUS PROCESSING AND QUEUES (10 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "sam",
+    "text": "Let's talk about when things go wrong. At scale, failures are constant.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "At scale, failures are not exceptions, they're the norm. If you have thousands of servers, something is failing right now. Networks partition. Disks die. Processes crash. You design for failure from the start.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "sam",
+    "text": "What are the key patterns?",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Redundancy - no single points of failure. Multiple servers behind load balancers. Multiple database replicas. Multiple data centers.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "sam",
+    "text": "What happens when a timeout fires?",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "You fail gracefully. Return a cached result, show a degraded experience, or return an error. Don't let one slow component bring down everything.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "Circuit breakers - if a dependency is failing, stop calling it. A circuit breaker tracks failures and \"opens\" when too many occur, fast-failing requests instead of waiting for timeouts. After a cooldown, it tests if the dependency is back.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "sam",
+    "text": "Like a fuse in electrical systems.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "alex",
+    "text": "Exactly the analogy. Prevents cascading failures where one broken component takes down everything that depends on it.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Retries with backoff - transient failures often resolve quickly. Retry a few times with increasing delays. But be careful: too aggressive retrying can overwhelm a struggling system.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "sam",
+    "text": "How do you balance that?",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Add jitter - random variation in retry timing so requests don't all retry simultaneously. Use exponential backoff - wait 1s, then 2s, then 4s, not 1s, 1s, 1s.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "alex",
+    "text": "Bulkheads - isolate failure domains. If your payment processing dies, your product browsing should still work. Separate thread pools, separate services, separate databases for critical functions.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "sam",
+    "text": "How do you know things are failing?",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "alex",
+    "text": "Monitoring and alerting - we talked about this for engineering culture, but at scale it's even more critical. You need: metrics for everything, alerts that are actionable, dashboards showing system health, distributed tracing to follow requests across services.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "sam",
+    "text": "What about testing for failures?",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "alex",
+    "text": "Chaos engineering - deliberately inject failures to see how your system responds. Netflix's Chaos Monkey kills random servers. Can your system handle it? Better to find out on Tuesday afternoon than Saturday at 2 AM.",
+    "chapter": "SEGMENT 6: RELIABILITY AND FAILURE HANDLING (10 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "sam",
+    "text": "Let's make this concrete with some examples. How would you design a few common systems?",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "alex",
+    "text": "Let me walk through a few quickly.",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "sam",
+    "text": "What about generating unique short codes?",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "alex",
+    "text": "Several options: auto-increment ID converted to base62, random generation with collision check, or distributed ID generators like Snowflake (Twitter's approach).",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "Social media feed (like Twitter timeline):",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "sam",
+    "text": "What do real systems do?",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "alex",
+    "text": "Hybrid. Pull for users who follow few accounts. Push for users who follow many but none are celebrities. Special handling for celebrity accounts - pull their tweets at read time.",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "alex",
+    "text": "Video streaming (like YouTube):",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0111.mp3"
+  },
+  {
+    "index": 112,
+    "speaker": "sam",
+    "text": "What about live streaming?",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0112.mp3"
+  },
+  {
+    "index": 113,
+    "speaker": "alex",
+    "text": "Different problem. Low latency matters. Use protocols like HLS or WebRTC. Distributed ingestion, edge publishing, small segment sizes.",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0113.mp3"
+  },
+  {
+    "index": 114,
+    "speaker": "alex",
+    "text": "Ride-sharing matching (like Uber):",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0114.mp3"
+  },
+  {
+    "index": 115,
+    "speaker": "sam",
+    "text": "These examples show how different problems need different solutions.",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0115.mp3"
+  },
+  {
+    "index": 116,
+    "speaker": "alex",
+    "text": "Exactly. There's no one-size-fits-all architecture. Understanding your specific requirements - read vs write heavy, latency requirements, consistency needs, geographic distribution - drives the design.",
+    "chapter": "SEGMENT 7: SYSTEM DESIGN CASE STUDIES (10 minutes)",
+    "file": "0116.mp3"
+  },
+  {
+    "index": 117,
+    "speaker": "sam",
+    "text": "What should product leaders remember about systems design at scale?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0117.mp3"
+  },
+  {
+    "index": 118,
+    "speaker": "alex",
+    "text": "Several things:",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0118.mp3"
+  },
+  {
+    "index": 119,
+    "speaker": "sam",
+    "text": "So constant evolution?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0119.mp3"
+  },
+  {
+    "index": 120,
+    "speaker": "alex",
+    "text": "Yes. Invest in observability so you see problems before users do. Create headroom so spikes don't cause outages.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0120.mp3"
+  },
+  {
+    "index": 121,
+    "speaker": "alex",
+    "text": "Embrace failure. At scale, failure is constant. Design systems that degrade gracefully, recover automatically, and alert humans only when automated recovery fails.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0121.mp3"
+  },
+  {
+    "index": 122,
+    "speaker": "sam",
+    "text": "How much redundancy is enough?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0122.mp3"
+  },
+  {
+    "index": 123,
+    "speaker": "alex",
+    "text": "Depends on business impact of downtime. E-commerce? Very high. Internal tool? Less critical. Match investment to risk.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0123.mp3"
+  },
+  {
+    "index": 124,
+    "speaker": "alex",
+    "text": "Optimize for the common case. What operations happen most frequently? Make those fast, even if rare operations are slower. Don't over-engineer for edge cases.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0124.mp3"
+  },
+  {
+    "index": 125,
+    "speaker": "alex",
+    "text": "The database is often the bottleneck. Invest in database performance: query optimization, indexing, caching, read replicas. Shard only when you must.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0125.mp3"
+  },
+  {
+    "index": 126,
+    "speaker": "alex",
+    "text": "Async everything you can. If users don't need immediate results, don't make them wait. Queues smooth load and add reliability.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0126.mp3"
+  },
+  {
+    "index": 127,
+    "speaker": "sam",
+    "text": "What about cloud versus building your own?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0127.mp3"
+  },
+  {
+    "index": 128,
+    "speaker": "alex",
+    "text": "Use managed services when possible. Running your own Kafka cluster is a full-time job. Managed services let you focus on your product. The cost is usually worth it until you're truly massive.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0128.mp3"
+  },
+  {
+    "index": 129,
+    "speaker": "sam",
+    "text": "When does custom make sense?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0129.mp3"
+  },
+  {
+    "index": 130,
+    "speaker": "alex",
+    "text": "When managed services can't meet your needs, when cost at scale justifies the investment, or when it's core to your product. Netflix runs their own CDN because content delivery is their core business.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0130.mp3"
+  },
+  {
+    "index": 131,
+    "speaker": "alex",
+    "text": "Finally, remember that scale is expensive. Every 10x in traffic requires different solutions and often step-changes in cost and complexity. Grow into complexity rather than starting there.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0131.mp3"
+  },
+  {
+    "index": 132,
+    "speaker": "sam",
+    "text": "Practical wisdom. Next episode, we're going from systems to code organization - specifically, Monorepos. Why are big companies moving to them, and should you?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0132.mp3"
+  },
+  {
+    "index": 133,
+    "speaker": "alex",
+    "text": "One repo to rule them all?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0133.mp3"
+  },
+  {
+    "index": 134,
+    "speaker": "sam",
+    "text": "We'll see.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (6 minutes)",
+    "file": "0134.mp3"
+  }
+]

@@ -1,0 +1,709 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome back to Tech Leadership Unpacked. I'm Sam Rivera. We're in the home stretch - episode nine. Today we're talking about API design, and I'll admit, this might seem deeply technical, but APIs are increasingly a product concern.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen. Sam's right. If you have external developers, partners, or even internal teams consuming your services, your API is a product. A well-designed API creates leverage - people can build on your platform. A poorly designed API creates friction, support burden, and abandoned integrations.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "So how do we build APIs that developers love?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "That's exactly what we'll cover. We'll talk principles that apply whether you're building REST, GraphQL, or internal services.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "Let's start with principles. What makes a good API?",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Several qualities matter.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "That seems obvious. Why does it go wrong?",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "Different teams building different endpoints. No style guide. Rushing to ship. You end up with /users returning {users: []} and /products returning {items: []}. Small inconsistencies multiply into confusion.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Intuitiveness - developers can guess how things work. If you know how to list users, you can guess how to list products. Following conventions and patterns makes APIs learnable.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "sam",
+    "text": "What conventions matter?",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Industry standards like REST conventions, HTTP verb semantics, status codes. If your API uses POST for everything and returns 200 for errors, you're fighting expectations.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "Simplicity - the API does what's needed without unnecessary complexity. Every optional parameter, every configuration flag, every edge case you support has a maintenance cost. Start simple, add complexity only when needed.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "sam",
+    "text": "Isn't more flexibility better?",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "alex",
+    "text": "Flexibility has costs. More ways to do things means more ways to do things wrong, more documentation needed, more support questions. Opinionated APIs that guide users toward the right path are often better.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Evolvability - the API can change without breaking existing users. You'll always need to add features, fix mistakes, evolve the product. Good API design anticipates change.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "sam",
+    "text": "How do you design for change?",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Versioning strategies, additive-only changes, deprecation policies. We'll dig into these.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "alex",
+    "text": "Documentation - this isn't really a property of the API itself, but it's inseparable. An undocumented API barely exists. Documentation is part of the product.",
+    "chapter": "SEGMENT 1: API DESIGN PRINCIPLES (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "sam",
+    "text": "REST is still the most common API style, right? Let's go deep there.",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "alex",
+    "text": "Yes, REST dominates. Let's cover how to do it well.",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "sam",
+    "text": "What about actions like \"send email\" or \"archive\"?",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "alex",
+    "text": "This is where REST gets tricky. Options:",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "HTTP Methods. Use them correctly:",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "sam",
+    "text": "What's the difference between PUT and PATCH in practice?",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "PUT: \"Here's the complete new state.\" You send all fields, missing fields might be set to null.",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "alex",
+    "text": "Status Codes. Use them meaningfully:",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "sam",
+    "text": "I've seen APIs that return 200 with error messages in the body.",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "alex",
+    "text": "That's an anti-pattern. Status codes exist for a reason. Clients and infrastructure (caches, load balancers, monitoring) rely on them. If you return 200 for errors, retries won't work correctly, caching breaks, and clients can't trust responses.",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "Request and Response Design.",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "sam",
+    "text": "What about errors?",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Errors should be structured and helpful:",
+    "chapter": "SEGMENT 2: REST API DESIGN (15 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "sam",
+    "text": "List endpoints seem straightforward but can get complex. How do you handle pagination?",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Several patterns:",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "sam",
+    "text": "How do you implement cursor pagination?",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "The cursor encodes position - often the ID or timestamp of the last item. \"Give me 10 items after this one.\" The response includes the next cursor. Client uses it for the next page.",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "sam",
+    "text": "What about filtering?",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Several approaches:",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "sam",
+    "text": "And sorting?",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Common patterns:",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "sam",
+    "text": "What about including related data?",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "This is a big topic. Options:",
+    "chapter": "SEGMENT 3: PAGINATION, FILTERING, SORTING (10 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "sam",
+    "text": "REST isn't the only option. What about GraphQL?",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "GraphQL is a query language for APIs. Instead of fixed endpoints returning fixed shapes, clients request exactly what they need.",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "sam",
+    "text": "Example?",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Client sends:",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "sam",
+    "text": "When does GraphQL make sense?",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "Strong use cases:",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "sam",
+    "text": "What are the downsides?",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Complexity. Setting up a GraphQL server is more involved than REST. Schema definition, resolvers, tooling.",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "sam",
+    "text": "So when would you choose REST over GraphQL?",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Simple CRUD APIs. Public APIs where documentation and simplicity matter. Cases where HTTP caching is important. When the team doesn't have GraphQL expertise.",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "sam",
+    "text": "What about gRPC?",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "gRPC is a high-performance RPC framework using Protocol Buffers. Binary format, schema-first, code generation, streaming support.",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "sam",
+    "text": "Any guidance on choosing?",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "My defaults:",
+    "chapter": "SEGMENT 4: GRAPHQL AND ALTERNATIVES (10 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "sam",
+    "text": "How do you handle API changes over time?",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "This is one of the hardest parts of API design. Once an API is in use, changing it is painful.",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "sam",
+    "text": "What counts as a breaking change?",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Removing or renaming fields. Changing field types. Changing required/optional status. Changing response structure. Removing endpoints. Changing error formats.",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "sam",
+    "text": "How do you handle breaking changes when you need them?",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Versioning. Common strategies:",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "sam",
+    "text": "Which do you prefer?",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "URL versioning for clarity, especially for public APIs. Internal APIs can use headers or content negotiation.",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "alex",
+    "text": "Deprecation policies are critical. When you version:",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "sam",
+    "text": "How long should you support old versions?",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "alex",
+    "text": "Depends on your users. Internal APIs can move faster. Public APIs with enterprise customers might need years. Set expectations upfront and stick to them.",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "Compatibility strategies:",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "sam",
+    "text": "What about field defaults?",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Tricky area. If you add a required field to a creation request, that's breaking. Solutions: make new fields optional with defaults, or gate behind feature flags or versions.",
+    "chapter": "SEGMENT 5: VERSIONING AND EVOLUTION (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "sam",
+    "text": "We have a whole episode on security, but let's touch on API-specific concerns.",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Key considerations:",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "sam",
+    "text": "Which should we use?",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "API keys for simple integrations, especially internal. OAuth for user authorization, especially if third parties access user data. JWTs often paired with OAuth as the token format.",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "alex",
+    "text": "Authorization - who can do what:",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Rate limiting - prevent abuse:",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "alex",
+    "text": "HTTPS everywhere. No exceptions. API keys and tokens over HTTP are exposed. HSTS headers to enforce.",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "sam",
+    "text": "What about input validation?",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "alex",
+    "text": "Validate everything. Type checking, length limits, allowed values. Return clear validation errors. Never trust client input. This prevents security issues and improves developer experience.",
+    "chapter": "SEGMENT 6: AUTHENTICATION AND SECURITY (8 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "sam",
+    "text": "Let's talk about documentation. You said it's part of the product.",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "alex",
+    "text": "Maybe the most important part for external APIs. Good docs = adoption. Bad docs = support tickets.",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "sam",
+    "text": "What tools are standard?",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "alex",
+    "text": "OpenAPI (Swagger) - spec for describing REST APIs. Tools generate docs, SDKs, mocks from the spec.",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "sam",
+    "text": "Should we generate SDKs?",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "alex",
+    "text": "For major platforms - JavaScript, Python, Ruby, Go - SDKs dramatically improve developer experience. Generated from OpenAPI or hand-crafted for polish.",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "Interactive documentation is powerful. Try-it-out features in docs let developers experiment without writing code. Reduces time to first successful call.",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "sam",
+    "text": "What makes documentation great?",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "Clear, concise writing. Realistic examples. Good search. Up-to-date with the actual API. Version-matched. Quick path to solving real problems.",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "alex",
+    "text": "Developer experience (DX) goes beyond docs:",
+    "chapter": "SEGMENT 7: DOCUMENTATION AND DX (8 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "sam",
+    "text": "Let's summarize. What should product leaders know about API design?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "alex",
+    "text": "APIs are products. They have users, they need design, they need documentation, they need support. Treat them with the same rigor as your customer-facing product.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "sam",
+    "text": "Who should own API design?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "Joint ownership between product (what capabilities to expose) and engineering (how to expose them well). For public APIs, consider a dedicated API product manager.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "Consistency over perfection. A consistent API is better than a perfect one. Establish patterns early, document them, enforce them in code review.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "Plan for evolution. You will make mistakes. You will need to add features. Design for change with versioning, deprecation policies, and additive changes.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "Invest in developer experience. Time spent on docs, SDKs, and examples pays back in adoption, reduced support, and developer goodwill.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "sam",
+    "text": "Any anti-patterns to avoid?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Exposing internal implementation. Your API should model the domain, not your database schema.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "sam",
+    "text": "One thing to remember?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Think of your API from the consumer's perspective. Every design decision should make their life easier. If you wouldn't want to use your own API, redesign it.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "sam",
+    "text": "Perfect. Final episode coming up: Security and Development Methodologies. How to build securely and deliver effectively.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "The grand finale.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (7 minutes)",
+    "file": "0100.mp3"
+  }
+]

@@ -1,0 +1,786 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome back to Tech Leadership Unpacked. I'm Sam Rivera. We've covered building systems at scale - now let's talk about how you organize the code that builds those systems. Specifically: should all your code live in one giant repository?",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen. And I should warn you - this topic generates surprisingly strong opinions. People get passionate about repository structure. We're going to try to cut through the religious wars and give you a practical framework.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "Perfect. So let's start basic: what is a monorepo?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "A monorepo (mono repository) is a single version-controlled repository that contains multiple projects, often the entire codebase of an organization. Google, Meta, Microsoft, and many others use this approach.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "As opposed to?",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Polyrepo or multi-repo - separate repositories for each project, library, or service. Most startups start here because it's the default: new project, new repo.",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "Why would anyone want all their code in one place? That sounds like chaos.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "It sounds counterintuitive, but there are compelling benefits.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "sam",
+    "text": "That happens in polyrepo?",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "alex",
+    "text": "Constantly. Library version drift is a major source of bugs and compatibility issues. In a monorepo, everyone uses the same version of shared code, and when you update that shared code, you update all consumers simultaneously.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "sam",
+    "text": "That sounds like a lot of breaking changes.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "It changes how you handle breaking changes. Instead of deprecating and supporting multiple versions, you make the change and fix all consumers in the same commit. This is actually cleaner - no version fragmentation.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Atomic cross-project changes. Need to refactor an API that's used by ten services? In a polyrepo world, that's ten PRs, coordinated carefully. In a monorepo, it's one change that updates the API and all consumers atomically.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "sam",
+    "text": "How does that work practically?",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "You run one refactoring script or make the changes, run the full test suite, and commit. Everything is in sync. No deployment coordination nightmares.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "alex",
+    "text": "Code sharing and discoverability. When code is in one place, it's easier to find and reuse. You can see what utilities exist, how problems were solved elsewhere, avoid reinventing wheels.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "sam",
+    "text": "Don't you get duplication in polyrepo?",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "alex",
+    "text": "Rampant duplication. Each team builds their own logging wrapper, their own auth library, their own HTTP client. In a monorepo, you build once and share.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "Consistent tooling and configuration. One linting config, one test framework, one CI setup. Everyone follows the same standards because there's one place to define them.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "sam",
+    "text": "That sounds like enforced consistency.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Yes, and that's often good. Consistency reduces cognitive load. A developer can move between projects and everything works the same way.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "alex",
+    "text": "Simplified collaboration. Everyone can see and contribute to any code. No access requests across repos. This creates transparency and enables broader ownership.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "sam",
+    "text": "Who uses monorepos?",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "alex",
+    "text": "Google is the famous example - most of their code is in one repository. Meta, Twitter, Microsoft, Uber, Airbnb. The pattern is proven at scale.",
+    "chapter": "SEGMENT 1: THE CASE FOR MONOREPOS (12 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "sam",
+    "text": "Okay, that sounds compelling. What's the counterargument?",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "alex",
+    "text": "The challenges are real, especially at scale.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "sam",
+    "text": "Like what?",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "alex",
+    "text": "Google built Piper and Blaze (now open-sourced as Bazel). Meta has Mercurial extensions. You need: sparse checkout (only pull code you need), smart build systems that know what changed and what to rebuild, fast dependency analysis.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "sam",
+    "text": "Can you get that off the shelf?",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "alex",
+    "text": "Increasingly, yes. Bazel, Nx, Turborepo, Rush - there are now tools designed for monorepos. But it's not just install-and-go. There's a learning curve and configuration work.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Build and test times. If you have to test everything on every change, builds take hours. You need sophisticated caching, parallel execution, and affected-only testing.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "sam",
+    "text": "Can you achieve that?",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Yes, with investment. Bazel and similar tools have remote caching, distributed execution. The CI bill can be significant.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "alex",
+    "text": "Ownership and permissions. In a polyrepo, team A owns repo A. Clear boundaries. In a monorepo, who owns what? How do you prevent people from making changes to code they don't understand?",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "sam",
+    "text": "That's an organizational concern.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "alex",
+    "text": "Exactly. You need CODEOWNERS files, code review requirements, clear directory ownership. The tooling exists but needs to be implemented.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Tight coupling risk. When it's easy to change anything, it's tempting to reach into other teams' code. You can end up with tangled dependencies that undermine the intended isolation.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "sam",
+    "text": "How do you prevent that?",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Enforce module boundaries. Some monorepo tools can enforce that team A's code can only depend on team B's public API, not internals. You need discipline.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "alex",
+    "text": "Scaling challenges. At some point, even with great tooling, there are limits. Very large monorepos require custom infrastructure. Not everyone can afford what Google built.",
+    "chapter": "SEGMENT 2: THE CASE AGAINST MONOREPOS (10 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "sam",
+    "text": "So how do I decide? Monorepo or polyrepo?",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "alex",
+    "text": "Let me give you a framework.",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "sam",
+    "text": "When does polyrepo make more sense?",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "alex",
+    "text": "Favor polyrepo when:",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "sam",
+    "text": "What about a hybrid?",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "alex",
+    "text": "Very common. One approach: monorepo per domain or per product line, polyrepo across domains. Or: monorepo for applications, separate repos for truly independent libraries or infrastructure.",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "sam",
+    "text": "What's the migration path if you want to switch?",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "alex",
+    "text": "Polyrepo to monorepo: Start by identifying shared dependencies. Move those in first. Then gradually migrate projects, testing carefully.",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "sam",
+    "text": "Any general advice?",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "alex",
+    "text": "Don't over-rotate. The choice matters less than how well you execute. A well-run polyrepo beats a poorly-run monorepo, and vice versa. Focus on the practices - sharing code, managing dependencies, consistent standards - and the repository structure follows.",
+    "chapter": "SEGMENT 3: MAKING THE DECISION (10 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "sam",
+    "text": "Let's talk tools. What do I need to make a monorepo work?",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "alex",
+    "text": "Several categories of tooling:",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "sam",
+    "text": "What's a hermetic build?",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "alex",
+    "text": "A build that depends only on declared inputs, not on the machine state. Run it on any machine, get the same result. This enables distributed builds and caching.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "Nx - designed for JavaScript/TypeScript monorepos, but expanding. Great for web teams. Computation caching, affected commands, dependency graph visualization.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "sam",
+    "text": "How do these help?",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "They understand what depends on what. When you change file X, they know which projects need rebuilding. They cache build outputs so unchanged code doesn't rebuild. They can run builds in parallel.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "sam",
+    "text": "What about version control?",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Git works but needs help at scale.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "sam",
+    "text": "What about CI/CD?",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Critical to get right. The build system's affected analysis should drive CI - only test what changed. Remote caching so different builds share results. Distributed test execution.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "sam",
+    "text": "Sounds expensive.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "It can be. But consider: you're paying compute cost instead of coordination cost. The alternative is developers waiting for slow builds or, worse, not running tests.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "alex",
+    "text": "Code ownership tools.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "sam",
+    "text": "What about IDEs?",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "alex",
+    "text": "Modern IDEs handle large projects better than before. VS Code with monorepo-aware extensions works well. JetBrains IDEs can scope to sub-projects. The key is not loading everything at once.",
+    "chapter": "SEGMENT 4: MONOREPO TOOLING DEEP DIVE (12 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "sam",
+    "text": "Let's zoom out from monorepo vs polyrepo. How should code be organized within a repository?",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "alex",
+    "text": "Great question. The structure affects developer experience significantly.",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "sam",
+    "text": "What's most common in monorepos?",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "alex",
+    "text": "Usually a structure like:",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "sam",
+    "text": "What makes a good library boundary?",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "alex",
+    "text": "Cohesion - the library does one thing well. Clear API - internals aren't exposed. Minimal dependencies - doesn't pull in the world.",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "sam",
+    "text": "How do you prevent spaghetti dependencies?",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "alex",
+    "text": "Layered architecture in the repo. Define layers: infrastructure, domain, application, presentation. Enforce that dependencies only flow one direction (e.g., presentation can depend on application, but not vice versa).",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Package boundaries. Tools like Nx have the concept of \"tags\" where you can tag libraries (scope:orders, type:feature, type:util) and define rules about what can depend on what.",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "sam",
+    "text": "What about feature organization?",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Some teams organize by feature \"vertically\" - all code for a feature in one place, even if it spans layers. This maximizes team autonomy but can lead to duplication.",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "sam",
+    "text": "How do you handle configuration?",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "Centralize what should be consistent - linting rules, TypeScript config, CI definitions. Use inheritance so projects extend shared configs with overrides.",
+    "chapter": "SEGMENT 5: CODE ORGANIZATION WITHIN REPOS (10 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "sam",
+    "text": "Let's talk about package management, especially for JavaScript ecosystems. It seems complicated in monorepos.",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "It's the source of much pain. But there are solutions.",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "sam",
+    "text": "What problems do these solve?",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "Several:",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "sam",
+    "text": "What about non-JavaScript ecosystems?",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "Each ecosystem has its patterns:",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "sam",
+    "text": "What about versioning libraries within a monorepo?",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "Controversial topic. Two approaches:",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "sam",
+    "text": "Which is better?",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "No versioning is simpler and enables atomic changes. Independent versioning is necessary if you publish packages externally or have very large repos where updating all consumers at once isn't practical.",
+    "chapter": "SEGMENT 6: PACKAGE MANAGEMENT (10 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "sam",
+    "text": "Let's talk about the human side. How does code organization affect culture?",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Deeply. Repository structure shapes behavior.",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "sam",
+    "text": "What about team autonomy?",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "There's tension there. Monorepos can feel centralizing - everyone must use the same tools, follow the same standards. Some teams chafe at that.",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "sam",
+    "text": "How do you balance?",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "Be explicit about what's standardized (must use) versus what's suggested (should consider). Make the standards genuinely good so people want to follow them. Have a process for teams to propose changes to standards.",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "alex",
+    "text": "Inner-source culture. The best monorepo cultures embrace inner-source - internal open source. Anyone can contribute to any code, with appropriate review. This spreads knowledge, increases bus factor, improves code quality.",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "sam",
+    "text": "What makes inner-source work?",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "alex",
+    "text": "Good documentation - code should be understandable by outsiders. Welcoming maintainers who don't gatekeep. Clear contribution guidelines. Fast feedback on PRs.",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Code ownership models.",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "sam",
+    "text": "What works best?",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Depends on risk. For critical infrastructure, strong ownership makes sense. For utilities and features, weaker ownership enables faster iteration. The key is matching ownership strength to criticality.",
+    "chapter": "SEGMENT 7: CULTURAL AND ORGANIZATIONAL ASPECTS (8 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "sam",
+    "text": "Let's wrap up with actionable advice.",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Here's my practical guidance:",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "sam",
+    "text": "What's the migration story?",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "Start small. Move shared libraries first. See how it feels. Then migrate applications gradually. Don't do a big-bang migration.",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "alex",
+    "text": "For large teams (100+):",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "sam",
+    "text": "What mistakes do you see?",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "alex",
+    "text": "Mistake 1: Choosing monorepo without investing in tooling. You get the pain without the benefit.",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "sam",
+    "text": "What's the one thing to remember?",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "alex",
+    "text": "Code organization should serve the humans who use it. If developers are fighting their tools, structure is wrong. If changes are scary and coordination is hard, structure is wrong. Optimize for developer productivity and collaboration, and the specific repo structure is secondary.",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "sam",
+    "text": "Great framing. Next episode: Design Systems. How to build and maintain component libraries that scale across products and teams.",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "alex",
+    "text": "From code organization to UI organization.",
+    "chapter": "SEGMENT 8: PRACTICAL RECOMMENDATIONS (8 minutes)",
+    "file": "0111.mp3"
+  }
+]

@@ -108,6 +108,7 @@ let sleepEndTime = null;
 let searchMatches = [];
 let searchIndex = 0;
 const synth = window.speechSynthesis;
+const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 
 // Audio playback state (for pre-generated audio)
 let audioManifest = null;  // null = use TTS, array = use audio files
@@ -509,12 +510,18 @@ function parseMarkdown(content) {
         }
 
         // Match any speaker pattern: **NAME:** or **NAME:** text
-        const speakerMatch = trimmed.match(/^\*\*([A-Z]+):\*\*\s*(.*)$/);
+        const speakerMatch = trimmed.match(SPEAKER_LINE_RE);
         const dirMatch = trimmed.match(/^\*?\*?\[(.+)\]\*?\*?$/);
 
         if (speakerMatch) {
             const speakerName = speakerMatch[1];
-            const text = speakerMatch[2];
+            const text = (speakerMatch[2] || '').trim();
+
+            // Ignore metadata-like bold labels that are not dialogue lines.
+            if (!text) {
+                currentSpeaker = null;
+                continue;
+            }
 
             // Assign voice type (alternating between alex and sam voices)
             if (!speakerMap[speakerName]) {
@@ -523,14 +530,11 @@ function parseMarkdown(content) {
             }
 
             const voiceType = speakerMap[speakerName];
-
-            if (text && text.trim()) {
-                dialogue.push({
-                    speaker: speakerName,
-                    text: cleanText(text),
-                    type: voiceType
-                });
-            }
+            dialogue.push({
+                speaker: speakerName,
+                text: cleanText(text),
+                type: voiceType
+            });
             currentSpeaker = voiceType;
         } else if (dirMatch) {
             // Stage directions like [MUSIC FADES] - skip these, don't speak them
@@ -1648,7 +1652,8 @@ function parseChapters(content) {
         const line = lines[i].trim();
 
         // Track dialogue lines for position mapping (any speaker name pattern: **NAME:** or **NAME:**)
-        if (line.match(/^\*\*[A-Z]+:\*\*/)) {
+        const speakerMatch = line.match(SPEAKER_LINE_RE);
+        if (speakerMatch && (speakerMatch[2] || '').trim()) {
             // Check if this line follows a chapter header
             for (let j = chaps.length - 1; j >= 0; j--) {
                 if (chaps[j].lineIndex === -1) {

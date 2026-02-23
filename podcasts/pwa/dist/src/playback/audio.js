@@ -94,7 +94,12 @@ export function createSpeechPlayers({
       };
 
       audioElement.addEventListener('pause', () => {
-        onInterrupted?.();
+        // Browsers emit `pause` during natural completion; treat only true interruptions.
+        queueMicrotask(() => {
+          if (!audioElement.ended) {
+            onInterrupted?.();
+          }
+        });
       });
 
       audioElement.play().catch(async () => {

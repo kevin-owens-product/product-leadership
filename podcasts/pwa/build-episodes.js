@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const showsDir = path.join(__dirname, '..', 'shows');
 const distDir = path.join(__dirname, 'dist');
@@ -71,13 +75,13 @@ if (podcasts.length === 0) {
 
 // Generate podcasts.js
 const podcastsJs = `// Auto-generated podcast data - ${new Date().toISOString()}
-const PODCASTS = ${JSON.stringify(podcasts, null, 2)};
+window.PODCASTS = ${JSON.stringify(podcasts, null, 2)};
 `;
 
 fs.writeFileSync(path.join(distDir, 'podcasts.js'), podcastsJs);
 console.log('\n✓ Generated: podcasts.js');
 
-// Copy other files
+// Copy static root files
 const filesToCopy = ['index.html', 'manifest.json', 'sw.js', 'icon.svg', '_headers', 'version.json'];
 filesToCopy.forEach(file => {
     const src = path.join(__dirname, file);
@@ -116,6 +120,16 @@ if (fs.existsSync(audioSrcDir)) {
     const audioCount = copyDirRecursive(audioSrcDir, audioDistDir);
     if (audioCount > 0) {
         console.log(`✓ Copied: ${audioCount} audio files`);
+    }
+}
+
+// Copy ES module source files used by index.html
+const srcModulesDir = path.join(__dirname, 'src');
+const srcModulesDistDir = path.join(distDir, 'src');
+if (fs.existsSync(srcModulesDir)) {
+    const sourceCount = copyDirRecursive(srcModulesDir, srcModulesDistDir);
+    if (sourceCount > 0) {
+        console.log(`✓ Copied: ${sourceCount} source module files`);
     }
 }
 

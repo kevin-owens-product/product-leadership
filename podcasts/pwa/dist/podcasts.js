@@ -1,5 +1,5 @@
-// Auto-generated podcast data - 2026-02-22T09:08:19.930Z
-const PODCASTS = [
+// Auto-generated podcast data - 2026-02-23T23:31:16.107Z
+window.PODCASTS = [
   {
     "id": "claude-code-mastery",
     "title": "Claude Code Mastery",

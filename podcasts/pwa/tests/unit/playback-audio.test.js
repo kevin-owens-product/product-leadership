@@ -8,7 +8,6 @@ test('audio segment completion does not trigger interruption handler', async () 
 
   class FakeAudio {
     constructor() {
-      this.handlers = new Map();
       this.ended = false;
       this.playbackRate = 1;
       this.preload = 'auto';
@@ -17,25 +16,15 @@ test('audio segment completion does not trigger interruption handler', async () 
 
     setAttribute() {}
 
-    addEventListener(event, handler) {
-      if (!this.handlers.has(event)) this.handlers.set(event, []);
-      this.handlers.get(event).push(handler);
-    }
-
-    emit(event) {
-      const listeners = this.handlers.get(event) || [];
-      listeners.forEach(listener => listener());
-    }
-
     pause() {
-      this.emit('pause');
+      if (typeof this.onpause === 'function') this.onpause();
     }
 
     play() {
       if (typeof this.onplay === 'function') this.onplay();
 
       // Simulate browser order where pause can happen as media naturally ends.
-      this.emit('pause');
+      if (typeof this.onpause === 'function') this.onpause();
       this.ended = true;
       if (typeof this.onended === 'function') this.onended();
 

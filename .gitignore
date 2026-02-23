@@ -1,0 +1,6 @@
+.netlify/
+podcasts/pwa/.netlify/
+podcasts/pwa/dist/audio/
+podcasts/pwa/node_modules/
+podcasts/pwa/test-results/
+podcasts/pwa/playwright-report/

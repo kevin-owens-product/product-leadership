@@ -65,7 +65,8 @@ self.addEventListener('fetch', event => {
 
     // For audio files, use network with cache fallback
     if (url.pathname.startsWith('/audio/')) {
-        event.respondWith(networkFirst(event.request));
+        // Do not persist audio in SW cache to avoid unbounded storage growth
+        event.respondWith(networkFirst(event.request, { cacheResponse: false }));
         return;
     }
 
@@ -74,10 +75,10 @@ self.addEventListener('fetch', event => {
 });
 
 // Network first strategy - try network, fall back to cache
-async function networkFirst(request) {
+async function networkFirst(request, { cacheResponse = true } = {}) {
     try {
         const networkResponse = await fetch(request);
-        if (networkResponse.ok) {
+        if (cacheResponse && networkResponse.ok) {
             // Cache the fresh response
             const cache = await caches.open(CACHE_NAME);
             cache.put(request, networkResponse.clone());

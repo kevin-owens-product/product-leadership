@@ -609,7 +609,6 @@ async function openEpisode(episode) {
     await stopPlayback();
     currentEpisode = episode;
     dialogueLines = parseMarkdown(episode.content);
-    chapters = parseChapters(episode.content);
 
     // Restore progress (with podcast-scoped key)
     const state = loadState();
@@ -619,6 +618,8 @@ async function openEpisode(episode) {
 
     // Check for pre-generated audio
     await loadAudioManifest(episode);
+    // Parse chapters after audio metadata is loaded so duration estimates are accurate.
+    chapters = parseChapters(episode.content);
 
     document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
 
@@ -1642,10 +1643,16 @@ updateQueueDisplay();
 // ===== CHAPTERS =====
 let chapters = [];
 
+function extractEpisodeDurationMinutes(content) {
+    const durationMatch = content.match(/\*\*Duration:\*\*\s*~?\s*(\d+(?:\.\d+)?)\s*minutes?/i);
+    if (!durationMatch) return null;
+    const minutes = parseFloat(durationMatch[1]);
+    return Number.isFinite(minutes) && minutes > 0 ? minutes : null;
+}
+
 function parseChapters(content) {
     const lines = content.split('\n');
     const chaps = [];
-    let currentLine = 0;
     let dialogueLine = 0;
 
     for (let i = 0; i < lines.length; i++) {
@@ -1668,13 +1675,15 @@ function parseChapters(content) {
         const chapterMatch = line.match(/^###\s+(.+)/);
         if (chapterMatch) {
             let title = chapterMatch[1].trim();
+            const hintedDuration = title.match(/\((\d+(?:\.\d+)?)\s*minutes?\)/i);
             // Clean up the title
-            title = title.replace(/\*\*/g, '').replace(/\(\d+\s*minutes?\)/i, '').trim();
+            title = title.replace(/\*\*/g, '').replace(/\(\d+(?:\.\d+)?\s*minutes?\)/i, '').trim();
             title = title.replace(/:\s*$/, '');
 
             chaps.push({
                 title: title,
                 lineIndex: -1, // Will be set when we find the next dialogue
+                hintedMinutes: hintedDuration ? parseFloat(hintedDuration[1]) : null,
                 rawLine: i
             });
         }
@@ -1687,13 +1696,19 @@ function parseChapters(content) {
         }
     });
 
-    // Add estimated times based on actual audio duration or line count
-    let avgSecsPerLine = 3;  // default fallback
+    const episodeDurationMinutes = extractEpisodeDurationMinutes(content);
+    const episodeDurationSeconds = episodeDurationMinutes ? episodeDurationMinutes * 60 : null;
+
+    // Add estimated times based on explicit chapter hints, actual audio duration, episode total duration, or line count.
+    let avgSecsPerLine = 3; // default fallback
 
     // If we have actual audio durations, calculate accurate average
     if (audioSegmentDurations.length > 0 && dialogueLine > 0) {
         avgSecsPerLine = totalAudioDuration / dialogueLine;
         console.log(`Using actual duration: ${avgSecsPerLine.toFixed(2)}s per line`);
+    } else if (episodeDurationSeconds && dialogueLine > 0) {
+        avgSecsPerLine = episodeDurationSeconds / dialogueLine;
+        console.log(`Using episode duration fallback: ${avgSecsPerLine.toFixed(2)}s per line`);
     } else {
         console.log('Using estimated duration: 3s per line');
     }
@@ -1702,15 +1717,19 @@ function parseChapters(content) {
         const nextChap = chaps[idx + 1];
         const endLine = nextChap ? nextChap.lineIndex : dialogueLine;
         const lines = endLine - chap.lineIndex;
+        const safeLines = Math.max(1, lines);
 
-        // Calculate duration in minutes
-        let mins = Math.round((lines * avgSecsPerLine) / 60);
+        // 1) Prefer explicit chapter duration hints in the markdown headers.
+        let mins = chap.hintedMinutes;
 
-        // If using actual audio durations, calculate precise segment duration
-        if (audioSegmentDurations.length > 0) {
+        // 2) Use actual segment durations when audio metadata exists.
+        if (!mins && audioSegmentDurations.length > 0) {
             const segmentDuration = audioSegmentDurations.slice(chap.lineIndex, endLine)
                 .reduce((sum, d) => sum + d, 0);
             mins = Math.round(segmentDuration / 60);
+        } else if (!mins) {
+            // 3) Fall back to line-based estimate, scaled from episode duration if available.
+            mins = Math.round((safeLines * avgSecsPerLine) / 60);
         }
 
         chap.duration = mins > 0 ? mins : 1;  // minimum 1 minute

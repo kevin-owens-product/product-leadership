@@ -61,19 +61,19 @@ export function createSpeechPlayers({
         return;
       }
 
-      const previous = getAudioElement();
-      if (previous) {
-        previous.pause();
-        previous.src = '';
+      let audioElement = getAudioElement();
+      if (!audioElement) {
+        audioElement = new Audio();
+        audioElement.preload = 'auto';
+        audioElement.setAttribute('playsinline', '');
+        audioElement.setAttribute('x-webkit-airplay', 'allow');
+        audioElement.preservesPitch = true;
+        setAudioElement(audioElement);
       }
 
-      const audioElement = new Audio(buildAudioUrl(segment.file));
       audioElement.playbackRate = getSpeechRate();
-      audioElement.preload = 'auto';
-      audioElement.setAttribute('playsinline', '');
-      audioElement.setAttribute('x-webkit-airplay', 'allow');
-      audioElement.preservesPitch = true;
-      setAudioElement(audioElement);
+      audioElement.src = buildAudioUrl(segment.file);
+      audioElement.currentTime = 0;
 
       if (isVoiceBoostEnabled()) {
         await setupWebAudio();
@@ -93,14 +93,14 @@ export function createSpeechPlayers({
         }
       };
 
-      audioElement.addEventListener('pause', () => {
+      audioElement.onpause = () => {
         // Browsers emit `pause` during natural completion; treat only true interruptions.
         queueMicrotask(() => {
           if (!audioElement.ended) {
             onInterrupted?.();
           }
         });
-      });
+      };
 
       audioElement.play().catch(async () => {
         audioElement.pause();

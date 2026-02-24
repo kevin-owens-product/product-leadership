@@ -11,6 +11,7 @@
     {"id": 2, "file": "episode-02-multi-agent-architecture.md", "title": "Multi-Agent Architecture for Enterprise Software", "subtitle": "Designing Systems Where AI Agents Collaborate on Complex Business Problems"},
     {"id": 3, "file": "episode-03-platform-power-dynamics.md", "title": "Platform Power Dynamics and Data Moats", "subtitle": "How B2B SaaS Companies Protect Their Value When Everyone Wants Their Data"},
     {"id": 4, "file": "episode-04-ai-native-product-management.md", "title": "AI-Native Product Management", "subtitle": "How the Role of the Product Manager Fundamentally Changes in an AI-First World"},
-    {"id": 5, "file": "episode-05-the-forge-method.md", "title": "The Forge Method", "subtitle": "A Systematic Framework for Transforming Software Companies from Legacy to AI-Native"}
+    {"id": 5, "file": "episode-05-the-forge-method.md", "title": "The Forge Method", "subtitle": "A Systematic Framework for Transforming Software Companies from Legacy to AI-Native"},
+    {"id": 6, "file": "episode-06-cpo-cro-cto-convergence.md", "title": "The Converged Executive", "subtitle": "Merging CPO, CRO, and CTO into One AI-Native Operating System"}
   ]
 }

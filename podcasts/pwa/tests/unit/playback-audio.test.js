@@ -50,6 +50,50 @@ test('speak uses TTS voice/rate settings and resolves on end', async () => {
   }
 });
 
+test('speak splits long text into multiple utterances', async () => {
+  const OriginalUtterance = global.SpeechSynthesisUtterance;
+
+  class FakeUtterance {
+    constructor(text) {
+      this.text = text;
+      this.voice = null;
+      this.rate = 1;
+      this.pitch = 1;
+      this.onend = null;
+      this.onerror = null;
+    }
+  }
+
+  global.SpeechSynthesisUtterance = FakeUtterance;
+
+  const spokenTexts = [];
+  const synth = {
+    cancel() {},
+    speak(utterance) {
+      spokenTexts.push(utterance.text);
+      if (typeof utterance.onend === 'function') {
+        utterance.onend();
+      }
+    }
+  };
+
+  const players = createSpeechPlayers({
+    synth,
+    getVoices: () => ({ alexVoice: null, samVoice: null }),
+    getSpeechRate: () => 1
+  });
+
+  const longText = Array.from({ length: 120 }, (_, idx) => `Sentence ${idx + 1}.`).join(' ');
+
+  try {
+    await players.speak(longText, 'sam');
+    assert.ok(spokenTexts.length > 1);
+    assert.ok(spokenTexts.every(chunk => chunk.length <= 260));
+  } finally {
+    global.SpeechSynthesisUtterance = OriginalUtterance;
+  }
+});
+
 test('stopCurrentSpeech calls synth.cancel', () => {
   let cancelled = 0;
   const synth = {

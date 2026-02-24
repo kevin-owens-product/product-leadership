@@ -1,5 +1,13 @@
 import { escapeHtml, safeColor } from '../security/sanitize.js';
 
+function formatClockFromMinutes(totalMinutes) {
+  const safeMinutes = Number.isFinite(totalMinutes) ? Math.max(0, totalMinutes) : 0;
+  const totalSeconds = Math.round(safeMinutes * 60);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
 export function setStaticHtml(el, html) {
   if (!el) return;
   el.innerHTML = html;
@@ -63,11 +71,13 @@ export function renderQueueItem(item, episode, podcast, isPlaying, index) {
 }
 
 export function renderChapterItem(item, chap, idx) {
+  const startTime = formatClockFromMinutes(chap.startMinute);
+  const durationLabel = `${chap.duration} min`;
   item.innerHTML = `
     <div class="chapter-number">${idx + 1}</div>
     <div class="chapter-info">
       <div class="chapter-title">${escapeHtml(chap.title)}</div>
-      <div class="chapter-time">~${chap.duration} min</div>
+      <div class="chapter-time">${startTime} · ${durationLabel}</div>
     </div>
   `;
 }

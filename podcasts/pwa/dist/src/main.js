@@ -25,7 +25,22 @@ import {
 } from './ui/render.js';
 
 // ===== APP VERSION =====
-const APP_VERSION = '2.2.0';
+const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
+let APP_VERSION = localStorage.getItem(VERSION_STORAGE_KEY) || '0.0.0';
+
+function updateVersionBadge() {
+    const badge = document.getElementById('version-badge');
+    if (badge) {
+        badge.textContent = 'v' + APP_VERSION;
+    }
+}
+
+function setAppVersion(version) {
+    if (typeof version !== 'string' || !version.trim()) return;
+    APP_VERSION = version.trim();
+    localStorage.setItem(VERSION_STORAGE_KEY, APP_VERSION);
+    updateVersionBadge();
+}
 
 // ===== AUTO-UPDATE CHECK =====
 // Runs immediately - fetches version from server bypassing all caches
@@ -38,10 +53,15 @@ const APP_VERSION = '2.2.0';
         });
         if (response.ok) {
             const data = await response.json();
-            console.log('Version check - Local:', APP_VERSION, 'Server:', data.version);
+            const serverVersion = (typeof data.version === 'string' && data.version.trim())
+                ? data.version.trim()
+                : APP_VERSION;
+            const localVersion = localStorage.getItem(VERSION_STORAGE_KEY);
+            console.log('Version check - Local:', localVersion || APP_VERSION, 'Server:', serverVersion);
 
-            if (data.version !== APP_VERSION) {
+            if (localVersion && serverVersion !== localVersion) {
                 console.log('Update available! Clearing caches and reloading...');
+                localStorage.setItem(VERSION_STORAGE_KEY, serverVersion);
 
                 // Unregister all service workers
                 if ('serviceWorker' in navigator) {
@@ -60,13 +80,16 @@ const APP_VERSION = '2.2.0';
                 }
 
                 // Hard reload
-                window.location.reload(true);
+                window.location.reload();
                 return;
             }
+
+            setAppVersion(serverVersion);
         }
     } catch (e) {
         console.log('Version check skipped (offline?):', e.message);
     }
+    updateVersionBadge();
 })();
 
 // Flag to track if podcasts are loaded
@@ -181,7 +204,7 @@ async function releaseWakeLock() {
 // ===== PODCASTS HOME =====
 function renderPodcastsList(filter = '') {
     // Update version badge
-    document.getElementById('version-badge').textContent = 'v' + APP_VERSION;
+    updateVersionBadge();
 
     const podcasts = getPodcasts();
     if (podcasts.length === 0) {

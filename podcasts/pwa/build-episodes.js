@@ -84,8 +84,37 @@ window.PODCASTS = ${JSON.stringify(podcasts, null, 2)};
 fs.writeFileSync(path.join(distDir, 'podcasts.js'), podcastsJs);
 console.log('\n✓ Generated: podcasts.js');
 
+// Generate build version metadata for deploy artifacts.
+const sourceVersionPath = path.join(__dirname, 'version.json');
+let baseVersion = '0.0.0';
+if (fs.existsSync(sourceVersionPath)) {
+    try {
+        const sourceVersion = JSON.parse(fs.readFileSync(sourceVersionPath, 'utf8'));
+        if (typeof sourceVersion.version === 'string' && sourceVersion.version.trim()) {
+            baseVersion = sourceVersion.version.trim();
+        }
+    } catch (err) {
+        console.warn('Could not parse source version.json, using fallback 0.0.0:', err.message);
+    }
+}
+
+const buildTime = new Date();
+const buildStamp = buildTime
+    .toISOString()
+    .replace(/[-:]/g, '')
+    .replace(/\.\d{3}Z$/, 'Z');
+const buildVersion = `${baseVersion}+${buildStamp}`;
+const generatedVersion = {
+    version: buildVersion,
+    baseVersion,
+    updated: buildTime.toISOString().slice(0, 10),
+    builtAt: buildTime.toISOString()
+};
+fs.writeFileSync(path.join(distDir, 'version.json'), JSON.stringify(generatedVersion, null, 2) + '\n');
+console.log(`✓ Generated: version.json (${buildVersion})`);
+
 // Copy static root files
-const filesToCopy = ['index.html', 'manifest.json', 'sw.js', 'icon.svg', '_headers', 'version.json'];
+const filesToCopy = ['index.html', 'manifest.json', 'sw.js', 'icon.svg', '_headers'];
 filesToCopy.forEach(file => {
     const src = path.join(__dirname, file);
     const dest = path.join(distDir, file);

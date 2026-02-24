@@ -15,6 +15,9 @@ if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir, { recursive: true });
 }
 
+// Ensure legacy audio artifacts are not carried into new builds.
+fs.rmSync(path.join(distDir, 'audio'), { recursive: true, force: true });
+
 console.log('Building PodLearn Multi-Podcast App...\n');
 
 // Find all podcasts
@@ -92,10 +95,6 @@ filesToCopy.forEach(file => {
     }
 });
 
-// Copy audio files if they exist
-const audioSrcDir = path.join(__dirname, 'audio');
-const audioDistDir = path.join(distDir, 'audio');
-
 function copyDirRecursive(src, dest) {
     if (!fs.existsSync(src)) return 0;
     if (!fs.existsSync(dest)) {
@@ -114,13 +113,6 @@ function copyDirRecursive(src, dest) {
         }
     }
     return count;
-}
-
-if (fs.existsSync(audioSrcDir)) {
-    const audioCount = copyDirRecursive(audioSrcDir, audioDistDir);
-    if (audioCount > 0) {
-        console.log(`✓ Copied: ${audioCount} audio files`);
-    }
 }
 
 // Copy ES module source files used by index.html

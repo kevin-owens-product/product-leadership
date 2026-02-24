@@ -1,5 +1,6 @@
 .netlify/
 podcasts/pwa/.netlify/
+podcasts/pwa/audio/
 podcasts/pwa/dist/audio/
 podcasts/pwa/node_modules/
 podcasts/pwa/test-results/

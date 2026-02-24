@@ -14,6 +14,7 @@ import { bindNavTabs } from './ui/tabs.js';
 import { registerServiceWorker } from './sw/register-sw.js';
 import { createPlaybackSessionController } from './playback/controller.js';
 import { createSpeechPlayers } from './playback/audio.js';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -110,12 +111,6 @@ let searchIndex = 0;
 const synth = window.speechSynthesis;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 
-// Audio playback state (for pre-generated audio)
-let audioManifest = null;  // null = use TTS, array = use audio files
-let audioElement = null;
-let useAudio = false;  // true when pre-generated audio is available
-let audioSegmentDurations = [];  // actual duration of each audio segment in seconds
-let totalAudioDuration = 0;  // total duration of all audio segments
 const playbackSessions = createPlaybackSessionController();
 
 // New feature state
@@ -132,12 +127,6 @@ let listeningStats = loadListeningStats();
 function getPodcasts() {
     return Array.isArray(window.PODCASTS) ? window.PODCASTS : [];
 }
-
-// Web Audio API for enhancements
-let audioContext = null;
-let gainNode = null;
-let audioSource = null;
-let analyser = null;
 
 // Mini player state
 let showMiniPlayer = false;
@@ -609,17 +598,13 @@ async function openEpisode(episode) {
     await stopPlayback();
     currentEpisode = episode;
     dialogueLines = parseMarkdown(episode.content);
+    chapters = parseChapters(episode.content);
 
     // Restore progress (with podcast-scoped key)
     const state = loadState();
     const epKey = currentPodcast ? `${currentPodcast.id}-${episode.id}` : episode.id;
     const progress = state.episodeProgress?.[epKey];
     currentLineIndex = progress?.line || 0;
-
-    // Check for pre-generated audio
-    await loadAudioManifest(episode);
-    // Parse chapters after audio metadata is loaded so duration estimates are accurate.
-    chapters = parseChapters(episode.content);
 
     document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
 
@@ -631,81 +616,12 @@ async function openEpisode(episode) {
     renderChapters();
     renderBookmarks();
     updateProgress();
-    setStatus(useAudio ? 'Ready - High quality audio' : 'Ready - Tap play to start');
+    setStatus('Ready - Tap play to start');
 
     document.getElementById('list-view').classList.remove('active');
     document.getElementById('player-view').classList.add('active');
     // Hide mini player when entering player view
     document.getElementById('mini-player').classList.remove('active');
-}
-
-// Load audio manifest for pre-generated audio
-async function loadAudioManifest(episode) {
-    audioManifest = null;
-    useAudio = false;
-    audioSegmentDurations = [];
-    totalAudioDuration = 0;
-
-    if (!currentPodcast || !episode) return;
-
-    // Construct manifest URL based on episode filename pattern
-    const epNum = String(episode.id).padStart(2, '0');
-    const epSlug = episode.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
-    const manifestUrl = `/audio/${currentPodcast.id}/episode-${epNum}-${epSlug}/manifest.json`;
-
-    try {
-        const response = await fetch(manifestUrl);
-        if (response.ok) {
-            audioManifest = await response.json();
-            useAudio = true;
-            console.log(`Loaded audio manifest: ${audioManifest.length} segments`);
-
-            // Load duration metadata for all segments
-            await loadAudioDurations(episode);
-        }
-    } catch (e) {
-        // No audio available, will use TTS
-        console.log('No pre-generated audio, using TTS');
-    }
-}
-
-// Load duration metadata for audio segments
-async function loadAudioDurations(episode) {
-    if (!audioManifest || audioManifest.length === 0) return;
-
-    const epNum = String(episode.id).padStart(2, '0');
-    const epSlug = episode.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
-
-    console.log('Loading audio durations...');
-    const durationPromises = audioManifest.map((segment, index) => {
-        return new Promise((resolve) => {
-            const audioUrl = `/audio/${currentPodcast.id}/episode-${epNum}-${epSlug}/${segment.file}`;
-            const audio = new Audio();
-            audio.preload = 'metadata';
-
-            audio.addEventListener('loadedmetadata', () => {
-                resolve({ index, duration: audio.duration });
-            });
-
-            audio.addEventListener('error', () => {
-                // If audio fails to load, estimate based on text length
-                // Roughly 150 words per minute, average 5 chars per word
-                const estimatedDuration = (segment.text.length / 5) / 150 * 60;
-                resolve({ index, duration: estimatedDuration });
-            });
-
-            audio.src = audioUrl;
-        });
-    });
-
-    const results = await Promise.all(durationPromises);
-
-    // Sort by index and extract durations
-    results.sort((a, b) => a.index - b.index);
-    audioSegmentDurations = results.map(r => r.duration);
-    totalAudioDuration = audioSegmentDurations.reduce((sum, d) => sum + d, 0);
-
-    console.log(`Loaded durations: ${totalAudioDuration.toFixed(0)}s total (${(totalAudioDuration/60).toFixed(1)} min)`);
 }
 
 document.getElementById('back-to-list').addEventListener('click', () => {
@@ -757,16 +673,11 @@ function updateProgress() {
 
     // Calculate time remaining using actual audio durations or estimate
     const linesLeft = dialogueLines.length - currentLineIndex;
-    let secondsLeft;
-
-    if (audioSegmentDurations.length > 0 && currentLineIndex < audioSegmentDurations.length) {
-        // Use actual audio durations for remaining segments
-        const remainingDurations = audioSegmentDurations.slice(currentLineIndex);
-        secondsLeft = remainingDurations.reduce((sum, d) => sum + d, 0) / speechRate;
-    } else {
-        // Fall back to estimated 3 seconds per line
-        secondsLeft = (linesLeft * 3) / speechRate;
-    }
+    const episodeDurationMinutes = currentEpisode?.content ? extractEpisodeDurationMinutes(currentEpisode.content) : null;
+    const estimatedSecondsPerLine = (episodeDurationMinutes && dialogueLines.length > 0)
+        ? (episodeDurationMinutes * 60) / dialogueLines.length
+        : 3;
+    const secondsLeft = (linesLeft * estimatedSecondsPerLine) / speechRate;
 
     const minsLeft = Math.round(secondsLeft / 60);
     document.getElementById('time-remaining').textContent = `~${minsLeft} min left`;
@@ -858,38 +769,10 @@ function speak(text, speaker) {
     return speechPlayers.speak(text, speaker);
 }
 
-function buildAudioUrl(fileName) {
-    const epNum = String(currentEpisode.id).padStart(2, '0');
-    const epSlug = currentEpisode.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
-    return `/audio/${currentPodcast.id}/episode-${epNum}-${epSlug}/${fileName}`;
-}
-
 const speechPlayers = createSpeechPlayers({
     synth,
     getVoices: () => ({ alexVoice, samVoice }),
-    getSpeechRate: () => speechRate,
-    getAudioElement: () => audioElement,
-    setAudioElement: (el) => {
-        audioElement = el;
-    },
-    getUseAudio: () => useAudio,
-    getAudioManifest: () => audioManifest,
-    getCurrentLineIndex: () => currentLineIndex,
-    buildAudioUrl,
-    setupWebAudio,
-    isVoiceBoostEnabled: () => voiceBoostEnabled,
-    updateMediaSession,
-    onInterrupted: () => {
-        if (isPlaying && !isPaused && !document.hidden) {
-            isPaused = true;
-            document.getElementById('play-btn').textContent = '▶';
-            setStatus('Paused (interrupted)');
-            updateMediaSession();
-        }
-    },
-    onFallbackToTTS: () => {
-        console.warn('Audio playback failed, falling back to TTS');
-    }
+    getSpeechRate: () => speechRate
 });
 
 async function startPlayback() {
@@ -966,37 +849,19 @@ async function stopPlayback() {
 }
 
 async function togglePlayPause() {
-    // Resume AudioContext if suspended (critical for iOS)
-    if (audioContext && audioContext.state === 'suspended') {
-        try {
-            await audioContext.resume();
-            console.log('AudioContext resumed on user interaction');
-        } catch (e) {
-            console.warn('Failed to resume AudioContext:', e);
-        }
-    }
-
     if (!isPlaying) {
         startPlayback();
     } else if (isPaused) {
         isPaused = false;
         // Re-acquire wake lock when resuming
         await requestWakeLock();
-        if (useAudio && audioElement) {
-            audioElement.play();
-        } else {
-            synth.resume();
-        }
+        synth.resume();
         document.getElementById('play-btn').textContent = '⏸';
     } else {
         isPaused = true;
         // Release wake lock when pausing
         await releaseWakeLock();
-        if (useAudio && audioElement) {
-            audioElement.pause();
-        } else {
-            synth.pause();
-        }
+        synth.pause();
         document.getElementById('play-btn').textContent = '▶';
         setStatus('Paused');
         saveState();
@@ -1043,10 +908,6 @@ document.getElementById('fwd-btn').addEventListener('click', () => skipLines(5))
 document.getElementById('speed-slider').addEventListener('input', e => {
     speechRate = parseFloat(e.target.value);
     document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
-    // Update audio playback rate if using audio
-    if (useAudio && audioElement) {
-        audioElement.playbackRate = speechRate;
-    }
     // Update speed preset button highlights
     document.querySelectorAll('.speed-preset-btn').forEach(b => {
         b.classList.toggle('active', Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01);
@@ -1249,9 +1110,6 @@ document.querySelectorAll('.speed-preset-btn').forEach(btn => {
         speechRate = speed;
         document.getElementById('speed-slider').value = speed;
         document.getElementById('speed-value').textContent = `${speed.toFixed(1)}x`;
-        if (useAudio && audioElement) {
-            audioElement.playbackRate = speed;
-        }
         document.querySelectorAll('.speed-preset-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         saveState();
@@ -1286,14 +1144,14 @@ function updateSkipButtonTitles() {
 }
 
 // Voice Boost Toggle
-document.getElementById('voice-boost-toggle').addEventListener('click', async () => {
+document.getElementById('voice-boost-toggle').addEventListener('click', () => {
     voiceBoostEnabled = !voiceBoostEnabled;
     document.getElementById('voice-boost-toggle').classList.toggle('active', voiceBoostEnabled);
     document.getElementById('voice-boost-toggle').querySelector('span').textContent =
         voiceBoostEnabled ? 'On' : 'Off';
     localStorage.setItem('voiceBoostEnabled', voiceBoostEnabled);
-    if (voiceBoostEnabled && audioElement && !audioContext) {
-        await setupWebAudio();
+    if (voiceBoostEnabled) {
+        setStatus('Voice boost is limited in TTS mode');
     }
 });
 
@@ -1548,57 +1406,6 @@ document.getElementById('mini-play-btn').addEventListener('click', (e) => {
     togglePlayPause();
 });
 
-// Web Audio API Setup
-async function setupWebAudio() {
-    if (audioContext && audioSource) {
-        // Already set up, just update gain
-        if (gainNode) {
-            gainNode.gain.value = voiceBoostEnabled ? 1.3 : 1.0;
-        }
-        // Ensure AudioContext is resumed (critical for iOS)
-        if (audioContext.state === 'suspended') {
-            try {
-                await audioContext.resume();
-                console.log('AudioContext resumed');
-            } catch (e) {
-                console.warn('Failed to resume AudioContext:', e);
-            }
-        }
-        return;
-    }
-
-    if (!audioElement || !voiceBoostEnabled) return;
-
-    try {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        audioSource = audioContext.createMediaElementSource(audioElement);
-        gainNode = audioContext.createGain();
-        analyser = audioContext.createAnalyser();
-
-        // Voice boost: increase mid-range frequencies
-        gainNode.gain.value = 1.3;
-
-        audioSource.connect(gainNode);
-        gainNode.connect(analyser);
-        analyser.connect(audioContext.destination);
-
-        // Resume AudioContext immediately (required for iOS/Safari)
-        if (audioContext.state === 'suspended') {
-            await audioContext.resume();
-            console.log('AudioContext created and resumed');
-        } else {
-            console.log('Web Audio API initialized with voice boost');
-        }
-    } catch (e) {
-        console.error('Web Audio API setup failed:', e);
-        // Reset state on failure
-        audioContext = null;
-        audioSource = null;
-        gainNode = null;
-        analyser = null;
-    }
-}
-
 // Load from URL parameters
 window.addEventListener('load', () => {
     const params = new URLSearchParams(window.location.search);
@@ -1643,99 +1450,8 @@ updateQueueDisplay();
 // ===== CHAPTERS =====
 let chapters = [];
 
-function extractEpisodeDurationMinutes(content) {
-    const durationMatch = content.match(/\*\*Duration:\*\*\s*~?\s*(\d+(?:\.\d+)?)\s*minutes?/i);
-    if (!durationMatch) return null;
-    const minutes = parseFloat(durationMatch[1]);
-    return Number.isFinite(minutes) && minutes > 0 ? minutes : null;
-}
-
 function parseChapters(content) {
-    const lines = content.split('\n');
-    const chaps = [];
-    let dialogueLine = 0;
-
-    for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
-
-        // Track dialogue lines for position mapping (any speaker name pattern: **NAME:** or **NAME:**)
-        const speakerMatch = line.match(SPEAKER_LINE_RE);
-        if (speakerMatch && (speakerMatch[2] || '').trim()) {
-            // Check if this line follows a chapter header
-            for (let j = chaps.length - 1; j >= 0; j--) {
-                if (chaps[j].lineIndex === -1) {
-                    chaps[j].lineIndex = dialogueLine;
-                    break;
-                }
-            }
-            dialogueLine++;
-        }
-
-        // Find chapter headers (### SEGMENT, ### INTRO, etc.)
-        const chapterMatch = line.match(/^###\s+(.+)/);
-        if (chapterMatch) {
-            let title = chapterMatch[1].trim();
-            const hintedDuration = title.match(/\((\d+(?:\.\d+)?)\s*minutes?\)/i);
-            // Clean up the title
-            title = title.replace(/\*\*/g, '').replace(/\(\d+(?:\.\d+)?\s*minutes?\)/i, '').trim();
-            title = title.replace(/:\s*$/, '');
-
-            chaps.push({
-                title: title,
-                lineIndex: -1, // Will be set when we find the next dialogue
-                hintedMinutes: hintedDuration ? parseFloat(hintedDuration[1]) : null,
-                rawLine: i
-            });
-        }
-    }
-
-    // Assign line index to any remaining chapters
-    chaps.forEach((chap, idx) => {
-        if (chap.lineIndex === -1) {
-            chap.lineIndex = idx === 0 ? 0 : dialogueLine;
-        }
-    });
-
-    const episodeDurationMinutes = extractEpisodeDurationMinutes(content);
-    const episodeDurationSeconds = episodeDurationMinutes ? episodeDurationMinutes * 60 : null;
-
-    // Add estimated times based on explicit chapter hints, actual audio duration, episode total duration, or line count.
-    let avgSecsPerLine = 3; // default fallback
-
-    // If we have actual audio durations, calculate accurate average
-    if (audioSegmentDurations.length > 0 && dialogueLine > 0) {
-        avgSecsPerLine = totalAudioDuration / dialogueLine;
-        console.log(`Using actual duration: ${avgSecsPerLine.toFixed(2)}s per line`);
-    } else if (episodeDurationSeconds && dialogueLine > 0) {
-        avgSecsPerLine = episodeDurationSeconds / dialogueLine;
-        console.log(`Using episode duration fallback: ${avgSecsPerLine.toFixed(2)}s per line`);
-    } else {
-        console.log('Using estimated duration: 3s per line');
-    }
-
-    chaps.forEach((chap, idx) => {
-        const nextChap = chaps[idx + 1];
-        const endLine = nextChap ? nextChap.lineIndex : dialogueLine;
-        const lines = endLine - chap.lineIndex;
-        const safeLines = Math.max(1, lines);
-
-        // 1) Prefer explicit chapter duration hints in the markdown headers.
-        let mins = chap.hintedMinutes;
-
-        // 2) Use actual segment durations when audio metadata exists.
-        if (!mins && audioSegmentDurations.length > 0) {
-            const segmentDuration = audioSegmentDurations.slice(chap.lineIndex, endLine)
-                .reduce((sum, d) => sum + d, 0);
-            mins = Math.round(segmentDuration / 60);
-        } else if (!mins) {
-            // 3) Fall back to line-based estimate, scaled from episode duration if available.
-            mins = Math.round((safeLines * avgSecsPerLine) / 60);
-        }
-
-        chap.duration = mins > 0 ? mins : 1;  // minimum 1 minute
-    });
-
-    return chaps;
+    return parseChaptersFromContent(content, SPEAKER_LINE_RE);
 }
 
 function renderChapters() {
@@ -1921,13 +1637,13 @@ document.addEventListener('visibilitychange', async () => {
     if (!backgroundHandlersEnabled) return;
 
     if (document.hidden) {
-        // App went to background - continue playing audio
+        // App went to background.
         console.log('App went to background, isPlaying:', isPlaying, 'isPaused:', isPaused);
         wasPlayingBeforeBackground = isPlaying && !isPaused;
 
-        // Save current state but DO NOT pause - allow background playback
+        // Save current state but do not force pause here.
         saveState();
-        console.log('Audio will continue playing in background');
+        console.log('Playback handling delegated to browser while backgrounded');
     } else {
         // App came to foreground
         console.log('App came to foreground, wasPlaying:', wasPlayingBeforeBackground);
@@ -1936,16 +1652,8 @@ document.addEventListener('visibilitychange', async () => {
         if (isPlaying && !isPaused) {
             await requestWakeLock();
 
-            // Resume audio if it was paused by system
-            if (useAudio && audioElement && audioElement.paused) {
-                console.log('Resuming audio playback after background');
-                audioElement.play().catch(err => {
-                    console.warn('Failed to resume audio:', err);
-                });
-            }
-
             // Resume speech synthesis if it was paused
-            if (!useAudio && synth.paused) {
+            if (synth.paused) {
                 console.log('Resuming speech synthesis after background');
                 synth.resume();
             }
@@ -1960,9 +1668,8 @@ window.addEventListener('pagehide', (e) => {
     console.log('Page hide - saving state, persisted:', e.persisted);
     saveState();
 
-    // Don't cancel speech/audio - allow background playback to continue
-    // Audio elements and Media Session API will handle background playback
-    console.log('Page hidden, audio continues in background');
+    // Don't cancel speech - browser media policies will decide background behavior.
+    console.log('Page hidden, playback managed by browser policy');
 }, { passive: true });
 
 // Fallback: beforeunload for saving state

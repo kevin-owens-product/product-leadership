@@ -25,3 +25,12 @@ test('transcript search handles regex-like input without crash', async ({ page }
   await page.fill('#transcript-search-input', 'a+b?(c)[d]');
   await expect(page.locator('#transcript-search-input')).toHaveValue('a+b?(c)[d]');
 });
+
+test('settings shows TTS background playback notice', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.podcast-card').first().click();
+  await page.locator('.episode-card').first().click();
+
+  await page.locator('#settings-panel .panel-header').click();
+  await expect(page.locator('#tts-background-notice')).toContainText('Background playback note');
+});

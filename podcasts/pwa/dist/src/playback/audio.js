@@ -1,29 +1,13 @@
 export function createSpeechPlayers({
   synth,
   getVoices,
-  getSpeechRate,
-  getAudioElement,
-  setAudioElement,
-  getUseAudio,
-  getAudioManifest,
-  getCurrentLineIndex,
-  buildAudioUrl,
-  setupWebAudio,
-  isVoiceBoostEnabled,
-  updateMediaSession,
-  onInterrupted,
-  onFallbackToTTS
+  getSpeechRate
 }) {
   let activeUtterance = null;
 
   function stopCurrentSpeech() {
     synth.cancel();
     activeUtterance = null;
-    const audioElement = getAudioElement();
-    if (audioElement) {
-      audioElement.pause();
-      audioElement.src = '';
-    }
   }
 
   function speakWithTTS(text, speaker) {
@@ -52,81 +36,13 @@ export function createSpeechPlayers({
     });
   }
 
-  async function speakWithAudio(lineIndex) {
-    return new Promise(async (resolve, reject) => {
-      const manifest = getAudioManifest();
-      const segment = manifest?.[lineIndex];
-      if (!segment) {
-        reject(new Error('No audio segment'));
-        return;
-      }
-
-      let audioElement = getAudioElement();
-      if (!audioElement) {
-        audioElement = new Audio();
-        audioElement.preload = 'auto';
-        audioElement.setAttribute('playsinline', '');
-        audioElement.setAttribute('x-webkit-airplay', 'allow');
-        audioElement.preservesPitch = true;
-        setAudioElement(audioElement);
-      }
-
-      audioElement.playbackRate = getSpeechRate();
-      audioElement.src = buildAudioUrl(segment.file);
-      audioElement.currentTime = 0;
-
-      if (isVoiceBoostEnabled()) {
-        await setupWebAudio();
-      }
-
-      audioElement.onplay = () => updateMediaSession();
-      audioElement.onended = () => resolve();
-      audioElement.onerror = async () => {
-        audioElement.pause();
-        audioElement.src = '';
-        onFallbackToTTS?.();
-        try {
-          await speakWithTTS(segment.text, segment.speaker);
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      };
-
-      audioElement.onpause = () => {
-        // Browsers emit `pause` during natural completion; treat only true interruptions.
-        queueMicrotask(() => {
-          if (!audioElement.ended) {
-            onInterrupted?.();
-          }
-        });
-      };
-
-      audioElement.play().catch(async () => {
-        audioElement.pause();
-        audioElement.src = '';
-        onFallbackToTTS?.();
-        try {
-          await speakWithTTS(segment.text, segment.speaker);
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      });
-    });
-  }
-
   async function speak(text, speaker) {
-    if (getUseAudio() && getAudioManifest()?.[getCurrentLineIndex()]) {
-      return speakWithAudio(getCurrentLineIndex());
-    }
     return speakWithTTS(text, speaker);
   }
 
   return {
     speak,
     stopCurrentSpeech,
-    speakWithTTS,
-    speakWithAudio
+    speakWithTTS
   };
 }

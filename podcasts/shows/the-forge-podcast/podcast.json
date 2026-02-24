@@ -12,6 +12,16 @@
     {"id": 3, "file": "episode-03-platform-power-dynamics.md", "title": "Platform Power Dynamics and Data Moats", "subtitle": "How B2B SaaS Companies Protect Their Value When Everyone Wants Their Data"},
     {"id": 4, "file": "episode-04-ai-native-product-management.md", "title": "AI-Native Product Management", "subtitle": "How the Role of the Product Manager Fundamentally Changes in an AI-First World"},
     {"id": 5, "file": "episode-05-the-forge-method.md", "title": "The Forge Method", "subtitle": "A Systematic Framework for Transforming Software Companies from Legacy to AI-Native"},
-    {"id": 6, "file": "episode-06-cpo-cro-cto-convergence.md", "title": "The Converged Executive", "subtitle": "Merging CPO, CRO, and CTO into One AI-Native Operating System"}
+    {"id": 6, "file": "episode-06-cpo-cro-cto-convergence.md", "title": "The Converged Executive", "subtitle": "Merging CPO, CRO, and CTO into One AI-Native Operating System"},
+    {"id": 7, "file": "episode-07-ai-native-cfo-operating-model.md", "title": "The AI-Native CFO Operating Model", "subtitle": "How Finance Becomes the Control Tower for AI-Driven Value Creation"},
+    {"id": 8, "file": "episode-08-trust-risk-governance-autonomous-workflows.md", "title": "Trust, Risk, and Governance in Autonomous Workflows", "subtitle": "Designing Safety and Speed Without Slowing the Business"},
+    {"id": 9, "file": "episode-09-outcome-based-pricing-ai-products.md", "title": "Outcome-Based Pricing for AI Products", "subtitle": "From Seat Licenses to Priced Value Delivery"},
+    {"id": 10, "file": "episode-10-ai-native-gtm-stack.md", "title": "The AI-Native GTM Stack", "subtitle": "Unifying Marketing, Sales, and Customer Success with Product Intelligence"},
+    {"id": 11, "file": "episode-11-data-readiness-memory-architecture.md", "title": "Data Readiness and Memory Architecture", "subtitle": "Building the Context Layer That Becomes Your Competitive Moat"},
+    {"id": 12, "file": "episode-12-ai-product-ops-playbook.md", "title": "The AI Product Ops Playbook", "subtitle": "Operating AI Products with Discipline, Speed, and Reliability"},
+    {"id": 13, "file": "episode-13-build-buy-partner-ai-capabilities.md", "title": "Build vs Buy vs Partner for AI Capabilities", "subtitle": "A Decision Framework for Speed, Control, and Strategic Differentiation"},
+    {"id": 14, "file": "episode-14-ai-qa-evaluation-systems.md", "title": "AI QA and Evaluation Systems", "subtitle": "From Deterministic Test Cases to Probabilistic Confidence Engineering"},
+    {"id": 15, "file": "episode-15-leadership-talent-ai-native-org.md", "title": "Leadership and Talent in the AI-Native Organization", "subtitle": "How Roles, Incentives, and Capability Models Must Evolve"},
+    {"id": 16, "file": "episode-16-100-day-pe-transformation-sprint.md", "title": "The 100-Day PE AI Transformation Sprint", "subtitle": "A High-Tempo Blueprint for Portfolio Company Value Creation"}
   ]
 }

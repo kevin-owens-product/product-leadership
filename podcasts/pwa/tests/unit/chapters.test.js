@@ -66,3 +66,22 @@ test('parseChaptersFromContent distributes remaining episode minutes after hints
   assert.equal(chapters[1].startMinute, 5);
   assert.equal(chapters[1].endMinute, 55);
 });
+
+test('parseChaptersFromContent counts continuation dialogue lines for chapter anchors', () => {
+  const markdown = `
+# Episode
+
+### INTRO
+**ALEX:** first thought
+second thought
+third thought
+
+### SEGMENT 1
+**SAM:** new section starts here
+`;
+
+  const chapters = parseChaptersFromContent(markdown, SPEAKER_LINE_RE);
+  assert.equal(chapters.length, 2);
+  assert.equal(chapters[0].lineIndex, 0);
+  assert.equal(chapters[1].lineIndex, 3);
+});

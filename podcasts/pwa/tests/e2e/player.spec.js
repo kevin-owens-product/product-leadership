@@ -34,3 +34,33 @@ test('settings shows TTS background playback notice', async ({ page }) => {
   await page.locator('#settings-panel .panel-header').click();
   await expect(page.locator('#tts-background-notice')).toContainText('Background playback note');
 });
+
+test('AI Native PM shows stable chapter markers and playback advances', async ({ page }) => {
+  await page.addInitScript(() => {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    synth.getVoices = () => [
+      { name: 'Test Voice A', lang: 'en-US' },
+      { name: 'Test Voice B', lang: 'en-US' }
+    ];
+    synth.speak = (utterance) => {
+      setTimeout(() => {
+        if (typeof utterance.onend === 'function') utterance.onend();
+      }, 20);
+    };
+    synth.cancel = () => {};
+    synth.pause = () => {};
+    synth.resume = () => {};
+  });
+
+  await page.goto('/');
+  await page.locator('.podcast-card:has-text("The Forge Podcast")').click();
+  await page.locator('.episode-card:has-text("AI-Native Product Management")').click();
+
+  await expect(page.locator('#chapters-list .chapter-time').first()).toHaveText('00:00 · 3 min');
+  await expect(page.locator('#chapters-list .chapter-time').nth(1)).toHaveText('03:00 · 22 min');
+
+  const initialPosition = await page.locator('#current-pos').textContent();
+  await page.locator('#play-btn').click();
+  await expect.poll(async () => page.locator('#current-pos').textContent()).not.toBe(initialPosition);
+});

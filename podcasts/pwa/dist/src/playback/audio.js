@@ -4,6 +4,8 @@ export function createSpeechPlayers({
   getSpeechRate
 }) {
   const MAX_CHARS_PER_UTTERANCE = 260;
+  const MIN_UTTERANCE_TIMEOUT_MS = 4000;
+  const MAX_UTTERANCE_TIMEOUT_MS = 45000;
   let activeUtterance = null;
 
   function stopCurrentSpeech() {
@@ -70,6 +72,13 @@ export function createSpeechPlayers({
     return chunks;
   }
 
+  function estimateUtteranceTimeoutMs(text, speechRate) {
+    const words = String(text || '').trim().split(/\s+/).filter(Boolean).length;
+    const safeRate = Math.max(0.5, Number(speechRate) || 1);
+    const estimatedMs = ((words / (150 * safeRate)) * 60 * 1000) + 6000;
+    return Math.max(MIN_UTTERANCE_TIMEOUT_MS, Math.min(MAX_UTTERANCE_TIMEOUT_MS, Math.round(estimatedMs)));
+  }
+
   function speakSingleUtterance(text, speaker) {
     return new Promise((resolve, reject) => {
       const { alexVoice, samVoice } = getVoices();
@@ -79,14 +88,33 @@ export function createSpeechPlayers({
       utterance.rate = getSpeechRate();
       utterance.pitch = speaker === 'alex' ? 0.9 : 1.1;
 
-      activeUtterance = utterance;
-      utterance.onend = () => {
+      let settled = false;
+      const timeoutMs = estimateUtteranceTimeoutMs(text, utterance.rate);
+      const watchdog = setTimeout(() => {
+        if (settled) return;
+        console.warn('TTS watchdog timeout reached; skipping stalled utterance');
+        if (activeUtterance === utterance) {
+          synth.cancel();
+        }
+        settled = true;
         if (activeUtterance === utterance) activeUtterance = null;
         resolve();
+      }, timeoutMs);
+
+      const settle = (handler, value) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(watchdog);
+        if (activeUtterance === utterance) activeUtterance = null;
+        handler(value);
+      };
+
+      activeUtterance = utterance;
+      utterance.onend = () => {
+        settle(resolve);
       };
       utterance.onerror = (e) => {
-        if (activeUtterance === utterance) activeUtterance = null;
-        reject(e);
+        settle(reject, e);
       };
 
       synth.speak(utterance);

@@ -1,6 +1,15 @@
 const DEFAULT_SECONDS_PER_LINE = 3;
 const DEFAULT_WORDS_PER_MINUTE = 140;
 
+function isContinuationDialogueLine(trimmed) {
+  return Boolean(trimmed) &&
+    !trimmed.startsWith('*') &&
+    !trimmed.startsWith('-') &&
+    !trimmed.startsWith('|') &&
+    !trimmed.startsWith('#') &&
+    trimmed !== '---';
+}
+
 function countWords(text) {
   const normalized = text
     .replace(/\*\*/g, '')
@@ -41,20 +50,19 @@ export function parseChaptersFromContent(content, speakerLineRe) {
   const lines = content.split('\n');
   const chapters = [];
   let dialogueLineCount = 0;
+  let inSpeakerBlock = false;
+
+  const assignFirstLineIndexForPendingChapter = () => {
+    for (let j = chapters.length - 1; j >= 0; j -= 1) {
+      if (chapters[j].lineIndex === -1) {
+        chapters[j].lineIndex = dialogueLineCount;
+        break;
+      }
+    }
+  };
 
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i].trim();
-
-    const speakerMatch = line.match(speakerLineRe);
-    if (speakerMatch && (speakerMatch[2] || '').trim()) {
-      for (let j = chapters.length - 1; j >= 0; j -= 1) {
-        if (chapters[j].lineIndex === -1) {
-          chapters[j].lineIndex = dialogueLineCount;
-          break;
-        }
-      }
-      dialogueLineCount += 1;
-    }
 
     const chapterMatch = line.match(/^###\s+(.+)/);
     if (chapterMatch) {
@@ -69,6 +77,28 @@ export function parseChaptersFromContent(content, speakerLineRe) {
         hintedMinutes: hintedDuration ? parseFloat(hintedDuration[1]) : null,
         rawLine: i
       });
+      inSpeakerBlock = false;
+      continue;
+    }
+
+    if (!line) continue;
+
+    const speakerMatch = line.match(speakerLineRe);
+    if (speakerMatch && (speakerMatch[2] || '').trim()) {
+      assignFirstLineIndexForPendingChapter();
+      dialogueLineCount += 1;
+      inSpeakerBlock = true;
+      continue;
+    }
+
+    if (inSpeakerBlock && isContinuationDialogueLine(line)) {
+      assignFirstLineIndexForPendingChapter();
+      dialogueLineCount += 1;
+      continue;
+    }
+
+    if (line.startsWith('*') || line.startsWith('-') || line.startsWith('|') || line.startsWith('#') || line === '---') {
+      inSpeakerBlock = false;
     }
   }
 

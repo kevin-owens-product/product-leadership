@@ -695,6 +695,22 @@
             line-height: 1.5;
         }
 
+        .clear-data-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ef4444;
+            background: rgba(239, 68, 68, 0.12);
+            color: #fecaca;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .clear-data-btn:active {
+            transform: scale(0.99);
+        }
+
         .setting-item {
             display: flex;
             justify-content: space-between;
@@ -1809,6 +1825,7 @@
                 <div class="tts-background-notice" id="tts-background-notice">
                     <strong>Background playback note:</strong> In TTS mode, some mobile browsers may pause speech when the app is in the background.
                 </div>
+                <button class="clear-data-btn" id="clear-local-data-btn">Clear Local Cache & Data</button>
             </div>
         </div>
 

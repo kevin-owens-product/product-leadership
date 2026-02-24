@@ -1,6 +1,7 @@
 import { safeColor } from './security/sanitize.js';
 import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js';
 import {
+    STORAGE_KEY,
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState,
@@ -26,6 +27,17 @@ import {
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
+const LOCAL_STORAGE_KEYS_TO_CLEAR = [
+    VERSION_STORAGE_KEY,
+    STORAGE_KEY,
+    'playQueue',
+    'listeningStats',
+    'skipForwardInterval',
+    'skipBackwardInterval',
+    'voiceBoostEnabled',
+    'silenceTrimEnabled',
+    'theme'
+];
 let APP_VERSION = localStorage.getItem(VERSION_STORAGE_KEY) || '0.0.0';
 
 function updateVersionBadge() {
@@ -507,17 +519,68 @@ document.getElementById('preview-voices').addEventListener('click', () => {
 });
 
 // ===== MARKDOWN PARSING =====
-function parseMarkdown(content) {
+function normalizeSpeakerName(speakerName) {
+    return String(speakerName || '').trim().toUpperCase();
+}
+
+function isContinuationDialogueLine(trimmed) {
+    return Boolean(trimmed) &&
+        !trimmed.startsWith('*') &&
+        !trimmed.startsWith('-') &&
+        !trimmed.startsWith('|') &&
+        !trimmed.startsWith('#') &&
+        trimmed !== '---';
+}
+
+function parseSpeakerVoiceMap(content) {
+    const voiceMap = {};
+    const mapLine = content.split('\n').find((line) =>
+        /^\*\*(?:Speaker\s+Voices?|Voice\s*Map):\*\*/i.test(line.trim())
+    );
+    if (!mapLine) return voiceMap;
+
+    const matches = mapLine.trim().match(/^\*\*(?:Speaker\s+Voices?|Voice\s*Map):\*\*\s*(.+)$/i);
+    if (!matches || !matches[1]) return voiceMap;
+
+    const entries = matches[1].split(/[;,]+/);
+    entries.forEach((entry) => {
+        const parsed = entry.trim().match(/^(.+?)\s*(?:=|:|->)\s*(alex|sam)\s*$/i);
+        if (!parsed) return;
+        const speakerName = normalizeSpeakerName(parsed[1]);
+        const speakerVoice = parsed[2].toLowerCase();
+        if (speakerName) {
+            voiceMap[speakerName] = speakerVoice;
+        }
+    });
+
+    return voiceMap;
+}
+
+function parseMarkdown(content, voiceOverrides = {}) {
     const lines = content.split('\n');
     const dialogue = [];
-    let currentSpeaker = null;
-    let speakerCount = 0;
-    const speakerMap = {}; // Maps speaker names to 'alex' or 'sam' voice
+    let currentSpeakerType = null;
+    let currentSpeakerLabel = null;
+    const speakerMap = {};
+    Object.entries(voiceOverrides).forEach(([speaker, voiceType]) => {
+        const normalizedSpeaker = normalizeSpeakerName(speaker);
+        if ((voiceType === 'alex' || voiceType === 'sam') && normalizedSpeaker) {
+            speakerMap[normalizedSpeaker] = voiceType;
+        }
+    });
+    let speakerCount = Object.keys(speakerMap).length;
 
-    for (const line of lines) {
+    for (let i = 0; i < lines.length; i += 1) {
+        const line = lines[i];
         const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('|') ||
+        if (!trimmed) {
+            continue;
+        }
+
+        if (trimmed.startsWith('#') || trimmed.startsWith('|') ||
             trimmed.startsWith('---') || trimmed.startsWith('*Next') || trimmed.startsWith('[Read')) {
+            currentSpeakerType = null;
+            currentSpeakerLabel = null;
             continue;
         }
 
@@ -526,36 +589,47 @@ function parseMarkdown(content) {
         const dirMatch = trimmed.match(/^\*?\*?\[(.+)\]\*?\*?$/);
 
         if (speakerMatch) {
-            const speakerName = speakerMatch[1];
+            const speakerName = speakerMatch[1].trim();
+            const normalizedSpeaker = normalizeSpeakerName(speakerName);
             const text = (speakerMatch[2] || '').trim();
 
             // Ignore metadata-like bold labels that are not dialogue lines.
             if (!text) {
-                currentSpeaker = null;
+                currentSpeakerType = null;
+                currentSpeakerLabel = null;
                 continue;
             }
 
             // Assign voice type (alternating between alex and sam voices)
-            if (!speakerMap[speakerName]) {
-                speakerMap[speakerName] = speakerCount % 2 === 0 ? 'alex' : 'sam';
+            if (!speakerMap[normalizedSpeaker]) {
+                speakerMap[normalizedSpeaker] = speakerCount % 2 === 0 ? 'alex' : 'sam';
                 speakerCount++;
             }
 
-            const voiceType = speakerMap[speakerName];
+            const voiceType = speakerMap[normalizedSpeaker];
             dialogue.push({
                 speaker: speakerName,
                 text: cleanText(text),
-                type: voiceType
+                type: voiceType,
+                rawLine: i
             });
-            currentSpeaker = voiceType;
+            currentSpeakerType = voiceType;
+            currentSpeakerLabel = speakerName;
         } else if (dirMatch) {
             // Stage directions like [MUSIC FADES] - skip these, don't speak them
             // dialogue.push({ speaker: '', text: dirMatch[1], type: 'direction' });
+            currentSpeakerType = null;
+            currentSpeakerLabel = null;
             continue;
-        } else if (currentSpeaker && trimmed.length > 0 && !trimmed.startsWith('*') && !trimmed.startsWith('-')) {
-            // Continuation of previous speaker's text
-            if (dialogue.length > 0 && dialogue[dialogue.length - 1].type === currentSpeaker) {
-                dialogue[dialogue.length - 1].text += ' ' + cleanText(trimmed);
+        } else if (currentSpeakerType && isContinuationDialogueLine(trimmed)) {
+            const continuation = cleanText(trimmed);
+            if (continuation) {
+                dialogue.push({
+                    speaker: currentSpeakerLabel || 'Narration',
+                    text: continuation,
+                    type: currentSpeakerType,
+                    rawLine: i
+                });
             }
         }
     }
@@ -617,17 +691,64 @@ document.getElementById('episode-search').addEventListener('input', e => {
 });
 
 // ===== PLAYER =====
-async function openEpisode(episode) {
+function alignChapterLineIndexes(chapterList, lines) {
+    if (!Array.isArray(chapterList) || chapterList.length === 0 || !Array.isArray(lines)) return;
+    if (lines.length === 0) {
+        chapterList.forEach((chapter) => { chapter.lineIndex = 0; });
+        return;
+    }
+
+    chapterList.forEach((chapter, idx) => {
+        const nextRawLine = chapterList[idx + 1]?.rawLine ?? Number.POSITIVE_INFINITY;
+        const lineIndex = lines.findIndex((line) =>
+            Number.isInteger(line.rawLine) &&
+            line.rawLine > chapter.rawLine &&
+            line.rawLine < nextRawLine
+        );
+        if (lineIndex >= 0) {
+            chapter.lineIndex = lineIndex;
+        }
+    });
+
+    chapterList[0].lineIndex = Math.max(0, chapterList[0].lineIndex || 0);
+    for (let i = 1; i < chapterList.length; i += 1) {
+        if (chapterList[i].lineIndex < chapterList[i - 1].lineIndex) {
+            chapterList[i].lineIndex = chapterList[i - 1].lineIndex;
+        }
+    }
+}
+
+async function openEpisode(episode, options = {}) {
+    const {
+        promptResume = true,
+        preferredLine = null
+    } = options;
     await stopPlayback();
     currentEpisode = episode;
-    dialogueLines = parseMarkdown(episode.content);
+    const speakerVoiceMap = parseSpeakerVoiceMap(episode.content);
+    dialogueLines = parseMarkdown(episode.content, speakerVoiceMap);
     chapters = parseChapters(episode.content);
+    alignChapterLineIndexes(chapters, dialogueLines);
 
     // Restore progress (with podcast-scoped key)
     const state = loadState();
     const epKey = currentPodcast ? `${currentPodcast.id}-${episode.id}` : episode.id;
     const progress = state.episodeProgress?.[epKey];
-    currentLineIndex = progress?.line || 0;
+    const savedLine = Number.isInteger(progress?.line) ? progress.line : 0;
+    let initialLine = savedLine;
+
+    if (Number.isInteger(preferredLine)) {
+        initialLine = preferredLine;
+    } else if (
+        promptResume &&
+        savedLine > 0 &&
+        savedLine < Math.max(0, dialogueLines.length - 1)
+    ) {
+        const shouldResume = window.confirm(`Resume this episode from line ${savedLine + 1}?`);
+        initialLine = shouldResume ? savedLine : 0;
+    }
+
+    currentLineIndex = Math.max(0, Math.min(initialLine, Math.max(0, dialogueLines.length - 1)));
 
     document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
 
@@ -1027,7 +1148,7 @@ async function playNextEpisode() {
     const episodes = currentPodcast?.episodes || [];
     const nextEp = episodes.find(e => e.id === currentEpisode.id + 1);
     if (nextEp) {
-        await openEpisode(nextEp);
+        await openEpisode(nextEp, { promptResume: false, preferredLine: 0 });
         startPlayback();
     }
 }
@@ -1036,7 +1157,7 @@ async function playPreviousEpisode() {
     const episodes = currentPodcast?.episodes || [];
     const prevEp = episodes.find(e => e.id === currentEpisode.id - 1);
     if (prevEp) {
-        await openEpisode(prevEp);
+        await openEpisode(prevEp, { promptResume: false, preferredLine: 0 });
         startPlayback();
     }
 }
@@ -1187,6 +1308,31 @@ document.getElementById('silence-trim-toggle').addEventListener('click', () => {
     localStorage.setItem('silenceTrimEnabled', silenceTrimEnabled);
 });
 
+document.getElementById('clear-local-data-btn').addEventListener('click', async () => {
+    const confirmed = window.confirm(
+        'Clear local app data and cache? This resets saved progress, bookmarks, queue, and settings on this device.'
+    );
+    if (!confirmed) return;
+
+    await stopPlayback();
+
+    LOCAL_STORAGE_KEYS_TO_CLEAR.forEach((key) => {
+        localStorage.removeItem(key);
+    });
+
+    if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
+    }
+
+    if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations.map((registration) => registration.unregister()));
+    }
+
+    window.location.href = window.location.pathname;
+});
+
 // Episode Filters
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1280,7 +1426,7 @@ function updateQueueDisplay() {
                 const episode = podcast.episodes.find(e => e.id === queueItem.episodeNum);
                 if (!episode) return;
                 openPodcast(podcast);
-                setTimeout(() => openEpisode(episode), 100);
+                setTimeout(() => openEpisode(episode, { promptResume: true }), 100);
             }
         });
     });
@@ -1444,7 +1590,7 @@ window.addEventListener('load', () => {
             if (episode) {
                 openPodcast(podcast);
                 setTimeout(() => {
-                    openEpisode(episode);
+                    openEpisode(episode, { promptResume: !lineNum });
                     if (lineNum) {
                         setTimeout(() => {
                             jumpToLine(parseInt(lineNum), false);

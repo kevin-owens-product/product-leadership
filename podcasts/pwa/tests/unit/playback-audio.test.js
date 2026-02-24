@@ -94,6 +94,53 @@ test('speak splits long text into multiple utterances', async () => {
   }
 });
 
+test('speak watchdog resolves stalled utterances', async () => {
+  const OriginalUtterance = global.SpeechSynthesisUtterance;
+  const originalSetTimeout = global.setTimeout;
+  const originalClearTimeout = global.clearTimeout;
+
+  class FakeUtterance {
+    constructor(text) {
+      this.text = text;
+      this.voice = null;
+      this.rate = 1;
+      this.pitch = 1;
+      this.onend = null;
+      this.onerror = null;
+    }
+  }
+
+  global.SpeechSynthesisUtterance = FakeUtterance;
+  global.setTimeout = (fn) => {
+    fn();
+    return 1;
+  };
+  global.clearTimeout = () => {};
+
+  let cancelCount = 0;
+  const synth = {
+    cancel() {
+      cancelCount += 1;
+    },
+    speak() {}
+  };
+
+  const players = createSpeechPlayers({
+    synth,
+    getVoices: () => ({ alexVoice: null, samVoice: null }),
+    getSpeechRate: () => 1
+  });
+
+  try {
+    await players.speak('This utterance will stall', 'alex');
+    assert.ok(cancelCount >= 1);
+  } finally {
+    global.SpeechSynthesisUtterance = OriginalUtterance;
+    global.setTimeout = originalSetTimeout;
+    global.clearTimeout = originalClearTimeout;
+  }
+});
+
 test('stopCurrentSpeech calls synth.cancel', () => {
   let cancelled = 0;
   const synth = {

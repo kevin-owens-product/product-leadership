@@ -1,4 +1,4 @@
-// Auto-generated podcast data - 2026-02-24T02:04:08.898Z
+// Auto-generated podcast data - 2026-02-24T02:05:00.787Z
 window.PODCASTS = [
   {
     "id": "claude-code-mastery",

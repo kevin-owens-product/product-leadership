@@ -1,0 +1,17 @@
+{
+  "id": "agentic-coding-frontier",
+  "title": "Agentic Coding Frontier",
+  "subtitle": "Bleeding-Edge AI Agents and Autonomous Software Workflows",
+  "description": "A practical deep dive into the frontier of AI agents, multi-agent systems, and agentic coding techniques. Learn how elite teams design, evaluate, and scale autonomous development workflows from idea to production.",
+  "author": "Alex & Riley",
+  "color": "#06b6d4",
+  "icon": "🧠",
+  "episodes": [
+    {"id": 1, "file": "episode-01-agentic-coding-foundations.md", "title": "Agentic Coding Foundations", "subtitle": "From Chat Assistants to Autonomous Software Operators"},
+    {"id": 2, "file": "episode-02-tools-mcp-orchestration.md", "title": "Tools, MCP, and Orchestration", "subtitle": "How Agents Use External Systems Reliably"},
+    {"id": 3, "file": "episode-03-issue-to-pr-workflow.md", "title": "The Issue-to-PR Agentic Workflow", "subtitle": "Designing End-to-End Autonomous Development Loops"},
+    {"id": 4, "file": "episode-04-evals-guardrails-reliability.md", "title": "Evals, Guardrails, and Reliability", "subtitle": "Shipping Agentic Systems Without Losing Control"},
+    {"id": 5, "file": "episode-05-memory-context-long-horizon.md", "title": "Memory, Context, and Long-Horizon Execution", "subtitle": "Making Agents Stateful, Consistent, and Useful Over Time"},
+    {"id": 6, "file": "episode-06-frontier-trends-and-operating-model.md", "title": "Frontier Trends and the New Engineering Operating Model", "subtitle": "Where Agentic Coding Goes Next"}
+  ]
+}

@@ -145,6 +145,10 @@ let searchMatches = [];
 let searchIndex = 0;
 const synth = window.speechSynthesis;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
+let backgroundAudioElement = null;
+let backgroundAudioSrc = '';
+let mediaSessionHandlersInitialized = false;
+let backgroundAudioNeedsGesture = false;
 
 const playbackSessions = createPlaybackSessionController();
 
@@ -211,6 +215,94 @@ async function releaseWakeLock() {
             console.warn('Wake Lock release failed:', err);
         }
     }
+}
+
+function createKeepAliveWavUrl(durationSeconds = 2) {
+    const safeDuration = Math.max(1, Math.round(durationSeconds));
+    const sampleRate = 8000;
+    const sampleCount = sampleRate * safeDuration;
+    const bytesPerSample = 2;
+    const dataSize = sampleCount * bytesPerSample;
+    const buffer = new ArrayBuffer(44 + dataSize);
+    const view = new DataView(buffer);
+
+    const writeString = (offset, value) => {
+        for (let i = 0; i < value.length; i += 1) {
+            view.setUint8(offset + i, value.charCodeAt(i));
+        }
+    };
+
+    writeString(0, 'RIFF');
+    view.setUint32(4, 36 + dataSize, true);
+    writeString(8, 'WAVE');
+    writeString(12, 'fmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * bytesPerSample, true);
+    view.setUint16(32, bytesPerSample, true);
+    view.setUint16(34, 16, true);
+    writeString(36, 'data');
+    view.setUint32(40, dataSize, true);
+
+    // Write a very low-amplitude tone (instead of pure silence) to prevent
+    // aggressive background optimization of silent tracks on some browsers.
+    const toneFrequency = 190;
+    const amplitude = 180;
+    let offset = 44;
+    for (let i = 0; i < sampleCount; i += 1) {
+        const t = i / sampleRate;
+        const sample = Math.round(amplitude * Math.sin(2 * Math.PI * toneFrequency * t));
+        view.setInt16(offset, sample, true);
+        offset += 2;
+    }
+
+    return URL.createObjectURL(new Blob([buffer], { type: 'audio/wav' }));
+}
+
+function ensureBackgroundAudioElement() {
+    if (!backgroundAudioElement) {
+        if (!backgroundAudioSrc) {
+            backgroundAudioSrc = createKeepAliveWavUrl(2);
+        }
+        const audio = new Audio(backgroundAudioSrc);
+        audio.loop = true;
+        audio.preload = 'auto';
+        audio.volume = 0.02;
+        audio.muted = false;
+        audio.playsInline = true;
+        audio.setAttribute('playsinline', 'playsinline');
+        backgroundAudioElement = audio;
+    }
+    return backgroundAudioElement;
+}
+
+async function startBackgroundAudioSession() {
+    const audio = ensureBackgroundAudioElement();
+    if (!audio || !audio.paused) return;
+    try {
+        await audio.play();
+        backgroundAudioNeedsGesture = false;
+    } catch (err) {
+        backgroundAudioNeedsGesture = true;
+        console.warn('Background audio session start failed:', err);
+    }
+}
+
+function pauseBackgroundAudioSession() {
+    if (!backgroundAudioElement || backgroundAudioElement.paused) return;
+    try {
+        backgroundAudioElement.pause();
+        backgroundAudioElement.currentTime = 0;
+    } catch (err) {
+        console.warn('Background audio session pause failed:', err);
+    }
+}
+
+async function retryBackgroundAudioSessionFromGesture() {
+    if (!backgroundAudioNeedsGesture || !isPlaying || isPaused) return;
+    await startBackgroundAudioSession();
 }
 
 // ===== PODCASTS HOME =====
@@ -761,6 +853,8 @@ async function openEpisode(episode, options = {}) {
     renderBookmarks();
     updateProgress();
     setStatus('Ready - Tap play to start');
+    syncMediaSession({ includeMetadata: true, includePosition: true });
+    updateMiniPlayer();
 
     document.getElementById('list-view').classList.remove('active');
     document.getElementById('player-view').classList.add('active');
@@ -844,6 +938,7 @@ function updateProgress() {
 
     // Update chapter indicator
     updateCurrentChapter();
+    updateMediaSessionPositionState();
 }
 
 // Transcript search
@@ -927,6 +1022,9 @@ async function startPlayback() {
     isPlaying = true;
     isPaused = false;
     document.getElementById('play-btn').textContent = '⏸';
+    updateMiniPlayer();
+    syncMediaSession({ includeMetadata: true, includePosition: true });
+    void startBackgroundAudioSession();
 
     // Request wake lock to keep device awake during playback
     await requestWakeLock();
@@ -960,7 +1058,9 @@ async function startPlayback() {
 
         if (isPlaying && !isPaused) {
             currentLineIndex++;
-            await new Promise(r => setTimeout(r, 300));
+            if (!document.hidden) {
+                await new Promise(r => setTimeout(r, 120));
+            }
         }
     }
     if (!playbackSessions.isActive(sessionId)) return;
@@ -969,15 +1069,21 @@ async function startPlayback() {
     if (currentLineIndex >= dialogueLines.length && isPlaying) {
         isPlaying = false;
         isPaused = false;
+        pauseBackgroundAudioSession();
         await releaseWakeLock();
         saveState();
+        updateMiniPlayer();
+        syncMediaSession({ includeMetadata: true, includePosition: true });
         showCompleteModal();
     } else {
         isPlaying = false;
         isPaused = false;
+        pauseBackgroundAudioSession();
         await releaseWakeLock();
         document.getElementById('play-btn').textContent = '▶';
         setStatus('Ready');
+        updateMiniPlayer();
+        syncMediaSession({ includeMetadata: true, includePosition: true });
     }
 }
 
@@ -986,31 +1092,37 @@ async function stopPlayback() {
     isPlaying = false;
     isPaused = false;
     speechPlayers.stopCurrentSpeech();
+    pauseBackgroundAudioSession();
     // Release wake lock when stopping playback
     await releaseWakeLock();
     document.getElementById('play-btn').textContent = '▶';
     saveState();
+    updateMiniPlayer();
+    syncMediaSession({ includeMetadata: true, includePosition: true });
 }
 
 async function togglePlayPause() {
     if (!isPlaying) {
-        startPlayback();
+        void startPlayback();
     } else if (isPaused) {
         isPaused = false;
         // Re-acquire wake lock when resuming
         await requestWakeLock();
         synth.resume();
+        void startBackgroundAudioSession();
         document.getElementById('play-btn').textContent = '⏸';
     } else {
         isPaused = true;
         // Release wake lock when pausing
         await releaseWakeLock();
         synth.pause();
+        pauseBackgroundAudioSession();
         document.getElementById('play-btn').textContent = '▶';
         setStatus('Paused');
         saveState();
     }
     updateMiniPlayer();
+    syncMediaSession({ includeMetadata: true, includePosition: true });
 }
 
 async function jumpToLine(index, autoStart = false) {
@@ -1020,6 +1132,7 @@ async function jumpToLine(index, autoStart = false) {
     isPlaying = false;
     isPaused = false;
     speechPlayers.stopCurrentSpeech();
+    pauseBackgroundAudioSession();
     // Release wake lock when jumping
     await releaseWakeLock();
 
@@ -1030,10 +1143,14 @@ async function jumpToLine(index, autoStart = false) {
     // Update UI
     document.getElementById('play-btn').textContent = '▶';
     setStatus('Ready');
+    updateMiniPlayer();
+    syncMediaSession({ includeMetadata: true, includePosition: true });
 
     // Auto-start if requested or was playing before
     if (autoStart || wasPlaying) {
-        setTimeout(() => startPlayback(), 100);
+        setTimeout(() => {
+            void startPlayback();
+        }, 100);
     }
 }
 
@@ -1047,6 +1164,14 @@ document.getElementById('prev-btn').addEventListener('click', () => skipLines(-1
 document.getElementById('next-btn').addEventListener('click', () => skipLines(10));
 document.getElementById('back-btn').addEventListener('click', () => skipLines(-5));
 document.getElementById('fwd-btn').addEventListener('click', () => skipLines(5));
+
+document.addEventListener('pointerdown', () => {
+    void retryBackgroundAudioSessionFromGesture();
+}, { passive: true, capture: true });
+
+document.addEventListener('keydown', () => {
+    void retryBackgroundAudioSessionFromGesture();
+}, { capture: true });
 
 // Speed
 document.getElementById('speed-slider').addEventListener('input', e => {
@@ -1572,7 +1697,7 @@ document.getElementById('mini-player').addEventListener('click', (e) => {
 
 document.getElementById('mini-play-btn').addEventListener('click', (e) => {
     e.stopPropagation();
-    togglePlayPause();
+    void togglePlayPause();
 });
 
 // Load from URL parameters
@@ -1812,6 +1937,10 @@ document.addEventListener('visibilitychange', async () => {
 
         // Save current state but do not force pause here.
         saveState();
+        syncMediaSession({ includeMetadata: true, includePosition: true });
+        if (wasPlayingBeforeBackground) {
+            void startBackgroundAudioSession();
+        }
         console.log('Playback handling delegated to browser while backgrounded');
     } else {
         // App came to foreground
@@ -1826,6 +1955,7 @@ document.addEventListener('visibilitychange', async () => {
                 console.log('Resuming speech synthesis after background');
                 synth.resume();
             }
+            syncMediaSession({ includeMetadata: true, includePosition: true });
         }
     }
 }, { passive: true });
@@ -1836,6 +1966,7 @@ window.addEventListener('pagehide', (e) => {
 
     console.log('Page hide - saving state, persisted:', e.persisted);
     saveState();
+    syncMediaSession({ includeMetadata: true, includePosition: true });
 
     // Don't cancel speech - browser media policies will decide background behavior.
     console.log('Page hidden, playback managed by browser policy');
@@ -1846,6 +1977,10 @@ window.addEventListener('beforeunload', () => {
     if (!backgroundHandlersEnabled) return;
     console.log('Before unload - saving state');
     saveState();
+    if (backgroundAudioSrc) {
+        URL.revokeObjectURL(backgroundAudioSrc);
+        backgroundAudioSrc = '';
+    }
 });
 
 // Force refresh - clears cache and reloads
@@ -1884,17 +2019,32 @@ function applyUpdate() {
 
 // ===== MEDIA SESSION API =====
 // Enables lock screen controls, notification controls, and handles audio interruptions
-function updateMediaSession() {
-    if (!('mediaSession' in navigator)) {
-        console.log('Media Session API not supported');
-        return;
+function estimateEpisodeDurationSeconds() {
+    const episodeDurationMinutes = currentEpisode?.content
+        ? extractEpisodeDurationMinutes(currentEpisode.content)
+        : null;
+    if (episodeDurationMinutes && episodeDurationMinutes > 0) {
+        return Math.max(1, Math.round(episodeDurationMinutes * 60));
     }
+    return Math.max(1, Math.round(dialogueLines.length * 3));
+}
 
-    if (!currentPodcast || !currentEpisode) {
-        return;
-    }
+function estimateLineJumpFromSeconds(seconds) {
+    const safeSeconds = Math.max(1, Number(seconds) || 10);
+    const duration = estimateEpisodeDurationSeconds();
+    if (duration <= 0 || dialogueLines.length === 0) return 1;
+    return Math.max(1, Math.round((safeSeconds / duration) * dialogueLines.length));
+}
 
-    // Update metadata
+function updateMediaSessionPlaybackState() {
+    if (!('mediaSession' in navigator)) return;
+    navigator.mediaSession.playbackState = (isPlaying && !isPaused) ? 'playing' : 'paused';
+}
+
+function updateMediaSessionMetadata() {
+    if (!('mediaSession' in navigator)) return;
+    if (!currentPodcast || !currentEpisode) return;
+    if (typeof window.MediaMetadata !== 'function') return;
     navigator.mediaSession.metadata = new MediaMetadata({
         title: currentEpisode.title,
         artist: currentPodcast.title,
@@ -1903,68 +2053,99 @@ function updateMediaSession() {
             { src: '/icon.svg', sizes: '512x512', type: 'image/svg+xml' }
         ]
     });
-
-    // Set up action handlers
-    navigator.mediaSession.setActionHandler('play', () => {
-        if (!isPlaying || isPaused) {
-            togglePlayPause();
-        }
-    });
-
-    navigator.mediaSession.setActionHandler('pause', () => {
-        if (isPlaying && !isPaused) {
-            togglePlayPause();
-        }
-    });
-
-    navigator.mediaSession.setActionHandler('seekbackward', () => {
-        // Jump back 10 seconds worth of lines
-        const newIndex = Math.max(0, currentLineIndex - 5);
-        jumpToLine(newIndex);
-    });
-
-    navigator.mediaSession.setActionHandler('seekforward', () => {
-        // Jump forward 10 seconds worth of lines
-        const newIndex = Math.min(dialogueLines.length - 1, currentLineIndex + 5);
-        jumpToLine(newIndex);
-    });
-
-    navigator.mediaSession.setActionHandler('previoustrack', () => {
-        // Navigate to previous episode
-        playPreviousEpisode();
-    });
-
-    navigator.mediaSession.setActionHandler('nexttrack', () => {
-        // Navigate to next episode
-        playNextEpisode();
-    });
-
-    // Update playback state
-    navigator.mediaSession.playbackState = (isPlaying && !isPaused) ? 'playing' : 'paused';
-
-    console.log('Media Session API initialized');
 }
 
-// Call updateMediaSession when playback state changes
-const originalTogglePlayPause = togglePlayPause;
-togglePlayPause = function() {
-    const result = originalTogglePlayPause();
-    updateMediaSession();
-    return result;
-};
-
-const originalStartPlayback = startPlayback;
-startPlayback = function() {
-    const result = originalStartPlayback();
-    updateMediaSession();
-    return result;
-};
-
-const originalStopPlayback = stopPlayback;
-stopPlayback = function() {
-    const result = originalStopPlayback();
-    if ('mediaSession' in navigator) {
-        navigator.mediaSession.playbackState = 'paused';
+function updateMediaSessionPositionState() {
+    if (!('mediaSession' in navigator) || typeof navigator.mediaSession.setPositionState !== 'function') return;
+    if (!currentEpisode || dialogueLines.length === 0) return;
+    const duration = estimateEpisodeDurationSeconds();
+    const safeLineCount = Math.max(1, dialogueLines.length);
+    const clampedLine = Math.max(0, Math.min(currentLineIndex, safeLineCount));
+    const position = Math.max(0, Math.min(duration, (clampedLine / safeLineCount) * duration));
+    try {
+        navigator.mediaSession.setPositionState({
+            duration,
+            playbackRate: speechRate,
+            position
+        });
+    } catch (err) {
+        console.debug('Media Session position update failed:', err);
     }
-    return result;
-};
+}
+
+function initializeMediaSessionHandlers() {
+    if (!('mediaSession' in navigator) || mediaSessionHandlersInitialized) return;
+    const setActionHandler = (action, handler) => {
+        try {
+            navigator.mediaSession.setActionHandler(action, handler);
+        } catch (err) {
+            console.debug(`Media Session action not supported: ${action}`, err);
+        }
+    };
+
+    setActionHandler('play', () => {
+        if (!isPlaying || isPaused) {
+            void togglePlayPause();
+        }
+    });
+    setActionHandler('pause', () => {
+        if (isPlaying && !isPaused) {
+            void togglePlayPause();
+        }
+    });
+    setActionHandler('stop', () => {
+        void stopPlayback();
+    });
+    setActionHandler('seekbackward', (details) => {
+        const linesToJump = estimateLineJumpFromSeconds(details?.seekOffset || 10);
+        void jumpToLine(currentLineIndex - linesToJump, isPlaying && !isPaused);
+    });
+    setActionHandler('seekforward', (details) => {
+        const linesToJump = estimateLineJumpFromSeconds(details?.seekOffset || 10);
+        void jumpToLine(currentLineIndex + linesToJump, isPlaying && !isPaused);
+    });
+    setActionHandler('seekto', (details) => {
+        if (!Number.isFinite(details?.seekTime)) return;
+        const duration = estimateEpisodeDurationSeconds();
+        const targetLine = Math.round((details.seekTime / Math.max(1, duration)) * dialogueLines.length);
+        void jumpToLine(targetLine, isPlaying && !isPaused);
+    });
+    setActionHandler('previoustrack', () => {
+        void playPreviousEpisode();
+    });
+    setActionHandler('nexttrack', () => {
+        void playNextEpisode();
+    });
+
+    mediaSessionHandlersInitialized = true;
+}
+
+function syncMediaSession({ includeMetadata = false, includePosition = false } = {}) {
+    if (!('mediaSession' in navigator)) return;
+    initializeMediaSessionHandlers();
+    if (includeMetadata) {
+        updateMediaSessionMetadata();
+    }
+    updateMediaSessionPlaybackState();
+    if (includePosition) {
+        updateMediaSessionPositionState();
+    }
+}
+
+window.addEventListener('keydown', (event) => {
+    const key = event.code || event.key;
+    if (key === 'MediaPlayPause') {
+        event.preventDefault();
+        void togglePlayPause();
+        return;
+    }
+    if (key === 'MediaTrackNext') {
+        event.preventDefault();
+        void playNextEpisode();
+        return;
+    }
+    if (key === 'MediaTrackPrevious') {
+        event.preventDefault();
+        void playPreviousEpisode();
+    }
+});

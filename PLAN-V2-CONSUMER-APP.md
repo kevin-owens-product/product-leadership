@@ -608,24 +608,111 @@ v2/mobile/
 
 ## 6. Credit System & Payments
 
-### Credit Model
+### Actual Cost Per Episode (What We Pay)
+
+Before setting prices, here are the real API costs per episode:
+
+**ElevenLabs TTS** (~1,000 characters = ~1 minute of audio):
+- Scale plan ($330/mo) includes 2M characters = ~2,000 minutes of audio
+- In-plan effective rate: **$0.165 per minute** of audio
+- Overage rate: **$0.18 per 1,000 characters** (~$0.18/min)
+- Flash model (faster, lower quality) uses 0.5 credits/char = **half the cost**
+
+**Claude API** (Sonnet 4.6 for script generation):
+- Input: $3.00 per 1M tokens / Output: $15.00 per 1M tokens
+- A 30-min episode script is ~7,000 output tokens + ~3,500 input tokens
+- Cost per episode: ~$0.12
+
+**Per-Episode Cost Breakdown:**
+
+| Episode Length | ElevenLabs (Standard) | ElevenLabs (Flash) | Claude API | Total (Standard) | Total (Flash) |
+|---------------|----------------------|-------------------|------------|-----------------|---------------|
+| **~15 min** | $2.48 | $1.24 | $0.08 | **$2.56** | **$1.32** |
+| **~30 min** | $4.95 | $2.48 | $0.12 | **$5.07** | **$2.60** |
+| **~60 min** | $9.90 | $4.95 | $0.20 | **$10.10** | **$5.15** |
+
+**Per-Show Cost (6 episodes x ~30 min):**
+
+| TTS Model | ElevenLabs | Claude API | Total |
+|-----------|-----------|------------|-------|
+| Standard (highest quality) | $29.70 | $0.75 | **$30.45** |
+| Flash (good quality, recommended) | $14.85 | $0.75 | **$15.60** |
+
+> **Key insight:** ElevenLabs is ~95% of the variable cost. Claude API is negligible.
+> **Recommendation:** Default to Flash model. Offer Standard as a "premium voices" upsell.
+
+### Credit Model (Cost-Covering)
+
+1 credit = 1 episode generation. Credits cost more for longer episodes.
 
 | Action | Credits |
 |--------|---------|
-| Sign up (bonus) | 3 free credits |
-| Beta user bonus | 5 bonus credits |
+| Sign up (bonus) | 2 free credits |
+| Beta user bonus | 3 bonus credits |
 | Generate 1 episode (~15 min) | 1 credit |
-| Generate 1 episode (~30 min) | 1 credit |
-| Generate 1 episode (~60 min) | 2 credits |
+| Generate 1 episode (~30 min) | 2 credits |
+| Generate 1 episode (~60 min) | 4 credits |
 
-### Credit Packs (In-App Purchase via RevenueCat)
+### Credit Pack Pricing (In-App Purchase via RevenueCat)
 
-| Pack | Credits | Price | Per Credit |
-|------|---------|-------|------------|
-| Starter | 6 credits | $4.99 | $0.83 |
-| Popular | 15 credits | $9.99 | $0.67 |
-| Pro | 40 credits | $19.99 | $0.50 |
-| Studio | 100 credits | $39.99 | $0.40 |
+Apple/Google take a **30% cut** of all IAP revenue (15% if under $1M/year via Small Business Program).
+Pricing must cover: API costs + platform cut + margin.
+
+**Using Flash TTS (recommended default). Cost per credit ≈ $1.32.**
+
+| Pack | Credits | Price | After 30% cut | Revenue/credit | Our cost/credit | Gross margin |
+|------|---------|-------|---------------|----------------|-----------------|-------------|
+| **Try It** | 5 | $14.99 | $10.49 | $2.10 | $1.32 | **37%** |
+| **Popular** | 12 | $29.99 | $20.99 | $1.75 | $1.32 | **25%** |
+| **Pro** | 30 | $69.99 | $48.99 | $1.63 | $1.32 | **19%** |
+
+**What users actually pay for common scenarios:**
+
+| What the user creates | Credits needed | Cheapest pack | User pays |
+|-----------------------|---------------|---------------|-----------|
+| 1 short podcast (3 eps x 15 min) | 3 credits | Try It (5) | $14.99 |
+| 1 standard podcast (6 eps x 30 min) | 12 credits | Popular (12) | $29.99 |
+| 2 standard podcasts | 24 credits | Pro (30) | $69.99 |
+| 1 deep-dive podcast (6 eps x 60 min) | 24 credits | Pro (30) | $69.99 |
+
+### Margin Sanity Check
+
+**A user buys the "Popular" pack ($29.99) and creates a 6-episode, 30-min podcast:**
+
+```
+Revenue:                    $29.99
+- Apple/Google cut (30%):   -$9.00
+= Net revenue:              $20.99
+
+Generation costs:
+  ElevenLabs (Flash, 6 eps): -$14.85
+  Claude API (6 eps):        -$0.75
+= Total cost:               -$15.60
+
+Gross profit:                $5.39  (18% margin)
+```
+
+**Same scenario with Small Business Program (15% cut):**
+```
+Revenue:                    $29.99
+- Apple/Google cut (15%):   -$4.50
+= Net revenue:              $25.49
+
+Generation costs:           -$15.60
+
+Gross profit:                $9.89  (33% margin)
+```
+
+> **Important:** The Small Business Program (15% cut) applies while annual revenue is under $1M. At launch, this will apply and margins are healthy at ~33%. If the app scales past $1M, the 30% cut kicks in and margins drop to ~18% — at which point volume pricing with ElevenLabs or switching to a cheaper TTS becomes critical.
+
+### Free Credits: Cost of Acquisition
+
+| Scenario | Free credits | Our cost (Flash) | Notes |
+|----------|-------------|-------------------|-------|
+| New signup | 2 credits | $2.64 | Enough for 2 short episodes or 1 x 30-min |
+| Beta tester | 3 bonus credits | $3.96 | Total 5 credits with signup bonus |
+
+At 1,000 signups, free credits cost us **~$2,640**. This is the user acquisition budget — acceptable if conversion rate is >15%.
 
 ### Payment Architecture
 
@@ -649,9 +736,9 @@ Mobile App (RevenueCat SDK)
 ### Credit Flow for Generation
 
 ```
-1. User taps "Generate" (6 episodes × 1 credit = 6 credits)
+1. User taps "Generate" (6 episodes × 30 min × 2 credits = 12 credits)
 2. Edge function: create-show
-   a. Check credits_balance >= 6
+   a. Check credits_balance >= 12
    b. BEGIN TRANSACTION
    c. Deduct 6 credits from profile
    d. Insert credit_transaction (type: 'generation_spend')
@@ -732,7 +819,7 @@ Users could pick from a curated set of voice pairs in a future update.
 
 **Beta Features:**
 - Sign up with email + beta code
-- 5 free credits on signup
+- 5 free credits on signup (2 signup bonus + 3 beta bonus)
 - Create podcasts from descriptions
 - Full player with chapters, bookmarks, transcript
 - Basic profile and credit purchase
@@ -759,7 +846,7 @@ Users could pick from a curated set of voice pairs in a future update.
 
 **Changes from Closed Beta:**
 - Remove beta code requirement
-- Reduce signup bonus to 3 credits
+- Reduce signup bonus to 2 credits (no beta bonus)
 - Enable credit purchases (real money)
 - Add onboarding flow
 - Polish based on closed beta feedback
@@ -915,48 +1002,95 @@ Users could pick from a curated set of voice pairs in a future update.
 
 ## 11. Cost Estimates
 
-### Per-Podcast Generation Cost (6 episodes × ~30 min)
+### Real API Pricing Sources (March 2026)
 
-| Service | Cost per Episode | 6 Episodes |
-|---------|-----------------|------------|
-| Claude API (script generation) | ~$0.15 | ~$0.90 |
-| ElevenLabs (30 min audio) | ~$1.50 (Scale plan) | ~$9.00 |
-| Supabase Storage (30 MB) | negligible | negligible |
-| **Total per podcast** | | **~$9.90** |
+**ElevenLabs** ([pricing page](https://elevenlabs.io/pricing/api)):
+- ~1,000 characters = ~1 minute of generated audio
+- Scale plan: $330/mo for 2M characters (2,000 min of audio)
+- Overage: $0.18 per 1,000 characters
+- Flash model uses 0.5 credits/character (effectively half price)
 
-### Monthly Infrastructure Costs (estimated at 100 active users)
+**Anthropic Claude API** ([pricing page](https://platform.claude.com/docs/en/about-claude/pricing)):
+- Sonnet 4.6: $3/1M input tokens, $15/1M output tokens
+- Haiku 4.5: $1/1M input tokens, $5/1M output tokens (viable for script gen if quality is sufficient)
 
-| Service | Free Tier | Estimated Monthly |
-|---------|-----------|-------------------|
-| Supabase (Pro) | 50K MAU, 8GB DB | $25/mo |
-| ElevenLabs (Scale) | - | $99/mo (500K chars) |
-| Anthropic Claude API | - | Pay-per-use (~$50-200/mo) |
-| RevenueCat | Free < $2,500 MTR | $0 initially |
-| Expo EAS Build | 30 builds/mo free | $0 initially |
-| Sentry | 5K events free | $0 initially |
-| Apple Developer | - | $99/year |
-| Google Play Developer | - | $25 one-time |
-| **Total** | | **~$175-350/mo** |
+### Per-Episode Variable Costs (Flash TTS + Sonnet)
 
-### Revenue Model at Scale
+| Component | 15-min episode | 30-min episode | 60-min episode |
+|-----------|---------------|---------------|----------------|
+| ElevenLabs Flash (~$0.083/min) | $1.24 | $2.48 | $4.95 |
+| Claude Sonnet (script gen) | $0.08 | $0.12 | $0.20 |
+| Supabase Storage (~15-60 MB) | ~$0.00 | ~$0.00 | ~$0.01 |
+| **Total variable cost** | **$1.32** | **$2.60** | **$5.16** |
 
-At 1,000 active users with 20% conversion:
-- 200 paying users × average $10/purchase × 1.5 purchases/mo = **$3,000/mo gross**
-- Apple/Google take 30% (15% for small business program) = ~$450-900
-- Generation costs: ~200 podcasts/mo × $10 = ~$2,000
-- Infrastructure: ~$500/mo
-- **Net: ~$0-600/mo at 1K users** (improves with scale as infra is more fixed)
+### Per-Podcast Variable Costs (6 episodes x 30 min = standard show)
 
-At 10,000 active users with 15% conversion:
-- Revenue scales much better as infrastructure costs grow sublinearly
+| Item | Cost |
+|------|------|
+| ElevenLabs Flash (180 min audio) | $14.85 |
+| Claude Sonnet (6 scripts + 1 planning call) | $0.75 |
+| Supabase Storage (~180 MB) | ~$0.01 |
+| **Total per standard show** | **$15.60** |
 
-### Key Economic Insight
+### Monthly Fixed Infrastructure Costs
 
-The primary variable cost is ElevenLabs audio generation. To improve margins:
-1. Negotiate volume pricing with ElevenLabs at scale
-2. Consider alternative TTS providers (PlayHT, LMNT, or open-source models)
-3. Implement audio caching for popular prompts (unlikely overlap, but worth monitoring)
-4. Optimize script length (tighter scripts = less TTS cost)
+| Service | Cost | Notes |
+|---------|------|-------|
+| Supabase Pro | $25/mo | 50K MAU, 8GB DB, 250GB bandwidth |
+| ElevenLabs Scale (base) | $330/mo | 2M chars included (~133 episodes at Flash) |
+| Anthropic Claude API | Pay-per-use | ~$0.12/episode, negligible |
+| RevenueCat | $0 | Free under $2,500/mo tracked revenue |
+| Expo EAS Build | $0 | 30 builds/mo free tier |
+| Sentry | $0 | 5K events/mo free tier |
+| Apple Developer Program | $8.25/mo | ($99/year) |
+| Google Play Developer | one-time $25 | |
+| **Total fixed** | **~$363/mo** | Before any overage |
+
+### Break-Even Analysis
+
+**How many podcasts does the $330/mo ElevenLabs Scale plan cover?**
+- 2M characters / (30,000 chars × 6 episodes × 0.5 Flash multiplier) = **~22 standard shows/mo included**
+- Beyond that: overage at $0.18/1,000 chars
+
+**Monthly break-even at different scales (Flash TTS, Small Business 15% cut):**
+
+| Metric | 50 users | 200 users | 1,000 users |
+|--------|----------|-----------|-------------|
+| Paying users (15% conversion) | 8 | 30 | 150 |
+| Shows generated/mo | ~10 | ~35 | ~175 |
+| Avg. revenue/show (Popular pack) | $29.99 | $29.99 | $29.99 |
+| **Gross revenue** | **$300** | **$1,050** | **$5,250** |
+| Apple/Google cut (15%) | -$45 | -$158 | -$788 |
+| ElevenLabs (Scale + overage) | -$330 | -$522 | -$2,841 |
+| Claude API | -$1 | -$4 | -$21 |
+| Supabase | -$25 | -$25 | -$50 |
+| Other fixed costs | -$8 | -$8 | -$8 |
+| **Net profit/loss** | **-$109** | **$333** | **$1,542** |
+| **Margin** | **-36%** | **32%** | **29%** |
+
+> **Break-even point: ~120 paying users generating ~15 shows/month.**
+> Below that, the $330/mo ElevenLabs base cost dominates. Above it, margins stabilize at ~30%.
+
+### Revenue Scaling: When 30% App Store Cut Kicks In
+
+If annual revenue exceeds $1M (~$83K/mo), Apple/Google take 30% instead of 15%.
+At that scale (~2,800 shows/mo), you'd need to:
+
+1. **Negotiate ElevenLabs enterprise pricing** (they offer custom pricing at volume)
+2. **Evaluate alternative TTS**: PlayHT, LMNT, or self-hosted open-source (Bark, XTTS)
+3. **Optimize scripts**: Tighter prompts → shorter scripts → fewer characters → lower TTS cost
+4. **Consider a subscription tier**: Monthly subscription with included shows smooths revenue
+
+### Key Economic Levers
+
+| Lever | Impact | When to Pull |
+|-------|--------|-------------|
+| Switch to ElevenLabs Flash model | Cuts TTS cost ~50% | Day 1 (default) |
+| Offer Standard voices as premium upsell | Extra $5-10/show revenue | Launch |
+| Use Claude Haiku instead of Sonnet for scripts | Saves ~$0.08/ep (negligible) | Not worth the quality tradeoff |
+| Negotiate ElevenLabs volume pricing | 20-40% TTS savings | At ~500+ shows/mo |
+| Self-host TTS (XTTS/Bark on GPU) | 80-90% TTS savings | At ~1000+ shows/mo, if quality acceptable |
+| Add subscription tier ($19.99/mo for 2 shows) | Predictable revenue, higher LTV | Post-launch, once retention data exists |
 
 ---
 

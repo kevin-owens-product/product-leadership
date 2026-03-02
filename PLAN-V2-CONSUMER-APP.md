@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-Transform the existing personal podcast PWA (V1) into a consumer-grade mobile app (V2) where users describe a podcast concept and AI generates full multi-episode shows with professional TTS narration. V1 remains untouched as a personal tool. V2 is a new React Native app backed by Supabase, with AI script generation (Claude API), professional TTS (ElevenLabs), per-podcast credit billing (RevenueCat + Stripe), and distribution via App Store and Google Play.
+Transform the existing personal podcast PWA (V1) into a consumer-grade mobile app (V2) where users describe a podcast concept and AI generates full multi-episode shows with professional TTS narration. V1 remains untouched as a personal tool. V2 is a new React Native app backed by Supabase, with AI script generation (Claude API), tiered TTS (OpenAI tts-1 default at $0.45/episode, with OpenAI tts-1-hd premium upsell), per-podcast credit billing (RevenueCat), and distribution via App Store and Google Play.
 
 ---
 
@@ -113,7 +113,7 @@ product-leadership/
                           │                           │      │
                           ▼                           ▼      ▼
                    ┌──────────┐              ┌──────────┐ ┌──────┐
-                   │ Claude   │              │ElevenLabs│ │Stripe│
+                   │ Claude   │              │ OpenAI   │ │Stripe│
                    │ API      │              │ TTS API  │ │      │
                    │ (scripts)│              │ (audio)  │ │      │
                    └──────────┘              └──────────┘ └──────┘
@@ -129,7 +129,8 @@ product-leadership/
 | **Audio** | expo-av | Native audio playback for pre-generated MP3s |
 | **Backend** | Supabase | Auth + Postgres + Storage + Edge Functions in one |
 | **AI Scripts** | Claude API (Anthropic) | Best quality for long-form dialogue generation |
-| **TTS** | ElevenLabs API | Professional multi-voice audio, already integrated in V1 tools |
+| **TTS (default)** | OpenAI tts-1 API | 11x cheaper than ElevenLabs, good quality, no monthly minimum |
+| **TTS (premium)** | OpenAI tts-1-hd | Higher fidelity upsell; ElevenLabs as future "Ultra" tier |
 | **Payments** | RevenueCat + Stripe | RevenueCat handles App Store/Play Store IAP; Stripe for web |
 | **Builds** | EAS Build (Expo) | Cloud builds for iOS/Android without local Xcode/Android Studio |
 | **Analytics** | PostHog or Mixpanel | Product analytics, funnel tracking |
@@ -608,111 +609,186 @@ v2/mobile/
 
 ## 6. Credit System & Payments
 
-### Actual Cost Per Episode (What We Pay)
+### TTS Provider Comparison (March 2026 Pricing)
 
-Before setting prices, here are the real API costs per episode:
+TTS is ~95% of the variable cost per episode, so the provider choice determines the entire business model.
+All pricing below is per 1 million characters. ~1,000 characters = ~1 minute of audio.
 
-**ElevenLabs TTS** (~1,000 characters = ~1 minute of audio):
-- Scale plan ($330/mo) includes 2M characters = ~2,000 minutes of audio
-- In-plan effective rate: **$0.165 per minute** of audio
-- Overage rate: **$0.18 per 1,000 characters** (~$0.18/min)
-- Flash model (faster, lower quality) uses 0.5 credits/char = **half the cost**
+| Provider | Model | Cost / 1M chars | Cost / 30-min episode | Quality | Voices | Voice Cloning |
+|----------|-------|-----------------|----------------------|---------|--------|--------------|
+| **OpenAI** | tts-1 (standard) | **$15** | **$0.45** | Good, natural | 13 built-in | No |
+| **OpenAI** | tts-1-hd | $30 | $0.90 | Very good | 13 built-in | No |
+| **Google Cloud** | Neural2 / WaveNet | $16 | $0.48 | Good | 100+ | No |
+| **Google Cloud** | Chirp 3 HD | $30 | $0.90 | Very good | Fewer | No |
+| **Google Cloud** | Standard | $4 | $0.12 | Basic/robotic | 100+ | No |
+| **ElevenLabs** | Flash v2.5 | ~$83 (Scale plan) | $2.48 | Very good | 100+ library | Yes |
+| **ElevenLabs** | Multilingual v2 | ~$165 (Scale plan) | $4.95 | Best-in-class | 100+ library | Yes |
+| **PlayHT** | Unlimited plan | $49/mo flat* | ~$0.59* | Good | 120+ | Yes |
+| **Fish Audio** | API | ~$50-70 est. | ~$1.50-2.10 | Good | 2M+ community | Yes |
 
-**Claude API** (Sonnet 4.6 for script generation):
-- Input: $3.00 per 1M tokens / Output: $15.00 per 1M tokens
-- A 30-min episode script is ~7,000 output tokens + ~3,500 input tokens
-- Cost per episode: ~$0.12
+*PlayHT Unlimited has a 2.5M char/mo fair use cap (~83 episodes). Overage is $0.40/1K chars — worse than ElevenLabs.
 
-**Per-Episode Cost Breakdown:**
+**The standout finding: OpenAI tts-1 is 5-11x cheaper than ElevenLabs** with decent quality.
 
-| Episode Length | ElevenLabs (Standard) | ElevenLabs (Flash) | Claude API | Total (Standard) | Total (Flash) |
-|---------------|----------------------|-------------------|------------|-----------------|---------------|
-| **~15 min** | $2.48 | $1.24 | $0.08 | **$2.56** | **$1.32** |
-| **~30 min** | $4.95 | $2.48 | $0.12 | **$5.07** | **$2.60** |
-| **~60 min** | $9.90 | $4.95 | $0.20 | **$10.10** | **$5.15** |
+### Cost Per Episode by Provider (What We Actually Pay)
 
-**Per-Show Cost (6 episodes x ~30 min):**
+Using the recommended provider for each tier. Claude API cost (~$0.12/ep) included in all.
 
-| TTS Model | ElevenLabs | Claude API | Total |
-|-----------|-----------|------------|-------|
-| Standard (highest quality) | $29.70 | $0.75 | **$30.45** |
-| Flash (good quality, recommended) | $14.85 | $0.75 | **$15.60** |
+| Episode Length | OpenAI tts-1 | OpenAI tts-1-hd | Google Neural2 | ElevenLabs Flash |
+|---------------|-------------|-----------------|----------------|-----------------|
+| **~15 min** | **$0.31** | **$0.53** | **$0.32** | **$1.32** |
+| **~30 min** | **$0.57** | **$1.02** | **$0.60** | **$2.60** |
+| **~60 min** | **$1.10** | **$2.00** | **$1.16** | **$5.15** |
 
-> **Key insight:** ElevenLabs is ~95% of the variable cost. Claude API is negligible.
-> **Recommendation:** Default to Flash model. Offer Standard as a "premium voices" upsell.
+### Cost Per Show (6 episodes x ~30 min)
+
+| Provider | TTS Cost | Claude API | Total | vs. ElevenLabs Flash |
+|----------|---------|------------|-------|---------------------|
+| **OpenAI tts-1** | $2.70 | $0.75 | **$3.45** | **78% cheaper** |
+| **OpenAI tts-1-hd** | $5.40 | $0.75 | **$6.15** | **61% cheaper** |
+| **Google Neural2** | $2.88 | $0.75 | **$3.63** | **77% cheaper** |
+| **ElevenLabs Flash** | $14.85 | $0.75 | **$15.60** | baseline |
+| **ElevenLabs Standard** | $29.70 | $0.75 | **$30.45** | 95% more expensive |
+
+### Recommended Strategy: Tiered TTS
+
+Offer two voice quality tiers to maximize both accessibility and margin:
+
+| Tier | TTS Provider | Cost/30-min ep | User experience |
+|------|-------------|---------------|-----------------|
+| **Standard Voices** (default) | OpenAI tts-1 | $0.45 | Good natural voices, 13 options, solid for most users |
+| **Premium Voices** (upsell) | ElevenLabs Flash | $2.48 | Superior naturalness, voice cloning potential, 100+ voices |
+
+This lets us price the default tier aggressively to drive adoption, while Premium Voices becomes a high-margin upsell.
 
 ### Credit Model (Cost-Covering)
 
-1 credit = 1 episode generation. Credits cost more for longer episodes.
+1 credit = 1 episode generation.
 
 | Action | Credits |
 |--------|---------|
-| Sign up (bonus) | 2 free credits |
-| Beta user bonus | 3 bonus credits |
-| Generate 1 episode (~15 min) | 1 credit |
-| Generate 1 episode (~30 min) | 2 credits |
-| Generate 1 episode (~60 min) | 4 credits |
+| Sign up (bonus) | 3 free credits |
+| Beta user bonus | 5 bonus credits |
+| Generate 1 episode (~15 min, standard voices) | 1 credit |
+| Generate 1 episode (~30 min, standard voices) | 1 credit |
+| Generate 1 episode (~60 min, standard voices) | 2 credits |
+| **Premium voices add-on** | +1 credit per episode |
 
 ### Credit Pack Pricing (In-App Purchase via RevenueCat)
 
-Apple/Google take a **30% cut** of all IAP revenue (15% if under $1M/year via Small Business Program).
-Pricing must cover: API costs + platform cut + margin.
+Apple/Google take a **30% cut** of IAP revenue (15% under $1M/year via Small Business Program).
 
-**Using Flash TTS (recommended default). Cost per credit ≈ $1.32.**
+**Using OpenAI tts-1 as default. Cost per credit ≈ $0.57 (30-min episode).**
 
 | Pack | Credits | Price | After 30% cut | Revenue/credit | Our cost/credit | Gross margin |
 |------|---------|-------|---------------|----------------|-----------------|-------------|
-| **Try It** | 5 | $14.99 | $10.49 | $2.10 | $1.32 | **37%** |
-| **Popular** | 12 | $29.99 | $20.99 | $1.75 | $1.32 | **25%** |
-| **Pro** | 30 | $69.99 | $48.99 | $1.63 | $1.32 | **19%** |
+| **Starter** | 6 | $4.99 | $3.49 | $0.58 | $0.57 | **2%** |
+| **Popular** | 15 | $9.99 | $6.99 | $0.47 | $0.57 | **-21%** |
 
-**What users actually pay for common scenarios:**
+Those margins are too thin/negative at 30% cut. But with the **Small Business Program (15% cut)**:
+
+| Pack | Credits | Price | After 15% cut | Revenue/credit | Our cost/credit | Gross margin |
+|------|---------|-------|---------------|----------------|-----------------|-------------|
+| **Starter** | 6 | $4.99 | $4.24 | $0.71 | $0.57 | **20%** |
+| **Popular** | 15 | $9.99 | $8.49 | $0.57 | $0.57 | **0%** |
+
+Still tight. Let's price to guarantee margin at BOTH 30% and 15% cut:
+
+| Pack | Credits | Price | After 30% cut | After 15% cut | Our cost | Margin (30%) | Margin (15%) |
+|------|---------|-------|---------------|---------------|----------|-------------|-------------|
+| **Starter** | 6 | $6.99 | $4.89 | $5.94 | $3.42 | **30%** | **42%** |
+| **Popular** | 15 | $14.99 | $10.49 | $12.74 | $8.55 | **19%** | **33%** |
+| **Pro** | 40 | $34.99 | $24.49 | $29.74 | $22.80 | **7%** | **23%** |
+
+**What users actually pay for common scenarios (Standard Voices):**
 
 | What the user creates | Credits needed | Cheapest pack | User pays |
 |-----------------------|---------------|---------------|-----------|
-| 1 short podcast (3 eps x 15 min) | 3 credits | Try It (5) | $14.99 |
-| 1 standard podcast (6 eps x 30 min) | 12 credits | Popular (12) | $29.99 |
-| 2 standard podcasts | 24 credits | Pro (30) | $69.99 |
-| 1 deep-dive podcast (6 eps x 60 min) | 24 credits | Pro (30) | $69.99 |
+| 1 short podcast (3 eps x 15 min) | 3 credits | Starter (6) | $6.99 |
+| 1 standard podcast (6 eps x 30 min) | 6 credits | Starter (6) | $6.99 |
+| 2 standard podcasts | 12 credits | Popular (15) | $14.99 |
+| 1 deep-dive podcast (6 eps x 60 min) | 12 credits | Popular (15) | $14.99 |
+| 5 standard podcasts | 30 credits | Pro (40) | $34.99 |
+
+**With Premium Voices (ElevenLabs), same podcast costs +1 credit/episode:**
+
+| What the user creates | Credits needed | Pack | User pays |
+|-----------------------|---------------|------|-----------|
+| 1 standard podcast (6 eps x 30 min) | 12 credits (6 base + 6 premium) | Popular (15) | $14.99 |
 
 ### Margin Sanity Check
 
-**A user buys the "Popular" pack ($29.99) and creates a 6-episode, 30-min podcast:**
+**User buys "Starter" ($6.99) and creates a 6-episode, 30-min podcast with Standard Voices:**
 
 ```
-Revenue:                    $29.99
-- Apple/Google cut (30%):   -$9.00
-= Net revenue:              $20.99
+Revenue:                    $6.99
+- Apple/Google cut (15%):   -$1.05
+= Net revenue:              $5.94
 
 Generation costs:
-  ElevenLabs (Flash, 6 eps): -$14.85
-  Claude API (6 eps):        -$0.75
-= Total cost:               -$15.60
+  OpenAI tts-1 (6 eps):    -$2.70
+  Claude API (6 eps):       -$0.75
+= Total cost:              -$3.45
 
-Gross profit:                $5.39  (18% margin)
+Gross profit:               $2.49  (36% margin)
 ```
 
-**Same scenario with Small Business Program (15% cut):**
+**Same with 30% cut (post-$1M revenue):**
 ```
-Revenue:                    $29.99
-- Apple/Google cut (15%):   -$4.50
-= Net revenue:              $25.49
+Revenue:                    $6.99
+- Apple/Google cut (30%):   -$2.10
+= Net revenue:              $4.89
 
-Generation costs:           -$15.60
+Generation costs:           -$3.45
 
-Gross profit:                $9.89  (33% margin)
+Gross profit:               $1.44  (21% margin)
 ```
 
-> **Important:** The Small Business Program (15% cut) applies while annual revenue is under $1M. At launch, this will apply and margins are healthy at ~33%. If the app scales past $1M, the 30% cut kicks in and margins drop to ~18% — at which point volume pricing with ElevenLabs or switching to a cheaper TTS becomes critical.
+**User buys "Popular" ($14.99) and creates a 6-ep podcast with Premium Voices (ElevenLabs):**
+
+```
+Revenue:                    $14.99
+- Apple/Google cut (15%):   -$2.25
+= Net revenue:              $12.74
+
+Generation costs:
+  ElevenLabs Flash (6 eps): -$14.85
+  Claude API (6 eps):       -$0.75
+= Total cost:              -$15.60
+
+Gross profit:              -$2.86  (-22% margin) ❌ LOSS
+```
+
+> **Premium Voices with ElevenLabs at the Popular tier loses money.** Options:
+> 1. Price premium voice add-on at +2 credits/episode instead of +1 (user pays $14.99-$34.99 for a premium show)
+> 2. Only offer ElevenLabs at Pro tier pricing
+> 3. Use OpenAI tts-1-hd as the "premium" tier instead ($0.90/ep vs $2.48/ep)
+
+**Recommended: Use OpenAI tts-1-hd as "Premium Voices" instead of ElevenLabs.**
+
+```
+Revenue (Popular):          $14.99
+- Apple/Google cut (15%):   -$2.25
+= Net revenue:              $12.74
+
+Generation costs:
+  OpenAI tts-1-hd (6 eps): -$5.40
+  Claude API (6 eps):       -$0.75
+= Total cost:              -$6.15
+
+Gross profit:               $6.59  (44% margin) ✅
+```
+
+This makes the premium tier highly profitable while standard stays accessible.
 
 ### Free Credits: Cost of Acquisition
 
-| Scenario | Free credits | Our cost (Flash) | Notes |
-|----------|-------------|-------------------|-------|
-| New signup | 2 credits | $2.64 | Enough for 2 short episodes or 1 x 30-min |
-| Beta tester | 3 bonus credits | $3.96 | Total 5 credits with signup bonus |
+| Scenario | Free credits | Our cost (OpenAI tts-1) | Notes |
+|----------|-------------|-------------------------|-------|
+| New signup | 3 credits | $1.71 | Enough for 3 short episodes or 1 standard podcast (if 15-min eps) |
+| Beta tester | 5 bonus credits | $2.85 | Total 8 credits with signup bonus — generous |
 
-At 1,000 signups, free credits cost us **~$2,640**. This is the user acquisition budget — acceptable if conversion rate is >15%.
+At 1,000 signups, free credits cost us **~$1,710** (vs $2,640 with ElevenLabs). Much more affordable user acquisition.
 
 ### Payment Architecture
 
@@ -791,14 +867,29 @@ Updates Supabase tables directly
 
 **Recommendation:** Start with Option A (Edge Function chain with pg_net). Move to Option B only if Edge Function timeouts become a problem.
 
-### ElevenLabs Voice Selection
+### Voice Selection by Tier
+
+**Standard Voices (OpenAI tts-1) — default:**
+
+| Character | Voice | Style |
+|-----------|-------|-------|
+| Alex (Expert) | `onyx` | Deep, authoritative |
+| Sam (Interviewer) | `nova` | Warm, conversational |
+
+OpenAI offers 13 voices: alloy, ash, ballad, coral, echo, fable, nova, onyx, sage, shimmer, and verse. Pairs should be tested for best contrast in a two-host podcast format.
+
+**Premium Voices (OpenAI tts-1-hd) — upsell:**
+
+Same voice names as standard, but higher-fidelity audio generation. Twice the cost, noticeably better quality.
+
+**Future: ElevenLabs integration (post-launch):**
 
 | Character | Voice | Voice ID | Style |
 |-----------|-------|----------|-------|
 | Alex (Expert) | Adam | `pNInz6obpgDQGcFmaJgB` | Confident, knowledgeable |
 | Sam (Interviewer) | Bella | `EXAVITQu4vr4xnSDxMaL` | Warm, curious |
 
-Users could pick from a curated set of voice pairs in a future update.
+ElevenLabs can be added as a third "Ultra" tier once unit economics support it, or if voice cloning becomes a key differentiator. The TTS provider is abstracted behind an interface so swapping providers requires no app changes.
 
 ### Audio Format
 
@@ -1004,93 +1095,106 @@ Users could pick from a curated set of voice pairs in a future update.
 
 ### Real API Pricing Sources (March 2026)
 
+**OpenAI TTS** ([pricing page](https://openai.com/api/pricing/)):
+- tts-1 (standard): **$15 per 1M characters** — $0.015/1K chars
+- tts-1-hd: **$30 per 1M characters** — $0.030/1K chars
+- Pay-as-you-go, no monthly commitment, 13 built-in voices
+- ~1,000 characters = ~1 minute of audio
+
 **ElevenLabs** ([pricing page](https://elevenlabs.io/pricing/api)):
-- ~1,000 characters = ~1 minute of generated audio
-- Scale plan: $330/mo for 2M characters (2,000 min of audio)
-- Overage: $0.18 per 1,000 characters
-- Flash model uses 0.5 credits/character (effectively half price)
+- Scale plan: $330/mo for 2M characters = ~$165/1M chars (11x more expensive than OpenAI)
+- Flash model: ~$83/1M chars (5.5x more expensive than OpenAI)
+- Overage: $0.18/1K chars
+- Best voice quality, voice cloning, 100+ voices
+
+**Google Cloud TTS** ([pricing page](https://cloud.google.com/text-to-speech/pricing)):
+- Neural2/WaveNet: **$16 per 1M characters** — comparable to OpenAI
+- Chirp 3 HD: $30/1M chars
+- Free tier: 1M Neural2 chars/mo + 4M Standard chars/mo
 
 **Anthropic Claude API** ([pricing page](https://platform.claude.com/docs/en/about-claude/pricing)):
 - Sonnet 4.6: $3/1M input tokens, $15/1M output tokens
-- Haiku 4.5: $1/1M input tokens, $5/1M output tokens (viable for script gen if quality is sufficient)
+- Per episode: ~$0.12 (negligible vs TTS costs)
 
-### Per-Episode Variable Costs (Flash TTS + Sonnet)
+### Per-Episode Variable Costs (OpenAI tts-1 default + Sonnet)
 
 | Component | 15-min episode | 30-min episode | 60-min episode |
 |-----------|---------------|---------------|----------------|
-| ElevenLabs Flash (~$0.083/min) | $1.24 | $2.48 | $4.95 |
+| OpenAI tts-1 (~$0.015/min) | $0.23 | $0.45 | $0.90 |
 | Claude Sonnet (script gen) | $0.08 | $0.12 | $0.20 |
 | Supabase Storage (~15-60 MB) | ~$0.00 | ~$0.00 | ~$0.01 |
-| **Total variable cost** | **$1.32** | **$2.60** | **$5.16** |
+| **Total variable cost** | **$0.31** | **$0.57** | **$1.11** |
 
 ### Per-Podcast Variable Costs (6 episodes x 30 min = standard show)
 
-| Item | Cost |
-|------|------|
-| ElevenLabs Flash (180 min audio) | $14.85 |
-| Claude Sonnet (6 scripts + 1 planning call) | $0.75 |
-| Supabase Storage (~180 MB) | ~$0.01 |
-| **Total per standard show** | **$15.60** |
+| TTS Provider | TTS Cost | Claude API | Total | Notes |
+|-------------|---------|------------|-------|-------|
+| **OpenAI tts-1** | $2.70 | $0.75 | **$3.45** | Default — best margins |
+| OpenAI tts-1-hd | $5.40 | $0.75 | **$6.15** | Premium upsell |
+| Google Neural2 | $2.88 | $0.75 | **$3.63** | Comparable to OpenAI |
+| ElevenLabs Flash | $14.85 | $0.75 | **$15.60** | Future "Ultra" tier |
 
 ### Monthly Fixed Infrastructure Costs
 
 | Service | Cost | Notes |
 |---------|------|-------|
 | Supabase Pro | $25/mo | 50K MAU, 8GB DB, 250GB bandwidth |
-| ElevenLabs Scale (base) | $330/mo | 2M chars included (~133 episodes at Flash) |
+| OpenAI TTS API | Pay-per-use only | No base fee — $0.45 per 30-min episode |
 | Anthropic Claude API | Pay-per-use | ~$0.12/episode, negligible |
 | RevenueCat | $0 | Free under $2,500/mo tracked revenue |
 | Expo EAS Build | $0 | 30 builds/mo free tier |
 | Sentry | $0 | 5K events/mo free tier |
 | Apple Developer Program | $8.25/mo | ($99/year) |
 | Google Play Developer | one-time $25 | |
-| **Total fixed** | **~$363/mo** | Before any overage |
+| **Total fixed** | **~$33/mo** | No $330/mo ElevenLabs subscription needed |
+
+> **Switching from ElevenLabs to OpenAI eliminates the $330/mo fixed cost entirely.** OpenAI is pure pay-per-use with no monthly minimum. This drops the monthly floor from ~$363 to ~$33.
 
 ### Break-Even Analysis
 
-**How many podcasts does the $330/mo ElevenLabs Scale plan cover?**
-- 2M characters / (30,000 chars × 6 episodes × 0.5 Flash multiplier) = **~22 standard shows/mo included**
-- Beyond that: overage at $0.18/1,000 chars
+**Monthly break-even at different scales (OpenAI tts-1, Small Business 15% cut):**
 
-**Monthly break-even at different scales (Flash TTS, Small Business 15% cut):**
+Assuming average purchase is "Starter" pack ($6.99) generating one 6-ep show:
 
 | Metric | 50 users | 200 users | 1,000 users |
 |--------|----------|-----------|-------------|
 | Paying users (15% conversion) | 8 | 30 | 150 |
 | Shows generated/mo | ~10 | ~35 | ~175 |
-| Avg. revenue/show (Popular pack) | $29.99 | $29.99 | $29.99 |
-| **Gross revenue** | **$300** | **$1,050** | **$5,250** |
-| Apple/Google cut (15%) | -$45 | -$158 | -$788 |
-| ElevenLabs (Scale + overage) | -$330 | -$522 | -$2,841 |
+| Avg. revenue/show (Starter pack) | $6.99 | $6.99 | $6.99 |
+| **Gross revenue** | **$70** | **$245** | **$1,049** |
+| Apple/Google cut (15%) | -$10 | -$37 | -$157 |
+| OpenAI TTS | -$35 | -$121 | -$604 |
 | Claude API | -$1 | -$4 | -$21 |
-| Supabase | -$25 | -$25 | -$50 |
-| Other fixed costs | -$8 | -$8 | -$8 |
-| **Net profit/loss** | **-$109** | **$333** | **$1,542** |
-| **Margin** | **-36%** | **32%** | **29%** |
+| Supabase + fixed | -$33 | -$33 | -$50 |
+| **Net profit/loss** | **-$9** | **$50** | **$217** |
+| **Margin** | **-13%** | **20%** | **21%** |
 
-> **Break-even point: ~120 paying users generating ~15 shows/month.**
-> Below that, the $330/mo ElevenLabs base cost dominates. Above it, margins stabilize at ~30%.
+> **Break-even point: ~40 paying users** generating ~5 shows/month.
+> Dramatically better than the ~120 users needed with ElevenLabs, because there's no $330/mo base cost.
 
-### Revenue Scaling: When 30% App Store Cut Kicks In
+### Revenue Scaling: Optimistic Scenario
 
-If annual revenue exceeds $1M (~$83K/mo), Apple/Google take 30% instead of 15%.
-At that scale (~2,800 shows/mo), you'd need to:
+At 1,000 users with a mix of packs (some Popular/Pro, some premium voice upsells):
 
-1. **Negotiate ElevenLabs enterprise pricing** (they offer custom pricing at volume)
-2. **Evaluate alternative TTS**: PlayHT, LMNT, or self-hosted open-source (Bark, XTTS)
-3. **Optimize scripts**: Tighter prompts → shorter scripts → fewer characters → lower TTS cost
-4. **Consider a subscription tier**: Monthly subscription with included shows smooths revenue
+| Metric | Conservative ($6.99 avg) | Mixed ($10 avg) | With premium upsells ($14 avg) |
+|--------|--------------------------|-----------------|-------------------------------|
+| Gross revenue (150 buyers) | $1,049/mo | $1,500/mo | $2,100/mo |
+| Variable costs | -$625 | -$700 | -$950 |
+| Fixed costs | -$50 | -$50 | -$50 |
+| Platform cut (15%) | -$157 | -$225 | -$315 |
+| **Net** | **$217** | **$525** | **$785** |
 
 ### Key Economic Levers
 
 | Lever | Impact | When to Pull |
 |-------|--------|-------------|
-| Switch to ElevenLabs Flash model | Cuts TTS cost ~50% | Day 1 (default) |
-| Offer Standard voices as premium upsell | Extra $5-10/show revenue | Launch |
-| Use Claude Haiku instead of Sonnet for scripts | Saves ~$0.08/ep (negligible) | Not worth the quality tradeoff |
-| Negotiate ElevenLabs volume pricing | 20-40% TTS savings | At ~500+ shows/mo |
-| Self-host TTS (XTTS/Bark on GPU) | 80-90% TTS savings | At ~1000+ shows/mo, if quality acceptable |
-| Add subscription tier ($19.99/mo for 2 shows) | Predictable revenue, higher LTV | Post-launch, once retention data exists |
+| Use OpenAI tts-1 as default | 5-11x cheaper than ElevenLabs, no monthly min | Day 1 (default) |
+| Offer tts-1-hd as "Premium Voices" | 2x TTS cost but high-margin upsell | Launch |
+| Google Cloud free tier for prototyping | 1M Neural2 chars/mo free (~33 episodes) | Development/beta |
+| Add ElevenLabs as "Ultra" tier | Best quality, highest price point | Post-launch if demand exists |
+| Use Claude Haiku instead of Sonnet | Saves ~$0.08/ep (negligible) | Not worth the quality tradeoff |
+| Abstract TTS provider behind interface | Swap providers without app changes | Day 1 (architecture) |
+| Add subscription tier ($9.99/mo for 2 shows) | Predictable revenue, higher LTV | Post-launch, once retention data exists |
 
 ---
 
@@ -1111,8 +1215,8 @@ At that scale (~2,800 shows/mo), you'd need to:
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
 | Low conversion rate | Medium | High | Generous free credits, quality onboarding, iterate on pricing |
-| High generation costs eat margins | Medium | High | Monitor unit economics, explore cheaper TTS, optimize prompts |
-| ElevenLabs pricing changes | Low | High | Abstract TTS provider, evaluate alternatives |
+| High generation costs eat margins | Low | Medium | OpenAI tts-1 keeps costs at $0.57/ep; TTS provider is abstracted for easy swaps |
+| OpenAI TTS pricing changes | Low | Medium | Abstract TTS provider; Google Neural2 at $16/1M is a direct swap |
 | Competition from Notebook LM etc. | High | Medium | Focus on custom podcast creation as differentiator |
 | App Store policy changes on AI content | Low | High | Stay compliant, diversify distribution (web app) |
 
@@ -1133,8 +1237,8 @@ At that scale (~2,800 shows/mo), you'd need to:
 | **V2 Mobile App** | React Native + Expo | iOS + Android app |
 | **V2 Backend** | Supabase | Auth, DB, Storage, Edge Functions |
 | **AI Pipeline** | Claude API | Script generation from user descriptions |
-| **Audio Pipeline** | ElevenLabs API | Professional TTS audio generation |
-| **Payments** | RevenueCat + Stripe | Per-podcast credit purchases via IAP |
+| **Audio Pipeline** | OpenAI TTS API (default) | Standard + Premium voice tiers, ElevenLabs as future option |
+| **Payments** | RevenueCat | Per-podcast credit purchases via IAP |
 | **Distribution** | App Store + Play Store | Public consumer app |
 
 **Timeline:** ~18 weeks from start to public launch, with closed beta at week 14.

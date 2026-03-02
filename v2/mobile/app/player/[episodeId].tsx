@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -14,8 +14,8 @@ import * as Haptics from 'expo-haptics';
 import { router, useLocalSearchParams } from 'expo-router';
 
 import { usePlayerStore } from '@/stores/playerStore';
-import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { getBookmarks, addBookmark, deleteBookmark } from '@/services/playback';
+import { getShow } from '@/services/shows';
 import { parseDialogue, parseChapters } from '@/lib/parseDialogue';
 import { Colors, Spacing, FontSize, BorderRadius } from '@/constants/theme';
 
@@ -25,13 +25,17 @@ import ChapterList from '@/components/player/ChapterList';
 import TranscriptView from '@/components/player/TranscriptView';
 import SpeedControl from '@/components/player/SpeedControl';
 
-import type { Episode, Show, Bookmark, DialogueLine, Chapter } from '@shared/types';
+import type { Bookmark, DialogueLine, Chapter } from '@shared/types';
 
 // ============================================================
 // Full-Screen Player
 // Immersive episode player with artwork, transport controls,
 // progress slider, speed control, bookmarks, sleep timer, and
 // tabbed chapters/transcript/bookmarks section.
+//
+// Audio playback is managed entirely by the playerStore which
+// owns the expo-av Sound instance. This screen reads state from
+// the store and dispatches actions to it.
 // ============================================================
 
 type TabName = 'chapters' | 'transcript' | 'bookmarks';
@@ -52,50 +56,34 @@ export default function PlayerScreen() {
   const { episodeId } = useLocalSearchParams<{ episodeId: string }>();
 
   // --- Store state ---
-  const {
-    currentEpisode,
-    currentShow,
-    isPlaying: storeIsPlaying,
-    isLoading: storeIsLoading,
-    positionSeconds: storePosition,
-    durationSeconds: storeDuration,
-    playbackRate,
-    sleepTimerEndTime,
-    loadEpisode,
-    play: storePlay,
-    pause: storePause,
-    toggle: storeToggle,
-    seekTo: storeSeekTo,
-    skipForward: storeSkipForward,
-    skipBack: storeSkipBack,
-    setPlaybackRate: storeSetPlaybackRate,
-    setSleepTimer,
-    clearSleepTimer,
-    syncProgress,
-  } = usePlayerStore();
+  const currentEpisode = usePlayerStore((s) => s.currentEpisode);
+  const currentShow = usePlayerStore((s) => s.currentShow);
+  const isPlaying = usePlayerStore((s) => s.isPlaying);
+  const isLoading = usePlayerStore((s) => s.isLoading);
+  const positionSeconds = usePlayerStore((s) => s.positionSeconds);
+  const durationSeconds = usePlayerStore((s) => s.durationSeconds);
+  const playbackRate = usePlayerStore((s) => s.playbackRate);
+  const sleepTimerEndTime = usePlayerStore((s) => s.sleepTimerEndTime);
 
-  // --- Audio player hook ---
-  const audioPlayer = useAudioPlayer();
+  // --- Store actions ---
+  const storeLoadEpisode = usePlayerStore((s) => s.loadEpisode);
+  const storeToggle = usePlayerStore((s) => s.toggle);
+  const storeSeekTo = usePlayerStore((s) => s.seekTo);
+  const storeSkipForward = usePlayerStore((s) => s.skipForward);
+  const storeSkipBack = usePlayerStore((s) => s.skipBack);
+  const storeSetPlaybackRate = usePlayerStore((s) => s.setPlaybackRate);
+  const storeSleepTimer = usePlayerStore((s) => s.setSleepTimer);
+  const storeClearSleepTimer = usePlayerStore((s) => s.clearSleepTimer);
 
   // --- Local state ---
   const [activeTab, setActiveTab] = useState<TabName>('chapters');
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [isBookmarking, setIsBookmarking] = useState(false);
-  const syncIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   // --- Derived data ---
   const episode = currentEpisode;
   const show = currentShow;
-
-  const positionSeconds = audioPlayer.isLoaded
-    ? audioPlayer.positionMs / 1000
-    : storePosition;
-  const durationSeconds = audioPlayer.isLoaded
-    ? audioPlayer.durationMs / 1000
-    : storeDuration;
-  const isPlaying = audioPlayer.isLoaded
-    ? audioPlayer.isPlaying
-    : storeIsPlaying;
 
   const dialogueLines = useMemo<DialogueLine[]>(() => {
     if (!episode?.script_markdown) return [];
@@ -114,54 +102,54 @@ export default function PlayerScreen() {
     return Math.ceil(remaining);
   }, [sleepTimerEndTime]);
 
-  // --- Load episode if needed ---
+  // -----------------------------------------------------------------
+  // Load episode into the store if navigating directly (e.g. deep link)
+  // -----------------------------------------------------------------
   useEffect(() => {
-    if (episodeId && (!episode || episode.id !== episodeId)) {
-      loadEpisode(episodeId);
-    }
-  }, [episodeId, episode, loadEpisode]);
+    if (!episodeId) return;
+    // Episode already loaded in the store — nothing to do.
+    if (episode && episode.id === episodeId) return;
 
-  // --- Load audio when episode is available ---
-  useEffect(() => {
-    if (episode?.audio_url) {
-      audioPlayer.loadAudio(episode.audio_url);
-    }
-  }, [episode?.audio_url]);
+    let cancelled = false;
 
-  // --- Sync playback rate ---
-  useEffect(() => {
-    if (audioPlayer.isLoaded) {
-      audioPlayer.setRate(playbackRate);
-    }
-  }, [playbackRate, audioPlayer.isLoaded]);
+    async function fetchAndLoad() {
+      try {
+        setLoadError(null);
 
-  // --- Periodically sync progress to store / backend ---
-  useEffect(() => {
-    syncIntervalRef.current = setInterval(() => {
-      if (audioPlayer.isLoaded && audioPlayer.isPlaying) {
-        const posSec = audioPlayer.positionMs / 1000;
-        const durSec = audioPlayer.durationMs / 1000;
-        syncProgress(posSec, durSec);
+        // We need the show to find the episode. The episodeId belongs to a show,
+        // so we need to find the show first. Use the Supabase client to query
+        // the episode's show_id, then load both.
+        const { supabase } = await import('@/services/supabase');
+        const { data: episodeRow, error: epError } = await supabase
+          .from('episodes')
+          .select('*')
+          .eq('id', episodeId)
+          .single();
+
+        if (epError || !episodeRow) {
+          throw new Error('Episode not found');
+        }
+
+        if (cancelled) return;
+
+        const { show: showData } = await getShow(episodeRow.show_id);
+
+        if (cancelled) return;
+
+        await storeLoadEpisode(showData, episodeRow);
+      } catch (err) {
+        if (!cancelled) {
+          console.error('[PlayerScreen] Failed to load episode:', err);
+          setLoadError('Could not load episode. Please try again.');
+        }
       }
-    }, 10_000); // Sync every 10 seconds
+    }
 
+    fetchAndLoad();
     return () => {
-      if (syncIntervalRef.current) {
-        clearInterval(syncIntervalRef.current);
-      }
+      cancelled = true;
     };
-  }, [audioPlayer.isLoaded, audioPlayer.isPlaying, syncProgress]);
-
-  // --- Sync on unmount ---
-  useEffect(() => {
-    return () => {
-      if (audioPlayer.isLoaded) {
-        const posSec = audioPlayer.positionMs / 1000;
-        const durSec = audioPlayer.durationMs / 1000;
-        syncProgress(posSec, durSec);
-      }
-    };
-  }, []);
+  }, [episodeId, episode, storeLoadEpisode]);
 
   // --- Load bookmarks ---
   useEffect(() => {
@@ -173,7 +161,7 @@ export default function PlayerScreen() {
         const data = await getBookmarks(episodeId!);
         if (!cancelled) setBookmarks(data);
       } catch {
-        // Silently fail — bookmarks are non-critical
+        // Silently fail -- bookmarks are non-critical
       }
     }
 
@@ -192,37 +180,36 @@ export default function PlayerScreen() {
   }, []);
 
   const handleToggle = useCallback(() => {
-    audioPlayer.toggle();
-  }, [audioPlayer]);
+    storeToggle();
+  }, [storeToggle]);
 
   const handleSkipBack = useCallback(() => {
-    audioPlayer.skipBack(SKIP_BACK_SECONDS);
-  }, [audioPlayer]);
+    storeSkipBack(SKIP_BACK_SECONDS);
+  }, [storeSkipBack]);
 
   const handleSkipForward = useCallback(() => {
-    audioPlayer.skipForward(SKIP_FORWARD_SECONDS);
-  }, [audioPlayer]);
+    storeSkipForward(SKIP_FORWARD_SECONDS);
+  }, [storeSkipForward]);
 
   const handleSeek = useCallback(
     (seconds: number) => {
-      audioPlayer.seekTo(seconds);
+      storeSeekTo(seconds);
     },
-    [audioPlayer],
+    [storeSeekTo],
   );
 
   const handleRateChange = useCallback(
     (rate: number) => {
       storeSetPlaybackRate(rate);
-      audioPlayer.setRate(rate);
     },
-    [storeSetPlaybackRate, audioPlayer],
+    [storeSetPlaybackRate],
   );
 
   const handleChapterPress = useCallback(
     (seconds: number) => {
-      audioPlayer.seekTo(seconds);
+      storeSeekTo(seconds);
     },
-    [audioPlayer],
+    [storeSeekTo],
   );
 
   const handleAddBookmark = useCallback(async () => {
@@ -232,9 +219,11 @@ export default function PlayerScreen() {
 
     try {
       const bookmark = await addBookmark(episodeId, Math.floor(positionSeconds));
-      setBookmarks((prev) => [...prev, bookmark].sort(
-        (a, b) => a.position_seconds - b.position_seconds,
-      ));
+      setBookmarks((prev) =>
+        [...prev, bookmark].sort(
+          (a, b) => a.position_seconds - b.position_seconds,
+        ),
+      );
     } catch {
       Alert.alert('Error', 'Could not save bookmark. Please try again.');
     } finally {
@@ -257,14 +246,14 @@ export default function PlayerScreen() {
 
   const handleBookmarkSeek = useCallback(
     (seconds: number) => {
-      audioPlayer.seekTo(seconds);
+      storeSeekTo(seconds);
     },
-    [audioPlayer],
+    [storeSeekTo],
   );
 
   const handleSleepTimer = useCallback(() => {
     if (sleepTimerEndTime) {
-      // Timer is active — offer to cancel
+      // Timer is active -- offer to cancel
       Alert.alert(
         'Sleep Timer',
         `Timer set for ~${sleepTimerRemaining} min. Cancel it?`,
@@ -273,7 +262,7 @@ export default function PlayerScreen() {
           {
             text: 'Cancel Timer',
             style: 'destructive',
-            onPress: () => clearSleepTimer(),
+            onPress: () => storeClearSleepTimer(),
           },
         ],
       );
@@ -289,18 +278,38 @@ export default function PlayerScreen() {
           text: `${minutes} minutes`,
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            setSleepTimer(minutes);
+            storeSleepTimer(minutes);
           },
         })),
         { text: 'Cancel', style: 'cancel' },
       ],
     );
-  }, [sleepTimerEndTime, sleepTimerRemaining, setSleepTimer, clearSleepTimer]);
+  }, [sleepTimerEndTime, sleepTimerRemaining, storeSleepTimer, storeClearSleepTimer]);
 
   // -----------------------------------------------------------------
-  // Loading state
+  // Loading / error states
   // -----------------------------------------------------------------
-  if (!episode) {
+  if (loadError) {
+    return (
+      <SafeAreaView style={styles.screen}>
+        <View style={styles.loadingContainer}>
+          <Ionicons name="alert-circle-outline" size={48} color={Colors.error} />
+          <Text style={styles.errorText}>{loadError}</Text>
+          <Pressable
+            onPress={handleDismiss}
+            style={({ pressed }) => [
+              styles.errorBackButton,
+              pressed && styles.errorBackButtonPressed,
+            ]}
+          >
+            <Text style={styles.errorBackButtonText}>Go Back</Text>
+          </Pressable>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (!episode || isLoading) {
     return (
       <SafeAreaView style={styles.screen}>
         <View style={styles.loadingContainer}>
@@ -376,7 +385,7 @@ export default function PlayerScreen() {
           onToggle={handleToggle}
           onSkipBack={handleSkipBack}
           onSkipForward={handleSkipForward}
-          disabled={!audioPlayer.isLoaded && !storeIsLoading}
+          disabled={!episode.audio_url}
         />
 
         {/* --- Speed Control --- */}
@@ -473,7 +482,7 @@ export default function PlayerScreen() {
 }
 
 // ============================================================
-// TabButton — tab bar button with optional badge
+// TabButton -- tab bar button with optional badge
 // ============================================================
 
 interface TabButtonProps {
@@ -511,7 +520,7 @@ function TabButton({ label, isActive, onPress, badge }: TabButtonProps) {
 }
 
 // ============================================================
-// BookmarksList — list of user bookmarks with seek + delete
+// BookmarksList -- list of user bookmarks with seek + delete
 // ============================================================
 
 interface BookmarksListProps {
@@ -593,7 +602,7 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xxxl * 2,
   },
 
-  // Loading
+  // Loading / Error
   loadingContainer: {
     flex: 1,
     alignItems: 'center',
@@ -603,6 +612,27 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: FontSize.md,
     color: Colors.textSecondary,
+  },
+  errorText: {
+    fontSize: FontSize.md,
+    color: Colors.error,
+    textAlign: 'center',
+    paddingHorizontal: Spacing.xxxl,
+  },
+  errorBackButton: {
+    marginTop: Spacing.lg,
+    paddingHorizontal: Spacing.xxl,
+    paddingVertical: Spacing.md,
+    borderRadius: BorderRadius.full,
+    backgroundColor: Colors.surfaceElevated,
+  },
+  errorBackButtonPressed: {
+    opacity: 0.7,
+  },
+  errorBackButtonText: {
+    fontSize: FontSize.md,
+    fontWeight: '600',
+    color: Colors.text,
   },
 
   // Header

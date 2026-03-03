@@ -1,12 +1,12 @@
 import { create } from 'zustand';
-import { Audio, AVPlaybackStatus, AVPlaybackStatusSuccess } from 'expo-av';
+import TrackPlayer, { Event, State } from 'react-native-track-player';
 import type { Episode, Show } from '@shared/types';
 import * as playbackService from '@/services/playback';
 
 // ============================================================
 // Player Store
-// Controls audio playback via expo-av and keeps track of
-// position, rate, and an optional sleep timer.
+// Controls audio playback via react-native-track-player and
+// keeps track of position, rate, and an optional sleep timer.
 // ============================================================
 
 interface PlayerState {
@@ -40,18 +40,11 @@ interface PlayerState {
 
 // ---------- Module-level refs (not serialisable) ----------
 
-let soundObject: Audio.Sound | null = null;
 let progressSyncTimer: ReturnType<typeof setTimeout> | null = null;
 let sleepTimerInterval: ReturnType<typeof setInterval> | null = null;
 
 // Debounce interval for saving progress to Supabase (ms).
 const SYNC_DEBOUNCE_MS = 5_000;
-
-// ---------- Helpers ----------
-
-function isPlaybackSuccess(status: AVPlaybackStatus): status is AVPlaybackStatusSuccess {
-  return status.isLoaded;
-}
 
 // ============================================================
 
@@ -82,18 +75,12 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         await get().syncProgress();
       }
 
-      // Tear down previous sound instance.
+      // Tear down previous track.
       await _cleanup();
 
       if (!episode.audio_url) {
         throw new Error('Episode has no audio URL.');
       }
-
-      // Configure audio mode for background playback.
-      await Audio.setAudioModeAsync({
-        staysActiveInBackground: true,
-        playsInSilentModeIOS: true,
-      });
 
       // Try to resume from stored progress.
       let initialPosition = 0;
@@ -106,30 +93,28 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         // Non-critical – just start from the beginning.
       }
 
-      const { sound, status } = await Audio.Sound.createAsync(
-        { uri: episode.audio_url },
-        {
-          shouldPlay: true,
-          positionMillis: initialPosition * 1_000,
-          rate: get().playbackRate,
-          shouldCorrectPitch: true,
-        },
-        onPlaybackStatusUpdate,
-      );
+      await TrackPlayer.reset();
+      await TrackPlayer.add({
+        id: episode.id,
+        url: episode.audio_url,
+        title: episode.title,
+        artist: show.title ?? 'Podcast AI',
+        duration: episode.audio_duration_seconds ?? undefined,
+      });
 
-      soundObject = sound;
+      if (initialPosition > 0) {
+        await TrackPlayer.seekTo(initialPosition);
+      }
 
-      const duration =
-        isPlaybackSuccess(status) && status.durationMillis
-          ? status.durationMillis / 1_000
-          : episode.audio_duration_seconds ?? 0;
+      await TrackPlayer.setRate(get().playbackRate);
+      await TrackPlayer.play();
 
       set({
         currentEpisode: episode,
         currentShow: show,
         isPlaying: true,
         positionSeconds: initialPosition,
-        durationSeconds: duration,
+        durationSeconds: episode.audio_duration_seconds ?? 0,
       });
 
       // Start periodic progress sync.
@@ -144,9 +129,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   play: async () => {
-    if (!soundObject) return;
     try {
-      await soundObject.playAsync();
+      await TrackPlayer.play();
       set({ isPlaying: true });
       startProgressSync();
     } catch (error) {
@@ -155,9 +139,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   pause: async () => {
-    if (!soundObject) return;
     try {
-      await soundObject.pauseAsync();
+      await TrackPlayer.pause();
       set({ isPlaying: false });
       stopProgressSync();
       // Save progress immediately on pause.
@@ -177,9 +160,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   seekTo: async (seconds) => {
-    if (!soundObject) return;
     try {
-      await soundObject.setPositionAsync(seconds * 1_000);
+      await TrackPlayer.seekTo(seconds);
       set({ positionSeconds: seconds });
     } catch (error) {
       console.error('[PlayerStore] seekTo failed:', error);
@@ -200,9 +182,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
 
   setPlaybackRate: async (rate) => {
     set({ playbackRate: rate });
-    if (!soundObject) return;
     try {
-      await soundObject.setRateAsync(rate, true /* shouldCorrectPitch */);
+      await TrackPlayer.setRate(rate);
     } catch (error) {
       console.error('[PlayerStore] setPlaybackRate failed:', error);
     }
@@ -255,46 +236,51 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   /**
-   * Release the expo-av Sound object and stop all timers.
+   * Reset the TrackPlayer queue and stop all timers.
    */
   _cleanup: async () => {
     stopProgressSync();
 
-    if (soundObject) {
-      try {
-        await soundObject.unloadAsync();
-      } catch {
-        // Ignore – may already be unloaded.
-      }
-      soundObject = null;
+    try {
+      await TrackPlayer.reset();
+    } catch {
+      // Ignore – player may not be initialised yet.
     }
   },
 }));
 
-// ---------- Playback status callback ----------
+// ---------- TrackPlayer event listeners ----------
 
-function onPlaybackStatusUpdate(status: AVPlaybackStatus) {
-  if (!isPlaybackSuccess(status)) return;
+let listenersInitialised = false;
 
-  const store = usePlayerStore.getState();
+/**
+ * Register TrackPlayer event listeners that keep the Zustand
+ * store in sync with the native player state.
+ * Call once after `setupTrackPlayer()` completes.
+ */
+export function initPlayerStoreListeners() {
+  if (listenersInitialised) return;
+  listenersInitialised = true;
 
-  const positionSeconds = status.positionMillis / 1_000;
-  const durationSeconds = (status.durationMillis ?? 0) / 1_000;
+  TrackPlayer.addEventListener(Event.PlaybackState, ({ state }) => {
+    usePlayerStore.setState({ isPlaying: state === State.Playing });
 
-  usePlayerStore.setState({
-    positionSeconds,
-    durationSeconds,
-    isPlaying: status.isPlaying,
+    if (state === State.Ended) {
+      stopProgressSync();
+      usePlayerStore.getState().syncProgress().catch(console.warn);
+    }
   });
 
-  // Auto-stop at end of track.
-  if (status.didJustFinish) {
-    usePlayerStore.setState({ isPlaying: false });
-    stopProgressSync();
-
-    // Mark completed.
-    store.syncProgress().catch(console.warn);
-  }
+  TrackPlayer.addEventListener(
+    Event.PlaybackProgressUpdated,
+    ({ position, duration }) => {
+      const store = usePlayerStore.getState();
+      usePlayerStore.setState({
+        positionSeconds: position,
+        durationSeconds: duration > 0 ? duration : store.durationSeconds,
+      });
+    },
+  );
 }
 
 // ---------- Progress sync helpers ----------

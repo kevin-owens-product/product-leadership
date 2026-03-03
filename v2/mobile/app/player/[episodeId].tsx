@@ -34,7 +34,7 @@ import type { Bookmark, DialogueLine, Chapter } from '@shared/types';
 // tabbed chapters/transcript/bookmarks section.
 //
 // Audio playback is managed entirely by the playerStore which
-// owns the expo-av Sound instance. This screen reads state from
+// owns the react-native-track-player instance. This screen reads state from
 // the store and dispatches actions to it.
 // ============================================================
 

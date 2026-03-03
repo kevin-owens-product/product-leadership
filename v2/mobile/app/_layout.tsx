@@ -5,11 +5,17 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
+import TrackPlayer from 'react-native-track-player';
 import { useAuthStore } from '@/stores/authStore';
+import { initPlayerStoreListeners } from '@/stores/playerStore';
+import { PlaybackService, setupTrackPlayer } from '@/services/trackPlayerService';
 import { Colors } from '@/constants/theme';
 
 // Keep splash screen visible while we check auth state
 SplashScreen.preventAutoHideAsync();
+
+// Register the playback service at module level (must run before setupPlayer)
+TrackPlayer.registerPlaybackService(() => PlaybackService);
 
 function useProtectedRoute() {
   const { isAuthenticated, isLoading } = useAuthStore();
@@ -43,6 +49,21 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [isLoading]);
+
+  // Initialise react-native-track-player once on mount.
+  useEffect(() => {
+    async function init() {
+      try {
+        await setupTrackPlayer();
+        initPlayerStoreListeners();
+      } catch (error) {
+        // setupPlayer throws if already initialised (e.g. hot reload)
+        console.warn('[TrackPlayer] setup error (may be expected on reload):', error);
+      }
+    }
+
+    init();
+  }, []);
 
   useProtectedRoute();
 

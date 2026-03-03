@@ -345,7 +345,7 @@ serve(async (req: Request) => {
     const storagePath = `audio/${show_id}/episode-${episode.episode_number}.mp3`
 
     const { error: uploadError } = await supabase.storage
-      .from('podcast-audio')
+      .from('audio')
       .upload(storagePath, finalAudio, {
         contentType: 'audio/mpeg',
         upsert: true,
@@ -361,7 +361,7 @@ serve(async (req: Request) => {
     // ---- Get public URL ----
     const {
       data: { publicUrl },
-    } = supabase.storage.from('podcast-audio').getPublicUrl(storagePath)
+    } = supabase.storage.from('audio').getPublicUrl(storagePath)
 
     console.log(`generate-audio: public URL = ${publicUrl}`)
 

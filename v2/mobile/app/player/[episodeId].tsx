@@ -25,7 +25,8 @@ import ChapterList from '@/components/player/ChapterList';
 import TranscriptView from '@/components/player/TranscriptView';
 import SpeedControl from '@/components/player/SpeedControl';
 
-import type { Bookmark, DialogueLine, Chapter } from '@shared/types';
+import { supabase } from '@/services/supabase';
+import type { Bookmark, DialogueLine, Chapter, ContentReportReason } from '@shared/types';
 
 // ============================================================
 // Full-Screen Player
@@ -286,6 +287,46 @@ export default function PlayerScreen() {
     );
   }, [sleepTimerEndTime, sleepTimerRemaining, storeSleepTimer, storeClearSleepTimer]);
 
+  const handleReport = useCallback(() => {
+    const reasons: { label: string; value: ContentReportReason }[] = [
+      { label: 'Hate speech / Racism', value: 'hate_speech' },
+      { label: 'Harassment', value: 'harassment' },
+      { label: 'Illegal content', value: 'illegal_content' },
+      { label: 'Sexual content', value: 'sexual_content' },
+      { label: 'Violence', value: 'violence' },
+      { label: 'Dangerous content', value: 'dangerous_content' },
+      { label: 'Misinformation', value: 'misinformation' },
+      { label: 'Other', value: 'other' },
+    ];
+
+    Alert.alert(
+      'Report Content',
+      'Why are you reporting this episode?',
+      [
+        ...reasons.map((r) => ({
+          text: r.label,
+          onPress: async () => {
+            try {
+              const { error } = await supabase.functions.invoke('report-content', {
+                body: {
+                  show_id: currentShow?.id,
+                  episode_id: episodeId,
+                  reason: r.value,
+                },
+              });
+              if (error) throw error;
+              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+              Alert.alert('Report Submitted', 'Thank you. We will review this content.');
+            } catch {
+              Alert.alert('Error', 'Could not submit report. Please try again.');
+            }
+          },
+        })),
+        { text: 'Cancel', style: 'cancel' },
+      ],
+    );
+  }, [episodeId, currentShow]);
+
   // -----------------------------------------------------------------
   // Loading / error states
   // -----------------------------------------------------------------
@@ -426,6 +467,17 @@ export default function PlayerScreen() {
             >
               {sleepTimerEndTime ? `${sleepTimerRemaining}m` : 'Sleep'}
             </Text>
+          </Pressable>
+
+          <Pressable
+            onPress={handleReport}
+            style={({ pressed }) => [
+              styles.actionButton,
+              pressed && styles.actionButtonPressed,
+            ]}
+          >
+            <Ionicons name="flag-outline" size={20} color={Colors.text} />
+            <Text style={styles.actionButtonText}>Report</Text>
           </Pressable>
         </View>
 

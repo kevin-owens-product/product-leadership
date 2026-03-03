@@ -230,6 +230,37 @@ export function calculateCreditsNeeded(
   return episodeCount * (creditsPerEpisode + premiumAddon);
 }
 
+// --- Content reporting ---
+
+export interface ContentReport {
+  id: string;
+  reporter_id: string;
+  show_id: string | null;
+  episode_id: string | null;
+  reason: ContentReportReason;
+  description: string | null;
+  status: 'pending' | 'reviewing' | 'actioned' | 'dismissed';
+  reviewed_at: string | null;
+  created_at: string;
+}
+
+export type ContentReportReason =
+  | 'illegal_content'
+  | 'hate_speech'
+  | 'harassment'
+  | 'sexual_content'
+  | 'violence'
+  | 'dangerous_content'
+  | 'misinformation'
+  | 'other';
+
+export interface ReportContentRequest {
+  show_id?: string;
+  episode_id?: string;
+  reason: ContentReportReason;
+  description?: string;
+}
+
 // --- Dialogue parsing (ported from V1) ---
 
 export interface DialogueLine {

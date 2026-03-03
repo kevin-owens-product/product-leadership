@@ -6,6 +6,12 @@
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { createClient, SupabaseClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import {
+  moderateContent,
+  logModerationResult,
+  incrementModerationFlags,
+  CONTENT_POLICY,
+} from '../_shared/moderation.ts'
 
 // ---------------------------------------------------------------------------
 // CORS
@@ -69,6 +75,11 @@ async function planShowWithClaude(
   anthropicApiKey: string,
 ): Promise<ShowPlan> {
   const systemPrompt = `You are an expert podcast producer and creative director. Given a podcast concept from a user, you plan out the full show — title, description, episode titles, and detailed outlines for each episode.
+
+${CONTENT_POLICY}
+
+If the user's concept violates the content policy above, respond with ONLY this JSON:
+{"error": "content_policy_violation", "reason": "brief explanation"}
 
 Rules:
 - The show should feel professional, engaging, and well-structured.
@@ -139,7 +150,14 @@ Respond ONLY with valid JSON matching this schema:
     jsonStr = fenceMatch[1].trim()
   }
 
-  const plan: ShowPlan = JSON.parse(jsonStr)
+  const parsed = JSON.parse(jsonStr)
+
+  // Check if Claude refused due to content policy
+  if (parsed.error === 'content_policy_violation') {
+    throw new Error(`CONTENT_POLICY_VIOLATION: ${parsed.reason || 'Content violates our policies'}`)
+  }
+
+  const plan = parsed as ShowPlan
 
   // Validate required fields
   if (
@@ -274,6 +292,54 @@ serve(async (req: Request) => {
           credits_available: profile.credits_balance,
         }),
         { status: 402, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      )
+    }
+
+    // ---- Check if user is suspended ----
+    if (profile.suspended_until) {
+      const suspendedUntil = new Date(profile.suspended_until)
+      if (suspendedUntil > new Date()) {
+        return new Response(
+          JSON.stringify({
+            error: 'Your account is temporarily suspended due to content policy violations.',
+            suspended_until: profile.suspended_until,
+          }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+        )
+      }
+    }
+
+    // ---- Screen prompt for content policy violations ----
+    console.log(`Screening prompt for user ${userId}`)
+
+    const moderationResult = await moderateContent(user_prompt, anthropicApiKey)
+
+    await logModerationResult(supabaseAdmin, {
+      userId,
+      checkType: 'prompt_screen',
+      inputText: user_prompt,
+      result: moderationResult,
+    })
+
+    if (!moderationResult.safe) {
+      console.warn(
+        `Prompt rejected for user ${userId}: ${moderationResult.category} — ${moderationResult.reason}`,
+      )
+
+      const { newCount, suspended } = await incrementModerationFlags(
+        supabaseAdmin,
+        userId,
+      )
+
+      return new Response(
+        JSON.stringify({
+          error: 'Your prompt violates our content policy and cannot be used to generate a podcast.',
+          category: moderationResult.category,
+          reason: moderationResult.reason,
+          warning_count: newCount,
+          suspended,
+        }),
+        { status: 422, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
       )
     }
 
@@ -458,9 +524,25 @@ serve(async (req: Request) => {
     })
   } catch (error) {
     console.error('create-show error:', error)
+
+    // Surface content policy violations as a 422, not a 500
+    const message = error instanceof Error ? error.message : 'Internal server error'
+    if (message.startsWith('CONTENT_POLICY_VIOLATION:')) {
+      return new Response(
+        JSON.stringify({
+          error: 'Your podcast concept violates our content policy and cannot be generated.',
+          reason: message.replace('CONTENT_POLICY_VIOLATION: ', ''),
+        }),
+        {
+          status: 422,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        },
+      )
+    }
+
     return new Response(
       JSON.stringify({
-        error: error instanceof Error ? error.message : 'Internal server error',
+        error: message,
       }),
       {
         status: 500,

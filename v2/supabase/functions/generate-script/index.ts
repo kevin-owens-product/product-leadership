@@ -6,6 +6,12 @@
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import {
+  moderateScript,
+  logModerationResult,
+  incrementModerationFlags,
+  CONTENT_POLICY,
+} from '../_shared/moderation.ts'
 
 // ---------------------------------------------------------------------------
 // CORS
@@ -57,6 +63,10 @@ async function generateScriptWithClaude(opts: {
       : ''
 
   const systemPrompt = `You are an expert podcast scriptwriter. You write natural, engaging dialogue between two hosts.
+
+${CONTENT_POLICY}
+
+If the episode concept violates the content policy, respond with ONLY: "CONTENT_POLICY_VIOLATION: [reason]"
 
 Format rules:
 - Use markdown throughout.
@@ -292,6 +302,45 @@ serve(async (req: Request) => {
     console.log(
       `generate-script: script generated, length=${script.length} chars`,
     )
+
+    // Check if Claude refused the content
+    if (script.startsWith('CONTENT_POLICY_VIOLATION:')) {
+      console.warn(`generate-script: Claude refused content for episode ${episode_id}`)
+      await supabase
+        .from('episodes')
+        .update({ status: 'failed' })
+        .eq('id', episode_id)
+      throw new Error(script)
+    }
+
+    // ---- Post-generation moderation check ----
+    const scriptModResult = await moderateScript(script, anthropicApiKey)
+
+    await logModerationResult(supabase, {
+      userId: show.user_id,
+      showId: show_id,
+      episodeId: episode_id,
+      checkType: 'script_review',
+      inputText: script,
+      result: scriptModResult,
+    })
+
+    if (!scriptModResult.safe) {
+      console.warn(
+        `generate-script: script failed moderation for episode ${episode_id}: ${scriptModResult.category}`,
+      )
+
+      await incrementModerationFlags(supabase, show.user_id)
+
+      await supabase
+        .from('episodes')
+        .update({ status: 'failed' })
+        .eq('id', episode_id)
+
+      throw new Error(
+        `Script failed content moderation: ${scriptModResult.category} — ${scriptModResult.reason}`,
+      )
+    }
 
     // ---- Save script to episode record ----
     const { error: updateError } = await supabase

@@ -12,6 +12,7 @@ import {
   incrementModerationFlags,
   CONTENT_POLICY,
 } from '../_shared/moderation.ts'
+import { checkRateLimit } from '../_shared/admin.ts'
 
 // ---------------------------------------------------------------------------
 // CORS
@@ -307,6 +308,18 @@ serve(async (req: Request) => {
           { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
         )
       }
+    }
+
+    // ---- Rate limit: max 10 show creations per hour ----
+    const rateCheck = await checkRateLimit(supabaseAdmin, userId, 'create_show', 10, 60)
+    if (!rateCheck.allowed) {
+      return new Response(
+        JSON.stringify({
+          error: 'You are creating shows too quickly. Please try again later.',
+          retry_after: rateCheck.resetAt.toISOString(),
+        }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      )
     }
 
     // ---- Screen prompt for content policy violations ----

@@ -6,6 +6,7 @@
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { createAdminNotification } from '../_shared/admin.ts'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -138,6 +139,14 @@ serve(async (req: Request) => {
     console.log(
       `Content report created: ${report.id} by user ${user.id} for ${show_id ? 'show' : 'episode'} ${show_id || episode_id}`,
     )
+
+    // Notify admins
+    await createAdminNotification(supabaseAdmin, {
+      type: 'new_report',
+      title: `New content report: ${reason}`,
+      body: `User reported ${show_id ? 'a show' : 'an episode'} for ${reason}. ${description ? `Details: ${description.substring(0, 200)}` : ''}`,
+      referenceId: report.id,
+    })
 
     return new Response(
       JSON.stringify({ success: true, report_id: report.id }),

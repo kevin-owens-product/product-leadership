@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   View,
   Text,
@@ -18,6 +18,7 @@ import { Colors, Spacing, FontSize, BorderRadius, Shadows } from '@/constants/th
 import { Config } from '@/constants/config';
 import { useCreditStore } from '@/stores/creditStore';
 import { createShow } from '@/services/shows';
+import { getModerationStatus } from '@/services/moderation';
 import { calculateCreditsNeeded } from '@shared/types';
 import type { CreateShowRequest } from '@shared/types';
 import PromptInput from '@/components/create/PromptInput';
@@ -55,6 +56,16 @@ export default function CreateScreen() {
   );
   const [voiceTier, setVoiceTier] = useState<VoiceTier>(Config.defaultVoiceTier);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [suspendedUntil, setSuspendedUntil] = useState<string | null>(null);
+
+  // Check if user is suspended
+  useEffect(() => {
+    getModerationStatus()
+      .then((status) => setSuspendedUntil(status.suspended_until))
+      .catch(() => {});
+  }, []);
+
+  const isSuspended = suspendedUntil ? new Date(suspendedUntil) > new Date() : false;
 
   // --- derived values ---
   const creditsNeeded = useMemo(
@@ -64,7 +75,7 @@ export default function CreateScreen() {
 
   const hasEnoughCredits = balance >= creditsNeeded;
   const isPromptEmpty = prompt.trim().length === 0;
-  const canSubmit = !isPromptEmpty && hasEnoughCredits && !isSubmitting;
+  const canSubmit = !isPromptEmpty && hasEnoughCredits && !isSubmitting && !isSuspended;
 
   // --- handlers ---
   const handleSelectEpisodeCount = useCallback((count: EpisodeCount) => {
@@ -143,6 +154,24 @@ export default function CreateScreen() {
         <Text style={styles.screenSubtitle}>
           Describe your idea and we'll generate a full podcast series for you.
         </Text>
+
+        {/* Suspension Banner */}
+        {isSuspended && (
+          <TouchableOpacity
+            style={styles.suspensionBanner}
+            onPress={() => router.push('/appeal')}
+            activeOpacity={0.7}
+          >
+            <Ionicons name="alert-circle" size={20} color={Colors.error} />
+            <View style={styles.suspensionBannerContent}>
+              <Text style={styles.suspensionBannerTitle}>Account Suspended</Text>
+              <Text style={styles.suspensionBannerText}>
+                You cannot create podcasts while suspended. Tap to view details or submit an appeal.
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={Colors.textTertiary} />
+          </TouchableOpacity>
+        )}
 
         {/* Prompt Input */}
         <View style={styles.section}>
@@ -358,6 +387,33 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     lineHeight: 22,
     marginBottom: Spacing.xxl,
+  },
+
+  // --- Suspension Banner ---
+  suspensionBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    borderRadius: BorderRadius.lg,
+    borderWidth: 1,
+    borderColor: 'rgba(239, 68, 68, 0.3)',
+    padding: Spacing.lg,
+    marginBottom: Spacing.xxl,
+    gap: Spacing.md,
+  },
+  suspensionBannerContent: {
+    flex: 1,
+  },
+  suspensionBannerTitle: {
+    fontSize: FontSize.sm,
+    fontWeight: '700',
+    color: Colors.error,
+    marginBottom: 2,
+  },
+  suspensionBannerText: {
+    fontSize: FontSize.xs,
+    color: Colors.textSecondary,
+    lineHeight: 16,
   },
 
   // --- Sections ---

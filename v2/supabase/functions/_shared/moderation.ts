@@ -247,5 +247,30 @@ export async function incrementModerationFlags(
 
   await supabaseAdmin.from('profiles').update(update).eq('id', userId)
 
+  // Create admin notification on auto-suspension or high flag count
+  if (suspended) {
+    try {
+      await supabaseAdmin.from('admin_notifications').insert({
+        type: 'auto_suspension',
+        title: `User auto-suspended (${newCount} violations)`,
+        body: `User ${userId} was automatically suspended after reaching ${newCount} content policy violations.`,
+        reference_id: null,
+      })
+    } catch {
+      // non-fatal
+    }
+  } else if (newCount === 2) {
+    try {
+      await supabaseAdmin.from('admin_notifications').insert({
+        type: 'high_flag_count',
+        title: `User approaching suspension threshold (${newCount}/3)`,
+        body: `User ${userId} has ${newCount} content policy violations. One more will trigger auto-suspension.`,
+        reference_id: null,
+      })
+    } catch {
+      // non-fatal
+    }
+  }
+
   return { newCount, suspended }
 }

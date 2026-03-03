@@ -21,6 +21,7 @@ import { useCreditStore } from '@/stores/creditStore';
 import { CREDIT_PACKS } from '@shared/types';
 import type { CreditPack, CreditTransaction } from '@shared/types';
 import { supabase } from '@/services/supabase';
+import { router } from 'expo-router';
 
 // ---------------------------------------------------------------------------
 // Profile Screen
@@ -303,6 +304,18 @@ export default function ProfileScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Settings</Text>
         <View style={styles.settingsList}>
+          <SettingsRow
+            icon="shield-outline"
+            label="Account Status"
+            onPress={() => router.push('/appeal')}
+          />
+          {profile?.is_admin && (
+            <SettingsRow
+              icon="construct-outline"
+              label="Admin Dashboard"
+              onPress={() => router.push('/(admin)/dashboard')}
+            />
+          )}
           <SettingsRow
             icon="information-circle-outline"
             label="About"

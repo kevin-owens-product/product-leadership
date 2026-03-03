@@ -12,6 +12,9 @@ export interface Profile {
   credits_balance: number;
   tier: 'free' | 'beta' | 'paid';
   beta_code: string | null;
+  is_admin: boolean;
+  moderation_flags: number;
+  suspended_until: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -259,6 +262,34 @@ export interface ReportContentRequest {
   episode_id?: string;
   reason: ContentReportReason;
   description?: string;
+}
+
+// --- Appeals ---
+
+export interface Appeal {
+  id: string;
+  user_id: string;
+  action_id: string | null;
+  reason: string;
+  status: 'pending' | 'reviewing' | 'approved' | 'denied';
+  admin_response: string | null;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  created_at: string;
+}
+
+// --- Moderation actions ---
+
+export interface ModerationAction {
+  id: string;
+  user_id: string;
+  action_type: 'warning' | 'content_removed' | 'suspended' | 'banned';
+  reason: string;
+  show_id: string | null;
+  report_id: string | null;
+  performed_by: string;
+  expires_at: string | null;
+  created_at: string;
 }
 
 // --- Dialogue parsing (ported from V1) ---

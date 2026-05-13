@@ -1,0 +1,989 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome back to Tech Leadership Unpacked. I'm Sam Rivera, and if you're joining us mid-flight, we just wrapped up our foundations episode on AI and Machine Learning. Now we're diving deep into the technology that's reshaping entire industries: Large Language Models.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen, and I have to say, in my entire career, I've never seen a technology move this fast and capture this much attention. LLMs are genuinely a paradigm shift - but they're also surrounded by hype, confusion, and some legitimate concerns that we need to unpack.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "So Alex, let's start with the basics. What exactly is a Large Language Model?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "An LLM is a specific type of neural network that's been trained on massive amounts of text data - we're talking trillions of words from books, websites, code, conversations. The \"large\" refers to the number of parameters - the adjustable values in the neural network. GPT-4 has over a trillion parameters. These models learn to predict what word comes next given some context, and it turns out that simple objective leads to remarkably general capabilities.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "Predicting the next word? That sounds... underwhelming for something so powerful.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Right? But here's the insight: to predict the next word really well, you have to understand a lot about the world. If I say \"The capital of France is...\" you need to know geography to predict \"Paris.\" If I describe a coding problem, you need to understand programming to predict the solution. Next-word prediction is a proxy for general understanding.",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "Okay, take me under the hood. How does an LLM actually work?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "Let me walk you through it layer by layer, no PhD required.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "sam",
+    "text": "Why subwords instead of whole words?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "alex",
+    "text": "Efficiency and flexibility. With subwords, the model can handle words it's never seen before by combining pieces it knows. It's like how you can understand \"unhappiness\" even if you've never seen it, because you know \"un\" + \"happy\" + \"ness.\"",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "sam",
+    "text": "Makes sense. What happens next?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "Each token gets converted to an embedding - a list of numbers that represents its meaning in a mathematical space. Similar words have similar embeddings. \"King\" and \"Queen\" are closer to each other than to \"Refrigerator.\"",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "sam",
+    "text": "How does it learn these embeddings?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "alex",
+    "text": "Through the training process. The embeddings start random and get adjusted to make better predictions. The magic is that semantic relationships emerge automatically.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Now here's where transformers come in - the architecture that made LLMs possible. Transformers use something called attention to figure out which words in the context are most relevant for predicting the next word.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "sam",
+    "text": "I've heard \"attention is all you need.\" What does that actually mean?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "It's the title of the landmark 2017 paper that introduced transformers. Before transformers, we used architectures that processed text word by word, sequentially. Attention allows the model to look at all the words at once and decide which ones matter most.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "sam",
+    "text": "Can you give an example?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "Sure. Consider: \"The trophy didn't fit in the suitcase because it was too big.\" What does \"it\" refer to?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "sam",
+    "text": "The trophy, because if the suitcase was too big, the trophy would fit.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Exactly. Now consider: \"The trophy didn't fit in the suitcase because it was too small.\" Now \"it\" refers to the suitcase. The attention mechanism learns to focus on \"big\" or \"small\" to resolve this. It's dynamically figuring out which words matter for understanding.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "sam",
+    "text": "That's elegant.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Very. And attention happens at every layer, multiple times in parallel - that's \"multi-head attention.\" Different heads can focus on different types of relationships: grammar, meaning, factual associations.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "sam",
+    "text": "How many layers are we talking about?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "In a big LLM? 80 to 100 layers or more. Each layer refines the representation. Early layers might capture syntax, middle layers semantic meaning, later layers more abstract reasoning. The information flows through, getting enriched at each step.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "sam",
+    "text": "And the training process?",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "Pre-training is the big expensive part. You show the model billions of examples of text and have it predict masked or next words. Every wrong prediction generates an error signal that adjusts the parameters to do better next time. This takes months on thousands of expensive GPUs. We're talking tens to hundreds of millions of dollars for frontier models.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "sam",
+    "text": "Only big tech can afford that.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "For cutting-edge frontier models, yes. But here's the beautiful part: once a model is pre-trained, you can fine-tune it on your specific data much more cheaply. The general knowledge transfers. Fine-tuning on your customer service conversations might take hours, not months.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "sam",
+    "text": "And that's why we're seeing such rapid adoption.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Exactly. The heavy lifting is done. Companies can build on top of existing models rather than starting from scratch.",
+    "chapter": "SEGMENT 1: HOW LLMs ACTUALLY WORK (15 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "sam",
+    "text": "Let's talk about what LLMs can and can't do. I feel like there's a lot of hype and fear, and the reality is somewhere in between.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Absolutely. Let me be honest about both sides.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "sam",
+    "text": "Our support team is already using them for drafting responses.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Common use case. Code generation and understanding is another strength. They can write code, explain code, find bugs, translate between languages. GitHub Copilot has transformed how millions of developers work.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "sam",
+    "text": "Our engineering team lives in Copilot now.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Knowledge retrieval and synthesis. They've absorbed so much text that they can answer questions on almost any topic, synthesize information from different sources, and explain complex concepts at any level.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "sam",
+    "text": "Like what we're doing in this podcast.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Meta, right? Reasoning and analysis - they can work through logical problems, analyze data, critique arguments. Not perfectly, but often usefully. And creative tasks - brainstorming, writing marketing copy, generating ideas. They're surprisingly good creative partners.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "sam",
+    "text": "Now give me the limitations. What should I not trust them with?",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Hallucinations are the big one. LLMs confidently generate plausible-sounding but false information. They don't \"know\" what they don't know. If you ask about a paper that doesn't exist, they might make up a realistic-sounding citation with real author names and a fake title.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "sam",
+    "text": "How often does this happen?",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "Depends on the task and the model. For factual questions about obscure topics, it can be frequent. For well-known information, it's rarer. The newer models are better, but it's not solved. You need verification, especially for anything consequential.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "sam",
+    "text": "What else?",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Reasoning failures, especially for multi-step math or logic problems. They can struggle with problems that require careful sequential reasoning. They often get things right that \"feel\" like they require reasoning but can be pattern-matched from training data.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "sam",
+    "text": "Can you give an example?",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "A classic: \"If I have two apples and eat one, then buy five more, and my friend gives me three, how many do I have?\" They'll often get this right. But modify it slightly: \"If I start with X apples where X is the number of vowels in 'Mississippi' minus 2...\" - they might struggle to accurately count the vowels.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "sam",
+    "text": "Interesting. The reasoning chains are fragile.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "No real-time knowledge. Models are trained on data up to a cutoff date. They don't know about yesterday's news unless you tell them. This is being addressed with tools and retrieval augmentation, but it's a fundamental property.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "sam",
+    "text": "They also can't actually do things in the world, right?",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Not by themselves. An LLM is just text in, text out. To take actions - browse the web, send emails, execute code - you need to wrap it in an agent framework that calls external tools. This is where AI agents come in, and it's a rapidly evolving area.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "sam",
+    "text": "What about memory?",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Big limitation. Within a conversation, they only remember what's in the context window - the text they can see at once. This varies from model to model, but even \"long context\" models with 128K or 200K tokens can't remember everything from a multi-hour conversation. And between conversations, they don't remember you at all unless you engineer persistence.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "sam",
+    "text": "That seems like a solvable problem.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "It is being solved - through external memory systems, RAG databases, session persistence. But it's infrastructure you have to build.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "sam",
+    "text": "Any other limitations?",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Consistency and reliability. LLMs are stochastic - they sample from probability distributions. Ask the same question twice, you might get different answers. For creative tasks, that's a feature. For business logic, it can be a bug. And sensitive content - they're trained to refuse certain requests, but jailbreaks exist. Don't rely on the model alone to enforce content policies.",
+    "chapter": "SEGMENT 2: CAPABILITIES AND LIMITATIONS (12 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "sam",
+    "text": "Okay, let's get practical. If I want my product team to build LLM features, what should they know?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Great. Let me walk through the key concepts and patterns.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "sam",
+    "text": "What makes a good prompt?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Several things. Be specific. Don't say \"write about dogs.\" Say \"write a 200-word blog post about the top 3 health benefits of owning a dog, in a friendly, conversational tone, for an audience of potential first-time pet owners.\"",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "sam",
+    "text": "Front-load the context.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Exactly. Give examples. If you want a specific format, show the model what you want. This is called \"few-shot prompting.\" Show two or three examples of input-output pairs before your actual query.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "sam",
+    "text": "Like training by demonstration.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Precisely. Use structured output formats. If you need JSON, tell it to output JSON and show an example. Better yet, use schema-constrained generation that many APIs now offer.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "alex",
+    "text": "System prompts are important too. These are instructions that set the overall behavior - personality, constraints, role. \"You are a helpful customer service agent for a fintech company. Always be polite. Never give financial advice. If you don't know something, say so.\"",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "sam",
+    "text": "Where does fine-tuning fit in?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "alex",
+    "text": "Fine-tuning is when you take a pre-trained model and train it further on your specific data. This is powerful for: adapting tone and style, teaching domain-specific knowledge, improving performance on specific task types, reducing the need for long prompts.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "sam",
+    "text": "When should we fine-tune versus just prompt engineering?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "alex",
+    "text": "Good question. Start with prompting - it's faster and cheaper. Try really hard to solve your problem with prompting. If you hit limits - the style is wrong, it doesn't know domain terminology, you're hitting token limits with long prompts - then consider fine-tuning.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "sam",
+    "text": "What does fine-tuning require?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "alex",
+    "text": "You need training examples - usually hundreds to thousands of high-quality input-output pairs. \"Here's what a user asks, here's what we want the model to say.\" The model learns to mimic your examples. Most API providers offer fine-tuning as a service now.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "sam",
+    "text": "What about RAG - I keep hearing that term?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "alex",
+    "text": "Retrieval Augmented Generation - this is huge. The idea: instead of asking the model to answer from its training data alone, you first retrieve relevant documents from your own data and include them in the prompt. \"Here are three relevant knowledge base articles. Now answer the question.\"",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "sam",
+    "text": "So you're grounding the model in your actual data.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "alex",
+    "text": "Exactly. This solves so many problems: keeps answers up to date, grounds them in your actual documentation, reduces hallucinations because the answer is right there in the context, and works with proprietary data the model was never trained on.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "sam",
+    "text": "How does the retrieval work?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "alex",
+    "text": "You create embeddings of your documents - numerical representations. When a query comes in, you embed it too, then find the documents with the most similar embeddings. This is called semantic search - it matches meaning, not just keywords.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "sam",
+    "text": "And then you stuff those documents into the prompt?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "alex",
+    "text": "Essentially, yes. The challenge is fitting enough relevant context into limited token windows and avoiding irrelevant noise. Good RAG pipelines are engineered carefully.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "sam",
+    "text": "What about the agent pattern you mentioned?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "alex",
+    "text": "AI Agents are LLMs that can use tools. You give the model access to functions - search the web, query a database, send an email, execute code - and it decides when to use them. The model generates a tool call, your code executes it, the result goes back to the model, the model incorporates it into its reasoning.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "sam",
+    "text": "That sounds powerful and risky.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "alex",
+    "text": "Both true. Powerful because it massively extends capabilities. Risky because now the LLM is taking actions with real consequences. You need careful permissioning, sandboxing, human oversight for critical actions.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "sam",
+    "text": "What tools are essential for the agent pattern?",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "alex",
+    "text": "Search is common - lets the model find current information. Code execution - lets it do computation. API calls to your own systems. Database queries. File operations. But every tool is a capability AND a risk vector.",
+    "chapter": "SEGMENT 3: HOW TO ACTUALLY BUILD WITH LLMs (15 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "sam",
+    "text": "There are so many models now - GPT-4, Claude, Gemini, Llama, Mistral... How do I choose?",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "alex",
+    "text": "Let me give you a framework.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "sam",
+    "text": "What matters more?",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "alex",
+    "text": "Testing on your actual use cases. Create an evaluation set of 50-100 examples representative of what you'll actually do. Run them through different models. Score the outputs - ideally with multiple human raters. Compare.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "sam",
+    "text": "That sounds time-consuming.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "It is, but it's worth it. A model that's 3% better on benchmarks but 20% worse on your actual task is a bad choice.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "Latency and throughput matter for production. GPT-4 is great but slow. Sometimes a faster, smaller model is better for your UX. Some use cases need real-time responses; others can tolerate batch processing.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "sam",
+    "text": "Cost is obviously a factor.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "Huge factor. API pricing varies wildly. Tokens in, tokens out, model size - all affect cost. A chatbot handling millions of messages has very different economics than an internal tool used by ten people.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "sam",
+    "text": "Can you give rough numbers?",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Order of magnitude: frontier models like GPT-4 or Claude Opus might be 10-30x more expensive per token than smaller models like GPT-4o-mini or Claude Haiku. For high-volume use cases, this matters enormously. Often the right architecture uses small models for simple tasks and calls the big model only when needed.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "sam",
+    "text": "What about open source versus API?",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "API models (OpenAI, Anthropic, Google): easier to start, no infrastructure to manage, but ongoing costs and data goes to a third party. Open source models (Llama, Mistral): you host them, upfront infrastructure cost, but then inference is just compute, and your data never leaves.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "sam",
+    "text": "When would I choose open source?",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Data sensitivity - if you can't send data to third parties due to regulation or customer promises. Cost at scale - if you have massive volume, self-hosting can be cheaper. Customization - if you need deep fine-tuning or modifications.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "sam",
+    "text": "Infrastructure is the challenge.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Big models need serious GPUs. But there are managed inference providers that simplify this. And smaller open source models can run on modest hardware.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "sam",
+    "text": "Any other selection criteria?",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "Context window size - how much text can fit in one call. Ranges from 4K tokens to over 1 million now. Matters for long documents, complex conversations.",
+    "chapter": "SEGMENT 4: EVALUATING AND CHOOSING LLMs (10 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "sam",
+    "text": "Let's talk about the responsible use side. What should I worry about?",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "alex",
+    "text": "Several areas.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "sam",
+    "text": "How do we add filters?",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "Classification layers. Run the input through a model that detects problematic requests. Run the output through a filter before showing it to users. Many providers offer content moderation APIs.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "alex",
+    "text": "Privacy. If users input personal data, where does it go? Do you have consent? Is it used for training? Most API providers now offer enterprise agreements that prevent training on your data, but read the fine print.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "sam",
+    "text": "What about GDPR and data residency?",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "alex",
+    "text": "Real concerns. Some providers offer data residency guarantees. For strict requirements, self-hosted open source may be the only option. Log what you need for debugging but don't log more than necessary. Have a data retention policy.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0111.mp3"
+  },
+  {
+    "index": 112,
+    "speaker": "alex",
+    "text": "Intellectual property. The training data for most LLMs includes copyrighted material. The legal landscape is evolving with active lawsuits. Be thoughtful about directly reproducing content that looks like it came from training data.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0112.mp3"
+  },
+  {
+    "index": 113,
+    "speaker": "sam",
+    "text": "Should we worry about our own IP?",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0113.mp3"
+  },
+  {
+    "index": 114,
+    "speaker": "alex",
+    "text": "If you fine-tune on proprietary data and use a third-party API, read the terms carefully. If your model generates IP-like output (code, creative content), understand your rights. This is genuinely unsettled legally.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0114.mp3"
+  },
+  {
+    "index": 115,
+    "speaker": "alex",
+    "text": "Transparency with users. Should you disclose when users are interacting with AI? Increasingly, regulations require this. Even without regulation, transparency builds trust. The uncanny valley is real - a bot pretending to be human can backfire badly.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0115.mp3"
+  },
+  {
+    "index": 116,
+    "speaker": "sam",
+    "text": "What's your recommendation?",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0116.mp3"
+  },
+  {
+    "index": 117,
+    "speaker": "alex",
+    "text": "Be clear it's AI. Users adapt quickly and appreciate honesty. \"I'm an AI assistant powered by [technology]. I can help with X, Y, Z. For questions I can't answer, I'll connect you with a human.\"",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0117.mp3"
+  },
+  {
+    "index": 118,
+    "speaker": "alex",
+    "text": "Finally, human oversight for consequential decisions. LLM suggests, human confirms. Don't let an LLM unilaterally decide loan approvals, medical diagnoses, or employee terminations. Keep humans in the loop for anything with significant impact.",
+    "chapter": "SEGMENT 5: RESPONSIBLE LLM DEPLOYMENT (8 minutes)",
+    "file": "0118.mp3"
+  },
+  {
+    "index": 119,
+    "speaker": "sam",
+    "text": "Where is this going? What should I be watching?",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0119.mp3"
+  },
+  {
+    "index": 120,
+    "speaker": "alex",
+    "text": "A few big trends.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0120.mp3"
+  },
+  {
+    "index": 121,
+    "speaker": "sam",
+    "text": "So frontier model performance becomes commodity?",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0121.mp3"
+  },
+  {
+    "index": 122,
+    "speaker": "alex",
+    "text": "Eventually, yes. What's cutting-edge today becomes table stakes in 18 months. Plan accordingly - don't build moats around API access that anyone can get.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0122.mp3"
+  },
+  {
+    "index": 123,
+    "speaker": "alex",
+    "text": "Multimodality is standard - text, images, audio, video, all unified. Models that can see, hear, read, and speak. This opens new UX possibilities.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0123.mp3"
+  },
+  {
+    "index": 124,
+    "speaker": "sam",
+    "text": "Voice interfaces seem primed for a comeback.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0124.mp3"
+  },
+  {
+    "index": 125,
+    "speaker": "alex",
+    "text": "Big time. Voice has always been constrained by understanding. LLMs solve that. Expect voice-first AI applications everywhere.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0125.mp3"
+  },
+  {
+    "index": 126,
+    "speaker": "alex",
+    "text": "Longer context and better memory - we're going from 100K token contexts toward millions. Combined with better memory architectures, this enables truly long-running agents with persistent understanding.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0126.mp3"
+  },
+  {
+    "index": 127,
+    "speaker": "sam",
+    "text": "What about specialized models?",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0127.mp3"
+  },
+  {
+    "index": 128,
+    "speaker": "alex",
+    "text": "Domain-specific LLMs are emerging - legal, medical, financial, coding. Trained or fine-tuned specifically for verticals. Often outperform general models in their domain.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0128.mp3"
+  },
+  {
+    "index": 129,
+    "speaker": "alex",
+    "text": "Reasoning improvements - current LLMs fake reasoning through pattern matching. New architectures are emerging that do more genuine chain-of-thought reasoning. This will unlock more complex problem-solving.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0129.mp3"
+  },
+  {
+    "index": 130,
+    "speaker": "sam",
+    "text": "And AI agents?",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0130.mp3"
+  },
+  {
+    "index": 131,
+    "speaker": "alex",
+    "text": "Agentic AI is the next frontier. Models that can plan, break down tasks, use tools, learn from feedback, and work autonomously on complex goals. We're early, but the trajectory is clear. Within a few years, you'll have AI agents that can do significant portions of knowledge work with minimal supervision.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0131.mp3"
+  },
+  {
+    "index": 132,
+    "speaker": "sam",
+    "text": "That has big implications for workforce planning.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0132.mp3"
+  },
+  {
+    "index": 133,
+    "speaker": "alex",
+    "text": "Enormous. Not \"AI takes all jobs\" - that's too simplistic. More like \"the definition of a job changes.\" Roles become about directing and collaborating with AI rather than doing everything manually.",
+    "chapter": "SEGMENT 6: THE FUTURE OF LLMs (7 minutes)",
+    "file": "0133.mp3"
+  },
+  {
+    "index": 134,
+    "speaker": "sam",
+    "text": "Alright, let's crystallize this. If I walk off this plane and into a board meeting tomorrow, what are my key takeaways?",
+    "chapter": "SEGMENT 7: PRACTICAL TAKEAWAYS (5 minutes)",
+    "file": "0134.mp3"
+  },
+  {
+    "index": 135,
+    "speaker": "sam",
+    "text": "What's one thing you wish every CPO understood?",
+    "chapter": "SEGMENT 7: PRACTICAL TAKEAWAYS (5 minutes)",
+    "file": "0135.mp3"
+  },
+  {
+    "index": 136,
+    "speaker": "alex",
+    "text": "LLMs don't think like humans, even when it feels like they do. They're incredibly capable pattern matchers with amazing emergent behaviors. But they're not reasoning, remembering, or caring. Understanding that helps you design better systems and set realistic expectations.",
+    "chapter": "SEGMENT 7: PRACTICAL TAKEAWAYS (5 minutes)",
+    "file": "0136.mp3"
+  },
+  {
+    "index": 137,
+    "speaker": "sam",
+    "text": "And one concrete recommendation?",
+    "chapter": "SEGMENT 7: PRACTICAL TAKEAWAYS (5 minutes)",
+    "file": "0137.mp3"
+  },
+  {
+    "index": 138,
+    "speaker": "alex",
+    "text": "Set up a sandbox this week. Give your team a budget to experiment. The best way to understand this technology is to build something with it. Start small - a Slack bot, a documentation helper, a brainstorming tool. Learn by doing.",
+    "chapter": "SEGMENT 7: PRACTICAL TAKEAWAYS (5 minutes)",
+    "file": "0138.mp3"
+  },
+  {
+    "index": 139,
+    "speaker": "sam",
+    "text": "Excellent. That's a wrap on LLMs. Next episode, we're switching gears to talk about Software Engineering Excellence - how to run engineering organizations that actually deliver.",
+    "chapter": "SEGMENT 7: PRACTICAL TAKEAWAYS (5 minutes)",
+    "file": "0139.mp3"
+  },
+  {
+    "index": 140,
+    "speaker": "alex",
+    "text": "Looking forward to it.",
+    "chapter": "SEGMENT 7: PRACTICAL TAKEAWAYS (5 minutes)",
+    "file": "0140.mp3"
+  }
+]

@@ -1,0 +1,135 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to The Forge Podcast. In our last two episodes, we covered PE value creation and multi-agent architecture. Today we're tackling something that sits at the intersection of product strategy and competitive moats: platform power dynamics. Kevin, you've been dealing with this at GWI, a consumer insights company that serves some of the world's biggest agencies. Set up the problem for us.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "kevin",
+    "text": "Here's the strategic tension. GWI collects and curates one of the world's most comprehensive consumer datasets. Our data tells you what people think, what they buy, what media they consume, how their attitudes are shifting, across dozens of countries and thousands of data points. Agencies like WPP, Publicis, and Omnicom love our data. They use it to plan media strategies, build audience segments, and validate campaign ideas.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "So what's the framework for thinking about this? How does a data company protect itself without alienating its biggest customers?",
+    "chapter": "SEGMENT 1: THE THREE LAYERS OF THE VALUE CHAIN (10 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "kevin",
+    "text": "You need to understand the three layers of the value chain and where you sit in each one. Let me walk through them.",
+    "chapter": "SEGMENT 1: THE THREE LAYERS OF THE VALUE CHAIN (10 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "Practically speaking, how do you do that? The agencies want raw data or clean API access. They don't want your intelligence layer getting in the way of their platform.",
+    "chapter": "SEGMENT 2: PRODUCT ARCHITECTURE AS STRATEGIC WEAPON (10 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "kevin",
+    "text": "Right, and this is where the product architecture becomes your strategic weapon. The answer is to shift from being a data supplier to being an embedded intelligence layer. Here's how.",
+    "chapter": "SEGMENT 2: PRODUCT ARCHITECTURE AS STRATEGIC WEAPON (10 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "That's clever, but can't the agency just extract the data from the insight object and discard the branding?",
+    "chapter": "SEGMENT 2: PRODUCT ARCHITECTURE AS STRATEGIC WEAPON (10 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "kevin",
+    "text": "They can, and some will try. Which is why the second move is equally important: build a Certified Partner Programme with tiered access. The concept is that agencies can access GWI data at different levels depending on their commitment to attribution and data governance.",
+    "chapter": "SEGMENT 2: PRODUCT ARCHITECTURE AS STRATEGIC WEAPON (10 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "What about the pricing model? How does this change how you charge?",
+    "chapter": "SEGMENT 3: PRICING MODEL SHIFTS (7 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "kevin",
+    "text": "The pricing shift is critical and it's one of the most underappreciated levers in platform power dynamics. Most data companies price on consumption: pay per query, pay per data point, pay per seat. This model is inherently vulnerable because it creates an incentive for the customer to minimize their usage of your product, and it makes you directly comparable to alternatives on a per-unit cost basis.",
+    "chapter": "SEGMENT 3: PRICING MODEL SHIFTS (7 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Let's zoom out from the GWI example. What are the general principles here for any B2B SaaS company thinking about platform power dynamics?",
+    "chapter": "SEGMENT 4: FIVE PRINCIPLES FOR B2B PLATFORM STRATEGY (10 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "kevin",
+    "text": "There are five principles I'd apply to any data or software business.",
+    "chapter": "SEGMENT 4: FIVE PRINCIPLES FOR B2B PLATFORM STRATEGY (10 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Let's talk about the competitive dynamics. What happens when multiple data providers are all trying to be the embedded intelligence layer in the same agency platform?",
+    "chapter": "SEGMENT 5: COMPETITIVE DYNAMICS AND MULTI-AGENT ECOSYSTEMS (5 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "kevin",
+    "text": "This is where it gets really interesting, and it's where the multi-agent architecture concepts from our last episode come directly into play. Imagine an agency platform where the consumer insights come from an agent powered by GWI, the media measurement comes from an agent powered by Nielsen, and the social listening comes from an agent powered by Brandwatch. Each agent is a specialist that contributes its unique intelligence to the agency's overall platform.",
+    "chapter": "SEGMENT 5: COMPETITIVE DYNAMICS AND MULTI-AGENT ECOSYSTEMS (5 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "What about the risk of disintermediation from the other direction? What if the LLM providers themselves, OpenAI, Anthropic, Google, start offering consumer insights directly by training on publicly available data?",
+    "chapter": "SEGMENT 6: DEFENDING AGAINST LLM DISRUPTION AND THE PE CONNECTION (5 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "kevin",
+    "text": "This is the existential question for every data company, and the honest answer is that the risk is real but the timing and magnitude are uncertain.",
+    "chapter": "SEGMENT 6: DEFENDING AGAINST LLM DISRUPTION AND THE PE CONNECTION (5 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Last question. How does all of this connect to the PE value creation framework we discussed in Episode 1?",
+    "chapter": "SEGMENT 6: DEFENDING AGAINST LLM DISRUPTION AND THE PE CONNECTION (5 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "kevin",
+    "text": "Directly. Platform power dynamics are fundamentally about building and protecting competitive moats, which is one of the key drivers of multiple expansion at exit.",
+    "chapter": "SEGMENT 6: DEFENDING AGAINST LLM DISRUPTION AND THE PE CONNECTION (5 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "Kevin, this has been a masterclass in platform strategy. In our next episode, we're diving into AI-native product management, how the role of the product manager is fundamentally changing when AI is embedded in every workflow. See you then.",
+    "chapter": "SEGMENT 6: DEFENDING AGAINST LLM DISRUPTION AND THE PE CONNECTION (5 minutes)",
+    "file": "0018.mp3"
+  }
+]

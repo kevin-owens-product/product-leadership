@@ -1,0 +1,772 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to Claude Code Mastery. I'm Alex, and today we're exploring one of Claude Code's most powerful capabilities: searching and understanding codebases.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jamie",
+    "text": "I'm Jamie, and I'm really excited about this one. I often get thrown into unfamiliar codebases at work, and anything that helps me ramp up faster is gold.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "That's exactly what we're covering. By the end of this episode, you'll be able to quickly find anything in any codebase and understand how unfamiliar systems work.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jamie",
+    "text": "Before we dive into techniques, why is search such a big deal?",
+    "chapter": "SEGMENT 1: WHY SEARCH MATTERS (4 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "Think about how much of development is actually finding things. Finding where a bug originates. Finding where a feature is implemented. Finding all the places you need to change for a refactor.",
+    "chapter": "SEGMENT 1: WHY SEARCH MATTERS (4 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jamie",
+    "text": "When you put it that way, I probably spend more time searching than writing new code.",
+    "chapter": "SEGMENT 1: WHY SEARCH MATTERS (4 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Most developers do. Studies suggest developers spend 60 to 70 percent of their time reading and understanding code, not writing it. Any tool that accelerates that understanding is a huge productivity boost.",
+    "chapter": "SEGMENT 1: WHY SEARCH MATTERS (4 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jamie",
+    "text": "And Claude can help with that understanding, not just finding text.",
+    "chapter": "SEGMENT 1: WHY SEARCH MATTERS (4 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Exactly. Claude doesn't just locate code. It explains what it found. That combination of search plus explanation is incredibly powerful.",
+    "chapter": "SEGMENT 1: WHY SEARCH MATTERS (4 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jamie",
+    "text": "Let's start with Grep. We covered the basics, but what are some advanced patterns?",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "The key thing to understand about Grep is that it searches file contents using regular expressions. The pattern you provide can be simple text or a complex regex.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "jamie",
+    "text": "Give me some practical examples.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Sure. To find all function definitions in JavaScript, you could search for \"function space backslash w plus.\" That matches \"function\" followed by a space and one or more word characters, which would be the function name.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "jamie",
+    "text": "And that works across all JS files?",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "Right. You can also filter by file type. Grep has a type parameter, so you can say type equals \"js\" to only search JavaScript files. Or use glob patterns to search specific directories.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "jamie",
+    "text": "What about finding class definitions?",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "For classes in JavaScript or TypeScript, search for \"class space backslash w plus.\" In Python, look for \"class space backslash w plus colon.\" The pattern adapts to the language's syntax.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "jamie",
+    "text": "How do I find usages of a specific function?",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "Search for the function name followed by an open parenthesis. So \"fetchUser backslash open paren\" would find everywhere fetchUser is called. The backslash escapes the parenthesis as a literal character.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "jamie",
+    "text": "These regex patterns take some getting used to.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "They do, but here's the good news: you usually don't have to write them yourself. Just tell Claude \"find all calls to the fetchUser function\" and it will construct the appropriate grep pattern.",
+    "chapter": "SEGMENT 2: GREP PATTERNS FOR CONTENT SEARCH (5 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "jamie",
+    "text": "What about Glob for finding files? What patterns should I know?",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "The most useful glob patterns use the double star, which means any directory depth. \"Star star slash star dot tsx\" finds all TSX files anywhere in the project.",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "jamie",
+    "text": "What if I want files in a specific folder?",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "Add the folder prefix. \"Src slash components slash star star slash star dot tsx\" finds all TSX files under the components folder, including nested subdirectories.",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "jamie",
+    "text": "Can I combine patterns?",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "Yes! You can use braces for alternatives. \"Star star slash star dot curly brace ts comma tsx close brace\" finds both TypeScript and TSX files. Great for searching all TypeScript code at once.",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "jamie",
+    "text": "What about excluding folders like node modules?",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "Glob doesn't have built-in exclusion, but Claude automatically excludes common folders like node_modules, .git, and build outputs. It knows those aren't typically what you're looking for.",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "jamie",
+    "text": "Smart defaults.",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "And if you need to search those folders specifically, you can ask explicitly. \"Search in node_modules for\" will override the default exclusion.",
+    "chapter": "SEGMENT 3: GLOB PATTERNS FOR FILE DISCOVERY (4 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "jamie",
+    "text": "I've heard about the Explore agent. What is that?",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "The Explore agent is a specialized mode within Claude Code designed for complex search tasks. When you have an open-ended question that might require searching in multiple places or following chains of logic, Explore is the right tool.",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "jamie",
+    "text": "How is it different from regular search?",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Regular Grep and Glob are one-shot searches. You ask for files or content matching a pattern, and you get results. Explore is iterative. It searches, analyzes results, searches again based on what it found, and builds up understanding.",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "jamie",
+    "text": "Like a human exploring a codebase?",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Exactly. If you asked a senior developer to understand how authentication works in a new codebase, they wouldn't do one search. They'd search, read some code, follow imports, search for related concepts, and piece it together.",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "jamie",
+    "text": "And Explore does that automatically?",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Right. You can specify how thorough you want the exploration. Quick for basic searches, medium for moderate exploration, very thorough for comprehensive analysis.",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "jamie",
+    "text": "When should I use Explore versus direct Grep?",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Use direct Grep when you know exactly what you're looking for. A specific function name, a particular error message, an exact string. Use Explore when you have a conceptual question or need to understand relationships.",
+    "chapter": "SEGMENT 4: THE EXPLORE AGENT (5 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "jamie",
+    "text": "Let's talk about jumping into unfamiliar code. What's your strategy?",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "I have a systematic approach. First, I ask Claude for a high-level overview. \"Give me an overview of this codebase architecture.\" This reads key files like README, package.json, and main entry points to establish the big picture.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "jamie",
+    "text": "Starting from the top.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Then I ask about the directory structure. \"What's the purpose of each top-level directory?\" This helps me understand where different types of code live.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "jamie",
+    "text": "Building a mental map.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "Third, I identify the entry points. \"Where does execution start?\" \"What's the main file?\" For web apps, I might ask \"how is routing set up\" to understand how URLs map to code.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "jamie",
+    "text": "Following the flow.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Finally, I trace specific features. I pick a feature I need to work on and ask Claude to walk me through it end to end. \"How does user login work from start to finish?\"",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "jamie",
+    "text": "That gives you depth in the area you need.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Right. You don't need to understand everything. Just the parts relevant to your current task.",
+    "chapter": "SEGMENT 5: UNDERSTANDING UNFAMILIAR CODEBASES (5 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "jamie",
+    "text": "What if the codebase doesn't have good documentation?",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Most don't, honestly. That's where Claude's ability to infer architecture from code is valuable. Ask questions like \"what design patterns is this project using\" or \"how is state management handled.\"",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "jamie",
+    "text": "It can recognize patterns from the code itself?",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "Yes. Claude can identify that a project is using MVC, or that it has a services layer, or that it follows a microservices architecture. It looks at file organization, naming conventions, and code structure.",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "jamie",
+    "text": "What about dependencies? How do I understand what external libraries are used?",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Ask Claude to summarize the dependencies. \"What are the main libraries this project uses and what are they for?\" It will read package.json or requirements.txt and explain each dependency.",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "jamie",
+    "text": "That's faster than googling each one.",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Much faster. And Claude can tell you how the project uses each library, not just what the library does in general.",
+    "chapter": "SEGMENT 6: ARCHITECTURE DISCOVERY (4 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "jamie",
+    "text": "One thing I always struggle with is finding where things are defined. Where does this function come from? What file has this component?",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "This is a perfect use case for Claude. \"Where is the UserProfile component defined?\" Claude will search for the definition and tell you the file and line number.",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "jamie",
+    "text": "And it can distinguish between definitions and usages?",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Exactly. Searching for \"UserProfile\" might find dozens of files that import or use it. Claude understands you want the definition, the file where it's declared and implemented.",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "jamie",
+    "text": "What about things that come from libraries?",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Claude will tell you that too. \"Where does useState come from?\" Claude knows it's from React and will explain that it's imported from the react package, not defined in your codebase.",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "jamie",
+    "text": "That context is helpful.",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "And if something is defined in your code but seems to shadow or wrap a library function, Claude will explain that relationship.",
+    "chapter": "SEGMENT 7: FINDING WHERE THINGS ARE DEFINED (4 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "jamie",
+    "text": "How do I trace how data moves through an application?",
+    "chapter": "SEGMENT 8: UNDERSTANDING DATA FLOW (4 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Data flow questions are great for Claude. Try \"how does user input from the login form reach the database?\" Claude will trace the path: form submission, API call, server handler, database operation.",
+    "chapter": "SEGMENT 8: UNDERSTANDING DATA FLOW (4 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "jamie",
+    "text": "Following the journey of data.",
+    "chapter": "SEGMENT 8: UNDERSTANDING DATA FLOW (4 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "You can also ask the reverse. \"Where does the user's profile data come from?\" Claude will trace backward from where it's displayed to where it originates.",
+    "chapter": "SEGMENT 8: UNDERSTANDING DATA FLOW (4 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "jamie",
+    "text": "That's useful for debugging data issues.",
+    "chapter": "SEGMENT 8: UNDERSTANDING DATA FLOW (4 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "Extremely useful. When data is wrong somewhere, you need to find where it went wrong. Tracing the flow helps you identify the problematic step.",
+    "chapter": "SEGMENT 8: UNDERSTANDING DATA FLOW (4 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "jamie",
+    "text": "What about finding everywhere something is used?",
+    "chapter": "SEGMENT 9: FINDING ALL USAGES (4 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "This is Claude's bread and butter. \"Show me everywhere the formatCurrency function is called.\" Claude will grep for usages and give you a list of files and locations.",
+    "chapter": "SEGMENT 9: FINDING ALL USAGES (4 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "jamie",
+    "text": "Can it show context around each usage?",
+    "chapter": "SEGMENT 9: FINDING ALL USAGES (4 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Yes. Grep can show lines before and after each match. Claude often does this automatically to give you context around each usage.",
+    "chapter": "SEGMENT 9: FINDING ALL USAGES (4 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "jamie",
+    "text": "That helps understand how something is being used, not just where.",
+    "chapter": "SEGMENT 9: FINDING ALL USAGES (4 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "Right. And you can ask follow-up questions. \"Show me the different ways formatCurrency is called\" and Claude will analyze the usages and categorize them.",
+    "chapter": "SEGMENT 9: FINDING ALL USAGES (4 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "jamie",
+    "text": "What if my question doesn't map to a simple text search?",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "That's when you describe the concept and let Claude figure out the search strategy. \"How does this app handle authentication failures?\" Claude will search for error handling, authentication, login failure, and related terms.",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "jamie",
+    "text": "It translates concepts into searches.",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "Exactly. And it combines multiple searches. Authentication failures might be handled in the auth service, in the API middleware, in the frontend error handler. Claude will check all these places.",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "jamie",
+    "text": "What if Claude's first search doesn't find what I need?",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "Guide it with more information. \"That's the login logic, but I'm looking for where session expiration is handled.\" Claude will adjust its search based on your feedback.",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "jamie",
+    "text": "The conversation refines the search.",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "Exactly. It's iterative. You and Claude work together to narrow in on what you need.",
+    "chapter": "SEGMENT 10: SEARCH STRATEGIES FOR COMPLEX QUESTIONS (5 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "jamie",
+    "text": "Do searches ever get slow?",
+    "chapter": "SEGMENT 11: PERFORMANCE CONSIDERATIONS (4 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "Usually searches are fast, even in large codebases. Grep is optimized to be quick, and Glob is just looking at file paths. The Explore agent can take longer because it's doing multiple searches.",
+    "chapter": "SEGMENT 11: PERFORMANCE CONSIDERATIONS (4 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "jamie",
+    "text": "What if I'm searching something huge?",
+    "chapter": "SEGMENT 11: PERFORMANCE CONSIDERATIONS (4 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Be more specific. Instead of searching the entire codebase, narrow to a specific directory. \"Search in the api folder for rate limiting\" is faster than searching everywhere.",
+    "chapter": "SEGMENT 11: PERFORMANCE CONSIDERATIONS (4 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "jamie",
+    "text": "Constraints speed things up.",
+    "chapter": "SEGMENT 11: PERFORMANCE CONSIDERATIONS (4 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "Also, Claude caches some context during a session. If you're doing repeated searches in the same area, later searches can be faster.",
+    "chapter": "SEGMENT 11: PERFORMANCE CONSIDERATIONS (4 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "jamie",
+    "text": "What are your go-to tips for effective searching?",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "First, start broad and narrow down. Ask a general question, see what Claude finds, then focus on the most relevant results.",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "jamie",
+    "text": "Funnel approach.",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Second, use specific names when you have them. Searching for \"handleAuth\" is more precise than searching for \"authentication handling.\"",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "jamie",
+    "text": "Proper nouns over common words.",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Third, combine conceptual questions with specific searches. \"How does caching work?\" followed by \"show me the cache implementation in services/cache.ts.\"",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "jamie",
+    "text": "Mix high-level and low-level.",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "And fourth, ask Claude to explain what it found. Don't just take the search results. Ask \"explain how this caching code works\" after finding it.",
+    "chapter": "SEGMENT 12: PRACTICAL TIPS (4 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "jamie",
+    "text": "Let's give listeners something to practice.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Here's a good exercise. Pick a codebase you're not fully familiar with. Ask Claude three things. First, \"give me an architecture overview of this project.\" Second, \"find where the main business logic lives.\" Third, \"trace how a specific feature works end to end.\"",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "jamie",
+    "text": "Three questions that build understanding.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "Do this with different projects to practice. Each codebase will teach you something about how Claude explores and explains.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "jamie",
+    "text": "Great episode on search and exploration. What's next?",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "alex",
+    "text": "Episode five is all about Git workflow and collaboration. We'll cover how Claude helps with commits, pull requests, code review, and working with your team.",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "jamie",
+    "text": "Version control with AI assistance.",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "Exactly. It's one of the most practical daily workflows you'll develop. See you there!",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "jamie",
+    "text": "Happy exploring!",
+    "chapter": "SEGMENT 14: WHAT'S COMING NEXT (3 minutes)",
+    "file": "0109.mp3"
+  }
+]

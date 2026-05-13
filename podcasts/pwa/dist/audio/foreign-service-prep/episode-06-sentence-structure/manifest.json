@@ -1,0 +1,975 @@
+[
+  {
+    "index": 0,
+    "speaker": "maya",
+    "text": "Welcome to the final episode of \"The Diplomat's Edge.\" I'm Maya Torres, and over these six episodes, we've covered situational judgment, history, geography, politics, and grammar. Today, we bring it all together with sentence structure and style.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jordan",
+    "text": "I'm Jordan Hayes. Grammar is about following rules; style is about making choices. Both matter for the FSOT, and both matter enormously for your career as a diplomat. Today, we'll cover how to write sentences that are clear, effective, and professional.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "maya",
+    "text": "This is about the essay portion of the test?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jordan",
+    "text": "Partly, yes. But also about all the writing you'll do throughout your career. Cables, briefings, speeches, reports - good sentence structure and style make you a more effective diplomat.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "maya",
+    "text": "Let's finish strong.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "maya",
+    "text": "Let's start with the basics. What are the different types of sentences?",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "jordan",
+    "text": "There are four types based on structure. A simple sentence has one independent clause - one subject-verb combination that can stand alone. \"The ambassador arrived.\"",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "maya",
+    "text": "That's clear but kind of dull.",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "jordan",
+    "text": "Exactly. That's why we need variety. A compound sentence joins two independent clauses with a coordinating conjunction - and, but, or, nor, for, so, yet. \"The ambassador arrived, and the negotiations began.\"",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "maya",
+    "text": "Two equal ideas connected.",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "jordan",
+    "text": "Right. A complex sentence has one independent clause and at least one dependent clause. \"When the ambassador arrived, the negotiations began.\" The \"when\" clause can't stand alone - it depends on the main clause.",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "maya",
+    "text": "And the fourth type?",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "jordan",
+    "text": "A compound-complex sentence combines both - multiple independent clauses and at least one dependent clause. \"When the ambassador arrived, the negotiations began, but the parties remained far apart.\" You have the \"when\" dependent clause plus two independent clauses joined by \"but.\"",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "maya",
+    "text": "Why does variety matter?",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "jordan",
+    "text": "Variety creates rhythm and maintains reader interest. A string of simple sentences sounds choppy. \"The meeting started. The delegates sat down. The chairman spoke.\" That's monotonous.",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "maya",
+    "text": "And too many complex sentences?",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "jordan",
+    "text": "Can be exhausting. Dense, complicated prose is hard to follow. The best writing mixes sentence types and lengths. Short sentences for impact. Longer sentences for explanation and nuance.",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "maya",
+    "text": "How do I develop this skill?",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "jordan",
+    "text": "Read good writing and pay attention to rhythm. When you're editing your own work, read it aloud. Does it flow? Do some sentences seem to crash into others? That's a signal to vary your structure.",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "maya",
+    "text": "What about sentence length?",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "jordan",
+    "text": "In diplomatic writing, aim for an average of 15-20 words per sentence. But that's an average - you want some shorter (8-10 words) and some longer (25-30) to create variety. Avoid sentences over 35 words unless absolutely necessary.",
+    "chapter": "SEGMENT 1: SENTENCE TYPES AND VARIETY (10 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "maya",
+    "text": "Let's talk about clauses and common errors.",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "jordan",
+    "text": "An independent clause can stand alone as a sentence. A dependent clause cannot - it starts with a subordinating word like \"because,\" \"when,\" \"although,\" \"if,\" \"that,\" \"which,\" or \"who.\"",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "maya",
+    "text": "So a dependent clause is a fragment if it's left alone?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "jordan",
+    "text": "Exactly. \"Because the summit was postponed.\" That's a fragment - it makes us wait for something that never comes. It needs to attach to an independent clause: \"Tensions increased because the summit was postponed.\"",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "maya",
+    "text": "Are fragments ever okay?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "jordan",
+    "text": "In very informal writing or for deliberate effect, sometimes. But on the FSOT and in diplomatic writing? No. Complete sentences only.",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "maya",
+    "text": "How do I spot fragments?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "jordan",
+    "text": "Look for sentences that start with subordinating conjunctions (because, although, when, while, if, since, unless) or relative pronouns (which, that, who) without a main clause to attach to. Also watch for \"-ing\" phrases without a main verb. \"The delegates arriving at the conference.\" That's a fragment - there's no main verb.",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "maya",
+    "text": "What's the fix?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "jordan",
+    "text": "Add a main verb: \"The delegates were arriving at the conference.\" Or attach it to a main clause: \"The delegates arriving at the conference represented twelve nations.\"",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "maya",
+    "text": "What about run-on sentences?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "jordan",
+    "text": "A run-on fuses two independent clauses without proper punctuation. \"The meeting ended the delegates left.\" That's a run-on - technically called a \"fused sentence.\"",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "maya",
+    "text": "How do you fix it?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "jordan",
+    "text": "Several ways. Add a period: \"The meeting ended. The delegates left.\" Add a semicolon: \"The meeting ended; the delegates left.\" Add a comma and conjunction: \"The meeting ended, and the delegates left.\" Or make one clause dependent: \"When the meeting ended, the delegates left.\"",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "maya",
+    "text": "What about comma splices?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "jordan",
+    "text": "A comma splice joins two independent clauses with just a comma - no conjunction. \"The meeting ended, the delegates left.\" Same fixes apply: period, semicolon, comma with conjunction, or subordination.",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "maya",
+    "text": "Is there ever a time for a semicolon between independent clauses?",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "jordan",
+    "text": "Yes, when the clauses are closely related and you want to emphasize that connection. \"The proposal was rejected; negotiations would have to restart from the beginning.\" But don't overuse semicolons - they can feel pretentious if overdone.",
+    "chapter": "SEGMENT 2: CLAUSES AND FRAGMENTS (10 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "maya",
+    "text": "Let's talk about style. Wordiness seems like a common problem.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "jordan",
+    "text": "It's epidemic in government writing. Bureaucratic prose is famously bloated. But the best diplomatic writers are concise. Every word should earn its place.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "maya",
+    "text": "What are the main causes of wordiness?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "jordan",
+    "text": "First: redundant pairs. \"Each and every,\" \"first and foremost,\" \"various and sundry,\" \"null and void.\" Pick one word, not two that mean the same thing.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "maya",
+    "text": "What else?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "jordan",
+    "text": "Empty phrases that add words without adding meaning. \"Due to the fact that\" just means \"because.\" \"In the event that\" means \"if.\" \"At this point in time\" means \"now.\" \"In order to\" usually can just be \"to.\"",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "maya",
+    "text": "Those are everywhere in formal writing.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "jordan",
+    "text": "They are, and they're almost always unnecessary. Here's a list of substitutions:",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "maya",
+    "text": "That last one - can you give an example?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "jordan",
+    "text": "\"There are three issues that need to be addressed.\" Better: \"Three issues need to be addressed.\" Or even better: \"We must address three issues.\" You eliminate \"there are\" and \"that\" and make the sentence more direct.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "maya",
+    "text": "What about weak verbs?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "jordan",
+    "text": "This is huge. Weak verbs like \"is,\" \"are,\" \"was,\" \"were,\" and \"have\" often indicate wordiness. \"The proposal was rejected by the committee\" is passive. \"The committee rejected the proposal\" is stronger and shorter.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "maya",
+    "text": "Is passive voice always wrong?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "jordan",
+    "text": "Not always, but it's often weaker. Use active voice as your default. The doer of the action should usually be the subject of the sentence. Passive voice is appropriate when the receiver of action is more important than the doer, or when you don't know or want to conceal who did something.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "maya",
+    "text": "Like \"Mistakes were made\"?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "jordan",
+    "text": "laughs Classic evasive passive. In diplomatic writing, you sometimes need that ambiguity. But most of the time, active voice is clearer and more powerful.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "maya",
+    "text": "What about nominalizations?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "jordan",
+    "text": "Great vocabulary word. Nominalization is turning verbs into nouns. \"Make a decision\" instead of \"decide.\" \"Conduct an investigation\" instead of \"investigate.\" \"Provide assistance\" instead of \"assist\" or \"help.\"",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "maya",
+    "text": "So use the verb form instead?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "jordan",
+    "text": "Usually. \"We must make a decision on this matter\" → \"We must decide this.\" Shorter, punchier, clearer.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "maya",
+    "text": "How much shorter should I try to make things?",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "jordan",
+    "text": "When editing, ask yourself: \"Can I say this in fewer words without losing meaning?\" Often the answer is yes. Cut your word count by 10-20% on revision and your writing will almost always improve.",
+    "chapter": "SEGMENT 3: ELIMINATING WORDINESS (12 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "maya",
+    "text": "Beyond cutting words, how do I make sentences clearer?",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "jordan",
+    "text": "Several principles. First: Put the subject and verb close together. The subject is who or what the sentence is about; the verb is what they're doing. Don't separate them with lots of modifiers.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "maya",
+    "text": "Example?",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "jordan",
+    "text": "\"The ambassador, who had served for fifteen years in various posts throughout Asia and Africa and who was widely respected for her negotiating skills, arrived.\" By the time we get to \"arrived,\" we've almost forgotten who we're talking about.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "maya",
+    "text": "How do you fix it?",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "jordan",
+    "text": "Move the core statement first: \"The ambassador arrived. She had served for fifteen years in various posts throughout Asia and Africa and was widely respected for her negotiating skills.\" Or: \"The veteran ambassador, widely respected for her negotiating skills, arrived after fifteen years in Asia and Africa.\"",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "maya",
+    "text": "Keep the main point up front.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "jordan",
+    "text": "Exactly. Another principle: Use concrete language over abstract language. \"The situation requires action\" is vague. What situation? What action? \"The budget crisis requires cuts\" is clearer. \"The budget crisis requires a 10% reduction in staff\" is clearest.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "maya",
+    "text": "Be specific.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "jordan",
+    "text": "Yes. Specifics are more credible and more useful. A third principle: Define terms when necessary. Jargon and acronyms can confuse readers who aren't specialists.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "maya",
+    "text": "Even on the FSOT?",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "jordan",
+    "text": "The FSOT assumes a general audience. If you use a term that might not be universally understood, briefly explain it. In diplomatic writing, always consider your audience. What do they know? What do they need to know?",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "maya",
+    "text": "What about sentence emphasis?",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "jordan",
+    "text": "The most emphatic positions in a sentence are the beginning and the end. Put important information there. The middle is where qualifications and minor details go.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "maya",
+    "text": "So \"The negotiations failed despite extensive preparation\" puts emphasis on failure, but \"Despite extensive preparation, the negotiations failed\" emphasizes the preparation?",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "jordan",
+    "text": "Exactly. Both are grammatically correct, but they have different emphasis. Choose based on what you want the reader to remember.",
+    "chapter": "SEGMENT 4: CLARITY AND PRECISION (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "maya",
+    "text": "Let's talk about tone. What's appropriate for diplomatic writing?",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "jordan",
+    "text": "Diplomatic writing is formal but not stuffy. You want to sound professional, credible, and clear. Avoid slang, contractions (usually), and overly casual language. But also avoid pompous or bureaucratic language that obscures meaning.",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "maya",
+    "text": "What about on the FSOT essay?",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "jordan",
+    "text": "The essay tests whether you can write clear, well-organized prose on a topic. You want a formal academic tone. Use standard English, complete sentences, varied structure. Don't try to be funny or too casual, but don't be so stiff that you sound like a robot.",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "maya",
+    "text": "How formal is too formal?",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "jordan",
+    "text": "If you find yourself using lots of Latin phrases, sentences over 40 words, or vocabulary that most educated readers wouldn't know, you've gone too far. The goal is clarity, not showing off.",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "maya",
+    "text": "What about the word \"I\"?",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "jordan",
+    "text": "In essays, \"I\" is generally acceptable when you're expressing your opinion. \"I believe the evidence suggests...\" is fine. Avoid overusing it, and don't start too many sentences with \"I,\" but don't tie yourself in knots avoiding it either.",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "maya",
+    "text": "What words should I avoid?",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "jordan",
+    "text": "Avoid very informal words: \"gonna,\" \"gotta,\" \"kind of,\" \"like\" (as filler). Avoid very strong opinions words unless you're prepared to back them up: \"obviously,\" \"clearly,\" \"undoubtedly\" - these can make weak arguments seem weaker.",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "maya",
+    "text": "What about hedging language?",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "jordan",
+    "text": "Hedging - \"perhaps,\" \"possibly,\" \"might,\" \"may\" - is sometimes appropriate when you're genuinely uncertain. But too much hedging undermines confidence. \"This might possibly suggest that there could perhaps be a concern\" - that's too hedged. Either commit to the concern or explain the uncertainty.",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "maya",
+    "text": "How do I develop my ear for appropriate tone?",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "jordan",
+    "text": "Read quality publications. The Economist, Foreign Affairs, major newspapers. Pay attention to how professional writers handle tone. They're formal but accessible. Clear but nuanced. Confident but not arrogant.",
+    "chapter": "SEGMENT 5: TONE AND REGISTER (10 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "maya",
+    "text": "Let's talk specifically about the FSOT essay. What do readers expect?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "jordan",
+    "text": "The essay is timed - you have about 30 minutes to write on an assigned topic. You're being evaluated on your ability to construct a coherent argument, support it with evidence or reasoning, and express it clearly.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "maya",
+    "text": "What's the basic structure?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "jordan",
+    "text": "Classic five-paragraph essay structure works well. Introduction with thesis, three body paragraphs with supporting points, conclusion. It's not the only structure, but it's reliable under time pressure.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "maya",
+    "text": "How long should it be?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "jordan",
+    "text": "Aim for 300-500 words. Long enough to develop your argument; short enough to write in the time allowed. Quality matters more than quantity.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "maya",
+    "text": "What makes a good introduction?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "jordan",
+    "text": "Start by engaging with the prompt - show you understand what's being asked. Then present your thesis - your main argument or position. The thesis should be specific enough to guide the essay but not so narrow that you can't develop it.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "maya",
+    "text": "Example?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "jordan",
+    "text": "If the prompt asks whether international organizations are effective, don't just say \"Yes, they are\" or \"No, they aren't.\" A better thesis: \"International organizations are most effective when they focus on technical cooperation rather than high-politics security issues, as demonstrated by the success of specialized agencies compared to the Security Council.\"",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "maya",
+    "text": "That gives you something to argue.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "jordan",
+    "text": "Exactly. It's specific, it's debatable, and it sets up your body paragraphs.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "maya",
+    "text": "What about body paragraphs?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "jordan",
+    "text": "Each body paragraph should make one main point that supports your thesis. Start with a topic sentence that states the point. Develop it with evidence, examples, or reasoning. End by connecting back to your thesis.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "maya",
+    "text": "What counts as evidence?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "jordan",
+    "text": "Historical examples, current events, logical reasoning, hypothetical illustrations. You probably won't have time for deep research in a timed essay, but you can draw on your knowledge. \"For example, the WHO's eradication of smallpox demonstrates that technical cooperation can achieve remarkable results.\"",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "maya",
+    "text": "And conclusions?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "jordan",
+    "text": "Don't just repeat your introduction. Synthesize what you've argued. Point to implications. A good conclusion leaves the reader with something to think about. \"If policymakers recognize these patterns, they might redirect resources toward specialized cooperation, achieving more through modest goals than through ambitious but unrealistic agendas.\"",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "maya",
+    "text": "Any time management tips?",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "jordan",
+    "text": "Spend 5 minutes planning before you start writing. Outline your thesis and main points. Then write for 20 minutes. Save 5 minutes at the end to review and correct errors. Don't skip the planning or review phases.",
+    "chapter": "SEGMENT 6: ESSAY STRUCTURE (10 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "maya",
+    "text": "What are the most common style errors you see?",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0111.mp3"
+  },
+  {
+    "index": 112,
+    "speaker": "jordan",
+    "text": "First: Vague thesis statements. \"This essay will discuss...\" No - just make your argument. \"There are both advantages and disadvantages\" - that's not a thesis; that's saying you haven't decided what you think.",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0112.mp3"
+  },
+  {
+    "index": 113,
+    "speaker": "maya",
+    "text": "What else?",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0113.mp3"
+  },
+  {
+    "index": 114,
+    "speaker": "jordan",
+    "text": "Lack of transitions. Paragraphs should connect to each other. Use transitional phrases: \"Furthermore,\" \"However,\" \"In contrast,\" \"Similarly,\" \"More importantly.\" Don't overdo it, but do signal how ideas relate.",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0114.mp3"
+  },
+  {
+    "index": 115,
+    "speaker": "maya",
+    "text": "What about paragraph length?",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0115.mp3"
+  },
+  {
+    "index": 116,
+    "speaker": "jordan",
+    "text": "Avoid very long paragraphs (more than 8-10 sentences) or very short ones (1-2 sentences). Each paragraph should develop one idea fully. If you're constantly starting new paragraphs, you're not developing your points. If your paragraphs run half a page, you're probably combining multiple ideas.",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0116.mp3"
+  },
+  {
+    "index": 117,
+    "speaker": "maya",
+    "text": "Any other common problems?",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0117.mp3"
+  },
+  {
+    "index": 118,
+    "speaker": "jordan",
+    "text": "Starting sentences the same way. \"The UN does this. The UN does that. The UN also does something else.\" Vary your sentence openings. Use the organization's name once, then \"it,\" \"the organization,\" \"this body,\" etc.",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0118.mp3"
+  },
+  {
+    "index": 119,
+    "speaker": "maya",
+    "text": "What about very long sentences?",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0119.mp3"
+  },
+  {
+    "index": 120,
+    "speaker": "jordan",
+    "text": "If you can't easily say a sentence in one breath, it's probably too long. Break it up. Especially in a timed essay, simpler sentence structures reduce error risk.",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0120.mp3"
+  },
+  {
+    "index": 121,
+    "speaker": "maya",
+    "text": "And clichés?",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0121.mp3"
+  },
+  {
+    "index": 122,
+    "speaker": "jordan",
+    "text": "Avoid them. \"At the end of the day,\" \"the bottom line,\" \"it goes without saying,\" \"needless to say,\" \"in today's world.\" These phrases add nothing and signal lazy thinking. Find fresh ways to express your ideas.",
+    "chapter": "SEGMENT 7: COMMON STYLE ERRORS (8 minutes)",
+    "file": "0122.mp3"
+  },
+  {
+    "index": 123,
+    "speaker": "maya",
+    "text": "We've covered so much in these six episodes. Any final advice?",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0123.mp3"
+  },
+  {
+    "index": 124,
+    "speaker": "jordan",
+    "text": "Let me summarize key takeaways across all our episodes.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0124.mp3"
+  },
+  {
+    "index": 125,
+    "speaker": "maya",
+    "text": "How should I prepare in the weeks before the test?",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0125.mp3"
+  },
+  {
+    "index": 126,
+    "speaker": "jordan",
+    "text": "Practice, practice, practice. Take timed practice tests under realistic conditions. For the essay, write practice essays on random prompts - time yourself strictly.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0126.mp3"
+  },
+  {
+    "index": 127,
+    "speaker": "maya",
+    "text": "Where can I find practice materials?",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0127.mp3"
+  },
+  {
+    "index": 128,
+    "speaker": "jordan",
+    "text": "The State Department website has sample questions. There are commercial prep materials available. Practice with any standardized test prep materials for grammar - SAT, ACT, GRE - the principles are the same.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0128.mp3"
+  },
+  {
+    "index": 129,
+    "speaker": "maya",
+    "text": "Any day-of-test advice?",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0129.mp3"
+  },
+  {
+    "index": 130,
+    "speaker": "jordan",
+    "text": "Get a good night's sleep. Eat a proper breakfast. Arrive early so you're not stressed. During the test, pace yourself - don't spend too long on any one question. Trust your preparation.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0130.mp3"
+  },
+  {
+    "index": 131,
+    "speaker": "maya",
+    "text": "And if someone doesn't pass the first time?",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0131.mp3"
+  },
+  {
+    "index": 132,
+    "speaker": "jordan",
+    "text": "The FSOT has a low pass rate - many strong candidates take it more than once. Each attempt teaches you something. Analyze what went wrong, address those weaknesses, and try again. Persistence is itself a quality the Foreign Service values.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0132.mp3"
+  },
+  {
+    "index": 133,
+    "speaker": "maya",
+    "text": "Jordan, this has been an incredible series. Thank you for sharing your expertise.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0133.mp3"
+  },
+  {
+    "index": 134,
+    "speaker": "jordan",
+    "text": "It's been my pleasure, Maya. To everyone listening: you're preparing to join a noble profession. Diplomats have shaped history and will continue to do so. The work is demanding but deeply meaningful.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0134.mp3"
+  },
+  {
+    "index": 135,
+    "speaker": "maya",
+    "text": "Any final words?",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0135.mp3"
+  },
+  {
+    "index": 136,
+    "speaker": "jordan",
+    "text": "Remember why you want to do this. The Foreign Service isn't just a job - it's a calling. Keep that motivation in mind when the studying gets hard. And remember: every diplomat currently serving passed the same test you're preparing for. You can do this.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0136.mp3"
+  },
+  {
+    "index": 137,
+    "speaker": "maya",
+    "text": "Thank you all for listening to \"The Diplomat's Edge.\" Good luck on your FSOT, and maybe we'll see you in the Foreign Service.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0137.mp3"
+  },
+  {
+    "index": 138,
+    "speaker": "jordan",
+    "text": "Good luck. See you on the other side.",
+    "chapter": "SEGMENT 8: FINAL THOUGHTS AND PREPARATION (10 minutes)",
+    "file": "0138.mp3"
+  }
+]

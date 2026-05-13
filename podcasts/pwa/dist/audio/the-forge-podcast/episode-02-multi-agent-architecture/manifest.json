@@ -1,0 +1,163 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to The Forge Podcast. In Episode 1, we covered how PE firms create value through technology transformation. Today we're going deep on one of the most important technical topics in enterprise software right now: multi-agent architecture. Kevin, let's start with the basics. What do we mean when we say \"multi-agent\" and why is this different from just building a chatbot?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "kevin",
+    "text": "Great starting point. A single AI agent is essentially an LLM with some tools and a system prompt that can take actions in the world. A chatbot answers questions. An agent can read data, call APIs, make decisions, and execute workflows. The leap from a single agent to a multi-agent system is the same conceptual leap as going from a single developer working alone to a coordinated team of specialists.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "So what does this look like in practice? Give me a concrete enterprise example.",
+    "chapter": "SEGMENT 1: MULTI-AGENT SYSTEMS IN PRACTICE (5 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "kevin",
+    "text": "Let's use accounts payable automation as an example, since it's a domain I've been deep in. In a traditional AP workflow, an invoice arrives, someone manually enters the data, someone matches it to a purchase order, someone routes it for approval, someone handles exceptions, and someone schedules the payment. That's five to seven distinct functions.",
+    "chapter": "SEGMENT 1: MULTI-AGENT SYSTEMS IN PRACTICE (5 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "How do you decide where to draw the boundaries between agents? What makes something one agent versus two?",
+    "chapter": "SEGMENT 2: AGENT BOUNDARY DESIGN (7 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "kevin",
+    "text": "This is one of the most important design decisions in multi-agent architecture, and I have a framework for thinking about it. There are four criteria.",
+    "chapter": "SEGMENT 2: AGENT BOUNDARY DESIGN (7 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Okay, so you've got your agents defined. How do they actually talk to each other? What's the orchestration layer?",
+    "chapter": "SEGMENT 3: ORCHESTRATION PATTERNS (8 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "kevin",
+    "text": "Orchestration is the central nervous system of a multi-agent architecture, and getting it right is the difference between a system that works and one that falls apart. There are three main orchestration patterns, and most enterprise systems use all three depending on the query type.",
+    "chapter": "SEGMENT 3: ORCHESTRATION PATTERNS (8 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "What about the shared context? If agents are independent, how do they know what the other agents have done or discovered?",
+    "chapter": "SEGMENT 4: SHARED MEMORY ARCHITECTURE (7 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "kevin",
+    "text": "This is where shared memory architecture comes in, and it's the part that most people underestimate. There are three types of memory in a multi-agent system.",
+    "chapter": "SEGMENT 4: SHARED MEMORY ARCHITECTURE (7 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Let's talk about the LLM layer. In a multi-agent system, are all agents using the same model?",
+    "chapter": "SEGMENT 5: LLM LAYER AND MODEL ROUTING (6 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "kevin",
+    "text": "Not necessarily, and this is an important optimization. Different agents have different computational needs and different latency requirements.",
+    "chapter": "SEGMENT 5: LLM LAYER AND MODEL ROUTING (6 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "What about guardrails? If these agents are operating autonomously, how do you prevent them from doing something wrong or dangerous?",
+    "chapter": "SEGMENT 6: GUARDRAILS AND SAFETY (7 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "kevin",
+    "text": "Guardrails are non-negotiable in enterprise multi-agent systems, and they need to operate at multiple levels.",
+    "chapter": "SEGMENT 6: GUARDRAILS AND SAFETY (7 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "How does this all connect to the MCP, the Model Context Protocol, that's gaining adoption right now?",
+    "chapter": "SEGMENT 7: MODEL CONTEXT PROTOCOL (5 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "kevin",
+    "text": "MCP is really interesting because it standardizes how AI agents connect to external tools and data sources. Think of it like USB for AI agents. Before USB, every peripheral had its own proprietary connector. MCP does the same thing for agent-to-tool connections.",
+    "chapter": "SEGMENT 7: MODEL CONTEXT PROTOCOL (5 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Let's talk about implementation. If someone is starting from a single agent and wants to scale to ten, what's the right sequence?",
+    "chapter": "SEGMENT 8: IMPLEMENTATION ROADMAP AND COSTS (7 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "kevin",
+    "text": "The sequence matters enormously, and most teams get it wrong by jumping straight to building new agents before the infrastructure is ready. Here's the approach I recommend, broken into four phases over about 24 weeks.",
+    "chapter": "SEGMENT 8: IMPLEMENTATION ROADMAP AND COSTS (7 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "What does this cost to build and run?",
+    "chapter": "SEGMENT 8: IMPLEMENTATION ROADMAP AND COSTS (7 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "kevin",
+    "text": "The build cost depends heavily on your existing infrastructure, but for a mid-size B2B SaaS company with a decent engineering team, you're looking at 3 to 5 senior engineers dedicated for about 6 months for the foundation and core agents, plus ongoing work for the advanced phases.",
+    "chapter": "SEGMENT 8: IMPLEMENTATION ROADMAP AND COSTS (7 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "One more question. What's the biggest mistake you see teams make when building multi-agent systems?",
+    "chapter": "SEGMENT 8: IMPLEMENTATION ROADMAP AND COSTS (7 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "kevin",
+    "text": "The number one mistake is building agents before building infrastructure. Teams get excited about the AI capabilities and start building specialized agents immediately, but they skip the shared infrastructure layer, the gateway, the data access SDK, the memory stores, the guardrails. What happens is each agent team builds their own bespoke integrations, their own data access patterns, their own memory solutions. Within six months, you have 8 agents that each work individually but can't collaborate, can't share context, and cost 3x more to maintain than they should.",
+    "chapter": "SEGMENT 8: IMPLEMENTATION ROADMAP AND COSTS (7 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Fantastic. Kevin, this has been an incredibly detailed look at multi-agent architecture. In our next episode, we're going to talk about something you've been calling platform power dynamics, how data companies protect their moats when their customers and partners are trying to commoditize them. See you then.",
+    "chapter": "SEGMENT 8: IMPLEMENTATION ROADMAP AND COSTS (7 minutes)",
+    "file": "0022.mp3"
+  }
+]

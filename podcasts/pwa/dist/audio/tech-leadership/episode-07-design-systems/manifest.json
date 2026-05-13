@@ -1,0 +1,765 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome back to Tech Leadership Unpacked. I'm Sam Rivera, and we're pivoting from code organization to something equally important: how you organize your user interface. Today we're talking about Design Systems.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen. And I'll be honest - this topic transformed how I think about product development. A good design system doesn't just make things look consistent; it fundamentally changes how fast you can ship quality experiences.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "That's a bold claim. Let's unpack it. What exactly is a design system?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "A design system is a collection of reusable components, guided by clear standards, that can be assembled together to build any number of applications. It includes the components themselves, but also the design tokens, patterns, documentation, and guidelines that make them work.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "So it's more than just a component library?",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Much more. A component library is the what. The design system is the what, why, and how.",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "Why should a CPO care about design systems? Isn't this a designer or frontend thing?",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "It's a product velocity thing. And that makes it a CPO thing.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "sam",
+    "text": "Give me specific numbers.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "alex",
+    "text": "Studies suggest that design systems can reduce UI development time by 25-50%. Salesforce reported a 34% reduction in front-end development time after implementing their Lightning Design System. Shopify saw similar gains.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "sam",
+    "text": "That's significant.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "But it's not just time. It's quality. When every team builds their own components, you get inconsistencies. Different hover states. Different error message styles. Different spacing. Users notice, even subconsciously. It erodes trust and increases cognitive load.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "sam",
+    "text": "So it's about brand consistency too?",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "alex",
+    "text": "Absolutely. Your brand is expressed through every interaction. If your marketing site, web app, mobile app, and admin tools all look and feel different, what does that say about your brand?",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "There's also the maintenance angle. Without a design system, you have N implementations of a button, a modal, a dropdown. When you need to fix an accessibility issue or update the brand colors, you fix it N times. With a design system, you fix it once.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "sam",
+    "text": "The DRY principle for UI.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Exactly. Don't Repeat Yourself, applied to design and frontend development.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "sam",
+    "text": "What about the cost of building a design system?",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "Real and significant. A mature design system is a product itself, requiring ongoing investment. But the ROI is usually positive if you have: multiple products, multiple teams building UI, or expectations of long-term evolution.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "sam",
+    "text": "When is it not worth it?",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "For a single small product with one team, a design system might be overkill. You're better off using an existing component library like Chakra, Radix, or Material UI and customizing lightly. The calculus changes as you scale.",
+    "chapter": "SEGMENT 1: WHY DESIGN SYSTEMS MATTER (12 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "sam",
+    "text": "Let's break down the components of a design system.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "A complete design system typically has several layers.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "sam",
+    "text": "Why tokens specifically?",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "Tokens create a shared vocabulary between design and development. Instead of color: #1E90FF, you have color: var(--color-primary-500). The designer updates the token value, it propagates everywhere. Light mode, dark mode, brand themes - all controlled through tokens.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "sam",
+    "text": "What's the next layer?",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "Core Components - buttons, inputs, selects, checkboxes, modals, tooltips. These are the building blocks that appear in every application. They're fully accessible, properly styled, and well-tested.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "sam",
+    "text": "How many components are we talking?",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "A typical design system has 20-50 core components. More isn't always better - each component needs maintenance. Start with what you need, add thoughtfully.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "alex",
+    "text": "Composite Components or Patterns - combinations of core components for common use cases. A search bar (input + button). A card (container + image + text + button). A data table (table + pagination + sorting controls).",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "sam",
+    "text": "Where's the line between core and composite?",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "alex",
+    "text": "If it's used in multiple contexts and configurations, it's probably core. If it's solving a specific use case, it's a pattern. The distinction helps manage scope.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Layout Primitives - grids, flexbox wrappers, containers, spacing components. These handle structure and spatial relationships.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "sam",
+    "text": "Aren't those just CSS?",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "They can be. But encapsulating them as components ensures consistent use of spacing tokens, responsive breakpoints, and layout patterns. A <Stack spacing=\"md\"> is clearer and more maintainable than raw flexbox CSS everywhere.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "alex",
+    "text": "Documentation - this is critical. Every component needs: API documentation (props, variants, events), usage guidelines (when to use, when not to use), accessibility requirements, examples and code samples.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "sam",
+    "text": "Who writes the docs?",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "alex",
+    "text": "Ideally, the team building the component, with design input on guidelines. Good docs are as important as good code. A component no one understands is a component no one uses.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Design Assets - Figma libraries, Sketch symbols, whatever your designers use. The design assets should mirror the code components exactly. When a designer uses a component in Figma, they're using what developers will implement.",
+    "chapter": "SEGMENT 2: ANATOMY OF A DESIGN SYSTEM (12 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "sam",
+    "text": "How do you actually build a design system? Where do you start?",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Several approaches:",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "sam",
+    "text": "Then what?",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "Start with tokens. Define your color palette, typography scale, spacing scale. This is high-impact foundational work. Even before you have components, developers can use tokens for consistency.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "alex",
+    "text": "Extract, don't invent. Your first components should come from existing products. Find the best implementation of a button across your apps, refine it, make it the canonical version. This is faster than designing from scratch and ensures you're solving real problems.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "sam",
+    "text": "What about starting fresh?",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "alex",
+    "text": "Tempting but dangerous. Clean-sheet designs often miss practical requirements discovered through real usage. Extract, refine, standardize - then innovate incrementally.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "Component by component. Build one component at a time, fully - design, development, docs, accessibility. A complete button is worth more than half-finished implementations of ten components.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "sam",
+    "text": "What order do you build in?",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Start with highest usage and highest inconsistency. Usually: buttons, inputs, typography, colors, then modals, selects, forms. Data display components like tables come later.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "alex",
+    "text": "Adopt incrementally. You can't replace everything at once. New features use the design system. Existing pages migrate over time. Have a deprecation plan for old components.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "sam",
+    "text": "What about technical decisions?",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "alex",
+    "text": "Key decisions include:",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "sam",
+    "text": "What do you recommend?",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "alex",
+    "text": "If your org is React-only, build for React. If you have multiple frameworks, consider a layered approach: headless components with styling adapters, or web components.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "sam",
+    "text": "What about using existing systems as a base?",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "alex",
+    "text": "Smart approach. Libraries like Radix or Headless UI give you accessible, unstyled primitives. You add your tokens and styling. Much faster than building accessibility and interaction from scratch.",
+    "chapter": "SEGMENT 3: BUILDING A DESIGN SYSTEM (12 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "sam",
+    "text": "How do designers and developers work together in a design system context?",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "alex",
+    "text": "This is where design systems really shine - they bridge the gap.",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "sam",
+    "text": "That sounds efficient.",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "alex",
+    "text": "It is. But it requires discipline. The Figma libraries must stay in sync with code. New components need both design and code implementation. You need governance.",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "sam",
+    "text": "What tools help with this?",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "alex",
+    "text": "Figma with component libraries and design tokens. Plugins like Tokens Studio sync design tokens between Figma and code.",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "sam",
+    "text": "How do you handle one-offs? When a designer wants something the system doesn't support?",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "alex",
+    "text": "This is the tension. Too rigid, and you stifle creativity and edge cases. Too flexible, and the system becomes meaningless.",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "sam",
+    "text": "How do you balance?",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "alex",
+    "text": "Have a clear process:",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "The key is making the right thing easy. If using the design system is harder than going custom, people will go custom. The system must be well-documented, well-designed, and easy to use.",
+    "chapter": "SEGMENT 4: THE DESIGN-DEVELOPMENT WORKFLOW (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "sam",
+    "text": "Who owns the design system?",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Great question with multiple models.",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "sam",
+    "text": "What works best?",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Most successful systems use hybrid models. A small core team owns the primitives, tokens, and core components. Product teams contribute specialized components following established patterns. The core team reviews and approves contributions.",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "sam",
+    "text": "How do components get added?",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "A typical process:",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "sam",
+    "text": "How do you handle breaking changes?",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Carefully. Design systems are consumed by many teams. Breaking changes cause pain.",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "sam",
+    "text": "How does the system evolve over time?",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Regular audits - is the system being used? Which components are popular? Which are ignored? Usage data informs evolution.",
+    "chapter": "SEGMENT 5: GOVERNANCE AND EVOLUTION (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "sam",
+    "text": "I want to make sure we cover accessibility. How does that fit in?",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "Accessibility is one of the strongest arguments for design systems. When you build accessibility into the system, every product using it inherits accessibility by default.",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "sam",
+    "text": "What does that look like practically?",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "Every component must meet accessibility standards - WCAG 2.1 AA at minimum. This means:",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "sam",
+    "text": "How do you ensure this is maintained?",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "Automated testing - axe, jest-axe, or similar tools integrated into CI. Catch common issues automatically.",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "sam",
+    "text": "What about teams who don't prioritize accessibility?",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "The design system forces the issue. If the button is accessible, every product using that button is accessible for button interactions. You can't build an inaccessible button because the only button is accessible.",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "sam",
+    "text": "That's a powerful forcing function.",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "It is. And it's a significant cost savings. Retrofitting accessibility is expensive and error-prone. Building it in from the start through a design system is much more efficient.",
+    "chapter": "SEGMENT 6: ACCESSIBILITY IN DESIGN SYSTEMS (8 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "sam",
+    "text": "What goes wrong with design systems?",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "Several common pitfalls:",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "sam",
+    "text": "How do you avoid that?",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Build for real products. Have product teams as customers from day one. Extract from reality, don't invent in a vacuum.",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "Over-engineering. Too many options, too much abstraction, too many components. Simplicity is a feature. A component with 47 props is harder to use than three focused components.",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "sam",
+    "text": "What's the right level?",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "Start minimal. It's easier to add than to remove. Prefer composition over configuration - multiple simple components that combine, rather than one complex component with many options.",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "Ignoring adoption. You build it, but they don't come. Adoption requires: good documentation, developer advocacy, integration support, showing value.",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "sam",
+    "text": "How do you drive adoption?",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Make it the easiest path. Provide starter templates. Offer migration support. Celebrate teams that adopt. Track and share metrics on consistency and velocity.",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "alex",
+    "text": "Static system. Build it once, never iterate. The world changes - new requirements, new patterns, new problems. A design system needs ongoing investment.",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "sam",
+    "text": "How much investment?",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "alex",
+    "text": "Rule of thumb: 15-20% of frontend engineering capacity for maintenance and evolution of a mature system. Less for initial build and stabilization phase.",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Best practices:",
+    "chapter": "SEGMENT 7: COMMON PITFALLS AND BEST PRACTICES (8 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "sam",
+    "text": "For someone just starting - what's the path forward?",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Let me give you a phased approach.",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "sam",
+    "text": "What if we don't have resources for a dedicated team?",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "Start smaller. One designer and one developer part-time. Focus on the highest-value components. Use existing libraries (Radix, Headless UI) as a foundation. You don't need a Google-scale design system - you need enough consistency to help your specific products.",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "sam",
+    "text": "What's the one thing to remember?",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "alex",
+    "text": "A design system is a product. It has users (designers and developers), it needs to solve their problems, it requires ongoing investment. Treat it like a product - with user research, roadmapping, feedback loops, and continuous improvement - and it will succeed.",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "sam",
+    "text": "Perfect. Next episode: Testing Strategy. How to build confidence that your code actually works.",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "Testing - the thing everyone knows they should do more of.",
+    "chapter": "SEGMENT 8: GETTING STARTED (8 minutes)",
+    "file": "0108.mp3"
+  }
+]

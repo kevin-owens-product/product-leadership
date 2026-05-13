@@ -1,0 +1,814 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to Claude Code Mastery. I'm Alex, and today we're tackling two critical developer skills: testing and debugging.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jamie",
+    "text": "I'm Jamie, and I'll admit, writing tests and debugging issues are probably where I spend a huge chunk of my time. If Claude can help here, that's a big deal.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "It's one of the most impactful areas for Claude assistance. By the end of this episode, you'll know how to write better tests faster and debug issues more efficiently.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jamie",
+    "text": "Let's start with testing. Why is this a good fit for AI assistance?",
+    "chapter": "SEGMENT 1: WHY TESTING WITH AI MAKES SENSE (4 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "Tests often follow patterns. Once you understand what a function does, writing a test is somewhat formulaic: set up inputs, call the function, check outputs. Claude excels at this pattern-based work.",
+    "chapter": "SEGMENT 1: WHY TESTING WITH AI MAKES SENSE (4 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jamie",
+    "text": "So Claude can generate boilerplate test code?",
+    "chapter": "SEGMENT 1: WHY TESTING WITH AI MAKES SENSE (4 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Much more than boilerplate. Claude understands your actual code and can generate tests that cover real scenarios, edge cases, and potential failure modes.",
+    "chapter": "SEGMENT 1: WHY TESTING WITH AI MAKES SENSE (4 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jamie",
+    "text": "That sounds almost too good. Does it actually work?",
+    "chapter": "SEGMENT 1: WHY TESTING WITH AI MAKES SENSE (4 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "It works surprisingly well. Not perfectly, you should always review and understand the tests. But Claude can get you 80 percent of the way there quickly.",
+    "chapter": "SEGMENT 1: WHY TESTING WITH AI MAKES SENSE (4 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jamie",
+    "text": "How do I actually run tests through Claude?",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "Just ask! \"Run the tests\" or \"run the tests for the auth module\" or \"execute the test suite.\" Claude will figure out the right command for your project and run it.",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "jamie",
+    "text": "How does it know which test framework I'm using?",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Claude looks at your project configuration. Package.json might show Jest or Mocha. Pytest.ini suggests Python with pytest. Claude picks up these signals and runs the appropriate command.",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "jamie",
+    "text": "What if I have a custom test command?",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "You can tell Claude. \"Our tests run with npm run test:unit\" and Claude will remember that for the session. Or you can put it in your project configuration.",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "jamie",
+    "text": "And Claude can see the test output?",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Yes. The output comes back to Claude, so it can analyze results. \"Three tests failed.\" Claude can tell you which ones and why.",
+    "chapter": "SEGMENT 2: RUNNING TESTS WITH CLAUDE (4 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "jamie",
+    "text": "That's where it gets interesting. How does Claude help with failures?",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "When a test fails, Claude reads the failure message and the test code. It often immediately knows what's wrong. \"The test expects the response to include a user ID, but the function returns null when the user isn't found.\"",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "jamie",
+    "text": "It connects the failure to the actual code issue?",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Exactly. Claude doesn't just regurgitate the error message. It traces back to the source code and explains the mismatch between expected and actual behavior.",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "jamie",
+    "text": "Can it suggest fixes?",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Usually. Claude might say \"the function needs to handle the case where the user doesn't exist\" and show you the code change needed. Or \"the test expectation is wrong, the function correctly returns null here.\"",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "jamie",
+    "text": "So it might be the test that's wrong, not the code.",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "Right. Claude can distinguish between code bugs and test bugs. Sometimes the test has incorrect expectations.",
+    "chapter": "SEGMENT 3: UNDERSTANDING TEST FAILURES (4 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "jamie",
+    "text": "Let's talk about writing tests. How do I ask Claude to create tests?",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "The simplest approach: \"write tests for the calculateTotal function.\" Claude will read the function, understand what it does, and generate appropriate test cases.",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "jamie",
+    "text": "What frameworks does Claude know?",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "All the popular ones. Jest, Mocha, Jasmine for JavaScript. Pytest, unittest for Python. JUnit for Java. RSpec for Ruby. Go's built-in testing. And many more.",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "jamie",
+    "text": "Does it match my existing test style?",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Claude tries to match your project's conventions. If your existing tests use certain patterns, describe blocks, setup methods, or naming conventions, Claude will follow suit.",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "jamie",
+    "text": "How comprehensive are the generated tests?",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Claude typically generates tests for the happy path, common edge cases, and error conditions. For a function that divides numbers, you'd get tests for normal division, division by zero, negative numbers, and so on.",
+    "chapter": "SEGMENT 4: WRITING NEW TESTS (4 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "jamie",
+    "text": "How do I make sure tests cover edge cases?",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Ask explicitly. \"Write tests for calculateTotal including edge cases.\" Or be specific: \"make sure to test what happens with empty arrays, null values, and very large numbers.\"",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "jamie",
+    "text": "Can Claude identify edge cases I haven't thought of?",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Often, yes. Claude reads the code and thinks about what could go wrong. It might identify edge cases you didn't consider, like integer overflow or unicode handling.",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "jamie",
+    "text": "That's valuable. Fresh eyes on the code.",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Exactly. It's like having a thorough code reviewer who's specifically thinking about test coverage.",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "jamie",
+    "text": "What about testing asynchronous code?",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "Claude handles async well. It knows about promises, async/await, callbacks, and the various patterns for testing them. It will generate tests with proper async handling.",
+    "chapter": "SEGMENT 5: TEST COVERAGE AND EDGE CASES (4 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "jamie",
+    "text": "Can Claude help with TDD? Writing tests before code?",
+    "chapter": "SEGMENT 6: TEST-DRIVEN DEVELOPMENT (3 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "Absolutely. Describe the behavior you want, and Claude will write tests for it. \"I need a function that validates email addresses. Write the tests first.\"",
+    "chapter": "SEGMENT 6: TEST-DRIVEN DEVELOPMENT (3 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "jamie",
+    "text": "And then it writes the implementation?",
+    "chapter": "SEGMENT 6: TEST-DRIVEN DEVELOPMENT (3 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Yes. Once you have tests, you can ask Claude to implement the function that makes them pass. It's a great TDD workflow.",
+    "chapter": "SEGMENT 6: TEST-DRIVEN DEVELOPMENT (3 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "jamie",
+    "text": "Does Claude understand the red-green-refactor cycle?",
+    "chapter": "SEGMENT 6: TEST-DRIVEN DEVELOPMENT (3 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "It does. You can say \"I want to do TDD for this feature\" and Claude will guide you through writing tests first, then implementation, then refactoring.",
+    "chapter": "SEGMENT 6: TEST-DRIVEN DEVELOPMENT (3 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "jamie",
+    "text": "Let's switch to debugging. How does Claude help find bugs?",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "Start by describing the problem. \"The form submission fails when the email contains a plus sign.\" Claude will search for relevant code and identify likely causes.",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "jamie",
+    "text": "It investigates like a detective?",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Exactly. Claude looks at the form handling code, the validation logic, the API endpoint. It traces through to find where plus signs might cause issues.",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "jamie",
+    "text": "What if I don't know what the problem is exactly?",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Describe the symptoms. \"Users are sometimes logged out unexpectedly\" or \"the page loads slowly when there are many items.\" Claude can work from symptoms to find root causes.",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "jamie",
+    "text": "That's impressive. It can reason about behavior.",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "Claude is good at hypothesizing. \"Unexpected logouts could be caused by session timeout, token expiration, or a race condition. Let me check each possibility.\"",
+    "chapter": "SEGMENT 7: DEBUGGING BASICS (4 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "jamie",
+    "text": "What about analyzing error messages and stack traces?",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "This is one of Claude's strengths. Paste an error message or stack trace, and Claude will explain it. Not just \"there's a null pointer error\" but \"in function X, you're accessing property Y before checking if the object exists.\"",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "jamie",
+    "text": "It maps the error to specific code?",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Yes. Claude reads the stack trace, identifies the line numbers, looks at your code, and explains exactly what went wrong.",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "jamie",
+    "text": "What about cryptic errors?",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Claude can often decode cryptic errors. Framework-specific messages, library errors, low-level system errors. Claude has seen them before and can explain what they mean.",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "jamie",
+    "text": "\"Cannot read property undefined of undefined\" finally explained?",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Ha! Yes. Claude will tell you exactly which variable is undefined and why it got that way.",
+    "chapter": "SEGMENT 8: ERROR MESSAGE ANALYSIS (4 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "jamie",
+    "text": "What debugging strategies does Claude use?",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Several approaches. Tracing data flow: following a value through the code to find where it changes unexpectedly. Bisecting: narrowing down when a bug was introduced. Hypothesis testing: forming theories and verifying them.",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "jamie",
+    "text": "How does hypothesis testing work in practice?",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "Claude might say \"I think the bug is in the date parsing. Let me check that code.\" It reads the relevant code and either confirms \"yes, this is the issue\" or moves on to the next hypothesis.",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "jamie",
+    "text": "It's systematic.",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Very much so. Good debugging is methodical, and Claude follows a logical process.",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "jamie",
+    "text": "Can Claude add debug logging for me?",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Yes. \"Add logging to the checkout process so I can trace the bug.\" Claude will add console.log or your language's equivalent at key points.",
+    "chapter": "SEGMENT 9: DEBUGGING STRATEGIES (4 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "jamie",
+    "text": "Sometimes the hardest part is reproducing a bug. Can Claude help?",
+    "chapter": "SEGMENT 10: REPRODUCING ISSUES (3 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "Claude can help you understand the conditions that trigger a bug. \"This only fails with certain inputs.\" Claude might identify that the bug occurs with unicode characters or numbers exceeding a threshold.",
+    "chapter": "SEGMENT 10: REPRODUCING ISSUES (3 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "jamie",
+    "text": "Can it generate test cases that reproduce bugs?",
+    "chapter": "SEGMENT 10: REPRODUCING ISSUES (3 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Absolutely. Once Claude understands a bug, it can write a test that fails, demonstrating the problem. This is great for proving a bug exists and verifying your fix.",
+    "chapter": "SEGMENT 10: REPRODUCING ISSUES (3 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "jamie",
+    "text": "Test as bug documentation.",
+    "chapter": "SEGMENT 10: REPRODUCING ISSUES (3 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Exactly. The test serves as proof and prevents regression.",
+    "chapter": "SEGMENT 10: REPRODUCING ISSUES (3 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "jamie",
+    "text": "Are there bug patterns Claude is particularly good at catching?",
+    "chapter": "SEGMENT 11: COMMON BUG PATTERNS (4 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "Off-by-one errors. Claude can trace through loop logic and find fence-post errors. Null reference bugs, where something isn't checked before use. Race conditions in async code.",
+    "chapter": "SEGMENT 11: COMMON BUG PATTERNS (4 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "jamie",
+    "text": "What about security bugs?",
+    "chapter": "SEGMENT 11: COMMON BUG PATTERNS (4 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "Claude can identify common security issues. SQL injection, cross-site scripting, insecure direct object references. It won't find everything, but it catches common vulnerabilities.",
+    "chapter": "SEGMENT 11: COMMON BUG PATTERNS (4 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "jamie",
+    "text": "Valuable for security-conscious development.",
+    "chapter": "SEGMENT 11: COMMON BUG PATTERNS (4 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "And when Claude finds a security issue, it explains the risk and shows how to fix it properly.",
+    "chapter": "SEGMENT 11: COMMON BUG PATTERNS (4 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "jamie",
+    "text": "What about performance issues? Slow code?",
+    "chapter": "SEGMENT 12: PERFORMANCE DEBUGGING (4 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "Claude can analyze code for performance problems. \"This page loads slowly\" might lead Claude to find an N+1 query problem or an inefficient algorithm.",
+    "chapter": "SEGMENT 12: PERFORMANCE DEBUGGING (4 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "jamie",
+    "text": "Does it suggest optimizations?",
+    "chapter": "SEGMENT 12: PERFORMANCE DEBUGGING (4 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "Yes. Claude might rewrite a slow loop, suggest caching, recommend a better algorithm, or identify unnecessary work that can be eliminated.",
+    "chapter": "SEGMENT 12: PERFORMANCE DEBUGGING (4 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "jamie",
+    "text": "Without me having to profile first?",
+    "chapter": "SEGMENT 12: PERFORMANCE DEBUGGING (4 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "Claude can suggest where to profile based on code analysis. But for complex performance issues, actual profiling data helps Claude give better advice.",
+    "chapter": "SEGMENT 12: PERFORMANCE DEBUGGING (4 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "jamie",
+    "text": "What's a good debugging workflow with Claude?",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Step one: describe the problem clearly. What's happening? What should happen instead? When does it occur?",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "jamie",
+    "text": "Good bug reports help Claude too.",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "Step two: let Claude investigate. It will search code, read relevant files, form hypotheses.",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "jamie",
+    "text": "Don't jump to conclusions?",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "Right. Step three: review Claude's analysis. Does its explanation make sense? Does it match what you're seeing?",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "jamie",
+    "text": "Sanity check.",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Step four: implement and test the fix. Have Claude make the change, then run tests or manually verify.",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "jamie",
+    "text": "Confirm it's actually fixed.",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "And step five: add a test for the bug so it doesn't regress. Claude can help with that too.",
+    "chapter": "SEGMENT 13: DEBUGGING WORKFLOW (4 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "jamie",
+    "text": "What are your top tips?",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "For testing: let Claude write the first draft of tests, but understand every test. Don't just accept generated tests blindly. They should make sense to you.",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "jamie",
+    "text": "Own your test suite.",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "For debugging: give Claude as much context as possible. The error message, what you were doing, what you expected. More context means better debugging.",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "jamie",
+    "text": "Context is everything.",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "And don't be afraid to iterate. If Claude's first explanation doesn't seem right, push back. \"That doesn't match what I'm seeing. What else could it be?\"",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "jamie",
+    "text": "Collaborative debugging.",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "alex",
+    "text": "Exactly. You and Claude work together. Your knowledge of the system plus Claude's analytical power.",
+    "chapter": "SEGMENT 14: TIPS FOR EFFECTIVE TESTING AND DEBUGGING (4 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "jamie",
+    "text": "What should listeners practice?",
+    "chapter": "SEGMENT 15: PRACTICE EXERCISE (3 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "Find a function in your codebase that doesn't have tests. Ask Claude to write tests for it. Review what Claude generates. Run the tests. Then intentionally break the function and see if the tests catch it.",
+    "chapter": "SEGMENT 15: PRACTICE EXERCISE (3 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "jamie",
+    "text": "Full test lifecycle.",
+    "chapter": "SEGMENT 15: PRACTICE EXERCISE (3 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "alex",
+    "text": "For debugging practice, find a past bug you fixed and pretend it's new. Describe it to Claude and see if it can identify the same fix you found.",
+    "chapter": "SEGMENT 15: PRACTICE EXERCISE (3 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "jamie",
+    "text": "Great episode on testing and debugging. What's coming?",
+    "chapter": "SEGMENT 16: WHAT'S NEXT (3 minutes)",
+    "file": "0111.mp3"
+  },
+  {
+    "index": 112,
+    "speaker": "alex",
+    "text": "Episode seven covers project setup and configuration. We'll explore CLAUDE.md files, custom instructions, and setting up Claude Code for your specific project needs.",
+    "chapter": "SEGMENT 16: WHAT'S NEXT (3 minutes)",
+    "file": "0112.mp3"
+  },
+  {
+    "index": 113,
+    "speaker": "jamie",
+    "text": "Making Claude work your way.",
+    "chapter": "SEGMENT 16: WHAT'S NEXT (3 minutes)",
+    "file": "0113.mp3"
+  },
+  {
+    "index": 114,
+    "speaker": "alex",
+    "text": "Exactly. See you in episode seven!",
+    "chapter": "SEGMENT 16: WHAT'S NEXT (3 minutes)",
+    "file": "0114.mp3"
+  },
+  {
+    "index": 115,
+    "speaker": "jamie",
+    "text": "Happy debugging!",
+    "chapter": "SEGMENT 16: WHAT'S NEXT (3 minutes)",
+    "file": "0115.mp3"
+  }
+]

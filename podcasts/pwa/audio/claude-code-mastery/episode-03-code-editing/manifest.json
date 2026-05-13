@@ -1,0 +1,786 @@
+[
+  {
+    "index": 0,
+    "speaker": "alex",
+    "text": "Welcome back to Claude Code Mastery. I'm Alex, and today we're getting into the really powerful stuff: actually modifying your code with Claude's help.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "jamie",
+    "text": "I'm Jamie, and this is the episode I've been waiting for. Reading and navigating code is great, but the real productivity gains come from Claude helping me write and edit code, right?",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "alex",
+    "text": "Absolutely. By the end of this episode, you'll understand the three main tools Claude uses to modify files: Read, Edit, and Write. You'll know when to use each one and how to review changes safely.",
+    "chapter": "INTRO (3 minutes)",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "jamie",
+    "text": "We touched on the Read tool last episode, but let's go deeper. What exactly happens when Claude reads a file?",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "alex",
+    "text": "When Claude uses the Read tool, it requests the contents of a specific file at a specific path. The tool returns the file content with line numbers, which is crucial for making precise edits later.",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "jamie",
+    "text": "Why are line numbers important?",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "alex",
+    "text": "Because when Claude wants to edit a file, it needs to reference exact locations. If Claude reads a file and sees the function you want to change is on lines 45 through 60, it can target its edit precisely.",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "jamie",
+    "text": "Makes sense. Does Claude always read the entire file?",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "alex",
+    "text": "Not necessarily. The Read tool accepts optional parameters for offset and limit. So Claude can read lines 100 through 200 of a large file, or just the first 50 lines. This keeps context manageable.",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "jamie",
+    "text": "What about really large files?",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "alex",
+    "text": "For very large files, Claude often reads strategically. It might first search for a function name to find its line number, then read just that section. Or it might read the first 100 lines to understand the file structure, then jump to specific sections.",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "jamie",
+    "text": "That's pretty clever. It's like how I would navigate a large file manually.",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "alex",
+    "text": "Exactly. Claude mimics the patterns experienced developers use. Skim for structure, then dive into details where needed.",
+    "chapter": "SEGMENT 1: THE READ TOOL IN DEPTH (5 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "jamie",
+    "text": "Okay, let's talk about actually changing code. How does the Edit tool work?",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "alex",
+    "text": "The Edit tool is Claude's primary way to modify existing files. It works on a find-and-replace principle. Claude specifies an old string that exists in the file and a new string to replace it with.",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "jamie",
+    "text": "So it's like find and replace in my text editor?",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "alex",
+    "text": "Similar, but more targeted. Claude has to provide a string that uniquely identifies the location in the file. If the old string appears multiple times, the edit will fail unless Claude explicitly says to replace all occurrences.",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "jamie",
+    "text": "Why that constraint?",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "alex",
+    "text": "Safety. Imagine Claude wants to change a variable name from \"data\" to \"userData.\" If it just replaced every \"data\" in the file, it might accidentally change strings like \"database\" or \"metadata\" or comments. The uniqueness requirement prevents that.",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "jamie",
+    "text": "So Claude has to include enough context to be unique?",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Right. Instead of just \"data,\" Claude might specify \"const data = fetchUser\" as the old string, which is much more likely to be unique in the file.",
+    "chapter": "SEGMENT 2: THE EDIT TOOL (4 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "jamie",
+    "text": "Can you walk through what an edit looks like in practice?",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "Sure. Let's say you ask Claude to add error handling to a function. First, Claude reads the file to see the current code. It might see a function like: async function fetchUser id, then return await api dot get user id.",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "jamie",
+    "text": "A simple fetch without any error handling.",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "alex",
+    "text": "Right. Claude then proposes an edit. The old string would be that entire function body. The new string would be the same code wrapped in a try-catch block with appropriate error handling.",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "jamie",
+    "text": "And I see this proposal before it happens?",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "alex",
+    "text": "Yes! Claude shows you exactly what the old code is, what the new code will be, and asks for permission. You can approve it, reject it, or ask for modifications before it runs.",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "jamie",
+    "text": "That visibility is reassuring. I can catch mistakes before they happen.",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "alex",
+    "text": "That's the whole point. Claude is powerful, but you stay in control. Review every change, especially when you're first learning the workflow.",
+    "chapter": "SEGMENT 3: WATCHING AN EDIT IN ACTION (5 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "jamie",
+    "text": "What about creating entirely new files? Is that different?",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Yes, that's the Write tool. While Edit modifies existing files, Write creates new files or completely overwrites existing ones.",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "jamie",
+    "text": "When would Claude use Write versus Edit?",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Write is for new files: a new component, a new test file, a new utility module. It's also used when you want to completely replace a file's contents rather than make a surgical change.",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "jamie",
+    "text": "What's the permission flow for Write?",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Similar to Edit. Claude shows you the file path it wants to write to and the content it will write. You approve or deny. If the file already exists, you'll be warned that it will be overwritten.",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "jamie",
+    "text": "Good. I wouldn't want to accidentally clobber an existing file.",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "Right. In practice, Claude tries to use Edit for existing files because it's less destructive. Write is reserved for new files or complete rewrites.",
+    "chapter": "SEGMENT 4: THE WRITE TOOL (4 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "jamie",
+    "text": "How do I know which one Claude will use?",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "Claude makes this decision automatically based on the situation. If you ask to \"add a function to utils.js,\" Claude will use Edit because it's adding to an existing file. If you ask to \"create a new helper file,\" Claude will use Write.",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "jamie",
+    "text": "What if I want to replace a whole file?",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "You can ask explicitly. \"Rewrite the config file completely\" or \"replace the entire contents of setup.js\" signals to Claude that a full Write is appropriate.",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "jamie",
+    "text": "Are there cases where Edit is better even for big changes?",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "Generally, smaller, targeted edits are safer. Even if you're changing a lot, multiple Edit operations let you review each change individually. A single Write that replaces everything is harder to review.",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "jamie",
+    "text": "Incremental changes are easier to verify.",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "Exactly. I usually prefer Claude to make a series of edits rather than one big rewrite. It's easier to catch issues and rollback if needed.",
+    "chapter": "SEGMENT 5: EDIT VS WRITE: MAKING THE RIGHT CHOICE (4 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "jamie",
+    "text": "What about changes that span multiple files? Like adding a feature that touches the model, controller, and view?",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "alex",
+    "text": "Claude handles multi-file changes by making edits sequentially. It will edit the first file, then the second, then the third. Each edit gets its own permission prompt.",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "jamie",
+    "text": "Can I approve them all at once?",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "If you trust the pattern, you can tell Claude to proceed with all related changes. But especially for complex features, reviewing each file change individually is wise.",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "jamie",
+    "text": "What if one edit fails?",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "Claude will tell you about the failure and typically try to recover or ask for guidance. Maybe the file changed since it was read, or the string it was trying to match doesn't exist anymore.",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "jamie",
+    "text": "So I might need to help Claude get back on track?",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Sometimes. You might say \"read the file again\" or \"the function was renamed, look for newFunctionName instead.\" It's a collaboration.",
+    "chapter": "SEGMENT 6: HANDLING MULTIPLE FILE EDITS (5 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "jamie",
+    "text": "What's the best way to review Claude's proposed changes?",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "alex",
+    "text": "First, look at the scope. Is Claude changing what you expected? If you asked to fix a typo and Claude is rewriting the whole function, that's a red flag.",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "jamie",
+    "text": "Scope creep in AI suggestions.",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Exactly. Second, read the actual diff. Does the new code make sense? Are there obvious bugs or issues? Trust your developer instincts here.",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "jamie",
+    "text": "What if I'm not sure about a change?",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Ask Claude to explain it! \"Why did you change this part?\" or \"What does this new code do?\" Claude will walk you through its reasoning. Sometimes the explanation reveals issues you hadn't noticed.",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "jamie",
+    "text": "Or confirms that it's the right approach.",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Right. And don't hesitate to say \"no, try a different approach.\" Claude can suggest alternatives. The first proposal isn't always the best one.",
+    "chapter": "SEGMENT 7: REVIEWING PROPOSED CHANGES (5 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "jamie",
+    "text": "What are some common editing patterns you use with Claude?",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "One of my favorites is \"add X to Y.\" Add logging to this function. Add validation to this endpoint. Add error handling to this API call. It's specific about what and where.",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "jamie",
+    "text": "Clear instructions produce clear results.",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Another pattern is \"change X from A to B.\" Change the timeout from 30 seconds to 60 seconds. Change the color scheme from blue to green. Very explicit about the transformation.",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "jamie",
+    "text": "What about refactoring?",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "For refactoring, I often say \"extract this logic into a separate function\" or \"move this code into its own file.\" Claude understands these refactoring concepts and can execute them cleanly.",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "jamie",
+    "text": "Does Claude handle renaming well?",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Yes! \"Rename the function from handleClick to handleButtonClick everywhere\" is a great prompt. Claude will use Grep to find all usages and update them consistently.",
+    "chapter": "SEGMENT 8: COMMON EDITING PATTERNS (5 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "jamie",
+    "text": "Does Claude handle different file types differently?",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Claude understands many file types and their conventions. JavaScript, TypeScript, Python, Go, Rust, Java, and many more. It knows the syntax and common patterns for each.",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "jamie",
+    "text": "What about non-code files like JSON or YAML?",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "alex",
+    "text": "Claude handles configuration files really well. \"Update the package.json to add a new dependency\" or \"change the database port in docker-compose.yml\" are natural requests.",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "jamie",
+    "text": "What about markdown or documentation?",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Absolutely. \"Add a section to the README about installation\" or \"update the API docs with the new endpoint\" work great. Claude treats documentation as a first-class editing target.",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "jamie",
+    "text": "Does it handle Jupyter notebooks?",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Yes! Claude has specific support for notebook files. It can read cells, understand the flow of a notebook, and edit individual cells. There's even a specialized NotebookEdit tool for this.",
+    "chapter": "SEGMENT 9: WORKING WITH DIFFERENT FILE TYPES (5 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "jamie",
+    "text": "What if Claude makes a change I don't like? How do I undo it?",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "The best safety net is git. If you're working in a git repository, you can always revert changes. Before any major editing session, I recommend committing your current state so you have a clean rollback point.",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "jamie",
+    "text": "Git is the ultimate undo.",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "Exactly. You can use git diff to see what changed, git checkout to discard changes to specific files, or git reset to go back to your last commit.",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "jamie",
+    "text": "Can Claude help with the rollback?",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "Yes! You can say \"undo the last changes to auth.js\" and Claude will help you revert. Or \"show me what changed\" and Claude will run git diff for you.",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "jamie",
+    "text": "That's handy. The same tool that made the changes can unmake them.",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "And honestly, mistakes are part of learning. Don't be afraid to experiment knowing you can always roll back.",
+    "chapter": "SEGMENT 10: SAFETY AND ROLLBACK (5 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "jamie",
+    "text": "What are your top tips for getting the best editing results?",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "First, read before you edit. Make sure Claude has actually read the file before asking for changes. Say \"read the login function in auth.js\" before \"add rate limiting to the login function.\"",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "jamie",
+    "text": "Context before action.",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "Second, be specific about what you want to preserve. \"Add validation but keep the existing error messages\" tells Claude what not to change.",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "jamie",
+    "text": "Constraints help.",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Third, work incrementally. Instead of \"refactor this entire module,\" try \"refactor the first function in this module\" then \"now the second one.\" Smaller chunks are easier to review.",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "jamie",
+    "text": "Baby steps are safer steps.",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "alex",
+    "text": "And fourth, use your editor alongside Claude. Keep the file open in your IDE. When Claude makes a change, you'll see it update. You can also make manual tweaks and tell Claude about them.",
+    "chapter": "SEGMENT 11: TIPS FOR EFFECTIVE EDITING (4 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "jamie",
+    "text": "What mistakes do new users commonly make with editing?",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "alex",
+    "text": "The biggest one is asking for changes without Claude having read the file. If Claude hasn't seen the current code, it's guessing about what needs to change.",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "jamie",
+    "text": "Always read first.",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "alex",
+    "text": "Another pitfall is vague requests. \"Make this better\" doesn't give Claude much to work with. Better is \"improve the error messages to be more user-friendly\" or \"optimize this loop for performance.\"",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "jamie",
+    "text": "Specificity again.",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Also, some users approve changes too quickly without reading them. I know it's tempting to just click approve, but those few seconds of review can catch significant issues.",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "jamie",
+    "text": "Trust but verify.",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Exactly. And finally, not using version control. If you're making significant changes, commit frequently. It's your safety net.",
+    "chapter": "SEGMENT 12: COMMON PITFALLS (5 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "jamie",
+    "text": "Can we give listeners an exercise to practice editing?",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Here's a good one. Pick a function in your codebase that doesn't have comments. Ask Claude to read the function, then ask it to add a documentation comment explaining what the function does.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "jamie",
+    "text": "A safe, low-risk edit.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "Right. Review the comment Claude proposes. Does it accurately describe the function? Is the style consistent with your project? Approve it and check the result.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "jamie",
+    "text": "And we've practiced the full edit cycle.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "alex",
+    "text": "Exactly. Read, request change, review, approve. That's the pattern you'll use for all edits.",
+    "chapter": "SEGMENT 13: PRACTICE EXERCISE (3 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "jamie",
+    "text": "Great episode. I feel ready to start making edits with confidence. What's coming up?",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "Episode four dives into search and exploration in depth. We'll cover advanced patterns for Grep and Glob, using the specialized Explore agent for complex searches, and techniques for understanding unfamiliar codebases.",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "jamie",
+    "text": "From editing what we know to discovering what we don't know.",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "alex",
+    "text": "Exactly. See you in episode four!",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "jamie",
+    "text": "Happy editing, everyone!",
+    "chapter": "SEGMENT 14: WHAT'S NEXT (3 minutes)",
+    "file": "0111.mp3"
+  }
+]

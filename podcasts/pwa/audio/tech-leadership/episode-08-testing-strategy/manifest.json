@@ -1,0 +1,758 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome back to Tech Leadership Unpacked. I'm Sam Rivera. Eight episodes in, and we're finally talking about something that everyone agrees is important but often struggles to do well: testing.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen. And here's my hot take to start: most organizations are testing wrong. Either too much of the wrong things, or too little of the right things. Today we're going to fix that.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "Bold. Let's start with the basics. Why do we test?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "Two reasons, really. Confidence - knowing your code works before it hits production. And Documentation - tests describe expected behavior in a way that's executable and always up to date.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "Some might say testing is expensive and slows you down.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Testing done poorly is expensive. Testing done well is an accelerator. When you have confidence in your test suite, you can refactor fearlessly, deploy continuously, and onboard new developers faster.",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "I've heard of the testing pyramid. What is it and does it still apply?",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "The testing pyramid is a framework for balancing different types of tests. The classic version has three layers:",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "sam",
+    "text": "Why is it shaped like a pyramid?",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "alex",
+    "text": "Because you should have many more unit tests than integration tests, and many more integration tests than E2E tests. Unit tests are fast and cheap - run thousands in seconds. E2E tests are slow and expensive - test a few critical flows.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "sam",
+    "text": "Is the pyramid still relevant?",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "It's a useful mental model, but it's evolved. Some now advocate for a testing trophy - more emphasis on integration tests, which catch more realistic bugs than isolated unit tests.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "sam",
+    "text": "Explain that.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "alex",
+    "text": "The argument is: unit tests verify that code works in isolation, but bugs often live in the gaps between units. Integration tests verify that components work together, catching more real-world issues. The \"trophy\" shape means a thick middle layer of integration tests.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "sam",
+    "text": "Which approach is better?",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "alex",
+    "text": "Context-dependent. For complex business logic, heavy unit testing makes sense - many edge cases to cover. For CRUD applications, integration tests give more bang for the buck. Most teams need a mix.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "sam",
+    "text": "Let's break down each layer.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "alex",
+    "text": "Unit tests test individual functions, classes, or components in isolation. Dependencies are mocked or stubbed. They're fast - milliseconds each.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "sam",
+    "text": "What makes a good unit test?",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "alex",
+    "text": "Fast - no network, no disk, no database. Focused - tests one thing, fails for one reason. Independent - doesn't depend on other tests. Deterministic - same input, same result every time.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "alex",
+    "text": "Integration tests test multiple components together. In a web app, this might be testing an API endpoint with a real database, or testing a React component with its context providers.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "sam",
+    "text": "How do you set up the environment for integration tests?",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "alex",
+    "text": "You need realistic dependencies. Databases can be in-memory (SQLite) or dockerized. External services can be mocked at the HTTP level (WireMock, MSW). The key is testing real integration without flaky external dependencies.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "alex",
+    "text": "End-to-end tests (E2E) test the complete system through its user interface, often with tools like Playwright, Cypress, or Selenium. They simulate real user behavior.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "sam",
+    "text": "Why not just do E2E for everything?",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "alex",
+    "text": "They're slow - minutes per test. They're flaky - timing issues, network issues, environment issues. They're expensive to maintain - UI changes break tests. Use them sparingly for high-value scenarios.",
+    "chapter": "SEGMENT 1: THE TESTING PYRAMID (12 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "sam",
+    "text": "Okay, so what should I actually test? I can't test everything.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "alex",
+    "text": "Right. Testing everything is a myth. Testing strategically is the goal.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "sam",
+    "text": "Why does that distinction matter?",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "alex",
+    "text": "Tests coupled to implementation break when you refactor, even if behavior is unchanged. That creates friction and erodes trust in tests.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "alex",
+    "text": "Focus on critical paths. Not all code is equally important. Prioritize testing:",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "sam",
+    "text": "What about edge cases?",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "alex",
+    "text": "Test boundaries and edge cases. Bugs cluster at boundaries. What happens with empty input? Null? Maximum values? Negative numbers? One item versus many items?",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "alex",
+    "text": "Test error handling. Happy paths are easy. What happens when things go wrong? Network fails, database is unavailable, input is invalid. These are often the buggiest areas.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "sam",
+    "text": "What shouldn't I test?",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "alex",
+    "text": "Don't test third-party code. If you're using a well-maintained library, trust it. Test your integration with it, not the library itself.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "sam",
+    "text": "How do I know if I'm testing enough?",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "alex",
+    "text": "Coverage is a smell, not a target. 80% code coverage tells you that 80% of lines were executed during tests. It doesn't tell you if the right things were tested, or if edge cases were covered.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "sam",
+    "text": "But coverage is commonly used as a metric.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "alex",
+    "text": "And it's commonly misused. I've seen 90% coverage where the tests assert nothing meaningful. High coverage with no assertions is theater.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "sam",
+    "text": "What's a better metric?",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "alex",
+    "text": "Mutation testing is more rigorous. It introduces bugs into your code and sees if tests catch them. If a test suite doesn't catch introduced bugs, it's not actually testing anything.",
+    "chapter": "SEGMENT 2: WHAT TO TEST (12 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "sam",
+    "text": "Let's talk about TDD - Test-Driven Development. What is it and should we do it?",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "alex",
+    "text": "TDD is a practice where you write tests before you write implementation code. The cycle is: Red (write a failing test), Green (write minimal code to pass), Refactor (clean up while tests pass).",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "sam",
+    "text": "That sounds backwards.",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "alex",
+    "text": "It feels backwards at first, but it has benefits:",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "sam",
+    "text": "Does everyone do TDD?",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "alex",
+    "text": "No. It's controversial. Critics say it slows down exploratory coding, doesn't work well for UI, and can lead to over-mocked tests.",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "sam",
+    "text": "What's your take?",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "alex",
+    "text": "TDD is valuable for well-defined problems - you know the requirements, you're implementing known algorithms, you're working with business logic. It's less valuable for exploratory work - prototyping, figuring out what you want, UI design.",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "sam",
+    "text": "Any middle ground?",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "alex",
+    "text": "\"Test-first\" thinking even when not strict TDD. Ask yourself \"how will I test this?\" before coding. Even if you don't write tests first, thinking about testability improves design.",
+    "chapter": "SEGMENT 3: TEST-DRIVEN DEVELOPMENT (10 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "sam",
+    "text": "Let's get practical. How do you test different types of applications?",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "alex",
+    "text": "Let me walk through common scenarios.",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "sam",
+    "text": "What's a contract test?",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "alex",
+    "text": "A contract test verifies that an API meets its documented interface. If your OpenAPI spec says /users returns {id, name, email}, contract tests verify that. Useful for catching drift between documentation and reality.",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "Frontend/React applications:",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "sam",
+    "text": "What's visual regression testing?",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Screenshot comparison. Render components, take screenshots, compare to baseline. Catches unintended visual changes. Powerful for design systems.",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "alex",
+    "text": "Data pipelines:",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "sam",
+    "text": "Property-based testing?",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "alex",
+    "text": "Instead of specific test cases, you define properties that should always hold, and the framework generates random inputs to find violations. \"For any list, sorting then sorting again should equal sorting once.\" It finds edge cases you wouldn't think to test.",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Microservices:",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "sam",
+    "text": "Contract testing between services sounds important.",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Critical. In a microservices world, you need confidence that services can communicate. Consumer-driven contract testing lets service consumers define what they expect, and producers verify they meet those expectations.",
+    "chapter": "SEGMENT 4: TESTING IN PRACTICE (12 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "sam",
+    "text": "What about the infrastructure around testing? CI, test environments, etc.",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "alex",
+    "text": "Let's cover the essentials.",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "sam",
+    "text": "How fast should CI be?",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "For feedback: under 10 minutes for initial signal (unit tests, linting, type checking). Full suite can run longer but should complete before merge.",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "sam",
+    "text": "What if tests are slow?",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Parallelize. Run tests across multiple machines. Use test impact analysis to run only tests affected by changes. Cache dependencies and build artifacts. Optimize slow tests.",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "alex",
+    "text": "Test environments need to be reliable. Flaky environments cause flaky tests. Use containers for consistency. Keep test data clean and predictable.",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "sam",
+    "text": "What about test data?",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "alex",
+    "text": "Several strategies:",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Mocking and stubbing - replacing real dependencies with fake ones.",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "sam",
+    "text": "When to mock versus use real dependencies?",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Mock at boundaries. If you're testing your code, mock external services. But within your codebase, prefer real objects when practical. Too much mocking leads to tests that pass but code that fails.",
+    "chapter": "SEGMENT 5: TEST INFRASTRUCTURE (10 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "sam",
+    "text": "What about when tests go wrong? Flaky tests, slow tests, low coverage?",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "alex",
+    "text": "Let me address each.",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "sam",
+    "text": "What causes flakiness?",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "alex",
+    "text": "Common causes:",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "sam",
+    "text": "How do you fix them?",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "alex",
+    "text": "First, identify them. Track test pass rates over time. Quarantine consistently flaky tests.",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "alex",
+    "text": "Slow tests hurt feedback loops and developer productivity.",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "alex",
+    "text": "Low coverage or missing tests is a symptom of culture, not just technique.",
+    "chapter": "SEGMENT 6: DEBUGGING AND FIXING TEST PROBLEMS (8 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "sam",
+    "text": "Speaking of culture, how do you build a testing culture?",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "alex",
+    "text": "It starts at the top. If leadership doesn't value testing, it won't happen. Allocate time for testing, celebrate catching bugs, don't create pressure that forces skipping tests.",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "sam",
+    "text": "What does that look like day-to-day?",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "alex",
+    "text": "Several practices:",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "sam",
+    "text": "How do you handle inherited code with no tests?",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "alex",
+    "text": "Don't try to backfill everything. Instead:",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "Pair programming and mob testing. Writing tests together spreads knowledge and builds shared understanding of what \"good tests\" look like.",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "sam",
+    "text": "What about QA teams? Do they still have a role?",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "Absolutely, but the role is evolving. Less \"testers find bugs after developers code\" and more:",
+    "chapter": "SEGMENT 7: TESTING CULTURE (8 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "sam",
+    "text": "Let's bring it home. What should product leaders remember?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "alex",
+    "text": "Testing is an investment, not a cost. The time spent writing tests pays back in confidence, faster debugging, and safer refactoring. It's not slowing down - it's going fast sustainably.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "sam",
+    "text": "How do you balance speed and testing?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "alex",
+    "text": "The fallacy is that you can go faster by skipping tests. You go faster for a few days, then bugs pile up, confidence drops, fear of changing code increases, and everything slows down. Testing is the fast path, not the slow path.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Write fewer, better tests. A hundred mediocre tests are worse than ten excellent tests. Each test should have a clear purpose, test meaningful behavior, and be readable.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "sam",
+    "text": "What makes a test readable?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Clear naming - \"should return empty array when no items match filter.\" Obvious structure - arrange, act, assert. No magic values - use named constants. No unnecessary complexity.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "alex",
+    "text": "The right test at the right level. Don't E2E test everything. Don't unit test trivial code. Match the test type to what you're verifying.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "Flaky tests are emergencies. They're not minor annoyances. They actively harm productivity and trust. Fix or delete them immediately.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "alex",
+    "text": "Testing strategy should match risk. Payment code needs more testing than internal admin tools. Allocate testing effort proportional to business impact of failures.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "sam",
+    "text": "One thing to remember?",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "alex",
+    "text": "Tests are for humans. They're documentation, confidence-builders, and safety nets. If tests aren't serving the team - if they're slow, flaky, or confusing - something's wrong. Good tests should make developers' lives easier, not harder.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "sam",
+    "text": "Excellent. Next episode: API Design Best Practices. How to build interfaces that developers love.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "alex",
+    "text": "The foundation of good integration.",
+    "chapter": "SEGMENT 8: KEY TAKEAWAYS (8 minutes)",
+    "file": "0107.mp3"
+  }
+]

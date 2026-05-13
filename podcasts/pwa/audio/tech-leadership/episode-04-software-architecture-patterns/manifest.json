@@ -1,0 +1,1087 @@
+[
+  {
+    "index": 0,
+    "speaker": "sam",
+    "text": "Welcome back to Tech Leadership Unpacked. I'm Sam Rivera, and we've covered AI, LLMs, and engineering teams. Now we're getting into one of my favorite topics: Software Architecture. This is where the decisions that haunt you for years get made.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "speaker": "alex",
+    "text": "I'm Alex Chen. And Sam's right - architecture decisions are the hardest to undo. Choose the wrong database? You're stuck with it for years. Wrong communication pattern between services? That's now baked into everything. The stakes are high.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "speaker": "sam",
+    "text": "So how do you make good architecture decisions?",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "speaker": "alex",
+    "text": "That's what we're going to unpack. The goal isn't to teach you specific technologies - those change. The goal is to teach you how to think about architecture, recognize patterns, and ask the right questions.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "speaker": "sam",
+    "text": "Let's start with the basics. What is software architecture, exactly?",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "speaker": "alex",
+    "text": "Software architecture is the fundamental organization of a system - the components, their relationships, the principles governing their design and evolution. It's the big-picture structure that shapes everything else.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "speaker": "sam",
+    "text": "That's abstract. Make it concrete for me.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "speaker": "alex",
+    "text": "Think of it like city planning. Before you build individual buildings, you need to decide: where are the roads? Where's residential versus commercial? How does water and electricity flow? How does traffic move? Those decisions constrain and enable everything that comes after.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "speaker": "sam",
+    "text": "So it's the skeleton, not the flesh.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "speaker": "alex",
+    "text": "Exactly. The architecture defines: How is the system divided into pieces? How do those pieces communicate? How is data stored and accessed? How does the system handle scale, failure, change? The answers to those questions are your architecture.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "speaker": "sam",
+    "text": "Who makes architecture decisions?",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "speaker": "alex",
+    "text": "In small teams, often the senior engineers or tech lead. In larger organizations, you might have dedicated architects. But here's the key insight: architecture is not a role, it's an activity. Every senior engineer does architecture work. Having dedicated architects just means someone's thinking about cross-cutting concerns full-time.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "speaker": "sam",
+    "text": "What makes a good architect?",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "speaker": "alex",
+    "text": "Good architects have: deep technical knowledge across many domains, experience with systems that succeeded and failed, the ability to think about tradeoffs rather than absolutes, strong communication skills to align stakeholders, and humility to know they might be wrong.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "speaker": "sam",
+    "text": "That last one surprises me.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "speaker": "alex",
+    "text": "It shouldn't. The best architects I know are the most uncertain. They know how often predictions are wrong, how often context changes, how often the \"right\" answer depends on factors you can't foresee. They make decisions that are reversible when possible and instrument to learn when not.",
+    "chapter": "SEGMENT 1: WHAT IS SOFTWARE ARCHITECTURE? (10 minutes)",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "speaker": "sam",
+    "text": "Let's talk about patterns. What are the main ways to organize a system?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "speaker": "alex",
+    "text": "Let me walk through the major patterns you'll encounter.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "speaker": "sam",
+    "text": "When is a monolith the right choice?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "speaker": "alex",
+    "text": "Small to medium teams, especially early-stage companies. When you're figuring out your domain and need to move fast. When the operational complexity of distributed systems isn't justified. Shopify runs one of the largest Rails monoliths in the world. It works.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "speaker": "sam",
+    "text": "But eventually you outgrow it?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "speaker": "alex",
+    "text": "Sometimes. The problems with monoliths at scale: deploy coordination becomes painful, one bug can take down everything, scaling means scaling the whole thing even if only part is under load, and team coordination becomes hard because everyone's working in the same codebase.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "speaker": "sam",
+    "text": "So then you go to microservices?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "speaker": "alex",
+    "text": "Microservices are independently deployable services, each owning a specific business capability. Each service has its own database, its own deploy pipeline, its own team typically.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "speaker": "sam",
+    "text": "That sounds better.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "speaker": "alex",
+    "text": "It has huge benefits: independent deployment and scaling, technology flexibility per service, clear ownership boundaries, fault isolation. But it has huge costs too: network complexity, distributed transactions are hard, debugging across services is painful, operational overhead multiplies.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "speaker": "sam",
+    "text": "So how do you decide?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "speaker": "alex",
+    "text": "The rule of thumb: don't start with microservices. Start monolithic, understand your domain, identify natural boundaries, then extract services when you have specific reasons. Premature microservices have killed more startups than premature scaling.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "speaker": "sam",
+    "text": "What's in between?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "speaker": "alex",
+    "text": "Modular monolith - a monolith with clear internal boundaries. Modules communicate through defined interfaces, have their own data, but deploy together. You get some benefits of both worlds: the operational simplicity of monolith, the organizational clarity of microservices.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "speaker": "sam",
+    "text": "What about serverless?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "speaker": "alex",
+    "text": "Serverless or Function-as-a-Service - your code runs in response to events, on managed infrastructure. No servers to manage. You pay only for execution time. Great for variable workloads and event-driven architectures.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "speaker": "sam",
+    "text": "Tradeoffs?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "speaker": "alex",
+    "text": "Cold starts can hurt latency. Vendor lock-in is real. Long-running processes don't fit the model. Debugging is harder. Cost can spiral if you're not careful with high-volume workloads. Great tool for the right situations, not a universal solution.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "speaker": "alex",
+    "text": "Event-driven architecture - components communicate through events. A service publishes \"Order Created,\" other services react. This decouples services - the publisher doesn't know or care who's listening.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "speaker": "sam",
+    "text": "When does that make sense?",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "speaker": "alex",
+    "text": "When you have many consumers of the same information. When you want to decouple teams. When you need to handle spiky workloads by buffering events. The complexity is eventual consistency - events take time to propagate, so different parts of the system may see different states.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "speaker": "sam",
+    "text": "That sounds tricky.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "speaker": "alex",
+    "text": "It requires a different mental model. You design for eventual consistency rather than immediate consistency. It's powerful but requires careful thought about failure modes and ordering.",
+    "chapter": "SEGMENT 2: CORE ARCHITECTURAL PATTERNS (15 minutes)",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "speaker": "sam",
+    "text": "How do you actually make architecture decisions? What's the process?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "speaker": "alex",
+    "text": "I follow a structured approach.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "speaker": "sam",
+    "text": "What if the requirements aren't clear?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "speaker": "alex",
+    "text": "Push for clarity. If the business says \"it needs to be fast,\" ask: \"How fast? What latency is acceptable? For what percentage of requests?\" Vague requirements lead to over-engineering or under-engineering.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "speaker": "sam",
+    "text": "What comes after requirements?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "speaker": "alex",
+    "text": "2. Identify the constraints. Budget, timeline, team skills, existing systems, regulatory requirements. Architecture doesn't exist in a vacuum. Maybe the perfect solution requires expertise you don't have, or costs more than you have.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "speaker": "alex",
+    "text": "3. Generate options. Come up with multiple approaches. At least three. If you only have one option, you haven't thought hard enough. Each option should be genuinely viable, not a straw man.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "speaker": "sam",
+    "text": "Why three?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "speaker": "alex",
+    "text": "It forces you out of binary thinking. Not \"monolith or microservices\" but \"monolith, modular monolith, or microservices.\" The middle option is often the best.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "speaker": "alex",
+    "text": "4. Evaluate tradeoffs. Every option has pros and cons. Be explicit about them. Create a comparison matrix. What's good for scalability might be bad for simplicity. Make the tradeoffs visible.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "speaker": "sam",
+    "text": "How do you evaluate things you can't know yet?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "speaker": "alex",
+    "text": "You can't fully. This is why reversibility matters. Prefer decisions that can be changed later. If you're wrong about a reversible decision, you can fix it. If you're wrong about an irreversible decision, you live with it.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "speaker": "sam",
+    "text": "What makes a decision reversible or irreversible?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "speaker": "alex",
+    "text": "Data is the hardest to change. Choosing a database, data model, data formats - those decisions echo for years. Programming language is pretty reversible - you can rewrite. API contracts are medium - you can version and migrate.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "speaker": "alex",
+    "text": "5. Document the decision. Why you chose what you chose. What alternatives you considered. What tradeoffs you accepted. This is for future you and future team members. In a year, no one will remember why you made this choice.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "speaker": "sam",
+    "text": "Architecture Decision Records?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "speaker": "alex",
+    "text": "ADRs are great for this. Simple template: context, decision, consequences. Lives in the repo. One per significant decision. Immutable - you add new ADRs rather than editing old ones.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "speaker": "alex",
+    "text": "6. Validate with prototypes. For high-risk decisions, build a spike. Don't theorize - build. An afternoon building a proof of concept can save months of heading down the wrong path.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "speaker": "sam",
+    "text": "How much prototyping is enough?",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "speaker": "alex",
+    "text": "Enough to answer your key uncertainties. If you're worried about performance, prototype the hot path and benchmark it. If you're worried about team learning curve, prototype with junior engineers and see how they do.",
+    "chapter": "SEGMENT 3: MAKING ARCHITECTURE DECISIONS (12 minutes)",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "speaker": "sam",
+    "text": "You mentioned quality attributes. Can you go deeper on those?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "speaker": "alex",
+    "text": "Quality attributes - sometimes called non-functional requirements or \"-ilities\" - are how the system does what it does, not what it does. They drive architecture more than features do.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "speaker": "sam",
+    "text": "What are the main ones?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "speaker": "alex",
+    "text": "Let me cover the big ones.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "speaker": "sam",
+    "text": "What enables scalability?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "speaker": "alex",
+    "text": "Statelessness helps - any request can go to any server. Horizontal partitioning of data. Caching. Async processing. Queue-based architectures. The key is identifying your scaling bottlenecks before they become emergencies.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "speaker": "alex",
+    "text": "Availability - what percentage of time is the system operational? Five nines (99.999%) means 5 minutes downtime per year. The more nines, the more expensive and complex.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "speaker": "sam",
+    "text": "How do you achieve high availability?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "speaker": "alex",
+    "text": "Redundancy at every layer. No single points of failure. Multiple servers, multiple data centers, multiple regions. Automatic failover. Graceful degradation - the system should degrade rather than fail completely.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "speaker": "alex",
+    "text": "Performance - latency and throughput. Latency is how long a request takes. Throughput is how many requests per second. They're related but different. Sometimes you trade one for the other.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "speaker": "sam",
+    "text": "What drives good performance?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "speaker": "alex",
+    "text": "Efficient algorithms and data structures at the code level. Caching - the fastest request is one you don't make. Connection pooling and resource reuse. Async and parallel processing. Good indexing. Proximity - put data close to where it's processed.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "speaker": "alex",
+    "text": "Maintainability - how easy is the system to modify? This is usually undervalued until you live with a system for years. Technical debt accumulates when maintainability is sacrificed.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "speaker": "sam",
+    "text": "What makes a system maintainable?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "speaker": "alex",
+    "text": "Clear structure, separation of concerns, consistent patterns, good documentation, comprehensive tests. It's not sexy, but it's what determines whether you can still add features in year three.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "speaker": "alex",
+    "text": "Security - protecting against threats. Authentication, authorization, encryption, input validation, audit logging. Security should be designed in, not bolted on.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "speaker": "sam",
+    "text": "We have a whole episode on security later, right?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "speaker": "alex",
+    "text": "Yes. But for architecture: defense in depth, principle of least privilege, zero trust networks. Security is an architectural concern, not just a feature.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "speaker": "alex",
+    "text": "The critical insight is: you cannot maximize all quality attributes. There are fundamental trade-offs. Optimizing for latency may hurt scalability. Optimizing for availability may hurt consistency. You have to prioritize.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "speaker": "sam",
+    "text": "How do you prioritize?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "speaker": "alex",
+    "text": "Based on business needs. An e-commerce site might prioritize availability and performance - downtime costs sales. A financial system might prioritize consistency and security - correctness matters more than speed. A startup might prioritize maintainability and simplicity - they need to iterate fast.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "speaker": "sam",
+    "text": "Can you give a specific trade-off example?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "speaker": "alex",
+    "text": "The CAP theorem is the classic one. In a distributed system, you can have at most two of three: Consistency, Availability, and Partition tolerance. Since network partitions are unavoidable, you really choose between consistency and availability.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "speaker": "sam",
+    "text": "What does that mean practically?",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "speaker": "alex",
+    "text": "If the database nodes can't communicate, do you return potentially stale data (availability) or refuse to respond (consistency)? Different systems make different choices. Your banking app probably chooses consistency. Your social media feed probably chooses availability.",
+    "chapter": "SEGMENT 4: QUALITY ATTRIBUTES AND TRADE-OFFS (12 minutes)",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "speaker": "sam",
+    "text": "Let's talk about how to organize code. Layers, modules, boundaries - these concepts keep coming up.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "speaker": "alex",
+    "text": "The core principle is separation of concerns. Different responsibilities should live in different parts of the system. This makes the system easier to understand, test, and change.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "speaker": "sam",
+    "text": "What are the typical layers?",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "speaker": "alex",
+    "text": "The classic three-tier architecture: Presentation (UI, APIs), Business Logic (core domain), Data Access (databases, external services). Each layer has a clear responsibility and only talks to adjacent layers.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "speaker": "sam",
+    "text": "Why is that beneficial?",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0088.mp3"
+  },
+  {
+    "index": 89,
+    "speaker": "alex",
+    "text": "You can change the database without touching business logic. You can add a new UI without rewriting the backend. Each layer can be tested independently. Different teams can work on different layers.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0089.mp3"
+  },
+  {
+    "index": 90,
+    "speaker": "sam",
+    "text": "What about Domain-Driven Design? I hear that a lot.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0090.mp3"
+  },
+  {
+    "index": 91,
+    "speaker": "alex",
+    "text": "DDD is a powerful approach for complex domains. The core idea: organize code around business concepts, not technical concepts. A \"bounded context\" is an area of the system with its own ubiquitous language and model.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0091.mp3"
+  },
+  {
+    "index": 92,
+    "speaker": "sam",
+    "text": "Give me an example.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0092.mp3"
+  },
+  {
+    "index": 93,
+    "speaker": "alex",
+    "text": "In an e-commerce system, you might have bounded contexts for: Catalog (products, categories), Ordering (carts, orders), Fulfillment (shipping, inventory), Payments (transactions, refunds). Each has its own model of concepts. A \"Product\" in Catalog might have different attributes than in Fulfillment.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0093.mp3"
+  },
+  {
+    "index": 94,
+    "speaker": "sam",
+    "text": "Isn't that duplication?",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0094.mp3"
+  },
+  {
+    "index": 95,
+    "speaker": "alex",
+    "text": "It's appropriate separation. The Catalog cares about product descriptions and images. Fulfillment cares about weight and dimensions. Sharing one Product model across contexts leads to a bloated, coupled mess.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0095.mp3"
+  },
+  {
+    "index": 96,
+    "speaker": "sam",
+    "text": "How does this relate to microservices?",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0096.mp3"
+  },
+  {
+    "index": 97,
+    "speaker": "alex",
+    "text": "Bounded contexts are natural candidates for service boundaries. One team owns one bounded context. This gives you organizational alignment with technical architecture.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0097.mp3"
+  },
+  {
+    "index": 98,
+    "speaker": "alex",
+    "text": "Now let's talk about coupling and cohesion - the yin and yang of system design.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0098.mp3"
+  },
+  {
+    "index": 99,
+    "speaker": "sam",
+    "text": "How do you achieve that?",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0099.mp3"
+  },
+  {
+    "index": 100,
+    "speaker": "alex",
+    "text": "Define clear interfaces. Hide implementation details. Depend on abstractions, not concretions. The dependency inversion principle: high-level modules shouldn't depend on low-level modules; both should depend on abstractions.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0100.mp3"
+  },
+  {
+    "index": 101,
+    "speaker": "sam",
+    "text": "That sounds like buzzwords.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0101.mp3"
+  },
+  {
+    "index": 102,
+    "speaker": "alex",
+    "text": "laughs Let me make it concrete. Bad: your order processing code directly calls SQL queries. Good: your order processing code uses an OrderRepository interface. The SQL implementation is hidden. You could swap in a NoSQL implementation without changing the order processing logic.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0102.mp3"
+  },
+  {
+    "index": 103,
+    "speaker": "sam",
+    "text": "So it's about creating these abstraction boundaries.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0103.mp3"
+  },
+  {
+    "index": 104,
+    "speaker": "alex",
+    "text": "Yes. And being thoughtful about what crosses boundaries. Ideally, you communicate through well-defined messages or function calls. If you're sharing database tables across services, that's hidden coupling - you can't change the schema without coordinating everyone.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0104.mp3"
+  },
+  {
+    "index": 105,
+    "speaker": "sam",
+    "text": "What about APIs between services?",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0105.mp3"
+  },
+  {
+    "index": 106,
+    "speaker": "alex",
+    "text": "APIs are contracts. Treat them seriously. Version them. Design for evolution. Breaking changes to APIs are expensive - you have to coordinate all consumers. This is why backward compatibility matters, and why API design is its own discipline.",
+    "chapter": "SEGMENT 5: LAYERS, BOUNDARIES, AND COUPLING (12 minutes)",
+    "file": "0106.mp3"
+  },
+  {
+    "index": 107,
+    "speaker": "sam",
+    "text": "Let's talk about data. Database choice seems like one of those hard-to-undo decisions.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0107.mp3"
+  },
+  {
+    "index": 108,
+    "speaker": "alex",
+    "text": "It is. Data outlives code. The code that wrote the data might be gone, but the data persists. Choose data models and stores carefully.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0108.mp3"
+  },
+  {
+    "index": 109,
+    "speaker": "sam",
+    "text": "How do you choose between SQL and NoSQL?",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0109.mp3"
+  },
+  {
+    "index": 110,
+    "speaker": "alex",
+    "text": "It depends on your access patterns and consistency needs.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0110.mp3"
+  },
+  {
+    "index": 111,
+    "speaker": "sam",
+    "text": "When would you not use SQL?",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0111.mp3"
+  },
+  {
+    "index": 112,
+    "speaker": "alex",
+    "text": "When you need extreme scale and can sacrifice some flexibility. When your data is hierarchical or document-oriented. When you need schema flexibility. When your access patterns are simple key-value lookups.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0112.mp3"
+  },
+  {
+    "index": 113,
+    "speaker": "alex",
+    "text": "Document stores (MongoDB, Firestore) - store data as flexible documents. Good for data that varies in structure, when you read and write whole objects, when you need to evolve schema quickly.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0113.mp3"
+  },
+  {
+    "index": 114,
+    "speaker": "sam",
+    "text": "Can you use multiple databases?",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0114.mp3"
+  },
+  {
+    "index": 115,
+    "speaker": "alex",
+    "text": "Absolutely. Polyglot persistence - using different databases for different needs - is common in larger systems. Your relational data in Postgres, your cache in Redis, your search index in Elasticsearch, your analytics in a data warehouse.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0115.mp3"
+  },
+  {
+    "index": 116,
+    "speaker": "sam",
+    "text": "That sounds complex.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0116.mp3"
+  },
+  {
+    "index": 117,
+    "speaker": "alex",
+    "text": "It is. There's operational overhead to running multiple data stores. The alternative is forcing everything into one database type, which leads to different problems. Choose your complexity.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0117.mp3"
+  },
+  {
+    "index": 118,
+    "speaker": "sam",
+    "text": "What about data consistency across services?",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0118.mp3"
+  },
+  {
+    "index": 119,
+    "speaker": "alex",
+    "text": "This is one of the hardest problems in distributed systems. When Order Service and Inventory Service each have their own database, how do you ensure they're consistent?",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0119.mp3"
+  },
+  {
+    "index": 120,
+    "speaker": "sam",
+    "text": "Transactions?",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0120.mp3"
+  },
+  {
+    "index": 121,
+    "speaker": "alex",
+    "text": "Distributed transactions exist (two-phase commit) but are slow and complex. More often, you accept eventual consistency and design around it.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0121.mp3"
+  },
+  {
+    "index": 122,
+    "speaker": "sam",
+    "text": "That sounds error-prone.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0122.mp3"
+  },
+  {
+    "index": 123,
+    "speaker": "alex",
+    "text": "It requires careful design. You need idempotency (doing something twice has the same effect as once), clear failure modes, and monitoring. But it scales better than distributed transactions.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0123.mp3"
+  },
+  {
+    "index": 124,
+    "speaker": "alex",
+    "text": "One more concept: CQRS - Command Query Responsibility Segregation. Separate your read models from your write models. Writes go to one store optimized for writes, reads go to another optimized for reads.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0124.mp3"
+  },
+  {
+    "index": 125,
+    "speaker": "sam",
+    "text": "When is that useful?",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0125.mp3"
+  },
+  {
+    "index": 126,
+    "speaker": "alex",
+    "text": "When read and write patterns are very different. When you need to scale reads and writes independently. When your read views are complex aggregations of multiple entities.",
+    "chapter": "SEGMENT 6: DATA ARCHITECTURE (10 minutes)",
+    "file": "0126.mp3"
+  },
+  {
+    "index": 127,
+    "speaker": "sam",
+    "text": "Let's talk about what to avoid. What are the common anti-patterns you see?",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0127.mp3"
+  },
+  {
+    "index": 128,
+    "speaker": "alex",
+    "text": "So many. Let me hit the big ones.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0128.mp3"
+  },
+  {
+    "index": 129,
+    "speaker": "sam",
+    "text": "How does that happen?",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0129.mp3"
+  },
+  {
+    "index": 130,
+    "speaker": "alex",
+    "text": "Usually from sharing databases across services, chatty synchronous communication, or not respecting bounded contexts. Services should be independently deployable. If they're not, you don't actually have microservices.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0130.mp3"
+  },
+  {
+    "index": 131,
+    "speaker": "alex",
+    "text": "Big Ball of Mud. No discernible architecture at all. Code is tangled, boundaries are unclear, everything depends on everything. Usually happens from years of expedient hacking without refactoring.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0131.mp3"
+  },
+  {
+    "index": 132,
+    "speaker": "sam",
+    "text": "How do you escape a big ball of mud?",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0132.mp3"
+  },
+  {
+    "index": 133,
+    "speaker": "alex",
+    "text": "Slowly. Find natural seams, draw boundaries, strangle incrementally. It takes discipline and investment. The best cure is prevention - continuous refactoring rather than letting it get that bad.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0133.mp3"
+  },
+  {
+    "index": 134,
+    "speaker": "alex",
+    "text": "Golden Hammer. Using one tool or pattern for everything because you know it well. \"I know MongoDB, so I'll use it for everything.\" Different problems need different solutions.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0134.mp3"
+  },
+  {
+    "index": 135,
+    "speaker": "sam",
+    "text": "I see this with frameworks too.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0135.mp3"
+  },
+  {
+    "index": 136,
+    "speaker": "alex",
+    "text": "Definitely. \"We're a React shop\" becomes \"we'll use React even when a static site generator would be better.\" Know multiple tools, choose the right one.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0136.mp3"
+  },
+  {
+    "index": 137,
+    "speaker": "alex",
+    "text": "Resume-Driven Development. Choosing technologies because you want them on your resume, not because they're right for the problem. Kubernetes for a simple app that could run on a single server. GraphQL for an internal API with one consumer.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0137.mp3"
+  },
+  {
+    "index": 138,
+    "speaker": "sam",
+    "text": "Ouch. I've seen that.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0138.mp3"
+  },
+  {
+    "index": 139,
+    "speaker": "alex",
+    "text": "Premature optimization. Designing for scale you might never reach, adding complexity for performance you might never need. Build for your current needs with an eye toward evolution, not for imaginary future scale.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0139.mp3"
+  },
+  {
+    "index": 140,
+    "speaker": "alex",
+    "text": "Not Invented Here. Building custom solutions when good off-the-shelf options exist. Unless it's core to your competitive advantage, use existing solutions. You don't need to write your own authentication system.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0140.mp3"
+  },
+  {
+    "index": 141,
+    "speaker": "sam",
+    "text": "What about the opposite?",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0141.mp3"
+  },
+  {
+    "index": 142,
+    "speaker": "alex",
+    "text": "Outsource everything can be bad too. If it's core to your product, you probably need to own it. There's a balance.",
+    "chapter": "SEGMENT 7: ARCHITECTURE ANTI-PATTERNS (8 minutes)",
+    "file": "0142.mp3"
+  },
+  {
+    "index": 143,
+    "speaker": "sam",
+    "text": "Let's bring it home. What are the key messages for product leaders?",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0143.mp3"
+  },
+  {
+    "index": 144,
+    "speaker": "alex",
+    "text": "Architecture is not just technical. It affects team structure, organizational dynamics, time to market, and operational costs. You should be involved in major architecture decisions.",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0144.mp3"
+  },
+  {
+    "index": 145,
+    "speaker": "sam",
+    "text": "What should I be asking?",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0145.mp3"
+  },
+  {
+    "index": 146,
+    "speaker": "alex",
+    "text": "\"What are the alternatives you considered?\" \"What are the trade-offs?\" \"What would it take to change this later?\" \"How does this affect team independence?\"",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0146.mp3"
+  },
+  {
+    "index": 147,
+    "speaker": "alex",
+    "text": "Invest in reversibility. The more reversible a decision, the faster you can make it and the less consensus you need. Design for evolution, not perfection.",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0147.mp3"
+  },
+  {
+    "index": 148,
+    "speaker": "alex",
+    "text": "Simple is hard. The best architectures are simple, not simplistic. They solve complex problems with clear structures. Complexity should be a last resort, not a first instinct.",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0148.mp3"
+  },
+  {
+    "index": 149,
+    "speaker": "alex",
+    "text": "Architecture evolves. What's right today may not be right in two years. Plan for change. Don't optimize for a static target.",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0149.mp3"
+  },
+  {
+    "index": 150,
+    "speaker": "alex",
+    "text": "Team topology and architecture must align. If you want independent services, you need independent teams. Conway's Law isn't optional.",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0150.mp3"
+  },
+  {
+    "index": 151,
+    "speaker": "sam",
+    "text": "One thing to remember?",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0151.mp3"
+  },
+  {
+    "index": 152,
+    "speaker": "alex",
+    "text": "Every architecture decision is a bet on an uncertain future. The goal isn't to be right - it's to learn quickly when you're wrong and adapt. The best architectures are the ones that can evolve as you learn.",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0152.mp3"
+  },
+  {
+    "index": 153,
+    "speaker": "sam",
+    "text": "Perfect. Next episode, we're going bigger - Systems Design at Scale. How do you build systems that serve millions of users without falling over?",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0153.mp3"
+  },
+  {
+    "index": 154,
+    "speaker": "alex",
+    "text": "The fun stuff.",
+    "chapter": "SEGMENT 8: PRACTICAL TAKEAWAYS (6 minutes)",
+    "file": "0154.mp3"
+  }
+]

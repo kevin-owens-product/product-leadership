@@ -1,0 +1,20 @@
+{
+  "id": "ap-finance-mastery",
+  "title": "AP & Finance Mastery",
+  "subtitle": "The CPO's Guide to Accounts Payable & Financial Operations",
+  "description": "A comprehensive deep dive into accounts payable, procure-to-pay, payment operations, and finance automation. Built for product leaders joining the AP automation space who need to become domain experts fast.",
+  "color": "#059669",
+  "icon": "💰",
+  "episodes": [
+    {"id": 1, "file": "episode-01-ap-fundamentals.md", "title": "AP Fundamentals & The Invoice Lifecycle"},
+    {"id": 2, "file": "episode-02-procure-to-pay.md", "title": "The Procure-to-Pay Journey"},
+    {"id": 3, "file": "episode-03-invoice-processing.md", "title": "Invoice Processing Deep Dive"},
+    {"id": 4, "file": "episode-04-payment-operations.md", "title": "Payment Operations & Cash Management"},
+    {"id": 5, "file": "episode-05-supplier-management.md", "title": "Supplier Management & Spend Analytics"},
+    {"id": 6, "file": "episode-06-compliance-fraud.md", "title": "Compliance, Fraud Prevention & Internal Controls"},
+    {"id": 7, "file": "episode-07-ap-automation-ai.md", "title": "AP Automation Technology & The AI Revolution"},
+    {"id": 8, "file": "episode-08-medius-deep-dive.md", "title": "Medius Deep Dive — The Platform & Product Suite"},
+    {"id": 9, "file": "episode-09-cfo-perspective.md", "title": "The CFO Perspective & Strategic Finance"},
+    {"id": 10, "file": "episode-10-future-of-ap.md", "title": "The Future of AP & Autonomous Finance"}
+  ]
+}

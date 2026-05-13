@@ -1,6 +1,7 @@
 [build]
-  base = "podcasts/pwa/dist"
-  publish = "."
+  base = "podcasts/pwa"
+  publish = "dist"
+  command = "node build-episodes.js"
 
 [[headers]]
   for = "/*"

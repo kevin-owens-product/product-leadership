@@ -151,15 +151,15 @@ This podcast series is designed for CPOs, product leaders, and executives who wa
 Each transcript is approximately 8,000-10,000 words, equivalent to one hour of audio. Read at your own pace - the content is designed to be engaging and conversational.
 
 ### Converting to Audio
-You can use these transcripts with text-to-speech services to create audio versions:
-- **ElevenLabs** - High-quality AI voices with great intonation
-- **Amazon Polly** - AWS service, good for batch processing
-- **Google Cloud Text-to-Speech** - Multiple voice options
-- **Play.ht** - Easy-to-use with various voices
-- **Murf.ai** - Studio-quality voiceovers
+Audio is generated with Supertonic through the PWA scripts:
+
+```bash
+cd podcasts/pwa
+npm run audio:show -- --show tech-leadership
+```
 
 For best results:
-1. Use different voices for Alex (technical, energetic) and Sam (curious, thoughtful)
+1. Use the speaker-to-voice mapping in the episode transcript frontmatter
 2. Add appropriate pauses at segment breaks
 3. Export at podcast-quality (128kbps MP3 is sufficient)
 

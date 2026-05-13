@@ -4,6 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "node build-episodes.js",
+    "audio:list": "SUPERTONIC_DIR=${SUPERTONIC_DIR:-$HOME/code/supertonic} node ../tools/generate-audio-supertonic.js --list",
+    "audio:episode": "SUPERTONIC_DIR=${SUPERTONIC_DIR:-$HOME/code/supertonic} node ../tools/generate-audio-supertonic.js",
+    "audio:show": "SUPERTONIC_DIR=${SUPERTONIC_DIR:-$HOME/code/supertonic} node ../tools/generate-audio-supertonic.js --all",
     "test:unit": "node --test tests/unit/*.test.js",
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run test:e2e"

@@ -811,16 +811,20 @@ function alignChapterLineIndexes(chapterList, lines) {
     }
 }
 
-async function loadPrebakedAudioManifest(podcastId, episodeFile) {
+async function loadSupertonicAudioManifest(podcastId, episodeFile) {
     if (!podcastId || !episodeFile) return null;
     const basename = episodeFile.replace(/\.md$/, '');
     const base = `audio/${podcastId}/${basename}`;
+    const cacheKey = Date.now().toString(36);
     try {
-        const res = await fetch(`${base}/manifest.json`, { cache: 'no-cache' });
+        const res = await fetch(`${base}/manifest.json?v=${cacheKey}`, {
+            cache: 'no-store',
+            headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+        });
         if (!res.ok) return null;
         const items = await res.json();
         if (!Array.isArray(items) || items.length === 0) return null;
-        return { base, items };
+        return { base, cacheKey, items };
     } catch {
         return null;
     }
@@ -844,7 +848,7 @@ function attachAudioUrls(dialogue, manifest) {
         for (const line of dialogue) {
             const item = byRawLine.get(line.rawLine);
             if (item) {
-                line.audioUrl = `${manifest.base}/${item.file}`;
+                line.audioUrl = `${manifest.base}/${item.file}?v=${manifest.cacheKey}`;
                 matched++;
             }
         }
@@ -852,7 +856,7 @@ function attachAudioUrls(dialogue, manifest) {
     // Fallback: positional match if counts line up exactly.
     if (matched === 0 && manifest.items.length === dialogue.length) {
         for (let i = 0; i < dialogue.length; i++) {
-            dialogue[i].audioUrl = `${manifest.base}/${manifest.items[i].file}`;
+            dialogue[i].audioUrl = `${manifest.base}/${manifest.items[i].file}?v=${manifest.cacheKey}`;
             matched++;
         }
     }
@@ -873,17 +877,18 @@ async function openEpisode(episode, options = {}) {
 
     const podcastId = currentPodcast ? currentPodcast.id : null;
     const episodeFile = episode.file || episode.filename || null;
-    const audioManifest = await loadPrebakedAudioManifest(podcastId, episodeFile);
+    const audioManifest = await loadSupertonicAudioManifest(podcastId, episodeFile);
     if (audioManifest) {
         const matched = attachAudioUrls(dialogueLines, audioManifest);
         currentAudioManifestBase = audioManifest.base;
         if (matched > 0) {
-            console.log(`Loaded ${matched}/${dialogueLines.length} pre-baked audio lines from ${audioManifest.base}`);
+            console.log(`Loaded ${matched}/${dialogueLines.length} Supertonic audio lines from ${audioManifest.base}`);
         } else {
-            console.warn(`Pre-baked audio manifest found at ${audioManifest.base} but no lines matched; falling back to TTS`);
+            console.warn(`Supertonic audio manifest found at ${audioManifest.base} but no lines matched`);
         }
     } else {
         currentAudioManifestBase = '';
+        console.warn(`No Supertonic audio manifest found for ${podcastId || 'unknown podcast'} / ${episodeFile || 'unknown episode'}`);
     }
 
     // Restore progress (with podcast-scoped key)
@@ -1172,14 +1177,14 @@ async function togglePlayPause() {
         isPaused = false;
         // Re-acquire wake lock when resuming
         await requestWakeLock();
-        synth.resume();
+        speechPlayers.resumeCurrentSpeech();
         void startBackgroundAudioSession();
         document.getElementById('play-btn').textContent = '⏸';
     } else {
         isPaused = true;
         // Release wake lock when pausing
         await releaseWakeLock();
-        synth.pause();
+        speechPlayers.pauseCurrentSpeech();
         pauseBackgroundAudioSession();
         document.getElementById('play-btn').textContent = '▶';
         setStatus('Paused');
@@ -1484,7 +1489,7 @@ document.getElementById('voice-boost-toggle').addEventListener('click', () => {
         voiceBoostEnabled ? 'On' : 'Off';
     localStorage.setItem('voiceBoostEnabled', voiceBoostEnabled);
     if (voiceBoostEnabled) {
-        setStatus('Voice boost is limited in TTS mode');
+        setStatus('Voice boost is handled in generated Supertonic audio');
     }
 });
 
@@ -2014,11 +2019,7 @@ document.addEventListener('visibilitychange', async () => {
         if (isPlaying && !isPaused) {
             await requestWakeLock();
 
-            // Resume speech synthesis if it was paused
-            if (synth.paused) {
-                console.log('Resuming speech synthesis after background');
-                synth.resume();
-            }
+            speechPlayers.resumeCurrentSpeech();
             syncMediaSession({ includeMetadata: true, includePosition: true });
         }
     }

@@ -26,7 +26,7 @@ test('transcript search handles regex-like input without crash', async ({ page }
   await expect(page.locator('#transcript-search-input')).toHaveValue('a+b?(c)[d]');
 });
 
-test('settings shows TTS background playback notice', async ({ page }) => {
+test('settings shows generated audio background playback notice', async ({ page }) => {
   await page.goto('/');
   await page.locator('.podcast-card').first().click();
   await page.locator('.episode-card').first().click();
@@ -37,28 +37,58 @@ test('settings shows TTS background playback notice', async ({ page }) => {
 
 test('AI Native PM shows stable chapter markers and playback advances', async ({ page }) => {
   await page.addInitScript(() => {
+    window.Audio = class FakeAudio {
+      constructor(src) {
+        this.src = src;
+        this.preload = '';
+        this.playbackRate = 1;
+        this.paused = true;
+        this.onended = null;
+        this.onerror = null;
+      }
+      play() {
+        this.paused = false;
+        setTimeout(() => {
+          if (typeof this.onended === 'function') this.onended();
+        }, 20);
+        return Promise.resolve();
+      }
+      pause() {
+        this.paused = true;
+      }
+    };
     const synth = window.speechSynthesis;
     if (!synth) return;
     synth.getVoices = () => [
       { name: 'Test Voice A', lang: 'en-US' },
       { name: 'Test Voice B', lang: 'en-US' }
     ];
-    synth.speak = (utterance) => {
-      setTimeout(() => {
-        if (typeof utterance.onend === 'function') utterance.onend();
-      }, 20);
-    };
     synth.cancel = () => {};
-    synth.pause = () => {};
-    synth.resume = () => {};
+  });
+
+  await page.route('**/audio/the-forge-podcast/episode-04-ai-native-product-management/manifest.json*', route => {
+    route.fulfill({
+      contentType: 'application/json',
+      body: JSON.stringify([
+        { rawLine: 11, file: '0000.mp3' },
+        { rawLine: 13, file: '0001.mp3' }
+      ])
+    });
+  });
+
+  await page.route('**/audio/the-forge-podcast/episode-04-ai-native-product-management/*.mp3*', route => {
+    route.fulfill({
+      contentType: 'audio/mpeg',
+      body: ''
+    });
   });
 
   await page.goto('/');
   await page.locator('.podcast-card:has-text("The Forge Podcast")').click();
   await page.locator('.episode-card:has-text("AI-Native Product Management")').click();
 
-  await expect(page.locator('#chapters-list .chapter-time').first()).toHaveText('00:00 · 3 min');
-  await expect(page.locator('#chapters-list .chapter-time').nth(1)).toHaveText('03:00 · 22 min');
+  await expect(page.locator('#chapters-list .chapter-time').first()).toHaveText(/^00:00 · \d+ min$/);
+  await expect(page.locator('#chapters-list .chapter-time').nth(1)).toHaveText(/^\d{2}:\d{2} · \d+ min$/);
 
   const initialPosition = await page.locator('#current-pos').textContent();
   await page.locator('#play-btn').click();

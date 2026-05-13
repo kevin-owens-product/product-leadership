@@ -6,7 +6,7 @@
  * (https://github.com/supertone-inc/supertonic), then optionally concatenates
  * the WAVs into a single MP3 per episode using ffmpeg.
  *
- * Output layout (matches the older ElevenLabs flow so the PWA can load it):
+ * Output layout:
  *
  *   podcasts/pwa/audio/<show-id>/<episode-basename>/0000.wav
  *   podcasts/pwa/audio/<show-id>/<episode-basename>/0001.wav
@@ -280,6 +280,46 @@ function runSupertonicLine({ exampleScript, voiceName, text, outDir, lang }) {
   return concatPath;
 }
 
+function runSupertonicBatch({ exampleScript, lines, outDir, lang }) {
+  ensureDir(outDir);
+  for (const f of fs.readdirSync(outDir)) {
+    if (f.endsWith('.wav')) fs.rmSync(path.join(outDir, f));
+  }
+
+  const workerPath = path.join(__dirname, 'supertonic-episode-worker.mjs');
+  const jobPath = path.join(outDir, 'job.json');
+  const job = {
+    supertonicDir: SUPERTONIC_DIR,
+    totalStep: Number(TOTAL_STEP),
+    speed: Number(SPEED),
+    lang: lang || 'en',
+    lines: lines.map((line, idx) => ({
+      index: line.index,
+      text: line.text,
+      voiceStylePath: resolveVoiceStyle(line.voice),
+      outputPath: path.join(outDir, `${String(idx).padStart(4, '0')}.wav`),
+    })),
+  };
+  fs.writeFileSync(jobPath, JSON.stringify(job, null, 2));
+
+  const result = spawnSync('node', [workerPath, '--input', jobPath], {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    encoding: 'utf8',
+  });
+
+  if (result.status !== 0) {
+    process.stdout.write(result.stdout || '');
+    process.stderr.write(result.stderr || '');
+    throw new Error(`Supertonic exited with status ${result.status}`);
+  }
+
+  process.stdout.write(result.stdout || '');
+
+  const saved = job.lines.map((line) => line.outputPath);
+
+  return saved;
+}
+
 // Minimal WAV concatenator. Assumes all inputs share the same 16-bit PCM
 // format that Supertonic produces. Reads PCM data following the `data` chunk
 // header and rewrites a fresh header for the combined file.
@@ -393,6 +433,7 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   const speakerOrder = new Map();
   const items = [];
   const wavs = [];
+  const pending = [];
 
   for (let i = 0; i < dialogue.length; i++) {
     const line = dialogue[i];
@@ -401,28 +442,11 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
 
     const wavName = `${String(i).padStart(4, '0')}.wav`;
     const wavPath = path.join(outDir, wavName);
-    const tmpDir = path.join(outDir, '.tmp', String(i));
 
     if (fs.existsSync(wavPath) && !FLAGS.force) {
       process.stdout.write(`\r  line ${i + 1}/${dialogue.length} (cached)        `);
     } else {
-      process.stdout.write(`\r  line ${i + 1}/${dialogue.length} [${line.speaker} → ${voice}]    `);
-      try {
-        const produced = runSupertonicLine({
-          exampleScript,
-          voiceName: voice,
-          text: line.text,
-          outDir: tmpDir,
-          lang: manifest.lang || 'en',
-        });
-        safeRename(produced, wavPath);
-        fs.rmSync(tmpDir, { recursive: true, force: true });
-      } catch (err) {
-        console.log('');
-        log(`Line ${i} failed: ${err.message}`, 'err');
-        fs.rmSync(tmpDir, { recursive: true, force: true });
-        continue;
-      }
+      pending.push({ ...line, index: i, voice, wavPath });
     }
 
     wavs.push(wavPath);
@@ -437,8 +461,30 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     });
   }
 
+  if (pending.length > 0) {
+    console.log(`\n  rendering ${pending.length}/${dialogue.length} uncached lines with one Supertonic worker`);
+    const tmpDir = path.join(outDir, '.tmp', 'batch');
+    try {
+      const produced = runSupertonicBatch({
+        exampleScript,
+        lines: pending,
+        outDir: tmpDir,
+        lang: manifest.lang || 'en',
+      });
+      produced.forEach((producedPath, idx) => {
+        safeRename(producedPath, pending[idx].wavPath);
+      });
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
+  }
+
   fs.rmSync(path.join(outDir, '.tmp'), { recursive: true, force: true });
   console.log('');
+
+  if (items.length !== dialogue.length) {
+    throw new Error(`Generated ${items.length}/${dialogue.length} lines for ${episode.basename}; refusing to write partial manifest.`);
+  }
 
   // Per-line MP3 (smaller, what the PWA prefers)
   if (!FLAGS.noMp3 && hasFfmpeg()) {

@@ -7,10 +7,55 @@ export function createSpeechPlayers({
   const MIN_UTTERANCE_TIMEOUT_MS = 4000;
   const MAX_UTTERANCE_TIMEOUT_MS = 45000;
   let activeUtterance = null;
+  let activeAudio = null;
 
   function stopCurrentSpeech() {
     synth.cancel();
     activeUtterance = null;
+    if (activeAudio) {
+      try { activeAudio.pause(); } catch { /* ignore */ }
+      activeAudio.src = '';
+      activeAudio = null;
+    }
+  }
+
+  function pauseCurrentSpeech() {
+    if (activeAudio && !activeAudio.paused) {
+      try { activeAudio.pause(); } catch { /* ignore */ }
+    }
+    // For native TTS, callers continue to use synth.pause() directly.
+  }
+
+  function resumeCurrentSpeech() {
+    if (activeAudio && activeAudio.paused) {
+      const promise = activeAudio.play();
+      if (promise && typeof promise.catch === 'function') promise.catch(() => {});
+    }
+  }
+
+  function playPrebakedAudio(url) {
+    return new Promise((resolve, reject) => {
+      const audio = new Audio(url);
+      audio.preload = 'auto';
+      audio.playbackRate = Math.max(0.5, Math.min(4, Number(getSpeechRate()) || 1));
+
+      let settled = false;
+      const settle = (fn, value) => {
+        if (settled) return;
+        settled = true;
+        if (activeAudio === audio) activeAudio = null;
+        fn(value);
+      };
+
+      audio.onended = () => settle(resolve);
+      audio.onerror = () => settle(reject, new Error(`Failed to play ${url}`));
+
+      activeAudio = audio;
+      const startPromise = audio.play();
+      if (startPromise && typeof startPromise.catch === 'function') {
+        startPromise.catch((err) => settle(reject, err));
+      }
+    });
   }
 
   function splitIntoUtteranceChunks(text, maxChars = MAX_CHARS_PER_UTTERANCE) {
@@ -131,14 +176,26 @@ export function createSpeechPlayers({
     }
   }
 
-  async function speak(text, speaker) {
+  async function speak(text, speaker, options = {}) {
+    if (options && options.audioUrl) {
+      try {
+        await playPrebakedAudio(options.audioUrl);
+        return;
+      } catch (err) {
+        console.warn(`Pre-baked audio failed (${options.audioUrl}), falling back to TTS:`, err);
+        // fall through to TTS
+      }
+    }
     return speakWithTTS(text, speaker);
   }
 
   return {
     speak,
     stopCurrentSpeech,
+    pauseCurrentSpeech,
+    resumeCurrentSpeech,
     speakWithTTS,
+    playPrebakedAudio,
     splitIntoUtteranceChunks
   };
 }

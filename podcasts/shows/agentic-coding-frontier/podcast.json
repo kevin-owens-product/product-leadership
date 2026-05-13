@@ -6,6 +6,11 @@
   "author": "Alex & Riley",
   "color": "#06b6d4",
   "icon": "🧠",
+  "voiceMap": {
+    "ALEX": "M1",
+    "RILEY": "F2"
+  },
+  "lang": "en",
   "episodes": [
     {"id": 1, "file": "episode-01-agentic-coding-foundations.md", "title": "Agentic Coding Foundations", "subtitle": "From Chat Assistants to Autonomous Software Operators"},
     {"id": 2, "file": "episode-02-tools-mcp-orchestration.md", "title": "Tools, MCP, and Orchestration", "subtitle": "How Agents Use External Systems Reliably"},

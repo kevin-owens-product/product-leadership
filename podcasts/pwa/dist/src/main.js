@@ -132,6 +132,7 @@ let currentPodcast = null;
 let currentEpisode = null;
 let dialogueLines = [];
 let currentLineIndex = 0;
+let currentAudioManifestBase = '';
 let isPlaying = false;
 let isPaused = false;
 let voices = [];
@@ -810,6 +811,54 @@ function alignChapterLineIndexes(chapterList, lines) {
     }
 }
 
+async function loadPrebakedAudioManifest(podcastId, episodeFile) {
+    if (!podcastId || !episodeFile) return null;
+    const basename = episodeFile.replace(/\.md$/, '');
+    const base = `audio/${podcastId}/${basename}`;
+    try {
+        const res = await fetch(`${base}/manifest.json`, { cache: 'no-cache' });
+        if (!res.ok) return null;
+        const items = await res.json();
+        if (!Array.isArray(items) || items.length === 0) return null;
+        return { base, items };
+    } catch {
+        return null;
+    }
+}
+
+function attachAudioUrls(dialogue, manifest) {
+    if (!manifest) return;
+    // Prefer matching by rawLine when present (robust to parser differences).
+    const byRawLine = new Map();
+    let allHaveRawLine = true;
+    for (const item of manifest.items) {
+        if (typeof item.rawLine === 'number') {
+            byRawLine.set(item.rawLine, item);
+        } else {
+            allHaveRawLine = false;
+        }
+    }
+
+    let matched = 0;
+    if (allHaveRawLine && byRawLine.size === manifest.items.length) {
+        for (const line of dialogue) {
+            const item = byRawLine.get(line.rawLine);
+            if (item) {
+                line.audioUrl = `${manifest.base}/${item.file}`;
+                matched++;
+            }
+        }
+    }
+    // Fallback: positional match if counts line up exactly.
+    if (matched === 0 && manifest.items.length === dialogue.length) {
+        for (let i = 0; i < dialogue.length; i++) {
+            dialogue[i].audioUrl = `${manifest.base}/${manifest.items[i].file}`;
+            matched++;
+        }
+    }
+    return matched;
+}
+
 async function openEpisode(episode, options = {}) {
     const {
         promptResume = true,
@@ -821,6 +870,21 @@ async function openEpisode(episode, options = {}) {
     dialogueLines = parseMarkdown(episode.content, speakerVoiceMap);
     chapters = parseChapters(episode.content);
     alignChapterLineIndexes(chapters, dialogueLines);
+
+    const podcastId = currentPodcast ? currentPodcast.id : null;
+    const episodeFile = episode.file || episode.filename || null;
+    const audioManifest = await loadPrebakedAudioManifest(podcastId, episodeFile);
+    if (audioManifest) {
+        const matched = attachAudioUrls(dialogueLines, audioManifest);
+        currentAudioManifestBase = audioManifest.base;
+        if (matched > 0) {
+            console.log(`Loaded ${matched}/${dialogueLines.length} pre-baked audio lines from ${audioManifest.base}`);
+        } else {
+            console.warn(`Pre-baked audio manifest found at ${audioManifest.base} but no lines matched; falling back to TTS`);
+        }
+    } else {
+        currentAudioManifestBase = '';
+    }
 
     // Restore progress (with podcast-scoped key)
     const state = loadState();
@@ -1004,8 +1068,8 @@ function setStatus(text, speaking = false) {
     document.getElementById('status-dot').classList.toggle('speaking', speaking);
 }
 
-function speak(text, speaker) {
-    return speechPlayers.speak(text, speaker);
+function speak(text, speaker, options) {
+    return speechPlayers.speak(text, speaker, options);
 }
 
 const speechPlayers = createSpeechPlayers({
@@ -1050,7 +1114,7 @@ async function startPlayback() {
         setStatus(`${line.speaker || 'Narration'}: Speaking...`, true);
 
         try {
-            await speak(line.text, line.type);
+            await speak(line.text, line.type, line.audioUrl ? { audioUrl: line.audioUrl } : undefined);
         } catch (e) {
             console.error('Speech error:', e);
         }

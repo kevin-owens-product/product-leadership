@@ -142,7 +142,7 @@ filesToCopy.forEach(file => {
     }
 });
 
-function copyDirRecursive(src, dest) {
+function copyDirRecursive(src, dest, shouldCopy = () => true) {
     if (!fs.existsSync(src)) return 0;
     if (!fs.existsSync(dest)) {
         fs.mkdirSync(dest, { recursive: true });
@@ -153,13 +153,40 @@ function copyDirRecursive(src, dest) {
         const srcPath = path.join(src, entry.name);
         const destPath = path.join(dest, entry.name);
         if (entry.isDirectory()) {
-            count += copyDirRecursive(srcPath, destPath);
-        } else {
+            count += copyDirRecursive(srcPath, destPath, shouldCopy);
+        } else if (shouldCopy(srcPath, entry.name)) {
             fs.copyFileSync(srcPath, destPath);
             count++;
         }
     }
     return count;
+}
+
+function copyAudioRecursive(src, dest) {
+    return copyDirRecursive(src, dest, (srcPath, fileName) => {
+        if (fileName.includes(' 2.')) return false;
+        if (fileName === 'manifest.json') return true;
+        if (fileName.endsWith('.mp3')) return true;
+        return false;
+    });
+}
+
+function pruneEmptyDirs(dir) {
+    if (!fs.existsSync(dir)) return true;
+    let isEmpty = true;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const child = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            if (pruneEmptyDirs(child)) {
+                fs.rmdirSync(child);
+            } else {
+                isEmpty = false;
+            }
+        } else {
+            isEmpty = false;
+        }
+    }
+    return isEmpty;
 }
 
 // Copy ES module source files used by index.html
@@ -176,7 +203,8 @@ if (fs.existsSync(srcModulesDir)) {
 const audioSrcDir = path.join(__dirname, 'audio');
 const audioDistDir = path.join(distDir, 'audio');
 if (fs.existsSync(audioSrcDir)) {
-    const audioCount = copyDirRecursive(audioSrcDir, audioDistDir);
+    const audioCount = copyAudioRecursive(audioSrcDir, audioDistDir);
+    pruneEmptyDirs(audioDistDir);
     if (audioCount > 0) {
         console.log(`✓ Copied: ${audioCount} generated Supertonic audio files`);
     }

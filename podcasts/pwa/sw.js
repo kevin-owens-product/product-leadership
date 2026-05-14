@@ -1,4 +1,7 @@
 const CACHE_NAME = 'podlearn-v2.2.0';
+// Separate, persistent cache for user-initiated episode downloads. Lives across
+// version bumps — only deleted when the user explicitly removes a download.
+const OFFLINE_AUDIO_CACHE = 'podlearn-offline-audio-v1';
 const STATIC_ASSETS = [
     '/manifest.json',
     '/icon.svg'
@@ -27,7 +30,9 @@ self.addEventListener('activate', event => {
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
+                    // Preserve the offline-audio cache across version bumps — it
+                    // contains user-downloaded episodes that should outlive a deploy.
+                    if (cacheName !== CACHE_NAME && cacheName !== OFFLINE_AUDIO_CACHE) {
                         console.log('Deleting old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
@@ -63,10 +68,12 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // For audio files, use network with cache fallback
-    if (url.pathname.startsWith('/audio/')) {
-        // Do not persist audio in SW cache to avoid unbounded storage growth
-        event.respondWith(networkFirst(event.request, { cacheResponse: false }));
+    // Audio files: check the offline cache first (user-downloaded episodes),
+    // then fall through to network. We never auto-cache audio into the
+    // versioned cache to keep storage bounded — downloads are always
+    // explicit and stored in OFFLINE_AUDIO_CACHE only.
+    if (url.pathname.includes('/audio/')) {
+        event.respondWith(audioFetch(event.request));
         return;
     }
 
@@ -114,16 +121,78 @@ async function cacheFirst(request) {
     }
 }
 
+// Audio fetch: serve from the offline cache when present (downloaded episode),
+// otherwise stream from network without caching. Cache lookup ignores query
+// strings so the per-load cache-buster (?v=…) never causes a miss.
+async function audioFetch(request) {
+    try {
+        const cache = await caches.open(OFFLINE_AUDIO_CACHE);
+        const cached = await cache.match(request, { ignoreSearch: true });
+        if (cached) return cached;
+    } catch (err) {
+        console.warn('Offline audio cache lookup failed:', err);
+    }
+    return fetch(request);
+}
+
 // Listen for skip waiting message from client
 self.addEventListener('message', event => {
-    if (event.data === 'SKIP_WAITING') {
+    const data = event.data;
+    if (data === 'SKIP_WAITING') {
         self.skipWaiting();
+        return;
     }
-    if (event.data === 'CLEAR_CACHE') {
+    if (data === 'CLEAR_CACHE') {
         event.waitUntil(
             caches.delete(CACHE_NAME).then(() => {
                 console.log('Cache cleared');
             })
         );
+        return;
+    }
+    // Per-message offline-cache controls. Always reply via MessageChannel
+    // (event.ports[0]) when one is provided so the client can await success.
+    const reply = (payload) => {
+        const port = event.ports && event.ports[0];
+        if (port) port.postMessage(payload);
+    };
+    if (data && typeof data === 'object') {
+        if (data.type === 'CACHE_AUDIO_URLS' && Array.isArray(data.urls)) {
+            event.waitUntil((async () => {
+                const cache = await caches.open(OFFLINE_AUDIO_CACHE);
+                const results = [];
+                for (const url of data.urls) {
+                    try {
+                        const res = await fetch(url, { cache: 'no-store' });
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        await cache.put(url, res.clone());
+                        results.push({ url, ok: true });
+                    } catch (err) {
+                        results.push({ url, ok: false, error: String(err && err.message || err) });
+                    }
+                }
+                reply({ type: 'CACHE_AUDIO_URLS_RESULT', results });
+            })());
+            return;
+        }
+        if (data.type === 'DELETE_AUDIO_URLS' && Array.isArray(data.urls)) {
+            event.waitUntil((async () => {
+                const cache = await caches.open(OFFLINE_AUDIO_CACHE);
+                let removed = 0;
+                for (const url of data.urls) {
+                    if (await cache.delete(url, { ignoreSearch: true })) removed += 1;
+                }
+                reply({ type: 'DELETE_AUDIO_URLS_RESULT', removed });
+            })());
+            return;
+        }
+        if (data.type === 'LIST_OFFLINE_AUDIO') {
+            event.waitUntil((async () => {
+                const cache = await caches.open(OFFLINE_AUDIO_CACHE);
+                const reqs = await cache.keys();
+                reply({ type: 'LIST_OFFLINE_AUDIO_RESULT', urls: reqs.map((r) => r.url) });
+            })());
+            return;
+        }
     }
 });

@@ -225,7 +225,51 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 8px;
             margin-bottom: 6px;
+        }
+
+        .ep-download-btn {
+            margin-left: auto;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 14px;
+            min-width: 32px;
+            height: 26px;
+            padding: 0 8px;
+            font-size: 0.95rem;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ep-download-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        .ep-download-btn.downloaded {
+            color: var(--success, #22c55e);
+            border-color: var(--success, #22c55e);
+        }
+        .ep-download-btn.downloading {
+            color: var(--warning, #f59e0b);
+            border-color: var(--warning, #f59e0b);
+            cursor: wait;
+        }
+
+        .progress-bar {
+            position: relative;
+        }
+        .chapter-marker {
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.55);
+            pointer-events: none;
+            transform: translateX(-1px);
         }
 
         .episode-card .ep-number {

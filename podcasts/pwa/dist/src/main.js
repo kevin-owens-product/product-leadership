@@ -150,6 +150,14 @@ let mediaSessionHandlersInitialized = false;
 let lineOffsets = [];
 let episodeAudioDuration = 0;
 let lastPersistedLine = -1;
+// epKey strings (`${podcast.id}-${episode.id}`) that the user has downloaded
+// or is currently downloading. The downloaded set is persisted; downloading
+// is transient so a refresh-mid-download just shows the episode as undownloaded.
+let downloadedEpisodes = new Set(JSON.parse(localStorage.getItem('downloadedEpisodes') || '[]'));
+let downloadingEpisodes = new Set();
+// Per-podcast lockscreen artwork (data URLs), generated on demand.
+const podcastArtworkCache = new Map();
+let lastPrebufferedEpKey = null;
 
 const playbackSessions = createPlaybackSessionController();
 
@@ -221,6 +229,239 @@ async function releaseWakeLock() {
 // (Background-audio keep-alive hack was removed; combined.mp3 is now played as
 // a single continuous <audio> element so iOS/Android keep playing through
 // lockscreen and tab backgrounding without any tone trickery.)
+
+// === Offline downloads ===
+
+function episodeBasename(episode) {
+    const f = episode.file || episode.filename || '';
+    return String(f).replace(/\.md$/, '');
+}
+
+function combinedAudioUrl(podcastId, episode) {
+    return `audio/${podcastId}/${episodeBasename(episode)}/combined.mp3`;
+}
+
+function manifestAudioUrl(podcastId, episode) {
+    return `audio/${podcastId}/${episodeBasename(episode)}/manifest.json`;
+}
+
+function epKeyOf(podcast, episode) {
+    return `${podcast.id}-${episode.id}`;
+}
+
+function persistDownloadedEpisodes() {
+    try {
+        localStorage.setItem('downloadedEpisodes', JSON.stringify([...downloadedEpisodes]));
+    } catch (err) {
+        console.warn('Could not persist downloadedEpisodes:', err);
+    }
+}
+
+function isEpisodeDownloaded(podcast, episode) {
+    return downloadedEpisodes.has(epKeyOf(podcast, episode));
+}
+
+function isEpisodeDownloading(podcast, episode) {
+    return downloadingEpisodes.has(epKeyOf(podcast, episode));
+}
+
+// Send a message to the active service worker and wait for its reply via
+// MessageChannel. Resolves to null if there's no controller (e.g. SW not yet
+// installed) so callers can fall back to a no-op gracefully.
+function sendSwMessage(message) {
+    if (!('serviceWorker' in navigator) || !navigator.serviceWorker.controller) {
+        return Promise.resolve(null);
+    }
+    return new Promise((resolve) => {
+        const channel = new MessageChannel();
+        channel.port1.onmessage = (event) => resolve(event.data);
+        try {
+            navigator.serviceWorker.controller.postMessage(message, [channel.port2]);
+        } catch (err) {
+            console.warn('SW message failed:', err);
+            resolve(null);
+        }
+    });
+}
+
+async function downloadEpisode(podcast, episode) {
+    const epKey = epKeyOf(podcast, episode);
+    if (downloadedEpisodes.has(epKey) || downloadingEpisodes.has(epKey)) return;
+    downloadingEpisodes.add(epKey);
+    renderEpisodeList(document.getElementById('episode-search')?.value || '');
+    const urls = [
+        new URL(combinedAudioUrl(podcast.id, episode), location.href).toString(),
+        new URL(manifestAudioUrl(podcast.id, episode), location.href).toString()
+    ];
+    try {
+        const reply = await sendSwMessage({ type: 'CACHE_AUDIO_URLS', urls });
+        const allOk = reply && Array.isArray(reply.results) && reply.results.every((r) => r.ok);
+        if (!allOk) {
+            const failed = reply && reply.results ? reply.results.filter((r) => !r.ok).map((r) => r.url).join(', ') : '(no SW)';
+            console.warn('Episode download failed for', failed);
+            setStatus('Download failed — try again');
+            return;
+        }
+        downloadedEpisodes.add(epKey);
+        persistDownloadedEpisodes();
+        setStatus(`Downloaded "${episode.title}"`);
+    } finally {
+        downloadingEpisodes.delete(epKey);
+        renderEpisodeList(document.getElementById('episode-search')?.value || '');
+    }
+}
+
+async function deleteDownloadedEpisode(podcast, episode) {
+    const epKey = epKeyOf(podcast, episode);
+    if (!downloadedEpisodes.has(epKey)) return;
+    const urls = [
+        new URL(combinedAudioUrl(podcast.id, episode), location.href).toString(),
+        new URL(manifestAudioUrl(podcast.id, episode), location.href).toString()
+    ];
+    await sendSwMessage({ type: 'DELETE_AUDIO_URLS', urls });
+    downloadedEpisodes.delete(epKey);
+    persistDownloadedEpisodes();
+    renderEpisodeList(document.getElementById('episode-search')?.value || '');
+    setStatus(`Removed download "${episode.title}"`);
+}
+
+// Reconcile our localStorage set against what's actually in the SW cache so
+// the UI doesn't show stale "downloaded" badges after a cache eviction.
+async function reconcileDownloadedEpisodes() {
+    const reply = await sendSwMessage({ type: 'LIST_OFFLINE_AUDIO' });
+    if (!reply || !Array.isArray(reply.urls)) return;
+    const haveSet = new Set();
+    for (const fullUrl of reply.urls) {
+        const m = fullUrl.match(/\/audio\/([^/]+)\/([^/]+)\/combined\.mp3/);
+        if (!m) continue;
+        const podcastId = m[1];
+        const basename = m[2];
+        const podcasts = getPodcasts();
+        const podcast = podcasts.find((p) => p.id === podcastId);
+        if (!podcast) continue;
+        const ep = podcast.episodes.find((e) => episodeBasename(e) === basename);
+        if (ep) haveSet.add(`${podcastId}-${ep.id}`);
+    }
+    const before = downloadedEpisodes.size;
+    downloadedEpisodes = haveSet;
+    persistDownloadedEpisodes();
+    if (haveSet.size !== before) {
+        renderEpisodeList(document.getElementById('episode-search')?.value || '');
+    }
+}
+
+// === Per-podcast lockscreen artwork (canvas-generated) ===
+
+function generatePodcastArtwork(podcast) {
+    if (!podcast) return null;
+    const cached = podcastArtworkCache.get(podcast.id);
+    if (cached) return cached;
+    const size = 512;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+    const color = podcast.color || '#6366f1';
+    // Background: vertical gradient from podcast color to a darker shade
+    const grad = ctx.createLinearGradient(0, 0, 0, size);
+    grad.addColorStop(0, color);
+    grad.addColorStop(1, shadeHex(color, -0.35));
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, size, size);
+    // Big emoji centered
+    const icon = podcast.icon || '🎙️';
+    ctx.font = '300px system-ui, "Apple Color Emoji", "Segoe UI Emoji", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(icon, size / 2, size / 2 - 30);
+    // Title bar across the bottom
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
+    ctx.fillRect(0, size - 96, size, 96);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '600 36px system-ui, -apple-system, "Segoe UI", sans-serif';
+    ctx.textBaseline = 'middle';
+    const title = (podcast.title || '').slice(0, 26);
+    ctx.fillText(title, size / 2, size - 48);
+    let dataUrl;
+    try {
+        dataUrl = canvas.toDataURL('image/png');
+    } catch (err) {
+        console.warn('Artwork generation failed:', err);
+        return null;
+    }
+    podcastArtworkCache.set(podcast.id, dataUrl);
+    return dataUrl;
+}
+
+// Adjust a hex color toward black (amount<0) or white (amount>0). Tolerant of
+// short (#abc) and long (#aabbcc) forms; returns input unchanged on parse fail.
+function shadeHex(hex, amount) {
+    const m = String(hex).trim().match(/^#?([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (!m) return hex;
+    let h = m[1];
+    if (h.length === 3) h = h.split('').map((c) => c + c).join('');
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    const adjust = (v) => {
+        const target = amount < 0 ? 0 : 255;
+        const next = v + (target - v) * Math.abs(amount);
+        return Math.max(0, Math.min(255, Math.round(next)));
+    };
+    const toHex = (v) => v.toString(16).padStart(2, '0');
+    return `#${toHex(adjust(r))}${toHex(adjust(g))}${toHex(adjust(b))}`;
+}
+
+// === Chapter markers on the scrubber ===
+
+function renderChapterMarkers() {
+    const bar = document.getElementById('progress-bar');
+    if (!bar) return;
+    bar.querySelectorAll('.chapter-marker').forEach((el) => el.remove());
+    if (!Array.isArray(chapters) || chapters.length <= 1) return;
+    const total = episodeAudioDuration > 0
+        ? episodeAudioDuration
+        : (lineOffsets.length > 0 ? lineOffsets[lineOffsets.length - 1] : 0);
+    const lineCount = dialogueLines.length || 1;
+    chapters.forEach((chap, idx) => {
+        if (idx === 0) return; // skip the marker at 0%
+        let pct;
+        if (total > 0 && Number.isInteger(chap.lineIndex) && chap.lineIndex < lineOffsets.length) {
+            pct = (lineOffsets[chap.lineIndex] / total) * 100;
+        } else if (Number.isInteger(chap.lineIndex)) {
+            pct = (chap.lineIndex / lineCount) * 100;
+        } else {
+            return;
+        }
+        if (!Number.isFinite(pct) || pct <= 0 || pct >= 100) return;
+        const marker = document.createElement('div');
+        marker.className = 'chapter-marker';
+        marker.style.left = `${pct}%`;
+        marker.title = chap.title || `Chapter ${idx + 1}`;
+        bar.appendChild(marker);
+    });
+}
+
+// === Next-episode pre-buffer ===
+
+function maybePrebufferNextEpisode() {
+    if (!currentPodcast || !currentEpisode) return;
+    if (!speechPlayers.isContinuousReady()) return;
+    const duration = speechPlayers.getDuration();
+    const position = speechPlayers.getCurrentTime();
+    if (!duration || duration - position > 30) return;
+    const next = currentPodcast.episodes.find((e) => e.id === currentEpisode.id + 1);
+    if (!next) return;
+    const nextKey = epKeyOf(currentPodcast, next);
+    if (lastPrebufferedEpKey === nextKey) return;
+    lastPrebufferedEpKey = nextKey;
+    // Fire-and-forget: warms the browser HTTP cache so auto-play starts
+    // without a network round-trip when this episode ends.
+    const url = combinedAudioUrl(currentPodcast.id, next);
+    fetch(url, { mode: 'no-cors' }).catch(() => { /* ignore */ });
+}
 
 // ===== PODCASTS HOME =====
 function renderPodcastsList(filter = '') {
@@ -684,8 +925,27 @@ function renderEpisodeList(filter = '') {
 
         const card = document.createElement('div');
         card.className = 'episode-card' + (isComplete ? ' completed' : '') + (inProgress ? ' in-progress' : '');
-        renderEpisodeCard(card, ep, progress, isComplete, inProgress);
-        card.addEventListener('click', () => openEpisode(ep));
+        const downloadState = isEpisodeDownloading(currentPodcast, ep)
+            ? 'downloading'
+            : isEpisodeDownloaded(currentPodcast, ep) ? 'downloaded' : 'none';
+        renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState);
+        card.addEventListener('click', (event) => {
+            const btn = event.target.closest('.ep-download-btn');
+            if (btn) {
+                event.stopPropagation();
+                const state = btn.classList.contains('downloaded')
+                    ? 'downloaded'
+                    : btn.classList.contains('downloading') ? 'downloading' : 'none';
+                if (state === 'downloading') return;
+                if (state === 'downloaded') {
+                    void deleteDownloadedEpisode(currentPodcast, ep);
+                } else {
+                    void downloadEpisode(currentPodcast, ep);
+                }
+                return;
+            }
+            openEpisode(ep);
+        });
         listEl.appendChild(card);
     });
 
@@ -876,8 +1136,10 @@ async function openEpisode(episode, options = {}) {
 
     renderTranscript();
     renderChapters();
+    renderChapterMarkers();
     renderBookmarks();
     updateProgress();
+    lastPrebufferedEpKey = null;
     setStatus('Ready - Tap play to start');
     syncMediaSession({ includeMetadata: true, includePosition: true });
     updateMiniPlayer();
@@ -1061,6 +1323,7 @@ speechPlayers.on('timeupdate', () => {
         return;
     }
     updateMediaSessionPositionState();
+    maybePrebufferNextEpisode();
 });
 
 speechPlayers.on('play', () => {
@@ -2011,6 +2274,15 @@ bindNavTabs();
 // Service worker registration with update handling
 const swClient = registerServiceWorker();
 
+// Once the SW takes control, reconcile our localStorage download set against
+// the actual offline-audio cache so the UI doesn't show stale "downloaded"
+// badges (e.g. after an evicted cache or a manual storage clear).
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready
+        .then(() => reconcileDownloadedEpisodes())
+        .catch((err) => console.warn('Download reconciliation skipped:', err));
+}
+
 // ===== BACKGROUND MODE HANDLING =====
 // Track playback state before going to background
 let wasPlayingBeforeBackground = false;
@@ -2131,13 +2403,14 @@ function updateMediaSessionMetadata() {
     if (!('mediaSession' in navigator)) return;
     if (!currentPodcast || !currentEpisode) return;
     if (typeof window.MediaMetadata !== 'function') return;
+    const artwork = generatePodcastArtwork(currentPodcast);
     navigator.mediaSession.metadata = new MediaMetadata({
         title: currentEpisode.title,
         artist: currentPodcast.title,
         album: 'PodLearn',
-        artwork: [
-            { src: '/icon.svg', sizes: '512x512', type: 'image/svg+xml' }
-        ]
+        artwork: artwork
+            ? [{ src: artwork, sizes: '512x512', type: 'image/png' }]
+            : [{ src: '/icon.svg', sizes: '512x512', type: 'image/svg+xml' }]
     });
 }
 

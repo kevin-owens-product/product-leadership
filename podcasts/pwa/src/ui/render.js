@@ -33,12 +33,20 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
   `;
 }
 
-export function renderEpisodeCard(card, ep, progress, isComplete, inProgress) {
+export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState) {
+  const state = downloadState || 'none';
+  const downloadLabel = state === 'downloaded' ? '✓' : state === 'downloading' ? '…' : '⬇';
+  const downloadTitle = state === 'downloaded'
+    ? 'Downloaded — tap to remove'
+    : state === 'downloading'
+    ? 'Downloading…'
+    : 'Download for offline';
   card.innerHTML = `
     <div class="ep-progress-bar" style="width: ${progress.percent}%"></div>
     <div class="ep-header">
       <span class="ep-number">EPISODE ${ep.id}</span>
       ${isComplete ? '<span class="ep-status completed">Complete</span>' : inProgress ? `<span class="ep-status in-progress">${progress.percent}%</span>` : ''}
+      <button class="ep-download-btn ${state}" type="button" data-action="download" data-ep-id="${ep.id}" title="${downloadTitle}" aria-label="${downloadTitle}">${downloadLabel}</button>
     </div>
     <div class="ep-title">${escapeHtml(ep.title)}</div>
     <div class="ep-subtitle">${escapeHtml(ep.subtitle)}</div>

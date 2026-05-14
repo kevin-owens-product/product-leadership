@@ -73,13 +73,35 @@ if (fs.existsSync(showsDir)) {
                     // Escape for template literal
                     content = content.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
 
-                    podcastData.episodes.push({
+                    // Pull total duration (seconds) from the audio manifest if it
+                    // exists, so episode cards can show the real length instead
+                    // of a hardcoded estimate.
+                    const basename = epMeta.file.replace(/\.md$/, '');
+                    const audioManifestPath = path.join(__dirname, 'audio', manifest.id, basename, 'manifest.json');
+                    let durationSeconds = null;
+                    if (fs.existsSync(audioManifestPath)) {
+                        try {
+                            const items = JSON.parse(fs.readFileSync(audioManifestPath, 'utf8'));
+                            if (Array.isArray(items) && items.length > 0) {
+                                const last = items[items.length - 1];
+                                if (typeof last.startTime === 'number' && typeof last.duration === 'number') {
+                                    durationSeconds = Math.round(last.startTime + last.duration);
+                                }
+                            }
+                        } catch (err) {
+                            console.warn(`     ⚠ Could not parse audio manifest for ${epMeta.file}: ${err.message}`);
+                        }
+                    }
+
+                    const episodeRecord = {
                         id: epMeta.id,
                         file: epMeta.file,
                         title: epMeta.title,
                         subtitle: epMeta.subtitle,
                         content: content
-                    });
+                    };
+                    if (durationSeconds != null) episodeRecord.durationSeconds = durationSeconds;
+                    podcastData.episodes.push(episodeRecord);
                 } else {
                     console.log(`   ✗ Missing: ${epMeta.file}`);
                 }

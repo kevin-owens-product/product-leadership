@@ -8,6 +8,17 @@ function formatClockFromMinutes(totalMinutes) {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
+// Compact human-readable label for a duration in seconds: "47 min", "1h 12m".
+// Returns null when no duration is available so callers can fall back.
+export function formatDurationLabel(totalSeconds) {
+  if (!Number.isFinite(totalSeconds) || totalSeconds <= 0) return null;
+  const totalMinutes = Math.max(1, Math.round(totalSeconds / 60));
+  if (totalMinutes < 60) return `${totalMinutes} min`;
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return minutes === 0 ? `${hours}h` : `${hours}h ${minutes}m`;
+}
+
 export function setStaticHtml(el, html) {
   if (!el) return;
   el.innerHTML = html;
@@ -15,6 +26,17 @@ export function setStaticHtml(el, html) {
 
 export function renderPodcastCard(card, podcast, epCount, avgProgress) {
   const color = safeColor(podcast.color || '#6366f1');
+  let totalSeconds = 0;
+  let haveDurations = false;
+  if (Array.isArray(podcast.episodes)) {
+    for (const ep of podcast.episodes) {
+      if (Number.isFinite(ep.durationSeconds)) {
+        totalSeconds += ep.durationSeconds;
+        haveDurations = true;
+      }
+    }
+  }
+  const totalLabel = haveDurations ? formatDurationLabel(totalSeconds) : `~${epCount * 60} min`;
   card.innerHTML = `
     <div class="podcast-card-header">
       <div class="podcast-icon" style="background: ${color}20; color: ${color}">${escapeHtml(podcast.icon || '🎙️')}</div>
@@ -23,7 +45,7 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
         <div class="podcast-subtitle">${escapeHtml(podcast.subtitle)}</div>
         <div class="podcast-meta">
           <span>${epCount} episodes</span>
-          <span>~${epCount * 60} min</span>
+          <span>${totalLabel}</span>
         </div>
       </div>
     </div>
@@ -41,6 +63,13 @@ export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, do
     : state === 'downloading'
     ? 'Downloading…'
     : 'Download for offline';
+  const totalLabel = formatDurationLabel(ep.durationSeconds) || '—';
+  let remainingLabel = '';
+  if (Number.isFinite(ep.durationSeconds) && progress.percent > 0 && progress.percent < 100) {
+    const remainSec = Math.round(ep.durationSeconds * (100 - progress.percent) / 100);
+    const r = formatDurationLabel(remainSec);
+    if (r) remainingLabel = `${r} left`;
+  }
   card.innerHTML = `
     <div class="ep-progress-bar" style="width: ${progress.percent}%"></div>
     <div class="ep-header">
@@ -51,8 +80,8 @@ export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, do
     <div class="ep-title">${escapeHtml(ep.title)}</div>
     <div class="ep-subtitle">${escapeHtml(ep.subtitle)}</div>
     <div class="ep-meta">
-      <span>~60 min</span>
-      ${progress.percent > 0 ? `<span>${Math.round((100 - progress.percent) * 0.6)} min left</span>` : ''}
+      <span>${totalLabel}</span>
+      ${remainingLabel ? `<span>${remainingLabel}</span>` : ''}
     </div>
   `;
 }

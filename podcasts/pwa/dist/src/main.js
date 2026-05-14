@@ -135,16 +135,12 @@ let currentLineIndex = 0;
 let currentAudioManifestBase = '';
 let isPlaying = false;
 let isPaused = false;
-let voices = [];
-let alexVoice = null;
-let samVoice = null;
 let speechRate = 1.0;
 let autoPlayNext = true;
 let sleepTimer = null;
 let sleepEndTime = null;
 let searchMatches = [];
 let searchIndex = 0;
-const synth = window.speechSynthesis;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 let mediaSessionHandlersInitialized = false;
 let lineOffsets = [];
@@ -349,6 +345,43 @@ async function reconcileDownloadedEpisodes() {
         renderEpisodeList(document.getElementById('episode-search')?.value || '');
     }
 }
+
+// === Inline resume prompt (replaces window.confirm) ===
+
+let pendingResumeLine = null;
+
+function hideResumeBanner() {
+    pendingResumeLine = null;
+    const banner = document.getElementById('resume-banner');
+    if (banner) banner.hidden = true;
+}
+
+function showResumeBanner(savedLine, percent) {
+    const banner = document.getElementById('resume-banner');
+    if (!banner) return;
+    if (!Number.isInteger(savedLine) || savedLine <= 0) {
+        banner.hidden = true;
+        pendingResumeLine = null;
+        return;
+    }
+    pendingResumeLine = savedLine;
+    const text = document.getElementById('resume-banner-text');
+    if (text) {
+        const pctLabel = Number.isFinite(percent) && percent > 0 ? ` (${percent}%)` : '';
+        text.textContent = `Pick up where you left off${pctLabel}`;
+    }
+    banner.hidden = false;
+}
+
+document.addEventListener('click', (event) => {
+    if (event.target.closest('#resume-banner-resume')) {
+        const target = pendingResumeLine;
+        hideResumeBanner();
+        if (Number.isInteger(target)) void jumpToLine(target, false);
+    } else if (event.target.closest('#resume-banner-start') || event.target.closest('#resume-banner-close')) {
+        hideResumeBanner();
+    }
+});
 
 // === Per-podcast lockscreen artwork (canvas-generated) ===
 
@@ -570,9 +603,7 @@ function saveState() {
         completedEpisodes: [],
         bookmarks: {},
         speechRate,
-        autoPlayNext,
-        alexVoiceIndex: document.getElementById('alex-voice').value,
-        samVoiceIndex: document.getElementById('sam-voice').value
+        autoPlayNext
     };
 
     // Save current podcast/episode
@@ -639,134 +670,9 @@ function restoreState() {
     return state;
 }
 
-// ===== VOICE LOADING =====
-function loadVoices() {
-    voices = synth.getVoices();
-    if (voices.length === 0) {
-        setTimeout(loadVoices, 100);
-        return;
-    }
-
-    console.log('Available voices:', voices.length, voices.map(v => v.name));
-
-    // Update voice count display
-    const voiceCountEl = document.getElementById('voice-count');
-    const englishCount = voices.filter(v => v.lang.toLowerCase().startsWith('en')).length;
-    voiceCountEl.textContent = `${voices.length} voices available (${englishCount} English)`;
-
-    const alexSelect = document.getElementById('alex-voice');
-    const samSelect = document.getElementById('sam-voice');
-    alexSelect.innerHTML = '';
-    samSelect.innerHTML = '';
-
-    // Categorize voices
-    const maleKeywords = ['male', 'david', 'james', 'daniel', 'guy', 'aaron', 'mark', 'matthew', 'google us english', 'google uk english male'];
-    const femaleKeywords = ['female', 'samantha', 'karen', 'victoria', 'fiona', 'zira', 'susan', 'google uk english female'];
-
-    const maleVoices = [];
-    const femaleVoices = [];
-    const englishVoices = [];
-
-    voices.forEach((voice, index) => {
-        const name = voice.name.toLowerCase();
-        const lang = voice.lang.toLowerCase();
-
-        // Prefer English voices
-        if (lang.startsWith('en')) {
-            englishVoices.push({ voice, index });
-        }
-
-        if (maleKeywords.some(k => name.includes(k))) {
-            maleVoices.push({ voice, index });
-        } else if (femaleKeywords.some(k => name.includes(k))) {
-            femaleVoices.push({ voice, index });
-        }
-    });
-
-    // Populate select options
-    voices.forEach((voice, index) => {
-        const opt1 = document.createElement('option');
-        opt1.value = index;
-        opt1.textContent = `${voice.name} (${voice.lang})`;
-        alexSelect.appendChild(opt1);
-
-        const opt2 = document.createElement('option');
-        opt2.value = index;
-        opt2.textContent = `${voice.name} (${voice.lang})`;
-        samSelect.appendChild(opt2);
-    });
-
-    // Restore saved voices or use defaults
-    const state = loadState();
-    let alexIdx = 0;
-    let samIdx = voices.length > 1 ? 1 : 0;
-
-    // Try to get saved voices
-    if (state.alexVoiceIndex !== undefined && voices[parseInt(state.alexVoiceIndex, 10)]) {
-        alexIdx = parseInt(state.alexVoiceIndex, 10);
-    } else if (maleVoices.length > 0) {
-        alexIdx = maleVoices[0].index;
-    } else if (englishVoices.length > 0) {
-        alexIdx = englishVoices[0].index;
-    }
-
-    if (state.samVoiceIndex !== undefined && voices[parseInt(state.samVoiceIndex, 10)]) {
-        samIdx = parseInt(state.samVoiceIndex, 10);
-    } else if (femaleVoices.length > 0) {
-        samIdx = femaleVoices[0].index;
-    } else if (englishVoices.length > 1) {
-        // Pick a different English voice than Alex
-        samIdx = englishVoices.find(v => v.index !== alexIdx)?.index || (alexIdx === 0 ? 1 : 0);
-    }
-
-    // Ensure different voices if possible
-    if (samIdx === alexIdx && voices.length > 1) {
-        samIdx = alexIdx === 0 ? 1 : 0;
-    }
-
-    alexSelect.value = alexIdx;
-    samSelect.value = samIdx;
-    alexVoice = voices[alexIdx];
-    samVoice = voices[samIdx];
-
-    console.log('Alex voice:', alexVoice?.name);
-    console.log('Sam voice:', samVoice?.name);
-}
-
-if (synth.onvoiceschanged !== undefined) {
-    synth.onvoiceschanged = loadVoices;
-}
-loadVoices();
-
-document.getElementById('alex-voice').addEventListener('change', e => {
-    const idx = parseInt(e.target.value, 10);
-    alexVoice = voices[idx];
-    console.log('Alex voice set to:', alexVoice?.name);
-    saveState();
-});
-document.getElementById('sam-voice').addEventListener('change', e => {
-    const idx = parseInt(e.target.value, 10);
-    samVoice = voices[idx];
-    console.log('Sam voice set to:', samVoice?.name);
-    saveState();
-});
-
-// Preview voices
-document.getElementById('preview-voices').addEventListener('click', () => {
-    synth.cancel();
-    const alexUtter = new SpeechSynthesisUtterance("Hi, I'm Alex, your technical expert.");
-    if (alexVoice) alexUtter.voice = alexVoice;
-    alexUtter.rate = speechRate;
-    alexUtter.pitch = 0.9;
-
-    const samUtter = new SpeechSynthesisUtterance("And I'm Sam, asking the questions you're thinking.");
-    if (samVoice) samUtter.voice = samVoice;
-    samUtter.rate = speechRate;
-    samUtter.pitch = 1.1;
-
-    synth.speak(alexUtter);
-    synth.speak(samUtter);
-});
+// (Voice picker removed: playback uses pre-baked Supertonic audio, so the
+// Web Speech API voice selectors no longer affect anything. The preview
+// button and the Alex/Sam dropdowns lived here.)
 
 // ===== MARKDOWN PARSING =====
 function normalizeSpeakerName(speakerName) {
@@ -1115,6 +1021,7 @@ async function openEpisode(episode, options = {}) {
     const savedLine = Number.isInteger(progress?.line) ? progress.line : 0;
     let initialLine = savedLine;
 
+    let resumeOffer = null;
     if (Number.isInteger(preferredLine)) {
         initialLine = preferredLine;
     } else if (
@@ -1122,11 +1029,14 @@ async function openEpisode(episode, options = {}) {
         savedLine > 0 &&
         savedLine < Math.max(0, dialogueLines.length - 1)
     ) {
-        const shouldResume = window.confirm(`Resume this episode from line ${savedLine + 1}?`);
-        initialLine = shouldResume ? savedLine : 0;
+        // Default to starting from the beginning; let the user opt into
+        // resuming via the inline banner below. No more native confirm().
+        initialLine = 0;
+        resumeOffer = savedLine;
     }
 
     currentLineIndex = Math.max(0, Math.min(initialLine, Math.max(0, dialogueLines.length - 1)));
+    showResumeBanner(resumeOffer, progress?.percent || 0);
 
     document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
 
@@ -1151,6 +1061,7 @@ async function openEpisode(episode, options = {}) {
 }
 
 document.getElementById('back-to-list').addEventListener('click', () => {
+    hideResumeBanner();
     saveState();
     document.getElementById('player-view').classList.remove('active');
     document.getElementById('list-view').classList.add('active');
@@ -1191,22 +1102,42 @@ function renderTranscript() {
     updateProgress();
 }
 
+function formatClock(totalSeconds) {
+    if (!Number.isFinite(totalSeconds) || totalSeconds < 0) totalSeconds = 0;
+    const total = Math.round(totalSeconds);
+    const hours = Math.floor(total / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+    const seconds = total % 60;
+    const m = String(minutes).padStart(hours > 0 ? 2 : 1, '0');
+    const s = String(seconds).padStart(2, '0');
+    return hours > 0 ? `${hours}:${m}:${s}` : `${m}:${s}`;
+}
+
 function updateProgress() {
-    const pct = dialogueLines.length > 0 ? (currentLineIndex / dialogueLines.length) * 100 : 0;
+    let pct;
+    if (speechPlayers.isContinuousReady()) {
+        const dur = speechPlayers.getDuration() || episodeAudioDuration;
+        const pos = speechPlayers.getCurrentTime();
+        pct = dur > 0 ? Math.max(0, Math.min(100, (pos / dur) * 100)) : 0;
+        document.getElementById('current-pos').textContent = formatClock(pos);
+        document.getElementById('total-pos').textContent = formatClock(dur);
+        const remain = Math.max(0, (dur - pos) / Math.max(0.5, speechRate));
+        const minsLeft = Math.max(0, Math.round(remain / 60));
+        document.getElementById('time-remaining').textContent = minsLeft > 0 ? `${minsLeft} min left` : 'Almost done';
+    } else {
+        pct = dialogueLines.length > 0 ? (currentLineIndex / dialogueLines.length) * 100 : 0;
+        document.getElementById('current-pos').textContent = `Line ${currentLineIndex + 1}`;
+        document.getElementById('total-pos').textContent = `of ${dialogueLines.length}`;
+        const linesLeft = dialogueLines.length - currentLineIndex;
+        const episodeDurationMinutes = currentEpisode?.content ? extractEpisodeDurationMinutes(currentEpisode.content) : null;
+        const estimatedSecondsPerLine = (episodeDurationMinutes && dialogueLines.length > 0)
+            ? (episodeDurationMinutes * 60) / dialogueLines.length
+            : 3;
+        const secondsLeft = (linesLeft * estimatedSecondsPerLine) / speechRate;
+        const minsLeft = Math.round(secondsLeft / 60);
+        document.getElementById('time-remaining').textContent = `~${minsLeft} min left`;
+    }
     document.getElementById('progress-fill').style.width = `${pct}%`;
-    document.getElementById('current-pos').textContent = `Line ${currentLineIndex + 1}`;
-    document.getElementById('total-pos').textContent = `of ${dialogueLines.length}`;
-
-    // Calculate time remaining using actual audio durations or estimate
-    const linesLeft = dialogueLines.length - currentLineIndex;
-    const episodeDurationMinutes = currentEpisode?.content ? extractEpisodeDurationMinutes(currentEpisode.content) : null;
-    const estimatedSecondsPerLine = (episodeDurationMinutes && dialogueLines.length > 0)
-        ? (episodeDurationMinutes * 60) / dialogueLines.length
-        : 3;
-    const secondsLeft = (linesLeft * estimatedSecondsPerLine) / speechRate;
-
-    const minsLeft = Math.round(secondsLeft / 60);
-    document.getElementById('time-remaining').textContent = `~${minsLeft} min left`;
 
     // Update highlighting
     document.querySelectorAll('.transcript-line').forEach((el, i) => {
@@ -1321,6 +1252,18 @@ speechPlayers.on('timeupdate', () => {
         setStatus('Sleep timer ended');
         void stopPlayback();
         return;
+    }
+    // Cheap per-tick refresh of the clock + progress fill (~4 Hz from <audio>).
+    if (speechPlayers.isContinuousReady()) {
+        const dur = speechPlayers.getDuration() || episodeAudioDuration;
+        const pos = speechPlayers.getCurrentTime();
+        const pct = dur > 0 ? Math.max(0, Math.min(100, (pos / dur) * 100)) : 0;
+        const fill = document.getElementById('progress-fill');
+        if (fill) fill.style.width = `${pct}%`;
+        const cur = document.getElementById('current-pos');
+        const tot = document.getElementById('total-pos');
+        if (cur) cur.textContent = formatClock(pos);
+        if (tot) tot.textContent = formatClock(dur);
     }
     updateMediaSessionPositionState();
     maybePrebufferNextEpisode();
@@ -1520,16 +1463,29 @@ async function jumpToLine(index, autoStart = false) {
     }
 }
 
-function skipLines(n) {
-    jumpToLine(currentLineIndex + n, isPlaying && !isPaused);
+// Time-based skip. In continuous-mp3 mode we just advance audio.currentTime
+// by the given delta. In the legacy chunked fallback we approximate via
+// estimated seconds-per-line.
+function seekBySeconds(delta) {
+    if (speechPlayers.isContinuousReady()) {
+        speechPlayers.seek(speechPlayers.getCurrentTime() + delta);
+        updateProgress();
+        updateMediaSessionPositionState();
+        saveState();
+        return;
+    }
+    const linesToJump = estimateLineJumpFromSeconds(Math.abs(delta));
+    const target = currentLineIndex + (delta < 0 ? -linesToJump : linesToJump);
+    void jumpToLine(target, isPlaying && !isPaused);
 }
 
-// Controls
+// Controls — large jumps are ±30s, smaller ones use the user-configurable
+// skipForward/Backward intervals from the settings panel.
 document.getElementById('play-btn').addEventListener('click', togglePlayPause);
-document.getElementById('prev-btn').addEventListener('click', () => skipLines(-10));
-document.getElementById('next-btn').addEventListener('click', () => skipLines(10));
-document.getElementById('back-btn').addEventListener('click', () => skipLines(-5));
-document.getElementById('fwd-btn').addEventListener('click', () => skipLines(5));
+document.getElementById('prev-btn').addEventListener('click', () => seekBySeconds(-30));
+document.getElementById('next-btn').addEventListener('click', () => seekBySeconds(30));
+document.getElementById('back-btn').addEventListener('click', () => seekBySeconds(-skipBackwardInterval));
+document.getElementById('fwd-btn').addEventListener('click', () => seekBySeconds(skipForwardInterval));
 
 // Speed
 document.getElementById('speed-slider').addEventListener('input', e => {
@@ -1543,12 +1499,24 @@ document.getElementById('speed-slider').addEventListener('input', e => {
     saveState();
 });
 
-// Progress bar click
+// Progress bar click — seek to clicked position. In continuous mode we use
+// the real audio duration; in the chunked fallback we map to a line index.
 document.getElementById('progress-bar').addEventListener('click', e => {
-    const rect = e.target.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
+    const bar = e.currentTarget;
+    const rect = bar.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    if (speechPlayers.isContinuousReady()) {
+        const dur = speechPlayers.getDuration() || episodeAudioDuration;
+        if (dur > 0) {
+            speechPlayers.seek(pct * dur);
+            updateProgress();
+            updateMediaSessionPositionState();
+            saveState();
+            return;
+        }
+    }
     const wasPlaying = isPlaying && !isPaused;
-    jumpToLine(Math.floor(pct * dialogueLines.length), wasPlaying);
+    void jumpToLine(Math.floor(pct * dialogueLines.length), wasPlaying);
 });
 
 // Auto-play toggle
@@ -1689,9 +1657,9 @@ document.getElementById('player-view').addEventListener('touchend', e => {
 
     if (Math.abs(diffX) > swipeThreshold && diffY < 50) {
         if (diffX > 0) {
-            skipLines(-10); // Swipe right = go back
+            seekBySeconds(-30); // Swipe right = go back 30s
         } else {
-            skipLines(10); // Swipe left = go forward
+            seekBySeconds(30); // Swipe left = go forward 30s
         }
     }
     touchStartX = 0;
@@ -1767,9 +1735,12 @@ document.getElementById('skip-backward-interval').addEventListener('change', e =
 });
 
 function updateSkipButtonTitles() {
-    document.getElementById('next-btn').title = `Forward ${skipForwardInterval}s`;
-    document.getElementById('prev-btn').title = `Back ${skipBackwardInterval}s`;
+    // The big prev/next buttons stay at ±30s; the back/fwd buttons honor
+    // the user's configured interval.
+    document.getElementById('back-btn').title = `Back ${skipBackwardInterval}s`;
+    document.getElementById('fwd-btn').title = `Forward ${skipForwardInterval}s`;
 }
+updateSkipButtonTitles();
 
 // Voice Boost Toggle
 document.getElementById('voice-boost-toggle').addEventListener('click', () => {

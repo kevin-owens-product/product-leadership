@@ -1,0 +1,650 @@
+[
+  {
+    "index": 0,
+    "rawLine": 4,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Welcome back to AP and Finance Mastery. Today we're diving into the technology that makes modern AP possible, from the early days of OCR to the cutting edge of agentic AI.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "rawLine": 6,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "As a product leader, this is my home turf. But I want to understand how the technology has evolved specifically in the AP context and where it's heading.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "rawLine": 8,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Let's map it out. The evolution of AP technology is a fascinating journey from paper to intelligence.",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "rawLine": 14,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Take me through the generations.",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "rawLine": 16,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Generation one was manual AP. Paper invoices, filing cabinets, rubber stamps for approval, handwritten ledgers, and checks written by hand. This was the norm until the 1980s and 1990s, and honestly, many companies still operate closer to this than they'd admit.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "rawLine": 18,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Generation two?",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "rawLine": 20,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Basic automation, roughly the 1990s to 2000s. ERPs like SAP and Oracle digitized the transaction recording. Invoices were still manually keyed in, but at least the data lived in a database. Workflows were basic. Reports could be generated. It was better than paper but still heavily manual.",
+    "chapter": "INTRO",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "rawLine": 22,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Then what changed?",
+    "chapter": "INTRO",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "rawLine": 24,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Generation three was intelligent automation, from about 2005 to 2020. This is where dedicated AP automation platforms emerged. They brought OCR for data capture, digital workflows for approvals, automated matching engines, and basic analytics. Companies like Basware, ReadSoft, which eventually became part of the Medius story, and others pioneered this space.",
+    "chapter": "INTRO",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "rawLine": 26,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And generation four?",
+    "chapter": "INTRO",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "rawLine": 28,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "That's where we are now. AI-native AP automation. Machine learning for data extraction, natural language processing for understanding document context, predictive models for coding and fraud detection, and increasingly, large language models and agentic AI that can handle complex tasks autonomously.",
+    "chapter": "INTRO",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "rawLine": 34,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's start with OCR since it's the foundation of everything.",
+    "chapter": "INTRO",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "rawLine": 36,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "OCR, Optical Character Recognition, converts images of text into machine-readable text. In AP, it's used to extract text from scanned paper invoices or PDF files. The basic technology has been around since the 1970s, but it took decades to become reliable enough for production use.",
+    "chapter": "INTRO",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "rawLine": 38,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What are OCR's limitations?",
+    "chapter": "INTRO",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "rawLine": 40,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Traditional OCR just converts images to text. It doesn't understand what the text means. It can tell you there's a \"12,500.00\" on the page, but it doesn't know if that's the invoice total, a line item amount, or a PO number. That's why template-based OCR required pre-configured templates to tell the system where to look for each field.",
+    "chapter": "INTRO",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "rawLine": 42,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And template-free approaches?",
+    "chapter": "INTRO",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "rawLine": 44,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Template-free data capture uses machine learning models trained on millions of invoices to identify fields based on context, layout, and surrounding text. The model learns that a number in the bottom right corner near the word \"Total\" is likely the invoice total. This was the breakthrough that made AP automation scalable because you no longer needed a template for every supplier.",
+    "chapter": "INTRO",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "rawLine": 50,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How specifically is machine learning applied beyond data extraction?",
+    "chapter": "INTRO",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "rawLine": 52,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "ML is everywhere in modern AP. For extraction, as we discussed, it identifies and extracts fields without templates. For classification, it determines what type of document this is, an invoice, a credit note, a purchase order, a statement. For GL coding prediction, it suggests the correct accounts based on historical patterns.",
+    "chapter": "INTRO",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "rawLine": 54,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What else?",
+    "chapter": "INTRO",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "rawLine": 56,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "For approval routing, ML can predict who should approve a particular invoice based on past routing decisions. For fraud detection, it identifies anomalous patterns that deviate from established baselines. For cash flow forecasting, it predicts when invoices will arrive and when they'll be paid based on historical patterns. And for supplier behavior modeling, it predicts which suppliers are likely to offer early payment discounts or which are at risk of delayed deliveries.",
+    "chapter": "INTRO",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "rawLine": 58,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How much training data do you need for these models to work well?",
+    "chapter": "INTRO",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "rawLine": 60,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "This is a key question for product strategy. For extraction, the general models need millions of training documents, but they work reasonably well out of the box. For company-specific models like GL coding prediction, you typically need a few months of historical data, maybe a thousand transactions per GL code, before the predictions become reliable. This creates a cold-start problem for new customers.",
+    "chapter": "INTRO",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "rawLine": 62,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How do you solve the cold-start problem?",
+    "chapter": "INTRO",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "rawLine": 64,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Transfer learning. You train a base model on data from many customers, anonymized of course, and then fine-tune it for each specific customer. The base model provides reasonable predictions from day one, and they improve as the system processes more of that customer's specific invoices.",
+    "chapter": "INTRO",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "rawLine": 70,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Where do NLP and LLMs fit in?",
+    "chapter": "INTRO",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "rawLine": 72,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Natural Language Processing was initially used for things like parsing email content to extract invoice-related information, understanding unstructured text in invoice descriptions, and routing supplier inquiries to the right category.",
+    "chapter": "INTRO",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "rawLine": 74,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And LLMs take this much further?",
+    "chapter": "INTRO",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "rawLine": 76,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Yes. Large Language Models like the ones powering modern AI assistants can understand complex document layouts, interpret ambiguous field labels in any language, extract data from documents they've never seen before with remarkable accuracy, generate human-quality responses to supplier inquiries, and explain why a particular invoice was flagged, in natural language.",
+    "chapter": "INTRO",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "rawLine": 78,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "This is what Medius Copilot is built on?",
+    "chapter": "INTRO",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "rawLine": 80,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Exactly. Medius Copilot is an AI assistant that helps invoice approvers understand what they're looking at. Instead of just showing an invoice and saying \"approve or reject,\" the copilot can explain the context. For example: \"This invoice from Acme Corp is twelve percent higher than their usual monthly invoice. The increase appears to be due to two additional line items for rush delivery charges. The PO authorized standard delivery. You may want to verify with the requestor.\"",
+    "chapter": "INTRO",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "rawLine": 82,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's incredibly powerful. It's not just automation, it's augmented intelligence.",
+    "chapter": "INTRO",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "rawLine": 84,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Right. The human still makes the decision, but they have much better information to make it with.",
+    "chapter": "INTRO",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "rawLine": 90,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "I keep hearing about agentic AI. What does that mean in the AP context?",
+    "chapter": "INTRO",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "rawLine": 92,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Agentic AI refers to AI systems that can take actions autonomously, not just analyze data and make recommendations. In AP, an agentic AI system might receive a supplier email about a missing payment, look up the invoice in the system, identify that it's stuck in an approval queue, send a reminder to the approver, and respond to the supplier with a status update. All without human intervention.",
+    "chapter": "INTRO",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "rawLine": 94,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's a fundamentally different value proposition. From \"we help you process invoices\" to \"we handle your AP operations.\"",
+    "chapter": "INTRO",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "rawLine": 96,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Exactly. And it's where the industry is heading. The vision is an AP department where the AI handles ninety-five percent of transactions end-to-end, and humans only get involved for genuinely complex exceptions and strategic decisions.",
+    "chapter": "INTRO",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "rawLine": 98,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What are the barriers to getting there?",
+    "chapter": "INTRO",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "rawLine": 100,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Trust is the biggest one. Finance teams are understandably cautious about letting AI make decisions that involve money. There are also accuracy requirements. A ninety-nine percent accuracy rate sounds great, but if you process a million invoices, that's ten thousand errors. Regulatory and audit concerns about AI decision-making. And the change management challenge of redesigning AP teams around AI-first workflows.",
+    "chapter": "INTRO",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "rawLine": 106,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's talk about integration. AP automation doesn't exist in a vacuum.",
+    "chapter": "INTRO",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "rawLine": 108,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Integration is the lifeblood of AP automation. The platform needs to connect with ERPs to read PO and master data and write back validated invoices and payments. It needs to connect with banks for payment execution and reconciliation. It needs to connect with e-invoicing networks for structured invoice receipt. And increasingly, it needs to connect with other enterprise systems like contract management, expense management, and business intelligence.",
+    "chapter": "INTRO",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "rawLine": 110,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What are the main integration approaches?",
+    "chapter": "INTRO",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "rawLine": 112,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Point-to-point APIs are the most common for modern cloud platforms. Pre-built connectors for major ERPs like SAP, Oracle, and Dynamics reduce implementation time. Middleware platforms like MuleSoft or Dell Boomi can broker complex integrations. EDI for traditional supply chain integration. And file-based integration is still common for bank connections and some ERP scenarios.",
+    "chapter": "INTRO",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "rawLine": 114,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How important is the ERP integration for Medius specifically?",
+    "chapter": "INTRO",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "rawLine": 116,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It's existential. Medius's deep integration with Microsoft Dynamics is one of their strongest competitive advantages. They're a preferred solution in the Dynamics ecosystem. Expanding that same depth of integration to SAP and Oracle would significantly expand their addressable market.",
+    "chapter": "INTRO",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "rawLine": 122,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Is the cloud vs on-premise debate settled in AP?",
+    "chapter": "INTRO",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "rawLine": 124,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Largely, yes. The market has moved decisively to cloud and SaaS. Cloud offers faster deployment, automatic updates, scalability, and lower total cost of ownership. Medius is cloud-native, built on Microsoft Azure, which is exactly the right architecture.",
+    "chapter": "INTRO",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "rawLine": 126,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Are there holdouts?",
+    "chapter": "INTRO",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "rawLine": 128,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Some large enterprises, particularly in regulated industries like banking and government, still have on-premise requirements or hybrid architectures. Some companies in countries with data residency requirements need assurance that their data stays in-country. But even these organizations are increasingly comfortable with cloud solutions that meet their compliance requirements.",
+    "chapter": "INTRO",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "rawLine": 134,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's talk about the AP automation vendor landscape. Who are the major players?",
+    "chapter": "INTRO",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "rawLine": 136,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The market is fragmented but consolidating. At the top, you have the ERP vendors themselves, SAP with Ariba and Concur, Oracle with its procurement cloud, Coupa which was acquired by Thoma Bravo. Then you have the dedicated AP automation players like Medius, Basware, Tipalti, and Stampli.",
+    "chapter": "INTRO",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "rawLine": 138,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How do they differentiate?",
+    "chapter": "INTRO",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "rawLine": 140,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Tipalti is strong in global payments, particularly for companies with lots of cross-border payees like marketplaces and gig economy platforms. Stampli differentiates on user experience and speed of deployment, targeting the mid-market. Basware has a large e-invoicing network, particularly strong in Europe. Coupa goes broad as a full business spend management platform.",
+    "chapter": "INTRO",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "rawLine": 142,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And where does Medius fit?",
+    "chapter": "INTRO",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "rawLine": 144,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Medius positions as an AI-native, end-to-end spend management platform. Their strengths are deep Microsoft integration, strong European presence especially in the Nordics, a comprehensive suite from sourcing to payment, and increasingly their AI capabilities including Copilot and Supplier Conversations. They were named a Gartner Magic Quadrant Leader for AP Applications in 2025.",
+    "chapter": "INTRO",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "rawLine": 146,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What's the competitive threat?",
+    "chapter": "INTRO",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "rawLine": 148,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The biggest strategic threat is probably Coupa, which has scale and breadth. The tactical threats are specialists like Stampli who win on user experience in specific segments. And the sleeper threat is the ERPs themselves improving their native AP capabilities enough that the standalone case weakens.",
+    "chapter": "INTRO",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "rawLine": 154,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Do companies ever try to build their own AP automation?",
+    "chapter": "INTRO",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "rawLine": 156,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Some do, usually large enterprises with strong IT teams. It almost always ends badly. The problem is that AP automation looks simpler than it is. Extracting data from invoices, handling multi-country tax rules, integrating with banks, maintaining e-invoicing compliance, these are deeply specialized capabilities that require continuous investment.",
+    "chapter": "INTRO",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "rawLine": 158,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What happens to the build attempts?",
+    "chapter": "INTRO",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "rawLine": 160,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "They typically start well, handle the simple cases, and then stall when they hit the long tail of complexity. The ninety-five different PDF layouts from ninety-five different suppliers. The tax rule that changed in Germany last month. The bank file format quirk that causes payment failures. Companies end up spending more maintaining their custom solution than a commercial platform would cost.",
+    "chapter": "INTRO",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "rawLine": 162,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's a strong argument for best-of-breed platforms.",
+    "chapter": "INTRO",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "rawLine": 164,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It is. And it's an argument that resonates when you can demonstrate the breadth of edge cases your platform handles that a custom solution would need to replicate.",
+    "chapter": "INTRO",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "rawLine": 170,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Where is AP technology heading?",
+    "chapter": "INTRO",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "rawLine": 172,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Five key trends. First, autonomous AP where AI handles the vast majority of transactions without human intervention. Second, embedded payments becoming standard in every AP platform. Third, e-invoicing compliance becoming a must-have as mandates spread globally. Fourth, real-time analytics and predictive insights replacing retrospective reporting. And fifth, platform convergence where AP, procurement, expense, and treasury capabilities merge into unified spend management platforms.",
+    "chapter": "INTRO",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "rawLine": 174,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's a roadmap for Medius right there.",
+    "chapter": "INTRO",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "rawLine": 176,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It is. And the winners will be the platforms that execute on these trends while maintaining the deep, reliable automation that customers depend on daily.",
+    "chapter": "INTRO",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "rawLine": 182,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Morgan, this technology deep dive has been exactly what I needed. I can see the product strategy taking shape: AI-native automation, embedded payments, global compliance, and platform convergence.",
+    "chapter": "INTRO",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "rawLine": 184,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Next episode is the one I'm most excited about. We're going to do a full deep dive on Medius itself. The product suite, the architecture, the competitive positioning, and where a CPO can make the biggest impact.",
+    "chapter": "INTRO",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "rawLine": 186,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's going to be the most directly relevant episode for me. Can't wait.",
+    "chapter": "INTRO",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "rawLine": 188,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "See you next time.",
+    "chapter": "INTRO",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "rawLine": 190,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Next Episode: Medius Deep Dive — The Platform & Product Suite",
+    "chapter": "INTRO",
+    "file": "0071.mp3"
+  }
+]

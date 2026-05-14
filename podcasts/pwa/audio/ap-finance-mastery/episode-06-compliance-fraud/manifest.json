@@ -1,0 +1,704 @@
+[
+  {
+    "index": 0,
+    "rawLine": 4,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Welcome back. Today's topic is one that keeps CFOs and Controllers up at night: compliance, fraud prevention, and internal controls in accounts payable.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "rawLine": 6,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "This feels like a topic where getting it wrong has serious consequences.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "rawLine": 8,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It does. AP fraud costs companies billions of dollars annually. Compliance failures can result in regulatory penalties, restatements, and reputational damage. And weak internal controls can enable both. The good news is that AP automation, when done right, is one of the most powerful tools for strengthening controls.",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "rawLine": 14,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's start with the threat landscape. What kinds of fraud target AP?",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "rawLine": 16,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "AP is a prime target because it's where money leaves the organization. The main types are: duplicate payments, which we touched on earlier. This is paying the same invoice twice. It can be accidental due to process failures or intentional where someone submits the same invoice in different formats hoping it gets paid twice.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "rawLine": 18,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How common is this?",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "rawLine": 20,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "More common than anyone wants to admit. Studies suggest companies lose point-one to point-five percent of total disbursements to duplicate payments. For a company spending a billion through AP, that's one to five million dollars annually.",
+    "chapter": "INTRO",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "rawLine": 22,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What other types of fraud?",
+    "chapter": "INTRO",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "rawLine": 24,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Fictitious vendor fraud. Someone creates a fake supplier in the system, submits invoices from that fake supplier, and approves the payments themselves. This is why segregation of duties is so important. Invoice manipulation involves a real supplier's invoice being altered, perhaps the bank account number is changed so the payment goes to a fraudulent account. This often ties to business email compromise.",
+    "chapter": "INTRO",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "rawLine": 26,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Tell me about business email compromise. I've been hearing more about that.",
+    "chapter": "INTRO",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "rawLine": 28,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "BEC is one of the fastest-growing fraud types. A criminal compromises or spoofs a supplier's email address and sends a message to the AP department saying something like \"we've changed our bank account, please update your records and send future payments to this new account.\" The AP clerk, thinking it's legitimate, updates the bank details, and the next payment goes to the criminal's account.",
+    "chapter": "INTRO",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "rawLine": 30,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's terrifyingly simple.",
+    "chapter": "INTRO",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "rawLine": 32,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It is. The FBI's Internet Crime Complaint Center reported over two-and-a-half billion dollars in BEC losses in a single year. And those are just the reported cases. Many companies don't report it due to embarrassment.",
+    "chapter": "INTRO",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "rawLine": 34,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What other fraud types should I know about?",
+    "chapter": "INTRO",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "rawLine": 36,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Kickback schemes where an employee colludes with a supplier to inflate invoices and split the overpayment. Ghost employees on vendor rolls. Expense fraud where employees submit personal expenses as business expenses. And shell company fraud where an employee sets up a company and routes business to it.",
+    "chapter": "INTRO",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "rawLine": 42,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What does the data say about how widespread AP fraud is?",
+    "chapter": "INTRO",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "rawLine": 44,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The Association for Financial Professionals' annual survey consistently shows that over eighty percent of organizations experienced payment fraud attempts. The Association of Certified Fraud Examiners' reports indicate that the median loss from occupational fraud is over a hundred thousand dollars, and schemes typically run for twelve to eighteen months before detection.",
+    "chapter": "INTRO",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "rawLine": 46,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Twelve to eighteen months? Why so long?",
+    "chapter": "INTRO",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "rawLine": 48,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Because in manual environments, the controls that would catch fraud are weak or non-existent. No one's systematically checking for duplicate payments. No one's monitoring for bank detail changes. No one's cross-referencing employee addresses with supplier addresses. The fraudster has plenty of time to operate before someone accidentally notices something off.",
+    "chapter": "INTRO",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "rawLine": 50,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And automation changes that?",
+    "chapter": "INTRO",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "rawLine": 52,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Dramatically. Automated systems can check every single transaction against every rule, every time. They never get tired, never skip a step, and never look the other way. A good AP automation platform is performing hundreds of fraud checks on every invoice in real-time.",
+    "chapter": "INTRO",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "rawLine": 58,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's talk about internal controls. What's the framework?",
+    "chapter": "INTRO",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "rawLine": 60,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The foundational principle is segregation of duties, also called separation of duties. No single person should control all aspects of a financial transaction. In AP, this means the person who creates a supplier record shouldn't be the same person who approves invoices from that supplier. The person who approves an invoice shouldn't be the same person who executes the payment. And the person who reconciles the bank statement shouldn't be the same person who initiated the payments.",
+    "chapter": "INTRO",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "rawLine": 62,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Makes sense. What other controls?",
+    "chapter": "INTRO",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "rawLine": 64,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Authorization limits are critical. Every employee has a maximum dollar amount they can approve. Dual authorization for high-value payments means two people must approve. Mandatory documentation means every transaction needs supporting evidence. And systematic logging means every action is recorded with who did it, what they did, and when.",
+    "chapter": "INTRO",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "rawLine": 66,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How does AP automation enforce these controls?",
+    "chapter": "INTRO",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "rawLine": 68,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The software enforces controls that humans might skip. You literally cannot approve an invoice above your authorization limit. The system won't let you. You can't approve your own expense claim. You can't change bank details without a verification workflow. And every single action is logged in an immutable audit trail.",
+    "chapter": "INTRO",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "rawLine": 74,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Tell me about SOX compliance and AP.",
+    "chapter": "INTRO",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "rawLine": 76,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Sarbanes-Oxley, or SOX, was enacted in 2002 after the Enron and WorldCom scandals. It requires public companies to maintain effective internal controls over financial reporting. AP is directly in scope because accounts payable is a significant balance sheet item that flows into the financial statements.",
+    "chapter": "INTRO",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "rawLine": 78,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What specifically does SOX require for AP?",
+    "chapter": "INTRO",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "rawLine": 80,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "SOX requires documented controls and evidence that they're operating effectively. For AP, this means documented approval workflows with evidence of who approved what. Three-way matching procedures with evidence of matching. Segregation of duties with evidence that conflicts don't exist. Timely recording of liabilities for accurate financial reporting. And regular reconciliation of AP balances.",
+    "chapter": "INTRO",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "rawLine": 82,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And auditors test these controls?",
+    "chapter": "INTRO",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "rawLine": 84,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Every year. External auditors test AP controls as part of the annual audit. They'll sample transactions and verify that controls operated as designed. If they find control deficiencies, those get reported, and material weaknesses can result in adverse audit opinions, which is extremely damaging for a public company.",
+    "chapter": "INTRO",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "rawLine": 86,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "So AP automation systems need to produce audit-ready documentation?",
+    "chapter": "INTRO",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "rawLine": 88,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Exactly. The audit trail is one of the most valuable features of AP automation. Every action, every approval, every system decision is logged with timestamps. When the auditor asks to see evidence of three-way matching for a sample of invoices, you can produce it in seconds instead of digging through filing cabinets.",
+    "chapter": "INTRO",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "rawLine": 94,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What about tax compliance in AP?",
+    "chapter": "INTRO",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "rawLine": 96,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Tax is enormously complex, especially for multinational companies. In the US, you need to track payments to vendors for 1099 reporting. If you pay an independent contractor more than six hundred dollars in a year, you need to file a 1099 with the IRS. This requires accurate supplier classification and tax ID collection.",
+    "chapter": "INTRO",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "rawLine": 98,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What about VAT?",
+    "chapter": "INTRO",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "rawLine": 100,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "VAT, or Value Added Tax, is where things get really complex. In Europe, every invoice must include the correct VAT treatment. The buyer needs to verify that the VAT amount is calculated correctly, that the supplier's VAT number is valid, and that the correct reverse charge or intra-community rules are applied for cross-border transactions.",
+    "chapter": "INTRO",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "rawLine": 102,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And withholding tax?",
+    "chapter": "INTRO",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "rawLine": 104,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "In many countries, the buyer is required to withhold tax from payments to certain types of suppliers and remit it to the tax authority. The rules vary by country, by supplier type, and by the nature of the goods or services. Getting this wrong means either the company is liable for the withheld amount or the supplier is overtaxed.",
+    "chapter": "INTRO",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "rawLine": 106,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "So an AP platform needs to handle tax rules for potentially dozens of countries?",
+    "chapter": "INTRO",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "rawLine": 108,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Yes. And these rules change frequently. A good AP platform maintains a tax engine that stays current with regulatory changes. This is one of the areas where the complexity creates a real moat for established vendors. Building and maintaining a multi-country tax engine is not trivial.",
+    "chapter": "INTRO",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "rawLine": 114,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How does AI help with fraud detection specifically?",
+    "chapter": "INTRO",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "rawLine": 116,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "AI and machine learning are transforming fraud detection in AP. Traditional fraud detection was rule-based: flag any invoice over a certain amount, flag any new bank account, flag any duplicate invoice number. These rules catch some fraud but miss sophisticated schemes.",
+    "chapter": "INTRO",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "rawLine": 118,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And AI goes beyond rules?",
+    "chapter": "INTRO",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "rawLine": 120,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "AI uses pattern recognition and anomaly detection. It learns what \"normal\" looks like for each supplier, each department, each expense category, and flags deviations. For example, if a supplier typically sends invoices of five thousand to fifteen thousand dollars and suddenly submits one for fifty thousand, the AI flags it. Not because a rule said \"flag invoices over X,\" but because it's anomalous for that specific supplier.",
+    "chapter": "INTRO",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "rawLine": 122,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What specific patterns does it look for?",
+    "chapter": "INTRO",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "rawLine": 124,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Bank detail changes, especially when they come through email rather than the portal. Unusual invoice amounts compared to historical patterns. Invoices from new suppliers that match the address or bank account of an employee. Round-number invoices which are more common in fraud than in legitimate transactions. Invoices submitted just below approval thresholds. And clusters of invoices from the same supplier in a short period.",
+    "chapter": "INTRO",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "rawLine": 126,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And Medius has this capability?",
+    "chapter": "INTRO",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "rawLine": 128,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Yes, Medius has a Fraud and Risk Detection module that uses machine learning to identify anomalies and potential fraud. It's one of their differentiators because it's integrated directly into the invoice processing workflow, not bolted on as an afterthought.",
+    "chapter": "INTRO",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "rawLine": 134,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's go deeper on duplicate payments specifically.",
+    "chapter": "INTRO",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "rawLine": 136,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Duplicate payment detection is both simpler and more complex than people think. Exact duplicate detection is straightforward: same supplier, same invoice number, same amount. Any decent system catches those. The hard part is fuzzy duplicates.",
+    "chapter": "INTRO",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "rawLine": 138,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What makes a duplicate \"fuzzy\"?",
+    "chapter": "INTRO",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "rawLine": 140,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The same invoice submitted in different formats. A PDF sent by email and the same invoice entered manually from the paper copy. The same supplier under two different supplier records. An invoice that was reversed, corrected, and resubmitted but the original payment wasn't canceled. Credit notes that weren't applied correctly, causing the original invoice to be paid in full plus the credit.",
+    "chapter": "INTRO",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "rawLine": 142,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What techniques detect fuzzy duplicates?",
+    "chapter": "INTRO",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "rawLine": 144,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Fuzzy matching algorithms compare invoices based on multiple weighted factors: similar amounts within a tolerance, similar dates, same or similar supplier, similar line items. The system assigns a confidence score. High confidence duplicates get blocked automatically. Medium confidence gets flagged for human review. Low confidence gets logged for audit purposes.",
+    "chapter": "INTRO",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "rawLine": 150,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Beyond technology, how do you build a culture of compliance?",
+    "chapter": "INTRO",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "rawLine": 152,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Technology is necessary but not sufficient. Culture matters enormously. It starts with tone at the top. When the CFO and CEO take compliance seriously, the organization follows. Training is essential. AP staff need regular training on fraud recognition, compliance requirements, and the company's policies.",
+    "chapter": "INTRO",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "rawLine": 154,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What about whistleblower programs?",
+    "chapter": "INTRO",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "rawLine": 156,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Critical. The ACFE reports that forty-two percent of fraud is detected through tips. Having a confidential reporting mechanism, and making sure employees know about it and trust it, is one of the most effective fraud prevention measures.",
+    "chapter": "INTRO",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "rawLine": 158,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Any other cultural elements?",
+    "chapter": "INTRO",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "rawLine": 160,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Regular rotation of duties so no one person controls a process for too long. Mandatory vacations, because fraud schemes often unravel when the perpetrator is away and someone else handles their work. And regular audits, both internal and external, that are taken seriously and whose findings are acted on.",
+    "chapter": "INTRO",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "rawLine": 162,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "As a product builder, I'm thinking about how the software can enable and reinforce these cultural elements.",
+    "chapter": "INTRO",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "rawLine": 164,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "That's the right mindset. The best AP software doesn't just automate controls. It makes compliance the path of least resistance. When following the rules is easier than breaking them, compliance becomes the default behavior.",
+    "chapter": "INTRO",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "rawLine": 170,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Can you share some real-world examples to bring this to life?",
+    "chapter": "INTRO",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "rawLine": 172,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "There are many public cases. One classic was a senior AP manager at a large company who created over a dozen fictitious vendors over a period of six years. She submitted invoices from these vendors, approved the payments herself, and diverted millions of dollars. She was caught when she went on maternity leave and her replacement noticed unusual patterns.",
+    "chapter": "INTRO",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "rawLine": 174,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That ties to the mandatory vacation point you made.",
+    "chapter": "INTRO",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "rawLine": 176,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Exactly. Another major case involved a business email compromise where criminals impersonated a company's CEO via email and instructed the finance team to wire forty-seven million dollars to a bank account in China. The finance team complied because the email appeared to come from the CEO and the request seemed urgent.",
+    "chapter": "INTRO",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "rawLine": 178,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Forty-seven million dollars. That's staggering.",
+    "chapter": "INTRO",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "rawLine": 180,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It is. And it highlights why dual authorization for high-value payments is non-negotiable. If a second person had to approve that wire transfer, they might have picked up the phone to verify with the CEO.",
+    "chapter": "INTRO",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "rawLine": 186,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Morgan, this episode has been eye-opening. I knew fraud and compliance were important, but the scale of the problem and the sophistication of the solutions are both greater than I expected.",
+    "chapter": "INTRO",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "rawLine": 188,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "And here's the key insight for your product role: every control you build into the platform is a selling point. CFOs and Controllers don't buy AP software just for efficiency. They buy it for control. When you can demonstrate that your platform reduces fraud risk, ensures SOX compliance, and provides audit-ready documentation, you're speaking directly to their deepest concerns.",
+    "chapter": "INTRO",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "rawLine": 190,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's a powerful reframe. We're not just an automation vendor. We're a controls and compliance platform.",
+    "chapter": "INTRO",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "rawLine": 192,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Now you're thinking like a CPO. Next episode, we're going to explore the technology landscape in depth. AP automation, AI, and what's driving the next wave of innovation.",
+    "chapter": "INTRO",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "rawLine": 194,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Looking forward to it.",
+    "chapter": "INTRO",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "rawLine": 196,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "See you next time.",
+    "chapter": "INTRO",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "rawLine": 198,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Next Episode: AP Automation Technology & The AI Revolution",
+    "chapter": "INTRO",
+    "file": "0077.mp3"
+  }
+]

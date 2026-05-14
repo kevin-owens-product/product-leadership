@@ -1,0 +1,803 @@
+[
+  {
+    "index": 0,
+    "rawLine": 4,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Welcome to the final episode of AP and Finance Mastery. We've covered an incredible amount of ground over the past nine episodes, from the fundamentals of accounts payable all the way through the Medius product suite and the CFO perspective. Today we're looking forward.",
+    "chapter": "INTRO",
+    "file": "0000.mp3"
+  },
+  {
+    "index": 1,
+    "rawLine": 6,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "It's been an amazing journey, Morgan. I started this series barely knowing what three-way matching was, and now I feel genuinely prepared to lead product at an AP automation company. Let's talk about where this whole industry is heading.",
+    "chapter": "INTRO",
+    "file": "0001.mp3"
+  },
+  {
+    "index": 2,
+    "rawLine": 8,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The future of AP is the future of finance itself. What we're seeing isn't just incremental automation. It's a fundamental reimagining of how financial operations work.",
+    "chapter": "INTRO",
+    "file": "0002.mp3"
+  },
+  {
+    "index": 3,
+    "rawLine": 14,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's start with the big vision. What does autonomous AP look like?",
+    "chapter": "INTRO",
+    "file": "0003.mp3"
+  },
+  {
+    "index": 4,
+    "rawLine": 16,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Autonomous AP is a state where the vast majority of accounts payable transactions are processed end-to-end without human involvement. Invoices arrive, data is extracted, validation happens, matching occurs, payments are executed, and reconciliation is completed, all automatically. Humans only get involved for genuine exceptions and strategic decisions.",
+    "chapter": "INTRO",
+    "file": "0004.mp3"
+  },
+  {
+    "index": 5,
+    "rawLine": 18,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What's the difference between current automation and true autonomy?",
+    "chapter": "INTRO",
+    "file": "0005.mp3"
+  },
+  {
+    "index": 6,
+    "rawLine": 20,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Today's best-in-class AP automation still requires significant human oversight. An eighty-five percent touchless rate means fifteen percent of invoices need human attention. Many \"automated\" steps still have humans in the loop for verification. And strategic decisions like payment timing and DPO management are entirely human-driven.",
+    "chapter": "INTRO",
+    "file": "0006.mp3"
+  },
+  {
+    "index": 7,
+    "rawLine": 22,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And autonomous AP changes that?",
+    "chapter": "INTRO",
+    "file": "0007.mp3"
+  },
+  {
+    "index": 8,
+    "rawLine": 24,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "In the autonomous model, the AI doesn't just process invoices, it manages the entire AP function. It decides when to pay based on cash flow optimization. It negotiates with suppliers through AI-to-AI communication. It detects and resolves discrepancies without escalating. It generates the accrual estimates for period-end close. And it flags only truly exceptional situations for human review.",
+    "chapter": "INTRO",
+    "file": "0008.mp3"
+  },
+  {
+    "index": 9,
+    "rawLine": 26,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's a profound shift. From AI as a tool to AI as an operator.",
+    "chapter": "INTRO",
+    "file": "0009.mp3"
+  },
+  {
+    "index": 10,
+    "rawLine": 28,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Exactly. And it raises important questions about trust, control, and governance that the industry needs to address.",
+    "chapter": "INTRO",
+    "file": "0010.mp3"
+  },
+  {
+    "index": 11,
+    "rawLine": 34,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Tell me more about agentic AI specifically in finance.",
+    "chapter": "INTRO",
+    "file": "0011.mp3"
+  },
+  {
+    "index": 12,
+    "rawLine": 36,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Agentic AI systems can take multi-step actions to accomplish goals. In AP, this looks like an AI agent that receives a supplier's email about a disputed invoice, pulls up the invoice, compares it against the PO and goods receipt, identifies the discrepancy, drafts a resolution proposal, gets automated approval based on pre-set rules, adjusts the payment, and responds to the supplier, all in minutes without human intervention.",
+    "chapter": "INTRO",
+    "file": "0012.mp3"
+  },
+  {
+    "index": 13,
+    "rawLine": 38,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's a complex workflow executed autonomously.",
+    "chapter": "INTRO",
+    "file": "0013.mp3"
+  },
+  {
+    "index": 14,
+    "rawLine": 40,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "And it's not science fiction. The individual capabilities exist today. The challenge is orchestrating them reliably and building the guardrails that finance teams need. You can't have an AI agent accidentally paying a fraudulent invoice or approving an out-of-policy expense because it misunderstood the context.",
+    "chapter": "INTRO",
+    "file": "0014.mp3"
+  },
+  {
+    "index": 15,
+    "rawLine": 42,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How do you build those guardrails?",
+    "chapter": "INTRO",
+    "file": "0015.mp3"
+  },
+  {
+    "index": 16,
+    "rawLine": 44,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Multiple layers. Hard limits on what agents can do autonomously, like dollar thresholds. Confidence scoring where low-confidence decisions get escalated. Audit trails for every AI decision. Human-in-the-loop override capabilities. And continuous monitoring of AI behavior against expected baselines. The goal is trust through transparency. Finance teams need to see what the AI is doing and why.",
+    "chapter": "INTRO",
+    "file": "0016.mp3"
+  },
+  {
+    "index": 17,
+    "rawLine": 50,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What about the shift to real-time payments?",
+    "chapter": "INTRO",
+    "file": "0017.mp3"
+  },
+  {
+    "index": 18,
+    "rawLine": 52,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The batch processing model, where companies run payment batches once or twice a week, is a relic of an era when processing power and banking infrastructure made it necessary. We're moving toward a world where payments can be made in real-time.",
+    "chapter": "INTRO",
+    "file": "0018.mp3"
+  },
+  {
+    "index": 19,
+    "rawLine": 54,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What enables this?",
+    "chapter": "INTRO",
+    "file": "0019.mp3"
+  },
+  {
+    "index": 20,
+    "rawLine": 56,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Real-time payment infrastructure is now available in most major markets. FedNow in the US, which launched in 2023. Faster Payments in the UK. SEPA Instant in Europe. UPI in India. These systems process payments in seconds, twenty-four-seven.",
+    "chapter": "INTRO",
+    "file": "0020.mp3"
+  },
+  {
+    "index": 21,
+    "rawLine": 58,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What does this mean for AP?",
+    "chapter": "INTRO",
+    "file": "0021.mp3"
+  },
+  {
+    "index": 22,
+    "rawLine": 60,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It changes the economics and strategy of payments. If you can pay instantly, you can pay at the last possible moment before the due date, maximizing your DPO while still paying on time. You can offer dynamic discounts calibrated to the exact day of payment. And you can respond to urgent supplier needs immediately rather than waiting for the next payment run.",
+    "chapter": "INTRO",
+    "file": "0022.mp3"
+  },
+  {
+    "index": 23,
+    "rawLine": 62,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "But does instant payment mean you lose control?",
+    "chapter": "INTRO",
+    "file": "0023.mp3"
+  },
+  {
+    "index": 24,
+    "rawLine": 64,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "That's the concern. The batch model provides a natural review point before money leaves the company. Real-time payments eliminate that buffer. This makes pre-payment controls, fraud detection, and approval workflows even more critical. The automation needs to happen before the payment, not after.",
+    "chapter": "INTRO",
+    "file": "0024.mp3"
+  },
+  {
+    "index": 25,
+    "rawLine": 70,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "We touched on e-invoicing earlier. How is this evolving?",
+    "chapter": "INTRO",
+    "file": "0025.mp3"
+  },
+  {
+    "index": 26,
+    "rawLine": 72,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "E-invoicing is accelerating globally at a pace that's catching many companies off guard. The EU's VAT in the Digital Age directive, ViDA, will establish a framework for mandatory e-invoicing across all EU member states. Italy already mandated it in 2019 and processes over two billion e-invoices annually. France is phasing in mandates starting in 2026.",
+    "chapter": "INTRO",
+    "file": "0026.mp3"
+  },
+  {
+    "index": 27,
+    "rawLine": 74,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Beyond Europe?",
+    "chapter": "INTRO",
+    "file": "0027.mp3"
+  },
+  {
+    "index": 28,
+    "rawLine": 76,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "India has had mandatory e-invoicing for larger companies since 2020 and keeps lowering the threshold. Brazil has had its nota fiscal electronica for years. Saudi Arabia implemented its ZATCA e-invoicing mandate. Mexico, Colombia, and many other Latin American countries have mandates. Africa is following with countries like Nigeria and Kenya implementing e-invoicing.",
+    "chapter": "INTRO",
+    "file": "0028.mp3"
+  },
+  {
+    "index": 29,
+    "rawLine": 78,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What does this mean for AP automation vendors?",
+    "chapter": "INTRO",
+    "file": "0029.mp3"
+  },
+  {
+    "index": 30,
+    "rawLine": 80,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It's a strategic imperative. Companies need to receive, validate, and process e-invoices in country-specific formats. They need to generate e-invoices for their outbound transactions where required. And they need to handle the transition period where both traditional and electronic invoices coexist.",
+    "chapter": "INTRO",
+    "file": "0030.mp3"
+  },
+  {
+    "index": 31,
+    "rawLine": 82,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Is this a threat to the data capture value proposition?",
+    "chapter": "INTRO",
+    "file": "0031.mp3"
+  },
+  {
+    "index": 32,
+    "rawLine": 84,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It shifts the value proposition. If invoices arrive as structured data, you don't need AI to extract the data. But you still need everything else: matching, approval workflows, payment execution, compliance validation, and analytics. And you need the e-invoicing compliance layer itself. The data capture piece becomes less important, but the overall platform value remains strong.",
+    "chapter": "INTRO",
+    "file": "0032.mp3"
+  },
+  {
+    "index": 33,
+    "rawLine": 90,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "I've been hearing about convergence. What does that mean?",
+    "chapter": "INTRO",
+    "file": "0033.mp3"
+  },
+  {
+    "index": 34,
+    "rawLine": 92,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Traditionally, AP, accounts receivable, and treasury have been separate functions with separate systems. AP handles outgoing payments. AR handles incoming payments. Treasury manages cash, banking relationships, and investments. But they're deeply interconnected.",
+    "chapter": "INTRO",
+    "file": "0034.mp3"
+  },
+  {
+    "index": 35,
+    "rawLine": 94,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How so?",
+    "chapter": "INTRO",
+    "file": "0035.mp3"
+  },
+  {
+    "index": 36,
+    "rawLine": 96,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "AP's payment schedule directly affects the cash forecast that treasury manages. AR's collection timeline affects the cash available for AP payments. Intercompany transactions involve both AP and AR within the same organization. And working capital optimization requires coordinating all three functions.",
+    "chapter": "INTRO",
+    "file": "0036.mp3"
+  },
+  {
+    "index": 37,
+    "rawLine": 98,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "So unified platforms that span AP, AR, and treasury make sense?",
+    "chapter": "INTRO",
+    "file": "0037.mp3"
+  },
+  {
+    "index": 38,
+    "rawLine": 100,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "That's the direction. Some vendors are building toward a \"finance hub\" that provides a unified view of all cash flows: what's coming in from AR, what's going out through AP, and the net position that treasury manages. This eliminates the silos and gives the CFO a single source of truth for cash flow.",
+    "chapter": "INTRO",
+    "file": "0038.mp3"
+  },
+  {
+    "index": 39,
+    "rawLine": 102,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Is this where Medius should be heading?",
+    "chapter": "INTRO",
+    "file": "0039.mp3"
+  },
+  {
+    "index": 40,
+    "rawLine": 104,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It's a question of strategic focus versus breadth. Medius's strength is AP and spend management. Expanding into AR and treasury would be a massive undertaking. But providing data feeds and integrations that enable unified cash visibility is a more achievable and immediately valuable path.",
+    "chapter": "INTRO",
+    "file": "0040.mp3"
+  },
+  {
+    "index": 41,
+    "rawLine": 110,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What about open banking?",
+    "chapter": "INTRO",
+    "file": "0041.mp3"
+  },
+  {
+    "index": 42,
+    "rawLine": 112,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Open banking regulations, starting with PSD2 in Europe and expanding globally, require banks to provide APIs that allow third-party applications to access account information and initiate payments with the customer's consent. This is transformative for AP.",
+    "chapter": "INTRO",
+    "file": "0042.mp3"
+  },
+  {
+    "index": 43,
+    "rawLine": 114,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How?",
+    "chapter": "INTRO",
+    "file": "0043.mp3"
+  },
+  {
+    "index": 44,
+    "rawLine": 116,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Instead of generating bank files and uploading them, AP platforms can initiate payments directly through bank APIs. Instead of waiting for bank statements to arrive for reconciliation, they can pull real-time balance and transaction data. It eliminates the file-based handoffs that create delays and errors.",
+    "chapter": "INTRO",
+    "file": "0044.mp3"
+  },
+  {
+    "index": 45,
+    "rawLine": 118,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "This makes the embedded payments play even more powerful.",
+    "chapter": "INTRO",
+    "file": "0045.mp3"
+  },
+  {
+    "index": 46,
+    "rawLine": 120,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Exactly. Open banking APIs are the infrastructure that makes embedded payments truly seamless. Medius Payments can build on these APIs to provide real-time payment initiation and reconciliation without the traditional banking middleware.",
+    "chapter": "INTRO",
+    "file": "0046.mp3"
+  },
+  {
+    "index": 47,
+    "rawLine": 126,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "What happens to the people in AP as all this automation takes hold?",
+    "chapter": "INTRO",
+    "file": "0047.mp3"
+  },
+  {
+    "index": 48,
+    "rawLine": 128,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "This is one of the most important questions. The transactional work, data entry, manual matching, routine approvals, is going away. That's clear. But that doesn't mean AP jobs disappear. They transform.",
+    "chapter": "INTRO",
+    "file": "0048.mp3"
+  },
+  {
+    "index": 49,
+    "rawLine": 130,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Into what?",
+    "chapter": "INTRO",
+    "file": "0049.mp3"
+  },
+  {
+    "index": 50,
+    "rawLine": 132,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "AP professionals become exception managers, handling the complex cases that AI can't resolve. They become process analysts, optimizing workflows and automation rules. They become supplier relationship managers, handling strategic supplier interactions. And they become data analysts, using AP data to inform business decisions.",
+    "chapter": "INTRO",
+    "file": "0050.mp3"
+  },
+  {
+    "index": 51,
+    "rawLine": 134,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "So the skills profile changes?",
+    "chapter": "INTRO",
+    "file": "0051.mp3"
+  },
+  {
+    "index": 52,
+    "rawLine": 136,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Dramatically. Less data entry and rule following, more analytical thinking and problem-solving. Less routine processing, more judgment calls and relationship management. This has implications for hiring, training, and career development in finance.",
+    "chapter": "INTRO",
+    "file": "0052.mp3"
+  },
+  {
+    "index": 53,
+    "rawLine": 138,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And for our product, it means we need to build tools that support these new roles, not just automate the old ones.",
+    "chapter": "INTRO",
+    "file": "0053.mp3"
+  },
+  {
+    "index": 54,
+    "rawLine": 140,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Exactly. The exception management interface, the analytics dashboards, the supplier communication tools, these are the product surfaces that matter most as the transactional work gets automated away.",
+    "chapter": "INTRO",
+    "file": "0054.mp3"
+  },
+  {
+    "index": 55,
+    "rawLine": 146,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "How does ESG connect to AP?",
+    "chapter": "INTRO",
+    "file": "0055.mp3"
+  },
+  {
+    "index": 56,
+    "rawLine": 148,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Procurement and AP data is one of the richest sources of supply chain sustainability data. Every supplier relationship, every purchase, every payment tells a story about a company's environmental and social impact. Which suppliers have strong ESG practices? What's the carbon footprint of the supply chain? Are diverse suppliers getting a fair share of spend?",
+    "chapter": "INTRO",
+    "file": "0056.mp3"
+  },
+  {
+    "index": 57,
+    "rawLine": 150,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "So AP platforms become ESG data platforms?",
+    "chapter": "INTRO",
+    "file": "0057.mp3"
+  },
+  {
+    "index": 58,
+    "rawLine": 152,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "They can be. By tracking supplier ESG certifications, monitoring spend with diverse suppliers, and analyzing the environmental impact of purchasing decisions, AP platforms can provide the data that companies need for ESG reporting. This is an emerging use case but an important one as ESG regulations tighten globally.",
+    "chapter": "INTRO",
+    "file": "0058.mp3"
+  },
+  {
+    "index": 59,
+    "rawLine": 158,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Let's talk about the broader strategic direction. Why are AP vendors expanding into full spend management?",
+    "chapter": "INTRO",
+    "file": "0059.mp3"
+  },
+  {
+    "index": 60,
+    "rawLine": 160,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Three reasons. First, customers want fewer vendors, not more. A single platform for the full source-to-pay lifecycle is more appealing than stitching together five point solutions. Second, data advantage. The more of the spend lifecycle you cover, the more data you have, and the better your AI becomes. An AP platform that also knows the contracts and POs can make much better matching and coding decisions. Third, economics. Higher wallet share per customer means better unit economics and more defensible revenue.",
+    "chapter": "INTRO",
+    "file": "0060.mp3"
+  },
+  {
+    "index": 61,
+    "rawLine": 162,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Is there a risk of spreading too thin?",
+    "chapter": "INTRO",
+    "file": "0061.mp3"
+  },
+  {
+    "index": 62,
+    "rawLine": 164,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Absolutely. The graveyard of enterprise software is littered with companies that tried to be everything to everyone and ended up being mediocre at everything. The key is maintaining depth in your core, AP automation, while expanding breadth strategically. Medius needs to be the best AP automation platform AND offer strong complementary modules.",
+    "chapter": "INTRO",
+    "file": "0062.mp3"
+  },
+  {
+    "index": 63,
+    "rawLine": 170,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "If you had to describe the ideal AP product today, what would it look like?",
+    "chapter": "INTRO",
+    "file": "0063.mp3"
+  },
+  {
+    "index": 64,
+    "rawLine": 172,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "AI-native from the ground up, not bolted on. Intelligent data capture that works on any invoice format in any language. Automated matching with smart tolerance management. Embedded payments across multiple methods and geographies. E-invoicing compliance for current and upcoming mandates. A supplier experience that's as good as the buyer experience. Real-time analytics that tell you what's happening now and predict what's coming next. And rock-solid security and controls that pass any audit.",
+    "chapter": "INTRO",
+    "file": "0064.mp3"
+  },
+  {
+    "index": 65,
+    "rawLine": 174,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "And the user experience?",
+    "chapter": "INTRO",
+    "file": "0065.mp3"
+  },
+  {
+    "index": 66,
+    "rawLine": 176,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Invisible for routine transactions, everything just flows. Helpful for exceptions, providing context and suggestions. Beautiful for executives, dashboards that tell the story at a glance. And fast, because finance people have no patience for slow software.",
+    "chapter": "INTRO",
+    "file": "0066.mp3"
+  },
+  {
+    "index": 67,
+    "rawLine": 182,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Morgan, let me share what I've taken away from this series and how it shapes my thinking as I head into Medius.",
+    "chapter": "INTRO",
+    "file": "0067.mp3"
+  },
+  {
+    "index": 68,
+    "rawLine": 184,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "I'd love to hear it.",
+    "chapter": "INTRO",
+    "file": "0068.mp3"
+  },
+  {
+    "index": 69,
+    "rawLine": 186,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "First, AP is not a back-office function. It's a strategic lever that directly impacts cash flow, working capital, supplier relationships, and financial control. Any product leader in this space needs to internalize that.",
+    "chapter": "INTRO",
+    "file": "0069.mp3"
+  },
+  {
+    "index": 70,
+    "rawLine": 188,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "What else?",
+    "chapter": "INTRO",
+    "file": "0070.mp3"
+  },
+  {
+    "index": 71,
+    "rawLine": 190,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Second, the data capture and extraction problem, while still important, is becoming commoditized. The future value is in intelligence: smarter matching, predictive analytics, autonomous workflows, and embedded payments. That's where product investment should be focused.",
+    "chapter": "INTRO",
+    "file": "0071.mp3"
+  },
+  {
+    "index": 72,
+    "rawLine": 192,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "That's a sharp insight.",
+    "chapter": "INTRO",
+    "file": "0072.mp3"
+  },
+  {
+    "index": 73,
+    "rawLine": 194,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Third, the buyer is the CFO, and CFOs buy outcomes, not features. Every product decision needs to connect to a business outcome they care about: lower cost, faster close, better visibility, reduced risk.",
+    "chapter": "INTRO",
+    "file": "0073.mp3"
+  },
+  {
+    "index": 74,
+    "rawLine": 196,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "And fourth?",
+    "chapter": "INTRO",
+    "file": "0074.mp3"
+  },
+  {
+    "index": 75,
+    "rawLine": 198,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "The supplier experience is an underappreciated competitive advantage. Platforms that make suppliers happy create network effects that are incredibly hard for competitors to replicate.",
+    "chapter": "INTRO",
+    "file": "0075.mp3"
+  },
+  {
+    "index": 76,
+    "rawLine": 200,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "I'd add one more.",
+    "chapter": "INTRO",
+    "file": "0076.mp3"
+  },
+  {
+    "index": 77,
+    "rawLine": 202,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Please.",
+    "chapter": "INTRO",
+    "file": "0077.mp3"
+  },
+  {
+    "index": 78,
+    "rawLine": 204,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "The companies that win in AP automation will be the ones that successfully navigate the transition from automation tools to autonomous platforms. Getting AI right, building trust, and maintaining control while letting AI do more, that's the defining challenge for the next five years.",
+    "chapter": "INTRO",
+    "file": "0078.mp3"
+  },
+  {
+    "index": 79,
+    "rawLine": 206,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Agreed completely.",
+    "chapter": "INTRO",
+    "file": "0079.mp3"
+  },
+  {
+    "index": 80,
+    "rawLine": 212,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Let's do a quick recap for our listeners. Episode one covered AP fundamentals, the invoice lifecycle, and why AP matters. Episode two expanded to the full procure-to-pay journey. Episode three went deep on invoice processing technology. Episode four explored payment operations and cash management. Episode five covered supplier management and spend analytics. Episode six addressed compliance, fraud prevention, and controls. Episode seven surveyed AP automation technology and AI. Episode eight was our Medius deep dive. Episode nine explored the CFO perspective. And today we've looked at the future.",
+    "chapter": "INTRO",
+    "file": "0080.mp3"
+  },
+  {
+    "index": 81,
+    "rawLine": 214,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "That's a comprehensive education. For anyone listening who's in a similar position to me, entering the AP space from the outside, I hope this series has been as valuable for you as it has been for me.",
+    "chapter": "INTRO",
+    "file": "0081.mp3"
+  },
+  {
+    "index": 82,
+    "rawLine": 216,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "And for those already in the space, I hope we've provided some fresh perspectives and frameworks for thinking about where things are headed.",
+    "chapter": "INTRO",
+    "file": "0082.mp3"
+  },
+  {
+    "index": 83,
+    "rawLine": 222,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Morgan, thank you for being an incredible guide through this domain. Your depth of knowledge and ability to connect the tactical details to strategic implications has been exactly what I needed.",
+    "chapter": "INTRO",
+    "file": "0083.mp3"
+  },
+  {
+    "index": 84,
+    "rawLine": 224,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "It's been a pleasure, Kevin. You've asked the right questions and brought a product perspective that I think is really valuable for anyone in AP to hear. The intersection of domain expertise and product thinking is where the best AP software comes from.",
+    "chapter": "INTRO",
+    "file": "0084.mp3"
+  },
+  {
+    "index": 85,
+    "rawLine": 226,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "For our listeners, if you want to continue learning, I'd recommend following the Ardent Partners research, the APQC benchmarking studies, and the Gartner coverage of the AP and procurement space. And of course, there's no substitute for talking to real AP teams and watching them work.",
+    "chapter": "INTRO",
+    "file": "0085.mp3"
+  },
+  {
+    "index": 86,
+    "rawLine": 228,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Couldn't agree more. The best product insights come from the people who live this every day. Good luck at Medius, Kevin. I think you're going to do great things there.",
+    "chapter": "INTRO",
+    "file": "0086.mp3"
+  },
+  {
+    "index": 87,
+    "rawLine": 230,
+    "speaker": "KEVIN",
+    "voice": "M1",
+    "text": "Thanks Morgan. And thanks to everyone who's listened to this series. Here's to the future of finance.",
+    "chapter": "INTRO",
+    "file": "0087.mp3"
+  },
+  {
+    "index": 88,
+    "rawLine": 232,
+    "speaker": "MORGAN",
+    "voice": "F2",
+    "text": "Here's to the future.",
+    "chapter": "INTRO",
+    "file": "0088.mp3"
+  }
+]

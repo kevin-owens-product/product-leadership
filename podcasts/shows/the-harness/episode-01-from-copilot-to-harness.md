@@ -1,0 +1,198 @@
+# Episode 1: From Copilot to Harness
+## "Why the Model Is Not the Product"
+
+**Duration:** ~45 minutes
+**Hosts:** Priya Anand (Interviewer) & Marcus Hale (Expert)
+**Podcast:** The Harness -- Building the Enterprise AI Operating System
+
+---
+
+### INTRO (4 minutes)
+
+**[INTRO MUSIC FADES]**
+
+**PRIYA:** Welcome to The Harness. I'm Priya Anand, and this show is about a quiet shift that's happening inside the most sophisticated engineering organizations in the world. Two years ago the conversation was all about which model to use. GPT-4 versus Claude versus Gemini. Today, walk into Stripe, Notion, Block, or Cisco, and the model itself is almost an afterthought. What they're investing in is the scaffolding around the model. The retrieval, the tools, the evals, the policies, the developer experience. The harness.
+
+**MARCUS:** That word "harness" -- I think it's the right one because it actually describes the work. You have an animal, and you have a cart. The animal is the model. It's powerful. It can pull a lot of weight. But on its own, it doesn't know which direction your cart needs to go. It doesn't know what your terrain looks like. It doesn't have brakes when something goes wrong. A harness is the system of straps and reins and guides that converts that raw power into directed, useful work. And what we're seeing across enterprises right now is that the harness is becoming the actual product. The model gets swapped out. The harness compounds.
+
+**PRIYA:** I'm Priya Anand, by the way -- I spent the last decade as a platform engineer and then as a product leader at companies that built developer tools. And my guest today is Marcus Hale, who has been on the operating side of three different enterprise AI rollouts -- one at a global bank, one at a SaaS company you've definitely heard of, and most recently at a Fortune 100 industrial. Marcus, thanks for being here.
+
+**MARCUS:** Thanks for having me, Priya. I should say upfront -- I'm going to use real company names a lot in this series, because the public information is rich and the patterns matter. Stripe has published a lot about their internal AI work. Notion has been remarkably open. Block open-sourced their agent framework. Cisco has been doing AI transformation talks at every major industry event. We have an unusually transparent moment, and I want to take advantage of it.
+
+**PRIYA:** Today we're going to lay the foundation for the whole series. What "harness engineering" actually means. Why so many enterprises got the early AI rollout wrong. And what the leading companies have learned about where the durable value lives. Let's start with the basics. Marcus, when someone says "we're investing in AI," what do they usually mean -- and what should they mean?
+
+---
+
+### SEGMENT 1: THE COPILOT TRAP (8 minutes)
+
+**MARCUS:** Most enterprise AI programs in 2023 and 2024 looked the same. There was an executive mandate -- "we will be an AI-first company by next year." Procurement got an enterprise license for some combination of GitHub Copilot, Microsoft Copilot, ChatGPT Enterprise, and maybe Anthropic for Claude. The license got distributed to thousands of employees. There was a kickoff town hall, some internal training, some excitement. Six months later, finance asks for the ROI report, and you get a slide deck that says "85 percent of developers are weekly active users" and "self-reported productivity gains of 20 percent." And nobody can actually point to revenue, margin, or any operational metric that moved as a result. That's the copilot trap.
+
+**PRIYA:** And to be fair, those copilot tools genuinely do help individuals. I use them every day. So what's the disconnect between the individual experience and the enterprise outcome?
+
+**MARCUS:** The disconnect is that a copilot helps with the local task in front of one person. An enterprise gets value when work gets compounded across people, systems, and time. A copilot writes a function. The harness writes a function, runs the right test suite, opens a pull request against the right reviewers, posts a summary in the right Slack channel, updates the ticket in Jira, and remembers what it did so the next change builds on the last one. The copilot is a single transaction. The harness is a workflow.
+
+**PRIYA:** So when Stripe talks about the work they've done with internal AI -- you've seen them publish about their docs assistant, about applying LLMs to their fraud and risk pipelines -- where does that sit on the copilot-to-harness spectrum?
+
+**MARCUS:** Stripe is interesting because they're doing both, and they're very clear-eyed about the difference. They use Cursor, they use Claude Code, they use GitHub Copilot for the individual developer flow. That's table stakes. But the thing they've actually built -- and that they've talked about publicly -- is what they describe as a payments foundation model and an internal RAG stack that grounds their AI assistants in Stripe's actual documentation, code, and data. When you ask their internal AI about how a charge object behaves in a specific edge case, you don't get a hallucination based on training data from 2023. You get an answer grounded in the current Stripe API documentation, the current Ruby and Sorbet codebase, and the runbook that the on-call team is actually following this week. That's harness work. That's not a license you buy. That's infrastructure you build.
+
+**PRIYA:** Let's pull on that thread. Because I think one of the things that's often missing in the enterprise AI conversation is the distinction between buying a thing and integrating a thing. Walk me through what's actually involved in turning a foundation model into something an enterprise can trust to do work.
+
+**MARCUS:** Yeah, let's get concrete. Imagine you want an AI that can answer questions about your company's HR policies. The naive version is, you give every employee a ChatGPT license and tell them to upload the employee handbook into the context. That sort of works. It's also slow, inconsistent, expensive, doesn't know about policies that aren't in the handbook, and creates a compliance nightmare because now you have copies of the handbook floating around in third-party chat histories. The harness version is, you build a system where the model is connected to your authoritative HR knowledge base, it understands the access control rules so that managers see things individual contributors don't, it's tested against a known set of questions with known correct answers, it's logged for compliance, and it routes the truly ambiguous questions to a human. The model in both cases is the same. The difference is the harness.
+
+**PRIYA:** And the harness in your HR example -- what are the actual components there?
+
+**MARCUS:** I'd break it down into about seven pieces, and we'll come back to these throughout the series. One, the context system. That's retrieval, embedding, document indexing, freshness logic -- everything that connects the model to your company's truth. Two, the tool layer. The set of APIs and actions the model is allowed to call -- read the HRIS, lookup an employee, send a notification. Three, the policy layer. Who can do what, what data is allowed in which context, what actions require human approval. Four, the orchestration layer. The agent loop, the planner, the memory, the multi-step coordination. Five, the eval and observability layer. How do you know it's working? How do you catch regressions? Six, the developer experience layer. How does a team inside the company build a new use case on top of this without reinventing it. And seven, the trust and governance layer. Audit logs, attestations, lineage, the things your auditor and your CISO need.
+
+**PRIYA:** That's a much bigger surface area than "buy a copilot."
+
+**MARCUS:** It's an entire platform. And the companies that have understood this from the start are way ahead. Notion is a good example because they were one of the first to ship AI features inside their product, but they've talked publicly about how the actual engineering effort wasn't the model integration. The model is a few hundred lines of code. The actual effort was building the retrieval system that knows which page in your workspace is relevant, the permissions enforcement that makes sure the AI can't surface a page you don't have access to, the latency budget that lets it feel like a Notion interaction rather than a slow chat experience, and the eval suite they run before any model upgrade so the experience doesn't silently degrade.
+
+**PRIYA:** That permissions point feels like a big deal. Because Notion's whole product is built on workspace-level and page-level access. If their AI shipped without honoring those, they would have had a security incident on day one.
+
+**MARCUS:** They would have had a catastrophic incident. And the permissions enforcement isn't a model capability. It's a harness capability. The model never sees the documents it doesn't have permission to see. The retrieval layer enforces that before the prompt is ever assembled. That's the kind of thing you cannot bolt on. It has to be wired into the architecture from the beginning.
+
+---
+
+### SEGMENT 2: WHAT HARNESS ENGINEERING ACTUALLY MEANS (7 minutes)
+
+**PRIYA:** Let's define harness engineering as a discipline. Because I've heard "AI engineer," I've heard "ML platform engineer," I've heard "prompt engineer." Where does harness engineering fit? Or is it a different way of describing the same thing?
+
+**MARCUS:** I think of harness engineering as a synthesis discipline. It pulls from a few existing fields. From platform engineering, it inherits the focus on internal developer experience -- making it easy for product teams to build on top of a paved road. From ML engineering, it inherits the rigor around evaluation, monitoring, and model lifecycle. From security engineering, it inherits the threat modeling, the data classification, the policy enforcement. From product engineering, it inherits the focus on user outcomes and iteration speed. A good harness engineer is fluent in all of those, but the unique focus is making AI capabilities operational and composable inside an enterprise. Not "can the model do X" but "can a team of five engineers in our company ship a reliable feature that uses X by next quarter."
+
+**PRIYA:** So if I'm hiring for this role today, what's the resume look like?
+
+**MARCUS:** Honestly, the people who are good at this right now mostly didn't have "AI" anywhere in their job title two years ago. They're senior platform engineers who got curious. They're former DevOps leads who understand how to build reliable systems out of unreliable components -- because that's what cloud infrastructure already was. They're security engineers who realized that data flowing through a probabilistic model is going to need new controls. The pure "ML research" background turns out to be less useful than the operational background, because the hard problems aren't novel algorithms. The hard problems are how do you give an LLM access to fifty internal APIs without it confusing them, how do you cache embeddings to keep cost under control, how do you migrate from one foundation model to another without breaking the eval suite. Those are infrastructure problems.
+
+**PRIYA:** That maps to what I'm seeing in the market. Block's open-source agent framework -- Goose -- the team behind that is heavily drawn from former platform engineers. Stripe's AI infrastructure team has the same shape. So the talent pattern is real.
+
+**MARCUS:** And it matters for how you organize the org chart. If you put your AI investment under a research lab or a data science group, you're going to optimize for novelty and for benchmark performance. If you put it under the platform organization, you're going to optimize for reliability, for adoption, for paved roads. The companies getting real ROI from AI have almost universally put the strategic ownership under platform or under the office of the CTO -- with a strong product partnership -- rather than under a separate AI initiative.
+
+**PRIYA:** That's a strong claim. Say more about why.
+
+**MARCUS:** Because the value of AI in an enterprise is realized when it shows up in the existing workflows. The customer support agent isn't going to log into a separate "AI tool." They want the AI suggestion to show up in Zendesk. The developer doesn't want a separate "AI portal." They want the AI assistant to live in their IDE, their pull request flow, their on-call alert. The salesperson wants it in Salesforce. So the AI investment is fundamentally about integration with the existing surface area of how work gets done. Platform organizations are good at integration. Research labs are good at advancing the state of the art. Different muscle. Different incentive structure. The leading companies have figured out that they need both, but the dollars that actually move enterprise metrics are flowing through the platform side.
+
+**PRIYA:** Let's bring in another example. Block -- Square's parent company. They're interesting because they made a very loud architectural choice. They built Goose, they open-sourced it, and they've been talking about how they're rolling agentic AI internally. What's their bet?
+
+**MARCUS:** Block's bet is that agents will be a fundamental primitive for internal developer productivity, and that the tools to manage them should be treated as critical infrastructure. Goose is an open-source agent framework -- you can think of it as a local CLI agent that can use MCP tools, talk to LLMs, and execute multi-step workflows on a developer's machine. What's interesting is the philosophy. They didn't try to build a proprietary moat around the agent framework. They put it on GitHub and invited the world to use it. Their bet is that the durable value isn't in the agent runtime -- the runtime is going to be commoditized. The durable value is in the tools you connect to the agent, the workflows you've encoded, the evaluations you've built. The harness, in other words. So Goose is open. The harness Block has built around Goose, for its own developers, with access to its own systems -- that's where their internal advantage lives.
+
+**PRIYA:** That's a great example of separating the open layer from the proprietary layer. The runtime is open. The integrations are proprietary. The data and context are proprietary.
+
+**MARCUS:** And it maps to a broader pattern. In the early cloud era, the operating system became open. Linux won. But the way Netflix or Stripe configured Linux at scale -- their own kernel tuning, their own deployment tooling, their own observability stack -- that was proprietary and high-leverage. Same pattern repeating in agents. The agent framework is the new operating system. Many of them will be open. How you tune it, what you connect it to, how you operate it at scale -- that's your enterprise advantage.
+
+---
+
+### SEGMENT 3: THE LAYERED MODEL OF AN AI HARNESS (8 minutes)
+
+**PRIYA:** Let's draw the picture. If I'm a CTO or a head of platform listening to this, I want to leave with a mental model I can show on a whiteboard. Walk me through the layers.
+
+**MARCUS:** Let's stack them bottom up. At the bottom you have your foundation models. These are commoditizing rapidly. Today you'll have multiple. Most enterprises I've worked with are running at least three -- a frontier model for hard reasoning tasks, a mid-tier model for cost-sensitive workloads, and either a small model or an on-prem model for sensitive data that can't leave the boundary. The harness has to abstract these. You should be able to swap a model behind a feature flag and re-run your evals without rewriting application code. If you have to rewrite application code every time a new model comes out, you've already lost. So layer one is the model abstraction layer.
+
+**PRIYA:** And the abstraction has to be richer than just an API key, right? Different models have different prompt formats, different tool calling conventions, different context window economics.
+
+**MARCUS:** Exactly. The abstraction needs to normalize tool calling, structured output, streaming, retries, rate limit handling, cost accounting, and prompt caching. It needs to know that on this model, system prompts behave one way, and on that model they behave another way. It needs to know that prompt caching is essentially free on one provider and not yet supported on another. This is real engineering work. The companies that did this layer well a year ago can swap from Claude Sonnet to Claude Opus to GPT-5 to Gemini in an afternoon. The companies that didn't are still embroiled in re-integration projects every time a new model lands.
+
+**PRIYA:** Layer two?
+
+**MARCUS:** Layer two is the context layer. This is retrieval-augmented generation, but it's much more than vector search. It's your document indexing, your chunking strategy, your embedding model selection, your hybrid search -- often you'll want vector plus keyword plus structured filters. It's your freshness pipeline that re-indexes when source documents change. It's your access control enforcement, which we'll spend a whole episode on. And it's your memory and state -- short-term conversation memory and long-term institutional memory. Notion's investment in this layer is probably one of the most sophisticated in the industry. They've built a context system that understands not just the content of a page but its relationships -- which pages reference each other, who's edited what, what's been deprecated. That's the foundation that lets their AI feel like it actually knows your workspace.
+
+**PRIYA:** Layer three?
+
+**MARCUS:** Layer three is the tool layer. This is where the model gets to do things, not just say things. The protocol that's emerging here is MCP -- the Model Context Protocol. Anthropic introduced it, it's been picked up rapidly by Block in Goose, by OpenAI in their tooling, by many others. The reason this matters is that an agent without tools is just a chatbot. An agent with tools can act on your behalf. Send the Slack message. Update the Jira ticket. Query the database. Make the SQL change. Run the deploy. That's where work actually gets done. The harness has to define which tools an agent has access to, with what scopes, with what guardrails, with what audit trail.
+
+**PRIYA:** And tools are not just APIs. Tools include things like running a shell command, reading and writing files, browsing the web.
+
+**MARCUS:** Right. Tools are anything that lets the agent affect or sense the world. And as you add tools, the surface area for mistakes goes up. So this is where you start needing things like permissions, rate limits, dry-run modes, and human-in-the-loop checkpoints. Cisco has done some really interesting work here in their internal AI deployments because they're operating in environments where an agent doing the wrong thing can take down a network. Their tool layer has aggressive guardrails -- the agent can read network state freely, but any write operation goes through a staged approval flow. That's the harness encoding their risk tolerance.
+
+**PRIYA:** Layer four?
+
+**MARCUS:** Layer four is the orchestration layer. How does the model decide what to do? How does a multi-step plan unfold? How do you handle failures, retries, branching? Early agent frameworks did this in a very ad-hoc way. Now we're seeing a real discipline emerge around what people call agent loops -- the structured pattern of plan, act, observe, reflect, repeat. You're seeing investment in things like checkpointing -- saving state during a long-running agent so you can recover from a crash without starting over. You're seeing patterns like sub-agents -- a coordinator agent delegating to specialized worker agents. Anthropic has done some of the most public thinking on this, with their multi-agent research code and their writing on context engineering. But every serious enterprise is reinventing some version of this.
+
+**PRIYA:** Layer five?
+
+**MARCUS:** Layer five is the evaluation layer. And this is the layer that separates the serious from the not serious. If you don't have evaluations -- and I don't mean a one-time benchmark, I mean a continuous integration system that runs on every prompt change, every model upgrade, every tool addition -- you're flying blind. Your AI feature can silently degrade. A new model rolls out and a use case that was at 95 percent accuracy is now at 80 percent and nobody notices for three weeks. We'll dedicate an entire episode to this because it's that important. The short version is, every team that's running AI in production at scale has built an internal eval framework. Stripe has one. Notion has one. Block has one. Anthropic's own engineers have written about how they treat evals as a first-class engineering artifact. If you take one thing away from this series, it's that evals are the new tests, and you should be investing in them like you invested in unit tests fifteen years ago.
+
+**PRIYA:** Layer six?
+
+**MARCUS:** Layer six is the observability and governance layer. Logs, traces, audit trails, cost attribution, latency monitoring, hallucination detection, policy violation tracking. This is the layer that lets you sleep at night. It's also the layer that lets your CFO understand where the AI spend is going, your CISO understand where the risk is concentrated, and your engineering leadership understand which features are actually driving usage. In a typical mature deployment, you'll see this layer integrated with the broader observability stack -- Datadog, Honeycomb, Splunk, whatever the company already uses. You don't want a separate AI dashboard. You want AI metrics flowing into the same dashboards your SRE team is already watching.
+
+**PRIYA:** And layer seven?
+
+**MARCUS:** Layer seven, sitting across all the others, is the developer experience and platform layer. How does a product team -- not your AI experts, just regular engineers -- spin up a new AI-powered feature on top of all this infrastructure? What does the SDK look like? What's the local development experience? How long from "I have an idea" to "I have a prototype running with real data"? The companies that win at internal AI are the ones where that loop is hours, not weeks. Stripe's internal developer platform has been famous for years for letting teams ship new revenue-impacting features in days. They've extended that same philosophy to AI -- a new team can stand up an AI-powered internal tool against the Stripe context system in a couple of days, because the platform team has paved that road. That's the harness, encoded as a developer experience.
+
+---
+
+### SEGMENT 4: WHY THE EARLY ROLLOUTS FAILED (7 minutes)
+
+**PRIYA:** Let's talk about failures. Because everyone watching this space saw the explosion of AI initiatives in 2023 and 2024, and we're now far enough out that you can see which ones produced results and which ones didn't. What patterns are you seeing in the failures?
+
+**MARCUS:** Three patterns dominate. The first is what I call the proof of concept graveyard. Lots of demos, no production. A team builds an impressive chatbot, shows it to leadership, gets applause, and then can't ship it because they didn't think about authentication, or compliance, or how it integrates with the existing user surface, or how it's monitored. The PoC was a tech demo, not a production system. The harness work -- the unglamorous platform work -- was never done. So the demo never makes the leap to a real user-facing experience.
+
+**PRIYA:** I've seen this so many times. The famous "we'd love to ship this, but there are some compliance concerns" line in the post-mortem.
+
+**MARCUS:** It's almost universal. The second failure pattern is the wrong-team-owns-it problem. The AI initiative gets put under a "Center of Excellence" or an "AI Lab" that sits outside the product organization. They build cool things. They publish blog posts. But because they don't own any user-facing product, they don't ship anything. The product teams who do ship user-facing features don't have time to evaluate everything the lab built, and they don't trust externally-built components. So the lab becomes a research function detached from operational reality, and the product teams either build their own ad hoc AI features in isolation or don't ship AI at all. The harness never gets built because nobody is incented to build it. Everybody's incented to build features or to publish research.
+
+**PRIYA:** That's a really sharp diagnosis. The third pattern?
+
+**MARCUS:** The third pattern is what I'll call the metric mirage. Leadership wants ROI. The team produces metrics. The metrics look great in isolation. "Eighty-five percent weekly active users." "Twenty percent self-reported productivity gain." "We saved forty thousand hours of engineering time last quarter." But when you trace those numbers back to anything the business actually cares about -- shipped features, customer retention, revenue per employee, time to resolution on support tickets -- nothing has moved. Or if it has moved, you can't isolate the AI's contribution from everything else that was happening. The metric mirage looks like ROI but isn't ROI. And once the CFO catches on, the funding evaporates. We've seen this play out at companies that announced massive AI investments and then quietly walked them back six quarters later.
+
+**PRIYA:** What's the antidote to the metric mirage? Because I think every leader listening is wrestling with this. How do you actually attribute outcomes to AI investments?
+
+**MARCUS:** A few principles. One -- pick a small number of integrated metrics that the business already cares about, and instrument the AI's contribution to those metrics directly. If your support team measures first contact resolution and average handle time, the question is not "are agents using the AI?" but "is FCR up and AHT down on tickets routed through the AI-augmented flow versus the control?" You need an A-B comparison with statistical rigor, the same way you'd evaluate any other product change. Two -- pick use cases where you can isolate the AI's contribution. Code generation is hard to attribute because there are too many confounding variables. Customer support, sales follow-up, internal search, fraud review -- these have cleaner attribution because they're more workflow-bounded. Three -- be honest about timelines. Most enterprise AI use cases don't show ROI in the first quarter. They show ROI in quarter four or five, once the harness is solid enough that adoption is broad and consistent. The leaders who fund harness work for a year before demanding ROI metrics are the ones who get sustained results. The leaders who demand quarterly ROI from a brand-new AI program are the ones whose programs collapse.
+
+**PRIYA:** That patience point is a hard sell in the current environment though, right? Boards are asking for AI results yesterday.
+
+**MARCUS:** It is hard. And I think the way you sell it is by showing leading indicators in the first six months. Adoption metrics, eval scores, latency improvements, harness maturity scores. And then trailing business outcomes in the second six months. The patience the board needs is not "trust us, results coming." It's "here are the leading indicators that prove we're building the right system, and here are the business outcomes those leading indicators predict." That's a conversation a sophisticated board will engage with. The bad version of this conversation is "we spent ten million dollars on AI and we don't know what to show you." That's the version that gets the program cut.
+
+---
+
+### SEGMENT 5: WHAT THE LEADERS GOT RIGHT (6 minutes)
+
+**PRIYA:** Let's flip it around. Let's talk about what the leaders got right. You've worked with three of these rollouts. You watch a lot of the public companies. What are the common patterns in the success stories?
+
+**MARCUS:** I'll give you five. First, they treated AI as a platform investment, not a feature investment. They explicitly built a paved road. Stripe is the textbook case. They didn't say "every team build your own AI features." They said "the platform team will build the AI infrastructure and the context layer and the eval framework, and the product teams will build on top of it." That separation of concerns turned out to be everything.
+
+**PRIYA:** Second?
+
+**MARCUS:** Second, they invested in the context layer before they invested in agents. The temptation when agents got hot was to jump straight to multi-step autonomous workflows. The smart companies said, "wait. Our agents will be only as good as the context they can pull from. Let's get the retrieval and the indexing right first, even if it's less exciting than autonomous agents." Notion did this. Their first AI features were essentially context-grounded Q&A and generation. Agentic workflows came later, on top of the same context substrate. That order matters.
+
+**PRIYA:** Third?
+
+**MARCUS:** Third, they built evals from day one. The cultural artifact you see at the leading companies is that "the eval suite" is talked about like "the test suite." It's a first-class object. There's a person who owns it. There's a CI job that runs it. There's a regression policy. When a new model is being considered, the question is not "is the new model better in general" but "what does it score on our eval suite." That discipline is the difference between AI that gets reliably better over time and AI that fluctuates randomly with every vendor release.
+
+**PRIYA:** Fourth?
+
+**MARCUS:** Fourth, they got security and compliance involved early -- and as partners, not gatekeepers. The pattern I see at the failures is that engineering builds something, then security finds out at the end and says no. The pattern at the successes is that security has a seat at the architecture table from day zero. The security team is co-designing the policy layer, the audit trail, the data classification scheme. That trust gets built upfront, and it means the security review at launch is a formality rather than a fight. Cisco has been excellent at this because their security culture is so deep -- they literally cannot ship without security being a co-author, and that constraint has produced really thoughtful AI deployments.
+
+**PRIYA:** Fifth?
+
+**MARCUS:** Fifth, they tied the AI investment to a specific operational outcome from the start. Not "we want to be AI-first." That's not an outcome, that's a posture. But "we want to reduce time to resolution on customer support tickets by thirty percent" or "we want to cut the time from PR opened to PR reviewed by half" or "we want to triple the throughput of our compliance review team." Specific, measurable, time-bounded. Then the AI program is in service of the outcome, not the other way around. The outcome anchors everything. It tells you what to build, what to skip, what to measure. Without it, you drift.
+
+**PRIYA:** That's a clean list. Platform investment, context first, evals from day one, security as partner, outcome-anchored. I want to come back to a few of those in detail in later episodes, but as a frame for the whole series, that's a great starting set.
+
+---
+
+### SEGMENT 6: THE ROAD AHEAD (4 minutes)
+
+**PRIYA:** Marcus, before we close, give listeners a preview of where this series is going. Six episodes. What's the arc?
+
+**MARCUS:** Episode two is all about the context layer. We'll go deep on what it actually takes to encode your company's knowledge into something an LLM can work with. We'll look at how Notion built their workspace AI, how Stripe grounds their internal agents in the codebase and docs, and how Cisco has thought about institutional memory at the scale of a Fortune 100. Episode three is the developer enablement story. The IDP -- internal developer platform -- as the right home for AI capabilities. We'll go deep on Block and on Stripe's developer experience and look at what good looks like. Episode four zooms out to the operating model. How do you reshape an enterprise to actually use this stuff? Org design, talent, change management. Episode five is evals, guardrails, and trust. The unsexy work that determines whether you can actually ship AI to regulated, audited, customer-facing surfaces. And episode six is the playbook. A twelve-month sequenced roadmap for a CTO or CIO who's listening to this and thinking, "okay, where do I start on Monday?"
+
+**PRIYA:** That's a tight arc. And the through line is that the harness -- not the model -- is the actual product of enterprise AI work. The model is the engine. The harness is the car. And right now, every enterprise in the world is trying to figure out how to build a car around an engine that keeps getting more powerful and more weird at the same time.
+
+**MARCUS:** That's exactly right. And the encouraging thing is, the patterns are starting to converge. Two years ago every team was reinventing every wheel. Today we have MCP as a tool protocol. We have a fairly stable retrieval pattern. We have shared vocabulary around evals. The companies that started two years ago built a lot of their own scaffolding, and a lot of it is now becoming commoditized through open source and through vendors. The good news for someone starting now is that you don't have to build it all from scratch. You can stand on top of what Stripe, Notion, Block, Cisco, Anthropic, and others have learned and shared.
+
+**PRIYA:** Last question. If a listener has the budget to invest in one thing this quarter, what should it be?
+
+**MARCUS:** Evals. Build the evaluation infrastructure first. Before you scale a single agent. Before you sign a single enterprise license. Build a system that can tell you, on demand, how good your AI is at the use cases you care about. Because everything else -- model selection, prompt engineering, harness investment, agent deployment -- becomes massively more tractable when you can measure. And massively more dangerous when you can't.
+
+**PRIYA:** Evals. We're going to come back to that constantly. Marcus, thanks for setting the table. We'll pick up in episode two on the context layer.
+
+**MARCUS:** Looking forward to it.
+
+**PRIYA:** And thanks to all of you for listening. If you're a CTO, CIO, head of platform, or anyone trying to make AI work at enterprise scale, subscribe and stick with us. The next five episodes are where we get into the actual mechanics. See you in episode two.
+
+**[OUTRO MUSIC]**
+
+---
+
+*Next episode: Company Context as the Real Moat -- how Notion, Stripe, and Cisco turn their internal knowledge into AI advantage, and why the context layer is the most undervalued piece of infrastructure in modern enterprise software.*

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'podlearn-v2.2.0';
+const CACHE_NAME = 'podlearn-v2.3.0';
 // Separate, persistent cache for user-initiated episode downloads. Lives across
 // version bumps — only deleted when the user explicitly removes a download.
 const OFFLINE_AUDIO_CACHE = 'podlearn-offline-audio-v1';
@@ -7,13 +7,21 @@ const STATIC_ASSETS = [
     '/icon.svg'
 ];
 
-// Files that should always check network first (content that changes)
+// Files that should always check network first (content that changes).
+// /src/ files (main.js, audio.js, etc.) MUST stay network-first or a stale
+// cached main.js will collide with a freshly deployed index.html — the JS
+// references DOM ids that no longer exist and crashes init.
 const NETWORK_FIRST = [
     '/index.html',
     '/pwa/index.html',
     '/podcasts.js',
     '/dist/podcasts.js',
     '/'
+];
+
+const NETWORK_FIRST_PREFIXES = [
+    '/src/',
+    '/dist/src/'
 ];
 
 // Install service worker
@@ -62,8 +70,9 @@ self.addEventListener('fetch', event => {
         return;
     }
 
-    // For network-first resources (podcasts.js, root), try network first
-    if (NETWORK_FIRST.some(path => url.pathname === path || url.pathname.endsWith(path))) {
+    // For network-first resources (podcasts.js, root, /src/), try network first
+    if (NETWORK_FIRST.some(path => url.pathname === path || url.pathname.endsWith(path))
+        || NETWORK_FIRST_PREFIXES.some(prefix => url.pathname.includes(prefix))) {
         event.respondWith(networkFirst(event.request));
         return;
     }

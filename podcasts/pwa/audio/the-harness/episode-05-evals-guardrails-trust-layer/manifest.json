@@ -6,7 +6,9 @@
     "voice": "F1",
     "text": "Welcome back to The Harness. I'm Priya Anand, here again with Marcus Hale. This is episode five, and today we get into the work that determines whether your AI program is real or fake. Evals. Guardrails. The trust layer. The unglamorous operational scaffolding that turns a demo into a production system.",
     "chapter": "INTRO (3 minutes)",
-    "file": "0000.mp3"
+    "file": "0000.mp3",
+    "duration": 21.964,
+    "startTime": 0
   },
   {
     "index": 1,
@@ -15,7 +17,9 @@
     "voice": "M1",
     "text": "I've said it twice already in earlier episodes -- if you can only invest in one thing, invest in evals. Today's the episode where we earn that claim. We're going to go deep on what evals actually look like in practice, what guardrails are and aren't, how you red-team an AI system, and how the leading regulated enterprises -- Stripe, Cisco, Block, and we'll bring in Atlassian as well -- have built their trust layer. By the end, a listener should be able to walk into their own team and start the eval program tomorrow.",
     "chapter": "INTRO (3 minutes)",
-    "file": "0001.mp3"
+    "file": "0001.mp3",
+    "duration": 35.291,
+    "startTime": 21.964
   },
   {
     "index": 2,
@@ -24,7 +28,9 @@
     "voice": "F1",
     "text": "I want to flag something before we start. This episode is dense. It has the most practical and technical content of the whole series, and the lessons here are durable. Even if model providers change. Even if frameworks change. The disciplines we're going to discuss are the ones that have stood up across two years of AI progress and will stand up for the next five. Marcus, let's start with the basic question. What is an eval?",
     "chapter": "INTRO (3 minutes)",
-    "file": "0002.mp3"
+    "file": "0002.mp3",
+    "duration": 29.279,
+    "startTime": 57.255
   },
   {
     "index": 3,
@@ -33,7 +39,9 @@
     "voice": "M1",
     "text": "An eval, at its simplest, is a way to measure whether your AI system is doing what you want it to. The naming is confusing because the word \"eval\" gets used at three different levels of abstraction. There's the academic benchmark sense -- MMLU, HumanEval, things you see in model release notes. There's the model evaluation sense -- comparing two model versions on the same tasks. And there's the application evaluation sense -- testing whether your specific feature, prompts, retrieval, and tools together produce the right output for your users. The third sense is what enterprise teams care about most. It's also the sense least covered in the public discourse.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0003.mp3"
+    "file": "0003.mp3",
+    "duration": 45.043,
+    "startTime": 86.533
   },
   {
     "index": 4,
@@ -42,7 +50,9 @@
     "voice": "F1",
     "text": "So when Stripe or Block talks about their eval suite, they mean the third thing -- application evals.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0004.mp3"
+    "file": "0004.mp3",
+    "duration": 7.314,
+    "startTime": 131.576
   },
   {
     "index": 5,
@@ -51,7 +61,9 @@
     "voice": "M1",
     "text": "Exactly. The first two senses are interesting for vendor selection. The third sense is what you maintain forever. And the third sense looks much more like unit testing than like benchmarking.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0005.mp3"
+    "file": "0005.mp3",
+    "duration": 13.305,
+    "startTime": 138.891
   },
   {
     "index": 6,
@@ -60,7 +72,9 @@
     "voice": "F1",
     "text": "Walk me through what an application eval actually looks like.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0006.mp3"
+    "file": "0006.mp3",
+    "duration": 4.528,
+    "startTime": 152.196
   },
   {
     "index": 7,
@@ -69,7 +83,9 @@
     "voice": "M1",
     "text": "Concretely. Imagine you're building an AI feature that summarizes customer support tickets for the agent's review. An eval case for this feature looks like, here's an input -- a customer support ticket. Here's the expected behavior -- a summary that includes the customer's issue, the previous resolution attempts, the relevant account context. The eval runs the actual production prompt against the input and produces the actual output. Then a judge -- which might be another model, a rule-based system, a human reviewer, or some combination -- compares the output to the expected behavior and produces a score. The score is recorded. You run hundreds or thousands of these cases. You track aggregate scores over time. When you change the prompt, the retrieval logic, or the model, you re-run. The change is acceptable if the scores don't regress.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0007.mp3"
+    "file": "0007.mp3",
+    "duration": 58.23,
+    "startTime": 156.724
   },
   {
     "index": 8,
@@ -78,7 +94,9 @@
     "voice": "F1",
     "text": "And the judge is where a lot of the engineering interest lives, right? Because the judge needs to be both accurate and stable.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0008.mp3"
+    "file": "0008.mp3",
+    "duration": 8.29,
+    "startTime": 214.954
   },
   {
     "index": 9,
@@ -87,7 +105,9 @@
     "voice": "M1",
     "text": "The judge is the hard part. For some outputs, you can use a deterministic check -- did the JSON have the right schema, did it include the required fields. Those are cheap, fast, and reliable. For other outputs, you need a model-as-judge -- another LLM reads the output and scores it. That works, but you have to validate the judge itself. The judge can be wrong. So mature eval frameworks include what's called judge calibration -- you have a set of cases where you also have human judgments, and you regularly check that the judge model agrees with the human judgments. If the judge drifts, you need to know. Anthropic has written about this in technical pieces about evals -- they call attention to the importance of judge validation as a discipline, not a one-time setup.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0009.mp3"
+    "file": "0009.mp3",
+    "duration": 52.288,
+    "startTime": 223.243
   },
   {
     "index": 10,
@@ -96,7 +116,9 @@
     "voice": "F1",
     "text": "What's the typical scale of an eval suite?",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0010.mp3"
+    "file": "0010.mp3",
+    "duration": 2.926,
+    "startTime": 275.531
   },
   {
     "index": 11,
@@ -105,7 +127,9 @@
     "voice": "M1",
     "text": "It depends on the use case. For a narrow use case, a few hundred cases is enough. For a broad use case, you might want a few thousand. For a really diverse use case spanning many subdomains, ten thousand or more. The principle is that the suite has to cover the input distribution your users will produce. If your suite only tests easy cases, you'll see eval scores that don't predict production quality. The work of building a good eval suite is largely the work of curating a representative sample of real user inputs and their correct outputs. That curation is irreplaceable. You can't outsource it. The people who know what good looks like for your use case have to author the eval cases.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0011.mp3"
+    "file": "0011.mp3",
+    "duration": 47.342,
+    "startTime": 278.456
   },
   {
     "index": 12,
@@ -114,7 +138,9 @@
     "voice": "F1",
     "text": "And the maintenance burden -- evals aren't a one-time deliverable.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0012.mp3"
+    "file": "0012.mp3",
+    "duration": 4.598,
+    "startTime": 325.798
   },
   {
     "index": 13,
@@ -123,7 +149,9 @@
     "voice": "M1",
     "text": "Evals are like tests in another respect -- they require ongoing maintenance. As your product evolves, as your data evolves, as your users find new use cases, the eval suite has to evolve. New cases get added. Old cases get retired. Edge cases that production exposed get codified. The mature pattern is, the eval suite has the same kind of ownership as the test suite. The team that owns the feature owns the evals. The platform team provides the eval framework, but the cases are owned by the feature team.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0013.mp3"
+    "file": "0013.mp3",
+    "duration": 35.06,
+    "startTime": 330.396
   },
   {
     "index": 14,
@@ -132,7 +160,9 @@
     "voice": "F1",
     "text": "Give me the categories of evals that a typical enterprise should be running.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0014.mp3"
+    "file": "0014.mp3",
+    "duration": 5.503,
+    "startTime": 365.456
   },
   {
     "index": 15,
@@ -141,7 +171,9 @@
     "voice": "M1",
     "text": "I break them into five categories. One, capability evals. Does the model actually do the task. Two, regression evals. Does a change in the prompt, model, or retrieval logic preserve previous behavior. Three, safety evals. Does the system refuse the things it should refuse, avoid the topics it should avoid, redact what it should redact. Four, security evals. Does the system resist prompt injection, jailbreaks, adversarial inputs. Five, calibration evals. Does the model know when it's uncertain, and does it surface that uncertainty appropriately. Different categories are run at different cadences. Capability evals run on every change. Regression evals run on every release. Safety evals run on schedule and before major rollouts. Security evals run on schedule and before any expansion of the tool catalog. Calibration evals are typically run quarterly and on model upgrades.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0015.mp3"
+    "file": "0015.mp3",
+    "duration": 63.733,
+    "startTime": 370.959
   },
   {
     "index": 16,
@@ -150,7 +182,9 @@
     "voice": "F1",
     "text": "That's a great taxonomy. Let's talk about each in more depth, but I want to start with capability evals because that's where most teams start.",
     "chapter": "SEGMENT 1: WHAT IS AN EVAL, ACTUALLY (8 minutes)",
-    "file": "0016.mp3"
+    "file": "0016.mp3",
+    "duration": 9.056,
+    "startTime": 434.692
   },
   {
     "index": 17,
@@ -159,7 +193,9 @@
     "voice": "M1",
     "text": "Capability evals are the foundation. The question is, given the inputs your users will produce, does the system produce the right outputs. The discipline is to define \"right\" for your use case. For some use cases, \"right\" is a single correct answer -- the customer's email is X, the order ID is Y. For other use cases, \"right\" is a range of acceptable answers -- a good summary of this ticket would include these three facts but the wording is open. For others, \"right\" is fundamentally subjective -- a helpful explanation of this concept. Each of these requires a different evaluation approach.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0017.mp3"
+    "file": "0017.mp3",
+    "duration": 42.187,
+    "startTime": 443.748
   },
   {
     "index": 18,
@@ -168,7 +204,9 @@
     "voice": "F1",
     "text": "Walk through each.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0018.mp3"
+    "file": "0018.mp3",
+    "duration": 1.672,
+    "startTime": 485.935
   },
   {
     "index": 19,
@@ -177,7 +215,9 @@
     "voice": "M1",
     "text": "For single correct answer cases, you can do exact match or structured comparison. Did the extracted JSON match the ground truth JSON. Easy to score, fast, cheap. The work is in curating the ground truth set. For range of acceptable answer cases, you typically use a rubric-based model judge. Define the rubric -- the summary must include the issue, the attempted resolution, and the account context. The judge model scores each rubric item. The score is the percentage of rubric items satisfied. Robust, somewhat expensive, requires judge calibration. For subjective cases, you typically use a pairwise comparison -- show the judge two outputs, ask which is better, and aggregate over many comparisons. This is the technique used in academic preference modeling and it's effective for use cases where quality is hard to define absolutely but easier to define relatively.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0019.mp3"
+    "file": "0019.mp3",
+    "duration": 61.434,
+    "startTime": 487.607
   },
   {
     "index": 20,
@@ -186,7 +226,9 @@
     "voice": "F1",
     "text": "And those three approaches map to the different sophistication levels a team needs as their use case matures.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0020.mp3"
+    "file": "0020.mp3",
+    "duration": 7.523,
+    "startTime": 549.041
   },
   {
     "index": 21,
@@ -195,7 +237,9 @@
     "voice": "M1",
     "text": "Exactly. Start with the deterministic checks where you can. Move to rubrics for richer outputs. Use pairwise comparisons for the genuinely subjective dimensions. Many production eval suites use all three for different facets of the same feature.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0021.mp3"
+    "file": "0021.mp3",
+    "duration": 17.345,
+    "startTime": 556.565
   },
   {
     "index": 22,
@@ -204,7 +248,9 @@
     "voice": "F1",
     "text": "Regression gates next. How do you actually use evals in CI?",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0022.mp3"
+    "file": "0022.mp3",
+    "duration": 4.528,
+    "startTime": 573.91
   },
   {
     "index": 23,
@@ -213,7 +259,9 @@
     "voice": "M1",
     "text": "This is where the discipline gets operational. The pattern is, your CI system runs a defined eval suite on every change. The suite is fast enough to run on every PR -- typically a smoke test subset of the full suite. The full suite runs on merge to main or on scheduled cadence. If the eval scores drop below a threshold, the PR is blocked or the deployment is halted. The threshold is configured per use case. The pattern is the same as test gating, but the threshold can be tuned to be probabilistic -- you might accept a small drop in some metrics if other metrics improve, depending on your release policy.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0023.mp3"
+    "file": "0023.mp3",
+    "duration": 42.744,
+    "startTime": 578.438
   },
   {
     "index": 24,
@@ -222,7 +270,9 @@
     "voice": "F1",
     "text": "What about the cost? Running evals on every PR can be expensive at scale.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0024.mp3"
+    "file": "0024.mp3",
+    "duration": 5.991,
+    "startTime": 621.182
   },
   {
     "index": 25,
@@ -231,7 +281,9 @@
     "voice": "M1",
     "text": "Right. The cost discipline involves a few techniques. One, cache results aggressively. If a case hasn't changed and the model and prompt haven't changed, you don't need to re-run. Most eval frameworks support a hash-based cache. Two, tier the suite. Have a fast, cheap smoke suite for PRs and a full, expensive suite for releases. Three, use smaller judges where you can. A small model doing a structured rubric check can be much cheaper than a frontier judge. Four, parallelize. Modern eval frameworks fan out the cases across many concurrent inferences. Five, use prompt caching on the eval model when supported. The same system prompt across many cases benefits from caching, sometimes by orders of magnitude.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0025.mp3"
+    "file": "0025.mp3",
+    "duration": 50.059,
+    "startTime": 627.173
   },
   {
     "index": 26,
@@ -240,7 +292,9 @@
     "voice": "F1",
     "text": "Stripe and Block both lean heavily into prompt caching, right? Because the cost difference is meaningful at scale.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0026.mp3"
+    "file": "0026.mp3",
+    "duration": 8.011,
+    "startTime": 677.231
   },
   {
     "index": 27,
@@ -249,7 +303,9 @@
     "voice": "M1",
     "text": "Significant. Prompt caching has gone from a nice-to-have to a core part of the eval cost model. If you're running a thousand eval cases with a five-thousand-token system prompt, prompt caching can cut the eval cost dramatically. Both Stripe and Block have publicly discussed how aggressive they are about cache utilization across their AI workloads. It's not a corner-cutting move. It's an engineering discipline.",
     "chapter": "SEGMENT 2: CAPABILITY EVALS AND REGRESSION GATES (7 minutes)",
-    "file": "0027.mp3"
+    "file": "0027.mp3",
+    "duration": 28.373,
+    "startTime": 685.242
   },
   {
     "index": 28,
@@ -258,7 +314,9 @@
     "voice": "F1",
     "text": "Let's talk about safety evals. Because this is the category where I see teams skipping work and paying for it later.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0028.mp3"
+    "file": "0028.mp3",
+    "duration": 8.011,
+    "startTime": 713.615
   },
   {
     "index": 29,
@@ -267,7 +325,9 @@
     "voice": "M1",
     "text": "Yes. Safety evals are about checking that your system refuses what it should refuse, redacts what it should redact, and doesn't surface what it shouldn't surface. The cases here look different from capability cases. Instead of asking \"does it do the right thing on a normal input,\" you ask \"does it do the right thing on an input that's trying to make it misbehave.\" That's a different posture. The eval cases include adversarial inputs, prompt injection attempts, requests for prohibited content, requests that violate the company's content policy, requests that violate legal or compliance constraints, requests that probe for confidential information.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0029.mp3"
+    "file": "0029.mp3",
+    "duration": 43.441,
+    "startTime": 721.626
   },
   {
     "index": 30,
@@ -276,7 +336,9 @@
     "voice": "F1",
     "text": "And the cases come from where?",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0030.mp3"
+    "file": "0030.mp3",
+    "duration": 2.229,
+    "startTime": 765.067
   },
   {
     "index": 31,
@@ -285,7 +347,9 @@
     "voice": "M1",
     "text": "Several sources. One, the internal policy. The company has policies about what AI features can and can't do. Each policy becomes a set of eval cases. Two, the threat model. The security team and the AI team together produce a threat model. Each threat becomes a set of eval cases. Three, red team output. Internal or external red teams probe the system and produce attack inputs. The successful attacks become eval cases. Four, production incidents. Real-world failures get codified into the suite so they don't recur. Over time, the safety eval suite becomes a living artifact that reflects everything the company has learned about what can go wrong.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0031.mp3"
+    "file": "0031.mp3",
+    "duration": 45.809,
+    "startTime": 767.296
   },
   {
     "index": 32,
@@ -294,7 +358,9 @@
     "voice": "F1",
     "text": "Walk me through what red teaming looks like in practice for an enterprise AI system.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0032.mp3"
+    "file": "0032.mp3",
+    "duration": 5.991,
+    "startTime": 813.105
   },
   {
     "index": 33,
@@ -303,7 +369,9 @@
     "voice": "M1",
     "text": "Red teaming has matured rapidly. A few years ago, it was mostly ad hoc -- engineers trying weird inputs and seeing what happened. Today it's a discipline with patterns. The team is given a specific scope -- \"the customer support AI in production environment X.\" They have a defined budget -- \"two weeks, four people.\" They have a defined methodology -- typically a mix of automated attack generation, manual creative attacks, and structured probing of known vulnerability classes. They produce a report at the end with findings categorized by severity. The most serious findings are remediated before any further rollout. Less serious findings are added to the eval suite as regression tests.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0033.mp3"
+    "file": "0033.mp3",
+    "duration": 49.571,
+    "startTime": 819.096
   },
   {
     "index": 34,
@@ -312,7 +380,9 @@
     "voice": "F1",
     "text": "What are the common attack classes that show up?",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0034.mp3"
+    "file": "0034.mp3",
+    "duration": 3.413,
+    "startTime": 868.667
   },
   {
     "index": 35,
@@ -321,7 +391,9 @@
     "voice": "M1",
     "text": "A few patterns dominate. One is direct prompt injection -- a user input that contains instructions trying to override the system prompt. \"Ignore previous instructions and do X.\" Frontier models are increasingly robust to this in simple forms, but creative variants still work. Two is indirect prompt injection -- the attack is embedded in content the AI retrieves rather than in the user's message. The AI reads a document that contains instructions, and those instructions take effect. This is a critical class to test because retrieval is fundamental to most enterprise AI. A document that an attacker controls -- a customer-submitted form, a public web page the AI scrapes -- can become an attack vector. Three is tool abuse -- the AI is induced to use a tool in a way it wasn't intended to be used, like chaining a sequence of operations to exfiltrate data. Four is jailbreaking -- getting the AI to violate its content policy through roleplay, hypothetical framing, or other indirect approaches. Five is data extraction -- getting the AI to reveal information about its training, its system prompt, its tools, or its underlying context that was supposed to be private.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0035.mp3"
+    "file": "0035.mp3",
+    "duration": 82.145,
+    "startTime": 872.08
   },
   {
     "index": 36,
@@ -330,7 +402,9 @@
     "voice": "F1",
     "text": "That second one -- indirect prompt injection -- is the one I'd be most worried about as an enterprise architect. Because the attack surface is enormous.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0036.mp3"
+    "file": "0036.mp3",
+    "duration": 10.519,
+    "startTime": 954.225
   },
   {
     "index": 37,
@@ -339,7 +413,9 @@
     "voice": "M1",
     "text": "It's the one that keeps people up at night. And the defense isn't simple. You can sanitize untrusted content before it reaches the model, but sanitization is imperfect. You can structurally segregate trusted from untrusted content in the prompt, but the model can still be confused. You can constrain the tools available in a session to reduce blast radius. You can require human approval for high-stakes actions. The defense is layered, not a single fix. Cisco, who deals with this in their product surfaces, has talked about a defense-in-depth approach -- sanitization at retrieval, structural prompt design, tool scoping, action audit, anomaly detection. No single layer is sufficient. The stack is necessary.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0037.mp3"
+    "file": "0037.mp3",
+    "duration": 49.083,
+    "startTime": 964.744
   },
   {
     "index": 38,
@@ -348,7 +424,9 @@
     "voice": "F1",
     "text": "What's the cadence for red teaming?",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0038.mp3"
+    "file": "0038.mp3",
+    "duration": 2.368,
+    "startTime": 1013.827
   },
   {
     "index": 39,
@@ -357,7 +435,9 @@
     "voice": "M1",
     "text": "For high-stakes systems, a major red team engagement before any significant feature rollout. Plus a continuous, lower-intensity red teaming effort -- some teams have an internal hire whose job is permanent red team. Plus automated adversarial input generation that runs on a schedule. The combination of point-in-time deep engagement and continuous low-intensity probing covers the surface well. For lower-stakes systems, less intense, but you should never have zero red team. Every production AI system should have been probed by people trying to break it before customers see it.",
     "chapter": "SEGMENT 3: SAFETY EVALS AND THE RED TEAM (7 minutes)",
-    "file": "0039.mp3"
+    "file": "0039.mp3",
+    "duration": 40.145,
+    "startTime": 1016.195
   },
   {
     "index": 40,
@@ -366,7 +446,9 @@
     "voice": "F1",
     "text": "Let's distinguish guardrails from evals. Because these get confused.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0040.mp3"
+    "file": "0040.mp3",
+    "duration": 5.085,
+    "startTime": 1056.341
   },
   {
     "index": 41,
@@ -375,7 +457,9 @@
     "voice": "M1",
     "text": "Evals are how you know the system is working. Guardrails are what enforce policy at runtime. They're complementary. Guardrails sit in the request path and enforce constraints. Before the prompt is sent to the model, a guardrail can sanitize the input, redact PII, check for policy violations, route to a more restricted prompt template. After the model response is generated, a guardrail can check the output, redact secrets that may have slipped through, reject responses that violate policy, log audit events. Guardrails are runtime defenses. Evals are quality measurements.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0041.mp3"
+    "file": "0041.mp3",
+    "duration": 39.819,
+    "startTime": 1061.426
   },
   {
     "index": 42,
@@ -384,7 +468,9 @@
     "voice": "F1",
     "text": "What are the typical guardrails in a mature enterprise AI deployment?",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0042.mp3"
+    "file": "0042.mp3",
+    "duration": 5.016,
+    "startTime": 1101.244
   },
   {
     "index": 43,
@@ -393,7 +479,9 @@
     "voice": "M1",
     "text": "A few categories. One, content classification -- the input is classified before processing. If the input is in a prohibited category, it's refused. If it's in a sensitive category, it's routed to a more restricted handling path. Two, PII redaction -- credit card numbers, social security numbers, customer email addresses are detected and either redacted before the model sees them or detected on output and redacted before the user sees them. Three, tool scoping -- the set of tools the AI can call is constrained based on the context. A customer-facing AI doesn't get access to internal admin tools, full stop. Four, action approval -- write actions above a threshold require human approval. Five, rate limiting -- a single user or session can only make so many requests, can only invoke so many tools, can only execute so many write operations. Six, audit logging -- every interaction is logged with enough detail to reconstruct what happened.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0043.mp3"
+    "file": "0043.mp3",
+    "duration": 66.589,
+    "startTime": 1106.26
   },
   {
     "index": 44,
@@ -402,7 +490,9 @@
     "voice": "F1",
     "text": "That's a substantial stack. How do you implement it without making the system slow?",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0044.mp3"
+    "file": "0044.mp3",
+    "duration": 5.573,
+    "startTime": 1172.849
   },
   {
     "index": 45,
@@ -411,7 +501,9 @@
     "voice": "M1",
     "text": "Performance is a real concern. Most guardrails can run in parallel with the main model call, or as small fast checks before and after. The classifier is typically a small fast model. The PII detection is typically a fast regex or small model. The audit log is async. The action approval is asynchronous to the user-perceived latency -- the user sees \"your request is pending approval\" and the approver gets a notification. The total added latency is on the order of tens or hundreds of milliseconds, not seconds. For most use cases that's acceptable. For very latency-sensitive use cases, you tune which guardrails run synchronously and which run async or sampled.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0045.mp3"
+    "file": "0045.mp3",
+    "duration": 47.063,
+    "startTime": 1178.422
   },
   {
     "index": 46,
@@ -420,7 +512,9 @@
     "voice": "F1",
     "text": "What does the policy itself look like? Because I imagine companies are encoding their policies in different ways.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0046.mp3"
+    "file": "0046.mp3",
+    "duration": 8.15,
+    "startTime": 1225.485
   },
   {
     "index": 47,
@@ -429,7 +523,9 @@
     "voice": "M1",
     "text": "The pattern that's emerging is what I'd call policy-as-code. The policies are written in a structured format -- often a DSL or a configuration file -- that the guardrail engine consumes. The policy might say things like \"no responses that include credit card numbers,\" \"no actions on accounts above value X without approval,\" \"no responses about competitor products without disclosure.\" The policy is versioned. It's reviewed. It's tested. It evolves through pull requests like any other artifact. This discipline turns policy from a PowerPoint slide into an executable spec, which is enormously important for regulated industries.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0047.mp3"
+    "file": "0047.mp3",
+    "duration": 44.486,
+    "startTime": 1233.635
   },
   {
     "index": 48,
@@ -438,7 +534,9 @@
     "voice": "F1",
     "text": "That's a great pattern. And it's auditable, which matters for compliance.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0048.mp3"
+    "file": "0048.mp3",
+    "duration": 5.155,
+    "startTime": 1278.121
   },
   {
     "index": 49,
@@ -447,7 +545,9 @@
     "voice": "M1",
     "text": "Crucial for compliance. The auditor can ask, \"show me your policy as of Q1 last year, and show me that it was being enforced.\" With policy-as-code, that's a version control query. With policy-as-PowerPoint, that's a research project.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0049.mp3"
+    "file": "0049.mp3",
+    "duration": 16.44,
+    "startTime": 1283.276
   },
   {
     "index": 50,
@@ -456,7 +556,9 @@
     "voice": "F1",
     "text": "Atlassian has talked about how they think about policy for their AI features. Walk me through what we know.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0050.mp3"
+    "file": "0050.mp3",
+    "duration": 7.593,
+    "startTime": 1299.716
   },
   {
     "index": 51,
@@ -465,7 +567,9 @@
     "voice": "M1",
     "text": "Atlassian operates in a context where their customers are themselves regulated, often heavily. Their AI features in Jira, Confluence, and elsewhere have to respect customer data residency, customer access controls, customer compliance requirements. They've talked publicly about how their AI inherits the same policy stack as their core products. Data residency for the AI matches data residency for the underlying data. Access controls for the AI match access controls for the underlying data. The audit trail for AI actions feeds into the same audit trail as user actions. The inheritance model is the same pattern we've seen at Stripe and Cisco -- don't build a parallel control plane for AI, extend the existing control plane.",
     "chapter": "SEGMENT 4: GUARDRAILS AND THE POLICY LAYER (6 minutes)",
-    "file": "0051.mp3"
+    "file": "0051.mp3",
+    "duration": 49.641,
+    "startTime": 1307.308
   },
   {
     "index": 52,
@@ -474,7 +578,9 @@
     "voice": "F1",
     "text": "Let's talk about human oversight. Because in a regulated enterprise, the right answer is often \"the AI proposes and the human disposes.\" But that's not the only model.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0052.mp3"
+    "file": "0052.mp3",
+    "duration": 11.146,
+    "startTime": 1356.949
   },
   {
     "index": 53,
@@ -483,7 +589,9 @@
     "voice": "M1",
     "text": "Right. I think of this as the trust ladder. At the bottom of the ladder, the AI is a strict suggester -- it proposes, the human reviews and acts. The human is fully in the loop. Every output is reviewed before any consequence. This is the appropriate posture for high-stakes, low-tolerance use cases -- legal advice, medical decisions, irreversible financial transactions. One rung up, the AI takes low-risk actions autonomously and proposes higher-risk actions for review. The human is in the loop for things that matter. Mostly the AI moves work forward. One rung up, the AI takes most actions autonomously with periodic human review -- a sample of actions are reviewed, anomalies are flagged. The human is on the loop, not in the loop. At the top, the AI operates autonomously within a defined envelope with audit logs and exception handling -- the human is consulted only for edge cases.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0053.mp3"
+    "file": "0053.mp3",
+    "duration": 62.967,
+    "startTime": 1368.095
   },
   {
     "index": 54,
@@ -492,7 +600,9 @@
     "voice": "F1",
     "text": "And the ladder isn't a target. Different use cases live at different rungs forever.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0054.mp3"
+    "file": "0054.mp3",
+    "duration": 5.642,
+    "startTime": 1431.061
   },
   {
     "index": 55,
@@ -501,7 +611,9 @@
     "voice": "M1",
     "text": "Exactly. The right rung depends on the stakes, the reversibility, the regulatory context, the accuracy of the system. The customer support reply draft is appropriately at rung one for most enterprises -- the AI drafts, the agent reviews and sends. The classification of an inbound ticket is appropriately at rung two or three -- the AI classifies most tickets, anomalies are reviewed. The retrieval of historical context is appropriately near the top -- the AI does it, no human oversight is required because the action is low-risk and reversible.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0055.mp3"
+    "file": "0055.mp3",
+    "duration": 38.822,
+    "startTime": 1436.704
   },
   {
     "index": 56,
@@ -510,7 +622,9 @@
     "voice": "F1",
     "text": "And the trust ladder informs the harness design.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0056.mp3"
+    "file": "0056.mp3",
+    "duration": 3.413,
+    "startTime": 1475.526
   },
   {
     "index": 57,
@@ -519,7 +633,9 @@
     "voice": "M1",
     "text": "Heavily. The harness has to support all of these patterns. The UI patterns for human review have to be excellent or the human becomes a bottleneck. The sampling logic for periodic review has to be intelligent or you're either reviewing too much or missing problems. The exception handling logic has to be robust or autonomous operation collapses on the first edge case. Each rung has its own engineering requirements.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0057.mp3"
+    "file": "0057.mp3",
+    "duration": 28.164,
+    "startTime": 1478.939
   },
   {
     "index": 58,
@@ -528,7 +644,9 @@
     "voice": "F1",
     "text": "What's the right way to move up the ladder over time?",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0058.mp3"
+    "file": "0058.mp3",
+    "duration": 3.344,
+    "startTime": 1507.103
   },
   {
     "index": 59,
@@ -537,7 +655,9 @@
     "voice": "M1",
     "text": "Cautiously and with measurement. The pattern is, you start at a conservative rung. You instrument heavily. You collect data on how often the human disagreed with the AI, what kinds of cases the AI got wrong, where the AI is reliably correct. After enough data, you graduate specific subsets of the use case to a higher rung. The classification confidence is high enough on this category? It can move up. The classification is borderline on that category? It stays. Over time, the boundary moves, but it moves based on evidence, not based on willingness.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0059.mp3"
+    "file": "0059.mp3",
+    "duration": 38.704,
+    "startTime": 1510.447
   },
   {
     "index": 60,
@@ -546,7 +666,9 @@
     "voice": "F1",
     "text": "And the eval discipline is what gives you the evidence.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0060.mp3"
+    "file": "0060.mp3",
+    "duration": 3.971,
+    "startTime": 1549.151
   },
   {
     "index": 61,
@@ -555,7 +677,9 @@
     "voice": "M1",
     "text": "Yes. This is one of the places where eval discipline and trust ladder discipline reinforce each other. The eval suite tells you, on the specific dimensions you care about, what the system's accuracy is. The trust ladder uses that accuracy to decide what level of oversight is appropriate. Move the eval score and you can move the trust posture. Without the eval, you have no defensible basis for changing the trust posture, which means you're either stuck at the most conservative rung or you're taking risk you can't justify.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0061.mp3"
+    "file": "0061.mp3",
+    "duration": 34.782,
+    "startTime": 1553.121
   },
   {
     "index": 62,
@@ -564,7 +688,9 @@
     "voice": "F1",
     "text": "Block has talked about how they think about agent autonomy in their internal developer tools. What's their posture?",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0062.mp3"
+    "file": "0062.mp3",
+    "duration": 7.593,
+    "startTime": 1587.903
   },
   {
     "index": 63,
@@ -573,7 +699,9 @@
     "voice": "M1",
     "text": "Block's posture, from what I've read in their public material, is graduated. For low-risk operations, the agent operates with high autonomy. For higher-risk operations, the agent must produce a plan for human review before executing. For destructive operations, explicit human confirmation is required. They've built the harness so that the autonomy level is configurable per tool and per environment. A developer running Goose locally on their dev machine might have more latitude than the same agent running in CI against production resources. That contextual autonomy is the right model.",
     "chapter": "SEGMENT 5: HUMAN OVERSIGHT AND THE TRUST LADDER (6 minutes)",
-    "file": "0063.mp3"
+    "file": "0063.mp3",
+    "duration": 41.003,
+    "startTime": 1595.496
   },
   {
     "index": 64,
@@ -582,7 +710,9 @@
     "voice": "F1",
     "text": "Last big topic. Observability. Because once your AI is in production, you need to know what's happening, in real time.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0064.mp3"
+    "file": "0064.mp3",
+    "duration": 8.707,
+    "startTime": 1636.499
   },
   {
     "index": 65,
@@ -591,7 +721,9 @@
     "voice": "M1",
     "text": "Observability for AI systems is similar in concept to traditional observability but different in detail. The standard SRE metrics still apply -- latency, error rate, throughput, cost. New metrics specific to AI include token consumption, cache hit rate, eval score on production sample, hallucination rate, refusal rate, escalation rate to human, tool call distribution, policy violation count. Each of these needs to be a first-class metric in your observability stack, with dashboards, alerts, and runbooks.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0065.mp3"
+    "file": "0065.mp3",
+    "duration": 37.52,
+    "startTime": 1645.206
   },
   {
     "index": 66,
@@ -600,7 +732,9 @@
     "voice": "F1",
     "text": "And the goal is that the AI system is treated as a production system, not a research artifact.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0066.mp3"
+    "file": "0066.mp3",
+    "duration": 6.966,
+    "startTime": 1682.726
   },
   {
     "index": 67,
@@ -609,7 +743,9 @@
     "voice": "M1",
     "text": "Exactly. The same on-call rotation that handles your payments service should handle your AI service. The same incident response process should apply. The same post-mortem discipline. The cultural artifact is that AI failures are operational incidents, not research curiosities. Stripe's approach to this is exemplary -- their AI services are operated by SRE-grade processes. Their AI on-call has runbooks. Their AI dashboards live alongside their payment dashboards. The discipline matches.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0067.mp3"
+    "file": "0067.mp3",
+    "duration": 36.244,
+    "startTime": 1689.692
   },
   {
     "index": 68,
@@ -618,7 +754,9 @@
     "voice": "F1",
     "text": "What's the typical incident pattern for AI systems?",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0068.mp3"
+    "file": "0068.mp3",
+    "duration": 3.483,
+    "startTime": 1725.936
   },
   {
     "index": 69,
@@ -627,7 +765,9 @@
     "voice": "M1",
     "text": "A few common categories. One, performance regression after a model upgrade -- the new model is worse on some subset of use cases. Caught by evals if you have them. Discovered by user reports if you don't. Two, retrieval drift -- the retrieval system is returning bad documents because of an indexing problem or freshness issue. Manifests as confident wrong answers. Three, prompt injection in the wild -- an attacker has found a way to manipulate the system, possibly leaking data or triggering bad actions. Four, cost spike -- the system is calling the model far more often than expected, either due to a feature change or due to a bug. Five, latency spike -- the model provider is slow, or a guardrail is misconfigured, or a tool is timing out. Each has its own detection signature and runbook.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0069.mp3"
+    "file": "0069.mp3",
+    "duration": 56.558,
+    "startTime": 1729.419
   },
   {
     "index": 70,
@@ -636,7 +776,9 @@
     "voice": "F1",
     "text": "And the post-mortem process for AI incidents looks like a regular post-mortem.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0070.mp3"
+    "file": "0070.mp3",
+    "duration": 5.712,
+    "startTime": 1785.978
   },
   {
     "index": 71,
@@ -645,7 +787,9 @@
     "voice": "M1",
     "text": "With one important addition. The post-mortem should result in eval cases. Every incident is a learning opportunity. The specific failure that happened should be codified into the eval suite so it can't happen again silently. This is how the eval suite grows over time and becomes increasingly representative of real-world risks. The eval suite that an experienced team has built up over two years of operation is a major operational asset. It's hard to replicate. It encodes hard-won learning.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0071.mp3"
+    "file": "0071.mp3",
+    "duration": 34.851,
+    "startTime": 1791.69
   },
   {
     "index": 72,
@@ -654,7 +798,9 @@
     "voice": "F1",
     "text": "That's a great place to close. Marcus, preview for the final episode.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0072.mp3"
+    "file": "0072.mp3",
+    "duration": 5.085,
+    "startTime": 1826.541
   },
   {
     "index": 73,
@@ -663,7 +809,9 @@
     "voice": "M1",
     "text": "Episode six is the playbook. We've covered the concepts. We've covered the case studies. We've covered the disciplines. Episode six puts it together as a twelve-month sequenced roadmap for a CTO, CIO, or head of platform who's listening to this and ready to act. What you do in the first ninety days. What you do in the second quarter. What you do in the second half of the year. What good looks like at the end of twelve months.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0073.mp3"
+    "file": "0073.mp3",
+    "duration": 29.557,
+    "startTime": 1831.626
   },
   {
     "index": 74,
@@ -672,6 +820,8 @@
     "voice": "F1",
     "text": "That's the episode that ties it all together. Thanks Marcus. And thanks to all of you for listening. See you in episode six, the finale.",
     "chapter": "SEGMENT 6: OBSERVABILITY AND THE INCIDENT RESPONSE LOOP (4 minutes)",
-    "file": "0074.mp3"
+    "file": "0074.mp3",
+    "duration": 9.613,
+    "startTime": 1861.183
   }
 ]

@@ -146,10 +146,10 @@ let searchMatches = [];
 let searchIndex = 0;
 const synth = window.speechSynthesis;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
-let backgroundAudioElement = null;
-let backgroundAudioSrc = '';
 let mediaSessionHandlersInitialized = false;
-let backgroundAudioNeedsGesture = false;
+let lineOffsets = [];
+let episodeAudioDuration = 0;
+let lastPersistedLine = -1;
 
 const playbackSessions = createPlaybackSessionController();
 
@@ -218,93 +218,9 @@ async function releaseWakeLock() {
     }
 }
 
-function createKeepAliveWavUrl(durationSeconds = 2) {
-    const safeDuration = Math.max(1, Math.round(durationSeconds));
-    const sampleRate = 8000;
-    const sampleCount = sampleRate * safeDuration;
-    const bytesPerSample = 2;
-    const dataSize = sampleCount * bytesPerSample;
-    const buffer = new ArrayBuffer(44 + dataSize);
-    const view = new DataView(buffer);
-
-    const writeString = (offset, value) => {
-        for (let i = 0; i < value.length; i += 1) {
-            view.setUint8(offset + i, value.charCodeAt(i));
-        }
-    };
-
-    writeString(0, 'RIFF');
-    view.setUint32(4, 36 + dataSize, true);
-    writeString(8, 'WAVE');
-    writeString(12, 'fmt ');
-    view.setUint32(16, 16, true);
-    view.setUint16(20, 1, true);
-    view.setUint16(22, 1, true);
-    view.setUint32(24, sampleRate, true);
-    view.setUint32(28, sampleRate * bytesPerSample, true);
-    view.setUint16(32, bytesPerSample, true);
-    view.setUint16(34, 16, true);
-    writeString(36, 'data');
-    view.setUint32(40, dataSize, true);
-
-    // Write a very low-amplitude tone (instead of pure silence) to prevent
-    // aggressive background optimization of silent tracks on some browsers.
-    const toneFrequency = 190;
-    const amplitude = 180;
-    let offset = 44;
-    for (let i = 0; i < sampleCount; i += 1) {
-        const t = i / sampleRate;
-        const sample = Math.round(amplitude * Math.sin(2 * Math.PI * toneFrequency * t));
-        view.setInt16(offset, sample, true);
-        offset += 2;
-    }
-
-    return URL.createObjectURL(new Blob([buffer], { type: 'audio/wav' }));
-}
-
-function ensureBackgroundAudioElement() {
-    if (!backgroundAudioElement) {
-        if (!backgroundAudioSrc) {
-            backgroundAudioSrc = createKeepAliveWavUrl(2);
-        }
-        const audio = new Audio(backgroundAudioSrc);
-        audio.loop = true;
-        audio.preload = 'auto';
-        audio.volume = 0.02;
-        audio.muted = false;
-        audio.playsInline = true;
-        audio.setAttribute('playsinline', 'playsinline');
-        backgroundAudioElement = audio;
-    }
-    return backgroundAudioElement;
-}
-
-async function startBackgroundAudioSession() {
-    const audio = ensureBackgroundAudioElement();
-    if (!audio || !audio.paused) return;
-    try {
-        await audio.play();
-        backgroundAudioNeedsGesture = false;
-    } catch (err) {
-        backgroundAudioNeedsGesture = true;
-        console.warn('Background audio session start failed:', err);
-    }
-}
-
-function pauseBackgroundAudioSession() {
-    if (!backgroundAudioElement || backgroundAudioElement.paused) return;
-    try {
-        backgroundAudioElement.pause();
-        backgroundAudioElement.currentTime = 0;
-    } catch (err) {
-        console.warn('Background audio session pause failed:', err);
-    }
-}
-
-async function retryBackgroundAudioSessionFromGesture() {
-    if (!backgroundAudioNeedsGesture || !isPlaying || isPaused) return;
-    await startBackgroundAudioSession();
-}
+// (Background-audio keep-alive hack was removed; combined.mp3 is now played as
+// a single continuous <audio> element so iOS/Android keep playing through
+// lockscreen and tab backgrounding without any tone trickery.)
 
 // ===== PODCASTS HOME =====
 function renderPodcastsList(filter = '') {
@@ -849,6 +765,8 @@ function attachAudioUrls(dialogue, manifest) {
             const item = byRawLine.get(line.rawLine);
             if (item) {
                 line.audioUrl = `${manifest.base}/${item.file}?v=${manifest.cacheKey}`;
+                line.audioStartTime = typeof item.startTime === 'number' ? item.startTime : null;
+                line.audioDuration = typeof item.duration === 'number' ? item.duration : null;
                 matched++;
             }
         }
@@ -856,11 +774,31 @@ function attachAudioUrls(dialogue, manifest) {
     // Fallback: positional match if counts line up exactly.
     if (matched === 0 && manifest.items.length === dialogue.length) {
         for (let i = 0; i < dialogue.length; i++) {
-            dialogue[i].audioUrl = `${manifest.base}/${manifest.items[i].file}?v=${manifest.cacheKey}`;
+            const item = manifest.items[i];
+            dialogue[i].audioUrl = `${manifest.base}/${item.file}?v=${manifest.cacheKey}`;
+            dialogue[i].audioStartTime = typeof item.startTime === 'number' ? item.startTime : null;
+            dialogue[i].audioDuration = typeof item.duration === 'number' ? item.duration : null;
             matched++;
         }
     }
     return matched;
+}
+
+// Build a lineOffsets array aligned with dialogueLines for combined.mp3 playback.
+// Returns null if any line is missing duration data (caller should fall back to
+// chunked playback in that case).
+function buildLineOffsets(dialogue) {
+    if (!dialogue || dialogue.length === 0) return null;
+    const offsets = new Array(dialogue.length);
+    let cumulative = 0;
+    for (let i = 0; i < dialogue.length; i++) {
+        const startTime = dialogue[i].audioStartTime;
+        const duration = dialogue[i].audioDuration;
+        if (typeof startTime !== 'number' || typeof duration !== 'number') return null;
+        offsets[i] = startTime;
+        cumulative = Math.max(cumulative, startTime + duration);
+    }
+    return { offsets, totalDuration: cumulative };
 }
 
 async function openEpisode(episode, options = {}) {
@@ -878,6 +816,9 @@ async function openEpisode(episode, options = {}) {
     const podcastId = currentPodcast ? currentPodcast.id : null;
     const episodeFile = episode.file || episode.filename || null;
     const audioManifest = await loadSupertonicAudioManifest(podcastId, episodeFile);
+    lineOffsets = [];
+    episodeAudioDuration = 0;
+    lastPersistedLine = -1;
     if (audioManifest) {
         const matched = attachAudioUrls(dialogueLines, audioManifest);
         currentAudioManifestBase = audioManifest.base;
@@ -886,8 +827,24 @@ async function openEpisode(episode, options = {}) {
         } else {
             console.warn(`Supertonic audio manifest found at ${audioManifest.base} but no lines matched`);
         }
+        const built = buildLineOffsets(dialogueLines);
+        if (built) {
+            lineOffsets = built.offsets;
+            episodeAudioDuration = built.totalDuration;
+            const combinedUrl = `${audioManifest.base}/combined.mp3?v=${audioManifest.cacheKey}`;
+            speechPlayers.setEpisode({
+                combinedUrl,
+                lineOffsets: built.offsets,
+                totalDuration: built.totalDuration
+            });
+            console.log(`Continuous playback ready: ${built.totalDuration.toFixed(1)}s combined.mp3`);
+        } else {
+            speechPlayers.setEpisode({});
+            console.warn('Per-line durations missing from manifest; falling back to chunked playback (no background audio).');
+        }
     } else {
         currentAudioManifestBase = '';
+        speechPlayers.setEpisode({});
         console.warn(`No Supertonic audio manifest found for ${podcastId || 'unknown podcast'} / ${episodeFile || 'unknown episode'}`);
     }
 
@@ -1078,29 +1035,102 @@ function speak(text, speaker, options) {
 }
 
 const speechPlayers = createSpeechPlayers({
-    synth,
-    getVoices: () => ({ alexVoice, samVoice }),
     getSpeechRate: () => speechRate
+});
+
+// === Player <-> UI bridge (continuous combined.mp3 mode) ===
+
+speechPlayers.on('linechange', (lineIndex) => {
+    if (!isPlaying) return;
+    if (lineIndex === currentLineIndex) return;
+    currentLineIndex = lineIndex;
+    updateProgress();
+    updateMiniPlayer();
+    if (lineIndex - lastPersistedLine >= 5 || lineIndex === 0) {
+        saveState();
+        lastPersistedLine = lineIndex;
+    }
+});
+
+speechPlayers.on('timeupdate', () => {
+    if (sleepEndTime && Date.now() >= sleepEndTime) {
+        sleepEndTime = null;
+        updateSleepDisplay();
+        setStatus('Sleep timer ended');
+        void stopPlayback();
+        return;
+    }
+    updateMediaSessionPositionState();
+});
+
+speechPlayers.on('play', () => {
+    isPlaying = true;
+    isPaused = false;
+    document.getElementById('play-btn').textContent = '⏸';
+    updateMiniPlayer();
+    updateMediaSessionPlaybackState();
+    void requestWakeLock();
+});
+
+speechPlayers.on('pause', () => {
+    if (!isPlaying) return;
+    isPaused = true;
+    document.getElementById('play-btn').textContent = '▶';
+    updateMiniPlayer();
+    updateMediaSessionPlaybackState();
+    saveState();
+    void releaseWakeLock();
+});
+
+speechPlayers.on('ended', () => {
+    isPlaying = false;
+    isPaused = false;
+    currentLineIndex = Math.max(0, dialogueLines.length - 1);
+    saveState();
+    updateMiniPlayer();
+    syncMediaSession({ includeMetadata: true, includePosition: true });
+    void releaseWakeLock();
+    showCompleteModal();
+});
+
+speechPlayers.on('error', (err) => {
+    console.warn('Audio element error:', err);
+    setStatus('Audio playback error');
 });
 
 async function startPlayback() {
     if (dialogueLines.length === 0) return;
+
+    if (speechPlayers.isContinuousReady()) {
+        // Continuous mode: combined.mp3 plays as a single <audio>; line tracking
+        // happens in the 'linechange' event listener. Player events flip the UI.
+        if (isPlaying && !isPaused) return;
+        if (!isPlaying) {
+            // Fresh start (or resume from saved progress): seek to currentLineIndex.
+            speechPlayers.seekToLine(currentLineIndex);
+        }
+        try {
+            await speechPlayers.play();
+        } catch (err) {
+            console.warn('combined.mp3 play() rejected:', err);
+            setStatus('Tap play to start');
+        }
+        syncMediaSession({ includeMetadata: true, includePosition: true });
+        return;
+    }
+
+    // Legacy chunked fallback (manifest lacks per-line durations).
     if (isPlaying && !isPaused) return;
     const sessionId = playbackSessions.createSession();
-
     isPlaying = true;
     isPaused = false;
     document.getElementById('play-btn').textContent = '⏸';
     updateMiniPlayer();
     syncMediaSession({ includeMetadata: true, includePosition: true });
-    void startBackgroundAudioSession();
-
-    // Request wake lock to keep device awake during playback
     await requestWakeLock();
 
     while (currentLineIndex < dialogueLines.length && isPlaying) {
         if (!playbackSessions.isActive(sessionId)) break;
-        // Check sleep timer
         if (sleepEndTime && Date.now() >= sleepEndTime) {
             await stopPlayback();
             sleepEndTime = null;
@@ -1108,37 +1138,29 @@ async function startPlayback() {
             setStatus('Sleep timer ended');
             break;
         }
-
         if (isPaused) {
             await new Promise(r => setTimeout(r, 100));
             continue;
         }
-
         const line = dialogueLines[currentLineIndex];
         updateProgress();
         setStatus(`${line.speaker || 'Narration'}: Speaking...`, true);
-
         try {
             await speak(line.text, line.type, line.audioUrl ? { audioUrl: line.audioUrl } : undefined);
         } catch (e) {
             console.error('Speech error:', e);
         }
         if (!playbackSessions.isActive(sessionId)) break;
-
         if (isPlaying && !isPaused) {
             currentLineIndex++;
-            if (!document.hidden) {
-                await new Promise(r => setTimeout(r, 120));
-            }
+            if (!document.hidden) await new Promise(r => setTimeout(r, 120));
         }
     }
     if (!playbackSessions.isActive(sessionId)) return;
 
-    // Episode complete
     if (currentLineIndex >= dialogueLines.length && isPlaying) {
         isPlaying = false;
         isPaused = false;
-        pauseBackgroundAudioSession();
         await releaseWakeLock();
         saveState();
         updateMiniPlayer();
@@ -1147,7 +1169,6 @@ async function startPlayback() {
     } else {
         isPlaying = false;
         isPaused = false;
-        pauseBackgroundAudioSession();
         await releaseWakeLock();
         document.getElementById('play-btn').textContent = '▶';
         setStatus('Ready');
@@ -1160,9 +1181,8 @@ async function stopPlayback() {
     playbackSessions.invalidate();
     isPlaying = false;
     isPaused = false;
+    speechPlayers.stop();
     speechPlayers.stopCurrentSpeech();
-    pauseBackgroundAudioSession();
-    // Release wake lock when stopping playback
     await releaseWakeLock();
     document.getElementById('play-btn').textContent = '▶';
     saveState();
@@ -1171,21 +1191,29 @@ async function stopPlayback() {
 }
 
 async function togglePlayPause() {
+    if (speechPlayers.isContinuousReady()) {
+        if (!isPlaying || isPaused) {
+            if (!isPlaying) speechPlayers.seekToLine(currentLineIndex);
+            try { await speechPlayers.play(); } catch (err) { console.warn('play() failed:', err); }
+        } else {
+            speechPlayers.pause();
+        }
+        syncMediaSession({ includeMetadata: true, includePosition: true });
+        return;
+    }
+
+    // Legacy chunked path.
     if (!isPlaying) {
         void startPlayback();
     } else if (isPaused) {
         isPaused = false;
-        // Re-acquire wake lock when resuming
         await requestWakeLock();
         speechPlayers.resumeCurrentSpeech();
-        void startBackgroundAudioSession();
         document.getElementById('play-btn').textContent = '⏸';
     } else {
         isPaused = true;
-        // Release wake lock when pausing
         await releaseWakeLock();
         speechPlayers.pauseCurrentSpeech();
-        pauseBackgroundAudioSession();
         document.getElementById('play-btn').textContent = '▶';
         setStatus('Paused');
         saveState();
@@ -1196,30 +1224,36 @@ async function togglePlayPause() {
 
 async function jumpToLine(index, autoStart = false) {
     const wasPlaying = isPlaying && !isPaused;
-    // Stop any current playback cleanly
+    const target = Math.max(0, Math.min(index, dialogueLines.length - 1));
+
+    if (speechPlayers.isContinuousReady()) {
+        currentLineIndex = target;
+        speechPlayers.seekToLine(target);
+        updateProgress();
+        updateMiniPlayer();
+        syncMediaSession({ includeMetadata: false, includePosition: true });
+        if (autoStart || wasPlaying) {
+            try { await speechPlayers.play(); } catch (err) { console.warn('seek-and-play failed:', err); }
+        }
+        saveState();
+        return;
+    }
+
+    // Legacy chunked path.
     playbackSessions.invalidate();
     isPlaying = false;
     isPaused = false;
     speechPlayers.stopCurrentSpeech();
-    pauseBackgroundAudioSession();
-    // Release wake lock when jumping
     await releaseWakeLock();
-
-    currentLineIndex = Math.max(0, Math.min(index, dialogueLines.length - 1));
+    currentLineIndex = target;
     updateProgress();
     saveState();
-
-    // Update UI
     document.getElementById('play-btn').textContent = '▶';
     setStatus('Ready');
     updateMiniPlayer();
     syncMediaSession({ includeMetadata: true, includePosition: true });
-
-    // Auto-start if requested or was playing before
     if (autoStart || wasPlaying) {
-        setTimeout(() => {
-            void startPlayback();
-        }, 100);
+        setTimeout(() => { void startPlayback(); }, 100);
     }
 }
 
@@ -1234,14 +1268,6 @@ document.getElementById('next-btn').addEventListener('click', () => skipLines(10
 document.getElementById('back-btn').addEventListener('click', () => skipLines(-5));
 document.getElementById('fwd-btn').addEventListener('click', () => skipLines(5));
 
-document.addEventListener('pointerdown', () => {
-    void retryBackgroundAudioSessionFromGesture();
-}, { passive: true, capture: true });
-
-document.addEventListener('keydown', () => {
-    void retryBackgroundAudioSessionFromGesture();
-}, { capture: true });
-
 // Speed
 document.getElementById('speed-slider').addEventListener('input', e => {
     speechRate = parseFloat(e.target.value);
@@ -1250,6 +1276,7 @@ document.getElementById('speed-slider').addEventListener('input', e => {
     document.querySelectorAll('.speed-preset-btn').forEach(b => {
         b.classList.toggle('active', Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01);
     });
+    speechPlayers.setRate(speechRate);
     saveState();
 });
 
@@ -2004,12 +2031,10 @@ document.addEventListener('visibilitychange', async () => {
         console.log('App went to background, isPlaying:', isPlaying, 'isPaused:', isPaused);
         wasPlayingBeforeBackground = isPlaying && !isPaused;
 
-        // Save current state but do not force pause here.
+        // Save current state but do not force pause here. The combined.mp3
+        // <audio> element keeps playing on its own under browser media policy.
         saveState();
         syncMediaSession({ includeMetadata: true, includePosition: true });
-        if (wasPlayingBeforeBackground) {
-            void startBackgroundAudioSession();
-        }
         console.log('Playback handling delegated to browser while backgrounded');
     } else {
         // App came to foreground
@@ -2042,10 +2067,6 @@ window.addEventListener('beforeunload', () => {
     if (!backgroundHandlersEnabled) return;
     console.log('Before unload - saving state');
     saveState();
-    if (backgroundAudioSrc) {
-        URL.revokeObjectURL(backgroundAudioSrc);
-        backgroundAudioSrc = '';
-    }
 });
 
 // Force refresh - clears cache and reloads
@@ -2123,10 +2144,17 @@ function updateMediaSessionMetadata() {
 function updateMediaSessionPositionState() {
     if (!('mediaSession' in navigator) || typeof navigator.mediaSession.setPositionState !== 'function') return;
     if (!currentEpisode || dialogueLines.length === 0) return;
-    const duration = estimateEpisodeDurationSeconds();
-    const safeLineCount = Math.max(1, dialogueLines.length);
-    const clampedLine = Math.max(0, Math.min(currentLineIndex, safeLineCount));
-    const position = Math.max(0, Math.min(duration, (clampedLine / safeLineCount) * duration));
+    let duration;
+    let position;
+    if (speechPlayers.isContinuousReady()) {
+        duration = speechPlayers.getDuration() || episodeAudioDuration || estimateEpisodeDurationSeconds();
+        position = Math.max(0, Math.min(duration, speechPlayers.getCurrentTime()));
+    } else {
+        duration = estimateEpisodeDurationSeconds();
+        const safeLineCount = Math.max(1, dialogueLines.length);
+        const clampedLine = Math.max(0, Math.min(currentLineIndex, safeLineCount));
+        position = Math.max(0, Math.min(duration, (clampedLine / safeLineCount) * duration));
+    }
     try {
         navigator.mediaSession.setPositionState({
             duration,
@@ -2162,18 +2190,35 @@ function initializeMediaSessionHandlers() {
         void stopPlayback();
     });
     setActionHandler('seekbackward', (details) => {
-        const linesToJump = estimateLineJumpFromSeconds(details?.seekOffset || 10);
-        void jumpToLine(currentLineIndex - linesToJump, isPlaying && !isPaused);
+        const offset = Number(details?.seekOffset) || 10;
+        if (speechPlayers.isContinuousReady()) {
+            speechPlayers.seek(speechPlayers.getCurrentTime() - offset);
+            updateMediaSessionPositionState();
+        } else {
+            const linesToJump = estimateLineJumpFromSeconds(offset);
+            void jumpToLine(currentLineIndex - linesToJump, isPlaying && !isPaused);
+        }
     });
     setActionHandler('seekforward', (details) => {
-        const linesToJump = estimateLineJumpFromSeconds(details?.seekOffset || 10);
-        void jumpToLine(currentLineIndex + linesToJump, isPlaying && !isPaused);
+        const offset = Number(details?.seekOffset) || 10;
+        if (speechPlayers.isContinuousReady()) {
+            speechPlayers.seek(speechPlayers.getCurrentTime() + offset);
+            updateMediaSessionPositionState();
+        } else {
+            const linesToJump = estimateLineJumpFromSeconds(offset);
+            void jumpToLine(currentLineIndex + linesToJump, isPlaying && !isPaused);
+        }
     });
     setActionHandler('seekto', (details) => {
         if (!Number.isFinite(details?.seekTime)) return;
-        const duration = estimateEpisodeDurationSeconds();
-        const targetLine = Math.round((details.seekTime / Math.max(1, duration)) * dialogueLines.length);
-        void jumpToLine(targetLine, isPlaying && !isPaused);
+        if (speechPlayers.isContinuousReady()) {
+            speechPlayers.seek(details.seekTime);
+            updateMediaSessionPositionState();
+        } else {
+            const duration = estimateEpisodeDurationSeconds();
+            const targetLine = Math.round((details.seekTime / Math.max(1, duration)) * dialogueLines.length);
+            void jumpToLine(targetLine, isPlaying && !isPaused);
+        }
     });
     setActionHandler('previoustrack', () => {
         void playPreviousEpisode();

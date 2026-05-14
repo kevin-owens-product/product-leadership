@@ -383,6 +383,17 @@ function hasFfmpeg() {
   return res.status === 0;
 }
 
+function ffprobeDuration(filePath) {
+  const res = spawnSync(
+    'ffprobe',
+    ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', filePath],
+    { stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8' }
+  );
+  if (res.status !== 0) return null;
+  const seconds = parseFloat(String(res.stdout || '').trim());
+  return Number.isFinite(seconds) && seconds > 0 ? seconds : null;
+}
+
 function wavToMp3(wavPath, mp3Path) {
   const res = spawnSync('ffmpeg', ['-y', '-i', wavPath, '-codec:a', 'libmp3lame', '-qscale:a', '4', mp3Path], {
     stdio: ['ignore', 'pipe', 'pipe'],
@@ -511,6 +522,20 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     }
   } else if (!FLAGS.noMp3) {
     log('ffmpeg not found on PATH; leaving WAV files in place. Install ffmpeg for MP3 output.', 'warn');
+  }
+
+  // Per-line durations + cumulative startTime so the player can use combined.mp3
+  // as a single <audio> source and still highlight the correct line. We probe the
+  // per-line file (whichever extension survived the MP3 step).
+  let cumulative = 0;
+  for (const item of items) {
+    const filePath = path.join(outDir, item.file);
+    const dur = fs.existsSync(filePath) ? ffprobeDuration(filePath) : null;
+    if (dur != null) {
+      item.duration = Number(dur.toFixed(3));
+      item.startTime = Number(cumulative.toFixed(3));
+      cumulative += dur;
+    }
   }
 
   const manifestPath = path.join(outDir, 'manifest.json');

@@ -6,7 +6,9 @@
     "voice": "F2",
     "text": "Welcome back to \"The Diplomat's Edge.\" I'm Maya Torres, and if you're preparing for the FSOT, you're in the right place.",
     "chapter": "INTRO",
-    "file": "0000.mp3"
+    "file": "0000.mp3",
+    "duration": 7.3,
+    "startTime": 0
   },
   {
     "index": 1,
@@ -15,7 +17,9 @@
     "voice": "M1",
     "text": "And I'm Jordan Hayes. Last episode, we tackled the Situational Judgment Test. Today, we're diving into something that might seem like just background knowledge, but is actually fundamental to understanding what you're trying to join: the history of America's Foreign Service.",
     "chapter": "INTRO",
-    "file": "0001.mp3"
+    "file": "0001.mp3",
+    "duration": 19.1,
+    "startTime": 7.3
   },
   {
     "index": 2,
@@ -24,7 +28,9 @@
     "voice": "F2",
     "text": "Jordan, why does this history matter for the test?",
     "chapter": "INTRO",
-    "file": "0002.mp3"
+    "file": "0002.mp3",
+    "duration": 3.325,
+    "startTime": 26.4
   },
   {
     "index": 3,
@@ -33,7 +39,9 @@
     "voice": "M1",
     "text": "Two reasons. First, it may come up directly in the knowledge section. But more importantly, understanding where the Foreign Service came from helps you understand its values and culture - which directly helps with the SJT and the oral assessment.",
     "chapter": "INTRO",
-    "file": "0003.mp3"
+    "file": "0003.mp3",
+    "duration": 17.025,
+    "startTime": 29.725
   },
   {
     "index": 4,
@@ -42,7 +50,9 @@
     "voice": "F2",
     "text": "So we're learning history to become better diplomats, not just to pass a test.",
     "chapter": "INTRO",
-    "file": "0004.mp3"
+    "file": "0004.mp3",
+    "duration": 5.05,
+    "startTime": 46.75
   },
   {
     "index": 5,
@@ -51,7 +61,9 @@
     "voice": "M1",
     "text": "Exactly. The Foreign Service has a rich, fascinating history. And honestly? Some of these stories are better than any spy novel.",
     "chapter": "INTRO",
-    "file": "0005.mp3"
+    "file": "0005.mp3",
+    "duration": 9.275,
+    "startTime": 51.8
   },
   {
     "index": 6,
@@ -60,7 +72,9 @@
     "voice": "F2",
     "text": "Let's start at the beginning. Who were America's first diplomats?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0006.mp3"
+    "file": "0006.mp3",
+    "duration": 4.15,
+    "startTime": 61.075
   },
   {
     "index": 7,
@@ -69,7 +83,9 @@
     "voice": "M1",
     "text": "Before the United States even existed as a country, we had diplomats. In 1776, the Continental Congress sent Benjamin Franklin to France on what might have been the most important diplomatic mission in American history.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0007.mp3"
+    "file": "0007.mp3",
+    "duration": 16.7,
+    "startTime": 65.225
   },
   {
     "index": 8,
@@ -78,7 +94,9 @@
     "voice": "F2",
     "text": "To get the French to support the Revolution?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0008.mp3"
+    "file": "0008.mp3",
+    "duration": 2.925,
+    "startTime": 81.925
   },
   {
     "index": 9,
@@ -87,7 +105,9 @@
     "voice": "M1",
     "text": "Exactly. And Franklin was brilliant at it. He was 70 years old, famous across Europe as a scientist and philosopher. He arrived in Paris and became an instant celebrity. He wore a simple fur cap instead of the powdered wigs of the French court - it made him seem like a rustic American genius.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0009.mp3"
+    "file": "0009.mp3",
+    "duration": 20.825,
+    "startTime": 84.85
   },
   {
     "index": 10,
@@ -96,7 +116,9 @@
     "voice": "F2",
     "text": "laughs So he was doing personal branding in 1776?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0010.mp3"
+    "file": "0010.mp3",
+    "duration": 4.35,
+    "startTime": 105.675
   },
   {
     "index": 11,
@@ -105,7 +127,9 @@
     "voice": "M1",
     "text": "He absolutely was! And it worked. Franklin understood something fundamental about diplomacy: it's about relationships and perception, not just formal negotiations. He cultivated friendships with the French elite, charmed the salons of Paris, and eventually secured the alliance with France that won the Revolutionary War.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0011.mp3"
+    "file": "0011.mp3",
+    "duration": 22.425,
+    "startTime": 110.025
   },
   {
     "index": 12,
@@ -114,7 +138,9 @@
     "voice": "F2",
     "text": "What made Franklin such an effective diplomat?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0012.mp3"
+    "file": "0012.mp3",
+    "duration": 3.125,
+    "startTime": 132.45
   },
   {
     "index": 13,
@@ -123,7 +149,9 @@
     "voice": "M1",
     "text": "Several things. He was patient - it took over a year of careful cultivation before France formally allied with us. He was culturally adaptable - he learned French, embraced French society, and genuinely appreciated the country. And he understood power dynamics - he knew France would only help if it served French interests, specifically weakening Britain.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0013.mp3"
+    "file": "0013.mp3",
+    "duration": 23.7,
+    "startTime": 135.575
   },
   {
     "index": 14,
@@ -132,7 +160,9 @@
     "voice": "F2",
     "text": "That sounds like the 13 dimensions we discussed last episode.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0014.mp3"
+    "file": "0014.mp3",
+    "duration": 4.45,
+    "startTime": 159.275
   },
   {
     "index": 15,
@@ -141,7 +171,9 @@
     "voice": "M1",
     "text": "Exactly! Franklin had composure, cultural adaptability, initiative, and excellent judgment. He's a model diplomat even today. But he wasn't alone. John Adams served in France alongside Franklin, and later in the Netherlands, where he secured crucial loans for the new nation.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0015.mp3"
+    "file": "0015.mp3",
+    "duration": 19.525,
+    "startTime": 163.725
   },
   {
     "index": 16,
@@ -150,7 +182,9 @@
     "voice": "F2",
     "text": "I've heard Adams and Franklin didn't get along.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0016.mp3"
+    "file": "0016.mp3",
+    "duration": 3.25,
+    "startTime": 183.25
   },
   {
     "index": 17,
@@ -159,7 +193,9 @@
     "voice": "M1",
     "text": "They had very different styles. Adams was more formal, sometimes abrasive. Franklin was charming and flexible. Adams once complained that Franklin spent too much time at dinner parties. But Franklin's socializing was actually strategic - he was building relationships that paid off politically.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0017.mp3"
+    "file": "0017.mp3",
+    "duration": 20.325,
+    "startTime": 186.5
   },
   {
     "index": 18,
@@ -168,7 +204,9 @@
     "voice": "F2",
     "text": "Different diplomatic styles.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0018.mp3"
+    "file": "0018.mp3",
+    "duration": 2.375,
+    "startTime": 206.825
   },
   {
     "index": 19,
@@ -177,7 +215,9 @@
     "voice": "M1",
     "text": "Right, and that's still true today. The Foreign Service has room for different personalities. You don't have to be an extrovert to be a good diplomat, but you do need to understand the value of relationships.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0019.mp3"
+    "file": "0019.mp3",
+    "duration": 13.525,
+    "startTime": 209.2
   },
   {
     "index": 20,
@@ -186,7 +226,9 @@
     "voice": "F2",
     "text": "Who else was involved in early American diplomacy?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0020.mp3"
+    "file": "0020.mp3",
+    "duration": 3.675,
+    "startTime": 222.725
   },
   {
     "index": 21,
@@ -195,7 +237,9 @@
     "voice": "M1",
     "text": "Thomas Jefferson served as Minister to France after Franklin, from 1785 to 1789. He wasn't quite the social phenomenon Franklin was, but he developed deep connections with French intellectuals and brought back ideas that influenced American architecture, agriculture, and political thought.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0021.mp3"
+    "file": "0021.mp3",
+    "duration": 21.375,
+    "startTime": 226.4
   },
   {
     "index": 22,
@@ -204,7 +248,9 @@
     "voice": "F2",
     "text": "And John Jay?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0022.mp3"
+    "file": "0022.mp3",
+    "duration": 1.85,
+    "startTime": 247.775
   },
   {
     "index": 23,
@@ -213,7 +259,9 @@
     "voice": "M1",
     "text": "John Jay negotiated the Treaty of Paris that ended the Revolutionary War, along with Franklin and Adams. Later, as the first Chief Justice, he negotiated the Jay Treaty with Britain in 1794 - controversial at the time, but it kept us out of another war.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0023.mp3"
+    "file": "0023.mp3",
+    "duration": 19.6,
+    "startTime": 249.625
   },
   {
     "index": 24,
@@ -222,7 +270,9 @@
     "voice": "F2",
     "text": "These were all prominent figures. Was diplomacy considered a prestigious career?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0024.mp3"
+    "file": "0024.mp3",
+    "duration": 5.2,
+    "startTime": 269.225
   },
   {
     "index": 25,
@@ -231,7 +281,9 @@
     "voice": "M1",
     "text": "It was, but it was also informal and unprofessional by modern standards. These were wealthy men who could afford to live abroad. There was no formal diplomatic corps, no training, no clear career path. Diplomats were essentially political appointees - often reward appointments for the well-connected.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0025.mp3"
+    "file": "0025.mp3",
+    "duration": 21.35,
+    "startTime": 274.425
   },
   {
     "index": 26,
@@ -240,7 +292,9 @@
     "voice": "F2",
     "text": "When did that change?",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0026.mp3"
+    "file": "0026.mp3",
+    "duration": 2,
+    "startTime": 295.775
   },
   {
     "index": 27,
@@ -249,7 +303,9 @@
     "voice": "M1",
     "text": "It took over a century. But before we get there, let me tell you about the creation of the State Department itself.",
     "chapter": "SEGMENT 1: THE FOUNDING FATHERS AS DIPLOMATS (12 minutes)",
-    "file": "0027.mp3"
+    "file": "0027.mp3",
+    "duration": 7.55,
+    "startTime": 297.775
   },
   {
     "index": 28,
@@ -258,7 +314,9 @@
     "voice": "F2",
     "text": "So when was the State Department created?",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0028.mp3"
+    "file": "0028.mp3",
+    "duration": 2.95,
+    "startTime": 305.325
   },
   {
     "index": 29,
@@ -267,7 +325,9 @@
     "voice": "M1",
     "text": "The Department of Foreign Affairs was established in July 1789 - one of the first acts of the new constitutional government. Two months later, Congress renamed it the Department of State and added some domestic responsibilities.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0029.mp3"
+    "file": "0029.mp3",
+    "duration": 17.025,
+    "startTime": 308.275
   },
   {
     "index": 30,
@@ -276,7 +336,9 @@
     "voice": "F2",
     "text": "Wait, the State Department had domestic duties?",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0030.mp3"
+    "file": "0030.mp3",
+    "duration": 3.325,
+    "startTime": 325.3
   },
   {
     "index": 31,
@@ -285,7 +347,9 @@
     "voice": "M1",
     "text": "For a long time, yes! The State Department was responsible for the census, the mint, patents, copyrights - all kinds of things. The Secretary of State was considered the most senior Cabinet position. Thomas Jefferson was the first Secretary of State, serving under George Washington.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0031.mp3"
+    "file": "0031.mp3",
+    "duration": 19.9,
+    "startTime": 328.625
   },
   {
     "index": 32,
@@ -294,7 +358,9 @@
     "voice": "F2",
     "text": "How did the department evolve in the 1800s?",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0032.mp3"
+    "file": "0032.mp3",
+    "duration": 3.5,
+    "startTime": 348.525
   },
   {
     "index": 33,
@@ -303,7 +369,9 @@
     "voice": "M1",
     "text": "Slowly. The diplomatic corps remained small and patronage-based. Presidents appointed friends and supporters as ambassadors. The quality was... uneven. Some were excellent; others were disasters who couldn't speak the language of their host country and had no interest in learning.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0033.mp3"
+    "file": "0033.mp3",
+    "duration": 19.025,
+    "startTime": 352.025
   },
   {
     "index": 34,
@@ -312,7 +380,9 @@
     "voice": "F2",
     "text": "That sounds problematic.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0034.mp3"
+    "file": "0034.mp3",
+    "duration": 2.175,
+    "startTime": 371.05
   },
   {
     "index": 35,
@@ -321,7 +391,9 @@
     "voice": "M1",
     "text": "It was. There's a famous story about a U.S. minister to a European country in the 1850s who was so incompetent that the host government refused to deal with him and specifically requested his replacement. The spoils system didn't produce great diplomats.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0035.mp3"
+    "file": "0035.mp3",
+    "duration": 18.275,
+    "startTime": 373.225
   },
   {
     "index": 36,
@@ -330,7 +402,9 @@
     "voice": "F2",
     "text": "Were there any notable diplomatic achievements in the 1800s?",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0036.mp3"
+    "file": "0036.mp3",
+    "duration": 4.425,
+    "startTime": 391.5
   },
   {
     "index": 37,
@@ -339,7 +413,9 @@
     "voice": "M1",
     "text": "Several important ones. The Louisiana Purchase in 1803 - negotiated by Robert Livingston and James Monroe in Paris. They'd been authorized to spend $10 million for New Orleans; Napoleon offered to sell all of Louisiana for $15 million. Monroe made a quick decision that doubled the size of the country.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0037.mp3"
+    "file": "0037.mp3",
+    "duration": 22.925,
+    "startTime": 395.925
   },
   {
     "index": 38,
@@ -348,7 +424,9 @@
     "voice": "F2",
     "text": "Talk about initiative and judgment!",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0038.mp3"
+    "file": "0038.mp3",
+    "duration": 2.65,
+    "startTime": 418.85
   },
   {
     "index": 39,
@@ -357,7 +435,9 @@
     "voice": "M1",
     "text": "Exactly. They exceeded their authority, but they saw an opportunity that might never come again. Jefferson was initially uncomfortable with the constitutional implications, but he accepted it. Other notable moments: the Monroe Doctrine in 1823, establishing that European colonization in the Americas would be considered hostile. Secretary of State William Seward's purchase of Alaska in 1867 - mocked as \"Seward's Folly\" at the time, but looking pretty smart now.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0039.mp3"
+    "file": "0039.mp3",
+    "duration": 31.3,
+    "startTime": 421.5
   },
   {
     "index": 40,
@@ -366,7 +446,9 @@
     "voice": "F2",
     "text": "When did people start thinking about professionalizing the diplomatic corps?",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0040.mp3"
+    "file": "0040.mp3",
+    "duration": 4.725,
+    "startTime": 452.8
   },
   {
     "index": 41,
@@ -375,7 +457,9 @@
     "voice": "M1",
     "text": "Reform movements began in the late 1800s. The Pendleton Act of 1883 created the civil service system for federal employees, reducing patronage. But the diplomatic corps remained largely exempt. It took another four decades before real reform came to the Foreign Service.",
     "chapter": "SEGMENT 2: THE STATE DEPARTMENT TAKES SHAPE (10 minutes)",
-    "file": "0041.mp3"
+    "file": "0041.mp3",
+    "duration": 21.1,
+    "startTime": 457.525
   },
   {
     "index": 42,
@@ -384,7 +468,9 @@
     "voice": "F2",
     "text": "What was the Rogers Act?",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0042.mp3"
+    "file": "0042.mp3",
+    "duration": 2.1,
+    "startTime": 478.625
   },
   {
     "index": 43,
@@ -393,7 +479,9 @@
     "voice": "M1",
     "text": "The Rogers Act of 1924 is the founding document of the modern Foreign Service. Before 1924, there were actually two separate services: the Diplomatic Service (the traditional diplomats, mostly wealthy men in fancy embassies) and the Consular Service (more practical officers handling visas, trade, and protecting American citizens abroad).",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0043.mp3"
+    "file": "0043.mp3",
+    "duration": 25.4,
+    "startTime": 480.725
   },
   {
     "index": 44,
@@ -402,7 +490,9 @@
     "voice": "F2",
     "text": "They were completely separate?",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0044.mp3"
+    "file": "0044.mp3",
+    "duration": 2.175,
+    "startTime": 506.125
   },
   {
     "index": 45,
@@ -411,7 +501,9 @@
     "voice": "M1",
     "text": "Completely. Different pay scales, different cultures, different prestige levels. The Diplomatic Service was seen as the elite track - you needed independent wealth to survive on the low salaries and high social expectations. The Consular Service was more middle-class and practical.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0045.mp3"
+    "file": "0045.mp3",
+    "duration": 19.325,
+    "startTime": 508.3
   },
   {
     "index": 46,
@@ -420,7 +512,9 @@
     "voice": "F2",
     "text": "That seems inefficient.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0046.mp3"
+    "file": "0046.mp3",
+    "duration": 2.1,
+    "startTime": 527.625
   },
   {
     "index": 47,
@@ -429,7 +523,9 @@
     "voice": "M1",
     "text": "It was. The Rogers Act merged them into a single Foreign Service with unified standards, examinations, and career progression. For the first time, you could enter through merit and advance based on performance, not connections or personal wealth.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0047.mp3"
+    "file": "0047.mp3",
+    "duration": 17.375,
+    "startTime": 529.725
   },
   {
     "index": 48,
@@ -438,7 +534,9 @@
     "voice": "F2",
     "text": "Who was Rogers?",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0048.mp3"
+    "file": "0048.mp3",
+    "duration": 1.85,
+    "startTime": 547.1
   },
   {
     "index": 49,
@@ -447,7 +545,9 @@
     "voice": "M1",
     "text": "Representative John Jacob Rogers of Massachusetts. He'd been working on diplomatic reform for years. He believed America needed professional diplomats who could compete with the trained foreign services of European powers. The Act established the Foreign Service as a professional career, with entry by competitive examination, training, regular rotations, and a pension system.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0049.mp3"
+    "file": "0049.mp3",
+    "duration": 26.1,
+    "startTime": 548.95
   },
   {
     "index": 50,
@@ -456,7 +556,9 @@
     "voice": "F2",
     "text": "Did it work?",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0050.mp3"
+    "file": "0050.mp3",
+    "duration": 1.425,
+    "startTime": 575.05
   },
   {
     "index": 51,
@@ -465,7 +567,9 @@
     "voice": "M1",
     "text": "It transformed the service. Over the following decades, the Foreign Service became increasingly professional, diverse (slowly), and competent. The examination system that began in 1924 is the ancestor of the FSOT you're preparing for today.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0051.mp3"
+    "file": "0051.mp3",
+    "duration": 18.6,
+    "startTime": 576.475
   },
   {
     "index": 52,
@@ -474,7 +578,9 @@
     "voice": "F2",
     "text": "What were those early exams like?",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0052.mp3"
+    "file": "0052.mp3",
+    "duration": 2.575,
+    "startTime": 595.075
   },
   {
     "index": 53,
@@ -483,7 +589,9 @@
     "voice": "M1",
     "text": "Brutally difficult. Heavy on languages - you needed proficiency in French or another major language. Lots of knowledge testing on history, economics, international law. And importantly, there was an oral examination to assess judgment and personality.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0053.mp3"
+    "file": "0053.mp3",
+    "duration": 18.175,
+    "startTime": 597.65
   },
   {
     "index": 54,
@@ -492,7 +600,9 @@
     "voice": "F2",
     "text": "So the oral assessment goes back to the very beginning.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0054.mp3"
+    "file": "0054.mp3",
+    "duration": 3.675,
+    "startTime": 615.825
   },
   {
     "index": 55,
@@ -501,7 +611,9 @@
     "voice": "M1",
     "text": "It does. The founders of the professional Foreign Service believed that knowledge alone wasn't enough. You needed the right character, judgment, and interpersonal skills. That remains true today.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0055.mp3"
+    "file": "0055.mp3",
+    "duration": 13.65,
+    "startTime": 619.5
   },
   {
     "index": 56,
@@ -510,7 +622,9 @@
     "voice": "F2",
     "text": "Did the professionalization change the type of person who became a diplomat?",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0056.mp3"
+    "file": "0056.mp3",
+    "duration": 4.85,
+    "startTime": 633.15
   },
   {
     "index": 57,
@@ -519,7 +633,9 @@
     "voice": "M1",
     "text": "Gradually, yes. It took time, but the Foreign Service slowly became more meritocratic. Still, for decades, it remained overwhelmingly white, male, and from privileged backgrounds. Real diversity would take much longer.",
     "chapter": "SEGMENT 3: THE ROGERS ACT AND PROFESSIONALIZATION (12 minutes)",
-    "file": "0057.mp3"
+    "file": "0057.mp3",
+    "duration": 15.925,
+    "startTime": 638
   },
   {
     "index": 58,
@@ -528,7 +644,9 @@
     "voice": "F2",
     "text": "How did World War II change the Foreign Service?",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0058.mp3"
+    "file": "0058.mp3",
+    "duration": 3.475,
+    "startTime": 653.925
   },
   {
     "index": 59,
@@ -537,7 +655,9 @@
     "voice": "M1",
     "text": "Dramatically. The war required a massive expansion of American presence overseas. The Office of Strategic Services - the precursor to the CIA - was created. The Foreign Service worked alongside military and intelligence personnel in ways it never had before.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0059.mp3"
+    "file": "0059.mp3",
+    "duration": 19.226,
+    "startTime": 657.4
   },
   {
     "index": 60,
@@ -546,7 +666,9 @@
     "voice": "F2",
     "text": "Were there notable diplomats during this period?",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0060.mp3"
+    "file": "0060.mp3",
+    "duration": 3.225,
+    "startTime": 676.626
   },
   {
     "index": 61,
@@ -555,7 +677,9 @@
     "voice": "M1",
     "text": "Many. George Kennan is probably the most famous - a career Foreign Service Officer who helped shape post-war American strategy. In 1946, while serving in Moscow, he sent what became known as the \"Long Telegram\" - an 8,000-word analysis of Soviet intentions that became the foundation of containment policy.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0061.mp3"
+    "file": "0061.mp3",
+    "duration": 23.175,
+    "startTime": 679.851
   },
   {
     "index": 62,
@@ -564,7 +688,9 @@
     "voice": "F2",
     "text": "What was his argument?",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0062.mp3"
+    "file": "0062.mp3",
+    "duration": 2.05,
+    "startTime": 703.026
   },
   {
     "index": 63,
@@ -573,7 +699,9 @@
     "voice": "M1",
     "text": "Kennan argued that the Soviet Union was inherently expansionist but also patient - they would push where they could but retreat when they faced firm resistance. Therefore, the United States should \"contain\" Soviet expansion through a combination of economic, political, and military pressure, without necessarily seeking war.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0063.mp3"
+    "file": "0063.mp3",
+    "duration": 21.85,
+    "startTime": 705.076
   },
   {
     "index": 64,
@@ -582,7 +710,9 @@
     "voice": "F2",
     "text": "That shaped decades of American foreign policy.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0064.mp3"
+    "file": "0064.mp3",
+    "duration": 3.45,
+    "startTime": 726.926
   },
   {
     "index": 65,
@@ -591,7 +721,9 @@
     "voice": "M1",
     "text": "It did. Kennan later had complicated feelings about how his ideas were applied, but his analysis was enormously influential. He showed how a single officer with deep knowledge and good judgment could shape history.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0065.mp3"
+    "file": "0065.mp3",
+    "duration": 15.425,
+    "startTime": 730.376
   },
   {
     "index": 66,
@@ -600,7 +732,9 @@
     "voice": "F2",
     "text": "Who else should we know about?",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0066.mp3"
+    "file": "0066.mp3",
+    "duration": 2.125,
+    "startTime": 745.801
   },
   {
     "index": 67,
@@ -609,7 +743,9 @@
     "voice": "M1",
     "text": "Harriman, Bohlen, Acheson - there was a generation of diplomats and policymakers who built the post-war order. They created NATO, the Marshall Plan, the United Nations. They established the institutions that still shape international relations today.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0067.mp3"
+    "file": "0067.mp3",
+    "duration": 17.375,
+    "startTime": 747.926
   },
   {
     "index": 68,
@@ -618,7 +754,9 @@
     "voice": "F2",
     "text": "What about the Foreign Service Act of 1946?",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0068.mp3"
+    "file": "0068.mp3",
+    "duration": 3.675,
+    "startTime": 765.301
   },
   {
     "index": 69,
@@ -627,7 +765,9 @@
     "voice": "M1",
     "text": "Good question. That act modernized the Foreign Service again after the war. It established the structure that largely exists today: the five cone system (political, economic, consular, management, and public diplomacy), the class rankings, the up-or-out promotion system.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0069.mp3"
+    "file": "0069.mp3",
+    "duration": 19.2,
+    "startTime": 768.976
   },
   {
     "index": 70,
@@ -636,7 +776,9 @@
     "voice": "F2",
     "text": "Up-or-out?",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0070.mp3"
+    "file": "0070.mp3",
+    "duration": 1.45,
+    "startTime": 788.176
   },
   {
     "index": 71,
@@ -645,7 +787,9 @@
     "voice": "M1",
     "text": "It means officers must be promoted within a certain timeframe or they're forced to retire. It's controversial - some say it encourages risk-aversion because officers don't want to make mistakes that could hurt their promotion chances. But it also prevents stagnation.",
     "chapter": "SEGMENT 4: WORLD WAR II AND THE MODERN ERA (10 minutes)",
-    "file": "0071.mp3"
+    "file": "0071.mp3",
+    "duration": 17.875,
+    "startTime": 789.626
   },
   {
     "index": 72,
@@ -654,7 +798,9 @@
     "voice": "F2",
     "text": "What was the Foreign Service's role during the Cold War?",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0072.mp3"
+    "file": "0072.mp3",
+    "duration": 3.7,
+    "startTime": 807.501
   },
   {
     "index": 73,
@@ -663,7 +809,9 @@
     "voice": "M1",
     "text": "Central. Every embassy was, in a sense, on the front line of competition with the Soviet Union. Diplomats cultivated relationships, gathered information, implemented policy, and tried to win hearts and minds for the American side.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0073.mp3"
+    "file": "0073.mp3",
+    "duration": 16.45,
+    "startTime": 811.201
   },
   {
     "index": 74,
@@ -672,7 +820,9 @@
     "voice": "F2",
     "text": "Were there particular challenges?",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0074.mp3"
+    "file": "0074.mp3",
+    "duration": 2.475,
+    "startTime": 827.651
   },
   {
     "index": 75,
@@ -681,7 +831,9 @@
     "voice": "M1",
     "text": "One major challenge was McCarthyism. In the early 1950s, Senator Joseph McCarthy attacked the State Department as being infiltrated by Communists. Many career diplomats were investigated, accused, and forced out - often with little evidence.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0075.mp3"
+    "file": "0075.mp3",
+    "duration": 18.05,
+    "startTime": 830.126
   },
   {
     "index": 76,
@@ -690,7 +842,9 @@
     "voice": "F2",
     "text": "That must have been devastating for morale.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0076.mp3"
+    "file": "0076.mp3",
+    "duration": 3.026,
+    "startTime": 848.176
   },
   {
     "index": 77,
@@ -699,7 +853,9 @@
     "voice": "M1",
     "text": "It was. Some of the officers purged were among the most knowledgeable about China and Asia - they were accused of \"losing China\" to Communism. Their removal arguably weakened American understanding of Asia for years.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0077.mp3"
+    "file": "0077.mp3",
+    "duration": 15.775,
+    "startTime": 851.202
   },
   {
     "index": 78,
@@ -708,7 +864,9 @@
     "voice": "F2",
     "text": "Did this affect how diplomats operated?",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0078.mp3"
+    "file": "0078.mp3",
+    "duration": 3.026,
+    "startTime": 866.977
   },
   {
     "index": 79,
@@ -717,7 +875,9 @@
     "voice": "M1",
     "text": "It created a chilling effect. Officers became reluctant to report uncomfortable truths or take positions that might be seen as soft. Some argue this contributed to later mistakes, including in Vietnam.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0079.mp3"
+    "file": "0079.mp3",
+    "duration": 14.875,
+    "startTime": 870.003
   },
   {
     "index": 80,
@@ -726,7 +886,9 @@
     "voice": "F2",
     "text": "What was the Foreign Service's role in Vietnam?",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0080.mp3"
+    "file": "0080.mp3",
+    "duration": 3.425,
+    "startTime": 884.878
   },
   {
     "index": 81,
@@ -735,7 +897,9 @@
     "voice": "M1",
     "text": "Complex. Many Foreign Service Officers in Vietnam sent cables warning that the war wasn't winnable, that the South Vietnamese government was corrupt and unstable, that American policy wasn't working. But these warnings were often ignored or suppressed.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0081.mp3"
+    "file": "0081.mp3",
+    "duration": 18.15,
+    "startTime": 888.303
   },
   {
     "index": 82,
@@ -744,7 +908,9 @@
     "voice": "F2",
     "text": "So the diplomats on the ground saw the problems?",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0082.mp3"
+    "file": "0082.mp3",
+    "duration": 3.325,
+    "startTime": 906.453
   },
   {
     "index": 83,
@@ -753,7 +919,9 @@
     "voice": "M1",
     "text": "Many did. This is a recurring theme in Foreign Service history - the tension between what officers in the field observe and what policymakers in Washington want to hear. The best diplomats tell hard truths, but that's not always welcomed.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0083.mp3"
+    "file": "0083.mp3",
+    "duration": 16.75,
+    "startTime": 909.778
   },
   {
     "index": 84,
@@ -762,7 +930,9 @@
     "voice": "F2",
     "text": "That connects back to Objectivity and Integrity from the 13 dimensions.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0084.mp3"
+    "file": "0084.mp3",
+    "duration": 4.975,
+    "startTime": 926.528
   },
   {
     "index": 85,
@@ -771,7 +941,9 @@
     "voice": "M1",
     "text": "Exactly. The Foreign Service prizes officers who report accurately, even when the news is bad. But institutional pressures can push in the other direction. It's a tension every diplomat has to navigate.",
     "chapter": "SEGMENT 5: THE COLD WAR AND VIETNAM ERA (10 minutes)",
-    "file": "0085.mp3"
+    "file": "0085.mp3",
+    "duration": 14.575,
+    "startTime": 931.503
   },
   {
     "index": 86,
@@ -780,7 +952,9 @@
     "voice": "F2",
     "text": "You mentioned earlier that the Foreign Service was historically not very diverse. When did that start changing?",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0086.mp3"
+    "file": "0086.mp3",
+    "duration": 6.75,
+    "startTime": 946.078
   },
   {
     "index": 87,
@@ -789,7 +963,9 @@
     "voice": "M1",
     "text": "Slowly and incompletely. The first African American Foreign Service Officer was Clifton Wharton Sr., who passed the exam in 1924 - the very first year of the Rogers Act. But he was an exception for decades.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0087.mp3"
+    "file": "0087.mp3",
+    "duration": 16.275,
+    "startTime": 952.828
   },
   {
     "index": 88,
@@ -798,7 +974,9 @@
     "voice": "F2",
     "text": "When did women enter the service?",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0088.mp3"
+    "file": "0088.mp3",
+    "duration": 2.625,
+    "startTime": 969.103
   },
   {
     "index": 89,
@@ -807,7 +985,9 @@
     "voice": "M1",
     "text": "Women had been in the Consular Service before 1924, but the merged Foreign Service remained overwhelmingly male. Until 1971, women were required to resign if they married. Think about that - you had to choose between having a family and having a career.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0089.mp3"
+    "file": "0089.mp3",
+    "duration": 19.4,
+    "startTime": 971.728
   },
   {
     "index": 90,
@@ -816,7 +996,9 @@
     "voice": "F2",
     "text": "That's shocking by today's standards.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0090.mp3"
+    "file": "0090.mp3",
+    "duration": 2.75,
+    "startTime": 991.128
   },
   {
     "index": 91,
@@ -825,7 +1007,9 @@
     "voice": "M1",
     "text": "The 1970s brought significant changes. The marriage rule was abolished. Active recruiting of women and minorities began. But change was slow. The culture remained what critics called \"pale, male, and Yale\" - dominated by white men from elite backgrounds.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0091.mp3"
+    "file": "0091.mp3",
+    "duration": 18.9,
+    "startTime": 993.878
   },
   {
     "index": 92,
@@ -834,7 +1018,9 @@
     "voice": "F2",
     "text": "Has it improved?",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0092.mp3"
+    "file": "0092.mp3",
+    "duration": 1.8,
+    "startTime": 1012.778
   },
   {
     "index": 93,
@@ -843,7 +1029,9 @@
     "voice": "M1",
     "text": "Significantly, though there's still work to do. Today, entry classes are much more diverse than they were fifty years ago. There have been female Secretaries of State - Madeleine Albright, Condoleezza Rice, Hillary Clinton. Ambassadors now come from much more varied backgrounds.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0093.mp3"
+    "file": "0093.mp3",
+    "duration": 18.675,
+    "startTime": 1014.578
   },
   {
     "index": 94,
@@ -852,7 +1040,9 @@
     "voice": "F2",
     "text": "Are there notable minority diplomats we should know about?",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0094.mp3"
+    "file": "0094.mp3",
+    "duration": 3.75,
+    "startTime": 1033.253
   },
   {
     "index": 95,
@@ -861,7 +1051,9 @@
     "voice": "M1",
     "text": "Ralph Bunche, though technically he worked primarily for the UN, was a key figure - the first African American to receive the Nobel Peace Prize, for mediating the 1949 Arab-Israeli armistice. Edward Perkins was the first Black American ambassador to South Africa, appointed during apartheid. Patricia Roberts Harris was the first African American female ambassador.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0095.mp3"
+    "file": "0095.mp3",
+    "duration": 26.6,
+    "startTime": 1037.003
   },
   {
     "index": 96,
@@ -870,7 +1062,9 @@
     "voice": "F2",
     "text": "What about LGBTQ diplomats?",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0096.mp3"
+    "file": "0096.mp3",
+    "duration": 2.9,
+    "startTime": 1063.603
   },
   {
     "index": 97,
@@ -879,7 +1073,9 @@
     "voice": "M1",
     "text": "For decades, LGBTQ individuals were explicitly barred from holding security clearances - and therefore from the Foreign Service. This only changed in the 1990s. Today, the Foreign Service actively recruits LGBTQ candidates and has affinity groups supporting them.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0097.mp3"
+    "file": "0097.mp3",
+    "duration": 20.525,
+    "startTime": 1066.503
   },
   {
     "index": 98,
@@ -888,7 +1084,9 @@
     "voice": "F2",
     "text": "It sounds like the Foreign Service has become more representative of America.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0098.mp3"
+    "file": "0098.mp3",
+    "duration": 4.925,
+    "startTime": 1087.028
   },
   {
     "index": 99,
@@ -897,7 +1095,9 @@
     "voice": "M1",
     "text": "It has, though challenges remain. Promotion rates, retention rates, and representation at senior levels still show disparities. This is an ongoing area of focus.",
     "chapter": "SEGMENT 6: DIVERSITY AND CHANGE (10 minutes)",
-    "file": "0099.mp3"
+    "file": "0099.mp3",
+    "duration": 12.375,
+    "startTime": 1091.953
   },
   {
     "index": 100,
@@ -906,7 +1106,9 @@
     "voice": "F2",
     "text": "What does the modern Foreign Service look like?",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0100.mp3"
+    "file": "0100.mp3",
+    "duration": 3.175,
+    "startTime": 1104.328
   },
   {
     "index": 101,
@@ -915,7 +1117,9 @@
     "voice": "M1",
     "text": "Today, there are about 13,000 Foreign Service Officers, plus specialists in security, medical, and technical fields. They serve in over 270 embassies and consulates worldwide.",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0101.mp3"
+    "file": "0101.mp3",
+    "duration": 14.3,
+    "startTime": 1107.503
   },
   {
     "index": 102,
@@ -924,7 +1128,9 @@
     "voice": "F2",
     "text": "What are the current challenges?",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0102.mp3"
+    "file": "0102.mp3",
+    "duration": 2.25,
+    "startTime": 1121.803
   },
   {
     "index": 103,
@@ -933,7 +1139,9 @@
     "voice": "M1",
     "text": "Several. Security is a constant concern, especially after the 1998 embassy bombings in Kenya and Tanzania, and the 2012 attack in Benghazi. Embassies have become much more fortified, which can actually make diplomacy harder by creating physical barriers between diplomats and host country populations.",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0103.mp3"
+    "file": "0103.mp3",
+    "duration": 22.2,
+    "startTime": 1124.053
   },
   {
     "index": 104,
@@ -942,7 +1150,9 @@
     "voice": "F2",
     "text": "What else?",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0104.mp3"
+    "file": "0104.mp3",
+    "duration": 1.375,
+    "startTime": 1146.253
   },
   {
     "index": 105,
@@ -951,7 +1161,9 @@
     "voice": "M1",
     "text": "Resource constraints. The State Department budget is tiny compared to the Defense Department - often less than 1% of the military budget. Diplomats often work with limited staff and resources.",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0105.mp3"
+    "file": "0105.mp3",
+    "duration": 14.125,
+    "startTime": 1147.628
   },
   {
     "index": 106,
@@ -960,7 +1172,9 @@
     "voice": "F2",
     "text": "What about morale?",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0106.mp3"
+    "file": "0106.mp3",
+    "duration": 1.925,
+    "startTime": 1161.753
   },
   {
     "index": 107,
@@ -969,7 +1183,9 @@
     "voice": "M1",
     "text": "It's fluctuated. There was significant concern during the Trump administration about political interference and vacant positions. The Biden administration focused on rebuilding. But there are ongoing debates about the role of career officers versus political appointees, about whether the Foreign Service is adapting quickly enough to new challenges.",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0107.mp3"
+    "file": "0107.mp3",
+    "duration": 23.125,
+    "startTime": 1163.678
   },
   {
     "index": 108,
@@ -978,7 +1194,9 @@
     "voice": "F2",
     "text": "What new challenges?",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0108.mp3"
+    "file": "0108.mp3",
+    "duration": 2.025,
+    "startTime": 1186.803
   },
   {
     "index": 109,
@@ -987,7 +1205,9 @@
     "voice": "M1",
     "text": "Cyber diplomacy, climate change, pandemic response, competition with China, the role of technology in diplomacy. The nature of diplomatic work is changing - more public diplomacy, more interagency coordination, more technical expertise needed.",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0109.mp3"
+    "file": "0109.mp3",
+    "duration": 18.475,
+    "startTime": 1188.828
   },
   {
     "index": 110,
@@ -996,7 +1216,9 @@
     "voice": "F2",
     "text": "How has technology changed diplomacy?",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0110.mp3"
+    "file": "0110.mp3",
+    "duration": 2.95,
+    "startTime": 1207.303
   },
   {
     "index": 111,
@@ -1005,7 +1227,9 @@
     "voice": "M1",
     "text": "Enormously. In Franklin's day, it took weeks to get a message across the Atlantic. Today, Washington can micromanage an embassy in real-time. That has benefits - more coordination, faster responses. But it also means diplomats sometimes have less autonomy, less ability to use their judgment on the ground.",
     "chapter": "SEGMENT 7: MODERN CHALLENGES AND CHANGES (8 minutes)",
-    "file": "0111.mp3"
+    "file": "0111.mp3",
+    "duration": 21.925,
+    "startTime": 1210.253
   },
   {
     "index": 112,
@@ -1014,7 +1238,9 @@
     "voice": "F2",
     "text": "So as someone preparing for the FSOT, what should I take from this history?",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0112.mp3"
+    "file": "0112.mp3",
+    "duration": 5.1,
+    "startTime": 1232.178
   },
   {
     "index": 113,
@@ -1023,7 +1249,9 @@
     "voice": "M1",
     "text": "Several things. First, understand that you're trying to join an institution with a proud tradition. The Foreign Service has shaped American history. From Franklin's alliance with France to the creation of NATO to today's work on climate change and pandemic response, diplomats have made a difference.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0113.mp3"
+    "file": "0113.mp3",
+    "duration": 20.1,
+    "startTime": 1237.278
   },
   {
     "index": 114,
@@ -1032,7 +1260,9 @@
     "voice": "F2",
     "text": "That's inspiring.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0114.mp3"
+    "file": "0114.mp3",
+    "duration": 1.975,
+    "startTime": 1257.378
   },
   {
     "index": 115,
@@ -1041,7 +1271,9 @@
     "voice": "M1",
     "text": "Second, understand the values that have persisted: integrity, professionalism, service to country, speaking truth to power. The best diplomats throughout history have demonstrated these qualities. The FSOT and the oral assessment are designed to identify people who share these values.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0115.mp3"
+    "file": "0115.mp3",
+    "duration": 20.05,
+    "startTime": 1259.353
   },
   {
     "index": 116,
@@ -1050,7 +1282,9 @@
     "voice": "F2",
     "text": "What about the less inspiring parts of the history?",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0116.mp3"
+    "file": "0116.mp3",
+    "duration": 3.25,
+    "startTime": 1279.403
   },
   {
     "index": 117,
@@ -1059,7 +1293,9 @@
     "voice": "M1",
     "text": "Those matter too. The Foreign Service has sometimes failed - failed to be diverse, failed to speak up, failed to adapt. Understanding those failures helps you understand the institution's ongoing efforts to improve. And it reminds you that every generation of diplomats has a responsibility to make the service better.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0117.mp3"
+    "file": "0117.mp3",
+    "duration": 21.825,
+    "startTime": 1282.653
   },
   {
     "index": 118,
@@ -1068,7 +1304,9 @@
     "voice": "F2",
     "text": "Are there specific historical events I should know for the test?",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0118.mp3"
+    "file": "0118.mp3",
+    "duration": 3.975,
+    "startTime": 1304.478
   },
   {
     "index": 119,
@@ -1077,7 +1315,9 @@
     "voice": "M1",
     "text": "The knowledge section might ask about major treaties, key diplomatic milestones, famous diplomats. Know the basics: Louisiana Purchase, Monroe Doctrine, Open Door Policy, the founding of the UN, major Cold War events, key regional developments. But don't try to memorize everything - understand the big themes.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0119.mp3"
+    "file": "0119.mp3",
+    "duration": 22.275,
+    "startTime": 1308.453
   },
   {
     "index": 120,
@@ -1086,7 +1326,9 @@
     "voice": "F2",
     "text": "What are those big themes?",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0120.mp3"
+    "file": "0120.mp3",
+    "duration": 2.15,
+    "startTime": 1330.728
   },
   {
     "index": 121,
@@ -1095,7 +1337,9 @@
     "voice": "M1",
     "text": "America's gradual rise to global leadership. The tension between isolationism and engagement. The professionalization of diplomacy. The slow progress toward diversity. The relationship between diplomats in the field and policymakers at home.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0121.mp3"
+    "file": "0121.mp3",
+    "duration": 17.95,
+    "startTime": 1332.878
   },
   {
     "index": 122,
@@ -1104,7 +1348,9 @@
     "voice": "F2",
     "text": "This feels like context that will help me in many parts of the test.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0122.mp3"
+    "file": "0122.mp3",
+    "duration": 4.3,
+    "startTime": 1350.828
   },
   {
     "index": 123,
@@ -1113,7 +1359,9 @@
     "voice": "M1",
     "text": "Exactly. If you understand where the Foreign Service came from and what it values, you'll make better choices on the SJT, you'll write better essays, and you'll perform better in the oral assessment.",
     "chapter": "SEGMENT 8: WHY THIS HISTORY MATTERS FOR YOU (8 minutes)",
-    "file": "0123.mp3"
+    "file": "0123.mp3",
+    "duration": 13.4,
+    "startTime": 1355.128
   },
   {
     "index": 124,
@@ -1122,7 +1370,9 @@
     "voice": "F2",
     "text": "Jordan, this has been a fascinating journey through 250 years of American diplomacy.",
     "chapter": "CLOSING",
-    "file": "0124.mp3"
+    "file": "0124.mp3",
+    "duration": 6.15,
+    "startTime": 1368.528
   },
   {
     "index": 125,
@@ -1131,7 +1381,9 @@
     "voice": "M1",
     "text": "We've really just scratched the surface. If you want to dig deeper, there are great books - George Kennan's memoirs, histories of the State Department, biographies of diplomats like Franklin and Harriman.",
     "chapter": "CLOSING",
-    "file": "0125.mp3"
+    "file": "0125.mp3",
+    "duration": 13.226,
+    "startTime": 1374.678
   },
   {
     "index": 126,
@@ -1140,7 +1392,9 @@
     "voice": "F2",
     "text": "Any specific recommendations?",
     "chapter": "CLOSING",
-    "file": "0126.mp3"
+    "file": "0126.mp3",
+    "duration": 2.625,
+    "startTime": 1387.904
   },
   {
     "index": 127,
@@ -1149,7 +1403,9 @@
     "voice": "M1",
     "text": "\"The Professional Diplomat\" by John Harr is a classic on Foreign Service culture. Kennan's \"Memoirs\" are beautifully written. And there are excellent oral histories at Georgetown University and other archives.",
     "chapter": "CLOSING",
-    "file": "0127.mp3"
+    "file": "0127.mp3",
+    "duration": 14.55,
+    "startTime": 1390.529
   },
   {
     "index": 128,
@@ -1158,7 +1414,9 @@
     "voice": "F2",
     "text": "What's coming up next episode?",
     "chapter": "CLOSING",
-    "file": "0128.mp3"
+    "file": "0128.mp3",
+    "duration": 2.45,
+    "startTime": 1405.079
   },
   {
     "index": 129,
@@ -1167,7 +1425,9 @@
     "voice": "M1",
     "text": "We're going big - world history and geography. The essential knowledge every diplomat needs: major civilizations, key events, geographical realities that shape international relations.",
     "chapter": "CLOSING",
-    "file": "0129.mp3"
+    "file": "0129.mp3",
+    "duration": 13.575,
+    "startTime": 1407.529
   },
   {
     "index": 130,
@@ -1176,7 +1436,9 @@
     "voice": "F2",
     "text": "I'm looking forward to it. Thanks for listening, everyone. Until next time, keep studying - and remember, you're preparing to join a proud tradition.",
     "chapter": "CLOSING",
-    "file": "0130.mp3"
+    "file": "0130.mp3",
+    "duration": 8.6,
+    "startTime": 1421.104
   },
   {
     "index": 131,
@@ -1185,6 +1447,8 @@
     "voice": "M1",
     "text": "See you next time on The Diplomat's Edge.",
     "chapter": "CLOSING",
-    "file": "0131.mp3"
+    "file": "0131.mp3",
+    "duration": 3.15,
+    "startTime": 1429.704
   }
 ]

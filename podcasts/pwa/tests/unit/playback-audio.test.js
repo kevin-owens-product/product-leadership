@@ -3,196 +3,239 @@ import assert from 'node:assert/strict';
 
 import { createSpeechPlayers } from '../../src/playback/audio.js';
 
-test('speak plays generated Supertonic audio when audioUrl is provided', async () => {
-  const OriginalAudio = global.Audio;
+// Comprehensive Audio mock that covers what audio.js touches: setAttribute,
+// addEventListener, src/load, currentTime, paused, playbackRate, play/pause.
+function installFakeAudio() {
+  const previous = global.Audio;
+  const created = [];
 
-  const audioInstances = [];
   class FakeAudio {
     constructor(src) {
-      this.src = src;
+      this._listeners = new Map();
+      this.src = src || '';
       this.preload = '';
+      this.playsInline = false;
+      this.crossOrigin = '';
       this.playbackRate = 1;
+      this.currentTime = 0;
+      this.duration = 0;
       this.paused = true;
+      this.error = null;
       this.onended = null;
       this.onerror = null;
-      audioInstances.push(this);
+      created.push(this);
     }
+    setAttribute() {}
+    removeAttribute() {}
+    load() {}
     play() {
       this.paused = false;
-      queueMicrotask(() => {
-        if (typeof this.onended === 'function') this.onended();
-      });
+      this._dispatch('play');
       return Promise.resolve();
     }
-    pause() { this.paused = true; }
+    triggerEnded() {
+      if (typeof this.onended === 'function') this.onended();
+      this._dispatch('ended');
+    }
+    pause() {
+      if (!this.paused) {
+        this.paused = true;
+        this._dispatch('pause');
+      }
+    }
+    addEventListener(event, fn) {
+      if (!this._listeners.has(event)) this._listeners.set(event, []);
+      this._listeners.get(event).push(fn);
+    }
+    removeEventListener(event, fn) {
+      const list = this._listeners.get(event);
+      if (!list) return;
+      this._listeners.set(event, list.filter((h) => h !== fn));
+    }
+    _dispatch(event, ...args) {
+      const list = this._listeners.get(event);
+      if (!list) return;
+      list.forEach((fn) => fn(...args));
+    }
   }
 
   global.Audio = FakeAudio;
-
-  let synthSpeakCalls = 0;
-  const synth = {
-    cancel() {},
-    speak() { synthSpeakCalls += 1; }
+  return {
+    created,
+    sharedAudio: () => created[0],
+    chunkAudios: () => created.slice(1),
+    restore: () => { global.Audio = previous; }
   };
+}
 
-  const players = createSpeechPlayers({
-    synth,
-    getSpeechRate: () => 1.5
-  });
-
+test('speak plays generated chunk audio when audioUrl is provided', async () => {
+  const env = installFakeAudio();
   try {
-    await players.speak('ignored text', 'alex', { audioUrl: 'audio/show/ep/0000.mp3' });
-    assert.equal(audioInstances.length, 1);
-    assert.equal(audioInstances[0].src, 'audio/show/ep/0000.mp3');
-    assert.equal(audioInstances[0].playbackRate, 1.5);
-    assert.equal(synthSpeakCalls, 0);
+    const players = createSpeechPlayers({ getSpeechRate: () => 1.5 });
+    const playback = players.speak('ignored text', 'alex', { audioUrl: 'audio/show/ep/0000.mp3' });
+    await new Promise((r) => queueMicrotask(r));
+    const chunks = env.chunkAudios();
+    assert.equal(chunks.length, 1);
+    assert.equal(chunks[0].src, 'audio/show/ep/0000.mp3');
+    assert.equal(chunks[0].playbackRate, 1.5);
+    chunks[0].triggerEnded();
+    await playback;
   } finally {
-    global.Audio = OriginalAudio;
+    env.restore();
   }
 });
 
-test('speak rejects when generated Supertonic audio is missing', async () => {
-  const players = createSpeechPlayers({
-    synth: { cancel() {}, speak() {} },
-    getSpeechRate: () => 1
-  });
-
-  await assert.rejects(
-    () => players.speak('hello without generated audio', 'alex'),
-    /Missing generated Supertonic audio/
-  );
+test('speak rejects when generated Supertonic audio url is missing', async () => {
+  const env = installFakeAudio();
+  try {
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    await assert.rejects(
+      () => players.speak('hello without generated audio', 'alex'),
+      /Missing generated Supertonic audio/
+    );
+  } finally {
+    env.restore();
+  }
 });
 
 test('speak rejects when generated audio fails', async () => {
-  const OriginalAudio = global.Audio;
-
-  class FakeAudio {
-    constructor() {
-      this.onended = null;
-      this.onerror = null;
-    }
+  const env = installFakeAudio();
+  // Override play() on chunks to fail.
+  const Original = global.Audio;
+  class FailingAudio extends Original {
     play() {
       queueMicrotask(() => {
         if (typeof this.onerror === 'function') this.onerror(new Error('boom'));
       });
       return Promise.resolve();
     }
-    pause() {}
   }
-
-  global.Audio = FakeAudio;
-
-  let synthSpeakCalls = 0;
-  const players = createSpeechPlayers({
-    synth: {
-      cancel() {},
-      speak() { synthSpeakCalls += 1; }
-    },
-    getSpeechRate: () => 1
-  });
-
+  global.Audio = FailingAudio;
   try {
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
     await assert.rejects(
-      () => players.speak('hello with broken generated audio', 'alex', { audioUrl: 'broken.mp3' }),
+      () => players.speak('boom', 'alex', { audioUrl: 'broken.mp3' }),
       /Failed to play broken\.mp3/
     );
-    assert.equal(synthSpeakCalls, 0);
   } finally {
-    global.Audio = OriginalAudio;
+    env.restore();
   }
 });
 
-test('pause and resume control active generated audio', async () => {
-  const OriginalAudio = global.Audio;
-
-  let activeAudio = null;
-  class FakeAudio {
-    constructor(src) {
-      this.src = src;
-      this.paused = true;
-      this.onended = null;
-      this.onerror = null;
-      activeAudio = this;
-    }
-    play() {
-      this.paused = false;
-      return Promise.resolve();
-    }
-    pause() { this.paused = true; }
-  }
-
-  global.Audio = FakeAudio;
-
-  const players = createSpeechPlayers({
-    synth: { cancel() {}, speak() {} },
-    getSpeechRate: () => 1
-  });
-
+test('pauseCurrentSpeech / resumeCurrentSpeech toggle active chunk audio', async () => {
+  const env = installFakeAudio();
   try {
-    const playback = players.speak('ignored text', 'alex', { audioUrl: 'audio/show/ep/0000.mp3' });
-    await new Promise(resolve => queueMicrotask(resolve));
-
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    const playback = players.speak('x', 'alex', { audioUrl: 'a/0000.mp3' });
+    await new Promise((r) => queueMicrotask(r));
+    const chunk = env.chunkAudios()[0];
     players.pauseCurrentSpeech();
-    assert.equal(activeAudio.paused, true);
-
+    assert.equal(chunk.paused, true);
     players.resumeCurrentSpeech();
-    assert.equal(activeAudio.paused, false);
-
-    activeAudio.onended();
+    assert.equal(chunk.paused, false);
+    chunk.onended();
     await playback;
   } finally {
-    global.Audio = OriginalAudio;
+    env.restore();
   }
 });
 
-test('stopCurrentSpeech cancels synth and clears generated audio', async () => {
-  const OriginalAudio = global.Audio;
-
-  let cancelled = 0;
-  let paused = 0;
-  let activeAudio = null;
-  class FakeAudio {
-    constructor(src) {
-      this.src = src;
-      this.paused = true;
-      this.onended = null;
-      this.onerror = null;
-      activeAudio = this;
-    }
-    play() {
-      this.paused = false;
-      return Promise.resolve();
-    }
-    pause() {
-      this.paused = true;
-      paused += 1;
-    }
-  }
-
-  global.Audio = FakeAudio;
-
-  const players = createSpeechPlayers({
-    synth: {
-      cancel() {
-        cancelled += 1;
-      },
-      speak() {}
-    },
-    getSpeechRate: () => 1
-  });
-
+test('stopCurrentSpeech clears chunk audio src', async () => {
+  const env = installFakeAudio();
   try {
-    const playback = players.speak('ignored text', 'alex', { audioUrl: 'audio/show/ep/0000.mp3' });
-    await new Promise(resolve => queueMicrotask(resolve));
-
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    const playback = players.speak('x', 'alex', { audioUrl: 'a/0000.mp3' });
+    await new Promise((r) => queueMicrotask(r));
+    const chunk = env.chunkAudios()[0];
     players.stopCurrentSpeech();
-    assert.equal(cancelled, 1);
-    assert.equal(paused, 1);
-    assert.equal(activeAudio.src, '');
-
-    activeAudio.onended();
+    assert.equal(chunk.paused, true);
+    assert.equal(chunk.src, '');
+    chunk.onended();
     await playback;
   } finally {
-    global.Audio = OriginalAudio;
+    env.restore();
+  }
+});
+
+test('setEpisode binds combined.mp3 src and lineOffsets, isContinuousReady reflects both', () => {
+  const env = installFakeAudio();
+  try {
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    assert.equal(players.isContinuousReady(), false);
+    players.setEpisode({
+      combinedUrl: 'audio/show/ep/combined.mp3',
+      lineOffsets: [0, 4.5, 11.2, 18.0],
+      totalDuration: 24.0
+    });
+    assert.equal(env.sharedAudio().src, 'audio/show/ep/combined.mp3');
+    assert.equal(players.isContinuousReady(), true);
+    assert.equal(players.getDuration(), 24.0);
+  } finally {
+    env.restore();
+  }
+});
+
+test('seekToLine sets currentTime to the line offset and getCurrentLine reads it back', () => {
+  const env = installFakeAudio();
+  try {
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    players.setEpisode({
+      combinedUrl: 'audio/show/ep/combined.mp3',
+      lineOffsets: [0, 4.5, 11.2, 18.0],
+      totalDuration: 24.0
+    });
+    const shared = env.sharedAudio();
+    shared.duration = 24.0;
+    players.seekToLine(2);
+    assert.equal(shared.currentTime, 11.2);
+    assert.equal(players.getCurrentLine(), 2);
+    players.seekToLine(0);
+    assert.equal(shared.currentTime, 0);
+    assert.equal(players.getCurrentLine(), 0);
+  } finally {
+    env.restore();
+  }
+});
+
+test('linechange event fires once per crossed line as currentTime advances', () => {
+  const env = installFakeAudio();
+  try {
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    players.setEpisode({
+      combinedUrl: 'audio/show/ep/combined.mp3',
+      lineOffsets: [0, 4.5, 11.2, 18.0],
+      totalDuration: 24.0
+    });
+    const shared = env.sharedAudio();
+    shared.duration = 24.0;
+    const seen = [];
+    players.on('linechange', (lineIndex) => seen.push(lineIndex));
+    shared.currentTime = 0; shared._dispatch('timeupdate');
+    shared.currentTime = 3; shared._dispatch('timeupdate');
+    shared.currentTime = 5; shared._dispatch('timeupdate');
+    shared.currentTime = 6; shared._dispatch('timeupdate');
+    shared.currentTime = 12; shared._dispatch('timeupdate');
+    shared.currentTime = 22; shared._dispatch('timeupdate');
+    assert.deepEqual(seen, [0, 1, 2, 3]);
+  } finally {
+    env.restore();
+  }
+});
+
+test('on("ended") fires when the shared element ends', () => {
+  const env = installFakeAudio();
+  try {
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    players.setEpisode({
+      combinedUrl: 'audio/show/ep/combined.mp3',
+      lineOffsets: [0, 5],
+      totalDuration: 10
+    });
+    let endedCount = 0;
+    players.on('ended', () => { endedCount += 1; });
+    env.sharedAudio()._dispatch('ended');
+    assert.equal(endedCount, 1);
+  } finally {
+    env.restore();
   }
 });

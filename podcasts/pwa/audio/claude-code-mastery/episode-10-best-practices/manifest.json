@@ -4,776 +4,998 @@
     "speaker": "alex",
     "text": "Welcome to the final episode of Claude Code Mastery. I'm Alex, and it's been a journey getting here.",
     "chapter": "INTRO (3 minutes)",
-    "file": "0000.mp3"
+    "file": "0000.mp3",
+    "duration": 6.7,
+    "startTime": 0
   },
   {
     "index": 1,
     "speaker": "jamie",
     "text": "I'm Jamie, and wow, we've covered so much. From installation to MCP servers. I feel like a completely different developer than when we started.",
     "chapter": "INTRO (3 minutes)",
-    "file": "0001.mp3"
+    "file": "0001.mp3",
+    "duration": 10.7,
+    "startTime": 6.7
   },
   {
     "index": 2,
     "speaker": "alex",
     "text": "That's the goal. Today we're synthesizing everything into a cohesive workflow. Best practices, productivity tips, and how to keep improving with Claude Code.",
     "chapter": "INTRO (3 minutes)",
-    "file": "0002.mp3"
+    "file": "0002.mp3",
+    "duration": 9.825,
+    "startTime": 17.4
   },
   {
     "index": 3,
     "speaker": "jamie",
     "text": "Let's start with daily routine. How do you actually use Claude Code day to day?",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0003.mp3"
+    "file": "0003.mp3",
+    "duration": 5.65,
+    "startTime": 27.225
   },
   {
     "index": 4,
     "speaker": "alex",
     "text": "I start every coding session by launching Claude Code in my project directory. First thing I do is get oriented. \"What did I change yesterday?\" or \"remind me where I left off.\"",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0004.mp3"
+    "file": "0004.mp3",
+    "duration": 11.25,
+    "startTime": 32.875
   },
   {
     "index": 5,
     "speaker": "jamie",
     "text": "Using Claude as memory.",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0005.mp3"
+    "file": "0005.mp3",
+    "duration": 2.475,
+    "startTime": 44.125
   },
   {
     "index": 6,
     "speaker": "alex",
     "text": "Exactly. Then I review my tasks for the day and often ask Claude to help me break them down. \"Here's what I need to accomplish. Let's create a plan.\"",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0006.mp3"
+    "file": "0006.mp3",
+    "duration": 8.975,
+    "startTime": 46.6
   },
   {
     "index": 7,
     "speaker": "jamie",
     "text": "Planning with Claude.",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0007.mp3"
+    "file": "0007.mp3",
+    "duration": 1.925,
+    "startTime": 55.575
   },
   {
     "index": 8,
     "speaker": "alex",
     "text": "As I work, Claude is my constant companion. Reading code, making edits, running tests. When I finish a logical unit, I ask Claude to commit with a good message.",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0008.mp3"
+    "file": "0008.mp3",
+    "duration": 10,
+    "startTime": 57.5
   },
   {
     "index": 9,
     "speaker": "jamie",
     "text": "Integrated throughout.",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0009.mp3"
+    "file": "0009.mp3",
+    "duration": 2.1,
+    "startTime": 67.5
   },
   {
     "index": 10,
     "speaker": "alex",
     "text": "And at the end of the day, sometimes I ask Claude to summarize what we accomplished. Good for standups and keeping track of progress.",
     "chapter": "SEGMENT 1: THE DAILY WORKFLOW (5 minutes)",
-    "file": "0010.mp3"
+    "file": "0010.mp3",
+    "duration": 7.826,
+    "startTime": 69.6
   },
   {
     "index": 11,
     "speaker": "jamie",
     "text": "With Claude doing so much, how do you stay in control?",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0011.mp3"
+    "file": "0011.mp3",
+    "duration": 4.025,
+    "startTime": 77.426
   },
   {
     "index": 12,
     "speaker": "alex",
     "text": "First, always understand what Claude is doing. Don't approve changes you don't understand. If you're confused, ask Claude to explain.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0012.mp3"
+    "file": "0012.mp3",
+    "duration": 8.1,
+    "startTime": 81.451
   },
   {
     "index": 13,
     "speaker": "jamie",
     "text": "No blind approval.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0013.mp3"
+    "file": "0013.mp3",
+    "duration": 2.125,
+    "startTime": 89.551
   },
   {
     "index": 14,
     "speaker": "alex",
     "text": "Second, work incrementally. Small changes, frequent commits. If something goes wrong, you can easily revert.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0014.mp3"
+    "file": "0014.mp3",
+    "duration": 7.075,
+    "startTime": 91.676
   },
   {
     "index": 15,
     "speaker": "jamie",
     "text": "Small steps.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0015.mp3"
+    "file": "0015.mp3",
+    "duration": 1.725,
+    "startTime": 98.751
   },
   {
     "index": 16,
     "speaker": "alex",
     "text": "Third, trust but verify. Run your tests after Claude makes changes. Check the output. Don't assume correctness.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0016.mp3"
+    "file": "0016.mp3",
+    "duration": 7.15,
+    "startTime": 100.476
   },
   {
     "index": 17,
     "speaker": "jamie",
     "text": "Verify results.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0017.mp3"
+    "file": "0017.mp3",
+    "duration": 2.05,
+    "startTime": 107.626
   },
   {
     "index": 18,
     "speaker": "alex",
     "text": "And fourth, know when to do it yourself. Sometimes you know exactly what to type and it's faster to just do it. Claude is a tool, not a replacement for your skills.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0018.mp3"
+    "file": "0018.mp3",
+    "duration": 9.55,
+    "startTime": 109.676
   },
   {
     "index": 19,
     "speaker": "jamie",
     "text": "Still a developer, with better tools.",
     "chapter": "SEGMENT 2: STAYING IN CONTROL (4 minutes)",
-    "file": "0019.mp3"
+    "file": "0019.mp3",
+    "duration": 3,
+    "startTime": 119.226
   },
   {
     "index": 20,
     "speaker": "jamie",
     "text": "How do you use Claude for code review?",
     "chapter": "SEGMENT 3: CODE REVIEW WITH CLAUDE (3 minutes)",
-    "file": "0020.mp3"
+    "file": "0020.mp3",
+    "duration": 2.95,
+    "startTime": 122.226
   },
   {
     "index": 21,
     "speaker": "alex",
     "text": "Before I submit a PR, I ask Claude to review my own changes. \"Review the changes I've made and point out any issues.\" It catches things I missed.",
     "chapter": "SEGMENT 3: CODE REVIEW WITH CLAUDE (3 minutes)",
-    "file": "0021.mp3"
+    "file": "0021.mp3",
+    "duration": 9.375,
+    "startTime": 125.176
   },
   {
     "index": 22,
     "speaker": "jamie",
     "text": "Self-review with AI.",
     "chapter": "SEGMENT 3: CODE REVIEW WITH CLAUDE (3 minutes)",
-    "file": "0022.mp3"
+    "file": "0022.mp3",
+    "duration": 2.35,
+    "startTime": 134.551
   },
   {
     "index": 23,
     "speaker": "alex",
     "text": "For reviewing others' code, I ask Claude to analyze the PR and highlight concerns. Then I do my own review, informed by Claude's analysis.",
     "chapter": "SEGMENT 3: CODE REVIEW WITH CLAUDE (3 minutes)",
-    "file": "0023.mp3"
+    "file": "0023.mp3",
+    "duration": 9.4,
+    "startTime": 136.901
   },
   {
     "index": 24,
     "speaker": "jamie",
     "text": "Augmented review, not replaced review.",
     "chapter": "SEGMENT 3: CODE REVIEW WITH CLAUDE (3 minutes)",
-    "file": "0024.mp3"
+    "file": "0024.mp3",
+    "duration": 3.5,
+    "startTime": 146.301
   },
   {
     "index": 25,
     "speaker": "alex",
     "text": "Right. Claude might catch technical issues, but you still need human judgment about design choices, maintainability, and fit with the broader system.",
     "chapter": "SEGMENT 3: CODE REVIEW WITH CLAUDE (3 minutes)",
-    "file": "0025.mp3"
+    "file": "0025.mp3",
+    "duration": 9.05,
+    "startTime": 149.801
   },
   {
     "index": 26,
     "speaker": "jamie",
     "text": "How does Claude help you learn?",
     "chapter": "SEGMENT 4: LEARNING AND GROWING (4 minutes)",
-    "file": "0026.mp3"
+    "file": "0026.mp3",
+    "duration": 2.4,
+    "startTime": 158.851
   },
   {
     "index": 27,
     "speaker": "alex",
     "text": "When I encounter unfamiliar code or concepts, I ask Claude to explain. \"Walk me through how this async iteration works.\" It's like having a patient tutor.",
     "chapter": "SEGMENT 4: LEARNING AND GROWING (4 minutes)",
-    "file": "0027.mp3"
+    "file": "0027.mp3",
+    "duration": 9.75,
+    "startTime": 161.251
   },
   {
     "index": 28,
     "speaker": "jamie",
     "text": "Always available to teach.",
     "chapter": "SEGMENT 4: LEARNING AND GROWING (4 minutes)",
-    "file": "0028.mp3"
+    "file": "0028.mp3",
+    "duration": 2.5,
+    "startTime": 171.001
   },
   {
     "index": 29,
     "speaker": "alex",
     "text": "I also use Claude when learning new technologies. \"I'm new to GraphQL. Explain the basics and how our project uses it.\" Personalized learning based on my actual codebase.",
     "chapter": "SEGMENT 4: LEARNING AND GROWING (4 minutes)",
-    "file": "0029.mp3"
+    "file": "0029.mp3",
+    "duration": 11.15,
+    "startTime": 173.501
   },
   {
     "index": 30,
     "speaker": "jamie",
     "text": "Contextual learning.",
     "chapter": "SEGMENT 4: LEARNING AND GROWING (4 minutes)",
-    "file": "0030.mp3"
+    "file": "0030.mp3",
+    "duration": 2.1,
+    "startTime": 184.651
   },
   {
     "index": 31,
     "speaker": "alex",
     "text": "And when Claude suggests something I don't understand, I always ask why. \"Why did you use this pattern instead of the obvious approach?\" The explanations teach me.",
     "chapter": "SEGMENT 4: LEARNING AND GROWING (4 minutes)",
-    "file": "0031.mp3"
+    "file": "0031.mp3",
+    "duration": 10.15,
+    "startTime": 186.751
   },
   {
     "index": 32,
     "speaker": "jamie",
     "text": "How do you balance Claude and working with human teammates?",
     "chapter": "SEGMENT 5: EFFECTIVE COLLABORATION (3 minutes)",
-    "file": "0032.mp3"
+    "file": "0032.mp3",
+    "duration": 3.85,
+    "startTime": 196.901
   },
   {
     "index": 33,
     "speaker": "alex",
     "text": "Claude helps me be a better teammate. I can draft PR descriptions with Claude before refining them myself. I can prepare for code reviews by understanding the code first.",
     "chapter": "SEGMENT 5: EFFECTIVE COLLABORATION (3 minutes)",
-    "file": "0033.mp3"
+    "file": "0033.mp3",
+    "duration": 10.75,
+    "startTime": 200.751
   },
   {
     "index": 34,
     "speaker": "jamie",
     "text": "Preparation assistance.",
     "chapter": "SEGMENT 5: EFFECTIVE COLLABORATION (3 minutes)",
-    "file": "0034.mp3"
+    "file": "0034.mp3",
+    "duration": 2.275,
+    "startTime": 211.501
   },
   {
     "index": 35,
     "speaker": "alex",
     "text": "When working on shared code, I'm more careful. I make sure Claude's changes align with team conventions, and I document why changes were made.",
     "chapter": "SEGMENT 5: EFFECTIVE COLLABORATION (3 minutes)",
-    "file": "0035.mp3"
+    "file": "0035.mp3",
+    "duration": 8.875,
+    "startTime": 213.776
   },
   {
     "index": 36,
     "speaker": "jamie",
     "text": "Team awareness.",
     "chapter": "SEGMENT 5: EFFECTIVE COLLABORATION (3 minutes)",
-    "file": "0036.mp3"
+    "file": "0036.mp3",
+    "duration": 1.775,
+    "startTime": 222.651
   },
   {
     "index": 37,
     "speaker": "alex",
     "text": "And I share what I learn. When Claude shows me a better pattern, I bring it to the team. The whole team can benefit from AI-assisted insights.",
     "chapter": "SEGMENT 5: EFFECTIVE COLLABORATION (3 minutes)",
-    "file": "0037.mp3"
+    "file": "0037.mp3",
+    "duration": 8.6,
+    "startTime": 224.426
   },
   {
     "index": 38,
     "speaker": "jamie",
     "text": "Your best tips for debugging with Claude?",
     "chapter": "SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)",
-    "file": "0038.mp3"
+    "file": "0038.mp3",
+    "duration": 2.925,
+    "startTime": 233.026
   },
   {
     "index": 39,
     "speaker": "alex",
     "text": "Start with clear symptom description. The better you describe the problem, the faster Claude can help. Include error messages, reproduction steps, and what you've already tried.",
     "chapter": "SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)",
-    "file": "0039.mp3"
+    "file": "0039.mp3",
+    "duration": 10.425,
+    "startTime": 235.951
   },
   {
     "index": 40,
     "speaker": "jamie",
     "text": "Good bug reports for Claude.",
     "chapter": "SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)",
-    "file": "0040.mp3"
+    "file": "0040.mp3",
+    "duration": 2.575,
+    "startTime": 246.376
   },
   {
     "index": 41,
     "speaker": "alex",
     "text": "Let Claude investigate before jumping to conclusions. Sometimes the bug isn't where you think. Claude's systematic search can find the real cause.",
     "chapter": "SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)",
-    "file": "0041.mp3"
+    "file": "0041.mp3",
+    "duration": 9.05,
+    "startTime": 248.951
   },
   {
     "index": 42,
     "speaker": "jamie",
     "text": "Don't bias the investigation.",
     "chapter": "SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)",
-    "file": "0042.mp3"
+    "file": "0042.mp3",
+    "duration": 2.775,
+    "startTime": 258.001
   },
   {
     "index": 43,
     "speaker": "alex",
     "text": "And create a test that reproduces the bug before fixing it. Claude can help write this test. Then fixing becomes verifiable.",
     "chapter": "SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)",
-    "file": "0043.mp3"
+    "file": "0043.mp3",
+    "duration": 8.275,
+    "startTime": 260.776
   },
   {
     "index": 44,
     "speaker": "jamie",
     "text": "Test-confirmed fixes.",
     "chapter": "SEGMENT 6: DEBUGGING EFFICIENTLY (4 minutes)",
-    "file": "0044.mp3"
+    "file": "0044.mp3",
+    "duration": 2.275,
+    "startTime": 269.051
   },
   {
     "index": 45,
     "speaker": "jamie",
     "text": "Is there a risk of becoming too dependent on Claude?",
     "chapter": "SEGMENT 7: AVOIDING OVER-RELIANCE (4 minutes)",
-    "file": "0045.mp3"
+    "file": "0045.mp3",
+    "duration": 3.775,
+    "startTime": 271.326
   },
   {
     "index": 46,
     "speaker": "alex",
     "text": "It's worth being thoughtful about. Make sure you still understand the fundamentals. When Claude suggests a solution, understand why it works.",
     "chapter": "SEGMENT 7: AVOIDING OVER-RELIANCE (4 minutes)",
-    "file": "0046.mp3"
+    "file": "0046.mp3",
+    "duration": 8.2,
+    "startTime": 275.101
   },
   {
     "index": 47,
     "speaker": "jamie",
     "text": "Keep your skills sharp.",
     "chapter": "SEGMENT 7: AVOIDING OVER-RELIANCE (4 minutes)",
-    "file": "0047.mp3"
+    "file": "0047.mp3",
+    "duration": 2,
+    "startTime": 283.301
   },
   {
     "index": 48,
     "speaker": "alex",
     "text": "Occasionally do things the old way. Write code without Claude, debug by reading carefully, commit with hand-written messages. This keeps your skills from atrophying.",
     "chapter": "SEGMENT 7: AVOIDING OVER-RELIANCE (4 minutes)",
-    "file": "0048.mp3"
+    "file": "0048.mp3",
+    "duration": 9.975,
+    "startTime": 285.301
   },
   {
     "index": 49,
     "speaker": "jamie",
     "text": "Practice without the assistant.",
     "chapter": "SEGMENT 7: AVOIDING OVER-RELIANCE (4 minutes)",
-    "file": "0049.mp3"
+    "file": "0049.mp3",
+    "duration": 2.45,
+    "startTime": 295.276
   },
   {
     "index": 50,
     "speaker": "alex",
     "text": "And remember that Claude can be wrong. If something doesn't feel right, trust your instincts. You know your project better than Claude does.",
     "chapter": "SEGMENT 7: AVOIDING OVER-RELIANCE (4 minutes)",
-    "file": "0050.mp3"
+    "file": "0050.mp3",
+    "duration": 7.6,
+    "startTime": 297.726
   },
   {
     "index": 51,
     "speaker": "jamie",
     "text": "How do you keep Claude Code efficient?",
     "chapter": "SEGMENT 8: PERFORMANCE AND EFFICIENCY (3 minutes)",
-    "file": "0051.mp3"
+    "file": "0051.mp3",
+    "duration": 2.725,
+    "startTime": 305.326
   },
   {
     "index": 52,
     "speaker": "alex",
     "text": "Long conversations slow down. I use slash clear or slash compact regularly to keep things snappy.",
     "chapter": "SEGMENT 8: PERFORMANCE AND EFFICIENCY (3 minutes)",
-    "file": "0052.mp3"
+    "file": "0052.mp3",
+    "duration": 6.775,
+    "startTime": 308.051
   },
   {
     "index": 53,
     "speaker": "jamie",
     "text": "Manage conversation length.",
     "chapter": "SEGMENT 8: PERFORMANCE AND EFFICIENCY (3 minutes)",
-    "file": "0053.mp3"
+    "file": "0053.mp3",
+    "duration": 2.475,
+    "startTime": 314.826
   },
   {
     "index": 54,
     "speaker": "alex",
     "text": "I try to be specific about what I need. Narrow queries get faster responses than broad ones. \"Check only the auth module\" instead of \"search everywhere.\"",
     "chapter": "SEGMENT 8: PERFORMANCE AND EFFICIENCY (3 minutes)",
-    "file": "0054.mp3"
+    "file": "0054.mp3",
+    "duration": 9.525,
+    "startTime": 317.301
   },
   {
     "index": 55,
     "speaker": "jamie",
     "text": "Focused requests.",
     "chapter": "SEGMENT 8: PERFORMANCE AND EFFICIENCY (3 minutes)",
-    "file": "0055.mp3"
+    "file": "0055.mp3",
+    "duration": 2.025,
+    "startTime": 326.826
   },
   {
     "index": 56,
     "speaker": "alex",
     "text": "And I pay attention to what works. When a certain prompting style gets good results, I reuse it. Over time, you develop efficient patterns.",
     "chapter": "SEGMENT 8: PERFORMANCE AND EFFICIENCY (3 minutes)",
-    "file": "0056.mp3"
+    "file": "0056.mp3",
+    "duration": 8.65,
+    "startTime": 328.851
   },
   {
     "index": 57,
     "speaker": "jamie",
     "text": "How do you build trust with Claude?",
     "chapter": "SEGMENT 9: BUILDING TRUST (3 minutes)",
-    "file": "0057.mp3"
+    "file": "0057.mp3",
+    "duration": 2.575,
+    "startTime": 337.501
   },
   {
     "index": 58,
     "speaker": "alex",
     "text": "Start conservative. Require approval for everything at first. Review carefully. This builds your understanding of how Claude works.",
     "chapter": "SEGMENT 9: BUILDING TRUST (3 minutes)",
-    "file": "0058.mp3"
+    "file": "0058.mp3",
+    "duration": 8.25,
+    "startTime": 340.076
   },
   {
     "index": 59,
     "speaker": "jamie",
     "text": "Start cautious.",
     "chapter": "SEGMENT 9: BUILDING TRUST (3 minutes)",
-    "file": "0059.mp3"
+    "file": "0059.mp3",
+    "duration": 1.875,
+    "startTime": 348.326
   },
   {
     "index": 60,
     "speaker": "alex",
     "text": "As you see Claude succeed, relax restrictions. Allow read operations automatically. Trust more actions. But do this gradually.",
     "chapter": "SEGMENT 9: BUILDING TRUST (3 minutes)",
-    "file": "0060.mp3"
+    "file": "0060.mp3",
+    "duration": 8.426,
+    "startTime": 350.201
   },
   {
     "index": 61,
     "speaker": "jamie",
     "text": "Earn expanded trust.",
     "chapter": "SEGMENT 9: BUILDING TRUST (3 minutes)",
-    "file": "0061.mp3"
+    "file": "0061.mp3",
+    "duration": 2.2,
+    "startTime": 358.627
   },
   {
     "index": 62,
     "speaker": "alex",
     "text": "And if Claude makes a mistake, understand why. Was the prompt unclear? Did you give bad context? Learning from mistakes makes future interactions better.",
     "chapter": "SEGMENT 9: BUILDING TRUST (3 minutes)",
-    "file": "0062.mp3"
+    "file": "0062.mp3",
+    "duration": 9.425,
+    "startTime": 360.827
   },
   {
     "index": 63,
     "speaker": "jamie",
     "text": "Does code organization matter for Claude effectiveness?",
     "chapter": "SEGMENT 10: PROJECT ORGANIZATION FOR AI (3 minutes)",
-    "file": "0063.mp3"
+    "file": "0063.mp3",
+    "duration": 4.15,
+    "startTime": 370.252
   },
   {
     "index": 64,
     "speaker": "alex",
     "text": "Absolutely. Clear, well-organized code is easier for Claude to understand. Good naming, logical structure, consistent patterns.",
     "chapter": "SEGMENT 10: PROJECT ORGANIZATION FOR AI (3 minutes)",
-    "file": "0064.mp3"
+    "file": "0064.mp3",
+    "duration": 8.426,
+    "startTime": 374.402
   },
   {
     "index": 65,
     "speaker": "jamie",
     "text": "Good code practices help AI too.",
     "chapter": "SEGMENT 10: PROJECT ORGANIZATION FOR AI (3 minutes)",
-    "file": "0065.mp3"
+    "file": "0065.mp3",
+    "duration": 3.05,
+    "startTime": 382.828
   },
   {
     "index": 66,
     "speaker": "alex",
     "text": "Documentation matters. Claude reads your comments, your README, your CLAUDE.md. Good documentation makes Claude more effective.",
     "chapter": "SEGMENT 10: PROJECT ORGANIZATION FOR AI (3 minutes)",
-    "file": "0066.mp3"
+    "file": "0066.mp3",
+    "duration": 8.95,
+    "startTime": 385.878
   },
   {
     "index": 67,
     "speaker": "jamie",
     "text": "Document for humans and AI.",
     "chapter": "SEGMENT 10: PROJECT ORGANIZATION FOR AI (3 minutes)",
-    "file": "0067.mp3"
+    "file": "0067.mp3",
+    "duration": 2.825,
+    "startTime": 394.828
   },
   {
     "index": 68,
     "speaker": "alex",
     "text": "And keep related code together. If your auth logic is scattered across ten folders, Claude has to work harder. Cohesive organization helps everyone.",
     "chapter": "SEGMENT 10: PROJECT ORGANIZATION FOR AI (3 minutes)",
-    "file": "0068.mp3"
+    "file": "0068.mp3",
+    "duration": 9.575,
+    "startTime": 397.653
   },
   {
     "index": 69,
     "speaker": "jamie",
     "text": "Where do you see this going? How should we think about the future?",
     "chapter": "SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)",
-    "file": "0069.mp3"
+    "file": "0069.mp3",
+    "duration": 4.25,
+    "startTime": 407.228
   },
   {
     "index": 70,
     "speaker": "alex",
     "text": "AI assistance in development is only going to grow. The developers who thrive will be those who learn to collaborate effectively with AI.",
     "chapter": "SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)",
-    "file": "0070.mp3"
+    "file": "0070.mp3",
+    "duration": 8.875,
+    "startTime": 411.478
   },
   {
     "index": 71,
     "speaker": "jamie",
     "text": "AI as collaborator.",
     "chapter": "SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)",
-    "file": "0071.mp3"
+    "file": "0071.mp3",
+    "duration": 2.175,
+    "startTime": 420.353
   },
   {
     "index": 72,
     "speaker": "alex",
     "text": "Focus on the skills AI can't replace. Understanding user needs, making design decisions, evaluating trade-offs, communicating with stakeholders.",
     "chapter": "SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)",
-    "file": "0072.mp3"
+    "file": "0072.mp3",
+    "duration": 9.825,
+    "startTime": 422.528
   },
   {
     "index": 73,
     "speaker": "jamie",
     "text": "Human judgment remains essential.",
     "chapter": "SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)",
-    "file": "0073.mp3"
+    "file": "0073.mp3",
+    "duration": 3,
+    "startTime": 432.353
   },
   {
     "index": 74,
     "speaker": "alex",
     "text": "Stay curious and adaptable. The tools will evolve. New capabilities will emerge. Keep learning and experimenting.",
     "chapter": "SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)",
-    "file": "0074.mp3"
+    "file": "0074.mp3",
+    "duration": 7.45,
+    "startTime": 435.353
   },
   {
     "index": 75,
     "speaker": "jamie",
     "text": "Continuous learning.",
     "chapter": "SEGMENT 11: FUTURE-PROOFING YOUR SKILLS (3 minutes)",
-    "file": "0075.mp3"
+    "file": "0075.mp3",
+    "duration": 2.125,
+    "startTime": 442.803
   },
   {
     "index": 76,
     "speaker": "jamie",
     "text": "Can we summarize with your top ten tips?",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0076.mp3"
+    "file": "0076.mp3",
+    "duration": 3.075,
+    "startTime": 444.928
   },
   {
     "index": 77,
     "speaker": "alex",
     "text": "First: be clear and specific in your requests. Clarity gets results.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0077.mp3"
+    "file": "0077.mp3",
+    "duration": 4.7,
+    "startTime": 448.003
   },
   {
     "index": 78,
     "speaker": "jamie",
     "text": "One.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0078.mp3"
+    "file": "0078.mp3",
+    "duration": 1.275,
+    "startTime": 452.703
   },
   {
     "index": 79,
     "speaker": "alex",
     "text": "Second: always understand what Claude is doing. No blind approval.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0079.mp3"
+    "file": "0079.mp3",
+    "duration": 4.725,
+    "startTime": 453.978
   },
   {
     "index": 80,
     "speaker": "jamie",
     "text": "Two.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0080.mp3"
+    "file": "0080.mp3",
+    "duration": 1.175,
+    "startTime": 458.703
   },
   {
     "index": 81,
     "speaker": "alex",
     "text": "Third: work incrementally with small changes and frequent commits.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0081.mp3"
+    "file": "0081.mp3",
+    "duration": 4.45,
+    "startTime": 459.878
   },
   {
     "index": 82,
     "speaker": "jamie",
     "text": "Three.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0082.mp3"
+    "file": "0082.mp3",
+    "duration": 1.325,
+    "startTime": 464.328
   },
   {
     "index": 83,
     "speaker": "alex",
     "text": "Fourth: use CLAUDE.md to teach Claude about your project.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0083.mp3"
+    "file": "0083.mp3",
+    "duration": 4.226,
+    "startTime": 465.653
   },
   {
     "index": 84,
     "speaker": "jamie",
     "text": "Four.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0084.mp3"
+    "file": "0084.mp3",
+    "duration": 1.275,
+    "startTime": 469.879
   },
   {
     "index": 85,
     "speaker": "alex",
     "text": "Fifth: let Claude help with the tedious stuff so you can focus on the interesting problems.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0085.mp3"
+    "file": "0085.mp3",
+    "duration": 5.65,
+    "startTime": 471.154
   },
   {
     "index": 86,
     "speaker": "jamie",
     "text": "Five.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0086.mp3"
+    "file": "0086.mp3",
+    "duration": 1.35,
+    "startTime": 476.804
   },
   {
     "index": 87,
     "speaker": "alex",
     "text": "Sixth: iterate conversations. First response not right? Refine and redirect.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0087.mp3"
+    "file": "0087.mp3",
+    "duration": 5.55,
+    "startTime": 478.154
   },
   {
     "index": 88,
     "speaker": "jamie",
     "text": "Six.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0088.mp3"
+    "file": "0088.mp3",
+    "duration": 1.25,
+    "startTime": 483.704
   },
   {
     "index": 89,
     "speaker": "alex",
     "text": "Seventh: verify Claude's work. Run tests, check outputs, confirm behavior.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0089.mp3"
+    "file": "0089.mp3",
+    "duration": 5.45,
+    "startTime": 484.954
   },
   {
     "index": 90,
     "speaker": "jamie",
     "text": "Seven.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0090.mp3"
+    "file": "0090.mp3",
+    "duration": 1.4,
+    "startTime": 490.404
   },
   {
     "index": 91,
     "speaker": "alex",
     "text": "Eighth: use the right tool for the job. Grep for searching, Edit for changes, Explore for understanding.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0091.mp3"
+    "file": "0091.mp3",
+    "duration": 6.5,
+    "startTime": 491.804
   },
   {
     "index": 92,
     "speaker": "jamie",
     "text": "Eight.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0092.mp3"
+    "file": "0092.mp3",
+    "duration": 1.2,
+    "startTime": 498.304
   },
   {
     "index": 93,
     "speaker": "alex",
     "text": "Ninth: maintain your own skills. Don't let Claude become a crutch.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0093.mp3"
+    "file": "0093.mp3",
+    "duration": 4.125,
+    "startTime": 499.504
   },
   {
     "index": 94,
     "speaker": "jamie",
     "text": "Nine.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0094.mp3"
+    "file": "0094.mp3",
+    "duration": 1.375,
+    "startTime": 503.629
   },
   {
     "index": 95,
     "speaker": "alex",
     "text": "And tenth: enjoy it! This is an exciting time to be a developer. You have capabilities that were science fiction a few years ago.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0095.mp3"
+    "file": "0095.mp3",
+    "duration": 8.1,
+    "startTime": 505.004
   },
   {
     "index": 96,
     "speaker": "jamie",
     "text": "Ten. Great list.",
     "chapter": "SEGMENT 12: TOP TEN TIPS (6 minutes)",
-    "file": "0096.mp3"
+    "file": "0096.mp3",
+    "duration": 1.975,
+    "startTime": 513.104
   },
   {
     "index": 97,
     "speaker": "jamie",
     "text": "Where can people learn more?",
     "chapter": "SEGMENT 13: COMMUNITY AND RESOURCES (3 minutes)",
-    "file": "0097.mp3"
+    "file": "0097.mp3",
+    "duration": 2.35,
+    "startTime": 515.079
   },
   {
     "index": 98,
     "speaker": "alex",
     "text": "Anthropic's documentation is excellent. Start there for the official guides. GitHub has repositories with examples and community discussions.",
     "chapter": "SEGMENT 13: COMMUNITY AND RESOURCES (3 minutes)",
-    "file": "0098.mp3"
+    "file": "0098.mp3",
+    "duration": 9.4,
+    "startTime": 517.429
   },
   {
     "index": 99,
     "speaker": "jamie",
     "text": "Official docs first.",
     "chapter": "SEGMENT 13: COMMUNITY AND RESOURCES (3 minutes)",
-    "file": "0099.mp3"
+    "file": "0099.mp3",
+    "duration": 2.175,
+    "startTime": 526.829
   },
   {
     "index": 100,
     "speaker": "alex",
     "text": "Join developer communities using Claude Code. Share tips, ask questions, learn from others' experiences. The community is growing fast.",
     "chapter": "SEGMENT 13: COMMUNITY AND RESOURCES (3 minutes)",
-    "file": "0100.mp3"
+    "file": "0100.mp3",
+    "duration": 8.975,
+    "startTime": 529.004
   },
   {
     "index": 101,
     "speaker": "jamie",
     "text": "Learn from peers.",
     "chapter": "SEGMENT 13: COMMUNITY AND RESOURCES (3 minutes)",
-    "file": "0101.mp3"
+    "file": "0101.mp3",
+    "duration": 1.975,
+    "startTime": 537.979
   },
   {
     "index": 102,
     "speaker": "alex",
     "text": "And keep experimenting. The best way to learn Claude Code is to use it. Try things, make mistakes, figure out what works for you.",
     "chapter": "SEGMENT 13: COMMUNITY AND RESOURCES (3 minutes)",
-    "file": "0102.mp3"
+    "file": "0102.mp3",
+    "duration": 7.75,
+    "startTime": 539.954
   },
   {
     "index": 103,
     "speaker": "jamie",
     "text": "This has been an incredible journey, Alex. I've gone from intimidated newbie to confident user.",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0103.mp3"
+    "file": "0103.mp3",
+    "duration": 7.3,
+    "startTime": 547.704
   },
   {
     "index": 104,
     "speaker": "alex",
     "text": "You've been a great learning partner, Jamie. Your questions helped cover what real developers need to know.",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0104.mp3"
+    "file": "0104.mp3",
+    "duration": 6.4,
+    "startTime": 555.004
   },
   {
     "index": 105,
     "speaker": "jamie",
     "text": "For our listeners, I hope this series gave you the foundation to really leverage Claude Code. It's transformed how I work.",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0105.mp3"
+    "file": "0105.mp3",
+    "duration": 8.426,
+    "startTime": 561.404
   },
   {
     "index": 106,
     "speaker": "alex",
     "text": "The goal was never to replace developers. It's to amplify what we can do. With Claude Code, you're faster, more thorough, and able to tackle bigger challenges.",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0106.mp3"
+    "file": "0106.mp3",
+    "duration": 9.5,
+    "startTime": 569.83
   },
   {
     "index": 107,
     "speaker": "jamie",
     "text": "A superpower for developers.",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0107.mp3"
+    "file": "0107.mp3",
+    "duration": 2.65,
+    "startTime": 579.33
   },
   {
     "index": 108,
     "speaker": "alex",
     "text": "Exactly. Thank you everyone for listening to Claude Code Mastery. Go build something amazing!",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0108.mp3"
+    "file": "0108.mp3",
+    "duration": 6.1,
+    "startTime": 581.98
   },
   {
     "index": 109,
     "speaker": "jamie",
     "text": "Happy coding!",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0109.mp3"
+    "file": "0109.mp3",
+    "duration": 1.8,
+    "startTime": 588.08
   },
   {
     "index": 110,
     "speaker": "alex",
     "text": "And remember: the best code is the code that solves real problems. Let Claude help you write more of it.",
     "chapter": "SEGMENT 14: CLOSING THOUGHTS (5 minutes)",
-    "file": "0110.mp3"
+    "file": "0110.mp3",
+    "duration": 6.425,
+    "startTime": 589.88
   }
 ]

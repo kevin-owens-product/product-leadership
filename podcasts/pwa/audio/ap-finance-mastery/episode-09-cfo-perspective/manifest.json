@@ -6,7 +6,9 @@
     "voice": "F2",
     "text": "Welcome back. Today we're stepping into the shoes of the buyer. The CFO and finance leaders who decide whether to invest in AP automation.",
     "chapter": "INTRO",
-    "file": "0000.mp3"
+    "file": "0000.mp3",
+    "duration": 8.777,
+    "startTime": 0
   },
   {
     "index": 1,
@@ -15,7 +17,9 @@
     "voice": "M1",
     "text": "Understanding the buyer is product management 101. If I don't understand what CFOs care about, I can't build products they want to buy.",
     "chapter": "INTRO",
-    "file": "0001.mp3"
+    "file": "0001.mp3",
+    "duration": 8.707,
+    "startTime": 8.777
   },
   {
     "index": 2,
@@ -24,7 +28,9 @@
     "voice": "F2",
     "text": "Exactly. And CFOs think about AP very differently than AP teams do. Let's explore that gap.",
     "chapter": "INTRO",
-    "file": "0002.mp3"
+    "file": "0002.mp3",
+    "duration": 6.548,
+    "startTime": 17.485
   },
   {
     "index": 3,
@@ -33,7 +39,9 @@
     "voice": "M1",
     "text": "What are the top priorities for CFOs today?",
     "chapter": "INTRO",
-    "file": "0003.mp3"
+    "file": "0003.mp3",
+    "duration": 2.926,
+    "startTime": 24.033
   },
   {
     "index": 4,
@@ -42,7 +50,9 @@
     "voice": "F2",
     "text": "Based on every CFO survey I've seen, the top priorities consistently are: cash flow visibility and forecasting accuracy, cost reduction and operational efficiency, regulatory compliance and audit readiness, digital transformation and automation, and risk management. Notice that AP touches every single one of these priorities.",
     "chapter": "INTRO",
-    "file": "0004.mp3"
+    "file": "0004.mp3",
+    "duration": 21.616,
+    "startTime": 26.958
   },
   {
     "index": 5,
@@ -51,7 +61,9 @@
     "voice": "M1",
     "text": "But AP isn't usually the first thing CFOs think about, is it?",
     "chapter": "INTRO",
-    "file": "0005.mp3"
+    "file": "0005.mp3",
+    "duration": 4.04,
+    "startTime": 48.574
   },
   {
     "index": 6,
@@ -60,7 +72,9 @@
     "voice": "F2",
     "text": "It's not. Which is both the challenge and the opportunity. CFOs tend to think in terms of strategic initiatives: finance transformation, digital modernization, working capital optimization. AP automation is a means to those strategic ends, not an end in itself. The product and sales messaging needs to speak to those strategic outcomes, not to invoice processing features.",
     "chapter": "INTRO",
-    "file": "0006.mp3"
+    "file": "0006.mp3",
+    "duration": 24.402,
+    "startTime": 52.615
   },
   {
     "index": 7,
@@ -69,7 +83,9 @@
     "voice": "M1",
     "text": "So don't lead with \"we process invoices faster.\" Lead with \"we improve your cash flow visibility.\"",
     "chapter": "INTRO",
-    "file": "0007.mp3"
+    "file": "0007.mp3",
+    "duration": 6.339,
+    "startTime": 77.017
   },
   {
     "index": 8,
@@ -78,7 +94,9 @@
     "voice": "F2",
     "text": "Exactly. No CFO wakes up excited about invoice processing. They wake up worried about whether they have enough cash to fund operations, whether the audit will go smoothly, and whether they can hit their cost reduction targets.",
     "chapter": "INTRO",
-    "file": "0008.mp3"
+    "file": "0008.mp3",
+    "duration": 13.653,
+    "startTime": 83.356
   },
   {
     "index": 9,
@@ -87,7 +105,9 @@
     "voice": "M1",
     "text": "Help me understand exactly how AP affects the financial statements.",
     "chapter": "INTRO",
-    "file": "0009.mp3"
+    "file": "0009.mp3",
+    "duration": 4.528,
+    "startTime": 97.009
   },
   {
     "index": 10,
@@ -96,7 +116,9 @@
     "voice": "F2",
     "text": "On the balance sheet, accounts payable is a current liability. A larger AP balance means the company is holding cash longer, which improves the cash position. But it also means higher current liabilities, which affects ratios like the current ratio and quick ratio that lenders and analysts monitor.",
     "chapter": "INTRO",
-    "file": "0010.mp3"
+    "file": "0010.mp3",
+    "duration": 17.554,
+    "startTime": 101.537
   },
   {
     "index": 11,
@@ -105,7 +127,9 @@
     "voice": "M1",
     "text": "And on the income statement?",
     "chapter": "INTRO",
-    "file": "0011.mp3"
+    "file": "0011.mp3",
+    "duration": 1.881,
+    "startTime": 119.091
   },
   {
     "index": 12,
@@ -114,7 +138,9 @@
     "voice": "F2",
     "text": "AP doesn't directly appear on the income statement, but it affects it significantly. The cost of running the AP department hits the SG&A line as overhead. Missed early payment discounts are a direct hit to profitability. Duplicate payments are waste. And late payment penalties are unnecessary expenses.",
     "chapter": "INTRO",
-    "file": "0012.mp3"
+    "file": "0012.mp3",
+    "duration": 19.317,
+    "startTime": 120.972
   },
   {
     "index": 13,
@@ -123,7 +149,9 @@
     "voice": "M1",
     "text": "What about cash flow?",
     "chapter": "INTRO",
-    "file": "0013.mp3"
+    "file": "0013.mp3",
+    "duration": 1.602,
+    "startTime": 140.289
   },
   {
     "index": 14,
@@ -132,7 +160,9 @@
     "voice": "F2",
     "text": "This is where AP has the most strategic impact. The cash flow statement tracks actual cash movements. By managing when payments are made, DPO optimization, AP directly controls the timing of cash outflows. A five-day improvement in DPO for a company with a billion in annual payables frees up roughly fourteen million in cash.",
     "chapter": "INTRO",
-    "file": "0014.mp3"
+    "file": "0014.mp3",
+    "duration": 20.989,
+    "startTime": 141.892
   },
   {
     "index": 15,
@@ -141,7 +171,9 @@
     "voice": "M1",
     "text": "Fourteen million from five days?",
     "chapter": "INTRO",
-    "file": "0015.mp3"
+    "file": "0015.mp3",
+    "duration": 2.09,
+    "startTime": 162.881
   },
   {
     "index": 16,
@@ -150,7 +182,9 @@
     "voice": "F2",
     "text": "Simple math. A billion divided by three-sixty-five times five equals about fourteen million. That cash can be used for investment, debt repayment, or simply providing a larger cash buffer. This is why CFOs care so much about DPO.",
     "chapter": "INTRO",
-    "file": "0016.mp3"
+    "file": "0016.mp3",
+    "duration": 14.489,
+    "startTime": 164.97
   },
   {
     "index": 17,
@@ -159,7 +193,9 @@
     "voice": "M1",
     "text": "Let's go deeper on working capital.",
     "chapter": "INTRO",
-    "file": "0017.mp3"
+    "file": "0017.mp3",
+    "duration": 2.229,
+    "startTime": 179.46
   },
   {
     "index": 18,
@@ -168,7 +204,9 @@
     "voice": "F2",
     "text": "The Cash Conversion Cycle is the metric that ties it all together. CCC equals Days Sales Outstanding plus Days Inventory Outstanding minus Days Payable Outstanding. DSO is how long it takes to collect from customers. DIO is how long inventory sits before being sold. DPO is how long you take to pay suppliers.",
     "chapter": "INTRO",
-    "file": "0018.mp3"
+    "file": "0018.mp3",
+    "duration": 19.805,
+    "startTime": 181.689
   },
   {
     "index": 19,
@@ -177,7 +215,9 @@
     "voice": "M1",
     "text": "So a lower CCC is better?",
     "chapter": "INTRO",
-    "file": "0019.mp3"
+    "file": "0019.mp3",
+    "duration": 2.159,
+    "startTime": 201.493
   },
   {
     "index": 20,
@@ -186,7 +226,9 @@
     "voice": "F2",
     "text": "Generally, yes. A lower CCC means less cash is tied up in operations. Some companies like Amazon have actually achieved a negative CCC, meaning they collect from customers before they pay suppliers. They're essentially funded by their supply chain.",
     "chapter": "INTRO",
-    "file": "0020.mp3"
+    "file": "0020.mp3",
+    "duration": 15.882,
+    "startTime": 203.653
   },
   {
     "index": 21,
@@ -195,7 +237,9 @@
     "voice": "M1",
     "text": "And AP can only control the DPO component?",
     "chapter": "INTRO",
-    "file": "0021.mp3"
+    "file": "0021.mp3",
+    "duration": 2.995,
+    "startTime": 219.535
   },
   {
     "index": 22,
@@ -204,7 +248,9 @@
     "voice": "F2",
     "text": "Directly, yes. But AP data also informs decisions about the other components. If AP analytics reveal that certain suppliers consistently deliver late, that affects inventory planning and DIO. If AP data shows pricing trends, that informs procurement strategy. AP sits at a data intersection that can inform working capital decisions across the board.",
     "chapter": "INTRO",
-    "file": "0022.mp3"
+    "file": "0022.mp3",
+    "duration": 22.661,
+    "startTime": 222.531
   },
   {
     "index": 23,
@@ -213,7 +259,9 @@
     "voice": "M1",
     "text": "How do you build the ROI case for AP automation?",
     "chapter": "INTRO",
-    "file": "0023.mp3"
+    "file": "0023.mp3",
+    "duration": 3.274,
+    "startTime": 245.192
   },
   {
     "index": 24,
@@ -222,7 +270,9 @@
     "voice": "F2",
     "text": "The ROI case typically includes several components. Labor savings are the most tangible. If you're processing fifty-thousand invoices a month at eight dollars per invoice manual cost, and automation brings that to three dollars, you're saving three million dollars a year.",
     "chapter": "INTRO",
-    "file": "0024.mp3"
+    "file": "0024.mp3",
+    "duration": 15.673,
+    "startTime": 248.466
   },
   {
     "index": 25,
@@ -231,7 +281,9 @@
     "voice": "M1",
     "text": "What else goes into the business case?",
     "chapter": "INTRO",
-    "file": "0025.mp3"
+    "file": "0025.mp3",
+    "duration": 2.438,
+    "startTime": 264.139
   },
   {
     "index": 26,
@@ -240,7 +292,9 @@
     "voice": "F2",
     "text": "Early payment discount capture. If you have a hundred million in spend eligible for two percent discounts and you can increase your capture rate from thirty percent to seventy percent, that's an additional eight hundred thousand in annual savings. Duplicate payment prevention: recovering or preventing point-two percent of spend in duplicates on a billion-dollar base is two million.",
     "chapter": "INTRO",
-    "file": "0026.mp3"
+    "file": "0026.mp3",
+    "duration": 23.148,
+    "startTime": 266.577
   },
   {
     "index": 27,
@@ -249,7 +303,9 @@
     "voice": "M1",
     "text": "Anything beyond direct cost savings?",
     "chapter": "INTRO",
-    "file": "0027.mp3"
+    "file": "0027.mp3",
+    "duration": 2.299,
+    "startTime": 289.726
   },
   {
     "index": 28,
@@ -258,7 +314,9 @@
     "voice": "F2",
     "text": "Faster period-end close. If AP can close their books two days faster each month, the entire finance organization benefits from faster financial reporting. Reduced audit costs because the audit trail is automated and complete. Fraud prevention, which is hard to quantify but the avoided costs can be enormous. And working capital improvement through better DPO management.",
     "chapter": "INTRO",
-    "file": "0028.mp3"
+    "file": "0028.mp3",
+    "duration": 23.357,
+    "startTime": 292.024
   },
   {
     "index": 29,
@@ -267,7 +325,9 @@
     "voice": "M1",
     "text": "What's a typical payback period?",
     "chapter": "INTRO",
-    "file": "0029.mp3"
+    "file": "0029.mp3",
+    "duration": 2.09,
+    "startTime": 315.382
   },
   {
     "index": 30,
@@ -276,7 +336,9 @@
     "voice": "F2",
     "text": "For a mid-market company, AP automation typically pays for itself within six to twelve months. For larger enterprises, the payback can be even faster due to volume. The total cost of ownership over three to five years compared to the fully loaded cost of manual AP is typically a three to five X return.",
     "chapter": "INTRO",
-    "file": "0030.mp3"
+    "file": "0030.mp3",
+    "duration": 19.039,
+    "startTime": 317.472
   },
   {
     "index": 31,
@@ -285,7 +347,9 @@
     "voice": "M1",
     "text": "Tell me about the period-end close and why AP data quality matters.",
     "chapter": "INTRO",
-    "file": "0031.mp3"
+    "file": "0031.mp3",
+    "duration": 4.249,
+    "startTime": 336.51
   },
   {
     "index": 32,
@@ -294,7 +358,9 @@
     "voice": "F2",
     "text": "At the end of every month, quarter, and year, the finance team \"closes the books,\" meaning they finalize all financial transactions and produce financial statements. AP is one of the most complex areas to close because of accruals.",
     "chapter": "INTRO",
-    "file": "0032.mp3"
+    "file": "0032.mp3",
+    "duration": 14.071,
+    "startTime": 340.759
   },
   {
     "index": 33,
@@ -303,7 +369,9 @@
     "voice": "M1",
     "text": "Explain accruals in this context.",
     "chapter": "INTRO",
-    "file": "0033.mp3"
+    "file": "0033.mp3",
+    "duration": 2.438,
+    "startTime": 354.831
   },
   {
     "index": 34,
@@ -312,7 +380,9 @@
     "voice": "F2",
     "text": "An accrual is an estimate of expenses that have been incurred but not yet invoiced. If the company received goods on March 28th but the supplier's invoice doesn't arrive until April 5th, the expense belongs in March. The AP team needs to estimate and record these uninvoiced liabilities to ensure the March financial statements are accurate.",
     "chapter": "INTRO",
-    "file": "0034.mp3"
+    "file": "0034.mp3",
+    "duration": 21.198,
+    "startTime": 357.269
   },
   {
     "index": 35,
@@ -321,7 +391,9 @@
     "voice": "M1",
     "text": "How do they estimate?",
     "chapter": "INTRO",
-    "file": "0035.mp3"
+    "file": "0035.mp3",
+    "duration": 1.533,
+    "startTime": 378.467
   },
   {
     "index": 36,
@@ -330,7 +402,9 @@
     "voice": "F2",
     "text": "Typically by looking at open POs with goods receipts but no matching invoices. The PO amount serves as the accrual estimate. In a manual environment, this is a laborious process of matching POs, goods receipts, and invoices and identifying the gaps. In an automated environment, the system can generate the accrual report automatically.",
     "chapter": "INTRO",
-    "file": "0036.mp3"
+    "file": "0036.mp3",
+    "duration": 21.546,
+    "startTime": 379.999
   },
   {
     "index": 37,
@@ -339,7 +413,9 @@
     "voice": "M1",
     "text": "So faster invoice processing also means more accurate accruals?",
     "chapter": "INTRO",
-    "file": "0037.mp3"
+    "file": "0037.mp3",
+    "duration": 4.18,
+    "startTime": 401.545
   },
   {
     "index": 38,
@@ -348,7 +424,9 @@
     "voice": "F2",
     "text": "Exactly. The faster you process invoices, the fewer accruals you need because the actual invoices replace the estimates. This makes the financial statements more accurate and reduces the risk of material misstatements that auditors care about.",
     "chapter": "INTRO",
-    "file": "0038.mp3"
+    "file": "0038.mp3",
+    "duration": 14.698,
+    "startTime": 405.725
   },
   {
     "index": 39,
@@ -357,7 +435,9 @@
     "voice": "M1",
     "text": "What about companies with global operations? That must add layers of complexity.",
     "chapter": "INTRO",
-    "file": "0039.mp3"
+    "file": "0039.mp3",
+    "duration": 5.364,
+    "startTime": 420.423
   },
   {
     "index": 40,
@@ -366,7 +446,9 @@
     "voice": "F2",
     "text": "Enormously. A multinational company might have twenty legal entities across fifteen countries, each with its own chart of accounts, tax requirements, banking relationships, and regulatory mandates. Some of those entities might be on different ERPs. Suppliers might operate across borders.",
     "chapter": "INTRO",
-    "file": "0040.mp3"
+    "file": "0040.mp3",
+    "duration": 17.694,
+    "startTime": 425.787
   },
   {
     "index": 41,
@@ -375,7 +457,9 @@
     "voice": "M1",
     "text": "What are the specific challenges?",
     "chapter": "INTRO",
-    "file": "0041.mp3"
+    "file": "0041.mp3",
+    "duration": 2.159,
+    "startTime": 443.481
   },
   {
     "index": 42,
@@ -384,7 +468,9 @@
     "voice": "F2",
     "text": "Multi-currency handling: invoices in one currency, payments in another, and financial reporting in a third. Multi-entity accounting: intercompany invoices where one entity buys from another within the same group. Regulatory compliance: different tax rules, e-invoicing mandates, and reporting requirements in every country. And language: invoices arriving in twenty different languages that all need to be processed correctly.",
     "chapter": "INTRO",
-    "file": "0042.mp3"
+    "file": "0042.mp3",
+    "duration": 27.676,
+    "startTime": 445.64
   },
   {
     "index": 43,
@@ -393,7 +479,9 @@
     "voice": "M1",
     "text": "And shared services centers?",
     "chapter": "INTRO",
-    "file": "0043.mp3"
+    "file": "0043.mp3",
+    "duration": 2.02,
+    "startTime": 473.316
   },
   {
     "index": 44,
@@ -402,7 +490,9 @@
     "voice": "F2",
     "text": "Many large companies centralize their AP operations in shared services centers, often located in lower-cost regions. A company might consolidate AP for all of Europe in a center in Poland or for Asia in a center in India. These centers need to handle multiple countries, languages, and regulations from a single location.",
     "chapter": "INTRO",
-    "file": "0044.mp3"
+    "file": "0044.mp3",
+    "duration": 20.641,
+    "startTime": 475.337
   },
   {
     "index": 45,
@@ -411,7 +501,9 @@
     "voice": "M1",
     "text": "How does AP automation support shared services?",
     "chapter": "INTRO",
-    "file": "0045.mp3"
+    "file": "0045.mp3",
+    "duration": 3.344,
+    "startTime": 495.977
   },
   {
     "index": 46,
@@ -420,7 +512,9 @@
     "voice": "F2",
     "text": "It's essential. Without automation, a shared services center is just a labor arbitrage play. With automation, it becomes a center of excellence that can handle higher volumes with fewer people and better consistency. The AI handles the language translation, the system enforces country-specific rules, and the workflows route exceptions to the right specialists.",
     "chapter": "INTRO",
-    "file": "0046.mp3"
+    "file": "0046.mp3",
+    "duration": 22.034,
+    "startTime": 499.321
   },
   {
     "index": 47,
@@ -429,7 +523,9 @@
     "voice": "M1",
     "text": "How does AP automation fit into broader finance transformation?",
     "chapter": "INTRO",
-    "file": "0047.mp3"
+    "file": "0047.mp3",
+    "duration": 4.18,
+    "startTime": 521.355
   },
   {
     "index": 48,
@@ -438,7 +534,9 @@
     "voice": "F2",
     "text": "Finance transformation is the umbrella initiative that most large companies are running. It typically includes moving to cloud ERP, automating manual processes including AP, implementing advanced analytics and BI, consolidating shared services, and upgrading the finance team's skills from transactional to strategic.",
     "chapter": "INTRO",
-    "file": "0048.mp3"
+    "file": "0048.mp3",
+    "duration": 20.223,
+    "startTime": 525.534
   },
   {
     "index": 49,
@@ -447,7 +545,9 @@
     "voice": "M1",
     "text": "And AP automation is one piece of that puzzle?",
     "chapter": "INTRO",
-    "file": "0049.mp3"
+    "file": "0049.mp3",
+    "duration": 3.204,
+    "startTime": 545.757
   },
   {
     "index": 50,
@@ -456,7 +556,9 @@
     "voice": "F2",
     "text": "Usually one of the first pieces because the ROI is clear and the impact is visible quickly. It's often a \"quick win\" that builds momentum for the broader transformation. If the CFO can show that AP automation delivered three million in savings in year one, it builds the case for investing in other automation initiatives.",
     "chapter": "INTRO",
-    "file": "0050.mp3"
+    "file": "0050.mp3",
+    "duration": 20.223,
+    "startTime": 548.961
   },
   {
     "index": 51,
@@ -465,7 +567,9 @@
     "voice": "M1",
     "text": "So Medius could be a wedge into larger finance transformation deals?",
     "chapter": "INTRO",
-    "file": "0051.mp3"
+    "file": "0051.mp3",
+    "duration": 4.319,
+    "startTime": 569.184
   },
   {
     "index": 52,
@@ -474,7 +578,9 @@
     "voice": "F2",
     "text": "Absolutely. Start with AP automation, demonstrate value, then expand into procurement, payments, expense management, and analytics. That land-and-expand motion is one of the most effective go-to-market strategies in enterprise software.",
     "chapter": "INTRO",
-    "file": "0052.mp3"
+    "file": "0052.mp3",
+    "duration": 14.768,
+    "startTime": 573.503
   },
   {
     "index": 53,
@@ -483,7 +589,9 @@
     "voice": "M1",
     "text": "Let's get specific. What do finance leaders actually want from AP software?",
     "chapter": "INTRO",
-    "file": "0053.mp3"
+    "file": "0053.mp3",
+    "duration": 4.876,
+    "startTime": 588.271
   },
   {
     "index": 54,
@@ -492,7 +600,9 @@
     "voice": "F2",
     "text": "First and foremost, they want outcomes, not features. They don't care about your machine learning model's architecture. They care that invoices get processed accurately without their people touching them. They want reduced cost, faster close, fewer errors, and better visibility.",
     "chapter": "INTRO",
-    "file": "0054.mp3"
+    "file": "0054.mp3",
+    "duration": 16.091,
+    "startTime": 593.147
   },
   {
     "index": 55,
@@ -501,7 +611,9 @@
     "voice": "M1",
     "text": "What about the user experience?",
     "chapter": "INTRO",
-    "file": "0055.mp3"
+    "file": "0055.mp3",
+    "duration": 2.09,
+    "startTime": 609.239
   },
   {
     "index": 56,
@@ -510,7 +622,9 @@
     "voice": "F2",
     "text": "CFOs and Controllers don't use the software daily, but they care deeply about the experience for two reasons. First, if the software is hard to use, adoption will be low and the ROI won't materialize. They've been burned by this before. Second, they want great dashboards and executive reporting for themselves. They want to open the platform and immediately see the metrics that matter: invoices in queue, exceptions by category, payment forecast for the week, and DPO trends.",
     "chapter": "INTRO",
-    "file": "0056.mp3"
+    "file": "0056.mp3",
+    "duration": 29.348,
+    "startTime": 611.328
   },
   {
     "index": 57,
@@ -519,7 +633,9 @@
     "voice": "M1",
     "text": "Real-time visibility seems to be a recurring theme.",
     "chapter": "INTRO",
-    "file": "0057.mp3"
+    "file": "0057.mp3",
+    "duration": 3.344,
+    "startTime": 640.677
   },
   {
     "index": 58,
@@ -528,7 +644,9 @@
     "voice": "F2",
     "text": "It is the single most valued capability for senior finance leaders. In a manual world, generating an AP aging report takes days. In an automated world, it should be live, always current, always accessible from any device.",
     "chapter": "INTRO",
-    "file": "0058.mp3"
+    "file": "0058.mp3",
+    "duration": 13.932,
+    "startTime": 644.02
   },
   {
     "index": 59,
@@ -537,7 +655,9 @@
     "voice": "M1",
     "text": "What about implementation and time to value?",
     "chapter": "INTRO",
-    "file": "0059.mp3"
+    "file": "0059.mp3",
+    "duration": 2.717,
+    "startTime": 657.952
   },
   {
     "index": 60,
@@ -546,7 +666,9 @@
     "voice": "F2",
     "text": "CFOs are increasingly impatient with long implementation timelines. They've lived through eighteen-month ERP projects that went sideways. They want AP automation live in weeks, not months. They want to see results quickly. And they want a vendor who takes ownership of the outcome, not just the technology.",
     "chapter": "INTRO",
-    "file": "0060.mp3"
+    "file": "0060.mp3",
+    "duration": 18.76,
+    "startTime": 660.669
   },
   {
     "index": 61,
@@ -555,7 +677,9 @@
     "voice": "M1",
     "text": "How should we think about the sales motion?",
     "chapter": "INTRO",
-    "file": "0061.mp3"
+    "file": "0061.mp3",
+    "duration": 2.577,
+    "startTime": 679.429
   },
   {
     "index": 62,
@@ -564,7 +688,9 @@
     "voice": "F2",
     "text": "The CFO buying journey typically starts with a pain trigger: a failed audit, a fraud incident, the loss of a key AP employee, an executive mandate to cut costs, or a finance transformation initiative. They research options, often starting with Gartner and peer recommendations.",
     "chapter": "INTRO",
-    "file": "0062.mp3"
+    "file": "0062.mp3",
+    "duration": 17.554,
+    "startTime": 682.006
   },
   {
     "index": 63,
@@ -573,7 +699,9 @@
     "voice": "M1",
     "text": "What resonates in the pitch?",
     "chapter": "INTRO",
-    "file": "0063.mp3"
+    "file": "0063.mp3",
+    "duration": 1.881,
+    "startTime": 699.561
   },
   {
     "index": 64,
@@ -582,7 +710,9 @@
     "voice": "F2",
     "text": "Peer benchmarks are incredibly powerful. Showing a CFO that their cost per invoice is eight dollars when top performers achieve two dollars creates urgency. Case studies from similar companies in their industry. Clear ROI models with conservative assumptions. And a demonstration that emphasizes business outcomes, not technology. Show them the executive dashboard, not the data extraction engine.",
     "chapter": "INTRO",
-    "file": "0064.mp3"
+    "file": "0064.mp3",
+    "duration": 25.029,
+    "startTime": 701.441
   },
   {
     "index": 65,
@@ -591,7 +721,9 @@
     "voice": "M1",
     "text": "Any pitfalls to avoid?",
     "chapter": "INTRO",
-    "file": "0065.mp3"
+    "file": "0065.mp3",
+    "duration": 1.741,
+    "startTime": 726.471
   },
   {
     "index": 66,
@@ -600,7 +732,9 @@
     "voice": "F2",
     "text": "Don't oversell AI. CFOs are skeptical of hype. Show them real AI capabilities with real results, not vaporware. Don't promise ROI you can't deliver. Finance people are exceptionally good at math and will hold you accountable. And don't ignore the IT buyer. While the CFO often drives the decision, IT needs to be comfortable with the integration, security, and architecture.",
     "chapter": "INTRO",
-    "file": "0066.mp3"
+    "file": "0066.mp3",
+    "duration": 23.915,
+    "startTime": 728.212
   },
   {
     "index": 67,
@@ -609,7 +743,9 @@
     "voice": "M1",
     "text": "Final section. As a CPO, how do I build products that CFOs love?",
     "chapter": "INTRO",
-    "file": "0067.mp3"
+    "file": "0067.mp3",
+    "duration": 4.946,
+    "startTime": 752.127
   },
   {
     "index": 68,
@@ -618,7 +754,9 @@
     "voice": "F2",
     "text": "Start with the metrics they care about and work backward to the features that move those metrics. Every sprint planning session should connect back to customer outcomes: this feature will improve touchless rate by X percent, which reduces cost per invoice by Y dollars.",
     "chapter": "INTRO",
-    "file": "0068.mp3"
+    "file": "0068.mp3",
+    "duration": 16.509,
+    "startTime": 757.073
   },
   {
     "index": 69,
@@ -627,7 +765,9 @@
     "voice": "M1",
     "text": "What about the executive experience?",
     "chapter": "INTRO",
-    "file": "0069.mp3"
+    "file": "0069.mp3",
+    "duration": 2.438,
+    "startTime": 773.582
   },
   {
     "index": 70,
@@ -636,7 +776,9 @@
     "voice": "F2",
     "text": "Invest in executive dashboards as a first-class product surface, not an afterthought. The CFO might look at your product for five minutes a week, but those five minutes determine whether they renew the contract and expand. Make those five minutes count with beautiful, insightful, actionable dashboards.",
     "chapter": "INTRO",
-    "file": "0070.mp3"
+    "file": "0070.mp3",
+    "duration": 18.69,
+    "startTime": 776.02
   },
   {
     "index": 71,
@@ -645,7 +787,9 @@
     "voice": "M1",
     "text": "And the day-to-day user experience?",
     "chapter": "INTRO",
-    "file": "0071.mp3"
+    "file": "0071.mp3",
+    "duration": 2.438,
+    "startTime": 794.71
   },
   {
     "index": 72,
@@ -654,7 +798,9 @@
     "voice": "F2",
     "text": "The AP clerk and the approver are your daily users. Make their lives easier, not harder. Every click you eliminate, every decision you automate, every exception you resolve without human intervention, that's value. The best product feedback comes from sitting next to an AP clerk for a day and watching them work.",
     "chapter": "INTRO",
-    "file": "0072.mp3"
+    "file": "0072.mp3",
+    "duration": 19.456,
+    "startTime": 797.148
   },
   {
     "index": 73,
@@ -663,7 +809,9 @@
     "voice": "F2",
     "text": "And one more thing: the best AP products feel invisible. When AP is working perfectly, no one notices. The CFO's ideal state is never having to think about AP because it just works. That's the product vision to aspire to.",
     "chapter": "INTRO",
-    "file": "0073.mp3"
+    "file": "0073.mp3",
+    "duration": 14.071,
+    "startTime": 816.605
   },
   {
     "index": 74,
@@ -672,7 +820,9 @@
     "voice": "M1",
     "text": "Morgan, understanding the CFO perspective is going to fundamentally shape how I approach product strategy at Medius. It's about outcomes, not features. Visibility, not complexity. And trust, above all.",
     "chapter": "INTRO",
-    "file": "0074.mp3"
+    "file": "0074.mp3",
+    "duration": 12.887,
+    "startTime": 830.676
   },
   {
     "index": 75,
@@ -681,7 +831,9 @@
     "voice": "F2",
     "text": "You've got it. Next episode is our finale. We're going to look at the future of AP, autonomous finance, agentic AI, and where this entire industry is heading. It's going to be a forward-looking conversation that ties the whole series together.",
     "chapter": "INTRO",
-    "file": "0075.mp3"
+    "file": "0075.mp3",
+    "duration": 14.071,
+    "startTime": 843.563
   },
   {
     "index": 76,
@@ -690,7 +842,9 @@
     "voice": "M1",
     "text": "I'm excited to wrap this up with a look at what's coming. See you for the finale.",
     "chapter": "INTRO",
-    "file": "0076.mp3"
+    "file": "0076.mp3",
+    "duration": 4.876,
+    "startTime": 857.635
   },
   {
     "index": 77,
@@ -699,7 +853,9 @@
     "voice": "F2",
     "text": "See you there.",
     "chapter": "INTRO",
-    "file": "0077.mp3"
+    "file": "0077.mp3",
+    "duration": 1.324,
+    "startTime": 862.511
   },
   {
     "index": 78,
@@ -708,6 +864,8 @@
     "voice": "F2",
     "text": "Next Episode: The Future of AP & Autonomous Finance",
     "chapter": "INTRO",
-    "file": "0078.mp3"
+    "file": "0078.mp3",
+    "duration": 3.971,
+    "startTime": 863.834
   }
 ]

@@ -6,7 +6,9 @@
     "voice": "F2",
     "text": "Welcome to \"The Diplomat's Edge\" - the podcast that's going to help you crush the Foreign Service Officer Test. I'm Maya Torres, and I'm right there in the trenches with you, preparing for the FSOT myself.",
     "chapter": "INTRO",
-    "file": "0000.mp3"
+    "file": "0000.mp3",
+    "duration": 12.125,
+    "startTime": 0
   },
   {
     "index": 1,
@@ -15,7 +17,9 @@
     "voice": "M1",
     "text": "And I'm Jordan Hayes. I spent 18 years in the Foreign Service, serving in embassies from Lagos to Lima, and now I help candidates like Maya - and like you - understand what the State Department is really looking for.",
     "chapter": "INTRO",
-    "file": "0001.mp3"
+    "file": "0001.mp3",
+    "duration": 15.225,
+    "startTime": 12.125
   },
   {
     "index": 2,
@@ -24,7 +28,9 @@
     "voice": "F2",
     "text": "So Jordan, we're starting with the section that honestly scares me the most - the Situational Judgment Test. Everyone says you can't really study for it, but that doesn't feel right to me.",
     "chapter": "INTRO",
-    "file": "0002.mp3"
+    "file": "0002.mp3",
+    "duration": 10.975,
+    "startTime": 27.35
   },
   {
     "index": 3,
@@ -33,7 +39,9 @@
     "voice": "M1",
     "text": "laughs That's actually a myth I love busting. You absolutely can prepare for the SJT. You just have to prepare differently than you would for, say, the knowledge sections. You're not memorizing facts - you're learning to think like a diplomat.",
     "chapter": "INTRO",
-    "file": "0003.mp3"
+    "file": "0003.mp3",
+    "duration": 16.125,
+    "startTime": 38.325
   },
   {
     "index": 4,
@@ -42,7 +50,9 @@
     "voice": "F2",
     "text": "And that's exactly what we're going to do today. By the end of this episode, you'll understand how the SJT works, what the State Department is actually measuring, and how to approach any scenario they throw at you.",
     "chapter": "INTRO",
-    "file": "0004.mp3"
+    "file": "0004.mp3",
+    "duration": 12.425,
+    "startTime": 54.45
   },
   {
     "index": 5,
@@ -51,7 +61,9 @@
     "voice": "M1",
     "text": "Let's get into it.",
     "chapter": "INTRO",
-    "file": "0005.mp3"
+    "file": "0005.mp3",
+    "duration": 2,
+    "startTime": 66.875
   },
   {
     "index": 6,
@@ -60,7 +72,9 @@
     "voice": "F2",
     "text": "Okay, let's start with the basics. What exactly is the Situational Judgment Test?",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0006.mp3"
+    "file": "0006.mp3",
+    "duration": 5.5,
+    "startTime": 68.875
   },
   {
     "index": 7,
@@ -69,7 +83,9 @@
     "voice": "M1",
     "text": "The SJT is one of four sections of the FSOT. You'll face hypothetical workplace scenarios - usually about a dozen of them - and for each scenario, you'll see several possible responses. Your job is to rank these responses from most effective to least effective.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0007.mp3"
+    "file": "0007.mp3",
+    "duration": 18.975,
+    "startTime": 74.375
   },
   {
     "index": 8,
@@ -78,7 +94,9 @@
     "voice": "F2",
     "text": "So it's not multiple choice with one right answer?",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0008.mp3"
+    "file": "0008.mp3",
+    "duration": 3.425,
+    "startTime": 93.35
   },
   {
     "index": 9,
@@ -87,7 +105,9 @@
     "voice": "M1",
     "text": "Exactly. There might be four or five options, and you need to put them in order. This is crucial to understand - the State Department knows that in real diplomacy, there are rarely perfect answers. They want to see your judgment about which approaches are better and which are worse.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0009.mp3"
+    "file": "0009.mp3",
+    "duration": 18.225,
+    "startTime": 96.775
   },
   {
     "index": 10,
@@ -96,7 +116,9 @@
     "voice": "F2",
     "text": "How is it scored then?",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0010.mp3"
+    "file": "0010.mp3",
+    "duration": 2.075,
+    "startTime": 115
   },
   {
     "index": 11,
@@ -105,7 +127,9 @@
     "voice": "M1",
     "text": "Your ranking is compared against an \"expert\" ranking that was developed by experienced Foreign Service Officers. The closer your ranking matches theirs, the more points you get. You get partial credit for being close - so if you swap two adjacent options, you lose fewer points than if you put the best option last.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0011.mp3"
+    "file": "0011.mp3",
+    "duration": 21.275,
+    "startTime": 117.075
   },
   {
     "index": 12,
@@ -114,7 +138,9 @@
     "voice": "F2",
     "text": "That's actually reassuring. So even if I don't nail it perfectly, I can still do well.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0012.mp3"
+    "file": "0012.mp3",
+    "duration": 5.625,
+    "startTime": 138.35
   },
   {
     "index": 13,
@@ -123,7 +149,9 @@
     "voice": "M1",
     "text": "Right. And here's the thing - the SJT doesn't have a separate passing score. It's combined with your other sections. So you don't need to be perfect; you need to demonstrate good judgment consistently.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0013.mp3"
+    "file": "0013.mp3",
+    "duration": 13.375,
+    "startTime": 143.975
   },
   {
     "index": 14,
@@ -132,7 +160,9 @@
     "voice": "F2",
     "text": "What kind of scenarios should we expect?",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0014.mp3"
+    "file": "0014.mp3",
+    "duration": 2.7,
+    "startTime": 157.35
   },
   {
     "index": 15,
@@ -141,7 +171,9 @@
     "voice": "M1",
     "text": "They're all workplace scenarios, but they're designed to be relevant to anyone, not just people with government experience. You might see scenarios about working on a team project, handling a difficult colleague, managing competing priorities, or dealing with ethical dilemmas.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0015.mp3"
+    "file": "0015.mp3",
+    "duration": 18.875,
+    "startTime": 160.05
   },
   {
     "index": 16,
@@ -150,7 +182,9 @@
     "voice": "F2",
     "text": "So I won't see scenarios about negotiating with foreign governments?",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0016.mp3"
+    "file": "0016.mp3",
+    "duration": 4.35,
+    "startTime": 178.925
   },
   {
     "index": 17,
@@ -159,7 +193,9 @@
     "voice": "M1",
     "text": "No, and that's intentional. They're testing your underlying judgment and interpersonal skills, not your knowledge of diplomacy. The assumption is that if you have good judgment in general workplace situations, those skills will transfer to diplomatic work once you're trained.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0017.mp3"
+    "file": "0017.mp3",
+    "duration": 18.575,
+    "startTime": 183.275
   },
   {
     "index": 18,
@@ -168,7 +204,9 @@
     "voice": "F2",
     "text": "That makes sense. What else should we know about the format?",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0018.mp3"
+    "file": "0018.mp3",
+    "duration": 3.6,
+    "startTime": 201.85
   },
   {
     "index": 19,
@@ -177,7 +215,9 @@
     "voice": "M1",
     "text": "Each scenario is usually a paragraph or two describing the situation, then four or five response options. You have to drag and drop them into order, from most effective to least effective. There's no penalty for taking your time, but you do have limited time for the whole section, so you can't agonize forever.",
     "chapter": "SEGMENT 1: UNDERSTANDING THE SJT (10 minutes)",
-    "file": "0019.mp3"
+    "file": "0019.mp3",
+    "duration": 20.975,
+    "startTime": 205.45
   },
   {
     "index": 20,
@@ -186,7 +226,9 @@
     "voice": "F2",
     "text": "I've heard there are specific dimensions the State Department is evaluating. Can we break those down?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0020.mp3"
+    "file": "0020.mp3",
+    "duration": 6.225,
+    "startTime": 226.425
   },
   {
     "index": 21,
@@ -195,7 +237,9 @@
     "voice": "M1",
     "text": "Absolutely. The State Department evaluates candidates on what they call the \"13 Dimensions\" - these are the core competencies they believe make an effective diplomat. Understanding these is like having a cheat sheet for the SJT.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0021.mp3"
+    "file": "0021.mp3",
+    "duration": 15.8,
+    "startTime": 232.65
   },
   {
     "index": 22,
@@ -204,7 +248,9 @@
     "voice": "F2",
     "text": "Okay, I'm taking notes. Let's go through them.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0022.mp3"
+    "file": "0022.mp3",
+    "duration": 3.275,
+    "startTime": 248.45
   },
   {
     "index": 23,
@@ -213,7 +259,9 @@
     "voice": "M1",
     "text": "The first three are what I call the \"thinking\" dimensions. First is Composure - can you stay calm under pressure? Diplomatic work involves high-stakes situations, sometimes even dangerous ones. They want people who don't panic, who can think clearly when things go wrong.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0023.mp3"
+    "file": "0023.mp3",
+    "duration": 18.2,
+    "startTime": 251.725
   },
   {
     "index": 24,
@@ -222,7 +270,9 @@
     "voice": "F2",
     "text": "So in a scenario, the panicked or emotional response would rank lower?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0024.mp3"
+    "file": "0024.mp3",
+    "duration": 4.625,
+    "startTime": 269.925
   },
   {
     "index": 25,
@@ -231,7 +281,9 @@
     "voice": "M1",
     "text": "Usually, yes. Composure doesn't mean being cold or unfeeling - it means being able to manage your emotions so they don't drive your decisions.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0025.mp3"
+    "file": "0025.mp3",
+    "duration": 10.375,
+    "startTime": 274.55
   },
   {
     "index": 26,
@@ -240,7 +292,9 @@
     "voice": "F2",
     "text": "What's next?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0026.mp3"
+    "file": "0026.mp3",
+    "duration": 1.55,
+    "startTime": 284.925
   },
   {
     "index": 27,
@@ -249,7 +303,9 @@
     "voice": "M1",
     "text": "Cultural Adaptability. This is huge for the Foreign Service. Can you work effectively with people from different backgrounds? Are you curious about other perspectives rather than dismissive? Do you recognize that your way isn't the only way?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0027.mp3"
+    "file": "0027.mp3",
+    "duration": 16.226,
+    "startTime": 286.475
   },
   {
     "index": 28,
@@ -258,7 +314,9 @@
     "voice": "F2",
     "text": "I imagine scenarios might involve misunderstandings based on cultural differences?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0028.mp3"
+    "file": "0028.mp3",
+    "duration": 5.8,
+    "startTime": 302.701
   },
   {
     "index": 29,
@@ -267,7 +325,9 @@
     "voice": "M1",
     "text": "Exactly. And the best responses usually involve seeking to understand rather than assuming or judging. The third thinking dimension is Experience and Motivation. This one's a bit different - it's about why you want to join the Foreign Service and whether your background has prepared you.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0029.mp3"
+    "file": "0029.mp3",
+    "duration": 18.95,
+    "startTime": 308.501
   },
   {
     "index": 30,
@@ -276,7 +336,9 @@
     "voice": "F2",
     "text": "How does that show up in scenarios?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0030.mp3"
+    "file": "0030.mp3",
+    "duration": 2.7,
+    "startTime": 327.451
   },
   {
     "index": 31,
@@ -285,7 +347,9 @@
     "voice": "M1",
     "text": "It might be more subtle - scenarios where understanding the bigger picture of the mission matters, or where you need to connect your work to larger goals. Moving on to what I call the \"interpersonal\" dimensions - there are five of these.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0031.mp3"
+    "file": "0031.mp3",
+    "duration": 15.3,
+    "startTime": 330.151
   },
   {
     "index": 32,
@@ -294,7 +358,9 @@
     "voice": "F2",
     "text": "Hit me.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0032.mp3"
+    "file": "0032.mp3",
+    "duration": 1.375,
+    "startTime": 345.451
   },
   {
     "index": 33,
@@ -303,7 +369,9 @@
     "voice": "M1",
     "text": "Information Integration and Analysis - can you take complex information, see patterns, and draw sound conclusions? Diplomats deal with ambiguous situations constantly. They need people who can synthesize information from multiple sources and make sense of it.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0033.mp3"
+    "file": "0033.mp3",
+    "duration": 18.626,
+    "startTime": 346.826
   },
   {
     "index": 34,
@@ -312,7 +380,9 @@
     "voice": "F2",
     "text": "So not jumping to conclusions, gathering information first?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0034.mp3"
+    "file": "0034.mp3",
+    "duration": 4.3,
+    "startTime": 365.452
   },
   {
     "index": 35,
@@ -321,7 +391,9 @@
     "voice": "M1",
     "text": "Exactly. Then there's Initiative and Leadership. This is about taking appropriate action, stepping up when needed, but - and this is crucial - also knowing when to defer to others. Leadership in the Foreign Service is often about empowering others, not just directing them.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0035.mp3"
+    "file": "0035.mp3",
+    "duration": 18.275,
+    "startTime": 369.752
   },
   {
     "index": 36,
@@ -330,7 +402,9 @@
     "voice": "F2",
     "text": "That's interesting. So the \"take charge immediately\" response isn't always best?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0036.mp3"
+    "file": "0036.mp3",
+    "duration": 5.125,
+    "startTime": 388.027
   },
   {
     "index": 37,
@@ -339,7 +413,9 @@
     "voice": "M1",
     "text": "Right. Context matters enormously. Sometimes leadership means stepping back and letting someone else shine. The next one is Judgment - this is the big one, honestly. It's about making sound decisions, especially in ambiguous situations. Weighing pros and cons. Considering consequences.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0037.mp3"
+    "file": "0037.mp3",
+    "duration": 20.5,
+    "startTime": 393.152
   },
   {
     "index": 38,
@@ -348,7 +424,9 @@
     "voice": "F2",
     "text": "This feels like it overlaps with everything else.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0038.mp3"
+    "file": "0038.mp3",
+    "duration": 3.3,
+    "startTime": 413.652
   },
   {
     "index": 39,
@@ -357,7 +435,9 @@
     "voice": "M1",
     "text": "It does. Judgment is sort of the meta-skill. Then we have Objectivity and Integrity. Can you be fair? Can you see multiple sides of an issue? Are you honest, even when it's uncomfortable? The Foreign Service needs people who will tell hard truths, not just what their bosses want to hear.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0039.mp3"
+    "file": "0039.mp3",
+    "duration": 19.05,
+    "startTime": 416.952
   },
   {
     "index": 40,
@@ -366,7 +446,9 @@
     "voice": "F2",
     "text": "I can see how that would be critical in diplomatic work.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0040.mp3"
+    "file": "0040.mp3",
+    "duration": 3.725,
+    "startTime": 436.002
   },
   {
     "index": 41,
@@ -375,7 +457,9 @@
     "voice": "M1",
     "text": "Absolutely. Integrity is non-negotiable. The last interpersonal dimension is Oral Communication - can you express yourself clearly and persuasively? Can you adapt your communication style to your audience? In scenarios, this might show up as choosing the response that involves clear, appropriate communication.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0041.mp3"
+    "file": "0041.mp3",
+    "duration": 21.45,
+    "startTime": 439.727
   },
   {
     "index": 42,
@@ -384,7 +468,9 @@
     "voice": "F2",
     "text": "Okay, that's eight. What are the remaining five?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0042.mp3"
+    "file": "0042.mp3",
+    "duration": 3.275,
+    "startTime": 461.177
   },
   {
     "index": 43,
@@ -393,7 +479,9 @@
     "voice": "M1",
     "text": "The last five are what I call \"work style\" dimensions. Planning and Organizing - can you manage your time, prioritize tasks, and create effective plans? Diplomats juggle many responsibilities; they need to be organized.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0043.mp3"
+    "file": "0043.mp3",
+    "duration": 15.8,
+    "startTime": 464.452
   },
   {
     "index": 44,
@@ -402,7 +490,9 @@
     "voice": "F2",
     "text": "So scenarios about competing deadlines?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0044.mp3"
+    "file": "0044.mp3",
+    "duration": 3.075,
+    "startTime": 480.252
   },
   {
     "index": 45,
@@ -411,7 +501,9 @@
     "voice": "M1",
     "text": "Definitely. Then there's Quantitative Analysis - this is about comfort with data and numbers. It might seem odd for diplomacy, but a lot of the work involves budgets, statistics, economic indicators. You don't need to be a mathematician, but you can't be afraid of numbers.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0045.mp3"
+    "file": "0045.mp3",
+    "duration": 18.775,
+    "startTime": 483.327
   },
   {
     "index": 46,
@@ -420,7 +512,9 @@
     "voice": "F2",
     "text": "What else?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0046.mp3"
+    "file": "0046.mp3",
+    "duration": 1.375,
+    "startTime": 502.102
   },
   {
     "index": 47,
@@ -429,7 +523,9 @@
     "voice": "M1",
     "text": "Resourcefulness - can you find creative solutions? Can you work effectively even when you don't have everything you need? Diplomats overseas often have to improvise with limited resources. Then Working with Others - this is about collaboration, teamwork, building positive relationships. Different from leadership - this is about being a good team member, not necessarily being in charge.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0047.mp3"
+    "file": "0047.mp3",
+    "duration": 25.625,
+    "startTime": 503.477
   },
   {
     "index": 48,
@@ -438,7 +534,9 @@
     "voice": "F2",
     "text": "And the last one?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0048.mp3"
+    "file": "0048.mp3",
+    "duration": 1.725,
+    "startTime": 529.102
   },
   {
     "index": 49,
@@ -447,7 +545,9 @@
     "voice": "M1",
     "text": "Written Communication. Can you write clearly and effectively? This matters enormously in the Foreign Service - cables, reports, briefings. Diplomats write constantly. In SJT scenarios, this might show up as choosing responses that involve appropriate documentation or written follow-up.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0049.mp3"
+    "file": "0049.mp3",
+    "duration": 20,
+    "startTime": 530.827
   },
   {
     "index": 50,
@@ -456,7 +556,9 @@
     "voice": "F2",
     "text": "So when I'm looking at a scenario, I should be asking myself which of these dimensions are being tested?",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0050.mp3"
+    "file": "0050.mp3",
+    "duration": 6.275,
+    "startTime": 550.827
   },
   {
     "index": 51,
@@ -465,7 +567,9 @@
     "voice": "M1",
     "text": "Exactly. And often, multiple dimensions are at play. The best responses typically demonstrate several of these competencies together.",
     "chapter": "SEGMENT 2: THE 13 DIMENSIONS (15 minutes)",
-    "file": "0051.mp3"
+    "file": "0051.mp3",
+    "duration": 9.8,
+    "startTime": 557.102
   },
   {
     "index": 52,
@@ -474,7 +578,9 @@
     "voice": "F2",
     "text": "Before we get to practice scenarios, I want to understand the overall mindset. What makes someone think like a diplomat?",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0052.mp3"
+    "file": "0052.mp3",
+    "duration": 7.425,
+    "startTime": 566.902
   },
   {
     "index": 53,
@@ -483,7 +589,9 @@
     "voice": "M1",
     "text": "Great question. Let me give you what I call the \"Five Principles of Diplomatic Thinking.\" These should guide your approach to every scenario.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0053.mp3"
+    "file": "0053.mp3",
+    "duration": 9.175,
+    "startTime": 574.327
   },
   {
     "index": 54,
@@ -492,7 +600,9 @@
     "voice": "F2",
     "text": "I'm ready.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0054.mp3"
+    "file": "0054.mp3",
+    "duration": 1.475,
+    "startTime": 583.502
   },
   {
     "index": 55,
@@ -501,7 +611,9 @@
     "voice": "M1",
     "text": "First: Relationships are assets. In diplomacy, and in the SJT, the best solutions usually preserve or strengthen relationships. Even when you need to be firm or address a problem, you do it in a way that keeps the door open for future collaboration.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0055.mp3"
+    "file": "0055.mp3",
+    "duration": 17.95,
+    "startTime": 584.977
   },
   {
     "index": 56,
@@ -510,7 +622,9 @@
     "voice": "F2",
     "text": "So burning bridges is always bad?",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0056.mp3"
+    "file": "0056.mp3",
+    "duration": 2.9,
+    "startTime": 602.927
   },
   {
     "index": 57,
@@ -519,7 +633,9 @@
     "voice": "M1",
     "text": "Almost always. There might be rare cases where you need to take a hard stand, but even then, you try to do it respectfully. Think about it - in an embassy, you're going to work with the same people for years. You can't afford to make enemies.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0057.mp3"
+    "file": "0057.mp3",
+    "duration": 15.65,
+    "startTime": 605.827
   },
   {
     "index": 58,
@@ -528,7 +644,9 @@
     "voice": "F2",
     "text": "What's the second principle?",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0058.mp3"
+    "file": "0058.mp3",
+    "duration": 2.275,
+    "startTime": 621.477
   },
   {
     "index": 59,
@@ -537,7 +655,9 @@
     "voice": "M1",
     "text": "Context matters. Before choosing a response, always consider the full situation. Who are the stakeholders? What are the potential consequences? What's the organizational culture? The same action might be appropriate in one context and completely wrong in another.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0059.mp3"
+    "file": "0059.mp3",
+    "duration": 18.675,
+    "startTime": 623.752
   },
   {
     "index": 60,
@@ -546,7 +666,9 @@
     "voice": "F2",
     "text": "Can you give an example?",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0060.mp3"
+    "file": "0060.mp3",
+    "duration": 2.125,
+    "startTime": 642.427
   },
   {
     "index": 61,
@@ -555,7 +677,9 @@
     "voice": "M1",
     "text": "Sure. Imagine a scenario where a colleague makes a mistake. Going directly to your supervisor might be appropriate if it's a serious ethical issue, but it might be wrong if it's a minor error that the colleague could easily fix themselves. The context determines the right response.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0061.mp3"
+    "file": "0061.mp3",
+    "duration": 18.75,
+    "startTime": 644.552
   },
   {
     "index": 62,
@@ -564,7 +688,9 @@
     "voice": "F2",
     "text": "That makes sense. What's next?",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0062.mp3"
+    "file": "0062.mp3",
+    "duration": 2.35,
+    "startTime": 663.302
   },
   {
     "index": 63,
@@ -573,7 +699,9 @@
     "voice": "M1",
     "text": "Seek to understand before acting. This is huge. Diplomatic responses typically involve gathering information, asking questions, listening. Jumping to conclusions or taking immediate action without understanding the situation is usually ranked lower.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0063.mp3"
+    "file": "0063.mp3",
+    "duration": 17.775,
+    "startTime": 665.652
   },
   {
     "index": 64,
@@ -582,7 +710,9 @@
     "voice": "F2",
     "text": "So \"fire first, ask questions later\" is not the diplomatic way?",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0064.mp3"
+    "file": "0064.mp3",
+    "duration": 4.7,
+    "startTime": 683.427
   },
   {
     "index": 65,
@@ -591,7 +721,9 @@
     "voice": "M1",
     "text": "laughs Definitely not. The fourth principle is Consider second-order effects. Don't just think about the immediate outcome - think about what happens next. If you choose this response, what are the downstream consequences? The best diplomats are chess players, thinking several moves ahead.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0065.mp3"
+    "file": "0065.mp3",
+    "duration": 19.45,
+    "startTime": 688.127
   },
   {
     "index": 66,
@@ -600,7 +732,9 @@
     "voice": "F2",
     "text": "I like that analogy.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0066.mp3"
+    "file": "0066.mp3",
+    "duration": 2.125,
+    "startTime": 707.577
   },
   {
     "index": 67,
@@ -609,7 +743,9 @@
     "voice": "M1",
     "text": "And the fifth principle: Balance competing values. In real diplomacy, and in the SJT, you often face situations where doing right by one person means doing wrong by another. The best responses acknowledge this tension and try to find solutions that honor multiple values.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0067.mp3"
+    "file": "0067.mp3",
+    "duration": 19.7,
+    "startTime": 709.702
   },
   {
     "index": 68,
@@ -618,7 +754,9 @@
     "voice": "F2",
     "text": "Can you give an example of that?",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0068.mp3"
+    "file": "0068.mp3",
+    "duration": 2.4,
+    "startTime": 729.402
   },
   {
     "index": 69,
@@ -627,7 +765,9 @@
     "voice": "M1",
     "text": "Imagine a scenario where a colleague asks you to cover for them on something minor - maybe they need to leave early for a family emergency. You value loyalty to your colleague, but you also value honesty and responsibility to your organization. The best response finds a way to help your colleague without compromising your integrity - maybe offering to help them get proper approval rather than just lying for them.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0069.mp3"
+    "file": "0069.mp3",
+    "duration": 26.525,
+    "startTime": 731.802
   },
   {
     "index": 70,
@@ -636,7 +776,9 @@
     "voice": "F2",
     "text": "That's really helpful. It's not about choosing the \"nice\" answer or the \"tough\" answer - it's about finding the answer that balances the most values.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0070.mp3"
+    "file": "0070.mp3",
+    "duration": 8.575,
+    "startTime": 758.327
   },
   {
     "index": 71,
@@ -645,7 +787,9 @@
     "voice": "M1",
     "text": "Exactly. And here's a key insight: the State Department isn't looking for pushovers OR for harsh taskmasters. They want people with good judgment who can navigate complexity.",
     "chapter": "SEGMENT 3: THE DIPLOMATIC MINDSET (10 minutes)",
-    "file": "0071.mp3"
+    "file": "0071.mp3",
+    "duration": 12.3,
+    "startTime": 766.902
   },
   {
     "index": 72,
@@ -654,7 +798,9 @@
     "voice": "F2",
     "text": "Okay, I think I'm ready to try some scenarios. Can we walk through one together?",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0072.mp3"
+    "file": "0072.mp3",
+    "duration": 4.95,
+    "startTime": 779.202
   },
   {
     "index": 73,
@@ -663,7 +809,9 @@
     "voice": "M1",
     "text": "Let's do it. Here's a scenario:",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0073.mp3"
+    "file": "0073.mp3",
+    "duration": 2.8,
+    "startTime": 784.152
   },
   {
     "index": 74,
@@ -672,7 +820,9 @@
     "voice": "M1",
     "text": "\"You are new to a team that has been working on a project for several months. At your first team meeting, you notice that the project plan seems to have a significant flaw that could cause problems later. The team lead, who created the plan, is well-respected and has been with the organization for many years. Other team members don't seem to have noticed the issue or are not mentioning it. What do you do?\"",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0074.mp3"
+    "file": "0074.mp3",
+    "duration": 4.35,
+    "startTime": 786.952
   },
   {
     "index": 75,
@@ -681,7 +831,9 @@
     "voice": "F2",
     "text": "Ooh, this is tricky. Let me think about the options. What might they be?",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0075.mp3"
+    "file": "0075.mp3",
+    "duration": 6.275,
+    "startTime": 791.302
   },
   {
     "index": 76,
@@ -690,7 +842,9 @@
     "voice": "M1",
     "text": "Good instinct to think about what options you might see. Typically, you'd see something like:",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0076.mp3"
+    "file": "0076.mp3",
+    "duration": 9.75,
+    "startTime": 797.577
   },
   {
     "index": 77,
@@ -699,7 +853,9 @@
     "voice": "M1",
     "text": "A) Immediately raise your concern in the meeting to ensure the team can address it.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0077.mp3"
+    "file": "0077.mp3",
+    "duration": 3.875,
+    "startTime": 807.327
   },
   {
     "index": 78,
@@ -708,7 +864,9 @@
     "voice": "M1",
     "text": "B) Stay quiet in the meeting, then approach the team lead privately afterward to share your observation.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0078.mp3"
+    "file": "0078.mp3",
+    "duration": 10.6,
+    "startTime": 811.202
   },
   {
     "index": 79,
@@ -717,7 +875,9 @@
     "voice": "M1",
     "text": "C) Say nothing for now and wait to see if the issue becomes apparent to others as the project progresses.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0079.mp3"
+    "file": "0079.mp3",
+    "duration": 6.25,
+    "startTime": 821.802
   },
   {
     "index": 80,
@@ -726,7 +886,9 @@
     "voice": "M1",
     "text": "D) Email the team lead's supervisor to flag the potential problem.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0080.mp3"
+    "file": "0080.mp3",
+    "duration": 14.85,
+    "startTime": 828.052
   },
   {
     "index": 81,
@@ -735,7 +897,9 @@
     "voice": "M1",
     "text": "E) Do your own research first to make sure you're not missing something, then decide how to raise it.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0081.mp3"
+    "file": "0081.mp3",
+    "duration": 4.1,
+    "startTime": 842.902
   },
   {
     "index": 82,
@@ -744,7 +908,9 @@
     "voice": "F2",
     "text": "Okay, let me work through this. Option D - going to the supervisor - feels wrong. I'm new, I'd be going over the team lead's head, it would damage the relationship.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0082.mp3"
+    "file": "0082.mp3",
+    "duration": 11.225,
+    "startTime": 847.002
   },
   {
     "index": 83,
@@ -753,7 +919,9 @@
     "voice": "M1",
     "text": "Good reasoning. That would likely rank low. What else?",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0083.mp3"
+    "file": "0083.mp3",
+    "duration": 2.3,
+    "startTime": 858.227
   },
   {
     "index": 84,
@@ -762,7 +930,9 @@
     "voice": "F2",
     "text": "Option C - staying completely quiet - also seems wrong. If there's a real flaw, letting it continue could hurt the project. That doesn't show initiative or good judgment.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0084.mp3"
+    "file": "0084.mp3",
+    "duration": 12,
+    "startTime": 860.527
   },
   {
     "index": 85,
@@ -771,7 +941,9 @@
     "voice": "M1",
     "text": "Agreed. So you've identified the two that are probably at the bottom. What about the others?",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0085.mp3"
+    "file": "0085.mp3",
+    "duration": 17.5,
+    "startTime": 872.527
   },
   {
     "index": 86,
@@ -780,7 +952,9 @@
     "voice": "F2",
     "text": "Option A - raising it in the meeting - shows initiative, but it could embarrass the team lead in front of everyone. That might not preserve the relationship. Option B - going privately - is more respectful, but I'm still new. Maybe I'm wrong about the flaw?",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0086.mp3"
+    "file": "0086.mp3",
+    "duration": 7.425,
+    "startTime": 890.027
   },
   {
     "index": 87,
@@ -789,7 +963,9 @@
     "voice": "M1",
     "text": "You're thinking about this really well. What about Option E?",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0087.mp3"
+    "file": "0087.mp3",
+    "duration": 3.2,
+    "startTime": 897.452
   },
   {
     "index": 88,
@@ -798,7 +974,9 @@
     "voice": "F2",
     "text": "Option E - doing research first - that's appealing because I'm acknowledging I might not have all the information. I'm new to the team. But it also delays addressing a potential problem.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0088.mp3"
+    "file": "0088.mp3",
+    "duration": 2.05,
+    "startTime": 900.652
   },
   {
     "index": 89,
@@ -807,7 +985,9 @@
     "voice": "M1",
     "text": "So how would you rank them?",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0089.mp3"
+    "file": "0089.mp3",
+    "duration": 4.05,
+    "startTime": 902.702
   },
   {
     "index": 90,
@@ -816,7 +996,9 @@
     "voice": "F2",
     "text": "I think... E first, because it shows I'm gathering information before acting. Then B, because it's raising the concern but in a respectful way. Then A, because at least I'm speaking up. Then C, then D.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0090.mp3"
+    "file": "0090.mp3",
+    "duration": 6.175,
+    "startTime": 906.752
   },
   {
     "index": 91,
@@ -825,7 +1007,9 @@
     "voice": "M1",
     "text": "That's very close to how this would likely be ranked. You might also see E and B flipped, because some experts might value directness. But your reasoning is sound - you're showing composure, respecting the team lead, but also not ignoring a potential problem.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0091.mp3"
+    "file": "0091.mp3",
+    "duration": 3,
+    "startTime": 912.927
   },
   {
     "index": 92,
@@ -834,7 +1018,9 @@
     "voice": "F2",
     "text": "The key was thinking about the context - I'm new, the team lead is respected - not just what seems \"right\" in the abstract.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0092.mp3"
+    "file": "0092.mp3",
+    "duration": 1.25,
+    "startTime": 915.927
   },
   {
     "index": 93,
@@ -843,7 +1029,9 @@
     "voice": "M1",
     "text": "Exactly. Context is everything.",
     "chapter": "SEGMENT 4: PRACTICE SCENARIO 1 (8 minutes)",
-    "file": "0093.mp3"
+    "file": "0093.mp3",
+    "duration": 4.45,
+    "startTime": 917.177
   },
   {
     "index": 94,
@@ -852,7 +1040,9 @@
     "voice": "F2",
     "text": "Let's try another one.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0094.mp3"
+    "file": "0094.mp3",
+    "duration": 15.175,
+    "startTime": 921.627
   },
   {
     "index": 95,
@@ -861,7 +1051,9 @@
     "voice": "M1",
     "text": "Here's a scenario that tests a different set of dimensions:",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0095.mp3"
+    "file": "0095.mp3",
+    "duration": 3.475,
+    "startTime": 936.802
   },
   {
     "index": 96,
@@ -870,7 +1062,9 @@
     "voice": "M1",
     "text": "\"You work in a small office where everyone is expected to share common duties like answering phones and greeting visitors. You notice that one of your colleagues consistently finds excuses to avoid these shared duties, leaving others to pick up the slack. Other team members have started to grumble, but no one has addressed the issue directly. What do you do?\"",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0096.mp3"
+    "file": "0096.mp3",
+    "duration": 14.45,
+    "startTime": 940.277
   },
   {
     "index": 97,
@@ -879,7 +1073,9 @@
     "voice": "F2",
     "text": "This feels like a classic workplace conflict scenario. Let me think about what options we might see.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0097.mp3"
+    "file": "0097.mp3",
+    "duration": 1.875,
+    "startTime": 954.727
   },
   {
     "index": 98,
@@ -888,7 +1084,9 @@
     "voice": "M1",
     "text": "Go ahead - try to predict the options.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0098.mp3"
+    "file": "0098.mp3",
+    "duration": 14.175,
+    "startTime": 956.602
   },
   {
     "index": 99,
@@ -897,7 +1095,9 @@
     "voice": "F2",
     "text": "Maybe...",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0099.mp3"
+    "file": "0099.mp3",
+    "duration": 14.5,
+    "startTime": 970.777
   },
   {
     "index": 100,
@@ -906,7 +1106,9 @@
     "voice": "F2",
     "text": "A) Report the colleague to your supervisor for not doing their share.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0100.mp3"
+    "file": "0100.mp3",
+    "duration": 2.775,
+    "startTime": 985.277
   },
   {
     "index": 101,
@@ -915,7 +1117,9 @@
     "voice": "F2",
     "text": "B) Start tracking when the colleague avoids duties so you have documentation.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0101.mp3"
+    "file": "0101.mp3",
+    "duration": 21.075,
+    "startTime": 988.052
   },
   {
     "index": 102,
@@ -924,7 +1128,9 @@
     "voice": "F2",
     "text": "C) Have a direct, private conversation with the colleague about what you've observed.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0102.mp3"
+    "file": "0102.mp3",
+    "duration": 5.05,
+    "startTime": 1009.127
   },
   {
     "index": 103,
@@ -933,7 +1139,9 @@
     "voice": "F2",
     "text": "D) Organize a team meeting to discuss how shared duties should be handled.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0103.mp3"
+    "file": "0103.mp3",
+    "duration": 7.575,
+    "startTime": 1014.177
   },
   {
     "index": 104,
@@ -942,7 +1150,9 @@
     "voice": "F2",
     "text": "E) Accept that some people contribute differently and focus on your own work.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0104.mp3"
+    "file": "0104.mp3",
+    "duration": 1.95,
+    "startTime": 1021.752
   },
   {
     "index": 105,
@@ -951,7 +1161,9 @@
     "voice": "M1",
     "text": "Those are very realistic options. How would you rank them?",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0105.mp3"
+    "file": "0105.mp3",
+    "duration": 6.05,
+    "startTime": 1023.702
   },
   {
     "index": 106,
@@ -960,7 +1172,9 @@
     "voice": "F2",
     "text": "Option E seems too passive - it doesn't address the problem and others are already grumbling, so it could get worse. Option A jumps right to the supervisor without trying to solve it ourselves. Option B is weirdly passive-aggressive - tracking without talking?",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0106.mp3"
+    "file": "0106.mp3",
+    "duration": 8.05,
+    "startTime": 1029.752
   },
   {
     "index": 107,
@@ -969,7 +1183,9 @@
     "voice": "M1",
     "text": "Good observations. What about C and D?",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0107.mp3"
+    "file": "0107.mp3",
+    "duration": 1.725,
+    "startTime": 1037.802
   },
   {
     "index": 108,
@@ -978,7 +1194,9 @@
     "voice": "F2",
     "text": "Option C - direct conversation - that's the diplomatic approach, right? Address it privately, give the colleague a chance to explain or change. Option D - the team meeting - could work, but it might embarrass the colleague or turn into a pile-on.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0108.mp3"
+    "file": "0108.mp3",
+    "duration": 14.325,
+    "startTime": 1039.527
   },
   {
     "index": 109,
@@ -987,7 +1205,9 @@
     "voice": "M1",
     "text": "So your ranking?",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0109.mp3"
+    "file": "0109.mp3",
+    "duration": 2.35,
+    "startTime": 1053.852
   },
   {
     "index": 110,
@@ -996,7 +1216,9 @@
     "voice": "F2",
     "text": "I'd put C first - direct, private, gives them a chance. Then maybe D - if the direct conversation doesn't work, a team discussion of norms could help. Then A - going to the supervisor is appropriate if other approaches fail. Then B, then E.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0110.mp3"
+    "file": "0110.mp3",
+    "duration": 1.25,
+    "startTime": 1056.202
   },
   {
     "index": 111,
@@ -1005,7 +1227,9 @@
     "voice": "M1",
     "text": "That's solid reasoning. One thing I'd add - the ranking might put D a bit lower because a team meeting could be seen as avoiding the direct conversation. But your logic about C being first is exactly right.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0111.mp3"
+    "file": "0111.mp3",
+    "duration": 3.5,
+    "startTime": 1057.452
   },
   {
     "index": 112,
@@ -1014,7 +1238,9 @@
     "voice": "F2",
     "text": "What dimensions were being tested here?",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0112.mp3"
+    "file": "0112.mp3",
+    "duration": 12.65,
+    "startTime": 1060.952
   },
   {
     "index": 113,
@@ -1023,7 +1249,9 @@
     "voice": "M1",
     "text": "Great question. Primarily Working with Others - can you handle interpersonal friction? Also Judgment - can you pick the right level of escalation? And Initiative - are you willing to address problems rather than ignore them? But notably, the best answer involves direct communication, not going behind someone's back.",
     "chapter": "SEGMENT 5: PRACTICE SCENARIO 2 (8 minutes)",
-    "file": "0113.mp3"
+    "file": "0113.mp3",
+    "duration": 1.775,
+    "startTime": 1073.602
   },
   {
     "index": 114,
@@ -1032,7 +1260,9 @@
     "voice": "F2",
     "text": "Can we do one that's more of an ethical dilemma? I feel like those are the hardest.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0114.mp3"
+    "file": "0114.mp3",
+    "duration": 6.175,
+    "startTime": 1075.377
   },
   {
     "index": 115,
@@ -1041,7 +1271,9 @@
     "voice": "M1",
     "text": "You're right - ethical scenarios can be challenging because there's often tension between values. Here's one:",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0115.mp3"
+    "file": "0115.mp3",
+    "duration": 12.026,
+    "startTime": 1081.552
   },
   {
     "index": 116,
@@ -1050,7 +1282,9 @@
     "voice": "M1",
     "text": "\"You discover that a colleague has been claiming overtime hours that they didn't actually work. The amounts are relatively small, and you know that this colleague is going through a difficult financial situation due to a family illness. You like this colleague and consider them a friend. What do you do?\"",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0116.mp3"
+    "file": "0116.mp3",
+    "duration": 4.425,
+    "startTime": 1093.578
   },
   {
     "index": 117,
@@ -1059,7 +1293,9 @@
     "voice": "F2",
     "text": "Ouch. This one hurts.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0117.mp3"
+    "file": "0117.mp3",
+    "duration": 14.125,
+    "startTime": 1098.003
   },
   {
     "index": 118,
@@ -1068,7 +1304,9 @@
     "voice": "M1",
     "text": "That's the point. Real diplomacy involves hard choices. What are your instincts?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0118.mp3"
+    "file": "0118.mp3",
+    "duration": 2.15,
+    "startTime": 1112.128
   },
   {
     "index": 119,
@@ -1077,7 +1315,9 @@
     "voice": "F2",
     "text": "My gut says you have to report it, but that feels harsh given the circumstances. Let me think about what dimensions are in play here.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0119.mp3"
+    "file": "0119.mp3",
+    "duration": 18.175,
+    "startTime": 1114.278
   },
   {
     "index": 120,
@@ -1086,7 +1326,9 @@
     "voice": "M1",
     "text": "What do you see?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0120.mp3"
+    "file": "0120.mp3",
+    "duration": 2.4,
+    "startTime": 1132.453
   },
   {
     "index": 121,
@@ -1095,7 +1337,9 @@
     "voice": "F2",
     "text": "Objectivity and Integrity - that's the big one. The colleague is essentially stealing, even if it's a small amount and for sympathetic reasons. But also Working with Others - they're my friend. And Judgment - balancing these competing concerns.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0121.mp3"
+    "file": "0121.mp3",
+    "duration": 11.2,
+    "startTime": 1134.853
   },
   {
     "index": 122,
@@ -1104,7 +1348,9 @@
     "voice": "M1",
     "text": "What options might you see?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0122.mp3"
+    "file": "0122.mp3",
+    "duration": 3.775,
+    "startTime": 1146.053
   },
   {
     "index": 123,
@@ -1113,7 +1359,9 @@
     "voice": "F2",
     "text": "Maybe:",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0123.mp3"
+    "file": "0123.mp3",
+    "duration": 19.025,
+    "startTime": 1149.828
   },
   {
     "index": 124,
@@ -1122,7 +1370,9 @@
     "voice": "F2",
     "text": "A) Report the colleague to your supervisor immediately.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0124.mp3"
+    "file": "0124.mp3",
+    "duration": 5.4,
+    "startTime": 1168.853
   },
   {
     "index": 125,
@@ -1131,7 +1381,9 @@
     "voice": "F2",
     "text": "B) Talk to the colleague privately and give them a chance to correct it themselves.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0125.mp3"
+    "file": "0125.mp3",
+    "duration": 16.525,
+    "startTime": 1174.253
   },
   {
     "index": 126,
@@ -1140,7 +1392,9 @@
     "voice": "F2",
     "text": "C) Look the other way because the amounts are small and the circumstances are sympathetic.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0126.mp3"
+    "file": "0126.mp3",
+    "duration": 2.65,
+    "startTime": 1190.778
   },
   {
     "index": 127,
@@ -1149,7 +1403,9 @@
     "voice": "F2",
     "text": "D) Anonymously tip off the accounting department to look into overtime claims.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0127.mp3"
+    "file": "0127.mp3",
+    "duration": 21.475,
+    "startTime": 1193.428
   },
   {
     "index": 128,
@@ -1158,7 +1414,9 @@
     "voice": "F2",
     "text": "E) Help the colleague find legitimate resources for their financial difficulties.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0128.mp3"
+    "file": "0128.mp3",
+    "duration": 1.975,
+    "startTime": 1214.903
   },
   {
     "index": 129,
@@ -1167,7 +1425,9 @@
     "voice": "M1",
     "text": "Those are good options. How would you rank them?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0129.mp3"
+    "file": "0129.mp3",
+    "duration": 18.075,
+    "startTime": 1216.878
   },
   {
     "index": 130,
@@ -1176,7 +1436,9 @@
     "voice": "F2",
     "text": "C is out - looking the other way compromises my integrity. D feels cowardly - if I'm going to report, I should own it. A seems harsh as a first step. E is nice but doesn't address the actual wrongdoing.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0130.mp3"
+    "file": "0130.mp3",
+    "duration": 6.35,
+    "startTime": 1234.953
   },
   {
     "index": 131,
@@ -1185,7 +1447,9 @@
     "voice": "M1",
     "text": "What about B?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0131.mp3"
+    "file": "0131.mp3",
+    "duration": 16.675,
+    "startTime": 1241.303
   },
   {
     "index": 132,
@@ -1194,7 +1458,9 @@
     "voice": "F2",
     "text": "B gives the colleague a chance to make it right, which feels more humane. But what if they don't? Then what?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0132.mp3"
+    "file": "0132.mp3",
+    "duration": 2.925,
+    "startTime": 1257.978
   },
   {
     "index": 133,
@@ -1203,7 +1469,9 @@
     "voice": "M1",
     "text": "This is where ranking matters. You might rank B first, but A would be right behind it - because if the direct conversation doesn't lead to correction, reporting becomes necessary.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0133.mp3"
+    "file": "0133.mp3",
+    "duration": 20.325,
+    "startTime": 1260.903
   },
   {
     "index": 134,
@@ -1212,7 +1480,9 @@
     "voice": "F2",
     "text": "So my ranking would be: B first, then A, then E, then D, then C?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0134.mp3"
+    "file": "0134.mp3",
+    "duration": 2.4,
+    "startTime": 1281.228
   },
   {
     "index": 135,
@@ -1221,7 +1491,9 @@
     "voice": "M1",
     "text": "That's very defensible. You're prioritizing integrity - the wrongdoing has to be addressed - but you're doing it in the most humane way possible. You're giving your friend a chance to make it right before escalating.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0135.mp3"
+    "file": "0135.mp3",
+    "duration": 11.25,
+    "startTime": 1283.628
   },
   {
     "index": 136,
@@ -1230,7 +1502,9 @@
     "voice": "F2",
     "text": "What's the key lesson here?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0136.mp3"
+    "file": "0136.mp3",
+    "duration": 2.825,
+    "startTime": 1294.878
   },
   {
     "index": 137,
@@ -1239,7 +1513,9 @@
     "voice": "M1",
     "text": "In ethics scenarios, integrity always wins. You can be kind about it, you can give people chances, but you cannot compromise your honesty or look the other way on clear wrongdoing. The State Department needs people who will do the right thing even when it's hard.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0137.mp3"
+    "file": "0137.mp3",
+    "duration": 3.026,
+    "startTime": 1297.703
   },
   {
     "index": 138,
@@ -1248,7 +1524,9 @@
     "voice": "F2",
     "text": "Even if it costs a friendship?",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0138.mp3"
+    "file": "0138.mp3",
+    "duration": 13.6,
+    "startTime": 1300.729
   },
   {
     "index": 139,
@@ -1257,7 +1535,9 @@
     "voice": "M1",
     "text": "Even then. Although in this case, the best response - the private conversation - actually gives the best chance of preserving the friendship while still doing the right thing.",
     "chapter": "SEGMENT 6: PRACTICE SCENARIO 3 - ETHICS (8 minutes)",
-    "file": "0139.mp3"
+    "file": "0139.mp3",
+    "duration": 1.375,
+    "startTime": 1314.329
   },
   {
     "index": 140,
@@ -1266,7 +1546,9 @@
     "voice": "F2",
     "text": "What are the most common mistakes people make on the SJT?",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0140.mp3"
+    "file": "0140.mp3",
+    "duration": 14,
+    "startTime": 1315.704
   },
   {
     "index": 141,
@@ -1275,7 +1557,9 @@
     "voice": "M1",
     "text": "Great question. I see several patterns. First: Choosing the \"hero\" response. Some people always pick the most dramatic, take-charge option. \"Immediately confront the person!\" \"Go straight to the top!\" But diplomacy is usually about measured responses, not dramatic ones.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0141.mp3"
+    "file": "0141.mp3",
+    "duration": 1.725,
+    "startTime": 1329.704
   },
   {
     "index": 142,
@@ -1284,7 +1568,9 @@
     "voice": "F2",
     "text": "So if an option sounds like the climax of a movie, it's probably not the best choice?",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0142.mp3"
+    "file": "0142.mp3",
+    "duration": 15.5,
+    "startTime": 1331.429
   },
   {
     "index": 143,
@@ -1293,7 +1579,9 @@
     "voice": "M1",
     "text": "laughs That's actually a good rule of thumb. Second mistake: Ignoring the chain of command. There's almost always a proper channel for addressing problems. Jumping to the top is rarely the right first step. Work within the system first.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0143.mp3"
+    "file": "0143.mp3",
+    "duration": 2.3,
+    "startTime": 1346.929
   },
   {
     "index": 144,
@@ -1302,7 +1590,9 @@
     "voice": "F2",
     "text": "Unless it's a serious ethics issue?",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0144.mp3"
+    "file": "0144.mp3",
+    "duration": 16.725,
+    "startTime": 1349.229
   },
   {
     "index": 145,
@@ -1311,7 +1601,9 @@
     "voice": "M1",
     "text": "Even then, you usually have a designated process. Third mistake: Avoiding conflict entirely. The opposite of the hero problem. Some people rank passive options too high because they seem \"nice\" or \"diplomatic.\" But diplomats have to address problems. Avoidance isn't diplomacy; it's just avoidance.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0145.mp3"
+    "file": "0145.mp3",
+    "duration": 1.925,
+    "startTime": 1365.954
   },
   {
     "index": 146,
@@ -1320,7 +1612,9 @@
     "voice": "F2",
     "text": "So there's a balance.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0146.mp3"
+    "file": "0146.mp3",
+    "duration": 15.026,
+    "startTime": 1367.879
   },
   {
     "index": 147,
@@ -1329,7 +1623,9 @@
     "voice": "M1",
     "text": "Exactly. Fourth mistake: Not considering all stakeholders. Every scenario has multiple people affected - your colleague, your supervisor, the organization, external parties. The best responses consider everyone, not just the immediate participants.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0147.mp3"
+    "file": "0147.mp3",
+    "duration": 1.55,
+    "startTime": 1382.905
   },
   {
     "index": 148,
@@ -1338,7 +1634,9 @@
     "voice": "F2",
     "text": "Like in the ethics scenario - the organization is being harmed, not just the question of my friendship.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0148.mp3"
+    "file": "0148.mp3",
+    "duration": 12.725,
+    "startTime": 1384.455
   },
   {
     "index": 149,
@@ -1347,7 +1645,9 @@
     "voice": "M1",
     "text": "Right. Fifth mistake: Forgetting that you might be wrong. Responses that gather more information, check assumptions, or allow for the possibility of misunderstanding often rank higher than responses that assume you've got the complete picture.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0149.mp3"
+    "file": "0149.mp3",
+    "duration": 4.7,
+    "startTime": 1397.18
   },
   {
     "index": 150,
@@ -1356,7 +1656,9 @@
     "voice": "F2",
     "text": "That's the \"seek to understand\" principle.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0150.mp3"
+    "file": "0150.mp3",
+    "duration": 2.525,
+    "startTime": 1401.88
   },
   {
     "index": 151,
@@ -1365,7 +1667,9 @@
     "voice": "M1",
     "text": "Exactly. And the sixth common mistake: Over-relying on \"rules.\" Some people try to create simple rules like \"always talk to the person first\" or \"always go to your supervisor.\" But the SJT is designed to test nuanced judgment, not rule-following. The right answer depends on the context.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0151.mp3"
+    "file": "0151.mp3",
+    "duration": 13.1,
+    "startTime": 1404.405
   },
   {
     "index": 152,
@@ -1374,7 +1678,9 @@
     "voice": "F2",
     "text": "So I shouldn't look for a formula.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0152.mp3"
+    "file": "0152.mp3",
+    "duration": 1.55,
+    "startTime": 1417.505
   },
   {
     "index": 153,
@@ -1383,7 +1689,9 @@
     "voice": "M1",
     "text": "The only formula is: read carefully, consider the context, think about the 13 dimensions, and use good judgment. Which, I know, isn't much of a formula.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0153.mp3"
+    "file": "0153.mp3",
+    "duration": 2.625,
+    "startTime": 1419.055
   },
   {
     "index": 154,
@@ -1392,7 +1700,9 @@
     "voice": "F2",
     "text": "laughs It's the formula for life, really.",
     "chapter": "SEGMENT 7: COMMON MISTAKES (8 minutes)",
-    "file": "0154.mp3"
+    "file": "0154.mp3",
+    "duration": 16.575,
+    "startTime": 1421.68
   },
   {
     "index": 155,
@@ -1401,7 +1711,9 @@
     "voice": "F2",
     "text": "Any practical tips for the actual test?",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0155.mp3"
+    "file": "0155.mp3",
+    "duration": 1.6,
+    "startTime": 1438.255
   },
   {
     "index": 156,
@@ -1410,7 +1722,9 @@
     "voice": "M1",
     "text": "A few. First: Read the scenario twice. The first time for the overall situation, the second time for the specific details. Context matters, and missing a detail can lead you astray.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0156.mp3"
+    "file": "0156.mp3",
+    "duration": 17.125,
+    "startTime": 1439.855
   },
   {
     "index": 157,
@@ -1419,7 +1733,9 @@
     "voice": "F2",
     "text": "What else?",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0157.mp3"
+    "file": "0157.mp3",
+    "duration": 1.875,
+    "startTime": 1456.98
   },
   {
     "index": 158,
@@ -1428,7 +1744,9 @@
     "voice": "M1",
     "text": "Read all the options before ranking. Don't start ranking until you've seen everything. Sometimes an option seems good until you see a better one, and it's easier to rank correctly if you've seen the full picture.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0158.mp3"
+    "file": "0158.mp3",
+    "duration": 15,
+    "startTime": 1458.855
   },
   {
     "index": 159,
@@ -1437,7 +1755,9 @@
     "voice": "F2",
     "text": "That makes sense.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0159.mp3"
+    "file": "0159.mp3",
+    "duration": 15.25,
+    "startTime": 1473.855
   },
   {
     "index": 160,
@@ -1446,7 +1766,9 @@
     "voice": "M1",
     "text": "Eliminate extremes first. In most scenarios, the most extreme options - either the most aggressive or the most passive - will rank near the bottom. Start by identifying those, then focus on ranking the middle options.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0160.mp3"
+    "file": "0160.mp3",
+    "duration": 5.375,
+    "startTime": 1489.105
   },
   {
     "index": 161,
@@ -1455,7 +1777,9 @@
     "voice": "F2",
     "text": "What about time management?",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0161.mp3"
+    "file": "0161.mp3",
+    "duration": 8.25,
+    "startTime": 1494.48
   },
   {
     "index": 162,
@@ -1464,7 +1788,9 @@
     "voice": "M1",
     "text": "The SJT isn't meant to be a speed test, but you do have limited time. Don't agonize too long on any single scenario. If you're stuck, make your best judgment and move on. Your first instinct, after careful reading, is often correct.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0162.mp3"
+    "file": "0162.mp3",
+    "duration": 2.75,
+    "startTime": 1502.73
   },
   {
     "index": 163,
@@ -1473,7 +1799,9 @@
     "voice": "F2",
     "text": "Any mental tricks?",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0163.mp3"
+    "file": "0163.mp3",
+    "duration": 18.25,
+    "startTime": 1505.48
   },
   {
     "index": 164,
@@ -1482,7 +1810,9 @@
     "voice": "M1",
     "text": "Here's one that helps: For each scenario, ask yourself \"What would a thoughtful, experienced professional do here?\" Not a saint, not a pushover, not a maverick - a thoughtful professional who cares about their work and their colleagues.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0164.mp3"
+    "file": "0164.mp3",
+    "duration": 2.825,
+    "startTime": 1523.73
   },
   {
     "index": 165,
@@ -1491,7 +1821,9 @@
     "voice": "F2",
     "text": "I like that.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0165.mp3"
+    "file": "0165.mp3",
+    "duration": 6.026,
+    "startTime": 1526.555
   },
   {
     "index": 166,
@@ -1500,7 +1832,9 @@
     "voice": "M1",
     "text": "Also, after you rank the options, do a quick gut-check: \"Would I be proud of this response? Would I be comfortable explaining it to a respected mentor?\" If something feels off, reconsider.",
     "chapter": "SEGMENT 8: TEST-TAKING STRATEGIES (5 minutes)",
-    "file": "0166.mp3"
+    "file": "0166.mp3",
+    "duration": 12.75,
+    "startTime": 1532.581
   },
   {
     "index": 167,
@@ -1509,7 +1843,9 @@
     "voice": "F2",
     "text": "Let's do one more scenario, and I'll try to apply everything we've learned.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0167.mp3"
+    "file": "0167.mp3",
+    "duration": 18.15,
+    "startTime": 1545.331
   },
   {
     "index": 168,
@@ -1518,7 +1854,9 @@
     "voice": "M1",
     "text": "Here's a comprehensive one:",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0168.mp3"
+    "file": "0168.mp3",
+    "duration": 4.826,
+    "startTime": 1563.481
   },
   {
     "index": 169,
@@ -1527,7 +1865,9 @@
     "voice": "M1",
     "text": "\"You're leading a small team on a time-sensitive project. One team member, Pat, has been underperforming, missing deadlines and producing work with errors. You've had one informal conversation about it, but the issues continue. Other team members are frustrated and you're concerned about meeting the project deadline. Pat recently mentioned personal issues at home but didn't go into detail. What do you do?\"",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0169.mp3"
+    "file": "0169.mp3",
+    "duration": 3.15,
+    "startTime": 1568.307
   },
   {
     "index": 170,
@@ -1536,7 +1876,9 @@
     "voice": "F2",
     "text": "Okay, let me work through this out loud. This is testing leadership, judgment, working with others, and probably composure. The dimensions in tension are: achieving the project goal versus being compassionate to Pat.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0170.mp3"
+    "file": "0170.mp3",
+    "duration": 14.42,
+    "startTime": 1571.457
   },
   {
     "index": 171,
@@ -1545,7 +1887,9 @@
     "voice": "M1",
     "text": "Good start.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0171.mp3"
+    "file": "0171.mp3",
+    "duration": 1.463,
+    "startTime": 1585.876
   },
   {
     "index": 172,
@@ -1554,7 +1898,9 @@
     "voice": "F2",
     "text": "Possible responses might be:",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0172.mp3"
+    "file": "0172.mp3",
+    "duration": 2.299,
+    "startTime": 1587.339
   },
   {
     "index": 173,
@@ -1563,7 +1909,9 @@
     "voice": "F2",
     "text": "A) Have a formal performance conversation with Pat, documenting the issues and setting clear expectations.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0173.mp3"
+    "file": "0173.mp3",
+    "duration": 7.036,
+    "startTime": 1589.638
   },
   {
     "index": 174,
@@ -1572,7 +1920,9 @@
     "voice": "F2",
     "text": "B) Redistribute Pat's work to other team members to ensure the deadline is met.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0174.mp3"
+    "file": "0174.mp3",
+    "duration": 4.876,
+    "startTime": 1596.674
   },
   {
     "index": 175,
@@ -1581,7 +1931,9 @@
     "voice": "F2",
     "text": "C) Ask Pat directly if their personal issues are affecting their work and if they need any support.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0175.mp3"
+    "file": "0175.mp3",
+    "duration": 6.478,
+    "startTime": 1601.55
   },
   {
     "index": 176,
@@ -1590,7 +1942,9 @@
     "voice": "F2",
     "text": "D) Report Pat's performance issues to your supervisor and ask for guidance.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0176.mp3"
+    "file": "0176.mp3",
+    "duration": 4.876,
+    "startTime": 1608.028
   },
   {
     "index": 177,
@@ -1599,7 +1953,9 @@
     "voice": "F2",
     "text": "E) Give Pat more time, since they mentioned personal issues.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0177.mp3"
+    "file": "0177.mp3",
+    "duration": 4.11,
+    "startTime": 1612.904
   },
   {
     "index": 178,
@@ -1608,7 +1964,9 @@
     "voice": "F2",
     "text": "Let me rank these. Option E is too passive - one informal conversation already happened and things haven't improved. I have a responsibility to the team and the project. Option B solves the immediate problem but doesn't address the underlying issue and might embarrass Pat.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0178.mp3"
+    "file": "0178.mp3",
+    "duration": 17.763,
+    "startTime": 1617.014
   },
   {
     "index": 179,
@@ -1617,7 +1975,9 @@
     "voice": "M1",
     "text": "Keep going.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0179.mp3"
+    "file": "0179.mp3",
+    "duration": 1.463,
+    "startTime": 1634.778
   },
   {
     "index": 180,
@@ -1626,7 +1986,9 @@
     "voice": "F2",
     "text": "Option D - going to the supervisor - isn't wrong, but I should try to handle it myself first. I'm the leader. Option A is formal and clear but doesn't acknowledge the personal issues. Option C tries to understand what's going on before taking action - that's the \"seek to understand\" principle.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0180.mp3"
+    "file": "0180.mp3",
+    "duration": 18.46,
+    "startTime": 1636.24
   },
   {
     "index": 181,
@@ -1635,7 +1997,9 @@
     "voice": "M1",
     "text": "So your ranking?",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0181.mp3"
+    "file": "0181.mp3",
+    "duration": 1.533,
+    "startTime": 1654.7
   },
   {
     "index": 182,
@@ -1644,7 +2008,9 @@
     "voice": "F2",
     "text": "I'd put C first - it opens the door to understanding what's happening. Then A - because I do need to set clear expectations. Then D - because if my approaches don't work, I should seek guidance. Then B - as a last resort to meet the deadline. Then E.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0182.mp3"
+    "file": "0182.mp3",
+    "duration": 15.882,
+    "startTime": 1656.233
   },
   {
     "index": 183,
@@ -1653,7 +2019,9 @@
     "voice": "M1",
     "text": "Excellent reasoning. You balanced compassion with responsibility. You prioritized understanding, but you didn't avoid the performance issue. And you showed awareness that you have a team and a project to think about, not just Pat.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0183.mp3"
+    "file": "0183.mp3",
+    "duration": 15.813,
+    "startTime": 1672.115
   },
   {
     "index": 184,
@@ -1662,7 +2030,9 @@
     "voice": "F2",
     "text": "It felt more natural this time. Like I was actually thinking it through instead of guessing.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0184.mp3"
+    "file": "0184.mp3",
+    "duration": 6.06,
+    "startTime": 1687.928
   },
   {
     "index": 185,
@@ -1671,7 +2041,9 @@
     "voice": "M1",
     "text": "That's exactly what practice does. The more scenarios you work through, the more automatic this kind of thinking becomes.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0185.mp3"
+    "file": "0185.mp3",
+    "duration": 8.22,
+    "startTime": 1693.988
   },
   {
     "index": 186,
@@ -1680,7 +2052,9 @@
     "voice": "F2",
     "text": "So to summarize what we've learned today?",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0186.mp3"
+    "file": "0186.mp3",
+    "duration": 2.647,
+    "startTime": 1702.208
   },
   {
     "index": 187,
@@ -1689,7 +2063,9 @@
     "voice": "M1",
     "text": "The SJT isn't a trick - it's testing real judgment. Understand the 13 dimensions. Apply the five principles of diplomatic thinking. Read carefully, consider context, and look for balanced responses that address problems while preserving relationships.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0187.mp3"
+    "file": "0187.mp3",
+    "duration": 17.972,
+    "startTime": 1704.855
   },
   {
     "index": 188,
@@ -1698,7 +2074,9 @@
     "voice": "F2",
     "text": "And don't be the hero or the pushover.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0188.mp3"
+    "file": "0188.mp3",
+    "duration": 2.368,
+    "startTime": 1722.828
   },
   {
     "index": 189,
@@ -1707,7 +2085,9 @@
     "voice": "M1",
     "text": "Exactly. Be the thoughtful professional. That's what the State Department is looking for.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0189.mp3"
+    "file": "0189.mp3",
+    "duration": 6.548,
+    "startTime": 1725.196
   },
   {
     "index": 190,
@@ -1716,7 +2096,9 @@
     "voice": "F2",
     "text": "Jordan, this has been incredibly helpful. For everyone listening, we've got five more episodes coming - Foreign Service history, world history and geography, political systems, grammar, and sentence structure.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0190.mp3"
+    "file": "0190.mp3",
+    "duration": 13.862,
+    "startTime": 1731.744
   },
   {
     "index": 191,
@@ -1725,7 +2107,9 @@
     "voice": "M1",
     "text": "Next time, we'll dive into the fascinating history of America's diplomatic corps. From Benjamin Franklin to today's diverse Foreign Service. You'll learn the key events, the influential figures, and why understanding this history will make you a better diplomat.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0191.mp3"
+    "file": "0191.mp3",
+    "duration": 17.485,
+    "startTime": 1745.606
   },
   {
     "index": 192,
@@ -1734,7 +2118,9 @@
     "voice": "F2",
     "text": "Until then, keep practicing those scenarios. And remember - you've got this.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0192.mp3"
+    "file": "0192.mp3",
+    "duration": 5.155,
+    "startTime": 1763.091
   },
   {
     "index": 193,
@@ -1743,6 +2129,8 @@
     "voice": "M1",
     "text": "See you next time on The Diplomat's Edge.",
     "chapter": "SEGMENT 9: FINAL PRACTICE AND WRAP-UP (8 minutes)",
-    "file": "0193.mp3"
+    "file": "0193.mp3",
+    "duration": 2.856,
+    "startTime": 1768.246
   }
 ]

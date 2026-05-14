@@ -2346,11 +2346,8 @@ function applyUpdate() {
     window.location.reload();
 }
 
-// Expose to window so inline `onclick=` handlers in index.html resolve. The
-// module scope hides them otherwise, which silently breaks the Refresh button
-// (and the Update Now banner) that users rely on to recover from a bad cache.
-window.forceRefresh = forceRefresh;
-window.applyUpdate = applyUpdate;
+document.getElementById('refresh-btn')?.addEventListener('click', forceRefresh);
+document.getElementById('apply-update-btn')?.addEventListener('click', applyUpdate);
 
 // ===== MEDIA SESSION API =====
 // Enables lock screen controls, notification controls, and handles audio interruptions

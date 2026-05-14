@@ -1,166 +1,144 @@
-const CACHE_NAME = 'podlearn-v2.3.0';
-// Separate, persistent cache for user-initiated episode downloads. Lives across
-// version bumps — only deleted when the user explicitly removes a download.
+// Service worker — atomic versioned precache.
+//
+// The build script substitutes 2.3.0+20260514T195829Z and ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"] at deploy
+// time. Each deploy gets a unique cache name and pre-fetches the entire app
+// shell during install. Activation atomically deletes any older shell cache
+// (preserving the user-downloaded audio cache). After activation + clients.claim,
+// every request for an app-shell URL is served from a self-consistent set of
+// files — never a freshly deployed index.html paired with an old main.js.
+//
+// At dev time (when running directly without the build) the substitution
+// hasn't happened, so we fall back to a placeholder version and an empty
+// shell list, which means precache is skipped and the SW just passes
+// requests through to the network. Audio downloads still work.
+
+const BUILD_VERSION = '2.3.0+20260514T195829Z';
+const APP_SHELL_RAW = ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"];
+
+const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
+// Persistent across deploys — only deleted when the user explicitly removes
+// a downloaded episode.
 const OFFLINE_AUDIO_CACHE = 'podlearn-offline-audio-v1';
-const STATIC_ASSETS = [
-    '/manifest.json',
-    '/icon.svg'
-];
 
-// Files that should always check network first (content that changes).
-// /src/ files (main.js, audio.js, etc.) MUST stay network-first or a stale
-// cached main.js will collide with a freshly deployed index.html — the JS
-// references DOM ids that no longer exist and crashes init.
-const NETWORK_FIRST = [
-    '/index.html',
-    '/pwa/index.html',
-    '/podcasts.js',
-    '/dist/podcasts.js',
-    '/'
-];
+const APP_SHELL = Array.isArray(APP_SHELL_RAW) ? APP_SHELL_RAW : [];
+const SHELL_PATHS = new Set(APP_SHELL);
 
-const NETWORK_FIRST_PREFIXES = [
-    '/src/',
-    '/dist/src/'
-];
-
-// Install service worker
-self.addEventListener('install', event => {
-    console.log('Service Worker installing, version:', CACHE_NAME);
-    // Skip waiting to activate immediately
-    self.skipWaiting();
-});
-
-// Activate and clean up old caches
-self.addEventListener('activate', event => {
-    console.log('Service Worker activating, version:', CACHE_NAME);
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    // Preserve the offline-audio cache across version bumps — it
-                    // contains user-downloaded episodes that should outlive a deploy.
-                    if (cacheName !== CACHE_NAME && cacheName !== OFFLINE_AUDIO_CACHE) {
-                        console.log('Deleting old cache:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        }).then(() => {
-            // Take control of all clients immediately
-            return self.clients.claim();
-        }).then(() => {
-            // Notify all clients that SW has updated
-            return self.clients.matchAll().then(clients => {
-                clients.forEach(client => {
-                    client.postMessage({ type: 'SW_UPDATED', version: CACHE_NAME });
-                });
+self.addEventListener('install', (event) => {
+    console.log('[sw] install', BUILD_VERSION, 'shell entries:', APP_SHELL.length);
+    event.waitUntil((async () => {
+        if (APP_SHELL.length === 0) {
+            // Dev / unsubstituted SW: skip precache; serve passthrough.
+            return self.skipWaiting();
+        }
+        const cache = await caches.open(SHELL_CACHE);
+        // `cache: 'reload'` forces each request past the browser HTTP cache so
+        // we don't accidentally precache a stale main.js the browser is still
+        // holding from the previous deploy.
+        await Promise.all(APP_SHELL.map((url) => {
+            const req = new Request(url, { cache: 'reload' });
+            return fetch(req).then((res) => {
+                if (!res || !res.ok) throw new Error(`Precache fetch failed: ${url} (${res && res.status})`);
+                return cache.put(url, res);
+            }).catch((err) => {
+                console.warn('[sw] precache miss:', url, err.message);
             });
-        })
-    );
+        }));
+        return self.skipWaiting();
+    })());
 });
 
-// Smart fetch strategy
-self.addEventListener('fetch', event => {
-    const url = new URL(event.request.url);
+self.addEventListener('activate', (event) => {
+    console.log('[sw] activate', BUILD_VERSION);
+    event.waitUntil((async () => {
+        const keep = new Set([SHELL_CACHE, OFFLINE_AUDIO_CACHE]);
+        const names = await caches.keys();
+        await Promise.all(names.map((name) => keep.has(name) ? null : caches.delete(name)));
+        await self.clients.claim();
+        const clients = await self.clients.matchAll();
+        clients.forEach((client) => client.postMessage({ type: 'SW_UPDATED', version: BUILD_VERSION }));
+    })());
+});
 
-    // NEVER cache version.json - always go to network
-    if (url.pathname.endsWith('version.json')) {
-        event.respondWith(fetch(event.request));
+self.addEventListener('fetch', (event) => {
+    const req = event.request;
+    if (req.method !== 'GET') return;
+
+    const url = new URL(req.url);
+    if (url.origin !== self.location.origin) return; // only intercept same-origin
+
+    // version.json: always fresh from network so the version-mismatch detection
+    // in the page can fire. No caching, no shell membership.
+    if (url.pathname.endsWith('/version.json') || url.pathname.endsWith('version.json')) {
+        event.respondWith(fetch(req));
         return;
     }
 
-    // For network-first resources (podcasts.js, root, /src/), try network first
-    if (NETWORK_FIRST.some(path => url.pathname === path || url.pathname.endsWith(path))
-        || NETWORK_FIRST_PREFIXES.some(prefix => url.pathname.includes(prefix))) {
-        event.respondWith(networkFirst(event.request));
-        return;
-    }
-
-    // Audio files: check the offline cache first (user-downloaded episodes),
-    // then fall through to network. We never auto-cache audio into the
-    // versioned cache to keep storage bounded — downloads are always
-    // explicit and stored in OFFLINE_AUDIO_CACHE only.
+    // Audio: serve user-downloaded episodes from the offline cache, otherwise
+    // stream from network. Never auto-cache so storage stays bounded.
     if (url.pathname.includes('/audio/')) {
-        event.respondWith(audioFetch(event.request));
+        event.respondWith(audioFetch(req));
         return;
     }
 
-    // For static assets, use cache first with network fallback
-    event.respondWith(cacheFirst(event.request));
+    // App shell: serve from the current shell cache. Each deploy has its own
+    // cache, so the shell is always internally consistent.
+    if (isShellRequest(url)) {
+        event.respondWith(shellFetch(req));
+        return;
+    }
+
+    // Anything else (e.g. third-party scripts): pass through to network.
 });
 
-// Network first strategy - try network, fall back to cache
-async function networkFirst(request, { cacheResponse = true } = {}) {
-    try {
-        const networkResponse = await fetch(request);
-        if (cacheResponse && networkResponse.ok) {
-            // Cache the fresh response
-            const cache = await caches.open(CACHE_NAME);
-            cache.put(request, networkResponse.clone());
-        }
-        return networkResponse;
-    } catch (error) {
-        // Network failed, try cache
-        const cachedResponse = await caches.match(request);
-        if (cachedResponse) {
-            return cachedResponse;
-        }
-        throw error;
-    }
+function isShellRequest(url) {
+    if (SHELL_PATHS.has(url.pathname)) return true;
+    // Root path serves index.html in production hosting.
+    if (url.pathname === '/' && SHELL_PATHS.has('/index.html')) return true;
+    return false;
 }
 
-// Cache first strategy - try cache, fall back to network
-async function cacheFirst(request) {
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-        return cachedResponse;
-    }
-
+async function shellFetch(req) {
+    const cache = await caches.open(SHELL_CACHE);
+    const cached = await cache.match(req, { ignoreSearch: true });
+    if (cached) return cached;
+    // Cache miss (e.g. dev mode where precache was skipped, or a file that
+    // wasn't in the manifest at build time): fall back to network and store
+    // it so subsequent loads are fast.
     try {
-        const networkResponse = await fetch(request);
-        if (networkResponse.ok) {
-            const cache = await caches.open(CACHE_NAME);
-            cache.put(request, networkResponse.clone());
-        }
-        return networkResponse;
-    } catch (error) {
-        // Return a basic offline page or error
+        const res = await fetch(req);
+        if (res && res.ok) cache.put(req, res.clone()).catch(() => {});
+        return res;
+    } catch (err) {
         return new Response('Offline', { status: 503, statusText: 'Offline' });
     }
 }
 
-// Audio fetch: serve from the offline cache when present (downloaded episode),
-// otherwise stream from network without caching. Cache lookup ignores query
-// strings so the per-load cache-buster (?v=…) never causes a miss.
-async function audioFetch(request) {
+async function audioFetch(req) {
     try {
         const cache = await caches.open(OFFLINE_AUDIO_CACHE);
-        const cached = await cache.match(request, { ignoreSearch: true });
+        const cached = await cache.match(req, { ignoreSearch: true });
         if (cached) return cached;
     } catch (err) {
-        console.warn('Offline audio cache lookup failed:', err);
+        console.warn('[sw] offline audio lookup failed:', err);
     }
-    return fetch(request);
+    return fetch(req);
 }
 
-// Listen for skip waiting message from client
-self.addEventListener('message', event => {
+self.addEventListener('message', (event) => {
     const data = event.data;
     if (data === 'SKIP_WAITING') {
         self.skipWaiting();
         return;
     }
     if (data === 'CLEAR_CACHE') {
-        event.waitUntil(
-            caches.delete(CACHE_NAME).then(() => {
-                console.log('Cache cleared');
-            })
-        );
+        event.waitUntil((async () => {
+            const names = await caches.keys();
+            await Promise.all(names
+                .filter((n) => n !== OFFLINE_AUDIO_CACHE)
+                .map((n) => caches.delete(n)));
+        })());
         return;
     }
-    // Per-message offline-cache controls. Always reply via MessageChannel
-    // (event.ports[0]) when one is provided so the client can await success.
     const reply = (payload) => {
         const port = event.ports && event.ports[0];
         if (port) port.postMessage(payload);

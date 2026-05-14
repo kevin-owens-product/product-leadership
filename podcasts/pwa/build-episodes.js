@@ -153,8 +153,9 @@ const generatedVersion = {
 fs.writeFileSync(path.join(distDir, 'version.json'), JSON.stringify(generatedVersion, null, 2) + '\n');
 console.log(`✓ Generated: version.json (${buildVersion})`);
 
-// Copy static root files
-const filesToCopy = ['index.html', 'manifest.json', 'sw.js', 'icon.svg', '_headers'];
+// Copy static root files. sw.js gets a custom path because we need to
+// substitute the build version + app shell list into it after copying.
+const filesToCopy = ['index.html', 'manifest.json', 'icon.svg', '_headers'];
 filesToCopy.forEach(file => {
     const src = path.join(__dirname, file);
     const dest = path.join(distDir, file);
@@ -232,6 +233,45 @@ if (fs.existsSync(audioSrcDir)) {
     }
 } else {
     console.warn('⚠️  No generated Supertonic audio found. Run npm run audio:show before building.');
+}
+
+// === Service worker template substitution ===
+//
+// Walk dist/ to enumerate the app shell (everything except audio, the SW
+// itself, version.json, and Netlify-only files). Substitute the build version
+// + that file list into sw.js so the precache install is atomic — every deploy
+// gets a fresh cache name and pre-fetches a self-consistent set of assets.
+function listAppShellFiles(dir) {
+    const out = [];
+    const skipDirs = new Set(['audio']);
+    const skipFiles = new Set(['sw.js', 'version.json', '_headers', 'netlify.toml', 'README.md', '.DS_Store']);
+    function walk(absolute, relative) {
+        for (const entry of fs.readdirSync(absolute, { withFileTypes: true })) {
+            if (entry.name.includes(' 2.') || entry.name.endsWith(' 2')) continue;
+            const childAbs = path.join(absolute, entry.name);
+            const childRel = relative ? `${relative}/${entry.name}` : `/${entry.name}`;
+            if (entry.isDirectory()) {
+                if (skipDirs.has(entry.name)) continue;
+                walk(childAbs, childRel);
+            } else if (!skipFiles.has(entry.name)) {
+                out.push(childRel);
+            }
+        }
+    }
+    walk(dir, '');
+    return out.sort();
+}
+
+const swSrcPath = path.join(__dirname, 'sw.js');
+const swDestPath = path.join(distDir, 'sw.js');
+if (fs.existsSync(swSrcPath)) {
+    const appShell = listAppShellFiles(distDir);
+    const swSource = fs.readFileSync(swSrcPath, 'utf8');
+    const populated = swSource
+        .replaceAll('__BUILD_VERSION__', buildVersion)
+        .replaceAll('__APP_SHELL__', JSON.stringify(appShell));
+    fs.writeFileSync(swDestPath, populated);
+    console.log(`✓ Generated: sw.js (precache version=${buildVersion}, files=${appShell.length})`);
 }
 
 // Create README

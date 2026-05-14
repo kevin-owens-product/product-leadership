@@ -6,6 +6,11 @@
   "author": "Priya Anand & Marcus Hale",
   "color": "#0ea5e9",
   "icon": "🛠️",
+  "voiceMap": {
+    "PRIYA": "F1",
+    "MARCUS": "M1"
+  },
+  "lang": "en",
   "episodes": [
     {
       "id": 1,

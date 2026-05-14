@@ -81,6 +81,16 @@ SUPERTONIC_DIR=~/code/supertonic \
   node podcasts/tools/generate-audio-supertonic.js \
   --show agentic-coding-frontier --all
 
+# Render multiple shows with controlled episode-level parallelism
+SUPERTONIC_DIR=~/code/supertonic \
+  node podcasts/tools/generate-audio-supertonic-parallel.js \
+  --show foreign-service-prep \
+  --show ap-finance-mastery \
+  --jobs 2 \
+  --total-step 8 \
+  --speed 1.0 \
+  --force
+
 # Preview what would be generated without calling Supertonic
 node podcasts/tools/generate-audio-supertonic.js \
   --show agentic-coding-frontier --episode 1 --dry-run
@@ -96,6 +106,7 @@ From `podcasts/pwa`, the same generator is exposed through npm scripts:
 npm run audio:list -- --show agentic-coding-frontier
 npm run audio:episode -- --show agentic-coding-frontier --episode 1
 npm run audio:show -- --show agentic-coding-frontier
+npm run audio:shows -- --show foreign-service-prep --show ap-finance-mastery --jobs 2 --force
 ```
 
 ## Configuring voices

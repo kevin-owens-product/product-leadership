@@ -6,6 +6,10 @@
   "author": "PodLearn",
   "color": "#1e40af",
   "icon": "🌍",
+  "voiceMap": {
+    "JORDAN": "M1",
+    "MAYA": "F2"
+  },
   "episodes": [
     {
       "id": 1,

@@ -5,3 +5,9 @@ podcasts/pwa/dist/audio/
 podcasts/pwa/node_modules/
 podcasts/pwa/test-results/
 podcasts/pwa/playwright-report/
+
+# macOS Finder/iCloud Drive sync duplicates ("name 2.ext", "name 2", etc.)
+* [2-9].*
+* [2-9][0-9].*
+* [2-9]
+* [2-9][0-9]

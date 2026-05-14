@@ -5,6 +5,10 @@
   "description": "A comprehensive deep dive into accounts payable, procure-to-pay, payment operations, and finance automation. Built for product leaders joining the AP automation space who need to become domain experts fast.",
   "color": "#059669",
   "icon": "💰",
+  "voiceMap": {
+    "KEVIN": "M1",
+    "MORGAN": "F2"
+  },
   "episodes": [
     {"id": 1, "file": "episode-01-ap-fundamentals.md", "title": "AP Fundamentals & The Invoice Lifecycle"},
     {"id": 2, "file": "episode-02-procure-to-pay.md", "title": "The Procure-to-Pay Journey"},

@@ -1,0 +1,52 @@
+{
+  "id": "the-harness",
+  "title": "The Harness",
+  "subtitle": "Building the Enterprise AI Operating System",
+  "description": "A 6-part series on harness engineering, company context, enterprise AI transformation, and developer enablement. Each episode pulls real, current case studies from Stripe, Notion, Block, Cisco, Shopify, Atlassian, and others to show how leading companies are building the scaffolding that turns AI models into trusted enterprise systems.",
+  "author": "Priya Anand & Marcus Hale",
+  "color": "#0ea5e9",
+  "icon": "🛠️",
+  "voiceMap": {
+    "PRIYA": "F1",
+    "MARCUS": "M1"
+  },
+  "lang": "en",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-from-copilot-to-harness.md",
+      "title": "From Copilot to Harness",
+      "subtitle": "Why the Model Is Not the Product"
+    },
+    {
+      "id": 2,
+      "file": "episode-02-company-context-as-the-real-moat.md",
+      "title": "Company Context as the Real Moat",
+      "subtitle": "How Notion, Stripe, and Cisco Turn Their Knowledge Into AI Advantage"
+    },
+    {
+      "id": 3,
+      "file": "episode-03-developer-enablement-stack.md",
+      "title": "The Developer Enablement Stack",
+      "subtitle": "Platform Engineering Meets Agents -- Lessons from Stripe and Block"
+    },
+    {
+      "id": 4,
+      "file": "episode-04-enterprise-ai-transformation-at-scale.md",
+      "title": "Enterprise AI Transformation at Scale",
+      "subtitle": "Operating Models, Org Design, and the Cisco Playbook"
+    },
+    {
+      "id": 5,
+      "file": "episode-05-evals-guardrails-trust-layer.md",
+      "title": "Evals, Guardrails, and the Trust Layer",
+      "subtitle": "Shipping AI Safely in Regulated Enterprises"
+    },
+    {
+      "id": 6,
+      "file": "episode-06-twelve-month-enterprise-ai-roadmap.md",
+      "title": "The 12-Month Enterprise AI Roadmap",
+      "subtitle": "A Sequenced Playbook for CTOs, CIOs, and Heads of Platform"
+    }
+  ]
+}

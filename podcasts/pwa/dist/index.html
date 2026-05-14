@@ -1737,6 +1737,41 @@
 </head>
 <body>
     <!-- Podcasts Home View -->
+    <script>
+        // Recovery escape hatch: if main.js is broken-cached and the in-app
+        // Refresh button no longer fires, the user can append ?reset=1 to the
+        // URL to nuke caches + SW + localStorage and reload. Also exposes
+        // window.podlearnReset() so the same can be invoked from devtools.
+        (function () {
+            function nukeAndReload() {
+                var p = [];
+                try { localStorage.clear(); } catch (e) {}
+                if ('serviceWorker' in navigator) {
+                    p.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+                        return Promise.all(rs.map(function (r) { return r.unregister(); }));
+                    }).catch(function () {}));
+                }
+                if ('caches' in window) {
+                    p.push(caches.keys().then(function (ks) {
+                        return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+                    }).catch(function () {}));
+                }
+                Promise.all(p).then(function () {
+                    var u = new URL(location.href);
+                    u.searchParams.delete('reset');
+                    u.searchParams.set('_', Date.now().toString());
+                    location.replace(u.toString());
+                });
+            }
+            window.podlearnReset = nukeAndReload;
+            try {
+                if (new URL(location.href).searchParams.get('reset') === '1') {
+                    nukeAndReload();
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <div id="podcasts-view" class="view active podcasts-view">
         <header class="app-header">
             <h1>PodLearn</h1>

@@ -1,5 +1,5 @@
-import { safeColor } from './security/sanitize.js';
-import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js';
+import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260514T213359Z';
+import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260514T213359Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -9,13 +9,13 @@ import {
     saveQueue,
     loadListeningStats,
     saveListeningStats
-} from './state/storage.js';
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js';
-import { bindNavTabs } from './ui/tabs.js';
-import { registerServiceWorker } from './sw/register-sw.js';
-import { createPlaybackSessionController } from './playback/controller.js';
-import { createSpeechPlayers } from './playback/audio.js';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js';
+} from './state/storage.js?v=2.3.0%2B20260514T213359Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260514T213359Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260514T213359Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260514T213359Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260514T213359Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260514T213359Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260514T213359Z';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -23,7 +23,7 @@ import {
     renderQueueItem,
     renderChapterItem,
     renderBookmarkItem
-} from './ui/render.js';
+} from './ui/render.js?v=2.3.0%2B20260514T213359Z';
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';

@@ -262,6 +262,66 @@ function listAppShellFiles(dir) {
     return out.sort();
 }
 
+// === URL-versioning of every JS asset ===
+//
+// Belt-and-suspenders for the SW. Even if a user is stuck on a broken old
+// service worker that does cache-first for /src/*, a deploy bumps the query
+// string on every JS URL — so those URLs are guaranteed cache misses and
+// fetched fresh from network. The new SW's shellFetch uses ignoreSearch:true,
+// so the precache still hits for the same path regardless of query.
+//
+// Two passes:
+//   1. Rewrite relative `from "./x.js"` and `import("./x.js")` inside every
+//      dist/src/*.js so module-graph imports get the version too. (Otherwise
+//      only the entry point would be busted.)
+//   2. Rewrite the entry script tag(s) in dist/index.html.
+const VERSION_QUERY = `?v=${encodeURIComponent(buildVersion)}`;
+const RELATIVE_JS_RE = /(['"])(\.{1,2}\/[^'"?]+\.js)(['"])/g;
+function bustJsImportsInFile(filePath) {
+    const before = fs.readFileSync(filePath, 'utf8');
+    let touched = 0;
+    const after = before.replace(RELATIVE_JS_RE, (match, openQ, p, closeQ) => {
+        if (openQ !== closeQ) return match;
+        touched += 1;
+        return `${openQ}${p}${VERSION_QUERY}${closeQ}`;
+    });
+    if (touched > 0) fs.writeFileSync(filePath, after);
+    return touched;
+}
+function bustJsImportsInDir(dir) {
+    if (!fs.existsSync(dir)) return { files: 0, edits: 0 };
+    let files = 0;
+    let edits = 0;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const child = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            const sub = bustJsImportsInDir(child);
+            files += sub.files; edits += sub.edits;
+        } else if (entry.isFile() && entry.name.endsWith('.js')) {
+            const t = bustJsImportsInFile(child);
+            if (t > 0) { files += 1; edits += t; }
+        }
+    }
+    return { files, edits };
+}
+const distSrcDir = path.join(distDir, 'src');
+const importBust = bustJsImportsInDir(distSrcDir);
+console.log(`✓ Cache-busted ${importBust.edits} import(s) across ${importBust.files} module file(s)`);
+
+const indexHtmlDist = path.join(distDir, 'index.html');
+if (fs.existsSync(indexHtmlDist)) {
+    const original = fs.readFileSync(indexHtmlDist, 'utf8');
+    // Match <script ... src="src/x.js" or "./src/x.js"...>. Preserves attribute order.
+    const updated = original.replace(/(<script\b[^>]*\bsrc=)(['"])(\.{0,2}\/?src\/[^'"?]+\.js)(['"])/g, (m, prefix, q1, p, q2) => {
+        if (q1 !== q2) return m;
+        return `${prefix}${q1}${p}${VERSION_QUERY}${q2}`;
+    });
+    if (updated !== original) {
+        fs.writeFileSync(indexHtmlDist, updated);
+        console.log(`✓ Cache-busted entry <script src="…"> tags in dist/index.html`);
+    }
+}
+
 const swSrcPath = path.join(__dirname, 'sw.js');
 const swDestPath = path.join(distDir, 'sw.js');
 if (fs.existsSync(swSrcPath)) {

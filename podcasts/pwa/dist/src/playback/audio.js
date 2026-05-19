@@ -94,7 +94,11 @@ export function createSpeechPlayers({ getSpeechRate }) {
       }
     } else {
       try { audio.pause(); } catch { /* ignore */ }
-      audio.removeAttribute('src');
+      if (typeof audio.removeAttribute === 'function') {
+        audio.removeAttribute('src');
+      } else {
+        audio.src = '';
+      }
       try { audio.load(); } catch { /* ignore */ }
     }
     syncRate();

@@ -1,6 +1,6 @@
 // Service worker — atomic versioned precache.
 //
-// The build script substitutes 2.3.0+20260514T213359Z and ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"] at deploy
+// The build script substitutes 2.3.0+20260519T212616Z and ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"] at deploy
 // time. Each deploy gets a unique cache name and pre-fetches the entire app
 // shell during install. Activation atomically deletes any older shell cache
 // (preserving the user-downloaded audio cache). After activation + clients.claim,
@@ -12,7 +12,7 @@
 // shell list, which means precache is skipped and the SW just passes
 // requests through to the network. Audio downloads still work.
 
-const BUILD_VERSION = '2.3.0+20260514T213359Z';
+const BUILD_VERSION = '2.3.0+20260519T212616Z';
 const APP_SHELL_RAW = ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"];
 
 const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
@@ -117,11 +117,77 @@ async function audioFetch(req) {
     try {
         const cache = await caches.open(OFFLINE_AUDIO_CACHE);
         const cached = await cache.match(req, { ignoreSearch: true });
-        if (cached) return cached;
+        if (cached) return rangeAwareAudioResponse(req, cached);
     } catch (err) {
         console.warn('[sw] offline audio lookup failed:', err);
     }
     return fetch(req);
+}
+
+async function rangeAwareAudioResponse(req, cached) {
+    const range = req.headers.get('range');
+    if (!range) return cached;
+
+    const match = range.match(/^bytes=(\d*)-(\d*)$/);
+    if (!match) return cached;
+
+    const blob = await cached.blob();
+    const size = blob.size;
+    let start;
+    let end;
+
+    if (match[1] === '' && match[2] === '') {
+        return cached;
+    }
+
+    if (match[1] === '') {
+        const suffixLength = Number(match[2]);
+        if (!Number.isFinite(suffixLength) || suffixLength <= 0) {
+            return rangeNotSatisfiable(size);
+        }
+        start = Math.max(0, size - suffixLength);
+        end = size - 1;
+    } else {
+        start = Number(match[1]);
+        end = match[2] === '' ? size - 1 : Number(match[2]);
+    }
+
+    if (
+        !Number.isFinite(start) ||
+        !Number.isFinite(end) ||
+        start < 0 ||
+        end < start ||
+        start >= size
+    ) {
+        return rangeNotSatisfiable(size);
+    }
+
+    end = Math.min(end, size - 1);
+    const body = blob.slice(start, end + 1);
+    const headers = new Headers(cached.headers);
+    headers.set('Accept-Ranges', 'bytes');
+    headers.set('Content-Length', String(body.size));
+    headers.set('Content-Range', `bytes ${start}-${end}/${size}`);
+    if (!headers.has('Content-Type')) {
+        headers.set('Content-Type', blob.type || 'audio/mpeg');
+    }
+
+    return new Response(body, {
+        status: 206,
+        statusText: 'Partial Content',
+        headers
+    });
+}
+
+function rangeNotSatisfiable(size) {
+    return new Response('', {
+        status: 416,
+        statusText: 'Range Not Satisfiable',
+        headers: {
+            'Content-Range': `bytes */${size}`,
+            'Accept-Ranges': 'bytes'
+        }
+    });
 }
 
 self.addEventListener('message', (event) => {

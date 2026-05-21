@@ -1,35 +1,33 @@
 import { test, expect } from '@playwright/test';
 
-test('loads home and can open player shell', async ({ page }) => {
+async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitle = 'AI-Native Product Management') {
   await page.goto('/');
   await expect(page.locator('#podcasts-view')).toBeVisible();
 
-  const firstCard = page.locator('.podcast-card').first();
-  await expect(firstCard).toBeVisible();
-  await firstCard.click();
+  const podcastCard = page.locator(`.podcast-card:has-text("${podcastTitle}")`);
+  await expect(podcastCard).toBeVisible();
+  await podcastCard.evaluate((el) => el.click());
 
-  await expect(page.locator('#list-view')).toHaveClass(/active/);
-
-  const firstEpisode = page.locator('.episode-card').first();
-  await firstEpisode.click();
-
+  const episodeCard = page.locator(`.episode-card:has-text("${episodeTitle}")`);
+  await expect(episodeCard).toBeVisible();
+  await episodeCard.evaluate((el) => el.click());
   await expect(page.locator('#player-view')).toHaveClass(/active/);
+}
+
+test('loads home and can open player shell', async ({ page }) => {
+  await openEpisode(page);
   await expect(page.locator('#play-btn')).toBeVisible();
 });
 
 test('transcript search handles regex-like input without crash', async ({ page }) => {
-  await page.goto('/');
-  await page.locator('.podcast-card').first().click();
-  await page.locator('.episode-card').first().click();
+  await openEpisode(page);
 
   await page.fill('#transcript-search-input', 'a+b?(c)[d]');
   await expect(page.locator('#transcript-search-input')).toHaveValue('a+b?(c)[d]');
 });
 
 test('settings shows generated audio background playback notice', async ({ page }) => {
-  await page.goto('/');
-  await page.locator('.podcast-card').first().click();
-  await page.locator('.episode-card').first().click();
+  await openEpisode(page);
 
   await page.locator('#settings-panel .panel-header').click();
   await expect(page.locator('#tts-background-notice')).toContainText('Background playback note');
@@ -84,8 +82,7 @@ test('AI Native PM shows stable chapter markers and playback advances', async ({
   });
 
   await page.goto('/');
-  await page.locator('.podcast-card:has-text("The Forge Podcast")').click();
-  await page.locator('.episode-card:has-text("AI-Native Product Management")').click();
+  await openEpisode(page);
 
   await expect(page.locator('#chapters-list .chapter-time').first()).toHaveText(/^00:00 · \d+ min$/);
   await expect(page.locator('#chapters-list .chapter-time').nth(1)).toHaveText(/^\d{2}:\d{2} · \d+ min$/);

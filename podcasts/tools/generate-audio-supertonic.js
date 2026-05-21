@@ -53,6 +53,23 @@ const { spawnSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const SHOWS_DIR = path.join(ROOT, 'shows');
 const OUTPUT_ROOT = path.join(ROOT, 'pwa', 'audio');
+const BOLD_SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
+const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
+const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)\]$/i;
+const CUE_DURATIONS = {
+  'PAUSE': 0.8,
+  'LONG PAUSE': 1.8,
+  'MUSIC STING': 1.0,
+  'MUSIC FADE': 1.2,
+  'MUSIC FADES': 1.2,
+  'INTRO MUSIC': 1.5,
+  'OUTRO MUSIC': 1.5,
+  'SFX': 0.7,
+  'SOUND': 0.7,
+  'AMBIENCE': 1.0,
+  'AMBIENT BED': 1.0,
+};
+const SILENCE_SAMPLE_RATE = 44100;
 
 const args = process.argv.slice(2);
 
@@ -154,7 +171,7 @@ function cleanText(text) {
 function parseEpisode(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
   const lines = content.split('\n');
-  const dialogue = [];
+  const events = [];
   let chapter = 'INTRO';
   let lastSpeaker = null;
   let lastSpeakerLine = -2;
@@ -169,9 +186,25 @@ function parseEpisode(filePath) {
       continue;
     }
     if (trimmed.startsWith('#') || trimmed.startsWith('---')) continue;
-    if (/^\*?\*?\[.+\]\*?\*?$/.test(trimmed)) continue; // stage directions
+    const cueMatch = trimmed.match(BRACKET_CUE_LINE_RE);
+    if (cueMatch) {
+      const cue = cueMatch[1].toUpperCase();
+      events.push({
+        type: 'cue',
+        cue,
+        duration: CUE_DURATIONS[cue] || 0.8,
+        chapter,
+        rawLine: i,
+      });
+      lastSpeaker = null;
+      continue;
+    }
+    if (/^\*?\*?\[.+\]\*?\*?$/.test(trimmed)) {
+      lastSpeaker = null;
+      continue; // stage directions
+    }
 
-    const m = trimmed.match(/^\*\*([A-Z][A-Z0-9 _\-']{0,30}):\*\*\s*(.*)$/);
+    const m = trimmed.match(BOLD_SPEAKER_LINE_RE) || trimmed.match(BRACKET_SPEAKER_LINE_RE);
     if (m) {
       const speaker = m[1].trim();
       const text = cleanText(m[2] || '');
@@ -180,7 +213,7 @@ function parseEpisode(filePath) {
         lastSpeakerLine = i;
         continue;
       }
-      dialogue.push({ speaker, text, chapter, rawLine: i });
+      events.push({ type: 'dialogue', speaker, text, chapter, rawLine: i });
       lastSpeaker = speaker;
       lastSpeakerLine = i;
       continue;
@@ -190,12 +223,12 @@ function parseEpisode(filePath) {
     if (lastSpeaker && i - lastSpeakerLine <= 4) {
       const text = cleanText(trimmed);
       if (text && !/^\*?\*?\[/.test(trimmed)) {
-        dialogue.push({ speaker: lastSpeaker, text, chapter, rawLine: i });
+        events.push({ type: 'dialogue', speaker: lastSpeaker, text, chapter, rawLine: i });
         lastSpeakerLine = i;
       }
     }
   }
-  return dialogue;
+  return events;
 }
 
 function findEpisodes(showManifest, showDir) {
@@ -378,6 +411,33 @@ function concatWavs(inputs, outputPath) {
   fs.writeFileSync(outputPath, Buffer.concat([header, pcm]));
 }
 
+function writeSilenceWav(outputPath, seconds, sampleRate = SILENCE_SAMPLE_RATE) {
+  const safeSeconds = Math.max(0.1, Number(seconds) || 0.8);
+  const sampleCount = Math.max(1, Math.round(sampleRate * safeSeconds));
+  const bitsPerSample = 16;
+  const numChannels = 1;
+  const byteRate = sampleRate * numChannels * (bitsPerSample / 8);
+  const blockAlign = numChannels * (bitsPerSample / 8);
+  const pcmLength = sampleCount * blockAlign;
+
+  const header = Buffer.alloc(44);
+  header.write('RIFF', 0, 'ascii');
+  header.writeUInt32LE(36 + pcmLength, 4);
+  header.write('WAVE', 8, 'ascii');
+  header.write('fmt ', 12, 'ascii');
+  header.writeUInt32LE(16, 16);
+  header.writeUInt16LE(1, 20);
+  header.writeUInt16LE(numChannels, 22);
+  header.writeUInt32LE(sampleRate, 24);
+  header.writeUInt32LE(byteRate, 28);
+  header.writeUInt16LE(blockAlign, 32);
+  header.writeUInt16LE(bitsPerSample, 34);
+  header.write('data', 36, 'ascii');
+  header.writeUInt32LE(pcmLength, 40);
+
+  fs.writeFileSync(outputPath, Buffer.concat([header, Buffer.alloc(pcmLength)]));
+}
+
 function hasFfmpeg() {
   const res = spawnSync('ffmpeg', ['-version'], { stdio: 'ignore' });
   return res.status === 0;
@@ -426,14 +486,21 @@ function concatToMp3(wavs, mp3Path) {
 }
 
 async function generateEpisode({ exampleScript, showId, episode, manifest }) {
-  const dialogue = parseEpisode(episode.path);
+  const events = parseEpisode(episode.path);
+  const dialogue = events.filter((event) => event.type === 'dialogue');
+  const cues = events.filter((event) => event.type === 'cue');
   log(`${episode.basename}: ${dialogue.length} dialogue lines`);
+  if (cues.length > 0) log(`${episode.basename}: ${cues.length} production cues`);
 
   if (FLAGS.dryRun) {
-    dialogue.slice(0, 6).forEach((d, i) => {
-      console.log(`  ${String(i).padStart(4, '0')} [${d.speaker}] ${d.text.slice(0, 80)}${d.text.length > 80 ? '…' : ''}`);
+    events.slice(0, 8).forEach((event, i) => {
+      if (event.type === 'cue') {
+        console.log(`  ${String(i).padStart(4, '0')} [${event.cue}] ${event.duration}s`);
+        return;
+      }
+      console.log(`  ${String(i).padStart(4, '0')} [${event.speaker}] ${event.text.slice(0, 80)}${event.text.length > 80 ? '…' : ''}`);
     });
-    if (dialogue.length > 6) console.log(`  … and ${dialogue.length - 6} more`);
+    if (events.length > 8) console.log(`  … and ${events.length - 8} more events`);
     return;
   }
 
@@ -446,30 +513,52 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   const wavs = [];
   const pending = [];
 
-  for (let i = 0; i < dialogue.length; i++) {
-    const line = dialogue[i];
-    if (!speakerOrder.has(line.speaker)) speakerOrder.set(line.speaker, speakerOrder.size);
-    const voice = pickVoice(line.speaker, voiceMap, speakerOrder.get(line.speaker));
-
+  let dialogueIndex = 0;
+  for (let i = 0; i < events.length; i++) {
+    const event = events[i];
     const wavName = `${String(i).padStart(4, '0')}.wav`;
     const wavPath = path.join(outDir, wavName);
 
+    if (event.type === 'cue') {
+      if (!fs.existsSync(wavPath) || FLAGS.force) {
+        writeSilenceWav(wavPath, event.duration);
+      }
+      wavs.push(wavPath);
+      items.push({
+        index: i,
+        rawLine: event.rawLine,
+        type: 'cue',
+        cue: event.cue,
+        text: `[${event.cue}]`,
+        chapter: event.chapter,
+        file: wavName,
+      });
+      continue;
+    }
+
+    const line = event;
+    if (!speakerOrder.has(line.speaker)) speakerOrder.set(line.speaker, speakerOrder.size);
+    const voice = pickVoice(line.speaker, voiceMap, speakerOrder.get(line.speaker));
+
     if (fs.existsSync(wavPath) && !FLAGS.force) {
-      process.stdout.write(`\r  line ${i + 1}/${dialogue.length} (cached)        `);
+      process.stdout.write(`\r  line ${dialogueIndex + 1}/${dialogue.length} (cached)        `);
     } else {
-      pending.push({ ...line, index: i, voice, wavPath });
+      pending.push({ ...line, index: dialogueIndex, voice, wavPath });
     }
 
     wavs.push(wavPath);
     items.push({
       index: i,
+      dialogueIndex,
       rawLine: line.rawLine,
+      type: 'dialogue',
       speaker: line.speaker,
       voice,
       text: line.text,
       chapter: line.chapter,
       file: wavName,
     });
+    dialogueIndex += 1;
   }
 
   if (pending.length > 0) {
@@ -493,8 +582,8 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   fs.rmSync(path.join(outDir, '.tmp'), { recursive: true, force: true });
   console.log('');
 
-  if (items.length !== dialogue.length) {
-    throw new Error(`Generated ${items.length}/${dialogue.length} lines for ${episode.basename}; refusing to write partial manifest.`);
+  if (items.length !== events.length) {
+    throw new Error(`Generated ${items.length}/${events.length} events for ${episode.basename}; refusing to write partial manifest.`);
   }
 
   // Per-line MP3 (smaller, what the PWA prefers)
@@ -525,11 +614,13 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   }
 
   // Per-line durations + cumulative startTime so the player can use combined.mp3
-  // as a single <audio> source and still highlight the correct line. We probe the
-  // per-line file (whichever extension survived the MP3 step).
+  // as a single <audio> source and still highlight the correct line. Probe the
+  // WAV sources used for the combined render; per-line MP3 encoder padding would
+  // otherwise make the manifest timeline drift longer than combined.mp3.
   let cumulative = 0;
   for (const item of items) {
-    const filePath = path.join(outDir, item.file);
+    const wavName = `${String(item.index).padStart(4, '0')}.wav`;
+    const filePath = path.join(outDir, wavName);
     const dur = fs.existsSync(filePath) ? ffprobeDuration(filePath) : null;
     if (dur != null) {
       item.duration = Number(dur.toFixed(3));

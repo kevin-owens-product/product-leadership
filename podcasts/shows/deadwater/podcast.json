@@ -1,0 +1,69 @@
+{
+  "id": "deadwater",
+  "title": "Deadwater",
+  "subtitle": "An investigative audio series about the case that haunted Long Island",
+  "description": "An eight-part investigative podcast following journalist Sam Wilder through the Deadwater case: the discovery, the failed years, the forensic breakthrough, and the reckoning that followed.",
+  "author": "Sam Wilder",
+  "color": "#0f766e",
+  "icon": "🌊",
+  "voiceMap": {
+    "NARRATOR": "M2",
+    "MARSH": "F2",
+    "DONNA": "F3",
+    "REESE": "M1",
+    "DR. PARK": "F1",
+    "TULLY": "M3",
+    "GRAVES": "M4"
+  },
+  "lang": "en",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "deadwater_s01e01.md",
+      "title": "The Find",
+      "subtitle": "A search party finds something older and darker than the missing-person case they came to solve"
+    },
+    {
+      "id": 2,
+      "file": "deadwater_s01e02.md",
+      "title": "Ocean Parkway",
+      "subtitle": "The geography of the killings begins to reveal the killer's local knowledge"
+    },
+    {
+      "id": 3,
+      "file": "deadwater_s01e03.md",
+      "title": "The Department",
+      "subtitle": "Inside the institution that failed the victims before the case went cold"
+    },
+    {
+      "id": 4,
+      "file": "deadwater_s01e04.md",
+      "title": "Twelve Years of Silence",
+      "subtitle": "Cold cases breathe, and the people who carry them keep listening"
+    },
+    {
+      "id": 5,
+      "file": "deadwater_s01e05.md",
+      "title": "The Surveillance",
+      "subtitle": "A task force quietly builds the pattern that points to Roland Voss"
+    },
+    {
+      "id": 6,
+      "file": "deadwater_s01e06.md",
+      "title": "Pizza Night",
+      "subtitle": "A discarded pizza box becomes the direct DNA link investigators needed"
+    },
+    {
+      "id": 7,
+      "file": "deadwater_s01e07.md",
+      "title": "Double Life",
+      "subtitle": "The search of Voss's home exposes the architecture of a hidden life"
+    },
+    {
+      "id": 8,
+      "file": "deadwater_s01e08.md",
+      "title": "The Reckoning",
+      "subtitle": "A guilty plea, a courtroom full of families, and the cost of certainty"
+    }
+  ]
+}

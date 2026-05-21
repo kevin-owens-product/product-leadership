@@ -1,5 +1,7 @@
 const DEFAULT_SECONDS_PER_LINE = 3;
 const DEFAULT_WORDS_PER_MINUTE = 140;
+const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
+const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)\]$/i;
 
 function isContinuationDialogueLine(trimmed) {
   return Boolean(trimmed) &&
@@ -7,6 +9,8 @@ function isContinuationDialogueLine(trimmed) {
     !trimmed.startsWith('-') &&
     !trimmed.startsWith('|') &&
     !trimmed.startsWith('#') &&
+    !BRACKET_CUE_LINE_RE.test(trimmed) &&
+    !/^\[.+\]$/.test(trimmed) &&
     trimmed !== '---';
 }
 
@@ -36,6 +40,13 @@ function extractTimingText(line, speakerLineRe) {
   }
 
   if (trimmed.startsWith('*') || trimmed.startsWith('|')) return '';
+  if (BRACKET_CUE_LINE_RE.test(trimmed)) return '';
+
+  const bracketSpeakerMatch = trimmed.match(BRACKET_SPEAKER_LINE_RE);
+  if (bracketSpeakerMatch) {
+    return (bracketSpeakerMatch[2] || '').trim();
+  }
+
   return trimmed;
 }
 
@@ -83,7 +94,7 @@ export function parseChaptersFromContent(content, speakerLineRe) {
 
     if (!line) continue;
 
-    const speakerMatch = line.match(speakerLineRe);
+    const speakerMatch = line.match(speakerLineRe) || line.match(BRACKET_SPEAKER_LINE_RE);
     if (speakerMatch && (speakerMatch[2] || '').trim()) {
       assignFirstLineIndexForPendingChapter();
       dialogueLineCount += 1;
@@ -97,7 +108,15 @@ export function parseChaptersFromContent(content, speakerLineRe) {
       continue;
     }
 
-    if (line.startsWith('*') || line.startsWith('-') || line.startsWith('|') || line.startsWith('#') || line === '---') {
+    if (
+      line.startsWith('*') ||
+      line.startsWith('-') ||
+      line.startsWith('|') ||
+      line.startsWith('#') ||
+      line === '---' ||
+      BRACKET_CUE_LINE_RE.test(line) ||
+      /^\[.+\]$/.test(line)
+    ) {
       inSpeakerBlock = false;
     }
   }

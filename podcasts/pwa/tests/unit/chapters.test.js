@@ -85,3 +85,26 @@ third thought
   assert.equal(chapters[0].lineIndex, 0);
   assert.equal(chapters[1].lineIndex, 3);
 });
+
+test('parseChaptersFromContent supports bracket speaker scripts and ignores production cues', () => {
+  const markdown = `
+# Episode
+**Duration:** ~30 minutes
+
+### INTRO
+[NARRATOR] First line.
+[PAUSE]
+[DR. PARK] Second line with a dotted speaker name.
+
+### SEGMENT 1
+[MUSIC STING]
+[REESE] Third line starts the next section.
+`;
+
+  const chapters = parseChaptersFromContent(markdown, SPEAKER_LINE_RE);
+  assert.equal(chapters.length, 2);
+  assert.equal(chapters[0].lineIndex, 0);
+  assert.equal(chapters[1].lineIndex, 2);
+  assert.equal(chapters[0].startMinute, 0);
+  assert.equal(chapters[0].duration + chapters[1].duration, 30);
+});

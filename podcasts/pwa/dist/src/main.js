@@ -1,5 +1,5 @@
-import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260519T213327Z';
-import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260519T213327Z';
+import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260521T221637Z';
+import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260521T221637Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -9,13 +9,13 @@ import {
     saveQueue,
     loadListeningStats,
     saveListeningStats
-} from './state/storage.js?v=2.3.0%2B20260519T213327Z';
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260519T213327Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260519T213327Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260519T213327Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260519T213327Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260519T213327Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260519T213327Z';
+} from './state/storage.js?v=2.3.0%2B20260521T221637Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260521T221637Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260521T221637Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260521T221637Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260521T221637Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260521T221637Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260521T221637Z';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -23,7 +23,7 @@ import {
     renderQueueItem,
     renderChapterItem,
     renderBookmarkItem
-} from './ui/render.js?v=2.3.0%2B20260519T213327Z';
+} from './ui/render.js?v=2.3.0%2B20260521T221637Z';
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
@@ -142,6 +142,8 @@ let sleepEndTime = null;
 let searchMatches = [];
 let searchIndex = 0;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
+const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
+const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)\]$/i;
 let mediaSessionHandlersInitialized = false;
 let lineOffsets = [];
 let episodeAudioDuration = 0;
@@ -740,8 +742,10 @@ function parseMarkdown(content, voiceOverrides = {}) {
             continue;
         }
 
-        // Match any speaker pattern: **NAME:** or **NAME:** text
-        const speakerMatch = trimmed.match(SPEAKER_LINE_RE);
+        // Match dialogue patterns:
+        // - **NAME:** text (standard PodLearn format)
+        // - [NAME] text (audio-drama/script format)
+        const speakerMatch = trimmed.match(SPEAKER_LINE_RE) || trimmed.match(BRACKET_SPEAKER_LINE_RE);
         const dirMatch = trimmed.match(/^\*?\*?\[(.+)\]\*?\*?$/);
 
         if (speakerMatch) {
@@ -771,8 +775,9 @@ function parseMarkdown(content, voiceOverrides = {}) {
             });
             currentSpeakerType = voiceType;
             currentSpeakerLabel = speakerName;
-        } else if (dirMatch) {
-            // Stage directions like [MUSIC FADES] - skip these, don't speak them
+        } else if (dirMatch || BRACKET_CUE_LINE_RE.test(trimmed)) {
+            // Stage directions and production cues like [PAUSE] / [MUSIC STING]
+            // are not spoken by the TTS layer.
             // dialogue.push({ speaker: '', text: dirMatch[1], type: 'direction' });
             currentSpeakerType = null;
             currentSpeakerLabel = null;

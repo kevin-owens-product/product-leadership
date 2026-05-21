@@ -142,6 +142,8 @@ let sleepEndTime = null;
 let searchMatches = [];
 let searchIndex = 0;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
+const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
+const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)\]$/i;
 let mediaSessionHandlersInitialized = false;
 let lineOffsets = [];
 let episodeAudioDuration = 0;
@@ -740,8 +742,10 @@ function parseMarkdown(content, voiceOverrides = {}) {
             continue;
         }
 
-        // Match any speaker pattern: **NAME:** or **NAME:** text
-        const speakerMatch = trimmed.match(SPEAKER_LINE_RE);
+        // Match dialogue patterns:
+        // - **NAME:** text (standard PodLearn format)
+        // - [NAME] text (audio-drama/script format)
+        const speakerMatch = trimmed.match(SPEAKER_LINE_RE) || trimmed.match(BRACKET_SPEAKER_LINE_RE);
         const dirMatch = trimmed.match(/^\*?\*?\[(.+)\]\*?\*?$/);
 
         if (speakerMatch) {
@@ -771,8 +775,9 @@ function parseMarkdown(content, voiceOverrides = {}) {
             });
             currentSpeakerType = voiceType;
             currentSpeakerLabel = speakerName;
-        } else if (dirMatch) {
-            // Stage directions like [MUSIC FADES] - skip these, don't speak them
+        } else if (dirMatch || BRACKET_CUE_LINE_RE.test(trimmed)) {
+            // Stage directions and production cues like [PAUSE] / [MUSIC STING]
+            // are not spoken by the TTS layer.
             // dialogue.push({ speaker: '', text: dirMatch[1], type: 'direction' });
             currentSpeakerType = null;
             currentSpeakerLabel = null;

@@ -10,6 +10,23 @@ const __dirname = path.dirname(__filename);
 
 const showsDir = path.join(__dirname, '..', 'shows');
 const distDir = path.join(__dirname, 'dist');
+const BOLD_SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
+const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
+const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)(?:\s+-\s+FADE OUT)?\]$/i;
+const ESTIMATED_WORDS_PER_MINUTE = 145;
+const ESTIMATED_CUE_SECONDS = {
+    'PAUSE': 0.8,
+    'LONG PAUSE': 1.8,
+    'MUSIC STING': 1.0,
+    'MUSIC FADE': 1.2,
+    'MUSIC FADES': 1.2,
+    'INTRO MUSIC': 1.5,
+    'OUTRO MUSIC': 1.5,
+    'SFX': 0.7,
+    'SOUND': 0.7,
+    'AMBIENCE': 1.0,
+    'AMBIENT BED': 1.0
+};
 
 // Create dist directory
 if (!fs.existsSync(distDir)) {
@@ -36,6 +53,41 @@ function removeDirRecursive(dir) {
 removeDirRecursive(path.join(distDir, 'audio'));
 
 console.log('Building PodLearn Multi-Podcast App...\n');
+
+function estimateDurationSeconds(markdown) {
+    const explicit = markdown.match(/\*\*Duration:\*\*\s*~?\s*(\d+(?:\.\d+)?)\s*minutes?/i);
+    if (explicit) {
+        const minutes = parseFloat(explicit[1]);
+        if (Number.isFinite(minutes) && minutes > 0) return Math.round(minutes * 60);
+    }
+
+    let words = 0;
+    let cueSeconds = 0;
+
+    for (const rawLine of markdown.split('\n')) {
+        const line = rawLine.trim();
+        if (!line) continue;
+
+        const cueMatch = line.match(BRACKET_CUE_LINE_RE);
+        if (cueMatch) {
+            cueSeconds += ESTIMATED_CUE_SECONDS[cueMatch[1].toUpperCase()] || 0.8;
+            continue;
+        }
+
+        const speakerMatch = line.match(BOLD_SPEAKER_LINE_RE) || line.match(BRACKET_SPEAKER_LINE_RE);
+        if (!speakerMatch) continue;
+        const text = String(speakerMatch[2] || '')
+            .replace(/\*\*([^*]+)\*\*/g, '$1')
+            .replace(/\*([^*]+)\*/g, '$1')
+            .replace(/`([^`]+)`/g, '$1')
+            .trim();
+        if (!text) continue;
+        words += text.split(/\s+/).filter(Boolean).length;
+    }
+
+    if (words === 0 && cueSeconds === 0) return null;
+    return Math.max(60, Math.round((words / ESTIMATED_WORDS_PER_MINUTE) * 60 + cueSeconds));
+}
 
 // Find all podcasts
 const podcasts = [];
@@ -69,7 +121,8 @@ if (fs.existsSync(showsDir)) {
 
                 if (fs.existsSync(epPath)) {
                     console.log(`   ✓ ${epMeta.file}`);
-                    let content = fs.readFileSync(epPath, 'utf8');
+                    const rawContent = fs.readFileSync(epPath, 'utf8');
+                    let content = rawContent;
                     // Escape for template literal
                     content = content.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
 
@@ -100,6 +153,7 @@ if (fs.existsSync(showsDir)) {
                         subtitle: epMeta.subtitle,
                         content: content
                     };
+                    if (durationSeconds == null) durationSeconds = estimateDurationSeconds(rawContent);
                     if (durationSeconds != null) episodeRecord.durationSeconds = durationSeconds;
                     podcastData.episodes.push(episodeRecord);
                 } else {

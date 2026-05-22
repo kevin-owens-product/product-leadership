@@ -663,6 +663,12 @@
             font-size: 1.1rem;
         }
 
+        .ctrl-btn.ctrl-text {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
         .ctrl-btn.large {
             width: 68px;
             height: 68px;
@@ -809,6 +815,12 @@
             color: #fecaca;
             font-weight: 600;
             cursor: pointer;
+        }
+
+        body.light-theme .clear-data-btn {
+            /* On light backgrounds the pale text vanished; pin to a darker red. */
+            color: #b91c1c;
+            background: rgba(239, 68, 68, 0.08);
         }
 
         .clear-data-btn:active {
@@ -1654,6 +1666,9 @@
             font-size: 0.75rem;
             color: var(--text-secondary);
             margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* Add Podcast Button */
@@ -1749,6 +1764,55 @@
             border-color: white;
             transform: scale(1.1);
         }
+
+        /* ---------- Mobile (≤ 600px) ---------- */
+        @media (max-width: 600px) {
+            /* Header: hide breadcrumb + home button, let title claim the row */
+            .player-header .breadcrumb {
+                display: none;
+            }
+            .player-header #home-from-player {
+                display: none;
+            }
+            .player-title h2 {
+                font-size: 1.05rem;
+                line-height: 1.25;
+                white-space: normal;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            /* Bigger touch targets on speed presets */
+            .speed-preset-btn {
+                min-height: 44px;
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+
+            /* Speed slider is redundant with the preset row on small screens */
+            .options-row .speed-section {
+                display: none;
+            }
+
+            /* Compact the chapters/bookmarks/queue panel so play stays above the fold */
+            .nav-content {
+                max-height: 140px;
+            }
+
+            /* Header buttons a touch closer together */
+            .player-header .header-actions {
+                gap: 6px;
+            }
+
+            /* Trim version badge style */
+            .badge.version {
+                max-width: 9ch;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1803,7 +1867,7 @@
             <button class="filter-btn" data-filter="unplayed">Unplayed</button>
             <button class="filter-btn" data-filter="in-progress">In Progress</button>
             <button class="filter-btn" data-filter="completed">Completed</button>
-            <select class="sort-select" id="episode-sort">
+            <select class="sort-select" id="episode-sort" aria-label="Sort episodes">
                 <option value="default">Default Order</option>
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
@@ -1844,19 +1908,19 @@
 
         <!-- Chapters & Bookmarks Panel -->
         <div class="nav-panel">
-            <div class="nav-tabs">
-                <button class="nav-tab active" data-tab="chapters">Chapters</button>
-                <button class="nav-tab" data-tab="bookmarks">Bookmarks</button>
-                <button class="nav-tab" data-tab="queue">Queue</button>
+            <div class="nav-tabs" role="tablist" aria-label="Episode navigation">
+                <button class="nav-tab active" role="tab" aria-selected="true" aria-controls="chapters-list" id="tab-chapters" data-tab="chapters">Chapters</button>
+                <button class="nav-tab" role="tab" aria-selected="false" aria-controls="bookmarks-list" id="tab-bookmarks" data-tab="bookmarks">Bookmarks</button>
+                <button class="nav-tab" role="tab" aria-selected="false" aria-controls="queue-tabpanel" id="tab-queue" data-tab="queue">Queue</button>
             </div>
-            <div class="nav-content active" data-tab="chapters" id="chapters-list">
+            <div class="nav-content active" data-tab="chapters" id="chapters-list" role="tabpanel" aria-labelledby="tab-chapters">
                 <div class="no-items">Loading chapters...</div>
             </div>
-            <div class="nav-content" data-tab="bookmarks" id="bookmarks-list">
+            <div class="nav-content" data-tab="bookmarks" id="bookmarks-list" role="tabpanel" aria-labelledby="tab-bookmarks">
                 <button class="add-bookmark-btn" id="add-bookmark-btn">+ Add Bookmark Here</button>
                 <div class="no-items">No bookmarks yet</div>
             </div>
-            <div class="nav-content" data-tab="queue">
+            <div class="nav-content" data-tab="queue" role="tabpanel" aria-labelledby="tab-queue" id="queue-tabpanel">
                 <div class="queue-panel" id="queue-list">
                     <div class="no-items">Queue is empty</div>
                 </div>
@@ -1874,14 +1938,14 @@
                     <div class="setting-item">
                         <span class="setting-label">Skip Forward</span>
                         <div class="setting-value">
-                            <input type="number" class="setting-input" id="skip-forward-interval" value="10" min="5" max="60" step="5">
+                            <input type="number" class="setting-input" id="skip-forward-interval" value="10" min="5" max="60" step="5" aria-label="Skip forward interval (seconds)">
                             <span>sec</span>
                         </div>
                     </div>
                     <div class="setting-item">
                         <span class="setting-label">Skip Backward</span>
                         <div class="setting-value">
-                            <input type="number" class="setting-input" id="skip-backward-interval" value="10" min="5" max="60" step="5">
+                            <input type="number" class="setting-input" id="skip-backward-interval" value="10" min="5" max="60" step="5" aria-label="Skip backward interval (seconds)">
                             <span>sec</span>
                         </div>
                     </div>
@@ -1922,17 +1986,17 @@
             <div class="status-row">
                 <div class="status-dot" id="status-dot"></div>
                 <div style="flex:1">
-                    <span class="status-text" id="status-text">Ready</span>
+                    <span class="status-text" id="status-text" aria-live="polite" aria-atomic="true">Ready</span>
                     <div class="current-chapter-badge" id="current-chapter-badge"></div>
                 </div>
             </div>
 
             <div class="control-buttons">
-                <button class="ctrl-btn small" id="prev-btn" title="Back 30 seconds" aria-label="Back 30 seconds">⏮</button>
-                <button class="ctrl-btn small" id="back-btn" title="Back 10 seconds" aria-label="Back 10 seconds">↺</button>
+                <button class="ctrl-btn small ctrl-text" id="prev-btn" title="Back 30 seconds" aria-label="Back 30 seconds">−30</button>
+                <button class="ctrl-btn small ctrl-text" id="back-btn" title="Back 10 seconds" aria-label="Back 10 seconds">−10</button>
                 <button class="ctrl-btn large" id="play-btn" title="Play/Pause" aria-label="Play or pause">▶</button>
-                <button class="ctrl-btn small" id="fwd-btn" title="Forward 10 seconds" aria-label="Forward 10 seconds">↻</button>
-                <button class="ctrl-btn small" id="next-btn" title="Forward 30 seconds" aria-label="Forward 30 seconds">⏭</button>
+                <button class="ctrl-btn small ctrl-text" id="fwd-btn" title="Forward 10 seconds" aria-label="Forward 10 seconds">+10</button>
+                <button class="ctrl-btn small ctrl-text" id="next-btn" title="Forward 30 seconds" aria-label="Forward 30 seconds">+30</button>
             </div>
 
             <div class="progress-section">
@@ -1990,9 +2054,9 @@
     <div class="swipe-hint right" id="swipe-right">⏩</div>
 
     <!-- Sleep Timer Modal -->
-    <div class="modal-overlay" id="sleep-modal">
+    <div class="modal-overlay" id="sleep-modal" role="dialog" aria-modal="true" aria-labelledby="sleep-modal-title">
         <div class="modal">
-            <h3>Sleep Timer</h3>
+            <h3 id="sleep-modal-title">Sleep Timer</h3>
             <p>Auto-stop playback after:</p>
             <div class="timer-row">
                 <button class="timer-btn" data-minutes="15">15m</button>
@@ -2009,9 +2073,9 @@
     </div>
 
     <!-- Episode Complete Modal -->
-    <div class="modal-overlay" id="complete-modal">
+    <div class="modal-overlay" id="complete-modal" role="dialog" aria-modal="true" aria-labelledby="complete-modal-title">
         <div class="modal">
-            <h3>Episode Complete! 🎉</h3>
+            <h3 id="complete-modal-title">Episode Complete! 🎉</h3>
             <p id="complete-message">Great job finishing this episode!</p>
             <div class="complete-actions">
                 <button class="primary-btn" id="play-next-episode">Play Next Episode</button>
@@ -2021,9 +2085,9 @@
     </div>
 
     <!-- Add Bookmark Modal -->
-    <div class="modal-overlay" id="bookmark-modal">
+    <div class="modal-overlay" id="bookmark-modal" role="dialog" aria-modal="true" aria-labelledby="bookmark-modal-title">
         <div class="modal bookmark-modal">
-            <h3>Add Bookmark</h3>
+            <h3 id="bookmark-modal-title">Add Bookmark</h3>
             <p id="bookmark-position-text">Line 0 of 0</p>
             <div class="context-preview" id="bookmark-context"></div>
             <input type="text" id="bookmark-note-input" placeholder="Add a note (optional)">
@@ -2035,9 +2099,9 @@
     </div>
 
     <!-- Install Prompt -->
-    <div class="modal-overlay" id="install-modal">
+    <div class="modal-overlay" id="install-modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
         <div class="modal">
-            <h3>Install App</h3>
+            <h3 id="install-modal-title">Install App</h3>
             <p>Install for offline use during your flight!</p>
             <div class="btns">
                 <button class="secondary-btn" id="dismiss-install">Later</button>
@@ -2047,9 +2111,9 @@
     </div>
 
     <!-- Create Podcast Info Modal -->
-    <div class="modal-overlay create-modal" id="create-modal">
+    <div class="modal-overlay create-modal" id="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-modal-title">
         <div class="modal">
-            <h3>Create Your Own Podcast</h3>
+            <h3 id="create-modal-title">Create Your Own Podcast</h3>
             <p style="margin-bottom: 16px;">To add your own podcasts, follow these steps:</p>
             <div style="text-align: left; background: var(--bg-tertiary); padding: 16px; border-radius: 10px; font-size: 0.85rem; line-height: 1.8;">
                 <p><strong>1.</strong> Create a new folder in <code>shows/</code></p>
@@ -2066,9 +2130,9 @@
     </div>
 
     <!-- Share/Export Modal -->
-    <div class="modal-overlay" id="share-modal">
+    <div class="modal-overlay" id="share-modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
         <div class="modal">
-            <h3>Share & Export</h3>
+            <h3 id="share-modal-title">Share & Export</h3>
             <p style="margin-bottom: 16px; font-size: 0.9rem;">Share this episode or export your data</p>
             <div class="share-buttons">
                 <button class="share-btn" id="share-timestamp-btn">
@@ -2091,9 +2155,9 @@
     </div>
 
     <!-- Statistics Modal -->
-    <div class="modal-overlay" id="stats-modal">
+    <div class="modal-overlay" id="stats-modal" role="dialog" aria-modal="true" aria-labelledby="stats-modal-title">
         <div class="modal" style="max-width: 400px;">
-            <h3>Listening Statistics</h3>
+            <h3 id="stats-modal-title">Listening Statistics</h3>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-value" id="stat-total-time">0h</div>
@@ -2129,10 +2193,10 @@
             <div class="mini-player-subtitle" id="mini-player-subtitle">Podcast Name</div>
         </div>
         <div class="mini-player-controls">
-            <button class="mini-ctrl-btn" id="mini-play-btn">▶</button>
+            <button class="mini-ctrl-btn" id="mini-play-btn" aria-label="Play or pause">▶</button>
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.3.0%2B20260522T150546Z"></script>
+    <script type="module" src="./src/main.js?v=2.3.0%2B20260522T181441Z"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260522T150546Z';
-import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260522T150546Z';
+import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260522T181441Z';
+import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260522T181441Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -9,13 +9,13 @@ import {
     saveQueue,
     loadListeningStats,
     saveListeningStats
-} from './state/storage.js?v=2.3.0%2B20260522T150546Z';
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260522T150546Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260522T150546Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260522T150546Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260522T150546Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260522T150546Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260522T150546Z';
+} from './state/storage.js?v=2.3.0%2B20260522T181441Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260522T181441Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260522T181441Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260522T181441Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260522T181441Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260522T181441Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260522T181441Z';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -23,7 +23,7 @@ import {
     renderQueueItem,
     renderChapterItem,
     renderBookmarkItem
-} from './ui/render.js?v=2.3.0%2B20260522T150546Z';
+} from './ui/render.js?v=2.3.0%2B20260522T181441Z';
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
@@ -43,7 +43,11 @@ let APP_VERSION = localStorage.getItem(VERSION_STORAGE_KEY) || '0.0.0';
 function updateVersionBadge() {
     const badge = document.getElementById('version-badge');
     if (badge) {
-        badge.textContent = 'v' + APP_VERSION;
+        // Strip the build-id suffix (everything after the '+') for display;
+        // the full version still lives in localStorage / version.json.
+        const display = APP_VERSION.split('+')[0];
+        badge.textContent = 'v' + display;
+        badge.title = 'v' + APP_VERSION;
     }
 }
 
@@ -559,11 +563,13 @@ function renderPodcastsList(filter = '') {
 
     const filterLower = filter.toLowerCase();
 
+    let matched = 0;
     podcasts.forEach(podcast => {
         if (filter && !podcast.title.toLowerCase().includes(filterLower) &&
             !podcast.subtitle.toLowerCase().includes(filterLower)) {
             return;
         }
+        matched++;
 
         // Calculate podcast progress
         let totalProgress = 0;
@@ -587,6 +593,14 @@ function renderPodcastsList(filter = '') {
         activateCardWithKeyboard(card, () => openPodcast(podcast));
         listEl.appendChild(card);
     });
+
+    if (filter && matched === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'no-items';
+        empty.style.padding = '20px';
+        empty.textContent = `No podcasts match "${filter}".`;
+        listEl.appendChild(empty);
+    }
 
     // Add "Create Podcast" card
     const addCard = document.createElement('div');
@@ -905,6 +919,16 @@ function renderEpisodeList(filter = '') {
         activateCardWithKeyboard(card, handleEpisodeCardActivation);
         listEl.appendChild(card);
     });
+
+    if (shown === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'no-items';
+        empty.style.padding = '20px';
+        empty.textContent = filter
+            ? `No episodes match "${filter}".`
+            : 'No episodes match this filter.';
+        listEl.appendChild(empty);
+    }
 
     // Update total progress badge
     const avgProgress = episodes.length > 0 ? Math.round(totalProgress / episodes.length) : 0;
@@ -1801,8 +1825,10 @@ function updateSkipButtonTitles() {
     const fwdBtn = document.getElementById('fwd-btn');
     backBtn.title = `Back ${skipBackwardInterval}s`;
     backBtn.setAttribute('aria-label', `Back ${skipBackwardInterval} seconds`);
+    backBtn.textContent = `−${skipBackwardInterval}`;
     fwdBtn.title = `Forward ${skipForwardInterval}s`;
     fwdBtn.setAttribute('aria-label', `Forward ${skipForwardInterval} seconds`);
+    fwdBtn.textContent = `+${skipForwardInterval}`;
 }
 updateSkipButtonTitles();
 
@@ -1869,6 +1895,7 @@ function filterAndSortEpisodes() {
     const cards = Array.from(container.querySelectorAll('.episode-card'));
 
     // Filter
+    let visible = 0;
     cards.forEach(card => {
         const status = card.classList.contains('completed') ? 'completed' :
                       card.classList.contains('in-progress') ? 'in-progress' : 'unplayed';
@@ -1877,7 +1904,27 @@ function filterAndSortEpisodes() {
                     (currentFilter === 'in-progress' && status === 'in-progress') ||
                     (currentFilter === 'unplayed' && status === 'unplayed');
         card.style.display = show ? '' : 'none';
+        if (show) visible++;
     });
+
+    // Empty state for filters that match nothing
+    let emptyEl = container.querySelector('.no-items.filter-empty');
+    if (visible === 0 && cards.length > 0) {
+        if (!emptyEl) {
+            emptyEl = document.createElement('div');
+            emptyEl.className = 'no-items filter-empty';
+            emptyEl.style.padding = '20px';
+            container.appendChild(emptyEl);
+        }
+        const labels = {
+            unplayed: 'No unplayed episodes — you\'ve started or finished them all.',
+            'in-progress': 'No episodes in progress.',
+            completed: 'No completed episodes yet.',
+        };
+        emptyEl.textContent = labels[currentFilter] || 'No episodes match this filter.';
+    } else if (emptyEl) {
+        emptyEl.remove();
+    }
 
     // Sort
     if (currentSort !== 'default') {
@@ -2238,7 +2285,13 @@ function renderBookmarks() {
     const epBookmarks = bookmarks[epKey] || [];
 
     if (epBookmarks.length === 0) {
-        container.innerHTML += '<div class="no-items">No bookmarks yet</div>';
+        // NOTE: using innerHTML += here re-serializes and re-parses every child,
+        // which silently drops the click listener attached to addBtn above.
+        // Use appendChild so the listener survives.
+        const empty = document.createElement('div');
+        empty.className = 'no-items';
+        empty.textContent = 'No bookmarks yet';
+        container.appendChild(empty);
         return;
     }
 
@@ -2291,6 +2344,75 @@ document.getElementById('save-bookmark').addEventListener('click', () => {
 
 document.getElementById('cancel-bookmark').addEventListener('click', () => {
     document.getElementById('bookmark-modal').classList.remove('show');
+});
+
+// ===== MODAL A11Y =====
+// Manage focus + ESC for any .modal-overlay that toggles the `.show` class.
+const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const modalReturnFocus = new WeakMap();
+
+function focusableIn(el) {
+    return Array.from(el.querySelectorAll(FOCUSABLE_SELECTOR)).filter((n) => n.offsetParent !== null || n === document.activeElement);
+}
+
+function onModalShown(modal) {
+    modalReturnFocus.set(modal, document.activeElement);
+    const first = focusableIn(modal)[0];
+    if (first) {
+        try { first.focus({ preventScroll: true }); } catch (_) { first.focus(); }
+    }
+}
+
+function onModalHidden(modal) {
+    const returnTo = modalReturnFocus.get(modal);
+    modalReturnFocus.delete(modal);
+    if (returnTo && typeof returnTo.focus === 'function' && document.contains(returnTo)) {
+        try { returnTo.focus({ preventScroll: true }); } catch (_) { returnTo.focus(); }
+    }
+}
+
+document.querySelectorAll('.modal-overlay').forEach((modal) => {
+    const mo = new MutationObserver(() => {
+        if (modal.classList.contains('show')) onModalShown(modal);
+        else onModalHidden(modal);
+    });
+    mo.observe(modal, { attributes: true, attributeFilter: ['class'] });
+});
+
+// Tab / Shift-Tab focus trap + Escape close for any visible modal.
+document.addEventListener('keydown', (e) => {
+    const open = Array.from(document.querySelectorAll('.modal-overlay.show'));
+    if (open.length === 0) return;
+    const modal = open[open.length - 1];
+
+    if (e.key === 'Escape') {
+        // Prefer the modal's explicit cancel/close/dismiss button so its handler runs.
+        const closeBtn = modal.querySelector(
+            '[id^="cancel-"], [id^="close-"], [id^="dismiss-"]'
+        );
+        if (closeBtn) {
+            e.preventDefault();
+            closeBtn.click();
+        } else {
+            e.preventDefault();
+            modal.classList.remove('show');
+        }
+        return;
+    }
+
+    if (e.key === 'Tab') {
+        const focusables = focusableIn(modal);
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
 });
 
 // ===== INIT =====

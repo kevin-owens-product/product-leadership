@@ -1,5 +1,5 @@
-import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260522T023346Z';
-import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260522T023346Z';
+import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260522T040012Z';
+import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260522T040012Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -9,13 +9,13 @@ import {
     saveQueue,
     loadListeningStats,
     saveListeningStats
-} from './state/storage.js?v=2.3.0%2B20260522T023346Z';
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260522T023346Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260522T023346Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260522T023346Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260522T023346Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260522T023346Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260522T023346Z';
+} from './state/storage.js?v=2.3.0%2B20260522T040012Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260522T040012Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260522T040012Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260522T040012Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260522T040012Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260522T040012Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260522T040012Z';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -23,7 +23,7 @@ import {
     renderQueueItem,
     renderChapterItem,
     renderBookmarkItem
-} from './ui/render.js?v=2.3.0%2B20260522T023346Z';
+} from './ui/render.js?v=2.3.0%2B20260522T040012Z';
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
@@ -143,7 +143,7 @@ let searchMatches = [];
 let searchIndex = 0;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
-const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)\]$/i;
+const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)(?:\s*[-:]\s*[^\]]+)?\]$/i;
 let mediaSessionHandlersInitialized = false;
 let lineOffsets = [];
 let episodeAudioDuration = 0;

@@ -97,7 +97,7 @@ test('parseChaptersFromContent supports bracket speaker scripts and ignores prod
 [DR. PARK] Second line with a dotted speaker name.
 
 ### SEGMENT 1
-[MUSIC STING]
+[MUSIC STING - FADE TO SILENCE]
 [REESE] Third line starts the next section.
 `;
 

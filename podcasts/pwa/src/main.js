@@ -174,6 +174,40 @@ function getPodcasts() {
     return Array.isArray(window.PODCASTS) ? window.PODCASTS : [];
 }
 
+function activateCardWithKeyboard(card, callback) {
+    card.addEventListener('keydown', (event) => {
+        if (event.target.closest('button, input, select, textarea, a')) return;
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        callback(event);
+    });
+}
+
+function setPressedState(elementOrId, pressed) {
+    const el = typeof elementOrId === 'string'
+        ? document.getElementById(elementOrId)
+        : elementOrId;
+    if (!el) return;
+    el.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+}
+
+function updateToggleButton(id, pressed, labelText) {
+    const button = document.getElementById(id);
+    if (!button) return;
+    button.classList.toggle('active', pressed);
+    setPressedState(button, pressed);
+    const label = button.querySelector('span');
+    if (label) label.textContent = labelText;
+}
+
+function updateSpeedPresetButtons() {
+    document.querySelectorAll('.speed-preset-btn').forEach(b => {
+        const isActive = Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01;
+        b.classList.toggle('active', isActive);
+        setPressedState(b, isActive);
+    });
+}
+
 // Mini player state
 let showMiniPlayer = false;
 
@@ -544,22 +578,31 @@ function renderPodcastsList(filter = '') {
 
         const card = document.createElement('div');
         card.className = 'podcast-card';
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Open ${podcast.title}, ${epCount} episodes`);
         renderPodcastCard(card, podcast, epCount, avgProgress);
 
         card.addEventListener('click', () => openPodcast(podcast));
+        activateCardWithKeyboard(card, () => openPodcast(podcast));
         listEl.appendChild(card);
     });
 
     // Add "Create Podcast" card
     const addCard = document.createElement('div');
     addCard.className = 'add-podcast-card';
+    addCard.tabIndex = 0;
+    addCard.setAttribute('role', 'button');
+    addCard.setAttribute('aria-label', 'Create your own podcast');
     addCard.innerHTML = `
         <div class="add-podcast-icon">+</div>
         <div class="add-podcast-text">Create Your Own Podcast</div>
     `;
-    addCard.addEventListener('click', () => {
+    const openCreateModal = () => {
         document.getElementById('create-modal').classList.add('show');
-    });
+    };
+    addCard.addEventListener('click', openCreateModal);
+    activateCardWithKeyboard(addCard, openCreateModal);
     listEl.appendChild(addCard);
 }
 
@@ -661,13 +704,11 @@ function restoreState() {
         document.getElementById('speed-slider').value = speechRate;
         document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
         // Update speed preset button highlights
-        document.querySelectorAll('.speed-preset-btn').forEach(b => {
-            b.classList.toggle('active', Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01);
-        });
+        updateSpeedPresetButtons();
     }
     if (state.autoPlayNext !== undefined) {
         autoPlayNext = state.autoPlayNext;
-        document.getElementById('auto-play-toggle').classList.toggle('active', autoPlayNext);
+        updateToggleButton('auto-play-toggle', autoPlayNext, 'Auto');
     }
     return state;
 }
@@ -836,11 +877,14 @@ function renderEpisodeList(filter = '') {
 
         const card = document.createElement('div');
         card.className = 'episode-card' + (isComplete ? ' completed' : '') + (inProgress ? ' in-progress' : '');
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Play episode ${ep.id}: ${ep.title}`);
         const downloadState = isEpisodeDownloading(currentPodcast, ep)
             ? 'downloading'
             : isEpisodeDownloaded(currentPodcast, ep) ? 'downloaded' : 'none';
         renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState);
-        card.addEventListener('click', (event) => {
+        const handleEpisodeCardActivation = (event) => {
             const btn = event.target.closest('.ep-download-btn');
             if (btn) {
                 event.stopPropagation();
@@ -856,7 +900,9 @@ function renderEpisodeList(filter = '') {
                 return;
             }
             openEpisode(ep);
-        });
+        };
+        card.addEventListener('click', handleEpisodeCardActivation);
+        activateCardWithKeyboard(card, handleEpisodeCardActivation);
         listEl.appendChild(card);
     });
 
@@ -1496,10 +1542,7 @@ document.getElementById('fwd-btn').addEventListener('click', () => seekBySeconds
 document.getElementById('speed-slider').addEventListener('input', e => {
     speechRate = parseFloat(e.target.value);
     document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
-    // Update speed preset button highlights
-    document.querySelectorAll('.speed-preset-btn').forEach(b => {
-        b.classList.toggle('active', Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01);
-    });
+    updateSpeedPresetButtons();
     speechPlayers.setRate(speechRate);
     saveState();
 });
@@ -1527,7 +1570,7 @@ document.getElementById('progress-bar').addEventListener('click', e => {
 // Auto-play toggle
 document.getElementById('auto-play-toggle').addEventListener('click', () => {
     autoPlayNext = !autoPlayNext;
-    document.getElementById('auto-play-toggle').classList.toggle('active', autoPlayNext);
+    updateToggleButton('auto-play-toggle', autoPlayNext, 'Auto');
     saveState();
 });
 
@@ -1672,9 +1715,14 @@ document.getElementById('player-view').addEventListener('touchend', e => {
 
 // ===== COLLAPSIBLE PANELS =====
 document.querySelectorAll('.panel-header').forEach(header => {
-    header.addEventListener('click', () => {
+    header.tabIndex = 0;
+    header.setAttribute('role', 'button');
+    header.setAttribute('aria-label', `Toggle ${header.textContent.trim()}`);
+    const togglePanel = () => {
         header.parentElement.classList.toggle('collapsed');
-    });
+    };
+    header.addEventListener('click', togglePanel);
+    activateCardWithKeyboard(header, togglePanel);
 });
 
 // ===== INSTALL PROMPT =====
@@ -1703,6 +1751,10 @@ document.getElementById('dismiss-install').addEventListener('click', () => {
 if (currentTheme === 'light') {
     document.body.classList.add('light-theme');
 }
+document.getElementById('theme-toggle').setAttribute(
+    'aria-label',
+    currentTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+);
 
 // Speed Presets
 document.querySelectorAll('.speed-preset-btn').forEach(btn => {
@@ -1711,8 +1763,7 @@ document.querySelectorAll('.speed-preset-btn').forEach(btn => {
         speechRate = speed;
         document.getElementById('speed-slider').value = speed;
         document.getElementById('speed-value').textContent = `${speed.toFixed(1)}x`;
-        document.querySelectorAll('.speed-preset-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        updateSpeedPresetButtons();
         saveState();
     });
 });
@@ -1723,6 +1774,10 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
     document.body.classList.toggle('light-theme');
     document.getElementById('theme-toggle').querySelector('span').textContent =
         currentTheme === 'dark' ? '🌙 Dark' : '☀️ Light';
+    document.getElementById('theme-toggle').setAttribute(
+        'aria-label',
+        currentTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+    );
     localStorage.setItem('theme', currentTheme);
 });
 
@@ -1742,17 +1797,19 @@ document.getElementById('skip-backward-interval').addEventListener('change', e =
 function updateSkipButtonTitles() {
     // The big prev/next buttons stay at ±30s; the back/fwd buttons honor
     // the user's configured interval.
-    document.getElementById('back-btn').title = `Back ${skipBackwardInterval}s`;
-    document.getElementById('fwd-btn').title = `Forward ${skipForwardInterval}s`;
+    const backBtn = document.getElementById('back-btn');
+    const fwdBtn = document.getElementById('fwd-btn');
+    backBtn.title = `Back ${skipBackwardInterval}s`;
+    backBtn.setAttribute('aria-label', `Back ${skipBackwardInterval} seconds`);
+    fwdBtn.title = `Forward ${skipForwardInterval}s`;
+    fwdBtn.setAttribute('aria-label', `Forward ${skipForwardInterval} seconds`);
 }
 updateSkipButtonTitles();
 
 // Voice Boost Toggle
 document.getElementById('voice-boost-toggle').addEventListener('click', () => {
     voiceBoostEnabled = !voiceBoostEnabled;
-    document.getElementById('voice-boost-toggle').classList.toggle('active', voiceBoostEnabled);
-    document.getElementById('voice-boost-toggle').querySelector('span').textContent =
-        voiceBoostEnabled ? 'On' : 'Off';
+    updateToggleButton('voice-boost-toggle', voiceBoostEnabled, voiceBoostEnabled ? 'On' : 'Off');
     localStorage.setItem('voiceBoostEnabled', voiceBoostEnabled);
     if (voiceBoostEnabled) {
         setStatus('Voice boost is handled in generated Supertonic audio');
@@ -1762,9 +1819,7 @@ document.getElementById('voice-boost-toggle').addEventListener('click', () => {
 // Silence Trim Toggle
 document.getElementById('silence-trim-toggle').addEventListener('click', () => {
     silenceTrimEnabled = !silenceTrimEnabled;
-    document.getElementById('silence-trim-toggle').classList.toggle('active', silenceTrimEnabled);
-    document.getElementById('silence-trim-toggle').querySelector('span').textContent =
-        silenceTrimEnabled ? 'On' : 'Off';
+    updateToggleButton('silence-trim-toggle', silenceTrimEnabled, silenceTrimEnabled ? 'On' : 'Off');
     localStorage.setItem('silenceTrimEnabled', silenceTrimEnabled);
 });
 
@@ -2065,14 +2120,10 @@ window.addEventListener('load', () => {
 // Initialize settings
 document.getElementById('skip-forward-interval').value = skipForwardInterval;
 document.getElementById('skip-backward-interval').value = skipBackwardInterval;
-if (voiceBoostEnabled) {
-    document.getElementById('voice-boost-toggle').classList.add('active');
-    document.getElementById('voice-boost-toggle').querySelector('span').textContent = 'On';
-}
-if (silenceTrimEnabled) {
-    document.getElementById('silence-trim-toggle').classList.add('active');
-    document.getElementById('silence-trim-toggle').querySelector('span').textContent = 'On';
-}
+updateToggleButton('voice-boost-toggle', voiceBoostEnabled, voiceBoostEnabled ? 'On' : 'Off');
+updateToggleButton('silence-trim-toggle', silenceTrimEnabled, silenceTrimEnabled ? 'On' : 'Off');
+updateToggleButton('auto-play-toggle', autoPlayNext, 'Auto');
+updateSpeedPresetButtons();
 updateSkipButtonTitles();
 updateQueueDisplay();
 

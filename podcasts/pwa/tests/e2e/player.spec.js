@@ -34,6 +34,28 @@ test('settings shows generated audio background playback notice', async ({ page 
   await expect(page.locator('#tts-background-notice')).toContainText('Background playback note');
 });
 
+test('card navigation and player toggles are keyboard accessible', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await page.waitForLoadState('networkidle').catch(() => {});
+
+  const podcastCard = page.locator('.podcast-card:has-text("The Forge Podcast")').first();
+  await expect(podcastCard).toHaveAttribute('role', 'button');
+  await podcastCard.focus();
+  await page.keyboard.press('Enter');
+
+  const episodeCard = page.locator('.episode-card:has-text("AI-Native Product Management")').first();
+  await expect(episodeCard).toHaveAttribute('role', 'button');
+  await episodeCard.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+
+  const autoPlayToggle = page.locator('#auto-play-toggle');
+  await expect(autoPlayToggle).toHaveAttribute('aria-pressed', 'true');
+  await autoPlayToggle.focus();
+  await page.keyboard.press('Space');
+  await expect(autoPlayToggle).toHaveAttribute('aria-pressed', 'false');
+});
+
 test('AI Native PM shows stable chapter markers and playback advances', async ({ page }) => {
   await page.addInitScript(() => {
     window.Audio = class FakeAudio {

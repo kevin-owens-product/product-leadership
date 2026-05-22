@@ -1,16 +1,17 @@
 import { test, expect } from '@playwright/test';
 
 async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitle = 'AI-Native Product Management') {
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await page.waitForLoadState('networkidle').catch(() => {});
   await expect(page.locator('#podcasts-view')).toBeVisible();
 
-  const podcastCard = page.locator(`.podcast-card:has-text("${podcastTitle}")`);
+  const podcastCard = page.locator(`.podcast-card:has-text("${podcastTitle}")`).first();
   await expect(podcastCard).toBeVisible();
-  await podcastCard.evaluate((el) => el.click());
+  await podcastCard.click();
 
-  const episodeCard = page.locator(`.episode-card:has-text("${episodeTitle}")`);
+  const episodeCard = page.locator(`.episode-card:has-text("${episodeTitle}")`).first();
   await expect(episodeCard).toBeVisible();
-  await episodeCard.evaluate((el) => el.click());
+  await episodeCard.click();
   await expect(page.locator('#player-view')).toHaveClass(/active/);
 }
 

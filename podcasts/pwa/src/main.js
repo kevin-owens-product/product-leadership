@@ -396,29 +396,29 @@ function hideResumeBanner() {
     if (banner) banner.hidden = true;
 }
 
-function showResumeBanner(savedLine, percent) {
+function showResumeBanner(resumedFromLine, percent) {
     const banner = document.getElementById('resume-banner');
     if (!banner) return;
-    if (!Number.isInteger(savedLine) || savedLine <= 0) {
+    if (!Number.isInteger(resumedFromLine) || resumedFromLine <= 0) {
         banner.hidden = true;
         pendingResumeLine = null;
         return;
     }
-    pendingResumeLine = savedLine;
+    // Stash the resumed-from line so "Start from beginning" can confirm restart.
+    pendingResumeLine = resumedFromLine;
     const text = document.getElementById('resume-banner-text');
     if (text) {
         const pctLabel = Number.isFinite(percent) && percent > 0 ? ` (${percent}%)` : '';
-        text.textContent = `Pick up where you left off${pctLabel}`;
+        text.textContent = `Resumed where you left off${pctLabel}`;
     }
     banner.hidden = false;
 }
 
 document.addEventListener('click', (event) => {
-    if (event.target.closest('#resume-banner-resume')) {
-        const target = pendingResumeLine;
+    if (event.target.closest('#resume-banner-start')) {
         hideResumeBanner();
-        if (Number.isInteger(target)) void jumpToLine(target, false);
-    } else if (event.target.closest('#resume-banner-start') || event.target.closest('#resume-banner-close')) {
+        void jumpToLine(0, false);
+    } else if (event.target.closest('#resume-banner-close')) {
         hideResumeBanner();
     }
 });
@@ -1096,7 +1096,7 @@ async function openEpisode(episode, options = {}) {
     const savedLine = Number.isInteger(progress?.line) ? progress.line : 0;
     let initialLine = savedLine;
 
-    let resumeOffer = null;
+    let resumedFrom = null;
     if (Number.isInteger(preferredLine)) {
         initialLine = preferredLine;
     } else if (
@@ -1104,14 +1104,14 @@ async function openEpisode(episode, options = {}) {
         savedLine > 0 &&
         savedLine < Math.max(0, dialogueLines.length - 1)
     ) {
-        // Default to starting from the beginning; let the user opt into
-        // resuming via the inline banner below. No more native confirm().
-        initialLine = 0;
-        resumeOffer = savedLine;
+        // Auto-resume from the saved line; the banner just notifies the user
+        // and offers a one-tap "Start from beginning" escape hatch.
+        initialLine = savedLine;
+        resumedFrom = savedLine;
     }
 
     currentLineIndex = Math.max(0, Math.min(initialLine, Math.max(0, dialogueLines.length - 1)));
-    showResumeBanner(resumeOffer, progress?.percent || 0);
+    showResumeBanner(resumedFrom, progress?.percent || 0);
 
     document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
 

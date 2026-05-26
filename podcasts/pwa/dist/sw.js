@@ -1,6 +1,6 @@
 // Service worker — atomic versioned precache.
 //
-// The build script substitutes 2.3.0+20260523T194032Z and ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"] at deploy
+// The build script substitutes 2.3.0+20260526T005730Z and ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"] at deploy
 // time. Each deploy gets a unique cache name and pre-fetches the entire app
 // shell during install. Activation atomically deletes any older shell cache
 // (preserving the user-downloaded audio cache). After activation + clients.claim,
@@ -12,7 +12,7 @@
 // shell list, which means precache is skipped and the SW just passes
 // requests through to the network. Audio downloads still work.
 
-const BUILD_VERSION = '2.3.0+20260523T194032Z';
+const BUILD_VERSION = '2.3.0+20260526T005730Z';
 const APP_SHELL_RAW = ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"];
 
 const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
@@ -114,14 +114,27 @@ async function shellFetch(req) {
 }
 
 async function audioFetch(req) {
+    let cache = null;
     try {
-        const cache = await caches.open(OFFLINE_AUDIO_CACHE);
-        const cached = await cache.match(req, { ignoreSearch: true });
+        cache = await caches.open(OFFLINE_AUDIO_CACHE);
+        const cached = await cache.match(req);
         if (cached) return rangeAwareAudioResponse(req, cached);
     } catch (err) {
         console.warn('[sw] offline audio lookup failed:', err);
     }
-    return fetch(req);
+
+    try {
+        return await fetch(req);
+    } catch (err) {
+        if (cache) {
+            const cachedFallback = await cache.match(req, { ignoreSearch: true });
+            if (cachedFallback) {
+                console.warn('[sw] using older offline audio after network failure:', req.url);
+                return rangeAwareAudioResponse(req, cachedFallback);
+            }
+        }
+        throw err;
+    }
 }
 
 async function rangeAwareAudioResponse(req, cached) {
@@ -190,6 +203,25 @@ function rangeNotSatisfiable(size) {
     });
 }
 
+async function validatedAudioCacheResponse(url, res) {
+    if (res.status === 206) {
+        throw new Error('Refusing to cache partial audio response');
+    }
+    const blob = await res.blob();
+    const expectedLength = Number(res.headers.get('content-length'));
+    if (Number.isFinite(expectedLength) && expectedLength > 0 && blob.size !== expectedLength) {
+        throw new Error(`Incomplete response (${blob.size}/${expectedLength} bytes)`);
+    }
+    if (url.includes('/combined.mp3') && blob.size <= 0) {
+        throw new Error('Empty audio response');
+    }
+    return new Response(blob, {
+        status: res.status,
+        statusText: res.statusText,
+        headers: res.headers
+    });
+}
+
 self.addEventListener('message', (event) => {
     const data = event.data;
     if (data === 'SKIP_WAITING') {
@@ -214,14 +246,22 @@ self.addEventListener('message', (event) => {
             event.waitUntil((async () => {
                 const cache = await caches.open(OFFLINE_AUDIO_CACHE);
                 const results = [];
+                const fetched = [];
                 for (const url of data.urls) {
                     try {
                         const res = await fetch(url, { cache: 'no-store' });
                         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        await cache.put(url, res.clone());
+                        const stored = await validatedAudioCacheResponse(url, res);
+                        fetched.push({ url, response: stored });
                         results.push({ url, ok: true });
                     } catch (err) {
                         results.push({ url, ok: false, error: String(err && err.message || err) });
+                    }
+                }
+                if (results.every((r) => r.ok)) {
+                    for (const item of fetched) {
+                        await cache.delete(item.url, { ignoreSearch: true });
+                        await cache.put(item.url, item.response);
                     }
                 }
                 reply({ type: 'CACHE_AUDIO_URLS_RESULT', results });

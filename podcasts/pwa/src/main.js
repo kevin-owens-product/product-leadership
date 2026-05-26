@@ -281,6 +281,11 @@ function manifestAudioUrl(podcastId, episode) {
     return `audio/${podcastId}/${episodeBasename(episode)}/manifest.json`;
 }
 
+function withCacheKey(url, cacheKey) {
+    if (!cacheKey) return url;
+    return `${url}?v=${encodeURIComponent(cacheKey)}`;
+}
+
 function epKeyOf(podcast, episode) {
     return `${podcast.id}-${episode.id}`;
 }
@@ -325,11 +330,17 @@ async function downloadEpisode(podcast, episode) {
     if (downloadedEpisodes.has(epKey) || downloadingEpisodes.has(epKey)) return;
     downloadingEpisodes.add(epKey);
     renderEpisodeList(document.getElementById('episode-search')?.value || '');
-    const urls = [
-        new URL(combinedAudioUrl(podcast.id, episode), location.href).toString(),
-        new URL(manifestAudioUrl(podcast.id, episode), location.href).toString()
-    ];
     try {
+        const episodeFile = episode.file || episode.filename || null;
+        const audioManifest = await loadSupertonicAudioManifest(podcast.id, episodeFile);
+        if (!audioManifest) {
+            setStatus('Download failed — audio is not available yet');
+            return;
+        }
+        const urls = [
+            new URL(withCacheKey(combinedAudioUrl(podcast.id, episode), audioManifest.cacheKey), location.href).toString(),
+            new URL(withCacheKey(manifestAudioUrl(podcast.id, episode), audioManifest.cacheKey), location.href).toString()
+        ];
         const reply = await sendSwMessage({ type: 'CACHE_AUDIO_URLS', urls });
         const allOk = reply && Array.isArray(reply.results) && reply.results.every((r) => r.ok);
         if (!allOk) {
@@ -972,19 +983,35 @@ async function loadSupertonicAudioManifest(podcastId, episodeFile) {
     if (!podcastId || !episodeFile) return null;
     const basename = episodeFile.replace(/\.md$/, '');
     const base = `audio/${podcastId}/${basename}`;
-    const cacheKey = Date.now().toString(36);
+    const requestKey = Date.now().toString(36);
     try {
-        const res = await fetch(`${base}/manifest.json?v=${cacheKey}`, {
+        const res = await fetch(`${base}/manifest.json?v=${requestKey}`, {
             cache: 'no-store',
             headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
         });
         if (!res.ok) return null;
-        const items = await res.json();
+        const raw = await res.text();
+        const items = JSON.parse(raw);
         if (!Array.isArray(items) || items.length === 0) return null;
+        const cacheKey = stableCacheKey([
+            res.headers.get('etag') || '',
+            res.headers.get('last-modified') || '',
+            raw
+        ].join('|'));
         return { base, cacheKey, items };
     } catch {
         return null;
     }
+}
+
+function stableCacheKey(input) {
+    const text = String(input || '');
+    let hash = 2166136261;
+    for (let i = 0; i < text.length; i += 1) {
+        hash ^= text.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+    }
+    return (hash >>> 0).toString(36);
 }
 
 function attachAudioUrls(dialogue, manifest) {
@@ -1072,7 +1099,7 @@ async function openEpisode(episode, options = {}) {
         if (built) {
             lineOffsets = built.offsets;
             episodeAudioDuration = built.totalDuration;
-            const combinedUrl = `${audioManifest.base}/combined.mp3?v=${audioManifest.cacheKey}`;
+            const combinedUrl = withCacheKey(`${audioManifest.base}/combined.mp3`, audioManifest.cacheKey);
             speechPlayers.setEpisode({
                 combinedUrl,
                 lineOffsets: built.offsets,

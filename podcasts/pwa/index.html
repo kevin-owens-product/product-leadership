@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- Pinch-zoom stays enabled (WCAG 1.4.4); iOS ignores user-scalable
+         anyway and gestures don't rely on it. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#5a5df0">
     <title>PodLearn - Custom Podcast Player</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-maskable-192.png">
@@ -18,8 +20,13 @@
             --bg-tertiary: #252525;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
-            --accent: #6366f1;
+            /* #5a5df0 (was #6366f1) so white button text clears 4.5:1. */
+            --accent: #5a5df0;
             --accent-hover: #818cf8;
+            /* Accent used as small TEXT on dark surfaces needs a lighter
+               shade than the button-background accent (contrast ≥ 4.5:1).
+               main.js recomputes this per podcast alongside --accent. */
+            --accent-text: #9a9cf8;
             --alex-color: #3b82f6;
             --sam-color: #10b981;
             --success: #22c55e;
@@ -165,13 +172,29 @@
         .podcast-card:focus-visible,
         .episode-card:focus-visible,
         .add-podcast-card:focus-visible,
-        .panel-header:focus-visible {
+        .panel-header:focus-visible,
+        .progress-bar:focus-visible,
+        .transcript-line:focus-visible,
+        .chapter-item:focus-visible,
+        .queue-item:focus-visible,
+        .bookmark-content:focus-visible {
             outline: 3px solid var(--accent);
             outline-offset: 3px;
         }
 
+        /* Tighter outline for dense list rows so focus rings don't overlap
+           neighbouring rows. */
+        .transcript-line:focus-visible,
+        .chapter-item:focus-visible,
+        .queue-item:focus-visible,
+        .bookmark-content:focus-visible {
+            outline-width: 2px;
+            outline-offset: 1px;
+        }
+
         .update-banner {
-            background: var(--success);
+            /* Deeper green than --success: white text on #22c55e was ~2.3:1. */
+            background: #15803d;
             color: white;
             padding: 10px 16px;
             border-radius: 8px;
@@ -185,7 +208,7 @@
 
         .update-banner button {
             background: white;
-            color: var(--success);
+            color: #15803d;
             border: none;
             padding: 6px 12px;
             border-radius: 6px;
@@ -296,7 +319,7 @@
             justify-content: center;
         }
         .ep-download-btn:hover {
-            color: var(--accent);
+            color: var(--accent-text);
             border-color: var(--accent);
         }
         .ep-download-btn.downloaded {
@@ -370,7 +393,7 @@
 
         .episode-card .ep-number {
             font-size: 0.75rem;
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 700;
             letter-spacing: 1px;
         }
@@ -1382,6 +1405,88 @@
             cursor: pointer;
         }
 
+        /* Toasts — queue-able notifications with an optional action button
+           (see src/ui/toast.js). Stacked above the mini player, below nothing:
+           errors and update prompts must stay visible over modals too. */
+        .toast-region {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: calc(16px + var(--safe-bottom));
+            width: min(420px, calc(100vw - 32px));
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1100;
+            pointer-events: none;
+        }
+
+        body.has-mini-player .toast-region {
+            bottom: calc(84px + var(--safe-bottom));
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+            pointer-events: auto;
+            animation: toastIn 0.18s ease-out;
+        }
+
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .toast {
+                animation: none;
+            }
+        }
+
+        .toast-message {
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .toast-action {
+            flex-shrink: 0;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--accent-text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+
+        .toast-action:hover,
+        .toast-action:active {
+            border-color: var(--accent);
+        }
+
+        .toast-close {
+            flex-shrink: 0;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            line-height: 1;
+            padding: 4px 6px;
+            cursor: pointer;
+        }
+
+        body.light-theme .toast {
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+        }
+
         .mini-ctrl-btn:active {
             transform: scale(0.9);
         }
@@ -1416,7 +1521,7 @@
             justify-content: center;
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--accent);
+            color: var(--accent-text);
         }
 
         .queue-info {
@@ -1472,7 +1577,7 @@
         .stat-value {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--accent-text);
             margin-bottom: 4px;
         }
 
@@ -1511,6 +1616,10 @@
             --text-primary: #000000;
             --text-secondary: #666666;
             --border: #d0d0d0;
+            /* On light surfaces accent text must be DARKER, not lighter.
+               Defined on body so it shadows the per-podcast value main.js
+               sets on <html> (which is tuned for dark surfaces only). */
+            --accent-text: #4649c9;
         }
 
         /* Share & Export */
@@ -1681,6 +1790,7 @@
             border-radius: 10px;
             background: var(--bg-tertiary);
             transition: all 0.2s;
+            cursor: pointer;
         }
 
         .transcript-line.current {
@@ -1854,7 +1964,7 @@
         }
 
         .nav-tab.active {
-            color: var(--accent);
+            color: var(--accent-text);
             background: var(--bg-tertiary);
         }
 
@@ -1902,7 +2012,7 @@
             justify-content: center;
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--accent);
+            color: var(--accent-text);
             flex-shrink: 0;
         }
 
@@ -1950,7 +2060,7 @@
 
         .bookmark-position {
             font-size: 0.75rem;
-            color: var(--accent);
+            color: var(--accent-text);
             margin-bottom: 2px;
         }
 
@@ -2044,7 +2154,7 @@
         /* Current chapter indicator */
         .current-chapter-badge {
             font-size: 0.75rem;
-            color: var(--accent);
+            color: var(--accent-text);
             margin-top: 4px;
         }
 
@@ -2143,7 +2253,7 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 8px;
-            color: var(--accent);
+            color: var(--accent-text);
             font-size: 0.9rem;
             padding: 8px 14px;
             cursor: pointer;
@@ -2324,7 +2434,7 @@
                 <span class="badge version" id="version-badge">v--</span>
                 <button class="badge refresh-btn" id="refresh-btn" type="button">↻ Refresh</button>
             </div>
-            <div id="update-banner" class="update-banner" style="display:none">
+            <div id="update-banner" class="update-banner" role="status" style="display:none">
                 New content available! <button type="button" id="apply-update-btn">Update Now</button>
             </div>
             <div id="podcast-count" class="podcast-count"></div>
@@ -2360,7 +2470,7 @@
             <input type="text" class="search-input" id="episode-search" placeholder="Search episodes..." aria-label="Search episodes">
         </div>
 
-        <div class="filter-row">
+        <div class="filter-row" role="group" aria-label="Filter and sort episodes">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="unplayed">Unplayed</button>
             <button class="filter-btn" data-filter="in-progress">In Progress</button>
@@ -2395,7 +2505,7 @@
             </div>
         </div>
 
-        <div id="resume-banner" class="resume-banner" hidden>
+        <div id="resume-banner" class="resume-banner" role="status" hidden>
             <span class="resume-banner-text" id="resume-banner-text">Resumed where you left off</span>
             <div class="resume-banner-actions">
                 <button type="button" class="resume-banner-btn" id="resume-banner-start">Start from beginning</button>
@@ -2495,7 +2605,7 @@
         <!-- Controls Panel -->
         <div class="panel controls-panel">
             <div class="status-row">
-                <div class="status-dot" id="status-dot"></div>
+                <div class="status-dot" id="status-dot" aria-hidden="true"></div>
                 <div style="flex:1">
                     <span class="status-text" id="status-text" aria-live="polite" aria-atomic="true">Ready</span>
                     <div class="current-chapter-badge" id="current-chapter-badge"></div>
@@ -2505,13 +2615,13 @@
 
             <div class="now-playing-viz" id="now-playing-viz" aria-hidden="true"></div>
 
-            <div class="up-next-banner" id="up-next-banner" hidden>
+            <div class="up-next-banner" id="up-next-banner" role="status" hidden>
                 <span class="up-next-label">Up next</span>
                 <span class="up-next-title" id="up-next-title"></span>
                 <button type="button" class="up-next-play" id="up-next-play">Play now</button>
             </div>
 
-            <div class="control-buttons">
+            <div class="control-buttons" role="group" aria-label="Playback controls">
                 <button class="ctrl-btn small ctrl-text" id="prev-btn" title="Back 30 seconds" aria-label="Back 30 seconds">−30</button>
                 <button class="ctrl-btn small ctrl-text" id="back-btn" title="Back 10 seconds" aria-label="Back 10 seconds">−10</button>
                 <button class="ctrl-btn large" id="play-btn" title="Play/Pause" aria-label="Play">
@@ -2530,10 +2640,10 @@
             <div class="progress-section">
                 <div class="progress-bar" id="progress-bar" role="slider" tabindex="0"
                      aria-label="Seek position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-                    <div class="progress-buffered" id="progress-buffered" style="width:0%"></div>
-                    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-                    <div class="scrub-handle" id="scrub-handle" style="left:0%"></div>
-                    <div class="scrub-bubble" id="scrub-bubble" hidden>0:00</div>
+                    <div class="progress-buffered" id="progress-buffered" aria-hidden="true" style="width:0%"></div>
+                    <div class="progress-fill" id="progress-fill" aria-hidden="true" style="width:0%"></div>
+                    <div class="scrub-handle" id="scrub-handle" aria-hidden="true" style="left:0%"></div>
+                    <div class="scrub-bubble" id="scrub-bubble" aria-hidden="true" hidden>0:00</div>
                 </div>
                 <div class="progress-labels">
                     <span id="current-pos">Line 0</span>
@@ -2552,7 +2662,7 @@
                     <span>Auto</span>
                 </button>
                 <div class="speed-popover" id="speed-popover" role="dialog" aria-label="Playback speed" hidden>
-                    <div class="speed-presets">
+                    <div class="speed-presets" role="group" aria-label="Speed presets">
                         <button class="speed-preset-btn" data-speed="0.75" aria-pressed="false">0.75x</button>
                         <button class="speed-preset-btn active" data-speed="1" aria-pressed="true">1x</button>
                         <button class="speed-preset-btn" data-speed="1.25" aria-pressed="false">1.25x</button>
@@ -2585,20 +2695,20 @@
             <div class="transcript-content" id="transcript-content">
                 <p class="loading-text">Loading transcript...</p>
             </div>
-            <button type="button" class="transcript-resync" id="transcript-resync" hidden>↓ Resync</button>
+            <button type="button" class="transcript-resync" id="transcript-resync" aria-label="Scroll transcript back to the current line" hidden>↓ Resync</button>
         </div>
     </div>
 
     <!-- Swipe Hints -->
-    <div class="swipe-hint left" id="swipe-left">⏪</div>
-    <div class="swipe-hint right" id="swipe-right">⏩</div>
+    <div class="swipe-hint left" id="swipe-left" aria-hidden="true">⏪</div>
+    <div class="swipe-hint right" id="swipe-right" aria-hidden="true">⏩</div>
 
     <!-- Sleep Timer Modal -->
     <div class="modal-overlay" id="sleep-modal" role="dialog" aria-modal="true" aria-labelledby="sleep-modal-title">
         <div class="modal">
             <h3 id="sleep-modal-title">Sleep Timer</h3>
             <p>Auto-stop playback after:</p>
-            <div class="timer-row">
+            <div class="timer-row" role="group" aria-label="Sleep timer duration">
                 <button class="timer-btn" data-minutes="5">5m</button>
                 <button class="timer-btn" data-minutes="15">15m</button>
                 <button class="timer-btn" data-minutes="30">30m</button>
@@ -2736,13 +2846,16 @@
             </div>
             <div style="margin-top: 20px; padding: 16px; background: var(--bg-tertiary); border-radius: 10px;">
                 <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">Time Saved (at current speed)</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);" id="stat-time-saved">0h 0m</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-text);" id="stat-time-saved">0h 0m</div>
             </div>
             <div class="btns" style="margin-top: 16px;">
                 <button class="primary-btn" id="close-stats-modal">Done</button>
             </div>
         </div>
     </div>
+
+    <!-- Toasts (populated by src/ui/toast.js) -->
+    <div class="toast-region" id="toast-region"></div>
 
     <!-- Mini Player -->
     <div class="mini-player" id="mini-player" role="button" tabindex="0" aria-label="Now playing — open player">

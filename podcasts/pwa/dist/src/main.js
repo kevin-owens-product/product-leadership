@@ -1,5 +1,5 @@
-import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260712T160538Z';
-import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260712T160538Z';
+import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260712T162500Z';
+import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260712T162500Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -9,13 +9,13 @@ import {
     saveQueue,
     loadListeningStats,
     saveListeningStats
-} from './state/storage.js?v=2.3.0%2B20260712T160538Z';
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260712T160538Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T160538Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T160538Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T160538Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T160538Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T160538Z';
+} from './state/storage.js?v=2.3.0%2B20260712T162500Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260712T162500Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T162500Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T162500Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T162500Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T162500Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T162500Z';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -23,15 +23,20 @@ import {
     renderQueueItem,
     renderChapterItem,
     renderBookmarkItem
-} from './ui/render.js?v=2.3.0%2B20260712T160538Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T160538Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T160538Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T160538Z';
-import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T160538Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T160538Z';
-import { createTranscriptFollow } from './ui/transcript-follow.js?v=2.3.0%2B20260712T160538Z';
-import { sleepFadeVolume, sleepRemainingSeconds } from './playback/sleep-timer.js?v=2.3.0%2B20260712T160538Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T160538Z';
+} from './ui/render.js?v=2.3.0%2B20260712T162500Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T162500Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T162500Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T162500Z';
+import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T162500Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T162500Z';
+import { createTranscriptFollow } from './ui/transcript-follow.js?v=2.3.0%2B20260712T162500Z';
+import { sleepFadeVolume, sleepRemainingSeconds } from './playback/sleep-timer.js?v=2.3.0%2B20260712T162500Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T162500Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260712T162500Z';
+
+// Queue-able notifications with retry actions — the user-visible surface for
+// audio load failures, offline-download failures, and app updates.
+const toasts = createToastManager({ container: document.getElementById('toast-region') });
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
@@ -126,8 +131,8 @@ let podcastsLoaded = false;
 // build-episodes.js substitutes the real version into the placeholder below
 // (same mechanism as sw.js); when running unbuilt source, fall back to the
 // last-seen app version so the URL is still stable across reloads.
-const BUILD_VERSION = '2.3.0+20260712T160538Z';
-(function() {
+const BUILD_VERSION = '2.3.0+20260712T162500Z';
+function loadPodcastsScript() {
     const cacheKey = BUILD_VERSION.includes('__') ? APP_VERSION : BUILD_VERSION;
     const script = document.createElement('script');
     script.src = 'podcasts.js?v=' + encodeURIComponent(cacheKey);
@@ -142,12 +147,20 @@ const BUILD_VERSION = '2.3.0+20260712T160538Z';
     };
     script.onerror = function() {
         console.error('Failed to load podcasts.js');
+        script.remove();
         document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">Failed to load podcasts. Try refreshing.</p>';
+        toasts.show('Couldn’t load the podcast library', {
+            actionLabel: 'Retry',
+            onAction: loadPodcastsScript
+        });
     };
     document.head.appendChild(script);
-})();
+}
+loadPodcastsScript();
 
 // ===== STATE =====
+// Default accent — keep in sync with --accent in index.html.
+const DEFAULT_ACCENT = '#5a5df0';
 let currentPodcast = null;
 let currentEpisode = null;
 let dialogueLines = [];
@@ -423,6 +436,10 @@ async function downloadEpisode(podcast, episode) {
         const audioManifest = await loadSupertonicAudioManifest(podcast.id, episodeFile);
         if (!audioManifest) {
             setStatus('Download failed — audio is not available yet');
+            toasts.show(`Download failed — audio for "${episode.title}" isn’t available`, {
+                actionLabel: 'Retry',
+                onAction: () => { void downloadEpisode(podcast, episode); }
+            });
             return;
         }
         const urls = [
@@ -435,6 +452,10 @@ async function downloadEpisode(podcast, episode) {
             const failed = reply && reply.results ? reply.results.filter((r) => !r.ok).map((r) => r.url).join(', ') : '(no SW)';
             console.warn('Episode download failed for', failed);
             setStatus('Download failed — try again');
+            toasts.show(`Download failed for "${episode.title}"`, {
+                actionLabel: 'Retry',
+                onAction: () => { void downloadEpisode(podcast, episode); }
+            });
             return;
         }
         downloadedEpisodes.add(epKey);
@@ -534,7 +555,7 @@ function generatePodcastArtwork(podcast) {
     canvas.height = size;
     const ctx = canvas.getContext('2d');
     if (!ctx) return null;
-    const color = podcast.color || '#6366f1';
+    const color = podcast.color || DEFAULT_ACCENT;
     // Background: vertical gradient from podcast color to a darker shade
     const grad = ctx.createLinearGradient(0, 0, 0, size);
     grad.addColorStop(0, color);
@@ -739,8 +760,12 @@ function openPodcast(podcast) {
     document.getElementById('current-podcast-subtitle').textContent = podcast.subtitle;
     document.getElementById('nav-podcast-name').textContent = podcast.title;
 
-    // Update accent color
-    document.documentElement.style.setProperty('--accent', safeColor(podcast.color || '#6366f1'));
+    // Update accent color. --accent-text is a lightened shade for
+    // accent-colored text on dark surfaces (contrast ≥ 4.5:1); the light
+    // theme shadows it with its own darker value in CSS.
+    const accent = safeColor(podcast.color || DEFAULT_ACCENT);
+    document.documentElement.style.setProperty('--accent', accent);
+    document.documentElement.style.setProperty('--accent-text', shadeHex(accent, 0.4));
 
     renderEpisodeList();
     showView('list-view');
@@ -754,7 +779,9 @@ document.getElementById('back-to-podcasts').addEventListener('click', () => {
         // any polished podcast app.
         void stopPlayback();
         currentPodcast = null;
-        document.documentElement.style.setProperty('--accent', '#6366f1');
+        // Back to the stylesheet defaults for both accent variables.
+        document.documentElement.style.removeProperty('--accent');
+        document.documentElement.style.removeProperty('--accent-text');
     }
     renderPodcastsList();
     showView('podcasts-view');
@@ -1307,6 +1334,11 @@ function renderTranscript() {
         const div = document.createElement('div');
         div.className = `transcript-line ${line.type}`;
         div.dataset.index = index;
+        // Each line is a real control: screen readers announce speaker + text
+        // and can activate it to seek (keyboard handled by the delegated
+        // keydown on the container below).
+        div.tabIndex = 0;
+        div.setAttribute('role', 'button');
 
         renderTranscriptLine(div, line);
         div.addEventListener('click', () => jumpToLine(index));
@@ -1315,6 +1347,16 @@ function renderTranscript() {
 
     updateProgress();
 }
+
+// Keyboard activation for transcript lines (bound once; lines are re-created
+// per episode).
+document.getElementById('transcript-content').addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const lineEl = event.target.closest('.transcript-line');
+    if (!lineEl) return;
+    event.preventDefault();
+    void jumpToLine(parseInt(lineEl.dataset.index, 10));
+});
 
 function formatClock(totalSeconds) {
     if (!Number.isFinite(totalSeconds) || totalSeconds < 0) totalSeconds = 0;
@@ -1354,9 +1396,13 @@ function updateProgress() {
     scrubber.update(pct / 100, scrubLabelFor(pct / 100));
     updateBufferedBar();
 
-    // Update highlighting
+    // Update highlighting (aria-current mirrors the visual highlight for
+    // screen readers).
     document.querySelectorAll('.transcript-line').forEach((el, i) => {
-        el.classList.toggle('current', i === currentLineIndex);
+        const isCurrent = i === currentLineIndex;
+        el.classList.toggle('current', isCurrent);
+        if (isCurrent) el.setAttribute('aria-current', 'true');
+        else el.removeAttribute('aria-current');
     });
 
     // Scroll into view (only while the transcript is in follow mode).
@@ -1542,8 +1588,41 @@ speechPlayers.on('ended', () => {
 
 speechPlayers.on('error', (err) => {
     console.warn('Audio element error:', err);
+    if (!currentEpisode || !speechPlayers.isContinuousReady()) return;
     setStatus('Audio playback error');
+    toasts.show('Audio failed to load', {
+        actionLabel: 'Retry',
+        onAction: retryAudioLoad
+    });
 });
+
+// Re-fetch the combined.mp3 the <audio> element choked on (e.g. a dropped
+// connection mid-stream), restore the position, and resume.
+function retryAudioLoad() {
+    if (!speechPlayers.isContinuousReady()) return;
+    const line = currentLineIndex;
+    try { speechPlayers.audio.load(); } catch { /* ignore */ }
+    speechPlayers.seekToLine(line);
+    speechPlayers.play().catch((err) => handlePlayFailure(err));
+}
+
+// Distinguish autoplay-policy rejections (expected — just ask for a tap)
+// from real load/decode failures (surface a retry toast).
+function handlePlayFailure(err) {
+    if (err && err.name === 'NotAllowedError') {
+        setStatus('Tap play to start');
+        return;
+    }
+    console.warn('play() failed:', err);
+    setStatus('Audio playback error');
+    toasts.show('Playback failed to start', {
+        actionLabel: 'Retry',
+        onAction: () => {
+            nowPlayingViz.ensureContext();
+            void togglePlayPause();
+        }
+    });
+}
 
 async function startPlayback() {
     if (dialogueLines.length === 0) return;
@@ -1559,8 +1638,7 @@ async function startPlayback() {
         try {
             await speechPlayers.play();
         } catch (err) {
-            console.warn('combined.mp3 play() rejected:', err);
-            setStatus('Tap play to start');
+            handlePlayFailure(err);
         }
         syncMediaSession({ includeMetadata: true, includePosition: true });
         return;
@@ -1590,6 +1668,13 @@ async function startPlayback() {
             await speak(line.text, line.type, line.audioUrl ? { audioUrl: line.audioUrl } : undefined);
         } catch (e) {
             console.error('Speech error:', e);
+            // Identical messages coalesce into one toast, so a run of failing
+            // lines doesn't stack notifications.
+            const failedLine = currentLineIndex;
+            toasts.show('Audio failed for a line — skipping ahead', {
+                actionLabel: 'Retry',
+                onAction: () => { void jumpToLine(failedLine, true); }
+            });
         }
         if (!playbackSessions.isActive(sessionId)) break;
         if (isPlaying && !isPaused) {
@@ -1639,7 +1724,7 @@ async function togglePlayPause() {
     if (speechPlayers.isContinuousReady()) {
         if (!isPlaying || isPaused) {
             if (!isPlaying) speechPlayers.seekToLine(currentLineIndex);
-            try { await speechPlayers.play(); } catch (err) { console.warn('play() failed:', err); }
+            try { await speechPlayers.play(); } catch (err) { handlePlayFailure(err); }
         } else {
             speechPlayers.pause();
         }
@@ -1681,7 +1766,7 @@ async function jumpToLine(index, autoStart = false) {
         updateMiniPlayer();
         syncMediaSession({ includeMetadata: false, includePosition: true });
         if (autoStart || wasPlaying) {
-            try { await speechPlayers.play(); } catch (err) { console.warn('seek-and-play failed:', err); }
+            try { await speechPlayers.play(); } catch (err) { handlePlayFailure(err); }
         }
         saveState();
         return;
@@ -1801,10 +1886,32 @@ document.addEventListener('click', (e) => {
     setSpeedPopoverOpen(false);
 });
 
+// Escape closes the speed popover (returning focus to its trigger); Tab is
+// trapped inside it while open, matching the modal focus behavior.
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && speedPopover && !speedPopover.hidden) {
+    if (!speedPopover || speedPopover.hidden) return;
+    if (e.key === 'Escape') {
         setSpeedPopoverOpen(false);
         speedBtn?.focus();
+        return;
+    }
+    if (e.key !== 'Tab') return;
+    const focusables = Array.from(
+        speedPopover.querySelectorAll('button:not([disabled]), input:not([disabled])')
+    );
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const active = document.activeElement;
+    if (!speedPopover.contains(active)) {
+        e.preventDefault();
+        first.focus();
+    } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+    } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
     }
 });
 
@@ -2193,8 +2300,16 @@ document.querySelectorAll('.panel-header').forEach(header => {
     header.tabIndex = 0;
     header.setAttribute('role', 'button');
     header.setAttribute('aria-label', `Toggle ${header.textContent.trim()}`);
+    const syncExpanded = () => {
+        header.setAttribute(
+            'aria-expanded',
+            header.parentElement.classList.contains('collapsed') ? 'false' : 'true'
+        );
+    };
+    syncExpanded();
     const togglePanel = () => {
         header.parentElement.classList.toggle('collapsed');
+        syncExpanded();
     };
     header.addEventListener('click', togglePanel);
     activateCardWithKeyboard(header, togglePanel);
@@ -2440,19 +2555,24 @@ function updateQueueDisplay() {
         return renderQueueItem(item, episode, podcast, isPlaying, index);
     }).join('');
 
-    // Add click handlers
+    // Add click + keyboard handlers (items are role="button" divs)
+    const openQueueItem = (index) => {
+        const queueItem = playQueue[index];
+        if (!queueItem) return;
+        const podcast = getPodcasts().find(p => p.id === queueItem.podcastId);
+        if (!podcast) return;
+        const episode = podcast.episodes.find(e => e.id === queueItem.episodeNum);
+        if (!episode) return;
+        openPodcast(podcast);
+        setTimeout(() => openEpisode(episode, { promptResume: true }), 100);
+    };
     queueList.querySelectorAll('.queue-item').forEach((item, index) => {
         item.addEventListener('click', (e) => {
             if (!e.target.classList.contains('queue-remove')) {
-                const queueItem = playQueue[index];
-                const podcast = getPodcasts().find(p => p.id === queueItem.podcastId);
-                if (!podcast) return;
-                const episode = podcast.episodes.find(e => e.id === queueItem.episodeNum);
-                if (!episode) return;
-                openPodcast(podcast);
-                setTimeout(() => openEpisode(episode, { promptResume: true }), 100);
+                openQueueItem(index);
             }
         });
+        activateCardWithKeyboard(item, () => openQueueItem(index));
     });
 
     queueList.querySelectorAll('.queue-remove').forEach(btn => {
@@ -2707,12 +2827,17 @@ function renderChapters() {
         const item = document.createElement('div');
         item.className = 'chapter-item';
         item.dataset.index = idx;
+        item.tabIndex = 0;
+        item.setAttribute('role', 'button');
+        item.setAttribute('aria-label', `Play chapter ${idx + 1}: ${chap.title}`);
 
         renderChapterItem(item, chap, idx);
 
-        item.addEventListener('click', () => {
+        const activate = () => {
             jumpToLine(chap.lineIndex, true);
-        });
+        };
+        item.addEventListener('click', activate);
+        activateCardWithKeyboard(item, activate);
 
         container.appendChild(item);
     });
@@ -2732,7 +2857,10 @@ function updateCurrentChapter() {
 
     // Update chapter list highlighting
     document.querySelectorAll('.chapter-item').forEach((el, idx) => {
-        el.classList.toggle('current', idx === currentChapIdx);
+        const isCurrent = idx === currentChapIdx;
+        el.classList.toggle('current', isCurrent);
+        if (isCurrent) el.setAttribute('aria-current', 'true');
+        else el.removeAttribute('aria-current');
     });
 
     // Update badge
@@ -2818,9 +2946,12 @@ function renderBookmarks() {
 
         renderBookmarkItem(item, bm, preview);
 
-        item.querySelector('.bookmark-content').addEventListener('click', () => {
+        const bookmarkContent = item.querySelector('.bookmark-content');
+        bookmarkContent.addEventListener('click', () => {
             jumpToLine(bm.lineIndex, true);
         });
+        // .bookmark-content is rendered as role="button" tabindex="0".
+        activateCardWithKeyboard(bookmarkContent, () => jumpToLine(bm.lineIndex, true));
 
         item.querySelector('.bookmark-delete').addEventListener('click', (e) => {
             e.stopPropagation();
@@ -2933,8 +3064,18 @@ restoreState();
 renderPodcastsList();
 bindNavTabs();
 
-// Service worker registration with update handling
-const swClient = registerServiceWorker();
+// Service worker registration with update handling. Updates surface as a
+// sticky toast wherever the user is (the green banner only lives on the
+// home screen).
+const swClient = registerServiceWorker({
+    onUpdateAvailable: () => {
+        toasts.show('A new version is ready', {
+            actionLabel: 'Update',
+            onAction: applyUpdate,
+            duration: 0
+        });
+    }
+});
 
 // Once the SW takes control, reconcile our localStorage download set against
 // the actual offline-audio cache so the UI doesn't show stale "downloaded"

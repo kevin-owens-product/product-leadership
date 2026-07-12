@@ -1,4 +1,4 @@
-export function registerServiceWorker() {
+export function registerServiceWorker({ onUpdateAvailable } = {}) {
   if (!('serviceWorker' in navigator)) {
     return { registration: null, unregister: async () => {} };
   }
@@ -10,6 +10,15 @@ export function registerServiceWorker() {
     if (reloadedForUpdate) return;
     reloadedForUpdate = true;
     window.location.reload();
+  };
+
+  // A new version is installed and waiting: show the home-screen banner and
+  // let the app surface it wherever the user actually is (toast with an
+  // Update action — the banner only exists on the home view).
+  const announceUpdate = () => {
+    const banner = document.getElementById('update-banner');
+    if (banner) banner.style.display = 'flex';
+    if (typeof onUpdateAvailable === 'function') onUpdateAvailable();
   };
 
   navigator.serviceWorker.register('sw.js').then((reg) => {
@@ -26,8 +35,7 @@ export function registerServiceWorker() {
       if (!newWorker) return;
       newWorker.addEventListener('statechange', () => {
         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-          const banner = document.getElementById('update-banner');
-          if (banner) banner.style.display = 'flex';
+          announceUpdate();
         }
       });
     });
@@ -35,8 +43,7 @@ export function registerServiceWorker() {
 
   navigator.serviceWorker.addEventListener('message', (event) => {
     if (event.data?.type === 'SW_UPDATED') {
-      const banner = document.getElementById('update-banner');
-      if (banner) banner.style.display = 'flex';
+      announceUpdate();
     }
   });
 

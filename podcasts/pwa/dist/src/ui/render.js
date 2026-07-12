@@ -1,4 +1,4 @@
-import { escapeHtml, safeColor } from '../security/sanitize.js?v=2.3.0%2B20260712T160538Z';
+import { escapeHtml, safeColor } from '../security/sanitize.js?v=2.3.0%2B20260712T162500Z';
 
 function formatClockFromMinutes(totalMinutes) {
   const safeMinutes = Number.isFinite(totalMinutes) ? Math.max(0, totalMinutes) : 0;
@@ -96,13 +96,13 @@ export function renderTranscriptLine(div, line) {
 
 export function renderQueueItem(item, episode, podcast, isPlaying, index) {
   return `
-    <div class="queue-item ${isPlaying ? 'playing' : ''}" data-index="${index}">
-      <div class="queue-number">${index + 1}</div>
+    <div class="queue-item ${isPlaying ? 'playing' : ''}" data-index="${index}" role="button" tabindex="0" aria-label="Play from queue: ${escapeHtml(episode.title)}">
+      <div class="queue-number" aria-hidden="true">${index + 1}</div>
       <div class="queue-info">
         <div class="queue-title">${escapeHtml(episode.title)}</div>
         <div class="queue-subtitle">${escapeHtml(podcast.title)}</div>
       </div>
-      <button class="queue-remove" data-index="${index}">×</button>
+      <button class="queue-remove" data-index="${index}" aria-label="Remove ${escapeHtml(episode.title)} from queue">×</button>
     </div>
   `;
 }
@@ -121,11 +121,11 @@ export function renderChapterItem(item, chap, idx) {
 
 export function renderBookmarkItem(item, bm, preview) {
   item.innerHTML = `
-    <div class="bookmark-content">
+    <div class="bookmark-content" role="button" tabindex="0" aria-label="Jump to bookmark at line ${bm.lineIndex + 1}: ${escapeHtml(bm.note || 'Bookmark')}">
       <div class="bookmark-position">Line ${bm.lineIndex + 1}</div>
       <div class="bookmark-note">${escapeHtml(bm.note || 'Bookmark')}</div>
       <div class="bookmark-preview">${escapeHtml(preview)}</div>
     </div>
-    <button class="bookmark-delete" data-ts="${bm.timestamp}">×</button>
+    <button class="bookmark-delete" data-ts="${bm.timestamp}" aria-label="Delete bookmark at line ${bm.lineIndex + 1}">×</button>
   `;
 }

@@ -223,3 +223,54 @@ test('now-playing visualizer is hidden under prefers-reduced-motion', async ({ p
   await openEpisode(page);
   await expect(page.locator('#now-playing-viz')).toBeHidden();
 });
+
+test('failed offline download surfaces a retry toast', async ({ page }) => {
+  // No audio manifest reachable -> download must fail and surface a toast.
+  await page.route('**/audio/**/manifest.json*', route => route.abort());
+
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await page.waitForLoadState('networkidle').catch(() => {});
+  await page.locator('.podcast-card:has-text("The Forge Podcast")').first().click();
+  await expect(page.locator('#list-view')).toHaveClass(/active/);
+
+  await page.locator('.episode-card .ep-download-btn').first().click();
+
+  const toast = page.locator('#toast-region .toast');
+  await expect(toast).toBeVisible();
+  await expect(toast).toContainText('Download failed');
+  await expect(toast.locator('.toast-action')).toHaveText('Retry');
+
+  // The close button dismisses without acting.
+  await toast.locator('.toast-close').click();
+  await expect(page.locator('#toast-region .toast')).toHaveCount(0);
+});
+
+test('transcript lines, chapters, and panel headers are accessible controls', async ({ page }) => {
+  await openEpisode(page);
+
+  const line = page.locator('.transcript-line').first();
+  await expect(line).toHaveAttribute('role', 'button');
+  await expect(line).toHaveAttribute('tabindex', '0');
+
+  const chapter = page.locator('.chapter-item').first();
+  await expect(chapter).toHaveAttribute('role', 'button');
+  await expect(chapter).toHaveAttribute('tabindex', '0');
+
+  // Collapsible panel headers expose their expanded state.
+  const header = page.locator('#settings-panel .panel-header');
+  await expect(header).toHaveAttribute('aria-expanded', 'false');
+  await header.click();
+  await expect(header).toHaveAttribute('aria-expanded', 'true');
+});
+
+test('speed popover closes with Escape and returns focus to its trigger', async ({ page }) => {
+  await openEpisode(page);
+
+  await page.locator('#speed-btn').click();
+  await expect(page.locator('#speed-popover')).toBeVisible();
+  await expect(page.locator('#speed-btn')).toHaveAttribute('aria-expanded', 'true');
+
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#speed-popover')).toBeHidden();
+  await expect(page.locator('#speed-btn')).toBeFocused();
+});

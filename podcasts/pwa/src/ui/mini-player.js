@@ -42,15 +42,11 @@ export function createMiniPlayer({
     }
 
     function bind() {
+        // Whole-bar taps expand; #mini-player-open (a real button) carries the
+        // keyboard/screen-reader semantics and its clicks bubble to here, so
+        // Enter/Space need no separate handler.
         document.getElementById('mini-player').addEventListener('click', (e) => {
             if (e.target.closest('.mini-ctrl-btn')) return;
-            onExpand();
-        });
-
-        document.getElementById('mini-player').addEventListener('keydown', (e) => {
-            if (e.target.closest('.mini-ctrl-btn')) return;
-            if (e.key !== 'Enter' && e.key !== ' ') return;
-            e.preventDefault();
             onExpand();
         });
 

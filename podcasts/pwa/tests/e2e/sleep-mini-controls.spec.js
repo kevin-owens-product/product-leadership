@@ -153,7 +153,7 @@ test('mini player expands to the player with the keyboard', async ({ page }) => 
   await page.locator('#back-to-list').click();
   await expect(page.locator('#mini-player')).toHaveClass(/active/);
 
-  await page.locator('#mini-player').focus();
+  await page.locator('#mini-player-open').focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#player-view')).toHaveClass(/active/);
   await expect(page.locator('#mini-player')).not.toHaveClass(/active/);

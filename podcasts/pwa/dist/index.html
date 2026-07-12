@@ -16,9 +16,9 @@
     <!-- App styles, split by concern (was one inline <style> block).
          Load order matters: base -> player -> components preserves the
          original cascade. All three are precached in the SW app shell. -->
-    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260712T183210Z">
-    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260712T183210Z">
-    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260712T183210Z">
+    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260712T184326Z">
+    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260712T184326Z">
+    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260712T184326Z">
 </head>
 <body>
     <!-- Podcasts Home View -->
@@ -457,15 +457,17 @@
     <div class="toast-region" id="toast-region"></div>
 
     <!-- Mini Player -->
-    <div class="mini-player" id="mini-player" role="button" tabindex="0" aria-label="Now playing — open player">
+    <div class="mini-player" id="mini-player">
         <div class="mini-progress" aria-hidden="true">
             <div class="mini-progress-fill" id="mini-progress-fill" style="width:0%"></div>
         </div>
-        <img class="mini-player-art" id="mini-player-art" alt="" hidden>
-        <div class="mini-player-info">
-            <div class="mini-player-title" id="mini-player-title">Episode Title</div>
-            <div class="mini-player-subtitle" id="mini-player-subtitle">Podcast Name</div>
-        </div>
+        <button class="mini-player-open" id="mini-player-open" aria-label="Now playing — open player">
+            <img class="mini-player-art" id="mini-player-art" alt="" hidden>
+            <span class="mini-player-info">
+                <span class="mini-player-title" id="mini-player-title">Episode Title</span>
+                <span class="mini-player-subtitle" id="mini-player-subtitle">Podcast Name</span>
+            </span>
+        </button>
         <div class="mini-player-controls">
             <button class="mini-ctrl-btn" id="mini-play-btn" aria-label="Play">
                 <svg class="play-pause-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
@@ -479,6 +481,6 @@
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T183210Z"></script>
+    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T184326Z"></script>
 </body>
 </html>

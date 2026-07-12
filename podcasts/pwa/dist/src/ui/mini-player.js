@@ -1,8 +1,8 @@
 // Persistent bottom mini player shown on non-player screens whenever an
 // episode is loaded (playing OR paused — like Overcast/Pocket Casts).
 
-import { setPlayButtonState } from './dom.js?v=2.3.0%2B20260712T183210Z';
-import { generatePodcastArtwork } from './artwork.js?v=2.3.0%2B20260712T183210Z';
+import { setPlayButtonState } from './dom.js?v=2.3.0%2B20260712T184326Z';
+import { generatePodcastArtwork } from './artwork.js?v=2.3.0%2B20260712T184326Z';
 
 export function createMiniPlayer({
     getPlayerPodcast,
@@ -42,15 +42,11 @@ export function createMiniPlayer({
     }
 
     function bind() {
+        // Whole-bar taps expand; #mini-player-open (a real button) carries the
+        // keyboard/screen-reader semantics and its clicks bubble to here, so
+        // Enter/Space need no separate handler.
         document.getElementById('mini-player').addEventListener('click', (e) => {
             if (e.target.closest('.mini-ctrl-btn')) return;
-            onExpand();
-        });
-
-        document.getElementById('mini-player').addEventListener('keydown', (e) => {
-            if (e.target.closest('.mini-ctrl-btn')) return;
-            if (e.key !== 'Enter' && e.key !== ' ') return;
-            e.preventDefault();
             onExpand();
         });
 

@@ -1047,6 +1047,9 @@ function bindSkipButton(id, getDelta) {
     const skipper = createRepeatSkipper({ action: doSkip });
     btn.addEventListener('pointerdown', (e) => {
         if (typeof e.button === 'number' && e.button !== 0) return;
+        // A long-press that ended off-button never got the trailing click
+        // that consumes this flag; clear it so this press isn't swallowed.
+        suppressClick = false;
         spawnRipple(btn, e);
         skipper.press();
     });

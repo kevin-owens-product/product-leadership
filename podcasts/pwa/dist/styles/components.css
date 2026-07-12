@@ -31,9 +31,33 @@
     transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.5, 1);
 }
 
-.mini-player:focus-visible {
+/* The expand affordance is a real button so the nested play control stays
+   independently reachable (no interactive content inside a role="button"). */
+.mini-player-open {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.mini-player-open:focus-visible {
     outline: 2px solid var(--accent);
-    outline-offset: -2px;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+.mini-player-title,
+.mini-player-subtitle {
+    display: block;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -235,26 +235,50 @@ filesToCopy.forEach(file => {
     const src = path.join(__dirname, file);
     const dest = path.join(distDir, file);
     if (fs.existsSync(src)) {
-        fs.copyFileSync(src, dest);
-        console.log(`✓ Copied: ${file}`);
+        if (copyFileResilient(src, dest)) console.log(`✓ Copied: ${file}`);
     }
 });
 
+// iCloud Drive can evict/materialize files mid-build, so copies and directory
+// scans occasionally hit transient ENOENT on paths that exist again moments
+// later. Retry once, then skip with a warning (the next build heals) rather
+// than failing the whole build.
+function copyFileResilient(src, dest) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+            fs.copyFileSync(src, dest);
+            return true;
+        } catch (err) {
+            if (err.code !== 'ENOENT') throw err;
+        }
+    }
+    console.warn(`⚠ Skipped (file vanished during copy): ${src}`);
+    return false;
+}
+
+function readdirSafe(dir) {
+    try {
+        return fs.readdirSync(dir, { withFileTypes: true });
+    } catch (err) {
+        if (err.code === 'ENOENT') return null;
+        throw err;
+    }
+}
+
 function copyDirRecursive(src, dest, shouldCopy = () => true) {
-    if (!fs.existsSync(src)) return 0;
+    const entries = readdirSafe(src);
+    if (!entries) return 0;
     if (!fs.existsSync(dest)) {
         fs.mkdirSync(dest, { recursive: true });
     }
     let count = 0;
-    const entries = fs.readdirSync(src, { withFileTypes: true });
     for (const entry of entries) {
         const srcPath = path.join(src, entry.name);
         const destPath = path.join(dest, entry.name);
         if (entry.isDirectory()) {
             count += copyDirRecursive(srcPath, destPath, shouldCopy);
         } else if (shouldCopy(srcPath, entry.name)) {
-            fs.copyFileSync(srcPath, destPath);
-            count++;
+            if (copyFileResilient(srcPath, destPath)) count++;
         }
     }
     return count;
@@ -270,13 +294,19 @@ function copyAudioRecursive(src, dest) {
 }
 
 function pruneEmptyDirs(dir) {
-    if (!fs.existsSync(dir)) return true;
+    const entries = readdirSafe(dir);
+    if (!entries) return true; // vanished mid-scan == already gone
     let isEmpty = true;
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    for (const entry of entries) {
         const child = path.join(dir, entry.name);
         if (entry.isDirectory()) {
             if (pruneEmptyDirs(child)) {
-                fs.rmdirSync(child);
+                try {
+                    fs.rmdirSync(child);
+                } catch (err) {
+                    if (err.code === 'ENOTEMPTY') isEmpty = false;
+                    else if (err.code !== 'ENOENT') throw err;
+                }
             } else {
                 isEmpty = false;
             }

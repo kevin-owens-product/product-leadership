@@ -1,0 +1,1133 @@
+/* Queue & Mini Player */
+/* Persistent bottom bar on non-player screens. Slides in/out with a
+   spring-feel transform; its own view-transition-name keeps it
+   anchored (not cross-faded) during screen transitions. */
+.mini-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: 10px 16px;
+    padding-bottom: calc(10px + var(--safe-bottom));
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 900;
+    cursor: pointer;
+    transform: translateY(105%);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.5, 1),
+                visibility 0s linear 0.2s;
+    view-transition-name: mini-player;
+}
+
+.mini-player.active {
+    transform: none;
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.5, 1);
+}
+
+.mini-player:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mini-player,
+    .mini-player.active {
+        transition: none;
+    }
+}
+
+/* Keep scrolling content clear of the bar while it's visible. */
+body.has-mini-player #podcasts-view,
+body.has-mini-player #list-view {
+    padding-bottom: calc(120px + var(--safe-bottom));
+}
+
+/* Progress hairline across the top edge of the mini player. */
+.mini-progress {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    pointer-events: none;
+}
+
+.mini-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+}
+
+.mini-player-art {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background: var(--bg-tertiary);
+}
+
+.mini-player-art[hidden] {
+    display: none;
+}
+
+.mini-player-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.mini-player-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mini-player-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.mini-player-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.mini-ctrl-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Toasts — queue-able notifications with an optional action button
+   (see src/ui/toast.js). Stacked above the mini player, below nothing:
+   errors and update prompts must stay visible over modals too. */
+.toast-region {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(16px + var(--safe-bottom));
+    width: min(420px, calc(100vw - 32px));
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1100;
+    pointer-events: none;
+}
+
+body.has-mini-player .toast-region {
+    bottom: calc(84px + var(--safe-bottom));
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+    pointer-events: auto;
+    animation: toastIn 0.18s ease-out;
+}
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        animation: none;
+    }
+}
+
+.toast-message {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.toast-action {
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--accent-text);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.toast-action:hover,
+.toast-action:active {
+    border-color: var(--accent);
+}
+
+.toast-close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 4px 6px;
+    cursor: pointer;
+}
+
+body.light-theme .toast {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+
+.mini-ctrl-btn:active {
+    transform: scale(0.9);
+}
+
+.queue-panel {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.queue-item {
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.queue-item.playing {
+    border-left: 3px solid var(--accent);
+}
+
+.queue-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-text);
+}
+
+.queue-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.queue-title {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.queue-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.queue-remove {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.queue-remove:active {
+    background: var(--accent);
+    color: white;
+}
+
+/* Statistics View */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-text);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.theme-toggle:active {
+    background: var(--accent);
+    color: white;
+}
+
+/* Light Theme */
+body.light-theme {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-tertiary: #e5e5e5;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --border: #d0d0d0;
+    /* On light surfaces accent text must be DARKER, not lighter.
+       Defined on body so it shadows the per-podcast value main.js
+       sets on <html> (which is tuned for dark surfaces only). */
+    --accent-text: #4649c9;
+}
+
+/* Share & Export */
+.share-buttons {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.share-btn {
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.share-btn:active {
+    background: var(--accent);
+    color: white;
+}
+
+/* Filter Controls */
+.filter-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.sort-select {
+    padding: 8px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* Transcript */
+.transcript-panel {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    max-height: 35vh;
+}
+
+/* "Resync" pill: appears when the user scrolls the transcript away
+   from the current line during playback; tap to re-follow. */
+.transcript-resync {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    padding: 7px 16px;
+    border: none;
+    border-radius: 999px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    z-index: 5;
+}
+
+.transcript-resync:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
+.panel.collapsed .transcript-resync {
+    display: none;
+}
+
+@keyframes resync-pill-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .transcript-resync {
+        animation: resync-pill-in 0.18s ease-out;
+    }
+}
+
+.transcript-panel .panel-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.transcript-search {
+    padding: 0 16px 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.transcript-search input {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+}
+
+.transcript-search input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.search-nav {
+    display: flex;
+    gap: 4px;
+}
+
+.search-nav button {
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.search-nav button:active {
+    background: var(--accent);
+    color: white;
+}
+
+.transcript-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.transcript-line {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background: var(--bg-tertiary);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.transcript-line.current {
+    background: var(--bg-primary);
+    border-left: 3px solid var(--accent);
+}
+
+.transcript-line.search-match {
+    border: 1px solid var(--warning);
+}
+
+.transcript-line.search-current {
+    border: 2px solid var(--warning);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.transcript-line .speaker {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+.transcript-line.alex .speaker { color: var(--alex-color); }
+.transcript-line.sam .speaker { color: var(--sam-color); }
+
+.transcript-line.direction {
+    font-style: italic;
+    color: var(--text-secondary);
+    background: transparent;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+.transcript-line .text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.transcript-line.current .text {
+    color: var(--text-primary);
+}
+
+.highlight {
+    background: var(--warning);
+    color: black;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+/* Loading */
+.loading-text {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+}
+
+/* Install & Sleep Prompts */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 320px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal h3 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+.modal p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.modal .btns {
+    display: flex;
+    gap: 10px;
+}
+
+.modal button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.modal .primary-btn {
+    background: var(--accent);
+    color: white;
+}
+
+.modal .secondary-btn {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+/* Swipe indicator */
+.swipe-hint {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.swipe-hint.left { left: 20px; }
+.swipe-hint.right { right: 20px; }
+.swipe-hint.show { opacity: 1; }
+
+/* Episode complete modal */
+.complete-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.complete-actions button {
+    width: 100%;
+}
+
+/* Bookmarks & Chapters Panel */
+.nav-panel {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.nav-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-tab {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-tab.active {
+    color: var(--accent-text);
+    background: var(--bg-tertiary);
+}
+
+.nav-content {
+    max-height: 200px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-content[data-tab]:not(.active) {
+    display: none;
+}
+
+/* Chapters List */
+.chapter-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.chapter-item:last-child {
+    border-bottom: none;
+}
+
+.chapter-item:active {
+    background: var(--bg-tertiary);
+}
+
+.chapter-item.current {
+    background: var(--bg-tertiary);
+    border-left: 3px solid var(--accent);
+}
+
+.chapter-number {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-text);
+    flex-shrink: 0;
+}
+
+.chapter-item.current .chapter-number {
+    background: var(--accent);
+    color: white;
+}
+
+.chapter-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.chapter-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chapter-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Bookmarks List */
+.bookmark-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.bookmark-item:last-child {
+    border-bottom: none;
+}
+
+.bookmark-content {
+    flex: 1;
+    cursor: pointer;
+    min-width: 0;
+}
+
+.bookmark-position {
+    font-size: 0.75rem;
+    color: var(--accent-text);
+    margin-bottom: 2px;
+}
+
+.bookmark-note {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bookmark-preview {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bookmark-delete {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+.bookmark-delete:active {
+    color: #ef4444;
+}
+
+.no-items {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.add-bookmark-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    margin: 12px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.add-bookmark-btn:active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+/* Bookmark Modal */
+.bookmark-modal input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 16px;
+}
+
+.bookmark-modal input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.bookmark-modal .context-preview {
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    max-height: 80px;
+    overflow: hidden;
+}
+
+/* Current chapter indicator */
+.current-chapter-badge {
+    font-size: 0.75rem;
+    color: var(--accent-text);
+    margin-top: 4px;
+}
+
+/* Podcasts View */
+.podcasts-view {
+    padding: 20px;
+    padding-bottom: 100px;
+}
+
+.podcast-card {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.podcast-card:hover, .podcast-card:active {
+    background: var(--bg-tertiary);
+    transform: scale(0.98);
+}
+
+.podcast-card-header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.podcast-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.podcast-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.podcast-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.podcast-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.podcast-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.podcast-progress-bar {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    margin-top: 12px;
+    overflow: hidden;
+}
+
+.podcast-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--accent-text);
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.nav-btn:hover, .nav-btn:active {
+    background: var(--accent);
+    color: white;
+}
+
+.nav-title {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    flex: 1;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.breadcrumb {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Add Podcast Button */
+.add-podcast-card {
+    background: var(--bg-secondary);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.add-podcast-card:active {
+    background: var(--bg-tertiary);
+    border-color: var(--accent);
+}
+
+.add-podcast-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.add-podcast-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Create Podcast Modal */
+.create-modal .modal {
+    max-width: 400px;
+}
+
+.create-modal textarea {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.create-modal textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.create-modal input {
+    width: 100%;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.create-modal input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.create-modal label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.color-picker {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.color-option {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.color-option.selected {
+    border-color: white;
+    transform: scale(1.1);
+}
+
+/* ---------- Mobile (≤ 600px) ---------- */
+@media (max-width: 600px) {
+    /* Header: hide breadcrumb + home button, let title claim the row */
+    .player-header .breadcrumb {
+        display: none;
+    }
+    .player-header #home-from-player {
+        display: none;
+    }
+    .player-title h2 {
+        font-size: 1.05rem;
+        line-height: 1.25;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Bigger touch targets on speed presets */
+    .speed-preset-btn {
+        min-height: 44px;
+        padding: 12px 8px;
+        font-size: 0.9rem;
+    }
+
+    /* Compact the chapters/bookmarks/queue panel so play stays above the fold */
+    .nav-content {
+        max-height: 140px;
+    }
+
+    /* Header buttons a touch closer together */
+    .player-header .header-actions {
+        gap: 6px;
+    }
+
+    /* Trim version badge style */
+    .badge.version {
+        max-width: 9ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

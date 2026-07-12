@@ -1,0 +1,853 @@
+/* Player View */
+.player-view {
+    padding: 20px;
+    padding-bottom: 20px;
+}
+
+.player-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.header-btn {
+    background: var(--bg-secondary);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.header-btn:active {
+    background: var(--accent);
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.player-title {
+    flex: 1;
+    min-width: 0;
+}
+
+.player-title h2 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-title .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+/* Collapsible Panels */
+.panel {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.panel-header {
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.panel-header h3 {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.panel-toggle {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+}
+
+.panel.collapsed .panel-toggle {
+    transform: rotate(-90deg);
+}
+
+.panel-content {
+    padding: 0 16px 16px;
+    transition: max-height 0.3s, opacity 0.2s;
+    overflow: hidden;
+}
+
+.panel.collapsed .panel-content {
+    max-height: 0 !important;
+    padding: 0 16px;
+    opacity: 0;
+}
+
+/* Voice Settings */
+.voice-row {
+    display: flex;
+    gap: 12px;
+}
+
+.voice-select-wrapper {
+    flex: 1;
+}
+
+.voice-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+}
+
+.voice-label .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.voice-label.alex .dot { background: var(--alex-color); }
+.voice-label.sam .dot { background: var(--sam-color); }
+
+.voice-select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    /* Ensure native dropdown works on mobile */
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+    cursor: pointer;
+    min-height: 44px; /* Touch-friendly size */
+}
+
+.voice-info {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    padding: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    line-height: 1.4;
+}
+
+.voice-count {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.preview-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.preview-btn:active {
+    background: var(--accent);
+    color: white;
+}
+
+/* Timer Settings */
+.timer-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.timer-btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 10px 8px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.timer-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.timer-display {
+    margin-top: 12px;
+    text-align: center;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.timer-display.active {
+    color: var(--warning);
+}
+
+.timer-btn-episode {
+    flex-basis: 100%;
+}
+
+/* Sleep-timer state surfaced in the player UI */
+.header-btn.sleep-active {
+    box-shadow: inset 0 0 0 1.5px var(--warning);
+    color: var(--warning);
+}
+
+.sleep-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--warning);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sleep-chip[hidden] {
+    display: none;
+}
+
+/* "Up next" affordance in the final 30 seconds of an episode */
+.up-next-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    animation: upNextIn 0.2s ease-out;
+}
+
+.up-next-banner[hidden] {
+    display: none;
+}
+
+@keyframes upNextIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .up-next-banner {
+        animation: none;
+    }
+}
+
+.up-next-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.up-next-title {
+    flex: 1;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.up-next-play {
+    flex-shrink: 0;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.up-next-play:hover {
+    background: var(--accent-hover);
+}
+
+/* Keyboard shortcuts overlay */
+.shortcuts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+    text-align: left;
+}
+
+.shortcut-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.shortcut-keys {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.shortcut-row kbd {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    min-width: 28px;
+    text-align: center;
+}
+
+/* Controls Panel */
+.controls-panel {
+    padding: 16px;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.status-dot.speaking {
+    background: var(--accent);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+.status-text {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* Ambient now-playing visualizer: AnalyserNode-driven bars, animated
+   with transform/opacity only. Hidden entirely under reduced motion
+   (the JS never creates the AudioContext there either). */
+.now-playing-viz {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 26px;
+    margin-bottom: 14px;
+    opacity: 0.45;
+    transition: opacity 0.2s;
+}
+
+.now-playing-viz.live {
+    opacity: 1;
+}
+
+.viz-bar {
+    flex: 1;
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--accent-hover), var(--accent));
+    transform: scaleY(0.12);
+    transform-origin: center;
+    will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .now-playing-viz {
+        display: none;
+    }
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.ctrl-btn {
+    background: var(--bg-tertiary);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all 0.15s;
+    /* Anchor + clip for the press ripple. */
+    position: relative;
+    overflow: hidden;
+    /* Long-press repeat-skip: keep iOS from selecting text or
+       popping the callout while a skip button is held. */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+}
+
+.ctrl-btn:active {
+    transform: scale(0.9);
+    background: var(--accent);
+}
+
+.ctrl-btn.small {
+    width: 48px;
+    height: 48px;
+    font-size: 1.1rem;
+}
+
+.ctrl-btn.ctrl-text {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.ctrl-btn.large {
+    width: 68px;
+    height: 68px;
+    font-size: 1.8rem;
+    background: var(--accent);
+}
+
+/* Morphing play/pause icon: the two glyphs cross-fade + rotate inside
+   one SVG; the button's .playing class flips them (≤200ms). */
+.play-pause-icon {
+    width: 58%;
+    height: 58%;
+    fill: currentColor;
+    pointer-events: none;
+}
+
+.play-pause-icon .pp-play,
+.play-pause-icon .pp-pause {
+    transform-origin: 18px 18px;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.play-pause-icon .pp-pause {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+button.playing .play-pause-icon .pp-play {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+button.playing .play-pause-icon .pp-pause {
+    opacity: 1;
+    transform: none;
+}
+
+/* Skip-button press ripple (spawned by src/ui/motion.js). */
+.skip-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+    transform: scale(0);
+    animation: rippleExpand 0.2s ease-out forwards;
+}
+
+body.light-theme .skip-ripple {
+    background: rgba(0, 0, 0, 0.18);
+}
+
+@keyframes rippleExpand {
+    from { transform: scale(0); opacity: 0.9; }
+    to { transform: scale(2.4); opacity: 0; }
+}
+
+/* Seconds flyout ("−30s" / "+10s") rising from a skip button. */
+.skip-flyout {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-hover);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    z-index: 950;
+    animation: flyoutRise 0.2s ease-out forwards;
+}
+
+@keyframes flyoutRise {
+    from { opacity: 0; transform: translate(-50%, -100%); }
+    35% { opacity: 1; }
+    to { opacity: 0; transform: translate(-50%, calc(-100% - 16px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .play-pause-icon .pp-play,
+    .play-pause-icon .pp-pause {
+        transition: none;
+    }
+
+    .skip-ripple,
+    .skip-flyout {
+        display: none;
+    }
+}
+
+/* Progress */
+.progress-section {
+    margin-bottom: 16px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    cursor: pointer;
+    touch-action: none; /* the scrubber owns touches on the track */
+}
+
+/* Enlarged invisible hit target for touch scrubbing. */
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -12px;
+    bottom: -12px;
+}
+
+.progress-bar:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.progress-buffered {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+body.light-theme .progress-buffered {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    position: relative;
+    height: 100%;
+    background: linear-gradient(90deg, var(--alex-color), var(--sam-color));
+    border-radius: 4px;
+    transition: width 0.1s;
+}
+
+.scrub-handle {
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--accent);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 3;
+    transition: transform 0.15s;
+}
+
+.progress-bar.scrubbing .scrub-handle,
+.progress-bar:focus-visible .scrub-handle {
+    transform: translate(-50%, -50%) scale(1.3);
+}
+
+.scrub-bubble {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    transform: translateX(-50%);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.scrub-bubble[hidden] {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scrub-handle,
+    .progress-fill {
+        transition: none;
+    }
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Speed & Options Row */
+.options-row {
+    position: relative; /* anchors the speed popover */
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.speed-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.speed-btn[aria-expanded="true"] {
+    border-color: var(--accent);
+}
+
+.speed-btn-caret {
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+}
+
+.speed-popover {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    z-index: 20;
+}
+
+.speed-popover[hidden] {
+    display: none;
+}
+
+.speed-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.speed-section label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.speed-slider {
+    flex: 1;
+    accent-color: var(--accent);
+}
+
+.speed-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.auto-play-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.auto-play-toggle.active {
+    background: var(--accent);
+    color: white;
+}
+
+/* Speed Presets */
+.speed-presets {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.speed-preset-btn {
+    flex: 1;
+    min-width: 50px;
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.speed-preset-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.speed-preset-btn:hover,
+.speed-preset-btn:active {
+    transform: scale(0.95);
+}
+
+/* Settings Panel */
+.settings-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.tts-background-notice {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--warning);
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.clear-data-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ef4444;
+    background: rgba(239, 68, 68, 0.12);
+    color: #fecaca;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.light-theme .clear-data-btn {
+    /* On light backgrounds the pale text vanished; pin to a darker red. */
+    color: #b91c1c;
+    background: rgba(239, 68, 68, 0.08);
+}
+
+.clear-data-btn:active {
+    transform: scale(0.99);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+}
+
+.setting-label {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.setting-value {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.setting-input {
+    width: 60px;
+    padding: 6px 10px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    text-align: center;
+}
+

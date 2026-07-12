@@ -297,6 +297,18 @@ if (fs.existsSync(srcModulesDir)) {
     }
 }
 
+// Copy stylesheets linked from index.html. They land in dist/styles/, so the
+// app-shell walker below automatically precaches them — offline installs keep
+// working with the CSS split out of index.html.
+const stylesDir = path.join(__dirname, 'styles');
+const stylesDistDir = path.join(distDir, 'styles');
+if (fs.existsSync(stylesDir)) {
+    const styleCount = copyDirRecursive(stylesDir, stylesDistDir, (srcPath, fileName) => fileName.endsWith('.css'));
+    if (styleCount > 0) {
+        console.log(`✓ Copied: ${styleCount} stylesheet files`);
+    }
+}
+
 // Copy generated audio from tools/generate-audio-supertonic.js
 const audioSrcDir = path.join(__dirname, 'audio');
 const audioDistDir = path.join(distDir, 'audio');
@@ -413,9 +425,14 @@ if (fs.existsSync(indexHtmlDist)) {
         if (q1 !== q2) return m;
         return `${prefix}${q1}${p}${VERSION_QUERY}${q2}`;
     });
-    if (updated !== original) {
-        fs.writeFileSync(indexHtmlDist, updated);
-        console.log(`✓ Cache-busted entry <script src="…"> tags in dist/index.html`);
+    // Same belt-and-suspenders treatment for the stylesheet links.
+    const withCss = updated.replace(/(<link\b[^>]*\bhref=)(['"])(\.{0,2}\/?styles\/[^'"?]+\.css)(['"])/g, (m, prefix, q1, p, q2) => {
+        if (q1 !== q2) return m;
+        return `${prefix}${q1}${p}${VERSION_QUERY}${q2}`;
+    });
+    if (withCss !== original) {
+        fs.writeFileSync(indexHtmlDist, withCss);
+        console.log(`✓ Cache-busted entry <script src="…"> and <link href="…"> tags in dist/index.html`);
     }
 }
 

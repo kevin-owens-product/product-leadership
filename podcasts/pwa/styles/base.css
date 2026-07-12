@@ -1,0 +1,421 @@
+:root {
+    --bg-primary: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #252525;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    /* #5a5df0 (was #6366f1) so white button text clears 4.5:1. */
+    --accent: #5a5df0;
+    --accent-hover: #818cf8;
+    /* Accent used as small TEXT on dark surfaces needs a lighter
+       shade than the button-background accent (contrast ≥ 4.5:1).
+       main.js recomputes this per podcast alongside --accent. */
+    --accent-text: #9a9cf8;
+    --alex-color: #3b82f6;
+    --sam-color: #10b981;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --border: #333;
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    min-height: 100dvh;
+    line-height: 1.5;
+    overflow-x: hidden;
+    padding-top: var(--safe-top);
+    padding-bottom: var(--safe-bottom);
+    touch-action: pan-y;
+}
+
+/* Views */
+.view {
+    display: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.view.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Screen-to-screen View Transitions (JS falls back to an instant swap
+   when unsupported; reduced motion skips the transition entirely). */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 0.18s;
+}
+
+::view-transition-old(mini-player),
+::view-transition-new(mini-player) {
+    animation-duration: 0.18s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root),
+    ::view-transition-old(mini-player),
+    ::view-transition-new(mini-player) {
+        animation: none !important;
+    }
+}
+
+/* Spring-feel rise when expanding the mini player back to the full
+   player screen. */
+.player-view.spring-in {
+    animation: playerSpringIn 0.2s cubic-bezier(0.3, 1.35, 0.6, 1);
+}
+
+@keyframes playerSpringIn {
+    from { transform: translateY(28px); opacity: 0.5; }
+    to { transform: none; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .player-view.spring-in {
+        animation: none;
+    }
+}
+
+/* Episode List View */
+.episode-list-view {
+    padding: 20px;
+    padding-bottom: 100px;
+}
+
+.app-header {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 10px;
+}
+
+.app-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.app-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+}
+
+.badge.offline {
+    background: var(--accent);
+    color: white;
+}
+
+.badge.refresh-btn {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.badge.refresh-btn:hover, .badge.refresh-btn:active {
+    background: var(--accent);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.podcast-card:focus-visible,
+.episode-card:focus-visible,
+.add-podcast-card:focus-visible,
+.panel-header:focus-visible,
+.progress-bar:focus-visible,
+.transcript-line:focus-visible,
+.chapter-item:focus-visible,
+.queue-item:focus-visible,
+.bookmark-content:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Tighter outline for dense list rows so focus rings don't overlap
+   neighbouring rows. */
+.transcript-line:focus-visible,
+.chapter-item:focus-visible,
+.queue-item:focus-visible,
+.bookmark-content:focus-visible {
+    outline-width: 2px;
+    outline-offset: 1px;
+}
+
+.update-banner {
+    /* Deeper green than --success: white text on #22c55e was ~2.3:1. */
+    background: #15803d;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.9rem;
+}
+
+.update-banner button {
+    background: white;
+    color: #15803d;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.badge.progress {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+.badge.version {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-family: monospace;
+    font-size: 0.7rem;
+}
+
+.podcast-count {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Search Bar */
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Episode Cards */
+.episode-card {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.episode-card:hover, .episode-card:active {
+    background: var(--bg-tertiary);
+    transform: scale(0.98);
+}
+
+.episode-card.completed {
+    border-color: var(--success);
+}
+
+.episode-card.in-progress {
+    border-color: var(--warning);
+}
+
+.episode-card .ep-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 0.3s;
+}
+
+.episode-card .ep-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.ep-download-btn {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    border-radius: 14px;
+    min-width: 32px;
+    height: 26px;
+    padding: 0 8px;
+    font-size: 0.95rem;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.ep-download-btn:hover {
+    color: var(--accent-text);
+    border-color: var(--accent);
+}
+.ep-download-btn.downloaded {
+    color: var(--success, #22c55e);
+    border-color: var(--success, #22c55e);
+}
+.ep-download-btn.downloading {
+    color: var(--warning, #f59e0b);
+    border-color: var(--warning, #f59e0b);
+    cursor: wait;
+}
+
+.progress-bar {
+    position: relative;
+}
+
+.resume-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    margin: 0 16px 12px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+.resume-banner[hidden] { display: none; }
+.resume-banner-text {
+    flex: 1;
+    min-width: 0;
+    color: var(--text-secondary);
+}
+.resume-banner-actions {
+    display: inline-flex;
+    gap: 6px;
+}
+.resume-banner-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-primary);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+.resume-banner-btn.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+.resume-banner-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+}
+.chapter-marker {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+    transform: translateX(-1px);
+}
+
+.episode-card .ep-number {
+    font-size: 0.75rem;
+    color: var(--accent-text);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.episode-card .ep-status {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+.episode-card .ep-status.completed {
+    background: var(--success);
+    color: white;
+}
+
+.episode-card .ep-status.in-progress {
+    background: var(--warning);
+    color: black;
+}
+
+.episode-card .ep-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.episode-card .ep-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.episode-card .ep-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+

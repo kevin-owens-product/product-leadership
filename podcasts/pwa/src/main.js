@@ -431,6 +431,18 @@ function openPodcast(podcast, { transition = true } = {}) {
     document.getElementById('current-podcast-subtitle').textContent = podcast.subtitle;
     document.getElementById('nav-podcast-name').textContent = podcast.title;
 
+    // Artwork-led show header: the generated cover anchors the wash.
+    const headerArt = document.getElementById('podcast-header-art');
+    if (headerArt) {
+        const headerArtUrl = generatePodcastArtwork(podcast);
+        if (headerArtUrl) {
+            headerArt.src = headerArtUrl;
+            headerArt.hidden = false;
+        } else {
+            headerArt.hidden = true;
+        }
+    }
+
     // Enter the show's adaptive palette: --show-* on <body> (wash, accent,
     // chips, glow — DESIGN.md §3) plus the legacy --accent/--accent-text
     // bridge on <html>. Contrast clamping happens inside the engine.

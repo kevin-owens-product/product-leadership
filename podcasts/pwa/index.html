@@ -24,17 +24,24 @@
     <!-- Podcasts Home View -->
     <div id="podcasts-view" class="view active podcasts-view">
         <header class="app-header">
-            <h1>PodLearn</h1>
-            <p>Your Custom Podcast Player</p>
-            <div class="badges">
+            <div class="home-brand-row">
+                <div class="home-brand">
+                    <h1>PodLearn</h1>
+                    <p class="home-tagline">Your Custom Podcast Player</p>
+                </div>
+                <button class="refresh-btn" id="refresh-btn" type="button" title="Refresh content">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 12a8.5 8.5 0 1 1-2.5-6"/><path d="M20.6 3.5v4.2h-4.2"/></svg>
+                    <span>Refresh</span>
+                </button>
+            </div>
+            <div class="badges home-meta">
+                <span id="podcast-count" class="podcast-count"></span>
                 <span class="badge offline" id="offline-badge-home" style="display:none">Offline Ready</span>
                 <span class="badge version" id="version-badge">v--</span>
-                <button class="badge refresh-btn" id="refresh-btn" type="button">↻ Refresh</button>
             </div>
             <div id="update-banner" class="update-banner" role="status" style="display:none">
                 New content available! <button type="button" id="apply-update-btn">Update Now</button>
             </div>
-            <div id="podcast-count" class="podcast-count"></div>
         </header>
 
         <div class="search-container">
@@ -50,16 +57,20 @@
     <div id="list-view" class="view episode-list-view">
         <div class="nav-bar">
             <button class="nav-btn" id="back-to-podcasts" title="Back to all podcasts">
-                <span>←</span> Home
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>
+                <span>Home</span>
             </button>
             <span class="nav-title" id="nav-podcast-name">Podcast Name</span>
         </div>
-        <header class="app-header" id="podcast-header">
-            <h1 id="current-podcast-title">Podcast</h1>
-            <p id="current-podcast-subtitle">Subtitle</p>
-            <div class="badges">
-                <span class="badge offline" id="offline-badge" style="display:none">Offline Ready</span>
-                <span class="badge progress" id="total-progress-badge">0% Complete</span>
+        <header class="show-header" id="podcast-header">
+            <img class="show-header-art" id="podcast-header-art" alt="" hidden>
+            <div class="show-header-info">
+                <h1 id="current-podcast-title">Podcast</h1>
+                <p class="show-header-subtitle" id="current-podcast-subtitle">Subtitle</p>
+                <div class="badges show-header-badges">
+                    <span class="badge progress" id="total-progress-badge">0% Complete</span>
+                    <span class="badge offline" id="offline-badge" style="display:none">Offline Ready</span>
+                </div>
             </div>
         </header>
 

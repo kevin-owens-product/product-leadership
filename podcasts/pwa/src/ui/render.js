@@ -1,5 +1,11 @@
 import { escapeHtml } from '../security/sanitize.js';
-import { generatePodcastArtwork } from './artwork.js';
+import { generatePodcastArtwork, getShowIdentity } from './artwork.js';
+
+// Hand-drawn inline SVG glyphs (1.8px round strokes — the shared .icon
+// language from player.css). No emoji glyphs in list chrome.
+const ICON_DOWNLOAD = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5v10"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M5 19.5h14"/></svg>';
+const ICON_CHECK = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5.5 12.5 4.5 4.5 8.5-9.5"/></svg>';
+const ICON_CHECK_SMALL = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 5 5 9-10"/></svg>';
 
 function formatClockFromMinutes(totalMinutes) {
   const safeMinutes = Number.isFinite(totalMinutes) ? Math.max(0, totalMinutes) : 0;
@@ -43,6 +49,12 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
   const artTile = artUrl
     ? `<img class="podcast-icon" src="${artUrl}" alt="" loading="lazy">`
     : `<div class="podcast-icon">${escapeHtml(podcast.icon || '🎙️')}</div>`;
+  // The card carries its show hue (the artwork's seed) so CSS can derive
+  // the corner tint and progress ink by formula — DESIGN.md §3.
+  if (card?.style?.setProperty) {
+    card.style.setProperty('--card-hue', String(getShowIdentity(podcast).hue));
+  }
+  const started = Number.isFinite(avgProgress) && avgProgress > 0;
   card.innerHTML = `
     <div class="podcast-card-header">
       ${artTile}
@@ -51,11 +63,13 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
         <div class="podcast-subtitle">${escapeHtml(podcast.subtitle)}</div>
         <div class="podcast-meta">
           <span>${epCount} episodes</span>
+          <span aria-hidden="true">·</span>
           <span>${totalLabel}</span>
+          ${started ? `<span class="podcast-progress-pct">${avgProgress}%</span>` : ''}
         </div>
       </div>
     </div>
-    <div class="podcast-progress-bar">
+    <div class="podcast-progress-bar${started ? '' : ' empty'}" aria-hidden="true">
       <div class="podcast-progress-fill" style="width: ${avgProgress}%"></div>
     </div>
   `;
@@ -63,7 +77,7 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
 
 export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState) {
   const state = downloadState || 'none';
-  const downloadLabel = state === 'downloaded' ? '✓' : state === 'downloading' ? '…' : '⬇';
+  const downloadGlyph = state === 'downloaded' ? ICON_CHECK : ICON_DOWNLOAD;
   const downloadTitle = state === 'downloaded'
     ? 'Downloaded — tap to remove'
     : state === 'downloading'
@@ -76,18 +90,25 @@ export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, do
     const r = formatDurationLabel(remainSec);
     if (r) remainingLabel = `${r} left`;
   }
+  // Played / in-progress state chips; the mini progress meter renders
+  // (hidden when idle) so sorting by progress can always read the width.
+  const statusChip = isComplete
+    ? `<span class="ep-status completed">${ICON_CHECK_SMALL}Played</span>`
+    : inProgress
+    ? `<span class="ep-status in-progress">${progress.percent}%</span>`
+    : '';
   card.innerHTML = `
-    <div class="ep-progress-bar" style="width: ${progress.percent}%"></div>
     <div class="ep-header">
-      <span class="ep-number">EPISODE ${ep.id}</span>
-      ${isComplete ? '<span class="ep-status completed">Complete</span>' : inProgress ? `<span class="ep-status in-progress">${progress.percent}%</span>` : ''}
-      <button class="ep-download-btn ${state}" type="button" data-action="download" data-ep-id="${ep.id}" title="${downloadTitle}" aria-label="${downloadTitle}">${downloadLabel}</button>
+      <span class="ep-number">Episode ${ep.id}</span>
+      ${statusChip}
+      <button class="ep-download-btn ${state}" type="button" data-action="download" data-ep-id="${ep.id}" title="${downloadTitle}" aria-label="${downloadTitle}">${downloadGlyph}</button>
     </div>
     <div class="ep-title">${escapeHtml(ep.title)}</div>
     <div class="ep-subtitle">${escapeHtml(ep.subtitle)}</div>
     <div class="ep-meta">
       <span>${totalLabel}</span>
-      ${remainingLabel ? `<span>${remainingLabel}</span>` : ''}
+      <span class="ep-mini-progress"${inProgress ? '' : ' hidden'} aria-hidden="true"><span class="ep-progress-bar" style="width: ${progress.percent}%"></span></span>
+      ${remainingLabel ? `<span class="ep-remaining">${remainingLabel}</span>` : ''}
     </div>
   `;
 }

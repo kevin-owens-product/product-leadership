@@ -16,9 +16,9 @@
     <!-- App styles, split by concern (was one inline <style> block).
          Load order matters: base -> player -> components preserves the
          original cascade. All three are precached in the SW app shell. -->
-    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260712T203412Z">
-    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260712T203412Z">
-    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260712T203412Z">
+    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260712T204827Z">
+    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260712T204827Z">
+    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260712T204827Z">
 </head>
 <body>
     <!-- Podcasts Home View -->
@@ -49,7 +49,32 @@
         </div>
 
         <div id="podcasts-list">
-            <p class="loading-text">Loading podcasts...</p>
+            <div role="status" aria-label="Loading podcasts">
+                <div class="skeleton-card" aria-hidden="true">
+                    <div class="skeleton-block skeleton-art"></div>
+                    <div class="skeleton-lines">
+                        <div class="skeleton-block skeleton-line title"></div>
+                        <div class="skeleton-block skeleton-line wide"></div>
+                        <div class="skeleton-block skeleton-line half"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card" aria-hidden="true">
+                    <div class="skeleton-block skeleton-art"></div>
+                    <div class="skeleton-lines">
+                        <div class="skeleton-block skeleton-line title"></div>
+                        <div class="skeleton-block skeleton-line wide"></div>
+                        <div class="skeleton-block skeleton-line half"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card" aria-hidden="true">
+                    <div class="skeleton-block skeleton-art"></div>
+                    <div class="skeleton-lines">
+                        <div class="skeleton-block skeleton-line title"></div>
+                        <div class="skeleton-block skeleton-line wide"></div>
+                        <div class="skeleton-block skeleton-line half"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -93,7 +118,36 @@
         </div>
 
         <div id="episode-list">
-            <p class="loading-text">Loading episodes...</p>
+            <div role="status" aria-label="Loading episodes">
+                <div class="skeleton-card row" aria-hidden="true">
+                    <div class="skeleton-lines">
+                        <div class="skeleton-block skeleton-line half"></div>
+                        <div class="skeleton-block skeleton-line title"></div>
+                        <div class="skeleton-block skeleton-line wide"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card row" aria-hidden="true">
+                    <div class="skeleton-lines">
+                        <div class="skeleton-block skeleton-line half"></div>
+                        <div class="skeleton-block skeleton-line title"></div>
+                        <div class="skeleton-block skeleton-line wide"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card row" aria-hidden="true">
+                    <div class="skeleton-lines">
+                        <div class="skeleton-block skeleton-line half"></div>
+                        <div class="skeleton-block skeleton-line title"></div>
+                        <div class="skeleton-block skeleton-line wide"></div>
+                    </div>
+                </div>
+                <div class="skeleton-card row" aria-hidden="true">
+                    <div class="skeleton-lines">
+                        <div class="skeleton-block skeleton-line half"></div>
+                        <div class="skeleton-block skeleton-line title"></div>
+                        <div class="skeleton-block skeleton-line wide"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -279,7 +333,11 @@
                     </div>
                 </div>
                 <div class="transcript-content" id="transcript-content">
-                    <p class="loading-text">Loading transcript...</p>
+                    <div role="status" aria-label="Loading transcript">
+                        <div class="skeleton-block skeleton-transcript-line" aria-hidden="true"></div>
+                        <div class="skeleton-block skeleton-transcript-line" aria-hidden="true"></div>
+                        <div class="skeleton-block skeleton-transcript-line" aria-hidden="true"></div>
+                    </div>
                 </div>
                 <button type="button" class="transcript-resync" id="transcript-resync" aria-label="Scroll transcript back to the current line" hidden>↓ Resync</button>
             </div>
@@ -567,6 +625,6 @@
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T203412Z"></script>
+    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T204827Z"></script>
 </body>
 </html>

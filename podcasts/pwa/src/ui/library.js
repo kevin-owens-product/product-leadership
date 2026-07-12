@@ -17,6 +17,22 @@ export function createLibrary({
     let currentFilter = 'all';
     let currentSort = 'default';
 
+    // Content-shaped skeleton placeholders (same markup as the initial
+    // index.html state; see .skeleton-* in components.css).
+    function skeletonCards(count, { art = true } = {}) {
+        const card = `
+            <div class="skeleton-card${art ? '' : ' row'}" aria-hidden="true">
+                ${art ? '<div class="skeleton-block skeleton-art"></div>' : ''}
+                <div class="skeleton-lines">
+                    ${art ? '' : '<div class="skeleton-block skeleton-line half"></div>'}
+                    <div class="skeleton-block skeleton-line title"></div>
+                    <div class="skeleton-block skeleton-line wide"></div>
+                    ${art ? '<div class="skeleton-block skeleton-line half"></div>' : ''}
+                </div>
+            </div>`;
+        return card.repeat(count);
+    }
+
     function renderPodcastsList(filter = '') {
         // Update version badge
         updateVersionBadge();
@@ -24,7 +40,8 @@ export function createLibrary({
         const podcasts = getPodcasts();
         if (podcasts.length === 0) {
             if (!isLoaded()) {
-                document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">Loading podcasts...</p>';
+                document.getElementById('podcasts-list').innerHTML =
+                    `<div role="status" aria-label="Loading podcasts">${skeletonCards(3)}</div>`;
                 document.getElementById('podcast-count').textContent = 'Loading...';
             } else {
                 document.getElementById('podcasts-list').innerHTML = '<p class="loading-text">No podcasts found. Try refreshing.</p>';
@@ -79,7 +96,6 @@ export function createLibrary({
         if (filter && matched === 0) {
             const empty = document.createElement('div');
             empty.className = 'no-items';
-            empty.style.padding = '20px';
             empty.textContent = `No podcasts match "${filter}".`;
             listEl.appendChild(empty);
         }
@@ -167,7 +183,6 @@ export function createLibrary({
         if (shown === 0) {
             const empty = document.createElement('div');
             empty.className = 'no-items';
-            empty.style.padding = '20px';
             empty.textContent = filter
                 ? `No episodes match "${filter}".`
                 : 'No episodes match this filter.';
@@ -209,7 +224,6 @@ export function createLibrary({
             if (!emptyEl) {
                 emptyEl = document.createElement('div');
                 emptyEl.className = 'no-items filter-empty';
-                emptyEl.style.padding = '20px';
                 container.appendChild(emptyEl);
             }
             const labels = {

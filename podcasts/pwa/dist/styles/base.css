@@ -382,9 +382,13 @@ body {
     flex-shrink: 0;
 }
 
+/* Designed focus ring: a 2px ember ring floated off the element by
+   2px, rounded to match (outline follows border-radius). Ember even
+   inside a show context — focus is app chrome (DESIGN.md §3). */
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
+textarea:focus-visible,
 .podcast-card:focus-visible,
 .episode-card:focus-visible,
 .add-podcast-card:focus-visible,
@@ -394,8 +398,8 @@ select:focus-visible,
 .chapter-item:focus-visible,
 .queue-item:focus-visible,
 .bookmark-content:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 3px;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* Tighter outline for dense list rows so focus rings don't overlap
@@ -404,8 +408,33 @@ select:focus-visible,
 .chapter-item:focus-visible,
 .queue-item:focus-visible,
 .bookmark-content:focus-visible {
-    outline-width: 2px;
     outline-offset: 1px;
+}
+
+/* Desktop scrollbars: hairline thumb on the neutral ramp, no track
+   chrome. Scoped to fine pointers — touch UIs keep overlay bars. */
+@media (hover: hover) and (pointer: fine) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--neutral-4) transparent;
+    }
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: var(--neutral-4);
+        border-radius: var(--radius-full);
+        border: 3px solid transparent;
+        background-clip: padding-box;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--neutral-5);
+        background-clip: padding-box;
+    }
 }
 
 .update-banner {

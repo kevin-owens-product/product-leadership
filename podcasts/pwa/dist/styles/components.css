@@ -1,22 +1,27 @@
 /* Queue & Mini Player */
-/* Persistent bottom bar on non-player screens. Slides in/out with a
+/* Persistent floating capsule on non-player screens: inset from the
+   edges, heavy radius, floating-tier elevation. Slides in/out with a
    spring-feel transform; its own view-transition-name keeps it
    anchored (not cross-faded) during screen transitions. */
 .mini-player {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--surface-1);
-    border-top: 1px solid var(--border);
-    padding: var(--space-3) var(--space-4);
-    padding-bottom: calc(10px + var(--safe-bottom));
+    bottom: calc(var(--space-3) + var(--safe-bottom));
+    left: var(--space-3);
+    right: var(--space-3);
+    max-width: 34rem;
+    margin-inline: auto;
+    background: var(--surface-3);
+    border-radius: calc(var(--radius-lg) + var(--radius-xs));
+    overflow: hidden;
+    padding: var(--space-2);
+    padding-right: var(--space-3);
     display: flex;
     align-items: center;
     gap: var(--space-3);
     z-index: 900;
     cursor: pointer;
-    transform: translateY(105%);
+    box-shadow: var(--shadow-3), var(--edge-highlight);
+    transform: translateY(calc(100% + var(--space-3) + var(--safe-bottom)));
     visibility: hidden;
     pointer-events: none;
     transition: transform var(--dur-2) var(--ease-spring),
@@ -67,19 +72,21 @@
     }
 }
 
-/* Keep scrolling content clear of the bar while it's visible. */
+/* Keep scrolling content clear of the capsule while it's visible. */
 body.has-mini-player #podcasts-view,
 body.has-mini-player #list-view {
     padding-bottom: calc(120px + var(--safe-bottom));
 }
 
-/* Progress hairline across the top edge of the mini player. */
+/* Progress hairline along the capsule's bottom edge (clipped by the
+   capsule radius via overflow: hidden). */
 .mini-progress {
     position: absolute;
-    top: -1px;
+    bottom: 0;
     left: 0;
     right: 0;
-    height: 2px;
+    height: 3px;
+    background: var(--tint-1);
     pointer-events: none;
 }
 
@@ -87,15 +94,17 @@ body.has-mini-player #list-view {
     height: 100%;
     width: 0%;
     background: var(--show-accent);
+    border-radius: 0 var(--radius-full) var(--radius-full) 0;
 }
 
 .mini-player-art {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-md);
     flex-shrink: 0;
     object-fit: cover;
     background: var(--surface-2);
+    box-shadow: var(--shadow-1);
 }
 
 .mini-player-art[hidden] {
@@ -108,7 +117,7 @@ body.has-mini-player #list-view {
 }
 
 .mini-player-title {
-    font-size: 0.9rem;
+    font-size: var(--fs-body-sm);
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -118,6 +127,9 @@ body.has-mini-player #list-view {
 .mini-player-subtitle {
     font-size: var(--fs-label);
     color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .mini-player-controls {
@@ -125,18 +137,22 @@ body.has-mini-player #list-view {
     gap: var(--space-2);
 }
 
+/* Play/pause disc speaks the active show's hue (DESIGN.md §3). */
 .mini-ctrl-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--show-accent);
     border: none;
-    color: var(--on-accent);
+    color: var(--show-on-accent);
     font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    box-shadow: var(--shadow-1), var(--edge-highlight);
+    flex-shrink: 0;
+    transition: transform var(--dur-1) var(--ease-out);
 }
 
 /* Toasts — queue-able notifications with an optional action button
@@ -156,7 +172,7 @@ body.has-mini-player #list-view {
 }
 
 body.has-mini-player .toast-region {
-    bottom: calc(84px + var(--safe-bottom));
+    bottom: calc(88px + var(--safe-bottom));
 }
 
 .toast {
@@ -164,12 +180,12 @@ body.has-mini-player .toast-region {
     align-items: center;
     gap: var(--space-3);
     padding: var(--space-3) var(--space-4);
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-2), var(--edge-highlight);
+    background: var(--surface-3);
+    border: none;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-3), var(--edge-highlight);
     pointer-events: auto;
-    animation: toastIn var(--dur-2) var(--ease-out);
+    animation: toastIn var(--dur-2) var(--ease-spring);
 }
 
 @keyframes toastIn {
@@ -185,40 +201,59 @@ body.has-mini-player .toast-region {
 
 .toast-message {
     flex: 1;
-    font-size: 0.9rem;
+    font-size: var(--fs-body-sm);
     color: var(--text-primary);
 }
 
 .toast-action {
     flex-shrink: 0;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
+    background: var(--accent-subtle);
+    border: none;
+    border-radius: var(--radius-full);
     color: var(--accent-text);
     font-weight: 600;
-    font-size: 0.85rem;
-    padding: var(--space-2) var(--space-3);
+    font-size: var(--fs-small);
+    padding: var(--space-2) var(--space-4);
     cursor: pointer;
+    transition: transform var(--dur-1) var(--ease-out);
 }
 
-.toast-action:hover,
+.toast-action:hover {
+    color: var(--accent-hover);
+}
+
 .toast-action:active {
-    border-color: var(--accent);
+    transform: scale(0.96);
 }
 
 .toast-close {
     flex-shrink: 0;
     background: none;
     border: none;
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     font-size: 1.2rem;
     line-height: 1;
     padding: var(--space-1) var(--space-2);
     cursor: pointer;
 }
 
+.toast-close:hover {
+    color: var(--text-primary);
+}
+
 .mini-ctrl-btn:active {
     transform: scale(0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mini-ctrl-btn,
+    .toast-action {
+        transition: none;
+    }
+    .mini-ctrl-btn:active,
+    .toast-action:active {
+        transform: none;
+    }
 }
 
 .queue-panel {
@@ -625,23 +660,96 @@ body.light-theme .podcast-card {
     border-radius: var(--radius-xs);
 }
 
-/* Loading */
+/* Loading / error state text (skeletons cover the happy path). */
 .loading-text {
     text-align: center;
-    padding: var(--space-10);
-    color: var(--text-secondary);
+    padding: var(--space-10) var(--space-5);
+    color: var(--text-tertiary);
+    font-size: var(--fs-small);
 }
 
-/* Install & Sleep Prompts */
+/* Skeleton states — content-shaped placeholders while lists load.
+   Pulse animates opacity only; reduced motion holds them static. */
+.skeleton-card {
+    background: var(--surface-1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    margin-bottom: var(--space-3);
+    box-shadow: var(--shadow-1), var(--edge-highlight);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.skeleton-block {
+    background: var(--surface-2);
+    border-radius: var(--radius-xs);
+    animation: skeletonPulse 1.1s var(--ease-out) infinite alternate;
+}
+
+.skeleton-art {
+    width: 88px;
+    height: 88px;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+}
+
+.skeleton-lines {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.skeleton-line {
+    height: 12px;
+}
+
+.skeleton-line.title {
+    height: 16px;
+    width: 62%;
+}
+
+.skeleton-line.wide { width: 92%; }
+.skeleton-line.half { width: 40%; }
+
+/* Episode-row variant: no artwork, just type-shaped lines. */
+.skeleton-card.row {
+    padding: var(--space-4) var(--space-5);
+}
+
+/* Transcript variant: quiet full-width speech blocks. */
+.skeleton-transcript-line {
+    height: 56px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-2);
+}
+
+@keyframes skeletonPulse {
+    from { opacity: 1; }
+    to { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-block {
+        animation: none;
+        opacity: 0.7;
+    }
+}
+
+/* Modals — bottom sheets on touch-width screens: grabber, top-only
+   radius, slide-up entrance. On wide screens they revert to centered
+   dialog cards (a bottom sheet on a 1280px desktop reads as broken). */
 .modal-overlay {
     position: fixed;
     inset: 0;
     background: var(--scrim);
     display: none;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     z-index: 1000;
-    padding: var(--space-5);
+    padding: 0;
 }
 
 .modal-overlay.show {
@@ -650,23 +758,79 @@ body.light-theme .podcast-card {
 
 .modal {
     background: var(--surface-1);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6);
-    max-width: 320px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: var(--space-3) var(--space-6) calc(var(--space-6) + var(--safe-bottom));
+    max-width: 34rem;
     width: 100%;
-    text-align: center;
+    max-height: 88dvh;
+    overflow-y: auto;
+    text-align: left;
+    box-shadow: var(--shadow-3), var(--edge-highlight);
+}
+
+/* Grabber: sheet affordance, pure CSS so every modal gets it. */
+.modal::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: var(--border);
+    margin: 0 auto var(--space-4);
+}
+
+.modal-overlay.show .modal {
+    animation: sheetUp var(--dur-3) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal-overlay.show .modal {
+        animation: none;
+    }
 }
 
 .modal h2,
 .modal h3 {
     margin-bottom: var(--space-3);
-    font-size: 1.2rem;
+    font-size: var(--fs-title);
+    letter-spacing: -0.01em;
 }
 
 .modal p {
     color: var(--text-secondary);
     margin-bottom: var(--space-5);
-    font-size: 0.95rem;
+    font-size: var(--fs-body-sm);
+}
+
+/* Wide screens: centered dialog card, no grabber, gentle fade-rise.
+   (.sheet-overlay is excluded — the player options sheet stays a
+   bottom sheet at every width; player.css owns it.) */
+@media (min-width: 700px) {
+    .modal-overlay:not(.sheet-overlay) {
+        align-items: center;
+        padding: var(--space-5);
+    }
+    .modal {
+        max-width: 380px;
+        border-radius: var(--radius-lg);
+        padding-top: var(--space-6);
+    }
+    .modal::before {
+        display: none;
+    }
+    .modal-overlay.show .modal {
+        animation: modalIn var(--dur-2) var(--ease-out);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .modal-overlay.show .modal {
+            animation: none;
+        }
+    }
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: none; }
 }
 
 .modal .btns {
@@ -881,11 +1045,25 @@ body.light-theme .podcast-card {
     color: var(--danger);
 }
 
+/* Empty state — every list speaks the same quiet language: a dashed
+   "empty slot" ring above a tertiary one-liner. */
 .no-items {
-    padding: var(--space-5);
+    padding: var(--space-8) var(--space-5);
     text-align: center;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    font-size: var(--fs-small);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.no-items::before {
+    content: '';
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    border: 1.5px dashed var(--border);
 }
 
 .add-bookmark-btn {

@@ -113,11 +113,14 @@ test.describe('desktop walkthrough', () => {
     await page.locator('#cancel-bookmark').click();
     await page.waitForTimeout(200);
 
-    // Speed presets row
+    // Speed popover — open it, pick the 1.5x preset, then dismiss.
+    await page.locator('#speed-btn').click();
     await page.locator('.speed-preset-btn[data-speed="1.5"]').click();
     await page.waitForTimeout(200);
     const speedVal = await page.locator('#speed-value').textContent();
     log('player.speed1.5', { speedValue: speedVal });
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(100);
 
     // Light theme
     await page.locator('#theme-toggle').click();

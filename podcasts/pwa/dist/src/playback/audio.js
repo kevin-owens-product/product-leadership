@@ -26,7 +26,8 @@ export function createSpeechPlayers({ getSpeechRate }) {
     play: [],
     pause: [],
     error: [],
-    linechange: []
+    linechange: [],
+    progress: []
   };
   let lastEmittedLine = -1;
 
@@ -77,6 +78,8 @@ export function createSpeechPlayers({ getSpeechRate }) {
     emit('timeupdate', t, audio.duration || totalDuration);
   });
   addAudioListener('ended', () => emit('ended'));
+  // Buffered-range changes (used by the scrubber's buffered indicator).
+  addAudioListener('progress', () => emit('progress'));
   addAudioListener('play', () => emit('play'));
   addAudioListener('pause', () => emit('pause'));
   addAudioListener('error', () => emit('error', audio.error));

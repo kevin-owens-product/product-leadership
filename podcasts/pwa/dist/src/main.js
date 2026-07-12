@@ -1,5 +1,5 @@
-import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260526T005730Z';
-import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260526T005730Z';
+import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260712T150415Z';
+import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260712T150415Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -9,13 +9,13 @@ import {
     saveQueue,
     loadListeningStats,
     saveListeningStats
-} from './state/storage.js?v=2.3.0%2B20260526T005730Z';
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260526T005730Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260526T005730Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260526T005730Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260526T005730Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260526T005730Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260526T005730Z';
+} from './state/storage.js?v=2.3.0%2B20260712T150415Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260712T150415Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T150415Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T150415Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T150415Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T150415Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T150415Z';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -23,7 +23,10 @@ import {
     renderQueueItem,
     renderChapterItem,
     renderBookmarkItem
-} from './ui/render.js?v=2.3.0%2B20260526T005730Z';
+} from './ui/render.js?v=2.3.0%2B20260712T150415Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T150415Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T150415Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T150415Z';
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
@@ -34,6 +37,9 @@ const LOCAL_STORAGE_KEYS_TO_CLEAR = [
     'listeningStats',
     'skipForwardInterval',
     'skipBackwardInterval',
+    'skipLargeForwardInterval',
+    'skipLargeBackwardInterval',
+    SPEED_PREFS_KEY,
     'voiceBoostEnabled',
     'silenceTrimEnabled',
     'theme'
@@ -111,10 +117,15 @@ function setAppVersion(version) {
 // Flag to track if podcasts are loaded
 let podcastsLoaded = false;
 
-// Load podcasts.js with cache-busting
+// Load podcasts.js with cache-busting pinned to the deployed build.
+// build-episodes.js substitutes the real version into the placeholder below
+// (same mechanism as sw.js); when running unbuilt source, fall back to the
+// last-seen app version so the URL is still stable across reloads.
+const BUILD_VERSION = '2.3.0+20260712T150415Z';
 (function() {
+    const cacheKey = BUILD_VERSION.includes('__') ? APP_VERSION : BUILD_VERSION;
     const script = document.createElement('script');
-    script.src = 'podcasts.js?v=' + Date.now();
+    script.src = 'podcasts.js?v=' + encodeURIComponent(cacheKey);
     script.onload = function() {
         const podcasts = Array.isArray(window.PODCASTS) ? window.PODCASTS : [];
         console.log('podcasts.js loaded, PODCASTS:', podcasts.length + ' podcasts');
@@ -166,6 +177,8 @@ const playbackSessions = createPlaybackSessionController();
 // New feature state
 let skipForwardInterval = parseInt(localStorage.getItem('skipForwardInterval') || '10');
 let skipBackwardInterval = parseInt(localStorage.getItem('skipBackwardInterval') || '10');
+let skipLargeForwardInterval = parseInt(localStorage.getItem('skipLargeForwardInterval') || '30');
+let skipLargeBackwardInterval = parseInt(localStorage.getItem('skipLargeBackwardInterval') || '30');
 let voiceBoostEnabled = localStorage.getItem('voiceBoostEnabled') === 'true';
 let silenceTrimEnabled = localStorage.getItem('silenceTrimEnabled') === 'true';
 let currentTheme = localStorage.getItem('theme') || 'dark';
@@ -210,6 +223,25 @@ function updateSpeedPresetButtons() {
         b.classList.toggle('active', isActive);
         setPressedState(b, isActive);
     });
+}
+
+// Single entry point for speed changes (slider, presets, per-show restore).
+// Keeps the button label, popover slider, live audio rate, per-show memory,
+// and Media Session position state all in sync.
+function applySpeechRate(rate, { persistShow = true, save = true } = {}) {
+    speechRate = clampSpeed(rate, speechRate);
+    const label = `${speechRate.toFixed(1)}x`;
+    const slider = document.getElementById('speed-slider');
+    if (slider) slider.value = speechRate;
+    const btnValue = document.getElementById('speed-value');
+    if (btnValue) btnValue.textContent = label;
+    const popValue = document.getElementById('speed-popover-value');
+    if (popValue) popValue.textContent = label;
+    updateSpeedPresetButtons();
+    speechPlayers.setRate(speechRate);
+    if (persistShow && currentPodcast) setShowSpeed(currentPodcast.id, speechRate);
+    if (save) saveState();
+    updateMediaSessionPositionState();
 }
 
 // Mini player state
@@ -633,6 +665,9 @@ function renderPodcastsList(filter = '') {
 
 function openPodcast(podcast) {
     currentPodcast = podcast;
+    // Each show remembers its own playback speed (falls back to the current
+    // global rate for shows without a saved preference).
+    applySpeechRate(getShowSpeed(podcast.id, speechRate), { persistShow: false, save: false });
     document.getElementById('current-podcast-title').textContent = podcast.title;
     document.getElementById('current-podcast-subtitle').textContent = podcast.subtitle;
     document.getElementById('nav-podcast-name').textContent = podcast.title;
@@ -725,11 +760,7 @@ function loadState() {
 function restoreState() {
     const state = loadState();
     if (state.speechRate) {
-        speechRate = state.speechRate;
-        document.getElementById('speed-slider').value = speechRate;
-        document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
-        // Update speed preset button highlights
-        updateSpeedPresetButtons();
+        applySpeechRate(state.speechRate, { persistShow: false, save: false });
     }
     if (state.autoPlayNext !== undefined) {
         autoPlayNext = state.autoPlayNext;
@@ -1239,7 +1270,8 @@ function updateProgress() {
         const minsLeft = Math.round(secondsLeft / 60);
         document.getElementById('time-remaining').textContent = `~${minsLeft} min left`;
     }
-    document.getElementById('progress-fill').style.width = `${pct}%`;
+    scrubber.update(pct / 100, scrubLabelFor(pct / 100));
+    updateBufferedBar();
 
     // Update highlighting
     document.querySelectorAll('.transcript-line').forEach((el, i) => {
@@ -1360,8 +1392,8 @@ speechPlayers.on('timeupdate', () => {
         const dur = speechPlayers.getDuration() || episodeAudioDuration;
         const pos = speechPlayers.getCurrentTime();
         const pct = dur > 0 ? Math.max(0, Math.min(100, (pos / dur) * 100)) : 0;
-        const fill = document.getElementById('progress-fill');
-        if (fill) fill.style.width = `${pct}%`;
+        scrubber.update(pct / 100);
+        updateBufferedBar();
         const cur = document.getElementById('current-pos');
         const tot = document.getElementById('total-pos');
         if (cur) cur.textContent = formatClock(pos);
@@ -1581,42 +1613,145 @@ function seekBySeconds(delta) {
     void jumpToLine(target, isPlaying && !isPaused);
 }
 
-// Controls — large jumps are ±30s, smaller ones use the user-configurable
-// skipForward/Backward intervals from the settings panel.
+// Controls — all four skip buttons honor user-configurable intervals from the
+// settings panel; holding a skip button repeats the skip until released.
 document.getElementById('play-btn').addEventListener('click', togglePlayPause);
-document.getElementById('prev-btn').addEventListener('click', () => seekBySeconds(-30));
-document.getElementById('next-btn').addEventListener('click', () => seekBySeconds(30));
-document.getElementById('back-btn').addEventListener('click', () => seekBySeconds(-skipBackwardInterval));
-document.getElementById('fwd-btn').addEventListener('click', () => seekBySeconds(skipForwardInterval));
 
-// Speed
-document.getElementById('speed-slider').addEventListener('input', e => {
-    speechRate = parseFloat(e.target.value);
-    document.getElementById('speed-value').textContent = `${speechRate.toFixed(1)}x`;
-    updateSpeedPresetButtons();
-    speechPlayers.setRate(speechRate);
-    saveState();
-});
-
-// Progress bar click — seek to clicked position. In continuous mode we use
-// the real audio duration; in the chunked fallback we map to a line index.
-document.getElementById('progress-bar').addEventListener('click', e => {
-    const bar = e.currentTarget;
-    const rect = bar.getBoundingClientRect();
-    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    if (speechPlayers.isContinuousReady()) {
-        const dur = speechPlayers.getDuration() || episodeAudioDuration;
-        if (dur > 0) {
-            speechPlayers.seek(pct * dur);
-            updateProgress();
-            updateMediaSessionPositionState();
-            saveState();
+function bindSkipButton(id, getDelta) {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    let suppressClick = false;
+    const skipper = createRepeatSkipper({ action: () => seekBySeconds(getDelta()) });
+    btn.addEventListener('pointerdown', (e) => {
+        if (typeof e.button === 'number' && e.button !== 0) return;
+        skipper.press();
+    });
+    const endPress = () => {
+        if (skipper.release()) suppressClick = true;
+    };
+    btn.addEventListener('pointerup', endPress);
+    btn.addEventListener('pointerleave', endPress);
+    btn.addEventListener('pointercancel', endPress);
+    btn.addEventListener('click', () => {
+        // A long-press already performed its repeat skips; swallow the
+        // trailing click so releasing doesn't skip one extra time.
+        if (suppressClick) {
+            suppressClick = false;
             return;
         }
-    }
-    const wasPlaying = isPlaying && !isPaused;
-    void jumpToLine(Math.floor(pct * dialogueLines.length), wasPlaying);
+        seekBySeconds(getDelta());
+    });
+    // Long-press on touch would otherwise summon the context menu.
+    btn.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+bindSkipButton('prev-btn', () => -skipLargeBackwardInterval);
+bindSkipButton('next-btn', () => skipLargeForwardInterval);
+bindSkipButton('back-btn', () => -skipBackwardInterval);
+bindSkipButton('fwd-btn', () => skipForwardInterval);
+
+// Speed — button opens a popover with presets + a 0.5–4x slider.
+document.getElementById('speed-slider').addEventListener('input', e => {
+    applySpeechRate(parseFloat(e.target.value));
 });
+
+const speedBtn = document.getElementById('speed-btn');
+const speedPopover = document.getElementById('speed-popover');
+
+function setSpeedPopoverOpen(open) {
+    if (!speedPopover || !speedBtn) return;
+    speedPopover.hidden = !open;
+    speedBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) {
+        const slider = document.getElementById('speed-slider');
+        if (slider) {
+            try { slider.focus({ preventScroll: true }); } catch (_) { slider.focus(); }
+        }
+    }
+}
+
+speedBtn?.addEventListener('click', () => {
+    setSpeedPopoverOpen(speedPopover.hidden);
+});
+
+document.addEventListener('click', (e) => {
+    if (!speedPopover || speedPopover.hidden) return;
+    if (e.target.closest('#speed-popover') || e.target.closest('#speed-btn')) return;
+    setSpeedPopoverOpen(false);
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && speedPopover && !speedPopover.hidden) {
+        setSpeedPopoverOpen(false);
+        speedBtn?.focus();
+    }
+});
+
+// Draggable scrubber — touch/mouse drag with a time-preview bubble, keyboard
+// arrow keys for fine seeks. Continuous mode seeks real audio time; the
+// chunked fallback maps the fraction to a transcript line.
+function getPlaybackFraction() {
+    if (speechPlayers.isContinuousReady()) {
+        const dur = speechPlayers.getDuration() || episodeAudioDuration;
+        return dur > 0 ? Math.max(0, Math.min(1, speechPlayers.getCurrentTime() / dur)) : 0;
+    }
+    return dialogueLines.length > 0 ? currentLineIndex / dialogueLines.length : 0;
+}
+
+function scrubLabelFor(fraction) {
+    if (speechPlayers.isContinuousReady()) {
+        const dur = speechPlayers.getDuration() || episodeAudioDuration;
+        return formatClock(fraction * dur);
+    }
+    const total = Math.max(1, dialogueLines.length);
+    return `Line ${Math.min(total, Math.floor(fraction * total) + 1)} of ${total}`;
+}
+
+const scrubber = createScrubber({
+    bar: document.getElementById('progress-bar'),
+    fill: document.getElementById('progress-fill'),
+    handle: document.getElementById('scrub-handle'),
+    bubble: document.getElementById('scrub-bubble'),
+    getFraction: getPlaybackFraction,
+    formatLabel: scrubLabelFor,
+    onCommit: (fraction) => {
+        if (speechPlayers.isContinuousReady()) {
+            const dur = speechPlayers.getDuration() || episodeAudioDuration;
+            if (dur > 0) {
+                speechPlayers.seek(fraction * dur);
+                updateProgress();
+                updateMediaSessionPositionState();
+                saveState();
+                return;
+            }
+        }
+        const wasPlaying = isPlaying && !isPaused;
+        void jumpToLine(Math.floor(fraction * dialogueLines.length), wasPlaying);
+    },
+    onNudge: (seconds) => {
+        if (speechPlayers.isContinuousReady()) {
+            seekBySeconds(seconds);
+        } else {
+            void jumpToLine(currentLineIndex + (seconds < 0 ? -1 : 1), isPlaying && !isPaused);
+        }
+    }
+});
+
+// Buffered-range indication on the scrubber track (continuous mode only).
+function updateBufferedBar() {
+    const el = document.getElementById('progress-buffered');
+    if (!el) return;
+    const audioEl = speechPlayers.audio;
+    if (!speechPlayers.isContinuousReady() || !audioEl || !audioEl.buffered) {
+        el.style.width = '0%';
+        return;
+    }
+    const dur = speechPlayers.getDuration() || episodeAudioDuration;
+    const frac = bufferedEndFraction(audioEl.buffered, dur, audioEl.currentTime || 0);
+    el.style.width = `${(frac * 100).toFixed(2)}%`;
+}
+
+speechPlayers.on('progress', updateBufferedBar);
 
 // Auto-play toggle
 document.getElementById('auto-play-toggle').addEventListener('click', () => {
@@ -1725,6 +1860,12 @@ let touchStartY = 0;
 const swipeThreshold = 80;
 
 document.getElementById('player-view').addEventListener('touchstart', e => {
+    // Touches that start on the scrubber belong to the drag interaction —
+    // never interpret them as a swipe skip.
+    if (e.target.closest('#progress-bar')) {
+        touchStartX = 0;
+        return;
+    }
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
 }, { passive: true });
@@ -1756,9 +1897,9 @@ document.getElementById('player-view').addEventListener('touchend', e => {
 
     if (Math.abs(diffX) > swipeThreshold && diffY < 50) {
         if (diffX > 0) {
-            seekBySeconds(-30); // Swipe right = go back 30s
+            seekBySeconds(-skipLargeBackwardInterval); // Swipe right = large skip back
         } else {
-            seekBySeconds(30); // Swipe left = go forward 30s
+            seekBySeconds(skipLargeForwardInterval); // Swipe left = large skip forward
         }
     }
     touchStartX = 0;
@@ -1810,12 +1951,7 @@ document.getElementById('theme-toggle').setAttribute(
 // Speed Presets
 document.querySelectorAll('.speed-preset-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        const speed = parseFloat(btn.dataset.speed);
-        speechRate = speed;
-        document.getElementById('speed-slider').value = speed;
-        document.getElementById('speed-value').textContent = `${speed.toFixed(1)}x`;
-        updateSpeedPresetButtons();
-        saveState();
+        applySpeechRate(parseFloat(btn.dataset.speed));
     });
 });
 
@@ -1845,17 +1981,33 @@ document.getElementById('skip-backward-interval').addEventListener('change', e =
     updateSkipButtonTitles();
 });
 
+document.getElementById('skip-large-forward-interval').addEventListener('change', e => {
+    skipLargeForwardInterval = parseInt(e.target.value);
+    localStorage.setItem('skipLargeForwardInterval', skipLargeForwardInterval);
+    updateSkipButtonTitles();
+});
+
+document.getElementById('skip-large-backward-interval').addEventListener('change', e => {
+    skipLargeBackwardInterval = parseInt(e.target.value);
+    localStorage.setItem('skipLargeBackwardInterval', skipLargeBackwardInterval);
+    updateSkipButtonTitles();
+});
+
 function updateSkipButtonTitles() {
-    // The big prev/next buttons stay at ±30s; the back/fwd buttons honor
-    // the user's configured interval.
-    const backBtn = document.getElementById('back-btn');
-    const fwdBtn = document.getElementById('fwd-btn');
-    backBtn.title = `Back ${skipBackwardInterval}s`;
-    backBtn.setAttribute('aria-label', `Back ${skipBackwardInterval} seconds`);
-    backBtn.textContent = `−${skipBackwardInterval}`;
-    fwdBtn.title = `Forward ${skipForwardInterval}s`;
-    fwdBtn.setAttribute('aria-label', `Forward ${skipForwardInterval} seconds`);
-    fwdBtn.textContent = `+${skipForwardInterval}`;
+    // All four skip buttons honor the user's configured intervals; hold any
+    // of them to repeat-skip.
+    const setSkipLabel = (id, seconds, direction) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        const word = direction < 0 ? 'Back' : 'Forward';
+        btn.title = `${word} ${seconds}s (hold to repeat)`;
+        btn.setAttribute('aria-label', `${word} ${seconds} seconds, hold to repeat`);
+        btn.textContent = `${direction < 0 ? '−' : '+'}${seconds}`;
+    };
+    setSkipLabel('prev-btn', skipLargeBackwardInterval, -1);
+    setSkipLabel('back-btn', skipBackwardInterval, -1);
+    setSkipLabel('fwd-btn', skipForwardInterval, 1);
+    setSkipLabel('next-btn', skipLargeForwardInterval, 1);
 }
 updateSkipButtonTitles();
 
@@ -2194,6 +2346,8 @@ window.addEventListener('load', () => {
 // Initialize settings
 document.getElementById('skip-forward-interval').value = skipForwardInterval;
 document.getElementById('skip-backward-interval').value = skipBackwardInterval;
+document.getElementById('skip-large-forward-interval').value = skipLargeForwardInterval;
+document.getElementById('skip-large-backward-interval').value = skipLargeBackwardInterval;
 updateToggleButton('voice-boost-toggle', voiceBoostEnabled, voiceBoostEnabled ? 'On' : 'Off');
 updateToggleButton('silence-trim-toggle', silenceTrimEnabled, silenceTrimEnabled ? 'On' : 'Off');
 updateToggleButton('auto-play-toggle', autoPlayNext, 'Auto');

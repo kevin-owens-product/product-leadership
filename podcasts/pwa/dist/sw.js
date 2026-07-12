@@ -1,6 +1,6 @@
 // Service worker — atomic versioned precache.
 //
-// The build script substitutes 2.3.0+20260526T005730Z and ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"] at deploy
+// The build script substitutes 2.3.0+20260712T150415Z and ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/speed-prefs.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/long-press.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/tabs.js"] at deploy
 // time. Each deploy gets a unique cache name and pre-fetches the entire app
 // shell during install. Activation atomically deletes any older shell cache
 // (preserving the user-downloaded audio cache). After activation + clients.claim,
@@ -12,8 +12,8 @@
 // shell list, which means precache is skipped and the SW just passes
 // requests through to the network. Audio downloads still work.
 
-const BUILD_VERSION = '2.3.0+20260526T005730Z';
-const APP_SHELL_RAW = ["/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/render.js","/src/ui/tabs.js"];
+const BUILD_VERSION = '2.3.0+20260712T150415Z';
+const APP_SHELL_RAW = ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/main.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/speed-prefs.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/long-press.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/tabs.js"];
 
 const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
 // Persistent across deploys — only deleted when the user explicitly removes

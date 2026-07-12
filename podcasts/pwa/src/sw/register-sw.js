@@ -41,13 +41,30 @@ export function registerServiceWorker({ onUpdateAvailable } = {}) {
     });
   }).catch((err) => console.log('SW error:', err));
 
+  // True when this page loaded under an existing service worker. When false,
+  // the activation we're about to observe is the very first install — the
+  // page already has the freshest assets, so it's neither an "update" to
+  // announce nor a reason to reload. (Two flags: controlledAtLoad stays
+  // fixed for the SW_UPDATED gate, because the first claim flips
+  // hadController before the activate-time postMessage arrives.)
+  const controlledAtLoad = Boolean(navigator.serviceWorker.controller);
+  let hadController = controlledAtLoad;
+
   navigator.serviceWorker.addEventListener('message', (event) => {
-    if (event.data?.type === 'SW_UPDATED') {
+    if (event.data?.type === 'SW_UPDATED' && controlledAtLoad) {
       announceUpdate();
     }
   });
 
+  // Reload when a NEW service worker takes over from an old one (an update
+  // was applied), but not on the very first claim after install — reloading
+  // a page that was just fetched from the network doubles every first
+  // visit's load time (and tanks LCP).
   navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hadController) {
+      hadController = true;
+      return;
+    }
     reloadOnce();
   });
 

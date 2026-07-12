@@ -366,7 +366,9 @@
     <!-- Install Prompt -->
     <div class="modal-overlay" id="install-modal" role="dialog" aria-modal="true" aria-labelledby="install-modal-title">
         <div class="modal">
-            <h3 id="install-modal-title">Install App</h3>
+            <!-- h2 (not h3): this modal can appear over the home view, where the
+                 only preceding heading is the h1 — keep heading levels sequential. -->
+            <h2 id="install-modal-title">Install App</h2>
             <p>Install for offline use during your flight!</p>
             <div class="btns">
                 <button class="secondary-btn" id="dismiss-install">Later</button>

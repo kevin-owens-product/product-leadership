@@ -86,7 +86,7 @@ body.has-mini-player #list-view {
 .mini-progress-fill {
     height: 100%;
     width: 0%;
-    background: var(--accent);
+    background: var(--show-accent);
 }
 
 .mini-player-art {
@@ -342,17 +342,23 @@ body.has-mini-player .toast-region {
    color values may appear; see the token block in base.css). */
 body.light-theme {
     --surface-0: oklch(1 0 0);
-    --surface-1: oklch(0.970 0.002 276);
-    --surface-2: oklch(0.922 0.003 276);
+    --surface-1: oklch(0.972 0.004 60);
+    --surface-2: oklch(0.925 0.006 58);
     --surface-3: oklch(1 0 0);
     --text-primary: oklch(0 0 0);
-    --text-secondary: oklch(0.510 0.008 276);
-    --text-tertiary: oklch(0.62 0.008 276);
-    --border: oklch(0.858 0.004 276);
+    --text-secondary: oklch(0.510 0.012 50);
+    --text-tertiary: oklch(0.62 0.012 50);
+    --border: oklch(0.860 0.008 55);
     /* On light surfaces accent text must be DARKER, not lighter.
        Defined on body so it shadows the per-podcast value main.js
        sets on <html> (which is tuned for dark surfaces only). */
-    --accent-text: oklch(0.484 0.194 275.4);
+    --accent-text: oklch(0.50 0.15 43);
+    /* Show-tinted text follows the same darker-on-light rule. !important
+       so these beat the dark-tuned inline values the identity engine sets
+       on <body> (author !important > inline non-important). */
+    --show-text: oklch(0.45 0.11 var(--show-hue)) !important;
+    --show-wash: oklch(0.93 0.02 var(--show-hue)) !important;
+    --show-glow: oklch(0.6 0.13 var(--show-hue) / 0.18) !important;
     /* Danger text follows the same rule. */
     --danger-text: oklch(0.505 0.190 27.5);
     --danger-subtle: color-mix(in oklab, var(--danger) 8%, transparent);
@@ -710,8 +716,9 @@ body.light-theme {
 }
 
 .nav-tab.active {
-    color: var(--accent-text);
-    background: var(--surface-2);
+    color: var(--show-text);
+    background: var(--show-chip);
+    font-weight: 600;
 }
 
 .nav-content {
@@ -897,12 +904,7 @@ body.light-theme {
     overflow: hidden;
 }
 
-/* Current chapter indicator */
-.current-chapter-badge {
-    font-size: var(--fs-label);
-    color: var(--accent-text);
-    margin-top: var(--space-1);
-}
+/* (Current chapter chip is styled in player.css — hero type stack.) */
 
 /* Podcasts View */
 .podcasts-view {
@@ -942,6 +944,11 @@ body.light-theme {
     justify-content: center;
     font-size: 1.8rem;
     flex-shrink: 0;
+    /* Generated cover art renders as an <img>; keep the tile crisp and
+       give it the raised-surface edge light. */
+    object-fit: cover;
+    box-shadow: var(--shadow-1), var(--edge-highlight);
+    background: var(--surface-2);
 }
 
 .podcast-info {
@@ -1120,29 +1127,12 @@ body.light-theme {
 }
 
 .color-option.selected {
-    border-color: var(--on-accent);
+    border-color: var(--text-primary);
     transform: scale(1.1);
 }
 
 /* ---------- Mobile (≤ 600px) ---------- */
 @media (max-width: 600px) {
-    /* Header: hide breadcrumb + home button, let title claim the row */
-    .player-header .breadcrumb {
-        display: none;
-    }
-    .player-header #home-from-player {
-        display: none;
-    }
-    .player-title h2 {
-        font-size: 1.05rem;
-        line-height: 1.25;
-        white-space: normal;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
     /* Bigger touch targets on speed presets */
     .speed-preset-btn {
         min-height: 44px;

@@ -80,10 +80,13 @@ test.describe('desktop walkthrough', () => {
     });
     log('player', playerInfo);
 
-    // Settings panel
+    // Settings panel (inside the ⋯ options sheet since the D3 redesign)
+    await page.locator('#player-more-btn').click();
     await page.locator('#settings-panel .panel-header').click();
     await page.waitForTimeout(300);
     await page.screenshot({ path: path.join(OUT, '06-settings-open.png'), fullPage: true });
+    await page.locator('#close-player-more').click();
+    await page.waitForTimeout(200);
 
     // modals
     await page.locator('#sleep-timer-btn').click();
@@ -91,6 +94,8 @@ test.describe('desktop walkthrough', () => {
     await page.screenshot({ path: path.join(OUT, '07-sleep-timer-modal.png'), fullPage: true });
     await page.locator('#close-sleep-modal').click();
 
+    // Stats lives in the ⋯ options sheet; opening it closes the sheet.
+    await page.locator('#player-more-btn').click();
     await page.locator('#stats-btn').click();
     await page.waitForTimeout(200);
     await page.screenshot({ path: path.join(OUT, '08-stats-modal.png'), fullPage: true });
@@ -122,12 +127,16 @@ test.describe('desktop walkthrough', () => {
     await page.keyboard.press('Escape');
     await page.waitForTimeout(100);
 
-    // Light theme
+    // Light theme (theme toggle sits in the settings accordion inside the
+    // ⋯ options sheet; the accordion is still expanded from earlier).
+    await page.locator('#player-more-btn').click();
     await page.locator('#theme-toggle').click();
     await page.waitForTimeout(200);
     await page.screenshot({ path: path.join(OUT, '11-player-light-theme.png'), fullPage: true });
-    // back to dark
+    // back to dark, then dismiss the sheet
     await page.locator('#theme-toggle').click();
+    await page.locator('#close-player-more').click();
+    await page.waitForTimeout(200);
 
     // Navigate back via header back
     await page.locator('#back-to-list').click();

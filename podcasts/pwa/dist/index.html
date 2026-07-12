@@ -16,9 +16,9 @@
     <!-- App styles, split by concern (was one inline <style> block).
          Load order matters: base -> player -> components preserves the
          original cascade. All three are precached in the SW app shell. -->
-    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260712T193103Z">
-    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260712T193103Z">
-    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260712T193103Z">
+    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260712T201829Z">
+    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260712T201829Z">
+    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260712T201829Z">
 </head>
 <body>
     <!-- Podcasts Home View -->
@@ -89,16 +89,17 @@
     <!-- Player View -->
     <div id="player-view" class="view player-view">
         <div class="player-header">
-            <button class="header-btn" id="back-to-list" title="Back to episodes" aria-label="Back to episodes">←</button>
+            <button class="header-btn" id="back-to-list" title="Back to episodes" aria-label="Back to episodes">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
             <div class="player-title">
-                <p class="breadcrumb" id="player-breadcrumb">Home › Podcast › Episode</p>
-                <h2 id="player-episode-title">Episode</h2>
+                <p class="np-kicker">Now Playing</p>
+                <p class="breadcrumb sr-only" id="player-breadcrumb">Home › Podcast › Episode</p>
             </div>
             <div class="header-actions">
-                <button class="header-btn" id="share-btn" title="Share & Export" aria-label="Share and export">📤</button>
-                <button class="header-btn" id="stats-btn" title="Statistics" aria-label="Listening statistics">📊</button>
-                <button class="header-btn" id="sleep-timer-btn" title="Sleep Timer" aria-label="Sleep timer">💤</button>
-                <button class="header-btn" id="home-from-player" title="Go to Home" aria-label="Go to home">🏠</button>
+                <button class="header-btn" id="player-more-btn" title="Playback & app options" aria-label="Playback and app options" aria-haspopup="dialog" aria-expanded="false">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="dot" cx="5" cy="12" r="1.7"/><circle class="dot" cx="12" cy="12" r="1.7"/><circle class="dot" cx="19" cy="12" r="1.7"/></svg>
+                </button>
             </div>
         </div>
 
@@ -110,130 +111,33 @@
             <button type="button" class="resume-banner-close" id="resume-banner-close" aria-label="Dismiss">×</button>
         </div>
 
-        <!-- Chapters & Bookmarks Panel -->
-        <div class="nav-panel">
-            <div class="nav-tabs" role="tablist" aria-label="Episode navigation">
-                <button class="nav-tab active" role="tab" aria-selected="true" aria-controls="chapters-list" id="tab-chapters" data-tab="chapters">Chapters</button>
-                <button class="nav-tab" role="tab" aria-selected="false" aria-controls="bookmarks-list" id="tab-bookmarks" data-tab="bookmarks">Bookmarks</button>
-                <button class="nav-tab" role="tab" aria-selected="false" aria-controls="queue-tabpanel" id="tab-queue" data-tab="queue">Queue</button>
+        <!-- Hero: artwork with the reactive halo behind it, then the type stack -->
+        <section class="np-hero">
+            <div class="np-stage">
+                <div class="now-playing-viz" id="now-playing-viz" aria-hidden="true"></div>
+                <img class="np-art" id="np-art" alt="">
             </div>
-            <div class="nav-content active" data-tab="chapters" id="chapters-list" role="tabpanel" aria-labelledby="tab-chapters">
-                <div class="no-items">Loading chapters...</div>
-            </div>
-            <div class="nav-content" data-tab="bookmarks" id="bookmarks-list" role="tabpanel" aria-labelledby="tab-bookmarks">
-                <button class="add-bookmark-btn" id="add-bookmark-btn">+ Add Bookmark Here</button>
-                <div class="no-items">No bookmarks yet</div>
-            </div>
-            <div class="nav-content" data-tab="queue" role="tabpanel" aria-labelledby="tab-queue" id="queue-tabpanel">
-                <div class="queue-panel" id="queue-list">
-                    <div class="no-items">Queue is empty</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Settings Panel -->
-        <div class="panel collapsed" id="settings-panel">
-            <div class="panel-header">
-                <h3>Settings</h3>
-                <span class="panel-toggle">▼</span>
-            </div>
-            <div class="panel-content">
-                <div class="settings-grid">
-                    <div class="setting-item">
-                        <span class="setting-label">Skip Forward</span>
-                        <div class="setting-value">
-                            <input type="number" class="setting-input" id="skip-forward-interval" value="10" min="5" max="60" step="5" aria-label="Skip forward interval (seconds)">
-                            <span>sec</span>
-                        </div>
-                    </div>
-                    <div class="setting-item">
-                        <span class="setting-label">Skip Backward</span>
-                        <div class="setting-value">
-                            <input type="number" class="setting-input" id="skip-backward-interval" value="10" min="5" max="60" step="5" aria-label="Skip backward interval (seconds)">
-                            <span>sec</span>
-                        </div>
-                    </div>
-                    <div class="setting-item">
-                        <span class="setting-label">Large Skip Forward</span>
-                        <div class="setting-value">
-                            <input type="number" class="setting-input" id="skip-large-forward-interval" value="30" min="15" max="300" step="15" aria-label="Large skip forward interval (seconds)">
-                            <span>sec</span>
-                        </div>
-                    </div>
-                    <div class="setting-item">
-                        <span class="setting-label">Large Skip Backward</span>
-                        <div class="setting-value">
-                            <input type="number" class="setting-input" id="skip-large-backward-interval" value="30" min="15" max="300" step="15" aria-label="Large skip backward interval (seconds)">
-                            <span>sec</span>
-                        </div>
-                    </div>
-                    <div class="setting-item">
-                        <span class="setting-label">Voice Boost</span>
-                        <div class="setting-value">
-                            <button class="auto-play-toggle" id="voice-boost-toggle" type="button" aria-pressed="false" aria-label="Voice boost">
-                                <span>Off</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="setting-item">
-                        <span class="setting-label">Silence Trim</span>
-                        <div class="setting-value">
-                            <button class="auto-play-toggle" id="silence-trim-toggle" type="button" aria-pressed="false" aria-label="Silence trim">
-                                <span>Off</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="setting-item">
-                        <span class="setting-label">Theme</span>
-                        <div class="setting-value">
-                            <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
-                                <span>🌙 Dark</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="tts-background-notice" id="tts-background-notice">
-                    <strong>Background playback note:</strong> Podcast playback uses generated Supertonic audio files for more reliable background behavior.
-                </div>
-                <button class="clear-data-btn" id="clear-local-data-btn">Clear Local Cache & Data</button>
-            </div>
-        </div>
-
-        <!-- Controls Panel -->
-        <div class="panel controls-panel">
-            <div class="status-row">
-                <div class="status-dot" id="status-dot" aria-hidden="true"></div>
-                <div style="flex:1">
-                    <span class="status-text" id="status-text" aria-live="polite" aria-atomic="true">Ready</span>
+            <div class="np-titles">
+                <h2 class="np-episode-title" id="player-episode-title">Episode</h2>
+                <p class="np-show" id="np-show-name">Podcast</p>
+                <div class="np-context-row">
                     <div class="current-chapter-badge" id="current-chapter-badge"></div>
+                    <button type="button" class="sleep-chip" id="sleep-chip" title="Sleep timer" aria-label="Sleep timer countdown" hidden>
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                        <span id="sleep-chip-text"></span>
+                    </button>
                 </div>
-                <button type="button" class="sleep-chip" id="sleep-chip" title="Sleep timer" aria-label="Sleep timer countdown" hidden>💤 <span id="sleep-chip-text"></span></button>
             </div>
+        </section>
 
-            <div class="now-playing-viz" id="now-playing-viz" aria-hidden="true"></div>
+        <div class="up-next-banner" id="up-next-banner" role="status" hidden>
+            <span class="up-next-label">Up next</span>
+            <span class="up-next-title" id="up-next-title"></span>
+            <button type="button" class="up-next-play" id="up-next-play">Play now</button>
+        </div>
 
-            <div class="up-next-banner" id="up-next-banner" role="status" hidden>
-                <span class="up-next-label">Up next</span>
-                <span class="up-next-title" id="up-next-title"></span>
-                <button type="button" class="up-next-play" id="up-next-play">Play now</button>
-            </div>
-
-            <div class="control-buttons" role="group" aria-label="Playback controls">
-                <button class="ctrl-btn small ctrl-text" id="prev-btn" title="Back 30 seconds" aria-label="Back 30 seconds">−30</button>
-                <button class="ctrl-btn small ctrl-text" id="back-btn" title="Back 10 seconds" aria-label="Back 10 seconds">−10</button>
-                <button class="ctrl-btn large" id="play-btn" title="Play/Pause" aria-label="Play">
-                    <svg class="play-pause-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
-                        <path class="pp-play" d="M13.4 9.6 L27.2 18 L13.4 26.4 Z"></path>
-                        <g class="pp-pause">
-                            <rect x="11.2" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
-                            <rect x="20" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
-                        </g>
-                    </svg>
-                </button>
-                <button class="ctrl-btn small ctrl-text" id="fwd-btn" title="Forward 10 seconds" aria-label="Forward 10 seconds">+10</button>
-                <button class="ctrl-btn small ctrl-text" id="next-btn" title="Forward 30 seconds" aria-label="Forward 30 seconds">+30</button>
-            </div>
-
+        <!-- Transport -->
+        <section class="np-transport">
             <div class="progress-section">
                 <div class="progress-bar" id="progress-bar" role="slider" tabindex="0"
                      aria-label="Seek position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
@@ -249,11 +153,62 @@
                 </div>
             </div>
 
-            <div class="options-row">
+            <div class="control-buttons" role="group" aria-label="Playback controls">
+                <button class="ctrl-btn skip outer" id="prev-btn" title="Back 30 seconds" aria-label="Back 30 seconds">
+                    <svg class="skip-arc" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                        <path class="arc" d="M24.5 6.7A13 13 0 1 1 11.5 6.7" fill="none"/>
+                        <path class="head" d="M7 9.3L9.8 3.8L13.2 9.6Z"/>
+                    </svg>
+                    <span class="skip-num">30</span>
+                </button>
+                <button class="ctrl-btn skip" id="back-btn" title="Back 10 seconds" aria-label="Back 10 seconds">
+                    <svg class="skip-arc" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                        <path class="arc" d="M24.5 6.7A13 13 0 1 1 11.5 6.7" fill="none"/>
+                        <path class="head" d="M7 9.3L9.8 3.8L13.2 9.6Z"/>
+                    </svg>
+                    <span class="skip-num">10</span>
+                </button>
+                <button class="ctrl-btn large" id="play-btn" title="Play/Pause" aria-label="Play">
+                    <svg class="play-pause-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                        <path class="pp-play" d="M13.4 9.6 L27.2 18 L13.4 26.4 Z"></path>
+                        <g class="pp-pause">
+                            <rect x="11.2" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
+                            <rect x="20" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
+                        </g>
+                    </svg>
+                </button>
+                <button class="ctrl-btn skip fwd" id="fwd-btn" title="Forward 10 seconds" aria-label="Forward 10 seconds">
+                    <svg class="skip-arc" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                        <path class="arc" d="M24.5 6.7A13 13 0 1 1 11.5 6.7" fill="none"/>
+                        <path class="head" d="M7 9.3L9.8 3.8L13.2 9.6Z"/>
+                    </svg>
+                    <span class="skip-num">10</span>
+                </button>
+                <button class="ctrl-btn skip fwd outer" id="next-btn" title="Forward 30 seconds" aria-label="Forward 30 seconds">
+                    <svg class="skip-arc" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                        <path class="arc" d="M24.5 6.7A13 13 0 1 1 11.5 6.7" fill="none"/>
+                        <path class="head" d="M7 9.3L9.8 3.8L13.2 9.6Z"/>
+                    </svg>
+                    <span class="skip-num">30</span>
+                </button>
+            </div>
+
+            <div class="options-row" role="group" aria-label="Playback options">
                 <button class="speed-btn" id="speed-btn" type="button" title="Playback speed"
                         aria-label="Playback speed" aria-haspopup="dialog" aria-expanded="false">
                     <span class="speed-value" id="speed-value">1.0x</span>
-                    <span class="speed-btn-caret" aria-hidden="true">▾</span>
+                </button>
+                <button class="icon-btn" id="sleep-timer-btn" type="button" title="Sleep Timer" aria-label="Sleep timer">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                </button>
+                <button class="icon-btn" id="np-queue-btn" type="button" title="Queue" aria-label="Show queue">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h7"/><path class="filled" d="M14.5 15.5L19.5 18.25L14.5 21Z"/></svg>
+                </button>
+                <button class="icon-btn" id="np-bookmark-btn" type="button" title="Bookmarks" aria-label="Show bookmarks">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-4.2L6 20V5a1 1 0 0 1 1-1z"/></svg>
+                </button>
+                <button class="icon-btn" id="share-btn" type="button" title="Share & Export" aria-label="Share and export">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 14V4"/><path d="m8.5 7.5 3.5-3.5 3.5 3.5"/><path d="M8 11H7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-1"/></svg>
                 </button>
                 <button class="auto-play-toggle" id="auto-play-toggle" type="button" title="Auto-play next episode" aria-pressed="true" aria-label="Auto-play next episode">
                     <span>Auto</span>
@@ -274,25 +229,145 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Transcript Panel -->
-        <div class="panel transcript-panel" id="transcript-panel">
-            <div class="panel-header">
-                <h3>Transcript</h3>
-                <span class="panel-toggle">▼</span>
-            </div>
-            <div class="transcript-search">
-                <input type="text" id="transcript-search-input" placeholder="Search transcript..." aria-label="Search transcript">
-                <div class="search-nav">
-                    <button id="search-prev" aria-label="Previous transcript search result">↑</button>
-                    <button id="search-next" aria-label="Next transcript search result">↓</button>
+        <!-- Below the fold: episode navigation + transcript, behind a clear seam -->
+        <section class="np-below">
+            <!-- Chapters & Bookmarks Panel -->
+            <div class="nav-panel">
+                <div class="nav-tabs" role="tablist" aria-label="Episode navigation">
+                    <button class="nav-tab active" role="tab" aria-selected="true" aria-controls="chapters-list" id="tab-chapters" data-tab="chapters">Chapters</button>
+                    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="bookmarks-list" id="tab-bookmarks" data-tab="bookmarks">Bookmarks</button>
+                    <button class="nav-tab" role="tab" aria-selected="false" aria-controls="queue-tabpanel" id="tab-queue" data-tab="queue">Queue</button>
+                </div>
+                <div class="nav-content active" data-tab="chapters" id="chapters-list" role="tabpanel" aria-labelledby="tab-chapters">
+                    <div class="no-items">Loading chapters...</div>
+                </div>
+                <div class="nav-content" data-tab="bookmarks" id="bookmarks-list" role="tabpanel" aria-labelledby="tab-bookmarks">
+                    <button class="add-bookmark-btn" id="add-bookmark-btn">+ Add Bookmark Here</button>
+                    <div class="no-items">No bookmarks yet</div>
+                </div>
+                <div class="nav-content" data-tab="queue" role="tabpanel" aria-labelledby="tab-queue" id="queue-tabpanel">
+                    <div class="queue-panel" id="queue-list">
+                        <div class="no-items">Queue is empty</div>
+                    </div>
                 </div>
             </div>
-            <div class="transcript-content" id="transcript-content">
-                <p class="loading-text">Loading transcript...</p>
+
+            <!-- Transcript Panel -->
+            <div class="panel transcript-panel" id="transcript-panel">
+                <div class="panel-header">
+                    <h3>Transcript</h3>
+                    <span class="panel-toggle">▼</span>
+                </div>
+                <div class="transcript-search">
+                    <input type="text" id="transcript-search-input" placeholder="Search transcript..." aria-label="Search transcript">
+                    <div class="search-nav">
+                        <button id="search-prev" aria-label="Previous transcript search result">↑</button>
+                        <button id="search-next" aria-label="Next transcript search result">↓</button>
+                    </div>
+                </div>
+                <div class="transcript-content" id="transcript-content">
+                    <p class="loading-text">Loading transcript...</p>
+                </div>
+                <button type="button" class="transcript-resync" id="transcript-resync" aria-label="Scroll transcript back to the current line" hidden>↓ Resync</button>
             </div>
-            <button type="button" class="transcript-resync" id="transcript-resync" aria-label="Scroll transcript back to the current line" hidden>↓ Resync</button>
+        </section>
+    </div>
+
+    <!-- Player options sheet: demoted settings + status + app-level actions -->
+    <div class="modal-overlay sheet-overlay" id="player-more-sheet" role="dialog" aria-modal="true" aria-labelledby="player-more-title">
+        <div class="sheet">
+            <div class="sheet-grabber" aria-hidden="true"></div>
+            <h3 class="sheet-title" id="player-more-title">Options</h3>
+
+            <div class="status-row">
+                <div class="status-dot" id="status-dot" aria-hidden="true"></div>
+                <span class="status-text" id="status-text" aria-live="polite" aria-atomic="true">Ready</span>
+            </div>
+
+            <div class="sheet-actions">
+                <button class="sheet-action-btn" id="stats-btn" type="button">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+                    Listening statistics
+                </button>
+                <button class="sheet-action-btn" id="home-from-player" type="button">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V19a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9.5"/></svg>
+                    Go to Home
+                </button>
+            </div>
+
+            <!-- Settings Panel -->
+            <div class="panel collapsed" id="settings-panel">
+                <div class="panel-header">
+                    <h3>Settings</h3>
+                    <span class="panel-toggle">▼</span>
+                </div>
+                <div class="panel-content">
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <span class="setting-label">Skip Forward</span>
+                            <div class="setting-value">
+                                <input type="number" class="setting-input" id="skip-forward-interval" value="10" min="5" max="60" step="5" aria-label="Skip forward interval (seconds)">
+                                <span>sec</span>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Skip Backward</span>
+                            <div class="setting-value">
+                                <input type="number" class="setting-input" id="skip-backward-interval" value="10" min="5" max="60" step="5" aria-label="Skip backward interval (seconds)">
+                                <span>sec</span>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Large Skip Forward</span>
+                            <div class="setting-value">
+                                <input type="number" class="setting-input" id="skip-large-forward-interval" value="30" min="15" max="300" step="15" aria-label="Large skip forward interval (seconds)">
+                                <span>sec</span>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Large Skip Backward</span>
+                            <div class="setting-value">
+                                <input type="number" class="setting-input" id="skip-large-backward-interval" value="30" min="15" max="300" step="15" aria-label="Large skip backward interval (seconds)">
+                                <span>sec</span>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Voice Boost</span>
+                            <div class="setting-value">
+                                <button class="auto-play-toggle" id="voice-boost-toggle" type="button" aria-pressed="false" aria-label="Voice boost">
+                                    <span>Off</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Silence Trim</span>
+                            <div class="setting-value">
+                                <button class="auto-play-toggle" id="silence-trim-toggle" type="button" aria-pressed="false" aria-label="Silence trim">
+                                    <span>Off</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <span class="setting-label">Theme</span>
+                            <div class="setting-value">
+                                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+                                    <span>🌙 Dark</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tts-background-notice" id="tts-background-notice">
+                        <strong>Background playback note:</strong> Podcast playback uses generated Supertonic audio files for more reliable background behavior.
+                    </div>
+                    <button class="clear-data-btn" id="clear-local-data-btn">Clear Local Cache & Data</button>
+                </div>
+            </div>
+
+            <div class="sheet-footer">
+                <button class="primary-btn" id="close-player-more" type="button">Done</button>
+            </div>
         </div>
     </div>
 
@@ -481,6 +556,6 @@
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T193103Z"></script>
+    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T201829Z"></script>
 </body>
 </html>

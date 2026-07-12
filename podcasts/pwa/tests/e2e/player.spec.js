@@ -30,6 +30,9 @@ test('transcript search handles regex-like input without crash', async ({ page }
 test('settings shows generated audio background playback notice', async ({ page }) => {
   await openEpisode(page);
 
+  // Settings live in the ⋯ options sheet since the D3 player redesign.
+  await page.locator('#player-more-btn').click();
+  await expect(page.locator('#player-more-sheet')).toHaveClass(/show/);
   await page.locator('#settings-panel .panel-header').click();
   await expect(page.locator('#tts-background-notice')).toContainText('Background playback note');
 });
@@ -155,7 +158,9 @@ test('mini player persists on non-player screens and expands back to the player'
   await expect(page.locator('#player-view')).toHaveClass(/active/);
   await expect(page.locator('#mini-player')).not.toHaveClass(/active/);
 
-  // Home screen keeps the mini player too.
+  // Home screen keeps the mini player too. ("Go to Home" moved into the
+  // ⋯ options sheet in the D3 player redesign.)
+  await page.locator('#player-more-btn').click();
   await page.locator('#home-from-player').click();
   await expect(page.locator('#podcasts-view')).toHaveClass(/active/);
   await expect(page.locator('#mini-player')).toHaveClass(/active/);
@@ -285,7 +290,9 @@ test('transcript lines, chapters, and panel headers are accessible controls', as
   await expect(chapter).toHaveAttribute('role', 'button');
   await expect(chapter).toHaveAttribute('tabindex', '0');
 
-  // Collapsible panel headers expose their expanded state.
+  // Collapsible panel headers expose their expanded state (the settings
+  // accordion now lives in the ⋯ options sheet).
+  await page.locator('#player-more-btn').click();
   const header = page.locator('#settings-panel .panel-header');
   await expect(header).toHaveAttribute('aria-expanded', 'false');
   await header.click();

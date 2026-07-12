@@ -1,7 +1,7 @@
 // Settings panel: theme toggle, configurable skip intervals, voice boost /
 // silence trim toggles, and the clear-local-data escape hatch.
 
-import { updateToggleButton } from './dom.js?v=2.3.0%2B20260712T193103Z';
+import { updateToggleButton } from './dom.js?v=2.3.0%2B20260712T201829Z';
 
 export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysToClear }) {
     let skipForwardInterval = parseInt(localStorage.getItem('skipForwardInterval') || '10');
@@ -21,7 +21,11 @@ export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysT
             const word = direction < 0 ? 'Back' : 'Forward';
             btn.title = `${word} ${seconds}s (hold to repeat)`;
             btn.setAttribute('aria-label', `${word} ${seconds} seconds, hold to repeat`);
-            btn.textContent = `${direction < 0 ? '−' : '+'}${seconds}`;
+            // The seconds sit inside the circular-arrow glyph; the arc itself
+            // carries the direction, so the number is unsigned.
+            const num = btn.querySelector('.skip-num');
+            if (num) num.textContent = String(seconds);
+            else btn.textContent = `${direction < 0 ? '−' : '+'}${seconds}`;
         };
         setSkipLabel('prev-btn', skipLargeBackwardInterval, -1);
         setSkipLabel('back-btn', skipBackwardInterval, -1);

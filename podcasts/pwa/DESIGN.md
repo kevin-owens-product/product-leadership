@@ -151,7 +151,38 @@ must read at both 44px (mini-player) and 320px (hero). The motif inks come
 from the show palette (accent / text steps); no pure white, no pure black,
 no emoji, no initials.
 
-## 6. Comps (reference renders)
+## 6. Player screen anatomy (D3.1 — the signature screen)
+
+Fixed vertical order, one centered column (max 30rem; fold sections 40rem):
+
+1. **Header**: back chevron · NOW PLAYING kicker · ⋯ (options sheet). Ghost
+   44px round buttons; no filled chrome up here.
+2. **Hero**: `.np-stage` artwork slab (≤288px, `--shadow-hero`, edge light)
+   with the audio-reactive visualizer as a halo BEHIND it (`inset: -7% 6%`
+   — taller than the art, narrower than it, so loud bars emerge past the
+   top/bottom edges only; blurred `--show-accent` bars, transform/opacity
+   only, `display:none` under reduced motion).
+3. **Type stack**: episode title (`--fs-heading`, 3-line clamp, balance) →
+   show · episode number (`--show-text`) → chapter chip + sleep chip
+   (`--show-chip` / warning chips).
+4. **Scrubber**: 6px full-radius track, ±16px hit area, chapter ticks,
+   buffered tint, thumb grows 1.55× while scrubbing; elapsed time is the
+   only tinted label (`--show-text`).
+5. **Transport**: 72px `--show-accent` play disc (`--glow-play`; the only
+   other glow) flanked by ghost skip buttons — circular-arrow glyph with
+   the configured seconds inside (`.skip-num`, tabular); outer 30s pair
+   steps down in size and tone.
+6. **Secondary row**: quiet 44px icon buttons — speed value, sleep, queue,
+   bookmark, share — plus the Auto pill (`--show-chip` when active).
+7. **Fold seam**: hairline + `--space-6`; below it chapters/bookmarks/queue
+   tabs and the transcript panel, all `--surface-1`, no glow.
+
+**Demotion rule**: settings accordion, status readout, stats, and Home live
+in the ⋯ bottom sheet (`.sheet-overlay`/`.sheet`, grabber, slide-up with
+reduced-motion branch) — never on the primary screen. Icons are hand-drawn
+inline SVG, 1.8px round strokes (`.icon`); no emoji glyphs in player chrome.
+
+## 7. Comps (reference renders)
 
 - `design-lab/a-ember-*.html` → shell look: warm ramp, glow elevation.
 - `design-lab/b-adaptive-*.html` → adaptive mechanics + home card grid.

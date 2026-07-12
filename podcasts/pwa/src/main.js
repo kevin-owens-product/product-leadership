@@ -600,11 +600,27 @@ async function openEpisode(episode, options = {}) {
     currentLineIndex = Math.max(0, Math.min(initialLine, Math.max(0, dialogueLines.length - 1)));
     showResumeBanner(resumedFrom, progress?.percent || 0);
 
-    document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
+    document.getElementById('player-episode-title').textContent = episode.title;
 
-    // Set breadcrumb navigation
+    // Hero type stack: show + episode number under the title; the breadcrumb
+    // stays in the DOM (visually hidden) as the screen-reader location line.
     const podcastName = currentPodcast ? currentPodcast.title : 'Podcast';
+    const showLine = document.getElementById('np-show-name');
+    if (showLine) showLine.textContent = `${podcastName} · Episode ${episode.id}`;
     document.getElementById('player-breadcrumb').textContent = `Home › ${podcastName} › Episode ${episode.id}`;
+
+    // Hero artwork (same generated cover the mini player / Media Session use).
+    const heroArt = document.getElementById('np-art');
+    if (heroArt) {
+        const artUrl = currentPodcast ? generatePodcastArtwork(currentPodcast) : null;
+        if (artUrl) {
+            heroArt.src = artUrl;
+            heroArt.hidden = false;
+        } else {
+            heroArt.removeAttribute('src');
+            heroArt.hidden = true;
+        }
+    }
 
     transcriptPanel.render();
     chaptersPanel.render();
@@ -1302,6 +1318,44 @@ document.getElementById('back-to-episodes').addEventListener('click', () => {
     document.getElementById('complete-modal').classList.remove('show');
     document.getElementById('back-to-list').click();
 });
+
+// ===== PLAYER OPTIONS SHEET =====
+// The settings accordion, status readout, stats, and home shortcut are
+// demoted off the primary player screen into a bottom sheet behind ⋯.
+// Focus trap / Escape handling comes from initModalA11y (.modal-overlay).
+const moreSheet = document.getElementById('player-more-sheet');
+const moreBtn = document.getElementById('player-more-btn');
+
+function setMoreSheetOpen(open) {
+    if (!moreSheet) return;
+    moreSheet.classList.toggle('show', open);
+    moreBtn?.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+moreBtn?.addEventListener('click', () => {
+    setMoreSheetOpen(!moreSheet?.classList.contains('show'));
+});
+document.getElementById('close-player-more')?.addEventListener('click', () => setMoreSheetOpen(false));
+// Tapping the scrim dismisses the sheet.
+moreSheet?.addEventListener('click', (e) => {
+    if (e.target === moreSheet) setMoreSheetOpen(false);
+});
+// Actions that open another surface (stats modal) or navigate away close
+// the sheet first so it isn't left hanging underneath.
+document.getElementById('stats-btn')?.addEventListener('click', () => setMoreSheetOpen(false));
+document.getElementById('home-from-player')?.addEventListener('click', () => setMoreSheetOpen(false));
+
+// Secondary-row shortcuts: reveal the queue / bookmarks section below the
+// fold (activates the tab, then brings the panel into view).
+function revealNavTab(tabName) {
+    document.querySelector(`.nav-tab[data-tab="${tabName}"]`)?.click();
+    document.querySelector('.nav-panel')?.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'start'
+    });
+}
+document.getElementById('np-queue-btn')?.addEventListener('click', () => revealNavTab('queue'));
+document.getElementById('np-bookmark-btn')?.addEventListener('click', () => revealNavTab('bookmarks'));
 
 // ===== SWIPE GESTURES =====
 initSwipeGestures({

@@ -716,8 +716,9 @@ body.light-theme {
 }
 
 .nav-tab.active {
-    color: var(--accent-text);
-    background: var(--surface-2);
+    color: var(--show-text);
+    background: var(--show-chip);
+    font-weight: 600;
 }
 
 .nav-content {
@@ -903,12 +904,7 @@ body.light-theme {
     overflow: hidden;
 }
 
-/* Current chapter indicator */
-.current-chapter-badge {
-    font-size: var(--fs-label);
-    color: var(--accent-text);
-    margin-top: var(--space-1);
-}
+/* (Current chapter chip is styled in player.css — hero type stack.) */
 
 /* Podcasts View */
 .podcasts-view {
@@ -1137,23 +1133,6 @@ body.light-theme {
 
 /* ---------- Mobile (≤ 600px) ---------- */
 @media (max-width: 600px) {
-    /* Header: hide breadcrumb + home button, let title claim the row */
-    .player-header .breadcrumb {
-        display: none;
-    }
-    .player-header #home-from-player {
-        display: none;
-    }
-    .player-title h2 {
-        font-size: 1.05rem;
-        line-height: 1.25;
-        white-space: normal;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
     /* Bigger touch targets on speed presets */
     .speed-preset-btn {
         min-height: 44px;

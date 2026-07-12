@@ -182,6 +182,7 @@ body {
 .chapter-time,
 .stat-value,
 .speed-value,
+.skip-num,
 .scrub-bubble,
 .ep-meta,
 .podcast-meta,
@@ -193,7 +194,7 @@ body {
 .app-header h1,
 .podcast-title,
 .ep-title,
-.player-title h2,
+.np-episode-title,
 .modal h2,
 .modal h3 {
     text-wrap: balance;
@@ -524,15 +525,7 @@ select:focus-visible,
     cursor: pointer;
     padding: 0 var(--space-1);
 }
-.chapter-marker {
-    position: absolute;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background: var(--tint-3);
-    pointer-events: none;
-    transform: translateX(-1px);
-}
+/* (Scrubber chapter ticks are styled in player.css.) */
 
 .episode-card .ep-number {
     font-size: var(--fs-label);

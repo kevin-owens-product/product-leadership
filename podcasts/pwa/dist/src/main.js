@@ -3,36 +3,35 @@
 // owns the cross-cutting mutable state (current podcast/episode, playback
 // flags) and wires the modules together.
 
-import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260712T193103Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260712T193103Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T193103Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T193103Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T193103Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T193103Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T193103Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T193103Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T193103Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T193103Z';
-import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T193103Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T193103Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260712T193103Z';
+} from './state/storage.js?v=2.3.0%2B20260712T201829Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T201829Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T201829Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T201829Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T201829Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T201829Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T201829Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T201829Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T201829Z';
+import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T201829Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T201829Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260712T201829Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260712T193103Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260712T193103Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260712T193103Z';
+} from './app/version.js?v=2.3.0%2B20260712T201829Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260712T201829Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260712T201829Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260712T193103Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260712T201829Z';
 import {
     combinedAudioUrl,
     withCacheKey,
@@ -40,26 +39,26 @@ import {
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260712T193103Z';
-import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260712T193103Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260712T193103Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260712T193103Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T193103Z';
-import { formatClock, shadeHex } from './ui/format.js?v=2.3.0%2B20260712T193103Z';
-import { generatePodcastArtwork, DEFAULT_ACCENT } from './ui/artwork.js?v=2.3.0%2B20260712T193103Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260712T193103Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260712T193103Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260712T193103Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260712T193103Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260712T193103Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260712T193103Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260712T193103Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260712T193103Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260712T193103Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260712T193103Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260712T193103Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260712T193103Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260712T193103Z';
+} from './playback/manifest.js?v=2.3.0%2B20260712T201829Z';
+import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260712T201829Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260712T201829Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260712T201829Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T201829Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260712T201829Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260712T201829Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260712T201829Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260712T201829Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260712T201829Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260712T201829Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260712T201829Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260712T201829Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260712T201829Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260712T201829Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260712T201829Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260712T201829Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260712T201829Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260712T201829Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260712T201829Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -432,12 +431,10 @@ function openPodcast(podcast, { transition = true } = {}) {
     document.getElementById('current-podcast-subtitle').textContent = podcast.subtitle;
     document.getElementById('nav-podcast-name').textContent = podcast.title;
 
-    // Update accent color. --accent-text is a lightened shade for
-    // accent-colored text on dark surfaces (contrast ≥ 4.5:1); the light
-    // theme shadows it with its own darker value in CSS.
-    const accent = safeColor(podcast.color || DEFAULT_ACCENT);
-    document.documentElement.style.setProperty('--accent', accent);
-    document.documentElement.style.setProperty('--accent-text', shadeHex(accent, 0.4));
+    // Enter the show's adaptive palette: --show-* on <body> (wash, accent,
+    // chips, glow — DESIGN.md §3) plus the legacy --accent/--accent-text
+    // bridge on <html>. Contrast clamping happens inside the engine.
+    applyShowPalette(podcast);
 
     library.renderEpisodeList();
     showView('list-view', { transition });
@@ -451,9 +448,8 @@ document.getElementById('back-to-podcasts').addEventListener('click', () => {
         // any polished podcast app.
         void stopPlayback();
         currentPodcast = null;
-        // Back to the stylesheet defaults for both accent variables.
-        document.documentElement.style.removeProperty('--accent');
-        document.documentElement.style.removeProperty('--accent-text');
+        // Back to the resting ember palette (stylesheet defaults).
+        clearShowPalette();
     }
     library.renderPodcastsList();
     showView('podcasts-view');
@@ -604,11 +600,27 @@ async function openEpisode(episode, options = {}) {
     currentLineIndex = Math.max(0, Math.min(initialLine, Math.max(0, dialogueLines.length - 1)));
     showResumeBanner(resumedFrom, progress?.percent || 0);
 
-    document.getElementById('player-episode-title').textContent = `Ep ${episode.id}: ${episode.title}`;
+    document.getElementById('player-episode-title').textContent = episode.title;
 
-    // Set breadcrumb navigation
+    // Hero type stack: show + episode number under the title; the breadcrumb
+    // stays in the DOM (visually hidden) as the screen-reader location line.
     const podcastName = currentPodcast ? currentPodcast.title : 'Podcast';
+    const showLine = document.getElementById('np-show-name');
+    if (showLine) showLine.textContent = `${podcastName} · Episode ${episode.id}`;
     document.getElementById('player-breadcrumb').textContent = `Home › ${podcastName} › Episode ${episode.id}`;
+
+    // Hero artwork (same generated cover the mini player / Media Session use).
+    const heroArt = document.getElementById('np-art');
+    if (heroArt) {
+        const artUrl = currentPodcast ? generatePodcastArtwork(currentPodcast) : null;
+        if (artUrl) {
+            heroArt.src = artUrl;
+            heroArt.hidden = false;
+        } else {
+            heroArt.removeAttribute('src');
+            heroArt.hidden = true;
+        }
+    }
 
     transcriptPanel.render();
     chaptersPanel.render();
@@ -1306,6 +1318,44 @@ document.getElementById('back-to-episodes').addEventListener('click', () => {
     document.getElementById('complete-modal').classList.remove('show');
     document.getElementById('back-to-list').click();
 });
+
+// ===== PLAYER OPTIONS SHEET =====
+// The settings accordion, status readout, stats, and home shortcut are
+// demoted off the primary player screen into a bottom sheet behind ⋯.
+// Focus trap / Escape handling comes from initModalA11y (.modal-overlay).
+const moreSheet = document.getElementById('player-more-sheet');
+const moreBtn = document.getElementById('player-more-btn');
+
+function setMoreSheetOpen(open) {
+    if (!moreSheet) return;
+    moreSheet.classList.toggle('show', open);
+    moreBtn?.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+moreBtn?.addEventListener('click', () => {
+    setMoreSheetOpen(!moreSheet?.classList.contains('show'));
+});
+document.getElementById('close-player-more')?.addEventListener('click', () => setMoreSheetOpen(false));
+// Tapping the scrim dismisses the sheet.
+moreSheet?.addEventListener('click', (e) => {
+    if (e.target === moreSheet) setMoreSheetOpen(false);
+});
+// Actions that open another surface (stats modal) or navigate away close
+// the sheet first so it isn't left hanging underneath.
+document.getElementById('stats-btn')?.addEventListener('click', () => setMoreSheetOpen(false));
+document.getElementById('home-from-player')?.addEventListener('click', () => setMoreSheetOpen(false));
+
+// Secondary-row shortcuts: reveal the queue / bookmarks section below the
+// fold (activates the tab, then brings the panel into view).
+function revealNavTab(tabName) {
+    document.querySelector(`.nav-tab[data-tab="${tabName}"]`)?.click();
+    document.querySelector('.nav-panel')?.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'start'
+    });
+}
+document.getElementById('np-queue-btn')?.addEventListener('click', () => revealNavTab('queue'));
+document.getElementById('np-bookmark-btn')?.addEventListener('click', () => revealNavTab('bookmarks'));
 
 // ===== SWIPE GESTURES =====
 initSwipeGestures({

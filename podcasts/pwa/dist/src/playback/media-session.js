@@ -29,8 +29,8 @@ export function createMediaSessionController({
             artist: currentPodcast.title,
             album: 'PodLearn',
             artwork: artwork
-                ? [{ src: artwork, sizes: '512x512', type: 'image/png' }]
-                : [{ src: '/icon.svg', sizes: '512x512', type: 'image/svg+xml' }]
+                ? [{ src: artwork, sizes: '1024x1024', type: 'image/png' }]
+                : [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' }]
         });
     }
 

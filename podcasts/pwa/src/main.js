@@ -111,10 +111,15 @@ function setAppVersion(version) {
 // Flag to track if podcasts are loaded
 let podcastsLoaded = false;
 
-// Load podcasts.js with cache-busting
+// Load podcasts.js with cache-busting pinned to the deployed build.
+// build-episodes.js substitutes the real version into the placeholder below
+// (same mechanism as sw.js); when running unbuilt source, fall back to the
+// last-seen app version so the URL is still stable across reloads.
+const BUILD_VERSION = '__BUILD_VERSION__';
 (function() {
+    const cacheKey = BUILD_VERSION.includes('__') ? APP_VERSION : BUILD_VERSION;
     const script = document.createElement('script');
-    script.src = 'podcasts.js?v=' + Date.now();
+    script.src = 'podcasts.js?v=' + encodeURIComponent(cacheKey);
     script.onload = function() {
         const podcasts = Array.isArray(window.PODCASTS) ? window.PODCASTS : [];
         console.log('podcasts.js loaded, PODCASTS:', podcasts.length + ' podcasts');

@@ -209,7 +209,16 @@ console.log(`✓ Generated: version.json (${buildVersion})`);
 
 // Copy static root files. sw.js gets a custom path because we need to
 // substitute the build version + app shell list into it after copying.
-const filesToCopy = ['index.html', 'manifest.json', 'icon.svg', '_headers'];
+const filesToCopy = [
+    'index.html',
+    'manifest.json',
+    'icon.svg',
+    'icon-192.png',
+    'icon-512.png',
+    'icon-maskable-192.png',
+    'icon-maskable-512.png',
+    '_headers'
+];
 filesToCopy.forEach(file => {
     const src = path.join(__dirname, file);
     const dest = path.join(distDir, file);
@@ -361,6 +370,28 @@ function bustJsImportsInDir(dir) {
 const distSrcDir = path.join(distDir, 'src');
 const importBust = bustJsImportsInDir(distSrcDir);
 console.log(`✓ Cache-busted ${importBust.edits} import(s) across ${importBust.files} module file(s)`);
+
+// Substitute the build version into copied source modules (same mechanism as
+// sw.js below) — e.g. main.js pins its podcasts.js cache-buster to the build.
+function stampBuildVersionInDir(dir) {
+    if (!fs.existsSync(dir)) return 0;
+    let stamped = 0;
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const child = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            stamped += stampBuildVersionInDir(child);
+        } else if (entry.isFile() && entry.name.endsWith('.js')) {
+            const before = fs.readFileSync(child, 'utf8');
+            if (before.includes('__BUILD_VERSION__')) {
+                fs.writeFileSync(child, before.replaceAll('__BUILD_VERSION__', buildVersion));
+                stamped++;
+            }
+        }
+    }
+    return stamped;
+}
+const versionStamped = stampBuildVersionInDir(distSrcDir);
+console.log(`✓ Stamped build version into ${versionStamped} module file(s)`);
 
 const indexHtmlDist = path.join(distDir, 'index.html');
 if (fs.existsSync(indexHtmlDist)) {

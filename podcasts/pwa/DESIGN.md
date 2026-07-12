@@ -182,7 +182,45 @@ in the ⋯ bottom sheet (`.sheet-overlay`/`.sheet`, grabber, slide-up with
 reduced-motion branch) — never on the primary screen. Icons are hand-drawn
 inline SVG, 1.8px round strokes (`.icon`); no emoji glyphs in player chrome.
 
-## 7. Comps (reference renders)
+## 7. Motion choreography (D4 contract)
+
+Every animation consumes `--dur-*`/`--ease-*`/`--stagger`, touches only
+`transform`/`opacity` (a press state may *set* `filter: brightness()` but
+never transitions it), and has a `prefers-reduced-motion` branch that
+swaps motion for an instant state. Verify with
+`tools/motion-probe.mjs` (mid-transition frames; `--reduced-motion` to
+prove the static branch).
+
+- **Shared-element artwork morph**: one artwork flies between screens via
+  View Transitions — home card → show header → player hero → mini-player
+  thumb, and back. `morphViews` (src/ui/motion.js) tags exactly one
+  source/destination pair with `view-transition-name: hero-art` per
+  navigation and cleans up after; CSS (base.css) gives the group
+  `--dur-3` + `--ease-spring` and swaps snapshots instantly (same art on
+  both ends — cross-fading would blur the flight). The mini-player
+  expand is this same morph, so it lands exactly on the hero; the
+  `spring-in` rise is only the no-View-Transitions fallback.
+- **Staggered list entrances**: showView stamps `.entering` on a
+  newly-activated list view (700ms lifetime); the first 8 cards rise
+  10px on the `--stagger` (35ms) beat, `backwards` fill, rows 9+ appear
+  instantly. Re-renders (search keystrokes, sort) happen after the stamp
+  expires and never re-ripple.
+- **Press states**: cards scale 0.97 with an instant `brightness(1.07)`;
+  round buttons may depress further (0.9–0.94). Transform transitions
+  on `--dur-1`; brightness snaps.
+- **Scrubber thumb**: grows 1.55× on grab and settles back on release
+  with `--dur-2` + `--ease-spring` (transform only).
+- **Sheet physics**: sheets/mobile modals travel their full height
+  (`translateY(100%)` → 0, `--dur-3`, `--ease-out`) while the scrim
+  fades in over `--dur-2` (`scrimIn`, opacity only). Desktop dialogs
+  keep the `modalIn` fade-rise. No overshoot: a bottom-anchored sheet
+  that overshoots exposes a gap.
+- **Don't**: no second shared-element name; no morphs from queue jumps
+  or deep links (plain cross-fade — there is no on-screen source to fly
+  from); no entrance animation past the 8th row; nothing animates
+  `width`/`height`/layout.
+
+## 8. Comps (reference renders)
 
 - `design-lab/a-ember-*.html` → shell look: warm ramp, glow elevation.
 - `design-lab/b-adaptive-*.html` → adaptive mechanics + home card grid.

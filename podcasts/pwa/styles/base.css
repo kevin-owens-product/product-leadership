@@ -226,12 +226,65 @@ body {
     animation-duration: var(--dur-2);
 }
 
+/* Shared-element artwork morph (card art → show header → player hero →
+   mini-player thumb). JS tags exactly one source/destination pair with
+   view-transition-name: hero-art per navigation (src/ui/motion.js
+   morphViews). The group flies with a spring; the snapshots swap
+   instantly (same artwork on both ends, so a cross-fade would only blur
+   the flight). */
+::view-transition-group(hero-art) {
+    animation-duration: var(--dur-3);
+    animation-timing-function: var(--ease-spring);
+}
+
+::view-transition-old(hero-art) {
+    display: none;
+}
+
+::view-transition-new(hero-art) {
+    animation: none;
+    width: 100%;
+    height: 100%;
+}
+
 @media (prefers-reduced-motion: reduce) {
     ::view-transition-old(root),
     ::view-transition-new(root),
     ::view-transition-old(mini-player),
-    ::view-transition-new(mini-player) {
+    ::view-transition-new(mini-player),
+    ::view-transition-group(hero-art),
+    ::view-transition-old(hero-art),
+    ::view-transition-new(hero-art) {
         animation: none !important;
+    }
+}
+
+/* ---- Staggered list entrances ----
+   showView stamps a short-lived .entering class on a newly-activated
+   list view; the first 8 cards rise in on the --stagger beat and rows
+   beyond the fold appear instantly. Search/sort re-renders happen after
+   the stamp expires, so lists never re-ripple while typing. */
+@keyframes listEnter {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
+
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card) {
+    animation: listEnter var(--dur-2) var(--ease-out) backwards;
+}
+
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(2) { animation-delay: var(--stagger); }
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(3) { animation-delay: calc(var(--stagger) * 2); }
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(4) { animation-delay: calc(var(--stagger) * 3); }
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(5) { animation-delay: calc(var(--stagger) * 4); }
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(6) { animation-delay: calc(var(--stagger) * 5); }
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(7) { animation-delay: calc(var(--stagger) * 6); }
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(8) { animation-delay: calc(var(--stagger) * 7); }
+.view.entering :is(.podcast-card, .add-podcast-card, .episode-card):nth-child(n + 9) { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .view.entering :is(.podcast-card, .add-podcast-card, .episode-card) {
+        animation: none;
     }
 }
 
@@ -530,8 +583,12 @@ textarea:focus-visible,
     background: var(--surface-2);
 }
 
+/* Press state: cards depress to 0.97 and brighten. The brightness step
+   is instant (filter is never transitioned/animated — compositor rule);
+   only the transform springs back on release. */
 .episode-card:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
+    filter: brightness(1.07);
 }
 
 @media (prefers-reduced-motion: reduce) {

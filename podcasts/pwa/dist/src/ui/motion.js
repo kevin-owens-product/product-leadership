@@ -26,6 +26,43 @@ export function transitionViews(apply, doc) {
   return false;
 }
 
+// Shared-element morph between screens: tag a source element (visible in
+// the OLD state) and a destination element (visible in the NEW state) with
+// the same view-transition-name for exactly one View Transition, so the
+// artwork appears to fly from card → hero instead of cross-fading. Cleans
+// both names up afterwards (duplicate lingering names would abort future
+// transitions). Falls back to an instant swap when View Transitions are
+// unsupported or the user prefers reduced motion. `to` may be an element
+// or a function resolved AFTER `apply` runs (for elements `apply` renders).
+// Returns true when a morph transition was started.
+export function morphViews(apply, { from = null, to = null, name = 'hero-art' } = {}, doc) {
+  const d = doc || globalThis.document;
+  if (!d || typeof d.startViewTransition !== 'function' || prefersReducedMotion(d.defaultView)) {
+    apply();
+    return false;
+  }
+  if (from) from.style.viewTransitionName = name;
+  let dest = null;
+  const vt = d.startViewTransition(() => {
+    // Old state is snapshotted; release the source name before the new
+    // state is captured so the name stays unique.
+    if (from) from.style.viewTransitionName = '';
+    apply();
+    dest = typeof to === 'function' ? to() : to;
+    if (dest) dest.style.viewTransitionName = name;
+  });
+  const cleanup = () => {
+    if (from) from.style.viewTransitionName = '';
+    if (dest) dest.style.viewTransitionName = '';
+  };
+  if (vt && vt.finished && typeof vt.finished.finally === 'function') {
+    vt.finished.finally(cleanup);
+  } else {
+    cleanup();
+  }
+  return true;
+}
+
 // Format a signed skip delta for the flyout: -30 → "−30s", 10 → "+10s".
 export function formatSkipDelta(seconds) {
   const n = Math.round(Number(seconds) || 0);

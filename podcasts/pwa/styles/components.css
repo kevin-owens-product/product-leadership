@@ -752,8 +752,22 @@ body.light-theme .podcast-card {
     padding: 0;
 }
 
+/* Scrim fades in (opacity only) while the sheet slides up beneath it —
+   the two-part entrance that makes sheets read as physical. */
 .modal-overlay.show {
     display: flex;
+    animation: scrimIn var(--dur-2) var(--ease-out);
+}
+
+@keyframes scrimIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal-overlay.show {
+        animation: none;
+    }
 }
 
 .modal {
@@ -1166,8 +1180,10 @@ body.light-theme .podcast-card {
     box-shadow: var(--shadow-2), var(--edge-highlight);
 }
 
+/* Press state: 0.97 + instant brightness (filter is never animated). */
 .podcast-card:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
+    filter: brightness(1.07);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1411,7 +1427,8 @@ body.light-theme .podcast-card {
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
-    transition: background var(--dur-2) var(--ease-out);
+    transition: background var(--dur-2) var(--ease-out),
+                transform var(--dur-1) var(--ease-out);
 }
 
 .add-podcast-card:hover {
@@ -1421,6 +1438,13 @@ body.light-theme .podcast-card {
 .add-podcast-card:active {
     background: var(--surface-1);
     border-color: var(--text-tertiary);
+    transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .add-podcast-card:active {
+        transform: none;
+    }
 }
 
 .add-podcast-icon {
@@ -1500,6 +1524,12 @@ body.light-theme .podcast-card {
 .color-option.selected {
     border-color: var(--text-primary);
     transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .color-option {
+        transition: none;
+    }
 }
 
 /* ---------- Mobile (≤ 600px) ---------- */

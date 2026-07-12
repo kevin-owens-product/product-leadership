@@ -83,13 +83,17 @@ export function createLibrary({
             card.className = 'podcast-card';
             card.tabIndex = 0;
             card.setAttribute('role', 'button');
+            // Lets the home←list shared-element morph find its landing card.
+            card.dataset.podcastId = podcast.id;
             // No aria-label: the accessible name comes from the card's visible
             // content (title, subtitle, counts), so what sighted users see is
             // exactly what screen readers announce (WCAG 2.5.3 label-in-name).
             renderPodcastCard(card, podcast, epCount, avgProgress);
 
-            card.addEventListener('click', () => onOpenPodcast(podcast));
-            activateCardWithKeyboard(card, () => onOpenPodcast(podcast));
+            // The card's artwork tile seeds the card→header morph.
+            const open = () => onOpenPodcast(podcast, card.querySelector('.podcast-icon'));
+            card.addEventListener('click', open);
+            activateCardWithKeyboard(card, open);
             listEl.appendChild(card);
         });
 

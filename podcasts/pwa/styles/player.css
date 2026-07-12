@@ -358,7 +358,8 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 3;
-    transition: transform var(--dur-1) var(--ease-spring);
+    /* Spring grow/settle on grab and release (transform only). */
+    transition: transform var(--dur-2) var(--ease-spring);
 }
 
 /* Thumb grows while dragging / keyboard-focused. */
@@ -949,9 +950,13 @@ button.playing .play-pause-icon .pp-pause {
     animation: sheetUp var(--dur-3) var(--ease-out);
 }
 
+/* Sheet physics: full travel from below the viewport with a fast-out,
+   decelerating settle — a physical object arriving, not a fade. The
+   scrim fades in separately (see .modal-overlay.show / scrimIn in
+   components.css). Transform-only. */
 @keyframes sheetUp {
-    from { transform: translateY(32px); opacity: 0.4; }
-    to { transform: none; opacity: 1; }
+    from { transform: translateY(100%); }
+    to { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

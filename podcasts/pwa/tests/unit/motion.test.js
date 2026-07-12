@@ -5,6 +5,7 @@ import { JSDOM } from 'jsdom';
 import {
   prefersReducedMotion,
   transitionViews,
+  morphViews,
   formatSkipDelta,
   spawnRipple,
   showSkipFlyout
@@ -65,6 +66,50 @@ test('transitionViews skips the transition under prefers-reduced-motion', () => 
   assert.equal(started, false);
   assert.equal(viaTransition, false);
   assert.equal(applied, true);
+});
+
+test('morphViews tags source before capture and destination after apply, then cleans up', async () => {
+  let applied = false;
+  const from = { style: {} };
+  const to = { style: {} };
+  let finishedResolve;
+  const finished = new Promise((r) => { finishedResolve = r; });
+  const doc = {
+    startViewTransition(cb) {
+      // Source must carry the shared name when the old state is captured.
+      assert.equal(from.style.viewTransitionName, 'hero-art');
+      cb();
+      return { finished };
+    },
+    defaultView: fakeWin(false)
+  };
+  const started = morphViews(() => { applied = true; }, { from, to: () => to }, doc);
+  assert.equal(started, true);
+  assert.equal(applied, true);
+  // Source name released before the new state; destination tagged after apply.
+  assert.equal(from.style.viewTransitionName, '');
+  assert.equal(to.style.viewTransitionName, 'hero-art');
+  finishedResolve();
+  await finished;
+  await new Promise((r) => setImmediate(r));
+  assert.equal(to.style.viewTransitionName, '');
+});
+
+test('morphViews falls back to an instant swap without support or under reduced motion', () => {
+  let applied = 0;
+  const from = { style: {} };
+  assert.equal(
+    morphViews(() => { applied += 1; }, { from }, { defaultView: fakeWin(false) }),
+    false
+  );
+  const reducedDoc = {
+    startViewTransition() { throw new Error('must not start under reduced motion'); },
+    defaultView: fakeWin(true)
+  };
+  assert.equal(morphViews(() => { applied += 1; }, { from }, reducedDoc), false);
+  assert.equal(applied, 2);
+  // Fallback paths never touch the elements.
+  assert.equal(from.style.viewTransitionName, undefined);
 });
 
 test('spawnRipple appends a self-removing ripple inside the button', () => {

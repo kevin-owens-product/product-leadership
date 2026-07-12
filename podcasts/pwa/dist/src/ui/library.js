@@ -1,9 +1,9 @@
 // Library screens: the podcasts home grid and the per-show episode list,
 // including search, status filters, and sorting.
 
-import { updateVersionBadge } from '../app/version.js?v=2.3.0%2B20260712T204827Z';
-import { renderPodcastCard, renderEpisodeCard } from './render.js?v=2.3.0%2B20260712T204827Z';
-import { activateCardWithKeyboard } from './dom.js?v=2.3.0%2B20260712T204827Z';
+import { updateVersionBadge } from '../app/version.js?v=2.3.0%2B20260712T211712Z';
+import { renderPodcastCard, renderEpisodeCard } from './render.js?v=2.3.0%2B20260712T211712Z';
+import { activateCardWithKeyboard } from './dom.js?v=2.3.0%2B20260712T211712Z';
 
 export function createLibrary({
     getPodcasts,
@@ -83,13 +83,17 @@ export function createLibrary({
             card.className = 'podcast-card';
             card.tabIndex = 0;
             card.setAttribute('role', 'button');
+            // Lets the home←list shared-element morph find its landing card.
+            card.dataset.podcastId = podcast.id;
             // No aria-label: the accessible name comes from the card's visible
             // content (title, subtitle, counts), so what sighted users see is
             // exactly what screen readers announce (WCAG 2.5.3 label-in-name).
             renderPodcastCard(card, podcast, epCount, avgProgress);
 
-            card.addEventListener('click', () => onOpenPodcast(podcast));
-            activateCardWithKeyboard(card, () => onOpenPodcast(podcast));
+            // The card's artwork tile seeds the card→header morph.
+            const open = () => onOpenPodcast(podcast, card.querySelector('.podcast-icon'));
+            card.addEventListener('click', open);
+            activateCardWithKeyboard(card, open);
             listEl.appendChild(card);
         });
 

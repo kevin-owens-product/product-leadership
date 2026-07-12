@@ -8,30 +8,30 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260712T204827Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T204827Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T204827Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T204827Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T204827Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T204827Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T204827Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T204827Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T204827Z';
-import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T204827Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T204827Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260712T204827Z';
+} from './state/storage.js?v=2.3.0%2B20260712T211712Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T211712Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T211712Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T211712Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T211712Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T211712Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T211712Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T211712Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T211712Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T211712Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T211712Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260712T211712Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260712T204827Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260712T204827Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260712T204827Z';
+} from './app/version.js?v=2.3.0%2B20260712T211712Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260712T211712Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260712T211712Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260712T204827Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260712T211712Z';
 import {
     combinedAudioUrl,
     withCacheKey,
@@ -39,26 +39,26 @@ import {
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260712T204827Z';
-import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260712T204827Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260712T204827Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260712T204827Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T204827Z';
-import { formatClock } from './ui/format.js?v=2.3.0%2B20260712T204827Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260712T204827Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260712T204827Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260712T204827Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260712T204827Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260712T204827Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260712T204827Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260712T204827Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260712T204827Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260712T204827Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260712T204827Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260712T204827Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260712T204827Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260712T204827Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260712T204827Z';
+} from './playback/manifest.js?v=2.3.0%2B20260712T211712Z';
+import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260712T211712Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260712T211712Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260712T211712Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T211712Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260712T211712Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260712T211712Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260712T211712Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260712T211712Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260712T211712Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260712T211712Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260712T211712Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260712T211712Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260712T211712Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260712T211712Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260712T211712Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260712T211712Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260712T211712Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260712T211712Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260712T211712Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -151,13 +151,18 @@ const library = createLibrary({
     loadState,
     getCurrentPodcast: () => currentPodcast,
     downloads,
-    onOpenPodcast: (podcast) => openPodcast(podcast),
+    onOpenPodcast: (podcast, sourceArt) => openPodcast(podcast, { sourceArt }),
     onOpenEpisode: (episode) => { void openEpisode(episode); }
 });
 
 const podcastsLoader = createPodcastsLoader({
     toasts,
-    onLoaded: () => library.renderPodcastsList()
+    onLoaded: () => {
+        library.renderPodcastsList();
+        // First paint of the library: give the home list its staggered
+        // entrance (later showView calls stamp this themselves).
+        stampViewEntering(document.getElementById('podcasts-view'));
+    }
 });
 
 const queuePanel = createQueuePanel({
@@ -297,14 +302,36 @@ function applySpeechRate(rate, { persistShow = true, save = true } = {}) {
 // keeps the bottom mini player's visibility in sync with the active screen.
 const VIEW_IDS = ['podcasts-view', 'list-view', 'player-view'];
 
-function showView(viewId, { transition = true } = {}) {
+// Newly-activated list views get a short-lived .entering class that drives
+// the staggered card-entrance animation (first 8 items, --stagger steps).
+// Removed on a timer so later re-renders (search keystrokes, sort) never
+// re-trigger the entrance.
+let enteringTimer = null;
+
+function stampViewEntering(view) {
+    if (!view) return;
+    document.querySelectorAll('.view.entering').forEach((v) => v.classList.remove('entering'));
+    view.classList.remove('entering');
+    void view.offsetWidth; // restart the entrance if re-entering the view
+    view.classList.add('entering');
+    clearTimeout(enteringTimer);
+    enteringTimer = setTimeout(() => view.classList.remove('entering'), 700);
+}
+
+// `morph` optionally names a shared-element pair { from, to } so the show
+// artwork flies card → hero (View Transitions; instant under reduced
+// motion or without support — see morphViews).
+function showView(viewId, { transition = true, morph = null } = {}) {
     const apply = () => {
         VIEW_IDS.forEach((id) => {
             document.getElementById(id)?.classList.toggle('active', id === viewId);
         });
+        if (viewId !== 'player-view') stampViewEntering(document.getElementById(viewId));
         updateMiniPlayerVisibility();
     };
-    if (transition) {
+    if (transition && morph) {
+        morphViews(apply, morph);
+    } else if (transition) {
         transitionViews(apply);
     } else {
         apply();
@@ -322,23 +349,29 @@ function updateMiniPlayerVisibility() {
     if (show) miniPlayer.update();
 }
 
-// Tap-to-expand: return to the player screen with a quick spring-feel rise
-// (CSS animation, ≤200ms, disabled under prefers-reduced-motion). Skips the
-// cross-fade view transition so the spring is the only motion.
+// Tap-to-expand: the capsule's artwork thumb morphs into the hero artwork
+// via a shared-element View Transition (mini-player-art → np-art), so the
+// expand lands exactly on the hero. Every DOM change happens inside the
+// morph's apply callback so the swap stays atomic. Fallback (no View
+// Transitions): the previous spring-feel rise; reduced motion: instant.
 function expandMiniPlayer() {
     if (!playerPodcast || !currentEpisode) return;
-    if (currentPodcast?.id !== playerPodcast.id) {
-        // The user browsed into a different show while listening — restore
-        // the playing show's context (header, accent, per-show speed).
-        // Must skip the View Transition: startViewTransition defers its DOM
-        // swap to an async callback, which would re-activate list-view AFTER
-        // the synchronous showView('player-view') below and dump the user on
-        // the episode list instead of the player.
-        openPodcast(playerPodcast, { transition: false });
-    }
-    showView('player-view', { transition: false });
+    const apply = () => {
+        if (currentPodcast?.id !== playerPodcast.id) {
+            // The user browsed into a different show while listening — restore
+            // the playing show's context (header, accent, per-show speed).
+            openPodcast(playerPodcast, { transition: false });
+        }
+        showView('player-view', { transition: false });
+    };
+    const thumb = document.getElementById('mini-player-art');
+    const morphed = morphViews(apply, {
+        from: thumb && !thumb.hidden ? thumb : null,
+        to: () => document.getElementById('np-art')
+    });
+    if (morphed) return;
     const playerView = document.getElementById('player-view');
-    if (playerView) {
+    if (playerView && !prefersReducedMotion()) {
         playerView.classList.remove('spring-in');
         // Restart the animation if the class was already applied.
         void playerView.offsetWidth;
@@ -422,7 +455,9 @@ function getNextUp() {
 
 // ===== NAVIGATION =====
 
-function openPodcast(podcast, { transition = true } = {}) {
+// `sourceArt` (the tapped card's artwork element, when the user navigated
+// from home) feeds the shared-element morph: card art → show-header art.
+function openPodcast(podcast, { transition = true, sourceArt = null } = {}) {
     currentPodcast = podcast;
     // Each show remembers its own playback speed (falls back to the current
     // global rate for shows without a saved preference).
@@ -449,11 +484,15 @@ function openPodcast(podcast, { transition = true } = {}) {
     applyShowPalette(podcast);
 
     library.renderEpisodeList();
-    showView('list-view', { transition });
+    showView('list-view', {
+        transition,
+        morph: sourceArt ? { from: sourceArt, to: headerArt && !headerArt.hidden ? headerArt : null } : null
+    });
 }
 
 document.getElementById('back-to-podcasts').addEventListener('click', () => {
     saveState();
+    const leavingShowId = currentPodcast?.id;
     if (!currentEpisode) {
         // Nothing loaded — fully reset context. When an episode is loaded we
         // keep playback (and the mini player) alive across navigation, like
@@ -464,7 +503,22 @@ document.getElementById('back-to-podcasts').addEventListener('click', () => {
         clearShowPalette();
     }
     library.renderPodcastsList();
-    showView('podcasts-view');
+    // Reverse morph: the show-header art flies back onto its home card.
+    const headerArt = document.getElementById('podcast-header-art');
+    showView('podcasts-view', {
+        morph: {
+            from: headerArt && !headerArt.hidden ? headerArt : null,
+            to: () => {
+                if (!leavingShowId) return null;
+                for (const card of document.querySelectorAll('.podcast-card')) {
+                    if (card.dataset.podcastId === leavingShowId) {
+                        return card.querySelector('.podcast-icon');
+                    }
+                }
+                return null;
+            }
+        }
+    });
 });
 
 // ===== APP STATE PERSISTENCE =====
@@ -645,14 +699,33 @@ async function openEpisode(episode, options = {}) {
     syncMediaSession({ includeMetadata: true, includePosition: true });
     miniPlayer.update();
 
-    showView('player-view');
+    // Shared-element morph: the show-header art flies into the hero slab
+    // (only when arriving from the episode list — queue jumps and deep
+    // links keep the plain cross-fade).
+    const listActive = document.getElementById('list-view')?.classList.contains('active');
+    const listArt = document.getElementById('podcast-header-art');
+    showView('player-view', {
+        morph: listActive && listArt && !listArt.hidden
+            ? { from: listArt, to: () => document.getElementById('np-art') }
+            : null
+    });
 }
 
 document.getElementById('back-to-list').addEventListener('click', () => {
     hideResumeBanner();
     saveState();
     library.renderEpisodeList();
-    showView('list-view');
+    // Reverse morph: hero artwork settles back into the show header.
+    const heroArt = document.getElementById('np-art');
+    showView('list-view', {
+        morph: {
+            from: heroArt && !heroArt.hidden ? heroArt : null,
+            to: () => {
+                const headerArt = document.getElementById('podcast-header-art');
+                return headerArt && !headerArt.hidden ? headerArt : null;
+            }
+        }
+    });
 });
 
 // Home button from player - go all the way back to podcasts list

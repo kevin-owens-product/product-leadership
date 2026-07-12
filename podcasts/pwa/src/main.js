@@ -27,6 +27,8 @@ import {
 import { createScrubber, bufferedEndFraction } from './ui/scrubber.js';
 import { createRepeatSkipper } from './ui/long-press.js';
 import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js';
+import { sleepFadeVolume, sleepRemainingSeconds } from './playback/sleep-timer.js';
+import { findNextUp } from './state/queue-next.js';
 
 // ===== APP VERSION =====
 const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
@@ -152,8 +154,13 @@ let isPlaying = false;
 let isPaused = false;
 let speechRate = 1.0;
 let autoPlayNext = true;
-let sleepTimer = null;
-let sleepEndTime = null;
+// Sleep timer: either a wall-clock end time (minute presets) or an
+// end-of-episode stop. Not persisted — a reload cancels the timer, which is
+// what every polished podcast app does. sleepBaseVolume remembers the user's
+// volume so we can restore it after the fade-out.
+let sleepTimerEndTime = null;
+let sleepAtEpisodeEnd = false;
+let sleepBaseVolume = null;
 let searchMatches = [];
 let searchIndex = 0;
 const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
@@ -568,15 +575,26 @@ function maybePrebufferNextEpisode() {
     const duration = speechPlayers.getDuration();
     const position = speechPlayers.getCurrentTime();
     if (!duration || duration - position > 30) return;
-    const next = currentPodcast.episodes.find((e) => e.id === currentEpisode.id + 1);
+    const next = getNextUp();
     if (!next) return;
-    const nextKey = epKeyOf(currentPodcast, next);
+    const nextKey = epKeyOf(next.podcast, next.episode);
     if (lastPrebufferedEpKey === nextKey) return;
     lastPrebufferedEpKey = nextKey;
     // Fire-and-forget: warms the browser HTTP cache so auto-play starts
     // without a network round-trip when this episode ends.
-    const url = combinedAudioUrl(currentPodcast.id, next);
+    const url = combinedAudioUrl(next.podcast.id, next.episode);
     fetch(url, { mode: 'no-cors' }).catch(() => { /* ignore */ });
+}
+
+// What plays after the current episode: queue first, then the next
+// sequential episode in the current show.
+function getNextUp() {
+    return findNextUp({
+        queue: playQueue,
+        podcasts: getPodcasts(),
+        currentPodcastId: currentPodcast?.id ?? null,
+        currentEpisodeId: currentEpisode?.id ?? null
+    });
 }
 
 // ===== PODCASTS HOME =====
@@ -1183,6 +1201,7 @@ async function openEpisode(episode, options = {}) {
     renderBookmarks();
     updateProgress();
     lastPrebufferedEpKey = null;
+    hideUpNextBanner();
     setStatus('Ready - Tap play to start');
     syncMediaSession({ includeMetadata: true, includePosition: true });
     updateMiniPlayer();
@@ -1380,13 +1399,8 @@ speechPlayers.on('linechange', (lineIndex) => {
 });
 
 speechPlayers.on('timeupdate', () => {
-    if (sleepEndTime && Date.now() >= sleepEndTime) {
-        sleepEndTime = null;
-        updateSleepDisplay();
-        setStatus('Sleep timer ended');
-        void stopPlayback();
-        return;
-    }
+    if (checkSleepTimerExpiry()) return;
+    applySleepFade();
     // Cheap per-tick refresh of the clock + progress fill (~4 Hz from <audio>).
     if (speechPlayers.isContinuousReady()) {
         const dur = speechPlayers.getDuration() || episodeAudioDuration;
@@ -1400,6 +1414,7 @@ speechPlayers.on('timeupdate', () => {
         if (tot) tot.textContent = formatClock(dur);
     }
     updateMediaSessionPositionState();
+    updateUpNextBanner();
     maybePrebufferNextEpisode();
 });
 
@@ -1426,11 +1441,15 @@ speechPlayers.on('ended', () => {
     isPlaying = false;
     isPaused = false;
     currentLineIndex = Math.max(0, dialogueLines.length - 1);
+    const sleepStop = sleepAtEpisodeEnd;
     saveState();
     updateMiniPlayer();
+    hideUpNextBanner();
     syncMediaSession({ includeMetadata: true, includePosition: true });
     void releaseWakeLock();
-    showCompleteModal();
+    // An end-of-episode sleep timer suppresses auto-advance and ends here.
+    showCompleteModal({ allowAutoAdvance: !sleepStop });
+    if (sleepStop) consumeSleepEpisodeEndStop();
 });
 
 speechPlayers.on('error', (err) => {
@@ -1471,13 +1490,7 @@ async function startPlayback() {
 
     while (currentLineIndex < dialogueLines.length && isPlaying) {
         if (!playbackSessions.isActive(sessionId)) break;
-        if (sleepEndTime && Date.now() >= sleepEndTime) {
-            await stopPlayback();
-            sleepEndTime = null;
-            updateSleepDisplay();
-            setStatus('Sleep timer ended');
-            break;
-        }
+        if (checkSleepTimerExpiry()) break;
         if (isPaused) {
             await new Promise(r => setTimeout(r, 100));
             continue;
@@ -1501,11 +1514,13 @@ async function startPlayback() {
     if (currentLineIndex >= dialogueLines.length && isPlaying) {
         isPlaying = false;
         isPaused = false;
+        const sleepStop = sleepAtEpisodeEnd;
         await releaseWakeLock();
         saveState();
         updateMiniPlayer();
         syncMediaSession({ includeMetadata: true, includePosition: true });
-        showCompleteModal();
+        showCompleteModal({ allowAutoAdvance: !sleepStop });
+        if (sleepStop) consumeSleepEpisodeEndStop();
     } else {
         isPlaying = false;
         isPaused = false;
@@ -1523,6 +1538,7 @@ async function stopPlayback() {
     isPaused = false;
     speechPlayers.stop();
     speechPlayers.stopCurrentSpeech();
+    restoreSleepVolume();
     await releaseWakeLock();
     document.getElementById('play-btn').textContent = '▶';
     saveState();
@@ -1761,7 +1777,141 @@ document.getElementById('auto-play-toggle').addEventListener('click', () => {
 });
 
 // ===== SLEEP TIMER =====
+function sleepTimerActive() {
+    return sleepTimerEndTime !== null || sleepAtEpisodeEnd;
+}
+
+function currentSleepRemaining() {
+    const continuous = speechPlayers.isContinuousReady();
+    return sleepRemainingSeconds({
+        endTime: sleepTimerEndTime,
+        atEpisodeEnd: sleepAtEpisodeEnd,
+        now: Date.now(),
+        positionSeconds: continuous ? speechPlayers.getCurrentTime() : 0,
+        durationSeconds: continuous ? (speechPlayers.getDuration() || episodeAudioDuration) : 0,
+        playbackRate: speechRate
+    });
+}
+
+// Gentle fade over the final SLEEP_FADE_SECONDS before the timer stops
+// playback. The user's volume is captured on the way into the fade window
+// and restored once playback stops (or the timer is cancelled). Note: iOS
+// Safari ignores element volume, so the fade is a desktop/Android nicety.
+function applySleepFade() {
+    if (!sleepTimerActive()) return;
+    const audioEl = speechPlayers.audio;
+    if (!audioEl) return;
+    const remaining = currentSleepRemaining();
+    const factor = sleepFadeVolume(remaining);
+    if (factor >= 1) return;
+    if (sleepBaseVolume === null) sleepBaseVolume = audioEl.volume;
+    try { audioEl.volume = sleepBaseVolume * factor; } catch { /* ignore */ }
+}
+
+function restoreSleepVolume() {
+    if (sleepBaseVolume === null) return;
+    const audioEl = speechPlayers.audio;
+    if (audioEl) {
+        try { audioEl.volume = sleepBaseVolume; } catch { /* ignore */ }
+    }
+    sleepBaseVolume = null;
+}
+
+function checkSleepTimerExpiry() {
+    if (sleepTimerEndTime !== null && Date.now() >= sleepTimerEndTime) {
+        void finishSleepTimer();
+        return true;
+    }
+    return false;
+}
+
+// Timer fired: pause (keeping position) rather than stop, restore the faded
+// volume, and make sure the lockscreen reflects the paused state.
+async function finishSleepTimer() {
+    sleepTimerEndTime = null;
+    sleepAtEpisodeEnd = false;
+    if (speechPlayers.isContinuousReady()) {
+        speechPlayers.pause();
+    } else {
+        await stopPlayback();
+    }
+    restoreSleepVolume();
+    setStatus('Sleep timer ended');
+    updateSleepUI();
+    saveState();
+    syncMediaSession({ includePosition: true });
+}
+
+// End-of-episode mode resolved naturally (the episode finished). Clears the
+// timer and restores volume; returns true if a sleep stop was consumed.
+function consumeSleepEpisodeEndStop() {
+    if (!sleepAtEpisodeEnd) return false;
+    sleepAtEpisodeEnd = false;
+    restoreSleepVolume();
+    setStatus('Sleep timer ended');
+    updateSleepUI();
+    return true;
+}
+
+function setSleepMinutes(mins) {
+    restoreSleepVolume();
+    sleepAtEpisodeEnd = false;
+    sleepTimerEndTime = Date.now() + mins * 60 * 1000;
+    updateSleepUI();
+}
+
+function setSleepEpisodeEnd() {
+    restoreSleepVolume();
+    sleepTimerEndTime = null;
+    sleepAtEpisodeEnd = true;
+    updateSleepUI();
+}
+
+function cancelSleepTimer() {
+    sleepTimerEndTime = null;
+    sleepAtEpisodeEnd = false;
+    restoreSleepVolume();
+    updateSleepUI();
+}
+
+// Keeps the modal display, the status-row chip, and the header button badge
+// in sync — the "visible state" of the timer in the player UI.
+function updateSleepUI() {
+    const display = document.getElementById('timer-display');
+    const chip = document.getElementById('sleep-chip');
+    const chipText = document.getElementById('sleep-chip-text');
+    const headerBtn = document.getElementById('sleep-timer-btn');
+    const active = sleepTimerActive();
+    headerBtn?.classList.toggle('sleep-active', active);
+
+    if (!active) {
+        if (display) {
+            display.textContent = 'No timer set';
+            display.classList.remove('active');
+        }
+        if (chip) chip.hidden = true;
+        document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
+        return;
+    }
+
+    const remaining = currentSleepRemaining();
+    if (sleepAtEpisodeEnd) {
+        const suffix = Number.isFinite(remaining) ? ` (~${formatClock(remaining)} left)` : '';
+        if (display) display.textContent = `Stopping at end of episode${suffix}`;
+        if (chipText) chipText.textContent = Number.isFinite(remaining) ? formatClock(remaining) : 'End of ep.';
+    } else {
+        if (display) display.textContent = `Stopping in ${formatClock(remaining)}`;
+        if (chipText) chipText.textContent = formatClock(remaining);
+    }
+    if (display) display.classList.add('active');
+    if (chip) chip.hidden = false;
+}
+
 document.getElementById('sleep-timer-btn').addEventListener('click', () => {
+    document.getElementById('sleep-modal').classList.add('show');
+});
+
+document.getElementById('sleep-chip')?.addEventListener('click', () => {
     document.getElementById('sleep-modal').classList.add('show');
 });
 
@@ -1773,44 +1923,37 @@ document.querySelectorAll('.timer-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const mins = parseInt(btn.dataset.minutes);
-        sleepEndTime = Date.now() + mins * 60 * 1000;
-        updateSleepDisplay();
+        if (btn.dataset.episodeEnd) {
+            setSleepEpisodeEnd();
+        } else {
+            setSleepMinutes(parseInt(btn.dataset.minutes));
+        }
     });
 });
 
-document.getElementById('cancel-timer').addEventListener('click', () => {
-    sleepEndTime = null;
-    document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
-    updateSleepDisplay();
-});
+document.getElementById('cancel-timer').addEventListener('click', cancelSleepTimer);
 
-function updateSleepDisplay() {
-    const display = document.getElementById('timer-display');
-    if (sleepEndTime) {
-        const minsLeft = Math.max(0, Math.round((sleepEndTime - Date.now()) / 60000));
-        display.textContent = `Stopping in ${minsLeft} minutes`;
-        display.classList.add('active');
-    } else {
-        display.textContent = 'No timer set';
-        display.classList.remove('active');
-    }
-}
+// 1 Hz countdown refresh; also catches expiry while paused (timeupdate
+// events stop when the audio element is paused).
+setInterval(() => {
+    if (!sleepTimerActive()) return;
+    if (checkSleepTimerExpiry()) return;
+    updateSleepUI();
+}, 1000);
 
-// Update timer display every minute
-setInterval(updateSleepDisplay, 60000);
-
-// ===== EPISODE COMPLETE MODAL =====
-function showCompleteModal() {
+// ===== EPISODE COMPLETE MODAL & QUEUE AUTO-ADVANCE =====
+function showCompleteModal({ allowAutoAdvance = true } = {}) {
     document.getElementById('play-btn').textContent = '▶';
     setStatus('Episode complete! 🎉');
+    hideUpNextBanner();
 
-    const episodes = currentPodcast?.episodes || [];
-    const nextEp = episodes.find(e => e.id === currentEpisode.id + 1);
+    const next = getNextUp();
+    const playNextBtn = document.getElementById('play-next-episode');
+    playNextBtn.style.display = '';
 
-    if (autoPlayNext && nextEp) {
-        document.getElementById('complete-message').textContent = `Starting "${nextEp.title}" in 5 seconds...`;
-        document.getElementById('play-next-episode').textContent = 'Play Now';
+    if (autoPlayNext && allowAutoAdvance && next) {
+        document.getElementById('complete-message').textContent = `Starting "${next.episode.title}" in 5 seconds...`;
+        playNextBtn.textContent = 'Play Now';
         document.getElementById('complete-modal').classList.add('show');
 
         setTimeout(() => {
@@ -1818,26 +1961,61 @@ function showCompleteModal() {
                 playNextEpisode();
             }
         }, 5000);
-    } else if (nextEp) {
-        document.getElementById('complete-message').textContent = `Up next: "${nextEp.title}"`;
-        document.getElementById('play-next-episode').textContent = 'Play Next Episode';
+    } else if (next) {
+        document.getElementById('complete-message').textContent = `Up next: "${next.episode.title}"`;
+        playNextBtn.textContent = 'Play Next Episode';
         document.getElementById('complete-modal').classList.add('show');
     } else {
         document.getElementById('complete-message').textContent = 'You\'ve completed all episodes! 🏆';
-        document.getElementById('play-next-episode').style.display = 'none';
+        playNextBtn.style.display = 'none';
         document.getElementById('complete-modal').classList.add('show');
     }
 }
 
+// Advance to whatever is up next (queue first, then the sequential episode).
+// Queue entries are consumed as they play; crossing into another show swaps
+// the podcast context so per-show speed and accent color follow along.
 async function playNextEpisode() {
     document.getElementById('complete-modal').classList.remove('show');
-    const episodes = currentPodcast?.episodes || [];
-    const nextEp = episodes.find(e => e.id === currentEpisode.id + 1);
-    if (nextEp) {
-        await openEpisode(nextEp, { promptResume: false, preferredLine: 0 });
-        startPlayback();
+    const next = getNextUp();
+    if (!next) return;
+    if (next.queueIndex >= 0) removeFromQueue(next.queueIndex);
+    if (!currentPodcast || currentPodcast.id !== next.podcast.id) {
+        openPodcast(next.podcast);
     }
+    await openEpisode(next.episode, { promptResume: false, preferredLine: 0 });
+    startPlayback();
 }
+
+// "Up next" affordance: a small banner in the controls panel during the last
+// 30 seconds of an episode, showing what auto-advance will play.
+function hideUpNextBanner() {
+    const banner = document.getElementById('up-next-banner');
+    if (banner) banner.hidden = true;
+}
+
+function updateUpNextBanner() {
+    const banner = document.getElementById('up-next-banner');
+    if (!banner) return;
+    let next = null;
+    if (autoPlayNext && !sleepAtEpisodeEnd && isPlaying && !isPaused && speechPlayers.isContinuousReady()) {
+        const dur = speechPlayers.getDuration() || episodeAudioDuration;
+        const pos = speechPlayers.getCurrentTime();
+        if (dur > 0 && dur - pos > 0 && dur - pos <= 30) {
+            next = getNextUp();
+        }
+    }
+    if (!next) {
+        banner.hidden = true;
+        return;
+    }
+    document.getElementById('up-next-title').textContent = next.episode.title;
+    banner.hidden = false;
+}
+
+document.getElementById('up-next-play')?.addEventListener('click', () => {
+    void playNextEpisode();
+});
 
 async function playPreviousEpisode() {
     const episodes = currentPodcast?.episodes || [];
@@ -2847,6 +3025,64 @@ function syncMediaSession({ includeMetadata = false, includePosition = false } =
         updateMediaSessionPositionState();
     }
 }
+
+// ===== KEYBOARD SHORTCUTS (desktop) =====
+// Space play/pause, ←/→ seek, ↑/↓ speed, ? shows the shortcut overlay.
+// Never fires while typing in a field or when focus is on an interactive
+// control (buttons keep their native Space/Enter activation; the scrubber
+// slider handles its own arrow keys).
+const SHORTCUT_IGNORE_SELECTOR =
+    'input, textarea, select, button, a, [contenteditable="true"], [role="slider"], [role="button"]';
+
+function toggleShortcutsModal() {
+    const modal = document.getElementById('shortcuts-modal');
+    if (!modal) return;
+    modal.classList.toggle('show');
+}
+
+document.getElementById('close-shortcuts-modal')?.addEventListener('click', () => {
+    document.getElementById('shortcuts-modal')?.classList.remove('show');
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    const target = event.target;
+    if (target instanceof Element && target.closest(SHORTCUT_IGNORE_SELECTOR)) return;
+
+    if (event.key === '?') {
+        event.preventDefault();
+        toggleShortcutsModal();
+        return;
+    }
+
+    // Playback shortcuts stay quiet while any modal is open (the modal focus
+    // trap owns the keyboard) or before an episode is loaded.
+    if (document.querySelector('.modal-overlay.show')) return;
+    if (!currentEpisode) return;
+
+    switch (event.key) {
+        case ' ':
+            event.preventDefault();
+            void togglePlayPause();
+            break;
+        case 'ArrowLeft':
+            event.preventDefault();
+            seekBySeconds(-skipBackwardInterval);
+            break;
+        case 'ArrowRight':
+            event.preventDefault();
+            seekBySeconds(skipForwardInterval);
+            break;
+        case 'ArrowUp':
+            event.preventDefault();
+            applySpeechRate(Math.round((speechRate + 0.1) * 10) / 10);
+            break;
+        case 'ArrowDown':
+            event.preventDefault();
+            applySpeechRate(Math.round((speechRate - 0.1) * 10) / 10);
+            break;
+    }
+});
 
 window.addEventListener('keydown', (event) => {
     const key = event.code || event.key;

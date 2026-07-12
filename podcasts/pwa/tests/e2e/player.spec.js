@@ -114,3 +114,41 @@ test('AI Native PM shows stable chapter markers and playback advances', async ({
   await page.locator('#play-btn').click();
   await expect.poll(async () => page.locator('#current-pos').textContent()).not.toBe(initialPosition);
 });
+
+test('keyboard shortcuts overlay opens with ? but not while typing', async ({ page }) => {
+  await openEpisode(page);
+  // Move focus off the episode card (role=button targets are ignored by shortcuts).
+  await page.evaluate(() => document.activeElement?.blur?.());
+
+  await page.keyboard.press('?');
+  await expect(page.locator('#shortcuts-modal')).toHaveClass(/show/);
+  await expect(page.locator('#shortcuts-modal')).toContainText('Play / Pause');
+  await page.locator('#close-shortcuts-modal').click();
+  await expect(page.locator('#shortcuts-modal')).not.toHaveClass(/show/);
+
+  // Typing "?" inside an input must not open the overlay.
+  await page.locator('#transcript-search-input').click();
+  await page.keyboard.press('?');
+  await expect(page.locator('#shortcuts-modal')).not.toHaveClass(/show/);
+  await expect(page.locator('#transcript-search-input')).toHaveValue('?');
+});
+
+test('sleep timer surfaces a visible countdown and can be cancelled', async ({ page }) => {
+  await openEpisode(page);
+
+  await page.locator('#sleep-timer-btn').click();
+  await page.locator('.timer-btn[data-minutes="5"]').click();
+  await expect(page.locator('#timer-display')).toContainText('Stopping in');
+  await page.locator('#close-sleep-modal').click();
+
+  await expect(page.locator('#sleep-chip')).toBeVisible();
+  await expect(page.locator('#sleep-timer-btn')).toHaveClass(/sleep-active/);
+
+  // The chip re-opens the sleep modal; cancelling clears all sleep UI state.
+  await page.locator('#sleep-chip').click();
+  await page.locator('#cancel-timer').click();
+  await expect(page.locator('#timer-display')).toContainText('No timer set');
+  await page.locator('#close-sleep-modal').click();
+  await expect(page.locator('#sleep-chip')).toBeHidden();
+  await expect(page.locator('#sleep-timer-btn')).not.toHaveClass(/sleep-active/);
+});

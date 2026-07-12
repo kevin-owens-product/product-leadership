@@ -1,4 +1,4 @@
-// Auto-generated podcast data - 2026-07-12T15:04:15.944Z
+// Auto-generated podcast data - 2026-07-12T15:18:36.881Z
 window.PODCASTS = [
   {
     "id": "agentic-coding-frontier",

@@ -4,6 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "node build-episodes.js",
+    "new-episode": "node cli/new-episode.js",
+    "validate": "node cli/validate.js",
+    "publish-episode": "node cli/publish-episode.js",
     "audio:list": "SUPERTONIC_DIR=${SUPERTONIC_DIR:-$HOME/code/supertonic} node ../tools/generate-audio-supertonic.js --list",
     "audio:episode": "SUPERTONIC_DIR=${SUPERTONIC_DIR:-$HOME/code/supertonic} node ../tools/generate-audio-supertonic.js",
     "audio:show": "SUPERTONIC_DIR=${SUPERTONIC_DIR:-$HOME/code/supertonic} node ../tools/generate-audio-supertonic.js --all",

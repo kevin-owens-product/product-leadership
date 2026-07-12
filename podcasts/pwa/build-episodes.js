@@ -5,6 +5,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
+import { runValidation } from './cli/validate.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -49,6 +51,16 @@ function removeDirRecursive(dir) {
         });
     }
 }
+
+// Validate all show Markdown + audio manifests before touching dist/ — a
+// broken episode should fail the build loudly, not ship silently truncated.
+console.log('Validating shows...\n');
+const validation = runValidation({ showsDir, audioRoot: path.join(__dirname, 'audio') });
+if (validation.errors > 0) {
+    console.error(`\n✗ Validation failed: ${validation.errors} error(s), ${validation.warnings} warning(s). Fix the issues above (or run: npm run validate).`);
+    process.exit(1);
+}
+console.log(`✓ Validation passed${validation.warnings ? ` (${validation.warnings} warning(s))` : ''}.\n`);
 
 removeDirRecursive(path.join(distDir, 'audio'));
 

@@ -796,6 +796,39 @@
             text-align: center;
         }
 
+        /* Ambient now-playing visualizer: AnalyserNode-driven bars, animated
+           with transform/opacity only. Hidden entirely under reduced motion
+           (the JS never creates the AudioContext there either). */
+        .now-playing-viz {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 26px;
+            margin-bottom: 14px;
+            opacity: 0.45;
+            transition: opacity 0.2s;
+        }
+
+        .now-playing-viz.live {
+            opacity: 1;
+        }
+
+        .viz-bar {
+            flex: 1;
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(180deg, var(--accent-hover), var(--accent));
+            transform: scaleY(0.12);
+            transform-origin: center;
+            will-change: transform, opacity;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .now-playing-viz {
+                display: none;
+            }
+        }
+
         .control-buttons {
             display: flex;
             justify-content: center;
@@ -1544,11 +1577,50 @@
 
         /* Transcript */
         .transcript-panel {
+            position: relative;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 200px;
             max-height: 35vh;
+        }
+
+        /* "Resync" pill: appears when the user scrolls the transcript away
+           from the current line during playback; tap to re-follow. */
+        .transcript-resync {
+            position: absolute;
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+            padding: 7px 16px;
+            border: none;
+            border-radius: 999px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            z-index: 5;
+        }
+
+        .transcript-resync:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        .panel.collapsed .transcript-resync {
+            display: none;
+        }
+
+        @keyframes resync-pill-in {
+            from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .transcript-resync {
+                animation: resync-pill-in 0.18s ease-out;
+            }
         }
 
         .transcript-panel .panel-header {
@@ -2431,6 +2503,8 @@
                 <button type="button" class="sleep-chip" id="sleep-chip" title="Sleep timer" aria-label="Sleep timer countdown" hidden>💤 <span id="sleep-chip-text"></span></button>
             </div>
 
+            <div class="now-playing-viz" id="now-playing-viz" aria-hidden="true"></div>
+
             <div class="up-next-banner" id="up-next-banner" hidden>
                 <span class="up-next-label">Up next</span>
                 <span class="up-next-title" id="up-next-title"></span>
@@ -2511,6 +2585,7 @@
             <div class="transcript-content" id="transcript-content">
                 <p class="loading-text">Loading transcript...</p>
             </div>
+            <button type="button" class="transcript-resync" id="transcript-resync" hidden>↓ Resync</button>
         </div>
     </div>
 
@@ -2692,6 +2767,6 @@
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T154010Z"></script>
+    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T160538Z"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-import { escapeHtml, safeColor } from '../security/sanitize.js?v=2.3.0%2B20260712T154010Z';
+import { escapeHtml, safeColor } from '../security/sanitize.js?v=2.3.0%2B20260712T160538Z';
 
 function formatClockFromMinutes(totalMinutes) {
   const safeMinutes = Number.isFinite(totalMinutes) ? Math.max(0, totalMinutes) : 0;

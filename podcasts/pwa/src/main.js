@@ -27,7 +27,9 @@ import {
 import { createScrubber, bufferedEndFraction } from './ui/scrubber.js';
 import { createRepeatSkipper } from './ui/long-press.js';
 import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js';
-import { transitionViews, spawnRipple, showSkipFlyout } from './ui/motion.js';
+import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js';
+import { createNowPlayingVisualizer } from './playback/visualizer.js';
+import { createTranscriptFollow } from './ui/transcript-follow.js';
 import { sleepFadeVolume, sleepRemainingSeconds } from './playback/sleep-timer.js';
 import { findNextUp } from './state/queue-next.js';
 
@@ -1274,9 +1276,32 @@ document.getElementById('home-from-player').addEventListener('click', () => {
 });
 
 // ===== TRANSCRIPT =====
+// Follow mode: the transcript tracks the current line until the user scrolls
+// away, which surfaces the "resync" pill; tapping the pill (or any line) puts
+// the transcript back in follow mode.
+const transcriptFollow = createTranscriptFollow({
+    container: document.getElementById('transcript-content'),
+    pill: document.getElementById('transcript-resync'),
+    onResync: () => scrollCurrentLineIntoView(true)
+});
+transcriptFollow.bind();
+
+function scrollCurrentLineIntoView(force = false) {
+    if (!force && !transcriptFollow.isFollowing()) return;
+    const currentEl = document.querySelector('.transcript-line.current');
+    if (!currentEl) return;
+    transcriptFollow.notifyAutoScroll();
+    currentEl.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'center'
+    });
+}
+
 function renderTranscript() {
     const content = document.getElementById('transcript-content');
     content.innerHTML = '';
+    // New episode content: return to follow mode with a fresh scroll baseline.
+    transcriptFollow.resync();
 
     dialogueLines.forEach((line, index) => {
         const div = document.createElement('div');
@@ -1334,11 +1359,8 @@ function updateProgress() {
         el.classList.toggle('current', i === currentLineIndex);
     });
 
-    // Scroll into view
-    const currentEl = document.querySelector('.transcript-line.current');
-    if (currentEl) {
-        currentEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    // Scroll into view (only while the transcript is in follow mode).
+    scrollCurrentLineIntoView();
 
     // Periodic save
     if (currentLineIndex % 10 === 0) {
@@ -1397,7 +1419,10 @@ function highlightSearchResult(idx) {
     const el = document.querySelector(`.transcript-line[data-index="${lineIdx}"]`);
     if (el) {
         el.classList.add('search-current');
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Browsing search results leaves follow mode (the pill offers the way
+        // back) so playback auto-scroll doesn't yank the view away.
+        transcriptFollow.suspend();
+        el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' });
     }
 }
 
@@ -1419,6 +1444,27 @@ function speak(text, speaker, options) {
 
 const speechPlayers = createSpeechPlayers({
     getSpeechRate: () => speechRate
+});
+
+// Ambient audio-reactive bars on the player screen. The AudioContext is only
+// ever created inside a user gesture (play button / Space key) — required on
+// iOS Safari, where a context created elsewhere would stay suspended and
+// silence the <audio> element it routes.
+const nowPlayingViz = createNowPlayingVisualizer({
+    audio: speechPlayers.audio,
+    container: document.getElementById('now-playing-viz'),
+    prefersReducedMotion: () => prefersReducedMotion()
+});
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        // Background/lockscreen: stop the rAF loop (audio keeps playing).
+        nowPlayingViz.stop();
+    } else {
+        // Foreground again: recover from any iOS 'interrupted' context state.
+        nowPlayingViz.resumeIfNeeded();
+        if (isPlaying && !isPaused) nowPlayingViz.start();
+    }
 });
 
 // === Player <-> UI bridge (continuous combined.mp3 mode) ===
@@ -1462,10 +1508,13 @@ speechPlayers.on('play', () => {
     setPlayButtonState(true);
     updateMiniPlayer();
     updateMediaSessionPlaybackState();
+    nowPlayingViz.resumeIfNeeded();
+    if (!document.hidden) nowPlayingViz.start();
     void requestWakeLock();
 });
 
 speechPlayers.on('pause', () => {
+    nowPlayingViz.stop();
     if (!isPlaying) return;
     isPaused = true;
     setPlayButtonState(false);
@@ -1476,6 +1525,7 @@ speechPlayers.on('pause', () => {
 });
 
 speechPlayers.on('ended', () => {
+    nowPlayingViz.stop();
     isPlaying = false;
     isPaused = false;
     currentLineIndex = Math.max(0, dialogueLines.length - 1);
@@ -1572,6 +1622,7 @@ async function startPlayback() {
 
 async function stopPlayback() {
     playbackSessions.invalidate();
+    nowPlayingViz.stop();
     isPlaying = false;
     isPaused = false;
     speechPlayers.stop();
@@ -1624,6 +1675,9 @@ async function jumpToLine(index, autoStart = false) {
         currentLineIndex = target;
         speechPlayers.seekToLine(target);
         updateProgress();
+        // Seeking to a line is an explicit "take me there" — re-enter follow
+        // mode so the transcript tracks playback from the new position.
+        transcriptFollow.resync();
         updateMiniPlayer();
         syncMediaSession({ includeMetadata: false, includePosition: true });
         if (autoStart || wasPlaying) {
@@ -1641,6 +1695,7 @@ async function jumpToLine(index, autoStart = false) {
     await releaseWakeLock();
     currentLineIndex = target;
     updateProgress();
+    transcriptFollow.resync();
     saveState();
     setPlayButtonState(false);
     setStatus('Ready');
@@ -1669,7 +1724,11 @@ function seekBySeconds(delta) {
 
 // Controls — all four skip buttons honor user-configurable intervals from the
 // settings panel; holding a skip button repeats the skip until released.
-document.getElementById('play-btn').addEventListener('click', togglePlayPause);
+document.getElementById('play-btn').addEventListener('click', () => {
+    // User gesture: safe point to create/resume the visualizer AudioContext.
+    nowPlayingViz.ensureContext();
+    void togglePlayPause();
+});
 
 function bindSkipButton(id, getDelta) {
     const btn = document.getElementById(id);
@@ -2585,6 +2644,7 @@ document.getElementById('mini-player').addEventListener('keydown', (e) => {
 
 document.getElementById('mini-play-btn').addEventListener('click', (e) => {
     e.stopPropagation();
+    nowPlayingViz.ensureContext();
     void togglePlayPause();
 });
 
@@ -3157,6 +3217,7 @@ document.addEventListener('keydown', (event) => {
     switch (event.key) {
         case ' ':
             event.preventDefault();
+            nowPlayingViz.ensureContext();
             void togglePlayPause();
             break;
         case 'ArrowLeft':

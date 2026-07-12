@@ -186,3 +186,40 @@ test('sleep timer surfaces a visible countdown and can be cancelled', async ({ p
   await expect(page.locator('#sleep-chip')).toBeHidden();
   await expect(page.locator('#sleep-timer-btn')).not.toHaveClass(/sleep-active/);
 });
+
+test('transcript resync pill appears on user scroll and re-follows on tap', async ({ page }) => {
+  await openEpisode(page);
+
+  const pill = page.locator('#transcript-resync');
+  await expect(pill).toBeHidden();
+
+  // A deliberate wheel scroll over the transcript leaves follow mode.
+  const transcript = page.locator('#transcript-content');
+  await transcript.hover();
+  await page.mouse.wheel(0, 300);
+  await expect(pill).toBeVisible();
+
+  // Tapping the pill re-engages follow mode and hides itself.
+  await pill.click();
+  await expect(pill).toBeHidden();
+
+  // Tapping a transcript line (seek) also re-engages follow mode.
+  await page.mouse.wheel(0, 300);
+  await expect(pill).toBeVisible();
+  await page.locator('.transcript-line').nth(3).click();
+  await expect(pill).toBeHidden();
+});
+
+test('now-playing visualizer strip is present and marked decorative', async ({ page }) => {
+  await openEpisode(page);
+
+  const viz = page.locator('#now-playing-viz');
+  await expect(viz).toBeVisible();
+  await expect(viz).toHaveAttribute('aria-hidden', 'true');
+});
+
+test('now-playing visualizer is hidden under prefers-reduced-motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openEpisode(page);
+  await expect(page.locator('#now-playing-viz')).toBeHidden();
+});

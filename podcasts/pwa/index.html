@@ -314,7 +314,7 @@
                 <button class="timer-btn timer-btn-episode" data-episode-end="true">End of episode</button>
             </div>
             <div class="timer-display" id="timer-display">No timer set</div>
-            <div class="btns" style="margin-top: 16px;">
+            <div class="btns" style="margin-top: var(--space-4);">
                 <button class="secondary-btn" id="cancel-timer">Cancel Timer</button>
                 <button class="primary-btn" id="close-sleep-modal">Done</button>
             </div>
@@ -331,7 +331,7 @@
                 <div class="shortcut-row"><span>Speed down / up</span><span class="shortcut-keys"><kbd>↓</kbd><kbd>↑</kbd></span></div>
                 <div class="shortcut-row"><span>Show this overlay</span><span class="shortcut-keys"><kbd>?</kbd></span></div>
             </div>
-            <div class="btns" style="margin-top: 16px;">
+            <div class="btns" style="margin-top: var(--space-4);">
                 <button class="primary-btn" id="close-shortcuts-modal">Done</button>
             </div>
         </div>
@@ -381,16 +381,16 @@
     <div class="modal-overlay create-modal" id="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-modal-title">
         <div class="modal">
             <h3 id="create-modal-title">Create Your Own Podcast</h3>
-            <p style="margin-bottom: 16px;">To add your own podcasts, follow these steps:</p>
-            <div style="text-align: left; background: var(--bg-tertiary); padding: 16px; border-radius: 10px; font-size: 0.85rem; line-height: 1.8;">
+            <p style="margin-bottom: var(--space-4);">To add your own podcasts, follow these steps:</p>
+            <div style="text-align: left; background: var(--surface-2); padding: var(--space-4); border-radius: var(--radius-md); font-size: var(--fs-small); line-height: 1.8;">
                 <p><strong>1.</strong> Create a new folder in <code>shows/</code></p>
                 <p><strong>2.</strong> Add a <code>podcast.json</code> file with your podcast info</p>
                 <p><strong>3.</strong> Add episode <code>.md</code> files with dialogue</p>
                 <p><strong>4.</strong> Run <code>node build-episodes.js</code></p>
                 <p><strong>5.</strong> Push to GitHub to deploy</p>
             </div>
-            <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-secondary);">See the template in <code>shows/_template/</code></p>
-            <div class="btns" style="margin-top: 16px;">
+            <p style="margin-top: var(--space-4); font-size: var(--fs-small); color: var(--text-secondary);">See the template in <code>shows/_template/</code></p>
+            <div class="btns" style="margin-top: var(--space-4);">
                 <button class="primary-btn" id="close-create-modal">Got it</button>
             </div>
         </div>
@@ -400,7 +400,7 @@
     <div class="modal-overlay" id="share-modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
         <div class="modal">
             <h3 id="share-modal-title">Share & Export</h3>
-            <p style="margin-bottom: 16px; font-size: 0.9rem;">Share this episode or export your data</p>
+            <p style="margin-bottom: var(--space-4); font-size: var(--fs-body-sm);">Share this episode or export your data</p>
             <div class="share-buttons">
                 <button class="share-btn" id="share-timestamp-btn">
                     📍 Share Current Position
@@ -415,7 +415,7 @@
                     💾 Export Progress
                 </button>
             </div>
-            <div class="btns" style="margin-top: 16px;">
+            <div class="btns" style="margin-top: var(--space-4);">
                 <button class="primary-btn" id="close-share-modal">Done</button>
             </div>
         </div>
@@ -443,11 +443,11 @@
                     <div class="stat-label">Avg Speed</div>
                 </div>
             </div>
-            <div style="margin-top: 20px; padding: 16px; background: var(--bg-tertiary); border-radius: 10px;">
-                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">Time Saved (at current speed)</div>
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-text);" id="stat-time-saved">0h 0m</div>
+            <div style="margin-top: var(--space-5); padding: var(--space-4); background: var(--surface-2); border-radius: var(--radius-md);">
+                <div style="font-size: var(--fs-small); color: var(--text-secondary); margin-bottom: var(--space-2);">Time Saved (at current speed)</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-text); font-variant-numeric: tabular-nums;" id="stat-time-saved">0h 0m</div>
             </div>
-            <div class="btns" style="margin-top: 16px;">
+            <div class="btns" style="margin-top: var(--space-4);">
                 <button class="primary-btn" id="close-stats-modal">Done</button>
             </div>
         </div>

@@ -1,7 +1,7 @@
 // Per-podcast lockscreen/mini-player artwork, generated on a canvas and
 // cached as data URLs per podcast id.
 
-import { shadeHex } from './format.js?v=2.3.0%2B20260712T184326Z';
+import { shadeHex } from './format.js?v=2.3.0%2B20260712T193103Z';
 
 // Default accent — keep in sync with --accent in styles/base.css.
 export const DEFAULT_ACCENT = '#5a5df0';

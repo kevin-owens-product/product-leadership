@@ -1,21 +1,128 @@
+/* ============================================================
+   Design tokens — the single source of truth for color, type,
+   space, radius, elevation, and motion. Values encode the app's
+   current look; DESIGN.md (once written) governs any change.
+   Rules:
+   - No raw hex/rgb values outside this block (and the light-theme
+     override block in components.css).
+   - Animate only transform/opacity, consuming the dur/ease tokens.
+   - JS overrides --accent and --accent-text per show (main.js);
+     everything accent-derived must reference those two names.
+   ============================================================ */
 :root {
-    --bg-primary: #0f0f0f;
-    --bg-secondary: #1a1a1a;
-    --bg-tertiary: #252525;
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
-    /* #5a5df0 (was #6366f1) so white button text clears 4.5:1. */
-    --accent: #5a5df0;
-    --accent-hover: #818cf8;
-    /* Accent used as small TEXT on dark surfaces needs a lighter
-       shade than the button-background accent (contrast ≥ 4.5:1).
-       main.js recomputes this per podcast alongside --accent. */
-    --accent-text: #9a9cf8;
-    --alex-color: #3b82f6;
-    --sam-color: #10b981;
-    --success: #22c55e;
-    --warning: #f59e0b;
-    --border: #333;
+    /* ---- Neutral ramp: near-black → near-white, warmed toward
+       the brand hue (276) with a whisper of chroma so dark
+       surfaces don't read as dead gray. ---- */
+    --neutral-0: oklch(0.13 0.006 276);   /* deepest recess */
+    --neutral-1: oklch(0.168 0.006 276);  /* page background */
+    --neutral-2: oklch(0.218 0.007 276);  /* card surface */
+    --neutral-3: oklch(0.264 0.008 276);  /* nested surface */
+    --neutral-4: oklch(0.321 0.010 276);  /* borders/dividers */
+    --neutral-5: oklch(0.44 0.012 276);
+    --neutral-6: oklch(0.57 0.012 276);   /* tertiary text */
+    --neutral-7: oklch(0.706 0.010 276);  /* secondary text */
+    --neutral-8: oklch(0.86 0.006 276);
+    --neutral-9: oklch(0.985 0.003 276);  /* primary text */
+
+    /* ---- Accent ramp (brand indigo). 500 is the reference step;
+       200 passes 4.5:1 as small text on surface-0..2. ---- */
+    --accent-200: oklch(0.729 0.132 277);
+    --accent-300: oklch(0.680 0.158 277);
+    --accent-400: oklch(0.62 0.19 276);
+    --accent-500: oklch(0.563 0.216 276);
+    --accent-600: oklch(0.48 0.19 276);
+
+    /* ---- Semantic surfaces (recessed → base → raised → floating) ---- */
+    --surface-0: var(--neutral-1);
+    --surface-1: var(--neutral-2);
+    --surface-2: var(--neutral-3);
+    --surface-3: oklch(0.30 0.009 276);   /* floating (popover/toast tier) */
+    --border: var(--neutral-4);
+
+    /* ---- Semantic text ---- */
+    --text-primary: var(--neutral-9);
+    --text-secondary: var(--neutral-7);
+    --text-tertiary: var(--neutral-6);
+
+    /* ---- Accent aliases. main.js overrides --accent/--accent-text
+       inline per podcast; keep all accent usage on these names. ---- */
+    --accent: var(--accent-500);
+    --accent-hover: var(--accent-300);
+    --accent-text: var(--accent-200);
+    --accent-subtle: color-mix(in oklab, var(--accent) 14%, transparent);
+    --on-accent: oklch(1 0 0);
+
+    /* ---- Status colors ---- */
+    --success: oklch(0.723 0.192 149.6);
+    --success-deep: oklch(0.527 0.137 150.1); /* white text passes on this */
+    --warning: oklch(0.769 0.165 70.1);
+    --warning-subtle: color-mix(in oklab, var(--warning) 10%, transparent);
+    --on-warning: oklch(0 0 0);
+    --danger: oklch(0.637 0.208 25.3);
+    --danger-subtle: color-mix(in oklab, var(--danger) 12%, transparent);
+    --danger-text: oklch(0.885 0.059 18.3);
+
+    /* ---- Speaker identity ---- */
+    --alex-color: oklch(0.623 0.188 259.8);
+    --sam-color: oklch(0.696 0.149 162.5);
+
+    /* ---- Translucent tints (theme-relative: light ink on dark
+       theme, dark ink on light theme — light theme overrides). ---- */
+    --tint-1: oklch(1 0 0 / 0.12);  /* buffered ranges, subtle fills */
+    --tint-2: oklch(1 0 0 / 0.35);  /* press ripples */
+    --tint-3: oklch(1 0 0 / 0.55);  /* chapter ticks on tracks */
+    --scrim: oklch(0 0 0 / 0.7);
+
+    /* ---- Type scale: 1.2 modular spine (11/13/16/19/23/28/33px)
+       plus two documented half-steps for dense UI rows. Timers and
+       counters must set font-variant-numeric: tabular-nums. ---- */
+    --fs-caption: 0.6875rem;   /* 11px — badges, micro-labels */
+    --fs-label: 0.75rem;       /* 12px — half-step: chips, meta */
+    --fs-small: 0.8125rem;     /* 13px — secondary UI text */
+    --fs-body-sm: 0.875rem;    /* 14px — half-step: dense body */
+    --fs-body: 1rem;           /* 16px */
+    --fs-title: 1.1875rem;     /* 19px — card/episode titles */
+    --fs-heading: 1.4375rem;   /* 23px — section headings */
+    --fs-display-sm: 1.75rem;  /* 28px */
+    --fs-display: 2.0625rem;   /* 33px — hero/display */
+    --tracking-caps: 0.06em;   /* uppercase label letter-spacing */
+
+    /* ---- Space scale (4px base; name = multiplier) ---- */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+
+    /* ---- Radii ---- */
+    --radius-xs: 4px;    /* hairline elements: bars, highlights */
+    --radius-sm: 8px;    /* buttons, inputs, chips */
+    --radius-md: 12px;   /* controls, small cards */
+    --radius-lg: 16px;   /* cards, panels, modals */
+    --radius-full: 999px;
+
+    /* ---- Elevation: layered shadow + top-edge light. Dark UIs
+       need edge light, not just shadow — pair --shadow-N with
+       --edge-highlight on raised/floating surfaces. ---- */
+    --edge-highlight: inset 0 1px 0 oklch(1 0 0 / 0.04);
+    --shadow-1: 0 1px 2px oklch(0 0 0 / 0.35), 0 1px 4px oklch(0 0 0 / 0.3);
+    --shadow-2: 0 2px 6px oklch(0 0 0 / 0.3), 0 6px 24px oklch(0 0 0 / 0.4);
+    --shadow-3: 0 4px 10px oklch(0 0 0 / 0.3), 0 12px 32px oklch(0 0 0 / 0.45);
+    --shadow-text: 0 1px 2px oklch(0 0 0 / 0.4);
+
+    /* ---- Motion ---- */
+    --dur-1: 120ms;   /* micro feedback: presses, toggles */
+    --dur-2: 200ms;   /* standard: fades, panel state */
+    --dur-3: 320ms;   /* large: sheets, screen-scale moves */
+    --ease-out: cubic-bezier(0.2, 0, 0, 1);
+    --ease-spring: cubic-bezier(0.34, 1.3, 0.5, 1);
+    --stagger: 35ms;  /* list-entrance step */
+
+    /* ---- Layout ---- */
     --safe-top: env(safe-area-inset-top);
     --safe-bottom: env(safe-area-inset-bottom);
 }
@@ -29,7 +136,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg-primary);
+    background: var(--surface-0);
     color: var(--text-primary);
     min-height: 100vh;
     min-height: 100dvh;
@@ -38,6 +145,31 @@ body {
     padding-top: var(--safe-top);
     padding-bottom: var(--safe-bottom);
     touch-action: pan-y;
+}
+
+/* Timers and counters render in tabular figures so digits don't
+   jitter as they tick. */
+.progress-labels,
+.timer-display,
+.sleep-chip,
+.chapter-time,
+.stat-value,
+.speed-value,
+.scrub-bubble,
+.ep-meta,
+.podcast-meta,
+.badge.progress {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Titles wrap in balanced lines instead of leaving orphans. */
+.app-header h1,
+.podcast-title,
+.ep-title,
+.player-title h2,
+.modal h2,
+.modal h3 {
+    text-wrap: balance;
 }
 
 /* Views */
@@ -56,12 +188,12 @@ body {
    when unsupported; reduced motion skips the transition entirely). */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-    animation-duration: 0.18s;
+    animation-duration: var(--dur-2);
 }
 
 ::view-transition-old(mini-player),
 ::view-transition-new(mini-player) {
-    animation-duration: 0.18s;
+    animation-duration: var(--dur-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -76,7 +208,7 @@ body {
 /* Spring-feel rise when expanding the mini player back to the full
    player screen. */
 .player-view.spring-in {
-    animation: playerSpringIn 0.2s cubic-bezier(0.3, 1.35, 0.6, 1);
+    animation: playerSpringIn var(--dur-2) var(--ease-spring);
 }
 
 @keyframes playerSpringIn {
@@ -92,19 +224,19 @@ body {
 
 /* Episode List View */
 .episode-list-view {
-    padding: 20px;
+    padding: var(--space-5);
     padding-bottom: 100px;
 }
 
 .app-header {
     text-align: center;
-    padding: 30px 20px;
-    margin-bottom: 10px;
+    padding: var(--space-8) var(--space-5);
+    margin-bottom: var(--space-3);
 }
 
 .app-header h1 {
     font-size: 1.8rem;
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
     background: linear-gradient(135deg, var(--accent), var(--accent-hover));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -119,31 +251,31 @@ body {
 .badges {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 12px;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
     flex-wrap: wrap;
 }
 
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-label);
 }
 
 .badge.offline {
     background: var(--accent);
-    color: white;
+    color: var(--on-accent);
 }
 
 .badge.refresh-btn {
-    background: var(--bg-tertiary);
+    background: var(--surface-2);
     color: var(--text-primary);
     border: 1px solid var(--border);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background var(--dur-2);
 }
 
 .badge.refresh-btn:hover, .badge.refresh-btn:active {
@@ -178,60 +310,60 @@ select:focus-visible,
 
 .update-banner {
     /* Deeper green than --success: white text on #22c55e was ~2.3:1. */
-    background: #15803d;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 8px;
-    margin-top: 12px;
+    background: var(--success-deep);
+    color: var(--on-accent);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    margin-top: var(--space-3);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: var(--space-3);
     font-size: 0.9rem;
 }
 
 .update-banner button {
-    background: white;
-    color: #15803d;
+    background: var(--on-accent);
+    color: var(--success-deep);
     border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
     font-weight: 600;
     cursor: pointer;
 }
 
 .badge.progress {
-    background: var(--bg-tertiary);
+    background: var(--surface-2);
     color: var(--text-secondary);
 }
 
 .badge.version {
-    background: var(--bg-tertiary);
+    background: var(--surface-2);
     color: var(--text-secondary);
     font-family: monospace;
     font-size: 0.7rem;
 }
 
 .podcast-count {
-    margin-top: 8px;
+    margin-top: var(--space-2);
     font-size: 0.85rem;
     color: var(--text-secondary);
 }
 
 /* Search Bar */
 .search-container {
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
 }
 
 .search-input {
     width: 100%;
-    padding: 14px 16px;
-    background: var(--bg-secondary);
+    padding: var(--space-4) var(--space-4);
+    background: var(--surface-1);
     border: 2px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     color: var(--text-primary);
-    font-size: 1rem;
-    transition: border-color 0.2s;
+    font-size: var(--fs-body);
+    transition: border-color var(--dur-2);
 }
 
 .search-input:focus {
@@ -245,19 +377,19 @@ select:focus-visible,
 
 /* Episode Cards */
 .episode-card {
-    background: var(--bg-secondary);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 12px;
+    background: var(--surface-1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    margin-bottom: var(--space-3);
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
+    transition: transform var(--dur-2), background var(--dur-2);
     border: 2px solid transparent;
     position: relative;
     overflow: hidden;
 }
 
 .episode-card:hover, .episode-card:active {
-    background: var(--bg-tertiary);
+    background: var(--surface-2);
     transform: scale(0.98);
 }
 
@@ -275,15 +407,15 @@ select:focus-visible,
     left: 0;
     height: 3px;
     background: var(--accent);
-    transition: width 0.3s;
+    transition: width var(--dur-3);
 }
 
 .episode-card .ep-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
 }
 
 .ep-download-btn {
@@ -291,10 +423,10 @@ select:focus-visible,
     background: transparent;
     border: 1px solid var(--border);
     color: var(--text-secondary);
-    border-radius: 14px;
+    border-radius: var(--radius-lg);
     min-width: 32px;
     height: 26px;
-    padding: 0 8px;
+    padding: 0 var(--space-2);
     font-size: 0.95rem;
     line-height: 1;
     cursor: pointer;
@@ -307,12 +439,12 @@ select:focus-visible,
     border-color: var(--accent);
 }
 .ep-download-btn.downloaded {
-    color: var(--success, #22c55e);
-    border-color: var(--success, #22c55e);
+    color: var(--success);
+    border-color: var(--success);
 }
 .ep-download-btn.downloading {
-    color: var(--warning, #f59e0b);
-    border-color: var(--warning, #f59e0b);
+    color: var(--warning);
+    border-color: var(--warning);
     cursor: wait;
 }
 
@@ -323,12 +455,12 @@ select:focus-visible,
 .resume-banner {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    margin: 0 16px 12px;
-    background: var(--bg-tertiary);
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-3);
+    margin: 0 var(--space-4) var(--space-3);
+    background: var(--surface-2);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     color: var(--text-primary);
     font-size: 0.9rem;
 }
@@ -340,20 +472,20 @@ select:focus-visible,
 }
 .resume-banner-actions {
     display: inline-flex;
-    gap: 6px;
+    gap: var(--space-2);
 }
 .resume-banner-btn {
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text-primary);
-    border-radius: 999px;
-    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    padding: var(--space-2) var(--space-3);
     font-size: 0.85rem;
     cursor: pointer;
 }
 .resume-banner-btn.primary {
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
     border-color: var(--accent);
 }
 .resume-banner-close {
@@ -363,47 +495,47 @@ select:focus-visible,
     font-size: 1.4rem;
     line-height: 1;
     cursor: pointer;
-    padding: 0 4px;
+    padding: 0 var(--space-1);
 }
 .chapter-marker {
     position: absolute;
     top: 0;
     width: 2px;
     height: 100%;
-    background: rgba(255, 255, 255, 0.55);
+    background: var(--tint-3);
     pointer-events: none;
     transform: translateX(-1px);
 }
 
 .episode-card .ep-number {
-    font-size: 0.75rem;
+    font-size: var(--fs-label);
     color: var(--accent-text);
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: var(--tracking-caps);
 }
 
 .episode-card .ep-status {
     font-size: 0.7rem;
-    padding: 2px 8px;
-    border-radius: 10px;
-    background: var(--bg-tertiary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
     color: var(--text-secondary);
 }
 
 .episode-card .ep-status.completed {
     background: var(--success);
-    color: white;
+    color: var(--on-accent);
 }
 
 .episode-card .ep-status.in-progress {
     background: var(--warning);
-    color: black;
+    color: var(--on-warning);
 }
 
 .episode-card .ep-title {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: var(--space-1);
 }
 
 .episode-card .ep-subtitle {
@@ -414,7 +546,7 @@ select:focus-visible,
 .episode-card .ep-meta {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: var(--space-3);
     font-size: 0.8rem;
     color: var(--text-secondary);
 }

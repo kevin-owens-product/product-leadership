@@ -597,7 +597,7 @@ button.playing .play-pause-icon .pp-pause {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: var(--on-accent);
+    background: var(--text-primary);
     border: 2px solid var(--accent);
     box-shadow: var(--shadow-1);
     transform: translate(-50%, -50%);

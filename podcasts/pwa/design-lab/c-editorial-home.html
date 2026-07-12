@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Direction C — Editorial Mono — Home</title>
+<style>
+/* ============================================================
+   DIRECTION C — EDITORIAL MONO — HOME
+   Near-mono surfaces, ONE cold accent, oversized display type,
+   hairline dividers, brutal restraint.
+   ============================================================ */
+:root {
+    --neutral-0: oklch(0.135 0.005 225);
+    --neutral-1: oklch(0.155 0.005 225);
+    --neutral-2: oklch(0.195 0.006 225);
+    --neutral-3: oklch(0.245 0.007 225);
+    --neutral-6: oklch(0.50 0.008 225);
+    --neutral-7: oklch(0.68 0.008 225);
+    --neutral-9: oklch(0.975 0.002 225);
+
+    --accent: oklch(0.80 0.105 220);
+    --on-accent: oklch(0.15 0.02 225);
+
+    --surface-0: var(--neutral-1);
+    --text-primary: var(--neutral-9);
+    --text-secondary: var(--neutral-7);
+    --text-tertiary: var(--neutral-6);
+
+    --hairline: oklch(1 0 0 / 0.10);
+    --hairline-strong: oklch(1 0 0 / 0.16);
+
+    --fs-overline: 0.6875rem;
+    --fs-label: 0.75rem;
+    --fs-small: 0.8125rem;
+    --fs-body: 1rem;
+    --fs-title: 1.0625rem;
+    --fs-display-xl: 2.5rem;   /* 40px masthead */
+    --tracking-caps: 0.14em;
+
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 20px; --space-6: 24px; --space-8: 32px;
+
+    --radius-art: 4px;
+
+    --dur-1: 120ms; --dur-2: 200ms;
+    --ease-out: cubic-bezier(0.2, 0, 0, 1);
+
+    --safe-top: env(safe-area-inset-top, 12px);
+    --safe-bottom: env(safe-area-inset-bottom, 12px);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    padding-top: var(--safe-top);
+    padding-bottom: var(--safe-bottom);
+    max-width: 430px;      /* phone comp: degrade gracefully on desktop */
+    margin: 0 auto;
+}
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.overline {
+    font-size: var(--fs-overline);
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+/* ---- Masthead: the editorial statement ---- */
+.masthead {
+    padding: var(--space-5) var(--space-5) var(--space-3);
+}
+.masthead .date { display: block; margin-bottom: var(--space-1); }
+.masthead h1 {
+    font-size: var(--fs-display-xl);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+.masthead .stats {
+    margin-top: var(--space-2);
+    font-size: var(--fs-small);
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---- Continue listening: one row, one accent ---- */
+.continue {
+    margin: var(--space-2) var(--space-5) 0;
+    border-top: 1px solid var(--hairline-strong);
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--hairline-strong);
+}
+.continue .overline { display: block; margin-bottom: var(--space-2); }
+.continue-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: left;
+    transition: opacity var(--dur-1) var(--ease-out);
+}
+.continue-row:active { opacity: 0.6; }
+.continue-row .thumb {
+    width: 64px; height: 64px;
+    flex: none;
+    border-radius: var(--radius-art);
+    border: 1px solid var(--hairline);
+    overflow: hidden;
+}
+.thumb svg { display: block; width: 100%; height: 100%; }
+.continue-row .info { flex: 1; min-width: 0; }
+.continue-row .ep {
+    display: block;
+    font-size: var(--fs-body);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.continue-row .meta {
+    display: block;
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.continue-row .bar {
+    display: block;
+    margin-top: var(--space-2);
+    height: 2px;
+    background: var(--hairline-strong);
+    position: relative;
+}
+.continue-row .bar i {
+    position: absolute; inset: 0 auto 0 0;
+    width: 61%;
+    background: var(--accent);
+}
+.continue-row .resume {
+    flex: none;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--hairline-strong);
+    display: grid; place-items: center;
+    color: var(--accent);
+}
+.continue-row .resume svg { margin-left: 2px; }
+
+/* ---- Show index: hairline rows, no cards ---- */
+.shows { padding: 0 var(--space-5) var(--space-8); }
+.shows-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-4) 0 var(--space-2);
+}
+.shows-head .count {
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+}
+.show-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--hairline);
+    cursor: pointer;
+    transition: opacity var(--dur-1) var(--ease-out);
+}
+.show-row:active { opacity: 0.6; }
+.show-row .thumb {
+    width: 52px; height: 52px;
+    flex: none;
+    border-radius: var(--radius-art);
+    border: 1px solid var(--hairline);
+    overflow: hidden;
+}
+.show-row .info { flex: 1; min-width: 0; }
+.show-row .name {
+    display: block;
+    font-size: var(--fs-title);
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.show-row .meta {
+    display: block;
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.show-row .meta .dl { color: var(--text-secondary); }
+.show-row .end {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+.show-row .unplayed {
+    font-size: var(--fs-label);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-secondary);
+}
+.show-row .unplayed.live { color: var(--accent); }
+.show-row .chev { color: var(--neutral-6); display: grid; }
+
+@media (prefers-reduced-motion: reduce) {
+    .show-row, .continue-row { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+    <span class="overline date">Saturday, July 12</span>
+    <h1>Library</h1>
+    <p class="stats">8 shows · 72 episodes · 41 hr</p>
+</header>
+
+<section class="continue" aria-label="Continue listening">
+    <span class="overline">Continue</span>
+    <button class="continue-row">
+        <span class="thumb" data-art="rings" aria-hidden="true"></span>
+        <span class="info">
+            <span class="ep">Memory, Context, and Long-Horizon Execution</span>
+            <span class="meta">Agentic Coding Frontier · 35 min left</span>
+            <span class="bar"><i></i></span>
+        </span>
+        <span class="resume" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M3 1.5 L12 7 L3 12.5 Z"/></svg>
+        </span>
+    </button>
+</section>
+
+<section class="shows" aria-label="All shows">
+    <div class="shows-head">
+        <span class="overline">Shows</span>
+        <span class="count">08</span>
+    </div>
+    <div id="show-list"></div>
+</section>
+
+<script>
+/* Monochrome editorial cover system: one geometric motif per show,
+   grayscale tones only. Accent never appears in artwork. */
+function motif(type, tone) {
+    const line = 'oklch(0.92 0.003 225)';
+    const dim  = 'oklch(0.42 0.006 225)';
+    const bg   = `oklch(${tone} 0.007 225)`;
+    let b = '';
+    if (type === 'rings') {
+        for (let i = 1; i <= 6; i++)
+            b += `<circle cx="290" cy="130" r="${i*38}" fill="none" stroke="${i===3?line:dim}" stroke-width="${i===3?6:2}"/>`;
+        b += `<circle cx="290" cy="130" r="9" fill="${line}"/>`;
+    } else if (type === 'bars') {
+        const w = [300, 210, 340, 150, 260, 110, 320];
+        w.forEach((x, i) => {
+            b += `<rect x="40" y="${52+i*44}" width="${x}" height="${i===2?14:4}" fill="${i===2?line:dim}"/>`;
+        });
+    } else if (type === 'caret') {
+        b = `<path d="M110 100 L210 200 L110 300" fill="none" stroke="${line}" stroke-width="26" stroke-linecap="square"/>
+             <rect x="240" y="284" width="90" height="26" fill="${dim}"/>`;
+    } else if (type === 'waves') {
+        for (let i = 0; i < 6; i++) {
+            const y = 210 + i * 30;
+            b += `<path d="M-20 ${y} Q 60 ${y-26} 140 ${y} T 300 ${y} T 460 ${y}" fill="none" stroke="${i===1?line:dim}" stroke-width="${i===1?5:2}"/>`;
+        }
+        b += `<circle cx="286" cy="120" r="34" fill="none" stroke="${dim}" stroke-width="2"/>`;
+    } else if (type === 'meridian') {
+        b = `<circle cx="200" cy="200" r="140" fill="none" stroke="${line}" stroke-width="3"/>`;
+        [46, 92].forEach(rx => {
+            b += `<ellipse cx="200" cy="200" rx="${rx}" ry="140" fill="none" stroke="${dim}" stroke-width="2"/>`;
+        });
+        b += `<line x1="60" y1="200" x2="340" y2="200" stroke="${dim}" stroke-width="2"/>
+              <line x1="72" y1="130" x2="328" y2="130" stroke="${dim}" stroke-width="2"/>
+              <line x1="72" y1="270" x2="328" y2="270" stroke="${dim}" stroke-width="2"/>`;
+    } else if (type === 'chevrons') {
+        for (let i = 0; i < 5; i++) {
+            const y = 300 - i * 52;
+            b += `<path d="M110 ${y} L200 ${y-64} L290 ${y}" fill="none" stroke="${i===3?line:dim}" stroke-width="${i===3?12:5}" stroke-linecap="square"/>`;
+        }
+    } else if (type === 'spark') {
+        for (let i = 0; i < 7; i++) {
+            const a = -80 + i * 12.5;
+            const rad = a * Math.PI / 180;
+            const x2 = 70 + Math.cos(rad) * 330, y2 = 330 + Math.sin(rad) * 330;
+            b += `<line x1="70" y1="330" x2="${x2}" y2="${y2}" stroke="${i===2?line:dim}" stroke-width="${i===2?7:2.5}"/>`;
+        }
+        b += `<circle cx="70" cy="330" r="16" fill="${line}"/>`;
+    } else if (type === 'grid') {
+        for (let i = 0; i <= 7; i++) {
+            b += `<line x1="${44+i*44}" y1="44" x2="${44+i*44}" y2="352" stroke="${dim}" stroke-width="1.5"/>
+                  <line x1="44" y1="${44+i*44}" x2="352" y2="${44+i*44}" stroke="${dim}" stroke-width="1.5"/>`;
+        }
+        b += `<circle cx="220" cy="132" r="12" fill="${line}"/>`;
+    }
+    return `<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="400" fill="${bg}"/>${b}</svg>`;
+}
+
+/* Real content from window.PODCASTS (dist/podcasts.js). */
+const SHOWS = [
+    { art: 'rings',    tone: 0.185, name: 'Agentic Coding Frontier',  meta: '6 episodes · Alex & Riley',        unplayed: '1',  live: true,  dl: true  },
+    { art: 'bars',     tone: 0.225, name: 'AP & Finance Mastery',     meta: '10 episodes · PodLearn',           unplayed: '10', live: false, dl: false },
+    { art: 'caret',    tone: 0.165, name: 'Claude Code Mastery',      meta: '10 episodes · PodLearn',           unplayed: '4',  live: false, dl: true  },
+    { art: 'waves',    tone: 0.205, name: 'Deadwater',                meta: '8 episodes · Sam Wilder',          unplayed: '✓',  live: false, dl: false },
+    { art: 'meridian', tone: 0.245, name: 'The Diplomat’s Edge', meta: '6 episodes · PodLearn',            unplayed: '6',  live: false, dl: false },
+    { art: 'chevrons', tone: 0.175, name: 'Tech Leadership Unpacked', meta: '10 episodes · Alex Chen & Sam Rivera', unplayed: '2', live: false, dl: false },
+    { art: 'spark',    tone: 0.215, name: 'The Forge Podcast',        meta: '16 episodes · Alex & Kevin',       unplayed: '16', live: false, dl: true  },
+    { art: 'grid',     tone: 0.195, name: 'The Harness',              meta: '6 episodes · Priya Anand & Marcus Hale', unplayed: '3', live: false, dl: false },
+];
+
+document.getElementById('show-list').innerHTML = SHOWS.map(s => `
+    <div class="show-row" role="button" tabindex="0">
+        <span class="thumb" aria-hidden="true">${motif(s.art, s.tone)}</span>
+        <span class="info">
+            <span class="name">${s.name}</span>
+            <span class="meta">${s.dl ? '<span class="dl">↓ offline · </span>' : ''}${s.meta}</span>
+        </span>
+        <span class="end">
+            <span class="unplayed${s.live ? ' live' : ''}">${s.unplayed}</span>
+            <span class="chev"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 2.5 L10 7 L5 11.5"/></svg></span>
+        </span>
+    </div>`).join('');
+
+document.querySelectorAll('.continue .thumb[data-art]').forEach(el => {
+    el.innerHTML = motif(el.dataset.art, 0.185);
+});
+</script>
+</body>
+</html>

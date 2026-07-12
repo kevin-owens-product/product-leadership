@@ -342,17 +342,21 @@ body.has-mini-player .toast-region {
    color values may appear; see the token block in base.css). */
 body.light-theme {
     --surface-0: oklch(1 0 0);
-    --surface-1: oklch(0.970 0.002 276);
-    --surface-2: oklch(0.922 0.003 276);
+    --surface-1: oklch(0.972 0.004 60);
+    --surface-2: oklch(0.925 0.006 58);
     --surface-3: oklch(1 0 0);
     --text-primary: oklch(0 0 0);
-    --text-secondary: oklch(0.510 0.008 276);
-    --text-tertiary: oklch(0.62 0.008 276);
-    --border: oklch(0.858 0.004 276);
+    --text-secondary: oklch(0.510 0.012 50);
+    --text-tertiary: oklch(0.62 0.012 50);
+    --border: oklch(0.860 0.008 55);
     /* On light surfaces accent text must be DARKER, not lighter.
        Defined on body so it shadows the per-podcast value main.js
        sets on <html> (which is tuned for dark surfaces only). */
-    --accent-text: oklch(0.484 0.194 275.4);
+    --accent-text: oklch(0.50 0.15 43);
+    /* Show-tinted text follows the same darker-on-light rule. */
+    --show-text: oklch(0.45 0.11 var(--show-hue));
+    --show-wash: oklch(0.93 0.02 var(--show-hue));
+    --show-glow: oklch(0.6 0.13 var(--show-hue) / 0.18);
     /* Danger text follows the same rule. */
     --danger-text: oklch(0.505 0.190 27.5);
     --danger-subtle: color-mix(in oklab, var(--danger) 8%, transparent);
@@ -1120,7 +1124,7 @@ body.light-theme {
 }
 
 .color-option.selected {
-    border-color: var(--on-accent);
+    border-color: var(--text-primary);
     transform: scale(1.1);
 }
 

@@ -1,7 +1,7 @@
 /* ============================================================
    Design tokens — the single source of truth for color, type,
    space, radius, elevation, and motion. Values encode the app's
-   current look; DESIGN.md (once written) governs any change.
+   current look; DESIGN.md governs any change (Ember & Wash).
    Rules:
    - No raw hex/rgb values outside this block (and the light-theme
      override block in components.css).
@@ -11,32 +11,33 @@
    ============================================================ */
 :root {
     /* ---- Neutral ramp: near-black → near-white, warmed toward
-       the brand hue (276) with a whisper of chroma so dark
-       surfaces don't read as dead gray. ---- */
-    --neutral-0: oklch(0.13 0.006 276);   /* deepest recess */
-    --neutral-1: oklch(0.168 0.006 276);  /* page background */
-    --neutral-2: oklch(0.218 0.007 276);  /* card surface */
-    --neutral-3: oklch(0.264 0.008 276);  /* nested surface */
-    --neutral-4: oklch(0.321 0.010 276);  /* borders/dividers */
-    --neutral-5: oklch(0.44 0.012 276);
-    --neutral-6: oklch(0.57 0.012 276);   /* tertiary text */
-    --neutral-7: oklch(0.706 0.010 276);  /* secondary text */
-    --neutral-8: oklch(0.86 0.006 276);
-    --neutral-9: oklch(0.985 0.003 276);  /* primary text */
+       the ember brand hue (~56) with real chroma so dark surfaces
+       read as embers-at-rest, never dead gray. (DESIGN.md: Ember
+       & Wash direction.) ---- */
+    --neutral-0: oklch(0.125 0.010 58);   /* deepest recess */
+    --neutral-1: oklch(0.162 0.011 56);   /* page background */
+    --neutral-2: oklch(0.212 0.013 55);   /* card surface */
+    --neutral-3: oklch(0.258 0.015 54);   /* nested surface */
+    --neutral-4: oklch(0.318 0.016 52);   /* borders/dividers */
+    --neutral-5: oklch(0.44 0.018 50);
+    --neutral-6: oklch(0.57 0.020 48);    /* tertiary text */
+    --neutral-7: oklch(0.708 0.022 50);   /* secondary text */
+    --neutral-8: oklch(0.86 0.014 55);
+    --neutral-9: oklch(0.982 0.006 60);   /* primary text */
 
-    /* ---- Accent ramp (brand indigo). 500 is the reference step;
+    /* ---- Ember accent ramp. 500 is the reference fill step;
        200 passes 4.5:1 as small text on surface-0..2. ---- */
-    --accent-200: oklch(0.729 0.132 277);
-    --accent-300: oklch(0.680 0.158 277);
-    --accent-400: oklch(0.62 0.19 276);
-    --accent-500: oklch(0.563 0.216 276);
-    --accent-600: oklch(0.48 0.19 276);
+    --accent-200: oklch(0.806 0.108 58);
+    --accent-300: oklch(0.748 0.140 52);
+    --accent-400: oklch(0.705 0.163 47);
+    --accent-500: oklch(0.665 0.180 43);
+    --accent-600: oklch(0.552 0.152 40);
 
     /* ---- Semantic surfaces (recessed → base → raised → floating) ---- */
     --surface-0: var(--neutral-1);
     --surface-1: var(--neutral-2);
     --surface-2: var(--neutral-3);
-    --surface-3: oklch(0.30 0.009 276);   /* floating (popover/toast tier) */
+    --surface-3: oklch(0.295 0.015 54);   /* floating (popover/toast tier) */
     --border: var(--neutral-4);
 
     /* ---- Semantic text ---- */
@@ -50,7 +51,24 @@
     --accent-hover: var(--accent-300);
     --accent-text: var(--accent-200);
     --accent-subtle: color-mix(in oklab, var(--accent) 14%, transparent);
-    --on-accent: oklch(1 0 0);
+    /* Dark ink on ember fills (white fails 4.5:1 on --accent-500).
+       Status fills (success/danger) keep white via --on-status. */
+    --on-accent: oklch(0.145 0.02 45);
+    --on-status: oklch(1 0 0);
+
+    /* ---- Adaptive show palette (DESIGN.md §3). One hue in — the
+       same hue seeded into the show's generated artwork — and the
+       whole family derives from it. src/ui/artwork.js sets these on
+       <body> when a show context is active; these are the resting
+       (no-show) ember defaults. ---- */
+    --show-hue: 43;
+    --show-accent: oklch(0.74 0.145 var(--show-hue));      /* fills: play, scrubber */
+    --show-accent-deep: oklch(0.52 0.11 var(--show-hue));  /* pressed / glow anchor */
+    --show-text: oklch(0.85 0.075 var(--show-hue));        /* tinted text on dark */
+    --show-wash: oklch(0.315 0.055 var(--show-hue));       /* radial bg wash */
+    --show-chip: oklch(0.74 0.145 var(--show-hue) / 0.14); /* subtle fills */
+    --show-on-accent: oklch(0.16 0.035 var(--show-hue));   /* glyphs on show fills */
+    --show-glow: oklch(0.6 0.13 var(--show-hue) / 0.38);   /* artwork ambient glow */
 
     /* ---- Status colors ---- */
     --success: oklch(0.723 0.192 149.6);
@@ -108,11 +126,20 @@
     /* ---- Elevation: layered shadow + top-edge light. Dark UIs
        need edge light, not just shadow — pair --shadow-N with
        --edge-highlight on raised/floating surfaces. ---- */
-    --edge-highlight: inset 0 1px 0 oklch(1 0 0 / 0.04);
+    --edge-highlight: inset 0 1px 0 oklch(1 0.01 60 / 0.06);
     --shadow-1: 0 1px 2px oklch(0 0 0 / 0.35), 0 1px 4px oklch(0 0 0 / 0.3);
     --shadow-2: 0 2px 6px oklch(0 0 0 / 0.3), 0 6px 24px oklch(0 0 0 / 0.4);
     --shadow-3: 0 4px 10px oklch(0 0 0 / 0.3), 0 12px 32px oklch(0 0 0 / 0.45);
     --shadow-text: 0 1px 2px oklch(0 0 0 / 0.4);
+    /* Hero artwork: black depth + a bloom of the active show's glow. */
+    --shadow-hero:
+        0 6px 14px oklch(0 0 0 / 0.42),
+        0 22px 56px oklch(0 0 0 / 0.5),
+        0 12px 64px -8px var(--show-glow);
+    /* Primary transport button halo. */
+    --glow-play:
+        0 2px 6px oklch(0 0 0 / 0.35),
+        0 6px 28px -4px var(--show-glow);
 
     /* ---- Motion ---- */
     --dur-1: 120ms;   /* micro feedback: presses, toggles */
@@ -311,7 +338,7 @@ select:focus-visible,
 .update-banner {
     /* Deeper green than --success: white text on #22c55e was ~2.3:1. */
     background: var(--success-deep);
-    color: var(--on-accent);
+    color: var(--on-status);
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-sm);
     margin-top: var(--space-3);
@@ -323,7 +350,7 @@ select:focus-visible,
 }
 
 .update-banner button {
-    background: var(--on-accent);
+    background: var(--on-status);
     color: var(--success-deep);
     border: none;
     padding: var(--space-2) var(--space-3);

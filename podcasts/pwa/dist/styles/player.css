@@ -331,7 +331,8 @@
     height: 100%;
     background: linear-gradient(90deg, var(--show-accent-deep), var(--show-accent));
     border-radius: var(--radius-full);
-    transition: width var(--dur-1);
+    /* No width transition: width is layout-triggering; timeupdate ticks are
+       frequent enough that the fill reads as continuous without one. */
 }
 
 /* Chapter ticks on the track. */
@@ -910,7 +911,8 @@ button.playing .play-pause-icon .pp-pause {
 
 .panel-content {
     padding: 0 var(--space-4) var(--space-4);
-    transition: max-height var(--dur-3), opacity var(--dur-2);
+    /* Opacity only — max-height is layout-triggering (DESIGN.md §7). */
+    transition: opacity var(--dur-2) var(--ease-out);
     overflow: hidden;
 }
 
@@ -1173,7 +1175,9 @@ button.playing .play-pause-icon .pp-pause {
     color: var(--text-secondary);
     font-size: var(--fs-small);
     cursor: pointer;
-    transition: all var(--dur-2);
+    transition: background var(--dur-2) var(--ease-out),
+                border-color var(--dur-2) var(--ease-out),
+                color var(--dur-2) var(--ease-out);
 }
 
 .timer-btn.active {

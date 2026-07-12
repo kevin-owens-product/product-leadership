@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PodLearn — Design Upgrade Gallery (before / after)</title>
+<style>
+  :root {
+    --bg: #16110d; --card: #211a15; --line: #3a2f26;
+    --text: #f5efe8; --muted: #a08f7e; --accent: #e8935a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 48px 24px 96px; }
+  header { max-width: 1200px; margin: 0 auto 12px; }
+  h1 { font-size: 28px; letter-spacing: -0.02em; }
+  header p { color: var(--muted); margin-top: 6px; max-width: 70ch; }
+  .viewport-note { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  section { max-width: 1200px; margin: 56px auto 0; }
+  h2 { font-size: 20px; margin-bottom: 4px; }
+  .caption { color: var(--muted); font-size: 14px; margin-bottom: 16px; max-width: 80ch; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .pair.desktop { grid-template-columns: 1fr; }
+  figure { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+  figcaption { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+  figure.before figcaption { color: var(--muted); }
+  figure.after figcaption { color: var(--accent); }
+  img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid var(--line); }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>PodLearn — visual redesign, before / after</h1>
+  <p>Same app, same 145 unit + 33 e2e tests, same features. The "before" set was shot prior to D0;
+     the "after" set is the shipped Ember &amp; Wash system (DESIGN.md): warm OKLCH neutral ramp,
+     per-show adaptive palette from generated artwork, hero-first now-playing, capsule mini-player,
+     bottom sheets, and compositor-only motion.</p>
+  <p class="viewport-note">Primary viewport 393×852 (iPhone 15). Desktop 1280×800 pairs where noted.</p>
+</header>
+
+<section>
+  <h2>Home</h2>
+  <p class="caption">Before: text rows with identical badges, one flat gray. After: generated cover art per show (node graph, bars, caret, waves, globe, rings, embers, weave), warm surfaces, artwork-led cards.</p>
+  <div class="pair">
+    <figure class="before"><figcaption>Before</figcaption><img src="before/mobile/01-home.png" alt="Home, before"></figure>
+    <figure class="after"><figcaption>After</figcaption><img src="final/mobile/01-home.png" alt="Home, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Episode list</h2>
+  <p class="caption">After: artwork-tinted header wash in the show's hue, pill filter chips, EPISODE kickers in the show accent, in-progress micro-badges and remaining-time meters.</p>
+  <div class="pair">
+    <figure class="before"><figcaption>Before</figcaption><img src="before/mobile/02-show-list.png" alt="Episode list, before"></figure>
+    <figure class="after"><figcaption>After</figcaption><img src="final/mobile/02-show-list.png" alt="Episode list, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Now-playing (the signature screen)</h2>
+  <p class="caption">Before: wall of gray panels, no artwork, no focal point. After: hero artwork with ambient show-hue glow, balanced display title, chapter chip, tick-marked scrubber with tabular times, 72px show-accent play disc with dark ink, quiet secondary icon row; settings demoted to the ⋯ sheet.</p>
+  <div class="pair">
+    <figure class="before"><figcaption>Before</figcaption><img src="before/mobile/03-player.png" alt="Player, before"></figure>
+    <figure class="after"><figcaption>After</figcaption><img src="final/mobile/03-player.png" alt="Player, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Transcript</h2>
+  <p class="caption">After: transcript lives below the fold seam as a quiet surface-1 panel; current line carried by an accent spine, resync pill floats in the show accent.</p>
+  <div class="pair">
+    <figure class="before"><figcaption>Before</figcaption><img src="before/mobile/04-transcript.png" alt="Transcript, before"></figure>
+    <figure class="after"><figcaption>After</figcaption><img src="final/mobile/04-transcript.png" alt="Transcript, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Mini-player</h2>
+  <p class="caption">After: floating capsule inset from the edges — artwork thumb, show-accent progress hairline and play disc — over the artwork-tinted episode list.</p>
+  <div class="pair">
+    <figure class="before"><figcaption>Before</figcaption><img src="before/mobile/08-mini-player.png" alt="Mini-player, before"></figure>
+    <figure class="after"><figcaption>After</figcaption><img src="final/mobile/08-mini-player.png" alt="Mini-player, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Modal — sleep timer</h2>
+  <p class="caption">After: mobile modals are bottom sheets with a grabber; option pills on the token system, active state in accent fill with dark ink, countdown in the warning hue.</p>
+  <div class="pair">
+    <figure class="before"><figcaption>Before</figcaption><img src="before/mobile/06-sleep-modal.png" alt="Sleep modal, before"></figure>
+    <figure class="after"><figcaption>After</figcaption><img src="final/mobile/06-sleep-modal.png" alt="Sleep modal, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Toast — download error</h2>
+  <p class="caption">After: raised surface with edge light, Retry as a quiet chip; toast enters with a spring rise (reduced-motion: instant).</p>
+  <div class="pair">
+    <figure class="before"><figcaption>Before</figcaption><img src="before/mobile/09-error-toast.png" alt="Error toast, before"></figure>
+    <figure class="after"><figcaption>After</figcaption><img src="final/mobile/09-error-toast.png" alt="Error toast, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Desktop spot-checks (1280×800)</h2>
+  <p class="caption">Two-column home grid; player column centered with the same hero treatment.</p>
+  <div class="pair desktop">
+    <figure class="before"><figcaption>Before — home</figcaption><img src="before/desktop/01-home.png" alt="Desktop home, before"></figure>
+    <figure class="after"><figcaption>After — home</figcaption><img src="final/desktop/01-home.png" alt="Desktop home, after"></figure>
+    <figure class="before"><figcaption>Before — player</figcaption><img src="before/desktop/03-player.png" alt="Desktop player, before"></figure>
+    <figure class="after"><figcaption>After — player</figcaption><img src="final/desktop/03-player.png" alt="Desktop player, after"></figure>
+  </div>
+</section>
+
+<section>
+  <h2>Real-content fixtures</h2>
+  <p class="caption">Longest episode title (55 chars, balanced two-line wrap at 0% progress) and the warm-hue worst case (The Forge, h=62) where show accent and shell are nearest in hue.</p>
+  <div class="pair">
+    <figure class="after"><figcaption>After — longest title</figcaption><img src="final/extra/player-longest-title.png" alt="Player with longest title"></figure>
+    <figure class="after"><figcaption>After — warm-hue list</figcaption><img src="final/extra/forge-list-warm-hue.png" alt="Forge episode list"></figure>
+  </div>
+</section>
+</body>
+</html>

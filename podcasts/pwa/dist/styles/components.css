@@ -432,7 +432,8 @@ body.light-theme .podcast-card {
     color: var(--text-primary);
     cursor: pointer;
     font-size: 0.9rem;
-    transition: all var(--dur-2);
+    transition: background var(--dur-2) var(--ease-out),
+                color var(--dur-2) var(--ease-out);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -608,7 +609,8 @@ body.light-theme .podcast-card {
     margin-bottom: var(--space-2);
     border-radius: var(--radius-md);
     background: var(--surface-2);
-    transition: all var(--dur-2);
+    transition: background var(--dur-2) var(--ease-out),
+                border-color var(--dur-2) var(--ease-out);
     cursor: pointer;
 }
 
@@ -923,7 +925,8 @@ body.light-theme .podcast-card {
     color: var(--text-secondary);
     font-size: 0.85rem;
     cursor: pointer;
-    transition: all var(--dur-2);
+    transition: background var(--dur-2) var(--ease-out),
+                color var(--dur-2) var(--ease-out);
 }
 
 .nav-tab.active {
@@ -1273,13 +1276,7 @@ body.light-theme .podcast-card {
     height: 100%;
     background: var(--card-accent);
     border-radius: 0 var(--radius-full) var(--radius-full) 0;
-    transition: width var(--dur-3) var(--ease-out);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .podcast-progress-fill {
-        transition: none;
-    }
+    /* No width transition: width is layout-triggering; progress updates snap. */
 }
 
 .nav-bar {
@@ -1518,7 +1515,8 @@ body.light-theme .podcast-card {
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid transparent;
-    transition: all var(--dur-2);
+    transition: border-color var(--dur-2) var(--ease-out),
+                transform var(--dur-2) var(--ease-spring);
 }
 
 .color-option.selected {

@@ -804,13 +804,7 @@ textarea:focus-visible,
     height: 100%;
     border-radius: var(--radius-full);
     background: var(--show-accent);
-    transition: width var(--dur-3) var(--ease-out);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .ep-mini-progress .ep-progress-bar {
-        transition: none;
-    }
+    /* No width transition: width is layout-triggering; progress updates snap. */
 }
 
 .ep-remaining {

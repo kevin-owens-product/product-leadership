@@ -27,6 +27,7 @@ import {
 import { createScrubber, bufferedEndFraction } from './ui/scrubber.js';
 import { createRepeatSkipper } from './ui/long-press.js';
 import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js';
+import { transitionViews, spawnRipple, showSkipFlyout } from './ui/motion.js';
 import { sleepFadeVolume, sleepRemainingSeconds } from './playback/sleep-timer.js';
 import { findNextUp } from './state/queue-next.js';
 
@@ -224,6 +225,18 @@ function updateToggleButton(id, pressed, labelText) {
     if (label) label.textContent = labelText;
 }
 
+// Both play/pause buttons (player + mini) share the same morphing SVG icon;
+// the `.playing` class drives the CSS cross-morph (≤200ms, disabled under
+// prefers-reduced-motion).
+function setPlayButtonState(playing) {
+    ['play-btn', 'mini-play-btn'].forEach((id) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        btn.classList.toggle('playing', Boolean(playing));
+        btn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    });
+}
+
 function updateSpeedPresetButtons() {
     document.querySelectorAll('.speed-preset-btn').forEach(b => {
         const isActive = Math.abs(parseFloat(b.dataset.speed) - speechRate) < 0.01;
@@ -251,8 +264,42 @@ function applySpeechRate(rate, { persistShow = true, save = true } = {}) {
     updateMediaSessionPositionState();
 }
 
-// Mini player state
-let showMiniPlayer = false;
+// The podcast that owns the loaded episode. `currentPodcast` follows the
+// user's browsing context (it changes when they open another show from home
+// while audio keeps playing); `playerPodcast` always matches `currentEpisode`
+// so the mini player and expand-to-player flow stay correct.
+let playerPodcast = null;
+
+// ===== VIEW SWITCHING =====
+// Single entry point for screen changes. Wraps the swap in a View Transition
+// (graceful fallback + reduced-motion no-op handled by transitionViews) and
+// keeps the bottom mini player's visibility in sync with the active screen.
+const VIEW_IDS = ['podcasts-view', 'list-view', 'player-view'];
+
+function showView(viewId, { transition = true } = {}) {
+    const apply = () => {
+        VIEW_IDS.forEach((id) => {
+            document.getElementById(id)?.classList.toggle('active', id === viewId);
+        });
+        updateMiniPlayerVisibility();
+    };
+    if (transition) {
+        transitionViews(apply);
+    } else {
+        apply();
+    }
+}
+
+// The mini player lives on every non-player screen whenever an episode is
+// loaded (playing OR paused — like Overcast/Pocket Casts). The body class
+// gives scrolling views extra bottom padding so content clears the bar.
+function updateMiniPlayerVisibility() {
+    const playerActive = document.getElementById('player-view')?.classList.contains('active');
+    const show = Boolean(playerPodcast && currentEpisode) && !playerActive;
+    document.getElementById('mini-player')?.classList.toggle('active', show);
+    document.body.classList.toggle('has-mini-player', show);
+    if (show) updateMiniPlayer();
+}
 
 // Wake Lock API for keeping screen on during playback
 let wakeLock = null;
@@ -693,20 +740,22 @@ function openPodcast(podcast) {
     // Update accent color
     document.documentElement.style.setProperty('--accent', safeColor(podcast.color || '#6366f1'));
 
-    document.getElementById('podcasts-view').classList.remove('active');
-    document.getElementById('list-view').classList.add('active');
     renderEpisodeList();
+    showView('list-view');
 }
 
 document.getElementById('back-to-podcasts').addEventListener('click', () => {
-    stopPlayback();
     saveState();
-    currentPodcast = null;
-    document.getElementById('list-view').classList.remove('active');
-    document.getElementById('podcasts-view').classList.add('active');
-    // Reset accent color
-    document.documentElement.style.setProperty('--accent', '#6366f1');
+    if (!currentEpisode) {
+        // Nothing loaded — fully reset context. When an episode is loaded we
+        // keep playback (and the mini player) alive across navigation, like
+        // any polished podcast app.
+        void stopPlayback();
+        currentPodcast = null;
+        document.documentElement.style.setProperty('--accent', '#6366f1');
+    }
     renderPodcastsList();
+    showView('podcasts-view');
 });
 
 document.getElementById('podcast-search').addEventListener('input', e => {
@@ -1125,6 +1174,7 @@ async function openEpisode(episode, options = {}) {
     } = options;
     await stopPlayback();
     currentEpisode = episode;
+    playerPodcast = currentPodcast;
     const speakerVoiceMap = parseSpeakerVoiceMap(episode.content);
     dialogueLines = parseMarkdown(episode.content, speakerVoiceMap);
     chapters = parseChapters(episode.content);
@@ -1206,34 +1256,21 @@ async function openEpisode(episode, options = {}) {
     syncMediaSession({ includeMetadata: true, includePosition: true });
     updateMiniPlayer();
 
-    document.getElementById('list-view').classList.remove('active');
-    document.getElementById('player-view').classList.add('active');
-    // Hide mini player when entering player view
-    document.getElementById('mini-player').classList.remove('active');
+    showView('player-view');
 }
 
 document.getElementById('back-to-list').addEventListener('click', () => {
     hideResumeBanner();
     saveState();
-    document.getElementById('player-view').classList.remove('active');
-    document.getElementById('list-view').classList.add('active');
-    // Show mini player if still playing
-    const showMini = currentPodcast && currentEpisode && (isPlaying || isPaused);
-    document.getElementById('mini-player').classList.toggle('active', showMini);
-    if (showMini) updateMiniPlayer();
     renderEpisodeList();
+    showView('list-view');
 });
 
 // Home button from player - go all the way back to podcasts list
 document.getElementById('home-from-player').addEventListener('click', () => {
     saveState();
-    document.getElementById('player-view').classList.remove('active');
-    document.getElementById('podcasts-view').classList.add('active');
-    // Show mini player if still playing
-    const showMini = currentPodcast && currentEpisode && (isPlaying || isPaused);
-    document.getElementById('mini-player').classList.toggle('active', showMini);
-    if (showMini) updateMiniPlayer();
     renderPodcastsList();
+    showView('podcasts-view');
 });
 
 // ===== TRANSCRIPT =====
@@ -1413,6 +1450,7 @@ speechPlayers.on('timeupdate', () => {
         if (cur) cur.textContent = formatClock(pos);
         if (tot) tot.textContent = formatClock(dur);
     }
+    updateMiniProgress();
     updateMediaSessionPositionState();
     updateUpNextBanner();
     maybePrebufferNextEpisode();
@@ -1421,7 +1459,7 @@ speechPlayers.on('timeupdate', () => {
 speechPlayers.on('play', () => {
     isPlaying = true;
     isPaused = false;
-    document.getElementById('play-btn').textContent = '⏸';
+    setPlayButtonState(true);
     updateMiniPlayer();
     updateMediaSessionPlaybackState();
     void requestWakeLock();
@@ -1430,7 +1468,7 @@ speechPlayers.on('play', () => {
 speechPlayers.on('pause', () => {
     if (!isPlaying) return;
     isPaused = true;
-    document.getElementById('play-btn').textContent = '▶';
+    setPlayButtonState(false);
     updateMiniPlayer();
     updateMediaSessionPlaybackState();
     saveState();
@@ -1483,7 +1521,7 @@ async function startPlayback() {
     const sessionId = playbackSessions.createSession();
     isPlaying = true;
     isPaused = false;
-    document.getElementById('play-btn').textContent = '⏸';
+    setPlayButtonState(true);
     updateMiniPlayer();
     syncMediaSession({ includeMetadata: true, includePosition: true });
     await requestWakeLock();
@@ -1525,7 +1563,7 @@ async function startPlayback() {
         isPlaying = false;
         isPaused = false;
         await releaseWakeLock();
-        document.getElementById('play-btn').textContent = '▶';
+        setPlayButtonState(false);
         setStatus('Ready');
         updateMiniPlayer();
         syncMediaSession({ includeMetadata: true, includePosition: true });
@@ -1540,7 +1578,7 @@ async function stopPlayback() {
     speechPlayers.stopCurrentSpeech();
     restoreSleepVolume();
     await releaseWakeLock();
-    document.getElementById('play-btn').textContent = '▶';
+    setPlayButtonState(false);
     saveState();
     updateMiniPlayer();
     syncMediaSession({ includeMetadata: true, includePosition: true });
@@ -1565,12 +1603,12 @@ async function togglePlayPause() {
         isPaused = false;
         await requestWakeLock();
         speechPlayers.resumeCurrentSpeech();
-        document.getElementById('play-btn').textContent = '⏸';
+        setPlayButtonState(true);
     } else {
         isPaused = true;
         await releaseWakeLock();
         speechPlayers.pauseCurrentSpeech();
-        document.getElementById('play-btn').textContent = '▶';
+        setPlayButtonState(false);
         setStatus('Paused');
         saveState();
     }
@@ -1604,7 +1642,7 @@ async function jumpToLine(index, autoStart = false) {
     currentLineIndex = target;
     updateProgress();
     saveState();
-    document.getElementById('play-btn').textContent = '▶';
+    setPlayButtonState(false);
     setStatus('Ready');
     updateMiniPlayer();
     syncMediaSession({ includeMetadata: true, includePosition: true });
@@ -1637,9 +1675,17 @@ function bindSkipButton(id, getDelta) {
     const btn = document.getElementById(id);
     if (!btn) return;
     let suppressClick = false;
-    const skipper = createRepeatSkipper({ action: () => seekBySeconds(getDelta()) });
+    // Every skip (tap, keyboard activation, or long-press repeat) shows the
+    // seconds flyout; the ripple fires once per press from the pointer point.
+    const doSkip = () => {
+        const delta = getDelta();
+        seekBySeconds(delta);
+        showSkipFlyout(btn, delta);
+    };
+    const skipper = createRepeatSkipper({ action: doSkip });
     btn.addEventListener('pointerdown', (e) => {
         if (typeof e.button === 'number' && e.button !== 0) return;
+        spawnRipple(btn, e);
         skipper.press();
     });
     const endPress = () => {
@@ -1655,7 +1701,7 @@ function bindSkipButton(id, getDelta) {
             suppressClick = false;
             return;
         }
-        seekBySeconds(getDelta());
+        doSkip();
     });
     // Long-press on touch would otherwise summon the context menu.
     btn.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -1943,7 +1989,7 @@ setInterval(() => {
 
 // ===== EPISODE COMPLETE MODAL & QUEUE AUTO-ADVANCE =====
 function showCompleteModal({ allowAutoAdvance = true } = {}) {
-    document.getElementById('play-btn').textContent = '▶';
+    setPlayButtonState(false);
     setStatus('Episode complete! 🎉');
     hideUpNextBanner();
 
@@ -2476,17 +2522,65 @@ setInterval(() => {
 
 // Mini Player
 function updateMiniPlayer() {
-    if (currentPodcast && currentEpisode) {
+    const pod = playerPodcast || currentPodcast;
+    if (pod && currentEpisode) {
         document.getElementById('mini-player-title').textContent = currentEpisode.title;
-        document.getElementById('mini-player-subtitle').textContent = currentPodcast.title;
-        document.getElementById('mini-play-btn').textContent = (isPlaying && !isPaused) ? '⏸' : '▶';
+        document.getElementById('mini-player-subtitle').textContent = pod.title;
+        const art = document.getElementById('mini-player-art');
+        if (art) {
+            const dataUrl = generatePodcastArtwork(pod);
+            if (dataUrl) {
+                if (art.src !== dataUrl) art.src = dataUrl;
+                art.hidden = false;
+            } else {
+                art.hidden = true;
+            }
+        }
+    }
+    setPlayButtonState(isPlaying && !isPaused);
+    updateMiniProgress();
+}
+
+// Progress hairline across the top of the mini player.
+function updateMiniProgress() {
+    const fill = document.getElementById('mini-progress-fill');
+    if (!fill) return;
+    fill.style.width = `${(getPlaybackFraction() * 100).toFixed(2)}%`;
+}
+
+// Tap-to-expand: return to the player screen with a quick spring-feel rise
+// (CSS animation, ≤200ms, disabled under prefers-reduced-motion). Skips the
+// cross-fade view transition so the spring is the only motion.
+function expandMiniPlayer() {
+    if (!playerPodcast || !currentEpisode) return;
+    if (currentPodcast?.id !== playerPodcast.id) {
+        // The user browsed into a different show while listening — restore
+        // the playing show's context (header, accent, per-show speed).
+        openPodcast(playerPodcast);
+    }
+    showView('player-view', { transition: false });
+    const playerView = document.getElementById('player-view');
+    if (playerView) {
+        playerView.classList.remove('spring-in');
+        // Restart the animation if the class was already applied.
+        void playerView.offsetWidth;
+        playerView.classList.add('spring-in');
+        playerView.addEventListener('animationend', () => {
+            playerView.classList.remove('spring-in');
+        }, { once: true });
     }
 }
 
 document.getElementById('mini-player').addEventListener('click', (e) => {
-    if (!e.target.classList.contains('mini-ctrl-btn') && currentPodcast && currentEpisode) {
-        showView('player-view');
-    }
+    if (e.target.closest('.mini-ctrl-btn')) return;
+    expandMiniPlayer();
+});
+
+document.getElementById('mini-player').addEventListener('keydown', (e) => {
+    if (e.target.closest('.mini-ctrl-btn')) return;
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    expandMiniPlayer();
 });
 
 document.getElementById('mini-play-btn').addEventListener('click', (e) => {

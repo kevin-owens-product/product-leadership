@@ -42,9 +42,13 @@ test('card navigation and player toggles are keyboard accessible', async ({ page
   await expect(podcastCard).toHaveAttribute('role', 'button');
   await podcastCard.focus();
   await page.keyboard.press('Enter');
+  // View swaps go through a View Transition (async by a frame), so wait for
+  // the list view before focusing an element inside it.
+  await expect(page.locator('#list-view')).toHaveClass(/active/);
 
   const episodeCard = page.locator('.episode-card:has-text("AI-Native Product Management")').first();
   await expect(episodeCard).toHaveAttribute('role', 'button');
+  await expect(episodeCard).toBeVisible();
   await episodeCard.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#player-view')).toHaveClass(/active/);
@@ -131,6 +135,36 @@ test('keyboard shortcuts overlay opens with ? but not while typing', async ({ pa
   await page.keyboard.press('?');
   await expect(page.locator('#shortcuts-modal')).not.toHaveClass(/show/);
   await expect(page.locator('#transcript-search-input')).toHaveValue('?');
+});
+
+test('mini player persists on non-player screens and expands back to the player', async ({ page }) => {
+  await openEpisode(page);
+
+  // Player screen: no mini player.
+  await expect(page.locator('#mini-player')).not.toHaveClass(/active/);
+
+  // Episode list: mini player shows the loaded episode.
+  await page.locator('#back-to-list').click();
+  await expect(page.locator('#list-view')).toHaveClass(/active/);
+  await expect(page.locator('#mini-player')).toHaveClass(/active/);
+  await expect(page.locator('#mini-player-title')).toContainText('AI-Native Product Management');
+  await expect(page.locator('#mini-player-subtitle')).toContainText('The Forge Podcast');
+
+  // Tap-to-expand returns to the player and hides the bar.
+  await page.locator('#mini-player-title').click();
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+  await expect(page.locator('#mini-player')).not.toHaveClass(/active/);
+
+  // Home screen keeps the mini player too.
+  await page.locator('#home-from-player').click();
+  await expect(page.locator('#podcasts-view')).toHaveClass(/active/);
+  await expect(page.locator('#mini-player')).toHaveClass(/active/);
+});
+
+test('play button uses the morphing icon and reflects playback state', async ({ page }) => {
+  await openEpisode(page);
+  await expect(page.locator('#play-btn .play-pause-icon')).toBeVisible();
+  await expect(page.locator('#play-btn')).not.toHaveClass(/playing/);
 });
 
 test('sleep timer surfaces a visible countdown and can be cancelled', async ({ page }) => {

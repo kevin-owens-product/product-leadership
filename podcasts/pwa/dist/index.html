@@ -61,6 +61,44 @@
             flex-direction: column;
         }
 
+        /* Screen-to-screen View Transitions (JS falls back to an instant swap
+           when unsupported; reduced motion skips the transition entirely). */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.18s;
+        }
+
+        ::view-transition-old(mini-player),
+        ::view-transition-new(mini-player) {
+            animation-duration: 0.18s;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-old(root),
+            ::view-transition-new(root),
+            ::view-transition-old(mini-player),
+            ::view-transition-new(mini-player) {
+                animation: none !important;
+            }
+        }
+
+        /* Spring-feel rise when expanding the mini player back to the full
+           player screen. */
+        .player-view.spring-in {
+            animation: playerSpringIn 0.2s cubic-bezier(0.3, 1.35, 0.6, 1);
+        }
+
+        @keyframes playerSpringIn {
+            from { transform: translateY(28px); opacity: 0.5; }
+            to { transform: none; opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .player-view.spring-in {
+                animation: none;
+            }
+        }
+
         /* Episode List View */
         .episode-list-view {
             padding: 20px;
@@ -776,6 +814,9 @@
             justify-content: center;
             color: var(--text-primary);
             transition: all 0.15s;
+            /* Anchor + clip for the press ripple. */
+            position: relative;
+            overflow: hidden;
             /* Long-press repeat-skip: keep iOS from selecting text or
                popping the callout while a skip button is held. */
             -webkit-user-select: none;
@@ -806,6 +847,86 @@
             height: 68px;
             font-size: 1.8rem;
             background: var(--accent);
+        }
+
+        /* Morphing play/pause icon: the two glyphs cross-fade + rotate inside
+           one SVG; the button's .playing class flips them (≤200ms). */
+        .play-pause-icon {
+            width: 58%;
+            height: 58%;
+            fill: currentColor;
+            pointer-events: none;
+        }
+
+        .play-pause-icon .pp-play,
+        .play-pause-icon .pp-pause {
+            transform-origin: 18px 18px;
+            transition: transform 0.18s ease, opacity 0.18s ease;
+        }
+
+        .play-pause-icon .pp-pause {
+            opacity: 0;
+            transform: rotate(-90deg) scale(0.5);
+        }
+
+        button.playing .play-pause-icon .pp-play {
+            opacity: 0;
+            transform: rotate(90deg) scale(0.5);
+        }
+
+        button.playing .play-pause-icon .pp-pause {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Skip-button press ripple (spawned by src/ui/motion.js). */
+        .skip-ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            pointer-events: none;
+            transform: scale(0);
+            animation: rippleExpand 0.2s ease-out forwards;
+        }
+
+        body.light-theme .skip-ripple {
+            background: rgba(0, 0, 0, 0.18);
+        }
+
+        @keyframes rippleExpand {
+            from { transform: scale(0); opacity: 0.9; }
+            to { transform: scale(2.4); opacity: 0; }
+        }
+
+        /* Seconds flyout ("−30s" / "+10s") rising from a skip button. */
+        .skip-flyout {
+            position: fixed;
+            transform: translate(-50%, -100%);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-hover);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+            z-index: 950;
+            animation: flyoutRise 0.2s ease-out forwards;
+        }
+
+        @keyframes flyoutRise {
+            from { opacity: 0; transform: translate(-50%, -100%); }
+            35% { opacity: 1; }
+            to { opacity: 0; transform: translate(-50%, calc(-100% - 16px)); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .play-pause-icon .pp-play,
+            .play-pause-icon .pp-pause {
+                transition: none;
+            }
+
+            .skip-ripple,
+            .skip-flyout {
+                display: none;
+            }
         }
 
         /* Progress */
@@ -1112,24 +1233,83 @@
         }
 
         /* Queue & Mini Player */
+        /* Persistent bottom bar on non-player screens. Slides in/out with a
+           spring-feel transform; its own view-transition-name keeps it
+           anchored (not cross-faded) during screen transitions. */
         .mini-player {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background: var(--bg-secondary);
-            border-top: 2px solid var(--border);
-            padding: 12px 16px;
-            padding-bottom: calc(12px + var(--safe-bottom));
-            display: none;
+            border-top: 1px solid var(--border);
+            padding: 10px 16px;
+            padding-bottom: calc(10px + var(--safe-bottom));
+            display: flex;
             align-items: center;
             gap: 12px;
             z-index: 900;
             cursor: pointer;
+            transform: translateY(105%);
+            visibility: hidden;
+            pointer-events: none;
+            transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.5, 1),
+                        visibility 0s linear 0.2s;
+            view-transition-name: mini-player;
         }
 
         .mini-player.active {
-            display: flex;
+            transform: none;
+            visibility: visible;
+            pointer-events: auto;
+            transition: transform 0.2s cubic-bezier(0.34, 1.3, 0.5, 1);
+        }
+
+        .mini-player:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .mini-player,
+            .mini-player.active {
+                transition: none;
+            }
+        }
+
+        /* Keep scrolling content clear of the bar while it's visible. */
+        body.has-mini-player #podcasts-view,
+        body.has-mini-player #list-view {
+            padding-bottom: calc(120px + var(--safe-bottom));
+        }
+
+        /* Progress hairline across the top edge of the mini player. */
+        .mini-progress {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            pointer-events: none;
+        }
+
+        .mini-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+        }
+
+        .mini-player-art {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            object-fit: cover;
+            background: var(--bg-tertiary);
+        }
+
+        .mini-player-art[hidden] {
+            display: none;
         }
 
         .mini-player-info {
@@ -2260,7 +2440,15 @@
             <div class="control-buttons">
                 <button class="ctrl-btn small ctrl-text" id="prev-btn" title="Back 30 seconds" aria-label="Back 30 seconds">−30</button>
                 <button class="ctrl-btn small ctrl-text" id="back-btn" title="Back 10 seconds" aria-label="Back 10 seconds">−10</button>
-                <button class="ctrl-btn large" id="play-btn" title="Play/Pause" aria-label="Play or pause">▶</button>
+                <button class="ctrl-btn large" id="play-btn" title="Play/Pause" aria-label="Play">
+                    <svg class="play-pause-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                        <path class="pp-play" d="M13.4 9.6 L27.2 18 L13.4 26.4 Z"></path>
+                        <g class="pp-pause">
+                            <rect x="11.2" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
+                            <rect x="20" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
+                        </g>
+                    </svg>
+                </button>
                 <button class="ctrl-btn small ctrl-text" id="fwd-btn" title="Forward 10 seconds" aria-label="Forward 10 seconds">+10</button>
                 <button class="ctrl-btn small ctrl-text" id="next-btn" title="Forward 30 seconds" aria-label="Forward 30 seconds">+30</button>
             </div>
@@ -2482,16 +2670,28 @@
     </div>
 
     <!-- Mini Player -->
-    <div class="mini-player" id="mini-player">
+    <div class="mini-player" id="mini-player" role="button" tabindex="0" aria-label="Now playing — open player">
+        <div class="mini-progress" aria-hidden="true">
+            <div class="mini-progress-fill" id="mini-progress-fill" style="width:0%"></div>
+        </div>
+        <img class="mini-player-art" id="mini-player-art" alt="" hidden>
         <div class="mini-player-info">
             <div class="mini-player-title" id="mini-player-title">Episode Title</div>
             <div class="mini-player-subtitle" id="mini-player-subtitle">Podcast Name</div>
         </div>
         <div class="mini-player-controls">
-            <button class="mini-ctrl-btn" id="mini-play-btn" aria-label="Play or pause">▶</button>
+            <button class="mini-ctrl-btn" id="mini-play-btn" aria-label="Play">
+                <svg class="play-pause-icon" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+                    <path class="pp-play" d="M13.4 9.6 L27.2 18 L13.4 26.4 Z"></path>
+                    <g class="pp-pause">
+                        <rect x="11.2" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
+                        <rect x="20" y="9.6" width="4.8" height="16.8" rx="1.6"></rect>
+                    </g>
+                </svg>
+            </button>
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T151836Z"></script>
+    <script type="module" src="./src/main.js?v=2.3.0%2B20260712T154010Z"></script>
 </body>
 </html>

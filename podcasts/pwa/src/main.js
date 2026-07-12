@@ -751,7 +751,7 @@ function renderPodcastsList(filter = '') {
     listEl.appendChild(addCard);
 }
 
-function openPodcast(podcast) {
+function openPodcast(podcast, { transition = true } = {}) {
     currentPodcast = podcast;
     // Each show remembers its own playback speed (falls back to the current
     // global rate for shows without a saved preference).
@@ -768,7 +768,7 @@ function openPodcast(podcast) {
     document.documentElement.style.setProperty('--accent-text', shadeHex(accent, 0.4));
 
     renderEpisodeList();
-    showView('list-view');
+    showView('list-view', { transition });
 }
 
 document.getElementById('back-to-podcasts').addEventListener('click', () => {
@@ -2735,7 +2735,11 @@ function expandMiniPlayer() {
     if (currentPodcast?.id !== playerPodcast.id) {
         // The user browsed into a different show while listening — restore
         // the playing show's context (header, accent, per-show speed).
-        openPodcast(playerPodcast);
+        // Must skip the View Transition: startViewTransition defers its DOM
+        // swap to an async callback, which would re-activate list-view AFTER
+        // the synchronous showView('player-view') below and dump the user on
+        // the episode list instead of the player.
+        openPodcast(playerPodcast, { transition: false });
     }
     showView('player-view', { transition: false });
     const playerView = document.getElementById('player-view');

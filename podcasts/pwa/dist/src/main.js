@@ -1,5 +1,5 @@
-import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260712T162500Z';
-import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260712T162500Z';
+import { safeColor } from './security/sanitize.js?v=2.3.0%2B20260712T163640Z';
+import { applyLiteralHighlight, includesQuery } from './search/transcript-search.js?v=2.3.0%2B20260712T163640Z';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -9,13 +9,13 @@ import {
     saveQueue,
     loadListeningStats,
     saveListeningStats
-} from './state/storage.js?v=2.3.0%2B20260712T162500Z';
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260712T162500Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T162500Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T162500Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T162500Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T162500Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T162500Z';
+} from './state/storage.js?v=2.3.0%2B20260712T163640Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from './share-export/export.js?v=2.3.0%2B20260712T163640Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260712T163640Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260712T163640Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260712T163640Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260712T163640Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260712T163640Z';
 import {
     renderPodcastCard,
     renderEpisodeCard,
@@ -23,16 +23,16 @@ import {
     renderQueueItem,
     renderChapterItem,
     renderBookmarkItem
-} from './ui/render.js?v=2.3.0%2B20260712T162500Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T162500Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T162500Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T162500Z';
-import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T162500Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T162500Z';
-import { createTranscriptFollow } from './ui/transcript-follow.js?v=2.3.0%2B20260712T162500Z';
-import { sleepFadeVolume, sleepRemainingSeconds } from './playback/sleep-timer.js?v=2.3.0%2B20260712T162500Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T162500Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260712T162500Z';
+} from './ui/render.js?v=2.3.0%2B20260712T163640Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260712T163640Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260712T163640Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260712T163640Z';
+import { transitionViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260712T163640Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260712T163640Z';
+import { createTranscriptFollow } from './ui/transcript-follow.js?v=2.3.0%2B20260712T163640Z';
+import { sleepFadeVolume, sleepRemainingSeconds } from './playback/sleep-timer.js?v=2.3.0%2B20260712T163640Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260712T163640Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260712T163640Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -131,7 +131,7 @@ let podcastsLoaded = false;
 // build-episodes.js substitutes the real version into the placeholder below
 // (same mechanism as sw.js); when running unbuilt source, fall back to the
 // last-seen app version so the URL is still stable across reloads.
-const BUILD_VERSION = '2.3.0+20260712T162500Z';
+const BUILD_VERSION = '2.3.0+20260712T163640Z';
 function loadPodcastsScript() {
     const cacheKey = BUILD_VERSION.includes('__') ? APP_VERSION : BUILD_VERSION;
     const script = document.createElement('script');

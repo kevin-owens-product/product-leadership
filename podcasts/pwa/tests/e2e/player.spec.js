@@ -161,6 +161,35 @@ test('mini player persists on non-player screens and expands back to the player'
   await expect(page.locator('#mini-player')).toHaveClass(/active/);
 });
 
+test('mini player expands to the player after browsing a different show', async ({ page }) => {
+  await openEpisode(page);
+
+  // Browse away from the playing show: player → episode list → home →
+  // another show's episode list. The mini player follows the whole way.
+  await page.locator('#back-to-list').click();
+  await expect(page.locator('#list-view')).toHaveClass(/active/);
+  await page.locator('#back-to-podcasts').click();
+  await expect(page.locator('#podcasts-view')).toHaveClass(/active/);
+  await page.locator('.podcast-card:has-text("Agentic Coding Frontier")').first().click();
+  await expect(page.locator('#list-view')).toHaveClass(/active/);
+  await expect(page.locator('#current-podcast-title')).toContainText('Agentic Coding Frontier');
+  await expect(page.locator('#mini-player')).toHaveClass(/active/);
+
+  // Expanding must land on the player AND restore the playing show's context.
+  await page.locator('#mini-player-title').click();
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+  await expect(page.locator('#current-podcast-title')).toContainText('The Forge Podcast');
+
+  // Regression guard: openPodcast() used to route through a View Transition
+  // whose deferred callback re-activated list-view over the player ~a frame
+  // (or transition duration) later. Give any stray transition time to finish
+  // and confirm the player is still the active view.
+  await page.waitForTimeout(700);
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+  await expect(page.locator('#list-view')).not.toHaveClass(/active/);
+  await expect(page.locator('#mini-player')).not.toHaveClass(/active/);
+});
+
 test('play button uses the morphing icon and reflects playback state', async ({ page }) => {
   await openEpisode(page);
   await expect(page.locator('#play-btn .play-pause-icon')).toBeVisible();

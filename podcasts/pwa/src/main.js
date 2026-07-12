@@ -3,7 +3,6 @@
 // owns the cross-cutting mutable state (current podcast/episode, playback
 // flags) and wires the modules together.
 
-import { safeColor } from './security/sanitize.js';
 import {
     STORAGE_KEY,
     STATE_SCHEMA_VERSION,
@@ -45,8 +44,8 @@ import { createDownloadsManager } from './downloads/downloads.js';
 import { createMediaSessionController } from './playback/media-session.js';
 import { createSleepController } from './playback/sleep-controller.js';
 import { findNextUp } from './state/queue-next.js';
-import { formatClock, shadeHex } from './ui/format.js';
-import { generatePodcastArtwork, DEFAULT_ACCENT } from './ui/artwork.js';
+import { formatClock } from './ui/format.js';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js';
 import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js';
 import { initModalA11y } from './ui/modal-a11y.js';
 import { createMiniPlayer } from './ui/mini-player.js';
@@ -432,12 +431,10 @@ function openPodcast(podcast, { transition = true } = {}) {
     document.getElementById('current-podcast-subtitle').textContent = podcast.subtitle;
     document.getElementById('nav-podcast-name').textContent = podcast.title;
 
-    // Update accent color. --accent-text is a lightened shade for
-    // accent-colored text on dark surfaces (contrast ≥ 4.5:1); the light
-    // theme shadows it with its own darker value in CSS.
-    const accent = safeColor(podcast.color || DEFAULT_ACCENT);
-    document.documentElement.style.setProperty('--accent', accent);
-    document.documentElement.style.setProperty('--accent-text', shadeHex(accent, 0.4));
+    // Enter the show's adaptive palette: --show-* on <body> (wash, accent,
+    // chips, glow — DESIGN.md §3) plus the legacy --accent/--accent-text
+    // bridge on <html>. Contrast clamping happens inside the engine.
+    applyShowPalette(podcast);
 
     library.renderEpisodeList();
     showView('list-view', { transition });
@@ -451,9 +448,8 @@ document.getElementById('back-to-podcasts').addEventListener('click', () => {
         // any polished podcast app.
         void stopPlayback();
         currentPodcast = null;
-        // Back to the stylesheet defaults for both accent variables.
-        document.documentElement.style.removeProperty('--accent');
-        document.documentElement.style.removeProperty('--accent-text');
+        // Back to the resting ember palette (stylesheet defaults).
+        clearShowPalette();
     }
     library.renderPodcastsList();
     showView('podcasts-view');

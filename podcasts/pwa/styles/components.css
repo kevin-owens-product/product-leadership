@@ -86,7 +86,7 @@ body.has-mini-player #list-view {
 .mini-progress-fill {
     height: 100%;
     width: 0%;
-    background: var(--accent);
+    background: var(--show-accent);
 }
 
 .mini-player-art {
@@ -353,10 +353,12 @@ body.light-theme {
        Defined on body so it shadows the per-podcast value main.js
        sets on <html> (which is tuned for dark surfaces only). */
     --accent-text: oklch(0.50 0.15 43);
-    /* Show-tinted text follows the same darker-on-light rule. */
-    --show-text: oklch(0.45 0.11 var(--show-hue));
-    --show-wash: oklch(0.93 0.02 var(--show-hue));
-    --show-glow: oklch(0.6 0.13 var(--show-hue) / 0.18);
+    /* Show-tinted text follows the same darker-on-light rule. !important
+       so these beat the dark-tuned inline values the identity engine sets
+       on <body> (author !important > inline non-important). */
+    --show-text: oklch(0.45 0.11 var(--show-hue)) !important;
+    --show-wash: oklch(0.93 0.02 var(--show-hue)) !important;
+    --show-glow: oklch(0.6 0.13 var(--show-hue) / 0.18) !important;
     /* Danger text follows the same rule. */
     --danger-text: oklch(0.505 0.190 27.5);
     --danger-subtle: color-mix(in oklab, var(--danger) 8%, transparent);
@@ -946,6 +948,11 @@ body.light-theme {
     justify-content: center;
     font-size: 1.8rem;
     flex-shrink: 0;
+    /* Generated cover art renders as an <img>; keep the tile crisp and
+       give it the raised-surface edge light. */
+    object-fit: cover;
+    box-shadow: var(--shadow-1), var(--edge-highlight);
+    background: var(--surface-2);
 }
 
 .podcast-info {

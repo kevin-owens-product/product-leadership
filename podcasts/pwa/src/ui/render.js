@@ -1,4 +1,5 @@
-import { escapeHtml, safeColor } from '../security/sanitize.js';
+import { escapeHtml } from '../security/sanitize.js';
+import { generatePodcastArtwork } from './artwork.js';
 
 function formatClockFromMinutes(totalMinutes) {
   const safeMinutes = Number.isFinite(totalMinutes) ? Math.max(0, totalMinutes) : 0;
@@ -25,7 +26,6 @@ export function setStaticHtml(el, html) {
 }
 
 export function renderPodcastCard(card, podcast, epCount, avgProgress) {
-  const color = safeColor(podcast.color || '#6366f1');
   let totalSeconds = 0;
   let haveDurations = false;
   if (Array.isArray(podcast.episodes)) {
@@ -37,9 +37,15 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
     }
   }
   const totalLabel = haveDurations ? formatDurationLabel(totalSeconds) : `~${epCount * 60} min`;
+  // Generated cover art (identity engine, DESIGN.md §5); falls back to the
+  // emoji tile only if canvas is unavailable.
+  const artUrl = generatePodcastArtwork(podcast);
+  const artTile = artUrl
+    ? `<img class="podcast-icon" src="${artUrl}" alt="" loading="lazy">`
+    : `<div class="podcast-icon">${escapeHtml(podcast.icon || '🎙️')}</div>`;
   card.innerHTML = `
     <div class="podcast-card-header">
-      <div class="podcast-icon" style="background: ${color}20; color: ${color}">${escapeHtml(podcast.icon || '🎙️')}</div>
+      ${artTile}
       <div class="podcast-info">
         <div class="podcast-title">${escapeHtml(podcast.title)}</div>
         <div class="podcast-subtitle">${escapeHtml(podcast.subtitle)}</div>

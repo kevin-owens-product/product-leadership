@@ -2,6 +2,10 @@
 .player-view {
     padding: var(--space-5);
     padding-bottom: var(--space-5);
+    /* Adaptive show wash (DESIGN.md §3): top-of-screen radial only,
+       never a full-bleed tint. */
+    background:
+        radial-gradient(140% 52% at 50% -8%, var(--show-wash), transparent 72%);
 }
 
 .player-header {

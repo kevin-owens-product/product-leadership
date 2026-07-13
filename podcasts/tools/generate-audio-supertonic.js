@@ -158,14 +158,28 @@ function pickVoice(speakerName, voiceMap, fallbackIndex) {
   return fallbackIndex % 2 === 0 ? 'M1' : 'F1';
 }
 
-function cleanText(text) {
+// Supertonic 3 inline expression tags (the documented subset — the model
+// ships 10 but only these are named upstream, and only <laugh> is verified
+// clearly audible). Known tags pass through to the model lowercased; any
+// other <angle> token is stripped so a typo is never read aloud as text.
+const EXPRESSION_TAGS = new Set(['laugh', 'breath', 'sigh']);
+
+function normalizeExpressionTags(text) {
   return text
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/\*([^*]+)\*/g, '$1')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/```[\s\S]*?```/g, 'code block')
-    .trim();
+    .replace(/<\s*([a-zA-Z_]+)\s*>/g, (m, name) =>
+      EXPRESSION_TAGS.has(name.toLowerCase()) ? `<${name.toLowerCase()}>` : '')
+    .replace(/ {2,}/g, ' ');
+}
+
+function cleanText(text) {
+  return normalizeExpressionTags(
+    text
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/```[\s\S]*?```/g, 'code block')
+  ).trim();
 }
 
 function parseEpisode(filePath) {

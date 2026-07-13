@@ -78,6 +78,12 @@ test('cleanText strips markdown emphasis, code, and link targets', () => {
     assert.equal(cleanText('see [the docs](https://example.com) now'), 'see the docs now');
 });
 
+test('cleanText strips TTS expression tags from transcript display', () => {
+    assert.equal(cleanText('<laugh> That is wild. <breath> Let me think.'), 'That is wild. Let me think.');
+    assert.equal(cleanText('Mid<sigh>sentence tag'), 'Mid sentence tag');
+    assert.equal(cleanText('Unknown <mystery_tag> is also hidden'), 'Unknown is also hidden');
+});
+
 test('isContinuationDialogueLine rejects structural markdown', () => {
     assert.equal(isContinuationDialogueLine('plain prose'), true);
     for (const line of ['', '# h', '| cell', '- item', '*em', '---']) {

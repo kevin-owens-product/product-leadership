@@ -130,7 +130,12 @@ export function parseMarkdown(content, voiceOverrides = {}) {
 export function cleanText(text) {
     return text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/`/g, '')
         .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-        .replace(/```[\s\S]*?```/g, 'code block').trim();
+        .replace(/```[\s\S]*?```/g, 'code block')
+        // TTS expression tags (<laugh>, <breath>, <sigh>) are audio-only
+        // directives — never show them in the transcript.
+        .replace(/<\s*[a-zA-Z_]+\s*>/g, ' ')
+        .replace(/ {2,}/g, ' ')
+        .trim();
 }
 
 // Align chapter entries (parsed from headings) to the dialogue line that

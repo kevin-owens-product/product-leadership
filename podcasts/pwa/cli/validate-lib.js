@@ -35,6 +35,13 @@ const CUE_HEAD_WORDS = new Set([
     'PAUSE', 'LONG', 'MUSIC', 'INTRO', 'OUTRO', 'SFX', 'SOUND', 'AMBIENCE', 'AMBIENT'
 ]);
 
+// Supertonic 3 inline expression tags — must mirror EXPRESSION_TAGS in
+// ../../tools/generate-audio-supertonic.js. Unknown <angle> tokens are
+// stripped by the generator (never read aloud), but they're almost always
+// typos, so lint them.
+export const EXPRESSION_TAGS = new Set(['laugh', 'breath', 'sigh']);
+const ANGLE_TAG_RE = /<\s*([a-zA-Z_]+)\s*>/g;
+
 const BOLD_COLON_OUTSIDE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*)\*\*\s*:/;
 const PLAIN_SPEAKER_RE = /^([A-Z][A-Z0-9 '&()./-]*):\s+\S/;
 const BARE_BRACKET_LINE_RE = /^\[([^\]]*)\]$/;
@@ -82,6 +89,20 @@ export function lintEpisodeMarkdown(markdown, { knownSpeakers = null } = {}) {
         if (trimmed.startsWith('[') && !trimmed.includes(']')) {
             issues.push(issue(lineNo, 'error', `unclosed "[" — cue or speaker tag is never closed`));
             continue;
+        }
+
+        // Expression tags: <laugh>/<breath>/<sigh> pass through to the TTS;
+        // anything else in <angle> brackets is stripped by the generator, so
+        // an unknown tag is almost certainly a typo that silently disappears.
+        for (const tagMatch of trimmed.matchAll(ANGLE_TAG_RE)) {
+            const tag = tagMatch[1];
+            if (!EXPRESSION_TAGS.has(tag.toLowerCase())) {
+                issues.push(issue(lineNo, 'error',
+                    `unknown expression tag "<${tag}>" — valid tags: ${[...EXPRESSION_TAGS].map((t) => `<${t}>`).join(' ')} (unknown tags are stripped from the audio)`));
+            } else if (tag !== tag.toLowerCase()) {
+                issues.push(issue(lineNo, 'warning',
+                    `expression tag "<${tag}>" should be lowercase "<${tag.toLowerCase()}>" (the generator normalizes it, but keep sources consistent)`));
+            }
         }
 
         // Bare bracket-only line: either a timed cue or a (skipped) stage direction.

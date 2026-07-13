@@ -129,6 +129,21 @@ order of speaker appearance.
 `lang` defaults to `en`; see the Supertonic README for the full list of 31
 supported codes.
 
+## Expression tags (Supertonic 3)
+
+Dialogue lines may contain inline expression tags, which the generator
+forwards to the model for vocal nuance:
+
+```markdown
+**ALEX:** <laugh> Okay, that one actually surprised me. <breath> Let's dig in.
+```
+
+Supported: `<laugh>` (clearly audible), `<breath>`, `<sigh>` (subtler).
+The generator lowercases known tags and strips any unrecognized `<angle>`
+token so typos are never read aloud; `npm run validate` (from `podcasts/pwa`)
+flags unknown tags as errors. The PWA strips all tags from the displayed
+transcript.
+
 ## How the PWA finds the audio
 
 The build step (`podcasts/pwa/build-episodes.js`) copies `podcasts/pwa/audio/`

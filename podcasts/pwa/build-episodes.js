@@ -92,6 +92,7 @@ function estimateDurationSeconds(markdown) {
             .replace(/\*\*([^*]+)\*\*/g, '$1')
             .replace(/\*([^*]+)\*/g, '$1')
             .replace(/`([^`]+)`/g, '$1')
+            .replace(/<\s*[a-zA-Z_]+\s*>/g, ' ')
             .trim();
         if (!text) continue;
         words += text.split(/\s+/).filter(Boolean).length;

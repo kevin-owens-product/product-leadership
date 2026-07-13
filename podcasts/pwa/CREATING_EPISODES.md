@@ -67,6 +67,18 @@ Rules the pipeline actually enforces:
   A suffix after `-` or `:` is allowed (`[MUSIC STING - FADE TO SILENCE]`).
   Any other `[BRACKETED]` line is a stage direction: it is skipped and
   produces **no** pause — near-misses like `[PAUSE FOR EFFECT]` are lint errors.
+- **Expression tags** — inline `<laugh>`, `<breath>`, and `<sigh>` inside a
+  dialogue line add vocal nuance to the generated audio (Supertonic 3
+  feature). They are stripped from the on-screen transcript and from the
+  duration estimate, and pass through to the TTS only:
+
+  ```markdown
+  **ALEX:** <laugh> Okay, that one actually surprised me. <breath> Let's dig in.
+  ```
+
+  Tags are lowercase; `<laugh>` is the most clearly audible of the three.
+  Any other `<angle>` token is a lint error and is stripped from the audio
+  rather than read aloud.
 
 ### `podcast.json`
 

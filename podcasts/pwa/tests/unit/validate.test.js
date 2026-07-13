@@ -277,6 +277,26 @@ test('parseEpisodeEvents mirrors the TTS parser event stream', () => {
     assert.equal(events[2].speaker, 'RILEY');
 });
 
+test('expression tags: known pass, unknown error, wrong case warns', () => {
+    const md = [
+        '**Duration:** ~10 minutes',
+        '',
+        '**ALEX:** <laugh> That is wild. <breath> Let me think.',
+        '',
+        '**RILEY:** <luagh> Typo tag here.',
+        '',
+        '**ALEX:** <Sigh> Wrong case.',
+        ''
+    ].join('\n');
+    const issues = lintEpisodeMarkdown(md, { speakers: SPEAKERS });
+    const errs = errors(issues);
+    const warns = warnings(issues);
+    assert.equal(errs.length, 1);
+    assert.match(errs[0].message, /unknown expression tag "<luagh>"/);
+    assert.equal(warns.length, 1);
+    assert.match(warns[0].message, /"<Sigh>" should be lowercase/);
+});
+
 test('knownSpeakersFromManifest uppercases voiceMap keys and handles absence', () => {
     assert.equal(knownSpeakersFromManifest({}), null);
     assert.equal(knownSpeakersFromManifest({ voiceMap: {} }), null);

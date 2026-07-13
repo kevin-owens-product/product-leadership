@@ -29,6 +29,11 @@ export const CUE_REFERENCE_COMMENT = `<!--
     \`[AMBIENCE]\` or \`[AMBIENT BED]\` background bed (1.0s)
   Anything else in [BRACKETS] on its own line is a stage direction — it is
   skipped entirely and produces no pause in the audio.
+  Expression -> inline tags inside dialogue add vocal nuance to the TTS and
+                 never appear in the transcript:
+    \`<laugh>\`   audible laugh   (**ALEX:** <laugh> No way, really?)
+    \`<breath>\`  breath beat
+    \`<sigh>\`    sigh beat
 
   Run "npm run validate" any time to lint this file.
 -->`;

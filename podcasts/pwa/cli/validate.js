@@ -19,6 +19,7 @@ import {
     lintEpisodeMarkdown,
     checkShowManifest,
     checkAudioManifest,
+    checkManifestAlignment,
     knownSpeakersFromManifest
 } from './validate-lib.js';
 
@@ -151,6 +152,10 @@ export function runValidation({
                 fileExists: (file) => fs.existsSync(path.join(audioDir, file)),
                 combinedDurationSeconds
             })) {
+                report(audioManifestPath, null, issue.level, issue.message);
+            }
+
+            for (const issue of checkManifestAlignment(markdown, items)) {
                 report(audioManifestPath, null, issue.level, issue.message);
             }
         }

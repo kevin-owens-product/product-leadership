@@ -883,9 +883,34 @@ speechPlayers.on('ended', () => {
     if (sleepStop) sleep.consumeEpisodeEndStop();
 });
 
+// Continuous mode is enabled from manifest durations alone — a missing or
+// unsupported combined.mp3 only reveals itself when the element errors. The
+// per-line clips are still there, so downgrade the episode to chunked
+// playback instead of stranding it behind a retry that can never succeed.
+// One-shot per episode: mid-stream network drops keep the retry toast.
+let demotedEpisodeKey = null;
+function demoteToChunked() {
+    if (!currentEpisode) return false;
+    const key = getEpisodeKey();
+    if (demotedEpisodeKey === key) return false;
+    if (!dialogueLines.some((l) => l.audioUrl)) return false;
+    demotedEpisodeKey = key;
+    const line = currentLineIndex;
+    speechPlayers.setEpisode({});
+    currentLineIndex = line;
+    console.warn('combined.mp3 unavailable — demoting episode to per-chunk playback');
+    return true;
+}
+
 speechPlayers.on('error', (err) => {
     console.warn('Audio element error:', err);
     if (!currentEpisode || !speechPlayers.isContinuousReady()) return;
+    // Source never became playable (load-time 404/decode failure, not a
+    // mid-stream drop): fall back to the per-line clips.
+    if (!(speechPlayers.getCurrentTime() > 0) && demoteToChunked()) {
+        if (isPlaying && !isPaused) { isPlaying = false; void startPlayback(); }
+        return;
+    }
     setStatus('Audio playback error');
     toasts.show('Audio failed to load', {
         actionLabel: 'Retry',
@@ -908,6 +933,12 @@ function retryAudioLoad() {
 function handlePlayFailure(err) {
     if (err && err.name === 'NotAllowedError') {
         setStatus('Tap play to start');
+        return;
+    }
+    // play() rejecting before any audio ever rendered usually means the
+    // combined.mp3 doesn't exist — switch to the per-line clips and go.
+    if (!(speechPlayers.getCurrentTime() > 0) && demoteToChunked()) {
+        void startPlayback();
         return;
     }
     console.warn('play() failed:', err);
@@ -951,6 +982,7 @@ async function startPlayback() {
     syncMediaSession({ includeMetadata: true, includePosition: true });
     await requestWakeLock();
 
+    let consecutiveAudioFailures = 0;
     while (currentLineIndex < dialogueLines.length && isPlaying) {
         if (!playbackSessions.isActive(sessionId)) break;
         if (sleep.checkExpiry()) break;
@@ -963,11 +995,26 @@ async function startPlayback() {
         setStatus(`${line.speaker || 'Narration'}: Speaking...`, true);
         try {
             await speak(line.text, line.type, line.audioUrl ? { audioUrl: line.audioUrl } : undefined);
+            consecutiveAudioFailures = 0;
         } catch (e) {
             console.error('Speech error:', e);
+            const failedLine = currentLineIndex;
+            consecutiveAudioFailures++;
+            if (consecutiveAudioFailures >= 3) {
+                // Nothing is loading (offline, missing audio deploy, bad
+                // episode) — stop at the start of the failing run instead of
+                // silently "playing" the rest of the episode and marking it
+                // complete with no sound.
+                currentLineIndex = Math.max(0, failedLine - (consecutiveAudioFailures - 1));
+                isPlaying = false;
+                toasts.show("Episode audio isn't loading — check your connection and try again", {
+                    actionLabel: 'Retry',
+                    onAction: () => { void jumpToLine(currentLineIndex, true); }
+                });
+                break;
+            }
             // Identical messages coalesce into one toast, so a run of failing
             // lines doesn't stack notifications.
-            const failedLine = currentLineIndex;
             toasts.show('Audio failed for a line — skipping ahead', {
                 actionLabel: 'Retry',
                 onAction: () => { void jumpToLine(failedLine, true); }

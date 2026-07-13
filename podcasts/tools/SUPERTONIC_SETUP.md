@@ -4,10 +4,11 @@
 WAV (then optionally MP3) using [Supertonic](https://github.com/supertone-inc/supertonic) —
 an on-device ONNX voice synthesis engine. Output drops into `podcasts/pwa/audio/<show>/<episode>/`.
 The PWA picks it up automatically: it fetches `audio/<show>/<episode>/manifest.json`
-on episode open, attaches a URL to each dialogue line, and the player swaps the
-browser's `speechSynthesis` for an `<audio>` element. The local production
-workflow is Supertonic-first: every published episode should have a generated
-manifest before the PWA is built.
+on episode open and attaches a URL to each dialogue line. Generated audio is
+REQUIRED for playback — there is no browser speechSynthesis fallback — so
+every published episode must have a generated manifest before the PWA is
+built, and `dist/audio/` must be committed (Netlify serves the committed
+`dist/`; the player stops with an error toast if episode audio is missing).
 
 ## One-time setup
 

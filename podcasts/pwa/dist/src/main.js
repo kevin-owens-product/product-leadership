@@ -8,30 +8,30 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260713T023529Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260713T023529Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260713T023529Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260713T023529Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260713T023529Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260713T023529Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260713T023529Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260713T023529Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260713T023529Z';
-import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260713T023529Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260713T023529Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260713T023529Z';
+} from './state/storage.js?v=2.3.0%2B20260713T035759Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260713T035759Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260713T035759Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260713T035759Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260713T035759Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260713T035759Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260713T035759Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260713T035759Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260713T035759Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260713T035759Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260713T035759Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260713T035759Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260713T023529Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260713T023529Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260713T023529Z';
+} from './app/version.js?v=2.3.0%2B20260713T035759Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260713T035759Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260713T035759Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260713T023529Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260713T035759Z';
 import {
     combinedAudioUrl,
     withCacheKey,
@@ -39,26 +39,26 @@ import {
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260713T023529Z';
-import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260713T023529Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260713T023529Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260713T023529Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260713T023529Z';
-import { formatClock } from './ui/format.js?v=2.3.0%2B20260713T023529Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260713T023529Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260713T023529Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260713T023529Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260713T023529Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260713T023529Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260713T023529Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260713T023529Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260713T023529Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260713T023529Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260713T023529Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260713T023529Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260713T023529Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260713T023529Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260713T023529Z';
+} from './playback/manifest.js?v=2.3.0%2B20260713T035759Z';
+import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260713T035759Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260713T035759Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260713T035759Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260713T035759Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260713T035759Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260713T035759Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260713T035759Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260713T035759Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260713T035759Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260713T035759Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260713T035759Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260713T035759Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260713T035759Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260713T035759Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260713T035759Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260713T035759Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260713T035759Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260713T035759Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260713T035759Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -883,9 +883,34 @@ speechPlayers.on('ended', () => {
     if (sleepStop) sleep.consumeEpisodeEndStop();
 });
 
+// Continuous mode is enabled from manifest durations alone — a missing or
+// unsupported combined.mp3 only reveals itself when the element errors. The
+// per-line clips are still there, so downgrade the episode to chunked
+// playback instead of stranding it behind a retry that can never succeed.
+// One-shot per episode: mid-stream network drops keep the retry toast.
+let demotedEpisodeKey = null;
+function demoteToChunked() {
+    if (!currentEpisode) return false;
+    const key = getEpisodeKey();
+    if (demotedEpisodeKey === key) return false;
+    if (!dialogueLines.some((l) => l.audioUrl)) return false;
+    demotedEpisodeKey = key;
+    const line = currentLineIndex;
+    speechPlayers.setEpisode({});
+    currentLineIndex = line;
+    console.warn('combined.mp3 unavailable — demoting episode to per-chunk playback');
+    return true;
+}
+
 speechPlayers.on('error', (err) => {
     console.warn('Audio element error:', err);
     if (!currentEpisode || !speechPlayers.isContinuousReady()) return;
+    // Source never became playable (load-time 404/decode failure, not a
+    // mid-stream drop): fall back to the per-line clips.
+    if (!(speechPlayers.getCurrentTime() > 0) && demoteToChunked()) {
+        if (isPlaying && !isPaused) { isPlaying = false; void startPlayback(); }
+        return;
+    }
     setStatus('Audio playback error');
     toasts.show('Audio failed to load', {
         actionLabel: 'Retry',
@@ -908,6 +933,12 @@ function retryAudioLoad() {
 function handlePlayFailure(err) {
     if (err && err.name === 'NotAllowedError') {
         setStatus('Tap play to start');
+        return;
+    }
+    // play() rejecting before any audio ever rendered usually means the
+    // combined.mp3 doesn't exist — switch to the per-line clips and go.
+    if (!(speechPlayers.getCurrentTime() > 0) && demoteToChunked()) {
+        void startPlayback();
         return;
     }
     console.warn('play() failed:', err);
@@ -951,6 +982,7 @@ async function startPlayback() {
     syncMediaSession({ includeMetadata: true, includePosition: true });
     await requestWakeLock();
 
+    let consecutiveAudioFailures = 0;
     while (currentLineIndex < dialogueLines.length && isPlaying) {
         if (!playbackSessions.isActive(sessionId)) break;
         if (sleep.checkExpiry()) break;
@@ -963,11 +995,26 @@ async function startPlayback() {
         setStatus(`${line.speaker || 'Narration'}: Speaking...`, true);
         try {
             await speak(line.text, line.type, line.audioUrl ? { audioUrl: line.audioUrl } : undefined);
+            consecutiveAudioFailures = 0;
         } catch (e) {
             console.error('Speech error:', e);
+            const failedLine = currentLineIndex;
+            consecutiveAudioFailures++;
+            if (consecutiveAudioFailures >= 3) {
+                // Nothing is loading (offline, missing audio deploy, bad
+                // episode) — stop at the start of the failing run instead of
+                // silently "playing" the rest of the episode and marking it
+                // complete with no sound.
+                currentLineIndex = Math.max(0, failedLine - (consecutiveAudioFailures - 1));
+                isPlaying = false;
+                toasts.show("Episode audio isn't loading — check your connection and try again", {
+                    actionLabel: 'Retry',
+                    onAction: () => { void jumpToLine(currentLineIndex, true); }
+                });
+                break;
+            }
             // Identical messages coalesce into one toast, so a run of failing
             // lines doesn't stack notifications.
-            const failedLine = currentLineIndex;
             toasts.show('Audio failed for a line — skipping ahead', {
                 actionLabel: 'Retry',
                 onAction: () => { void jumpToLine(failedLine, true); }

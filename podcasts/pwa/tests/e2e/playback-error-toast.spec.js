@@ -7,7 +7,7 @@ import { test, expect } from '@playwright/test';
 // cannot intercept — block it so the 404 routes actually reach the app.
 test.use({ serviceWorkers: 'block' });
 
-async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitle = 'AI-Native Product Management') {
+async function openEpisode(page, podcastTitle = 'Claude Code Mastery', episodeTitle = 'Getting Started with Claude Code') {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle').catch(() => {});
   await expect(page.locator('#podcasts-view')).toBeVisible();
@@ -32,7 +32,7 @@ async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitl
 
 test('404 per-line audio surfaces a coalesced skip-ahead retry toast', async ({ page }) => {
   // Every chunk 404s — playback must keep advancing and show ONE toast.
-  await page.route('**/audio/the-forge-podcast/episode-04-ai-native-product-management/*.mp3*', route =>
+  await page.route('**/audio/claude-code-mastery/episode-01-getting-started/*.mp3*', route =>
     route.fulfill({ status: 404, contentType: 'text/plain', body: 'not found' })
   );
 
@@ -46,11 +46,19 @@ test('404 per-line audio surfaces a coalesced skip-ahead retry toast', async ({ 
   // Identical failures coalesce: a run of 404'ing lines shows one toast, not N.
   await page.waitForTimeout(800);
   await expect(page.locator('#toast-region .toast', { hasText: 'Audio failed for a line' })).toHaveCount(1);
+
+  // Circuit breaker: after 3 consecutive failures playback STOPS instead of
+  // sprinting through the episode and marking it complete with no sound.
+  await expect(page.locator('#toast-region .toast', { hasText: "Episode audio isn't loading" })).toBeVisible();
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Play');
+  await expect(page.locator('#complete-modal')).not.toBeVisible();
 });
 
-test('404 combined audio in continuous mode surfaces a retry toast', async ({ page }) => {
-  // Deadwater plays via combined.mp3 (continuous mode); breaking that file
-  // must produce a load-failure toast with a Retry action.
+test('404 combined audio demotes to per-chunk playback and still plays', async ({ page }) => {
+  // Deadwater normally streams combined.mp3 (continuous mode). When that
+  // file is missing but the per-line clips exist, the player must demote to
+  // chunked playback and play — not strand the episode behind a retry toast
+  // that re-fetches the same dead URL.
   await page.route('**/audio/deadwater/deadwater_s01e01/combined.mp3*', route =>
     route.fulfill({ status: 404, contentType: 'text/plain', body: 'not found' })
   );
@@ -58,9 +66,8 @@ test('404 combined audio in continuous mode surfaces a retry toast', async ({ pa
   await openEpisode(page, 'Deadwater', 'The Find');
   await page.locator('#play-btn').click();
 
-  const toast = page.locator('#toast-region .toast', {
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause', { timeout: 15000 });
+  await expect(page.locator('#toast-region .toast', {
     hasText: /Audio failed to load|Playback failed to start/
-  });
-  await expect(toast.first()).toBeVisible({ timeout: 15000 });
-  await expect(toast.first().locator('.toast-action')).toHaveText('Retry');
+  })).toHaveCount(0);
 });

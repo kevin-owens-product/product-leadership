@@ -1,7 +1,8 @@
 .netlify/
 podcasts/pwa/.netlify/
 podcasts/pwa/audio/
-podcasts/pwa/dist/audio/
+# NOTE: dist/audio is deliberately TRACKED — Netlify serves the committed
+# dist/, so ignoring generated audio here ships episodes with no sound.
 podcasts/pwa/node_modules/
 podcasts/pwa/test-results/
 podcasts/pwa/playwright-report/

@@ -10,7 +10,7 @@ test.use({ serviceWorkers: 'block' });
 // interaction with auto-advance, plus the mini player's inline play/pause
 // control and keyboard expand.
 
-async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitle = 'AI-Native Product Management') {
+async function openEpisode(page, podcastTitle = 'Claude Code Mastery', episodeTitle = 'Getting Started with Claude Code') {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle').catch(() => {});
   await expect(page.locator('#podcasts-view')).toBeVisible();
@@ -36,25 +36,37 @@ async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitl
 // Chunks that end instantly — an episode "finishes" in a couple of seconds.
 function installInstantAudio(page) {
   return page.addInitScript(() => {
+    // Event-capable fake: the app's continuous mode wires addEventListener on
+    // a module-scope `new Audio()` singleton, so the fake must emit real
+    // play/pause/ended events — an "ended" fires shortly after play(), which
+    // finishes both continuous episodes and individual chunks instantly.
     window.Audio = class FakeAudio {
       constructor(src) {
-        this.src = src;
+        this._listeners = {};
+        this.src = src || '';
         this.preload = '';
         this.playbackRate = 1;
         this.paused = true;
+        this.currentTime = 0;
+        this.duration = NaN;
         this.onended = null;
         this.onerror = null;
       }
+      addEventListener(ev, fn) { (this._listeners[ev] = this._listeners[ev] || []).push(fn); }
+      removeEventListener(ev, fn) { this._listeners[ev] = (this._listeners[ev] || []).filter((f) => f !== fn); }
+      _emit(ev) {
+        (this._listeners[ev] || []).forEach((f) => { try { f(); } catch { /* ignore */ } });
+        if (ev === 'ended' && typeof this.onended === 'function') this.onended();
+      }
+      load() {}
+      setAttribute() {}
       play() {
         this.paused = false;
-        setTimeout(() => {
-          if (typeof this.onended === 'function') this.onended();
-        }, 20);
+        this._emit('play');
+        setTimeout(() => { if (!this.paused) { this.paused = true; this._emit('ended'); } }, 20);
         return Promise.resolve();
       }
-      pause() {
-        this.paused = true;
-      }
+      pause() { this.paused = true; this._emit('pause'); }
     };
   });
 }
@@ -62,22 +74,30 @@ function installInstantAudio(page) {
 // Chunks that never end — playback state stays "playing" deterministically.
 function installLingeringAudio(page) {
   return page.addInitScript(() => {
+    // Same event-capable fake, but chunks never end — playback state stays
+    // "playing" deterministically for pause/resume assertions.
     window.Audio = class FakeAudio {
       constructor(src) {
-        this.src = src;
+        this._listeners = {};
+        this.src = src || '';
         this.preload = '';
         this.playbackRate = 1;
         this.paused = true;
+        this.currentTime = 0;
+        this.duration = NaN;
         this.onended = null;
         this.onerror = null;
       }
-      play() {
-        this.paused = false;
-        return Promise.resolve();
+      addEventListener(ev, fn) { (this._listeners[ev] = this._listeners[ev] || []).push(fn); }
+      removeEventListener(ev, fn) { this._listeners[ev] = (this._listeners[ev] || []).filter((f) => f !== fn); }
+      _emit(ev) {
+        (this._listeners[ev] || []).forEach((f) => { try { f(); } catch { /* ignore */ } });
+        if (ev === 'ended' && typeof this.onended === 'function') this.onended();
       }
-      pause() {
-        this.paused = true;
-      }
+      load() {}
+      setAttribute() {}
+      play() { this.paused = false; this._emit('play'); return Promise.resolve(); }
+      pause() { this.paused = true; this._emit('pause'); }
     };
   });
 }

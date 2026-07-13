@@ -5,6 +5,7 @@ import {
     lintEpisodeMarkdown,
     checkShowManifest,
     checkAudioManifest,
+    checkManifestAlignment,
     parseEpisodeEvents,
     knownSpeakersFromManifest
 } from '../../cli/validate-lib.js';
@@ -295,6 +296,42 @@ test('expression tags: known pass, unknown error, wrong case warns', () => {
     assert.match(errs[0].message, /unknown expression tag "<luagh>"/);
     assert.equal(warns.length, 1);
     assert.match(warns[0].message, /"<Sigh>" should be lowercase/);
+});
+
+test('checkManifestAlignment mirrors the player matching rules', () => {
+    const md = [
+        '**ALEX:** Line one.',
+        '',
+        '**RILEY:** Line two.',
+        '',
+        '**ALEX:** Line three.',
+        ''
+    ].join('\n');
+    // rawLines of the three dialogue lines above are 0, 2, 4.
+
+    // Perfect rawLine match — silent.
+    assert.deepEqual(checkManifestAlignment(md, [
+        { rawLine: 0, file: '0000.mp3' }, { rawLine: 2, file: '0001.mp3' }, { rawLine: 4, file: '0002.mp3' }
+    ]), []);
+
+    // No rawLines but counts align — positional fallback warning only.
+    const positional = checkManifestAlignment(md, [
+        { file: '0000.mp3' }, { file: '0001.mp3' }, { file: '0002.mp3' }
+    ]);
+    assert.equal(positional.length, 1);
+    assert.match(positional[0].message, /positional fallback works today/);
+
+    // Stale fragment manifest — zero matches, counts differ: will not play.
+    const stale = checkManifestAlignment(md, [{ rawLine: 99, file: '0000.mp3' }]);
+    assert.equal(stale.length, 1);
+    assert.match(stale[0].message, /AUDIO WILL NOT PLAY/);
+
+    // Partial drift — some lines matched, the rest skipped.
+    const drift = checkManifestAlignment(md, [
+        { rawLine: 0, file: '0000.mp3' }, { rawLine: 99, file: '0001.mp3' }
+    ]);
+    assert.equal(drift.length, 1);
+    assert.match(drift[0].message, /2 of 3 dialogue lines have no matching audio/);
 });
 
 test('knownSpeakersFromManifest uppercases voiceMap keys and handles absence', () => {

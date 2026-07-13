@@ -358,3 +358,40 @@ export function knownSpeakersFromManifest(manifest) {
     if (keys.length === 0) return null;
     return new Set(keys.map((k) => k.toUpperCase()));
 }
+
+/**
+ * Mirror of the player's audio-attachment logic (src/playback/manifest.js):
+ * dialogue lines match manifest entries by rawLine, with a positional
+ * fallback when nothing matches by rawLine but the counts line up. When
+ * neither works, the affected lines play NO audio — the usual cause is a
+ * manifest generated from an older draft of the markdown.
+ */
+export function checkManifestAlignment(markdown, items) {
+    if (!Array.isArray(items) || items.length === 0) return [];
+    const dialogue = parseEpisodeEvents(markdown).filter((e) => e.type === 'dialogue');
+    if (dialogue.length === 0) return [];
+
+    const byRaw = new Set(items.map((it) => it.rawLine).filter((r) => typeof r === 'number'));
+    const matched = dialogue.filter((l) => byRaw.has(l.rawLine)).length;
+    if (matched === dialogue.length) return [];
+
+    const nonCue = items.filter((it) => it.type !== 'cue').length;
+    const positionalOk = matched === 0 &&
+        (nonCue === dialogue.length || items.length === dialogue.length);
+    if (positionalOk) {
+        return [{
+            level: 'warning',
+            message: `manifest predates rawLine matching but counts align (${dialogue.length} lines) — positional fallback works today, but any markdown edit will silently break it; regenerate to future-proof`
+        }];
+    }
+    if (matched === 0) {
+        return [{
+            level: 'warning',
+            message: `AUDIO WILL NOT PLAY: 0 of ${dialogue.length} dialogue lines match the manifest (${items.length} entries) and counts differ, so the positional fallback is unavailable — the manifest was generated from an older draft; regenerate this episode's audio`
+        }];
+    }
+    return [{
+        level: 'warning',
+        message: `${dialogue.length - matched} of ${dialogue.length} dialogue lines have no matching audio and will be skipped during playback — markdown and manifest have drifted; regenerate this episode's audio`
+    }];
+}

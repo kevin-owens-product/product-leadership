@@ -5,37 +5,49 @@ import { test, expect } from '@playwright/test';
 // home. These tests don't exercise the service worker, so block it.
 test.use({ serviceWorkers: 'block' });
 
-// Queue auto-advance coverage (Phase 1). The Forge episodes play through the
-// chunked fallback; stubbing window.Audio with instantly-ending chunks lets
+// Queue auto-advance coverage (Phase 1). Claude Code Mastery episodes play
+// through the chunked fallback (per-line manifests, no combined.mp3); stubbing window.Audio with instantly-ending chunks lets
 // an episode "finish" in a couple of seconds without decoding real MP3s
 // (same pattern as the chapter-markers test in player.spec.js).
 
 function installInstantAudio(page) {
   return page.addInitScript(() => {
+    // Event-capable fake: the app's continuous mode wires addEventListener on
+    // a module-scope `new Audio()` singleton, so the fake must emit real
+    // play/pause/ended events — an "ended" fires shortly after play(), which
+    // finishes both continuous episodes and individual chunks instantly.
     window.Audio = class FakeAudio {
       constructor(src) {
-        this.src = src;
+        this._listeners = {};
+        this.src = src || '';
         this.preload = '';
         this.playbackRate = 1;
         this.paused = true;
+        this.currentTime = 0;
+        this.duration = NaN;
         this.onended = null;
         this.onerror = null;
       }
+      addEventListener(ev, fn) { (this._listeners[ev] = this._listeners[ev] || []).push(fn); }
+      removeEventListener(ev, fn) { this._listeners[ev] = (this._listeners[ev] || []).filter((f) => f !== fn); }
+      _emit(ev) {
+        (this._listeners[ev] || []).forEach((f) => { try { f(); } catch { /* ignore */ } });
+        if (ev === 'ended' && typeof this.onended === 'function') this.onended();
+      }
+      load() {}
+      setAttribute() {}
       play() {
         this.paused = false;
-        setTimeout(() => {
-          if (typeof this.onended === 'function') this.onended();
-        }, 20);
+        this._emit('play');
+        setTimeout(() => { if (!this.paused) { this.paused = true; this._emit('ended'); } }, 20);
         return Promise.resolve();
       }
-      pause() {
-        this.paused = true;
-      }
+      pause() { this.paused = true; this._emit('pause'); }
     };
   });
 }
 
-async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitle = 'AI-Native Product Management') {
+async function openEpisode(page, podcastTitle = 'Claude Code Mastery', episodeTitle = 'Getting Started with Claude Code') {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle').catch(() => {});
   await expect(page.locator('#podcasts-view')).toBeVisible();
@@ -68,30 +80,29 @@ test('finishing an episode auto-advances to the next one after the countdown', a
 
   const modal = page.locator('#complete-modal');
   await expect(modal).toHaveClass(/show/, { timeout: 30000 });
-  await expect(page.locator('#complete-message')).toContainText('Starting "The Forge Method" in 5 seconds');
+  await expect(page.locator('#complete-message')).toContainText('Starting "Core Commands & Navigation" in 5 seconds');
   await expect(page.locator('#play-next-episode')).toHaveText('Play Now');
 
   // The 5-second countdown fires the advance on its own — no click.
-  // (The title renders as "Ep 5: The Forge Method".)
-  await expect(page.locator('#player-episode-title')).toContainText('The Forge Method', { timeout: 15000 });
+  await expect(page.locator('#player-episode-title')).toContainText('Core Commands & Navigation', { timeout: 15000 });
 });
 
 test('a queued episode takes precedence over the sequential next episode', async ({ page }) => {
   await installInstantAudio(page);
   await page.addInitScript(() => {
     localStorage.setItem('playQueue', JSON.stringify([
-      { podcastId: 'the-forge-podcast', episodeNum: 2, addedAt: Date.now() }
+      { podcastId: 'claude-code-mastery', episodeNum: 3, addedAt: Date.now() }
     ]));
   });
   await openEpisode(page);
   await page.locator('#play-btn').click();
 
   await expect(page.locator('#complete-modal')).toHaveClass(/show/, { timeout: 30000 });
-  await expect(page.locator('#complete-message')).toContainText('Multi-Agent Architecture for Enterprise Software');
+  await expect(page.locator('#complete-message')).toContainText('Code Reading & Editing');
 
   // "Play Now" advances immediately and consumes the queue entry.
   await page.locator('#play-next-episode').click();
-  await expect(page.locator('#player-episode-title')).toContainText('Multi-Agent Architecture');
+  await expect(page.locator('#player-episode-title')).toContainText('Code Reading');
   await expect.poll(() =>
     page.evaluate(() => JSON.parse(localStorage.getItem('playQueue') || '[]').length)
   ).toBe(0);
@@ -106,11 +117,11 @@ test('auto-advance is suppressed when the Auto toggle is off', async ({ page }) 
   await page.locator('#play-btn').click();
 
   await expect(page.locator('#complete-modal')).toHaveClass(/show/, { timeout: 30000 });
-  await expect(page.locator('#complete-message')).toContainText('Up next: "The Forge Method"');
+  await expect(page.locator('#complete-message')).toContainText('Up next: "Core Commands & Navigation"');
   await expect(page.locator('#play-next-episode')).toHaveText('Play Next Episode');
 
   // Past the 5s window nothing has advanced — the modal still offers a manual play.
   await page.waitForTimeout(5500);
-  await expect(page.locator('#player-episode-title')).toContainText('AI-Native Product Management');
+  await expect(page.locator('#player-episode-title')).toContainText('Getting Started with Claude Code');
   await expect(page.locator('#complete-modal')).toHaveClass(/show/);
 });

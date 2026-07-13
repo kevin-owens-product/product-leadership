@@ -10,6 +10,8 @@
 // the linter is to flag lines that those parsers would silently drop or
 // misread.
 
+import { parseMarkdown } from '../src/parse/dialogue.js';
+
 export const BOLD_SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 export const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
 export const VALID_CUE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)(?:\s*[-:]\s*[^\]]+)?\]$/i;
@@ -368,7 +370,11 @@ export function knownSpeakersFromManifest(manifest) {
  */
 export function checkManifestAlignment(markdown, items) {
     if (!Array.isArray(items) || items.length === 0) return [];
-    const dialogue = parseEpisodeEvents(markdown).filter((e) => e.type === 'dialogue');
+    // Playability is decided by the PLAYER's parser (src/parse/dialogue.js),
+    // not the generator-mirror parser used elsewhere in this file — the two
+    // can disagree by a line on older scripts, and the player is the truth
+    // for whether audio attaches.
+    const dialogue = parseMarkdown(markdown);
     if (dialogue.length === 0) return [];
 
     const byRaw = new Set(items.map((it) => it.rawLine).filter((r) => typeof r === 'number'));

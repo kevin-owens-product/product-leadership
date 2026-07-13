@@ -9,7 +9,7 @@ test.use({ serviceWorkers: 'block' });
 // chunked fallback mode (no combined.mp3), so scrub labels are line-based;
 // Deadwater ships combined.mp3 + durations and exercises continuous mode.
 
-async function openEpisode(page, podcastTitle = 'The Forge Podcast', episodeTitle = 'AI-Native Product Management') {
+async function openEpisode(page, podcastTitle = 'Claude Code Mastery', episodeTitle = 'Getting Started with Claude Code') {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
   await page.waitForLoadState('networkidle').catch(() => {});
   await expect(page.locator('#podcasts-view')).toBeVisible();

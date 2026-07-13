@@ -63,27 +63,39 @@ test('card navigation and player toggles are keyboard accessible', async ({ page
   await expect(autoPlayToggle).toHaveAttribute('aria-pressed', 'false');
 });
 
-test('AI Native PM shows stable chapter markers and playback advances', async ({ page }) => {
+test.describe('chapter markers (stubbed manifest)', () => {
+  // The SW fetches bypass page.route — block it so the manifest stub wins.
+  test.use({ serviceWorkers: 'block' });
+
+  test('AI Native PM shows stable chapter markers and playback advances', async ({ page }) => {
   await page.addInitScript(() => {
     window.Audio = class FakeAudio {
       constructor(src) {
-        this.src = src;
+        this._listeners = {};
+        this.src = src || '';
         this.preload = '';
         this.playbackRate = 1;
         this.paused = true;
+        this.currentTime = 0;
+        this.duration = NaN;
         this.onended = null;
         this.onerror = null;
       }
+      addEventListener(ev, fn) { (this._listeners[ev] = this._listeners[ev] || []).push(fn); }
+      removeEventListener(ev, fn) { this._listeners[ev] = (this._listeners[ev] || []).filter((f) => f !== fn); }
+      _emit(ev) {
+        (this._listeners[ev] || []).forEach((f) => { try { f(); } catch { /* ignore */ } });
+        if (ev === 'ended' && typeof this.onended === 'function') this.onended();
+      }
+      load() {}
+      setAttribute() {}
       play() {
         this.paused = false;
-        setTimeout(() => {
-          if (typeof this.onended === 'function') this.onended();
-        }, 20);
+        this._emit('play');
+        setTimeout(() => { if (!this.paused) { this.paused = true; this._emit('ended'); } }, 20);
         return Promise.resolve();
       }
-      pause() {
-        this.paused = true;
-      }
+      pause() { this.paused = true; this._emit('pause'); }
     };
     const synth = window.speechSynthesis;
     if (!synth) return;
@@ -98,8 +110,8 @@ test('AI Native PM shows stable chapter markers and playback advances', async ({
     route.fulfill({
       contentType: 'application/json',
       body: JSON.stringify([
-        { rawLine: 11, file: '0000.mp3' },
-        { rawLine: 13, file: '0001.mp3' }
+        { rawLine: 10, file: '0000.mp3' },
+        { rawLine: 12, file: '0001.mp3' }
       ])
     });
   });
@@ -120,6 +132,7 @@ test('AI Native PM shows stable chapter markers and playback advances', async ({
   const initialPosition = await page.locator('#current-pos').textContent();
   await page.locator('#play-btn').click();
   await expect.poll(async () => page.locator('#current-pos').textContent()).not.toBe(initialPosition);
+});
 });
 
 test('keyboard shortcuts overlay opens with ? but not while typing', async ({ page }) => {
@@ -258,7 +271,12 @@ test('now-playing visualizer is hidden under prefers-reduced-motion', async ({ p
   await expect(page.locator('#now-playing-viz')).toBeHidden();
 });
 
-test('failed offline download surfaces a retry toast', async ({ page }) => {
+test.describe('offline download failure', () => {
+  // The SW performs its own fetches, which page.route cannot intercept —
+  // block it so the aborted manifest request actually reaches the app.
+  test.use({ serviceWorkers: 'block' });
+
+  test('failed offline download surfaces a retry toast', async ({ page }) => {
   // No audio manifest reachable -> download must fail and surface a toast.
   await page.route('**/audio/**/manifest.json*', route => route.abort());
 
@@ -277,6 +295,7 @@ test('failed offline download surfaces a retry toast', async ({ page }) => {
   // The close button dismisses without acting.
   await toast.locator('.toast-close').click();
   await expect(page.locator('#toast-region .toast')).toHaveCount(0);
+});
 });
 
 test('transcript lines, chapters, and panel headers are accessible controls', async ({ page }) => {

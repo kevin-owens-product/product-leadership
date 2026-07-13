@@ -1,7 +1,7 @@
 // Per-show playback-speed memory. Stored as a single localStorage map so
 // each podcast keeps its own preferred rate (like Overcast's per-show speed).
 
-import { safeJSONParse } from './storage.js?v=2.3.0%2B20260713T065224Z';
+import { safeJSONParse } from './storage.js?v=2.3.0%2B20260713T101637Z';
 
 export const SPEED_PREFS_KEY = 'speedByShow';
 export const MIN_SPEED = 0.5;

@@ -647,20 +647,22 @@ async function openEpisode(episode, options = {}) {
     const epKey = currentPodcast ? `${currentPodcast.id}-${episode.id}` : episode.id;
     const progress = state.episodeProgress?.[epKey];
     const savedLine = Number.isInteger(progress?.line) ? progress.line : 0;
-    let initialLine = savedLine;
+    const lastLine = Math.max(0, dialogueLines.length - 1);
+    // A finished episode restarts from the top: resuming at the final line
+    // just replays the completion modal, which reads as "the episode won't
+    // play" — and the old failure-cascade bug left episodes saved exactly
+    // there with no resume banner to escape from.
+    const effectiveSavedLine = savedLine >= lastLine ? 0 : savedLine;
+    let initialLine = effectiveSavedLine;
 
     let resumedFrom = null;
     if (Number.isInteger(preferredLine)) {
         initialLine = preferredLine;
-    } else if (
-        promptResume &&
-        savedLine > 0 &&
-        savedLine < Math.max(0, dialogueLines.length - 1)
-    ) {
+    } else if (promptResume && effectiveSavedLine > 0) {
         // Auto-resume from the saved line; the banner just notifies the user
         // and offers a one-tap "Start from beginning" escape hatch.
-        initialLine = savedLine;
-        resumedFrom = savedLine;
+        initialLine = effectiveSavedLine;
+        resumedFrom = effectiveSavedLine;
     }
 
     currentLineIndex = Math.max(0, Math.min(initialLine, Math.max(0, dialogueLines.length - 1)));

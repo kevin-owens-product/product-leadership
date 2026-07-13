@@ -8,30 +8,30 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260713T053743Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260713T053743Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260713T053743Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260713T053743Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260713T053743Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260713T053743Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260713T053743Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260713T053743Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260713T053743Z';
-import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260713T053743Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260713T053743Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260713T053743Z';
+} from './state/storage.js?v=2.3.0%2B20260713T065224Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260713T065224Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260713T065224Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260713T065224Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260713T065224Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260713T065224Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260713T065224Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260713T065224Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260713T065224Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260713T065224Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260713T065224Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260713T065224Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260713T053743Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260713T053743Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260713T053743Z';
+} from './app/version.js?v=2.3.0%2B20260713T065224Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260713T065224Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260713T065224Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260713T053743Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260713T065224Z';
 import {
     combinedAudioUrl,
     withCacheKey,
@@ -39,26 +39,26 @@ import {
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260713T053743Z';
-import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260713T053743Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260713T053743Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260713T053743Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260713T053743Z';
-import { formatClock } from './ui/format.js?v=2.3.0%2B20260713T053743Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260713T053743Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260713T053743Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260713T053743Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260713T053743Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260713T053743Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260713T053743Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260713T053743Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260713T053743Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260713T053743Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260713T053743Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260713T053743Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260713T053743Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260713T053743Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260713T053743Z';
+} from './playback/manifest.js?v=2.3.0%2B20260713T065224Z';
+import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260713T065224Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260713T065224Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260713T065224Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260713T065224Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260713T065224Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260713T065224Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260713T065224Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260713T065224Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260713T065224Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260713T065224Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260713T065224Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260713T065224Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260713T065224Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260713T065224Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260713T065224Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260713T065224Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260713T065224Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260713T065224Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260713T065224Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -647,20 +647,22 @@ async function openEpisode(episode, options = {}) {
     const epKey = currentPodcast ? `${currentPodcast.id}-${episode.id}` : episode.id;
     const progress = state.episodeProgress?.[epKey];
     const savedLine = Number.isInteger(progress?.line) ? progress.line : 0;
-    let initialLine = savedLine;
+    const lastLine = Math.max(0, dialogueLines.length - 1);
+    // A finished episode restarts from the top: resuming at the final line
+    // just replays the completion modal, which reads as "the episode won't
+    // play" — and the old failure-cascade bug left episodes saved exactly
+    // there with no resume banner to escape from.
+    const effectiveSavedLine = savedLine >= lastLine ? 0 : savedLine;
+    let initialLine = effectiveSavedLine;
 
     let resumedFrom = null;
     if (Number.isInteger(preferredLine)) {
         initialLine = preferredLine;
-    } else if (
-        promptResume &&
-        savedLine > 0 &&
-        savedLine < Math.max(0, dialogueLines.length - 1)
-    ) {
+    } else if (promptResume && effectiveSavedLine > 0) {
         // Auto-resume from the saved line; the banner just notifies the user
         // and offers a one-tap "Start from beginning" escape hatch.
-        initialLine = savedLine;
-        resumedFrom = savedLine;
+        initialLine = effectiveSavedLine;
+        resumedFrom = effectiveSavedLine;
     }
 
     currentLineIndex = Math.max(0, Math.min(initialLine, Math.max(0, dialogueLines.length - 1)));

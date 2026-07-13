@@ -69,4 +69,8 @@ test('completed episode does not show the resume banner', async ({ page }) => {
   await expect(page.locator('#player-view')).toHaveClass(/active/);
 
   await expect(page.locator('#resume-banner')).toBeHidden();
+
+  // Finished episodes restart from the top — parking on the last line means
+  // pressing play instantly re-completes, which reads as "won't play".
+  await expect(page.locator('.transcript-line').first()).toHaveClass(/\bcurrent\b/);
 });

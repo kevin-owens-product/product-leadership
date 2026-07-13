@@ -62,7 +62,13 @@ if (validation.errors > 0) {
 }
 console.log(`✓ Validation passed${validation.warnings ? ` (${validation.warnings} warning(s))` : ''}.\n`);
 
-removeDirRecursive(path.join(distDir, 'audio'));
+// Wipe-and-mirror dist/audio ONLY when the generated source exists. pwa/audio
+// is gitignored (a local build artifact), so on CI — Netlify runs this exact
+// script — it is absent and the committed dist/audio IS the source of truth;
+// wiping it there ships a completely silent catalog.
+if (fs.existsSync(path.join(__dirname, 'audio'))) {
+    removeDirRecursive(path.join(distDir, 'audio'));
+}
 
 console.log('Building PodLearn Multi-Podcast App...\n');
 

@@ -1,0 +1,22 @@
+{
+  "id": "the-influence-brief",
+  "title": "The Influence Brief",
+  "subtitle": "Negotiation, Persuasion & Stakeholder Craft for Product Executives",
+  "description": "A practical series on the half of the executive job nobody trains you for: moving people. Stakeholder mapping, currencies of exchange, the trust equation, negotiation under power asymmetry, executive communication, and managing up — each episode gives you one working tool and one realistic product-org scenario to apply it in.",
+  "author": "Sloane Bishop & Victor Reyes",
+  "color": "#8b5cf6",
+  "icon": "🤝",
+  "voiceMap": {
+    "SLOANE": "F5",
+    "VICTOR": "M4"
+  },
+  "lang": "en",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-being-right-is-not-a-strategy.md",
+      "title": "Being Right Is Not a Strategy",
+      "subtitle": "The Influence Map, Currencies of Exchange, and the Trust Equation"
+    }
+  ]
+}

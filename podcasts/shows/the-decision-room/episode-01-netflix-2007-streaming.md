@@ -1,0 +1,118 @@
+# Episode 1: Netflix, January 2007
+## "Launch Streaming While DVDs Pay Every Bill"
+
+**Duration:** ~28 minutes
+**Hosts:** Dana Cole & Eli Vance
+**Podcast:** The Decision Room -- Famous Product Decisions, Argued From Inside the Room
+
+---
+
+### INTRO: THE RULES OF THE ROOM (3 minutes)
+
+[INTRO MUSIC]
+
+**DANA:** Welcome to The Decision Room. I'm Dana Cole.
+
+**ELI:** And I'm Eli Vance.
+
+**DANA:** Every episode of this show works the same way. We pick one famous product or strategy decision, and we walk you into the room at the exact moment it had to be made. Then Eli and I argue it out — one of us for, one of us against. And here's the only rule that matters: no hindsight. Inside the debate, we only get to use what the people in the room actually knew at the time. No "well, obviously streaming won." Nobody in the room gets tomorrow's newspaper.
+
+**ELI:** Which is harder than it sounds, because you, the listener, know how most of these stories end. That's the point. Knowing the ending makes every decision look obvious, and obvious is the enemy of judgment. The skill we're trying to build — for us and for you — is feeling the weight of the decision the way the people in the room felt it. With their incomplete information, their real constraints, and their own money on fire.
+
+**DANA:** At the end of the debate, we reveal what the company actually decided, what happened next, and — the part we care most about — what transfers. What you can actually carry into your own decision room. <breath> Alright. Eli, set the scene.
+
+[MUSIC FADES]
+
+---
+
+### THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)
+
+**ELI:** It's early January, 2007. Los Gatos, California. You are sitting in a conference room at Netflix headquarters, and the company you work for is, by every visible measure, winning. Netflix has about six point three million subscribers paying around eighteen dollars a month to get DVDs in little red envelopes. Revenue for 2006 came in just under a billion dollars. The war everyone said Netflix would lose — against Blockbuster, a company ten times its size — is going Netflix's way. Blockbuster Online is bleeding cash, and Blockbuster the parent is drowning in debt from its own stores.
+
+**DANA:** And the machine that's winning is a *logistics* machine. Netflix at this moment is arguably the best physical distribution company in America after Amazon and FedEx. Dozens of distribution centers. Software that optimizes which envelope ships from which warehouse. Next-day delivery to most of the country. The famous queue. The recommendation engine tuned to smooth demand across a hundred thousand titles. Everything about the company's operational excellence is built around a piece of plastic.
+
+**ELI:** And on the table in this conference room is a project that's been running quietly for years, and it is finally ready to ship. Internally, the ambition has always been obvious — it's in the company's name. Net. Flix. Reed Hastings has been saying since the late nineties that the DVD was a temporary technology, a bridge. The project on the table is streaming: click a title on the website, and it starts playing on your computer. Right now. No envelope, no wait.
+
+**DANA:** Here's what shipping it would actually mean in January 2007, because the demo hides a lot of ugliness. The launch catalog is about a thousand titles. The DVD catalog is *seventy thousand*. The studios will not license their good, new content for streaming — the licensing regimes don't even really exist yet. Playback happens in a browser on Windows, requires Internet Explorer and a Microsoft DRM plugin. It doesn't work on a Mac. It doesn't work on your television, which is where people actually watch movies. Broadband penetration in the US is around fifty percent and a lot of that is barely fast enough. And the plan on the table isn't to charge for this — it's to *give it away*, bundled into existing DVD plans, hours of streaming scaled to your plan tier.
+
+**ELI:** One more thing, and it's the thing everyone in the room knows but nobody loves saying out loud. Every hour of engineering, every licensing dollar, and every megabyte of bandwidth spent on streaming is spent building the thing that, if it works, kills the DVD business. The DVD business that is currently paying for all of it. And the licensing bill only goes up from here — the more streaming works, the more the studios will charge.
+
+**DANA:** So that's the decision. It's January 2007. Do you launch streaming now — half-broken, thousand-title catalog, free — or do you wait, protect the machine that's winning, and let someone else go first? <breath> Eli argued the coin flip and lost, so he's taking the case against. I'm taking the case for. Remember the rule: nothing we say in the next ten minutes gets to use anything after January 2007.
+
+[PAUSE]
+
+---
+
+### THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)
+
+**ELI:** Let me start with the thing that should terrify you, because it terrified the room: nobody has ever successfully disrupted themselves on purpose. The textbook — and Christensen's *Innovator's Dilemma* is already the most-quoted business book in every boardroom in America by 2007 — the textbook says incumbents fail because they *can't* prioritize the small, worse, cheaper new thing over the big, profitable current thing. Fine. But the textbook's prescription is to set up a *separate* organization, insulated from the mothership. The plan on this table does the opposite. It bolts a money-losing science project onto the flagship product and gives it away to our best customers.
+
+**DANA:** The customers who are already paying us eighteen dollars a month.
+
+**ELI:** Exactly — and think about what we're training them to believe. We're telling six million people that watching a movie *instantly* is worth *zero dollars*. That's the anchor we're setting for the future of our own industry. When the real streaming product arrives — the one with a real catalog, on a real television — we'll have spent years teaching the market it shouldn't cost anything. That is a pricing hole we may never climb out of.
+
+**ELI:** Second: the moat argument. Our advantage — the thing Blockbuster cannot copy because of their debt and their store leases — is physical logistics plus the biggest catalog in the world. Seventy thousand titles, next-day, algorithmically matched to your taste. Streaming *erases* that moat and replaces it with... what? Licensed bits. Anyone can license bits. Apple can license bits — and they just launched iTunes movie rentals. Amazon can license bits — Unbox launched four months ago. Walmart is trying. In streaming, we are not the incumbent with the moat. We're one more bidder in an auction where the studios set the prices and Apple has a hundred times our cash.
+
+**DANA:** So your claim is we're trading a moat we own for a knife fight we can't win.
+
+**ELI:** A knife fight where our opponents' pockets are infinitely deeper, yes. And third — timing. Fifty percent broadband, no TV playback, no Mac support, a thousand titles of catalog leftovers. The pioneers in this market are going to spend a fortune educating consumers and negotiating the first, *worst* licensing deals in history. Why would we volunteer to be the tuition? Let Apple and Amazon pay to open the market. We have the customer relationship, the brand, and the recommendation data. When broadband hits eighty percent and the TV problem is solved, we enter fast and win on catalog and taste. The fast-follower position here isn't cowardice — it's the only position that doesn't set our own house on fire to warm someone else's market.
+
+**ELI:** <sigh> And honestly — the boring argument is the strongest one. We are six years from having beaten Blockbuster into the ground. The prize for that war is a decade of extremely profitable, growing DVD subscriptions. The plan on the table asks us to start liquidating that prize the moment we've won it, on a technology that does not work in the living room, for a price of zero. No board should approve that.
+
+---
+
+### THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)
+
+**DANA:** Everything Eli just said is true. That's what makes this a real decision. <breath> So let me tell you why you ship it anyway, and why you ship it *now*.
+
+**DANA:** Start with the thing we know that nobody outside this room fully believes: the DVD is dying, and the date of death is not ours to choose. Postage costs rise every year. The studios hate revenue-sharing with us. And the moment movies can move as bits with acceptable quality, physical media is finished — the only question is whether it takes five years or fifteen. Here's the asymmetry that decides this whole debate: if streaming arrives slower than we fear, launching early costs us some margin and some embarrassment. If it arrives faster than we hope and we *haven't* built the muscle, we lose the company. Those two risks are not the same size. You always pay the small insurance premium against the extinction event.
+
+**ELI:** Insurance is one thing. Giving it away inside the flagship is another.
+
+**DANA:** No — the bundle *is* the strategy, and it's the part I'd defend hardest. Eli says we're one more bidder in a knife fight against Apple and Amazon. Wrong, and here's why: Apple has to convince someone to *pay per movie* on a computer screen. Amazon has to convince someone to *download and wait*. We have to convince our six million subscribers to... click a button they already paid for. Free-inside-the-bundle means we don't need streaming to win a market. We need it to deepen a subscription. Every competitor has to build a business; we just have to build a habit. That is a structurally easier problem, and it's available to exactly one company in the world: us.
+
+**DANA:** Second — the learning argument, and I want to be precise about it, because "we'll learn a lot" is how people justify every bad science project. It's not learning in general. It's that streaming has three specific muscles that take *years* to build and cannot be bought later: encoding and delivery infrastructure at scale, studio licensing relationships and precedents, and — the one nobody's pricing in — the data about what people watch when watching is *frictionless*. The queue tells us what people aspire to watch. Streaming will tell us what they actually watch at eleven PM on a Tuesday. Whoever owns that data owns the next decade of this industry. Every month we wait, the tuition Eli wants Apple to pay comes with the asset we need most.
+
+**ELI:** And the anchor? Training the market that instant is free?
+
+**DANA:** We're not anchoring streaming at zero — we're anchoring *Netflix* at "the subscription that keeps getting better." There's a difference. Nobody thinks the free peanuts mean the bar owes them dinner. And when the catalog is real and the TV problem is solved, the price conversation happens on our terms, with habits already formed. <laugh> Besides — you want to talk about anchors? The most dangerous anchor in this building is internal: six point three million people paying for envelopes, and every incentive in the company slowly bending toward protecting them. Christensen's book doesn't say the incumbents didn't see it coming, Eli. They all saw it coming. They just always had a reason to wait one more year. You're making that argument right now, beautifully. That's exactly how it sounds from inside.
+
+**DANA:** Ship it broken. Ship it small. Ship it free. Because the day this thing works in the living room, we need to be five years into the learning curve — not standing at the box office asking Apple what a ticket costs.
+
+[PAUSE]
+
+---
+
+### THE REVEAL: WHAT NETFLIX DID (4 minutes)
+
+[MUSIC STING]
+
+**ELI:** Here's what actually happened. On January 16th, 2007, Netflix announced Watch Now. About a thousand titles, streaming in the browser, Windows only, bundled free into existing plans — roughly one hour of streaming per dollar of your monthly plan. Rolled out gradually to all subscribers over six months. Almost exactly the plan on the table.
+
+**DANA:** The press coverage at the time is a museum of polite skepticism. Analysts noted the tiny catalog, the missing living room, the studio problem. The stock barely moved. For about two years, streaming looked like exactly what Eli's case said it would be: a costly, catalog-poor curiosity bolted onto a DVD business that kept growing.
+
+**ELI:** And then the compounding started. 2008: the Roku box ships — solving the living room — and the Starz deal brings twenty-five hundred real movies to streaming for pocket change, about thirty million dollars, because the studios still thought streaming was a curiosity. Those early, *worst-in-history* licensing deals Dana wanted to be first in line for? They turned out to be the best licensing deals anyone will ever sign, because the sellers didn't know what they were selling. 2010: Netflix launches streaming-only plans and international expansion. By 2011, streaming subscribers pass DVD subscribers and the studios wake up in horror.
+
+**DANA:** And for intellectual honesty, we have to tell the other half: 2011 is also Qwikster. Netflix, high on the logic of self-cannibalization, tries to *formally* split the businesses — spins DVDs into a separate brand, effectively a sixty percent price hike for combo customers. Eight hundred thousand subscribers leave in a quarter. The stock drops seventy-five percent. Hastings apologizes and reverses in three weeks. Same company, same theory of the future, same CEO — catastrophic decision. The difference? In 2007 the cannibalization ran at the *customer's* pace, wrapped inside a gift. In 2011 it ran at the company's pace, delivered as a bill.
+
+**ELI:** Which is weirdly comforting, if you think about it. Judgment isn't a personality trait you either have or don't. The same room gets one call historically right and another historically wrong four years apart.
+
+---
+
+### WHAT TRANSFERS (5 minutes)
+
+**DANA:** Alright — the part that earns this show its keep. Three things I'd carry out of this room into any decision you're facing.
+
+**DANA:** One: weigh the *asymmetry*, not the average. The case for shipping didn't claim streaming would win fast — it claimed the two mistakes were different sizes. Being early costs margin; being late costs the company. When someone shows you a forecast, ask instead: which direction of wrong is fatal? Pay the premium against that one.
+
+**ELI:** Two — and this is my concession from the losing side: the fast-follower argument is almost always emotionally attractive and structurally rotten *when the asset that matters is learned, not bought*. If the market's eventual winner needs relationships, infrastructure, or behavioral data that only accumulate with time, "let the pioneers pay the tuition" means "let the pioneers keep the diploma." Fast-following works for features. It fails for muscles.
+
+**DANA:** Three: sequence the cannibalization at the customer's pace. 2007 worked because the new thing arrived as a free gift inside the old thing — adoption was pull, not push. Qwikster failed because the same strategic logic arrived as a forced migration and a price hike. If your self-disruption plan requires customers to absorb the pain of your strategy on your schedule, it isn't a strategy — it's an invoice.
+
+**ELI:** And a fourth, half-serious one: when you hear yourself making the sophisticated, well-read, Christensen-quoting case for waiting one more year — <laugh> and it will sound *exactly* as reasonable as I sounded twenty minutes ago — remember that every incumbent that died had someone smart in the room making it.
+
+**DANA:** That's The Decision Room for this week. Next episode, we're walking into Cupertino, September 2016: the room where Apple decides to ship a phone with no headphone jack — a decision that looked like arrogance and might have been the most profitable subtraction in consumer hardware history.
+
+**ELI:** No hindsight allowed. See you in the room.
+
+[OUTRO MUSIC]

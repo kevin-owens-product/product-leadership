@@ -1,0 +1,22 @@
+{
+  "id": "the-decision-room",
+  "title": "The Decision Room",
+  "subtitle": "Famous Product Decisions, Argued From Inside the Room",
+  "description": "Each episode reconstructs one famous product or strategy decision at the moment it had to be made — then argues it out with no hindsight allowed. Dana takes one side, Eli takes the other, and only after the debate do we reveal what the company actually did and what happened next. A series about building judgment, not collecting frameworks.",
+  "author": "Dana Cole & Eli Vance",
+  "color": "#d97706",
+  "icon": "🚪",
+  "voiceMap": {
+    "DANA": "F4",
+    "ELI": "M2"
+  },
+  "lang": "en",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-netflix-2007-streaming.md",
+      "title": "Netflix, January 2007",
+      "subtitle": "Launch Streaming While DVDs Pay Every Bill"
+    }
+  ]
+}

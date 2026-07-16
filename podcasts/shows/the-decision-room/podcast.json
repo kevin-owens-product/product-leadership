@@ -17,6 +17,36 @@
       "file": "episode-01-netflix-2007-streaming.md",
       "title": "Netflix, January 2007",
       "subtitle": "Launch Streaming While DVDs Pay Every Bill"
+    },
+    {
+      "id": 2,
+      "file": "episode-02-apple-2016-headphone-jack.md",
+      "title": "Apple, September 2016",
+      "subtitle": "Ship a Phone With No Headphone Jack"
+    },
+    {
+      "id": 3,
+      "file": "episode-03-amazon-2004-prime.md",
+      "title": "Amazon, Fall 2004",
+      "subtitle": "Free Two-Day Shipping for $79, While Shipping Eats the P&L"
+    },
+    {
+      "id": 4,
+      "file": "episode-04-instagram-2010-burbn-pivot.md",
+      "title": "San Francisco, Summer 2010",
+      "subtitle": "Delete Everything but the Photos"
+    },
+    {
+      "id": 5,
+      "file": "episode-05-microsoft-2014-office-on-ipad.md",
+      "title": "Redmond, March 2014",
+      "subtitle": "Ship Office on the iPad Before Windows Touch"
+    },
+    {
+      "id": 6,
+      "file": "episode-06-blockbuster-2000-netflix-offer.md",
+      "title": "Dallas, Early 2000",
+      "subtitle": "Buy Netflix for Fifty Million Dollars — or Laugh Them Out of the Room"
     }
   ]
 }

@@ -1,0 +1,106 @@
+# Episode 4: Your Boss Is a Stakeholder
+## "The Operating Manual, the No-Surprises Contract, and Disagreeing Upward"
+
+**Duration:** ~26 minutes
+**Hosts:** Sloane Bishop & Victor Reyes
+**Podcast:** The Influence Brief -- Negotiation, Persuasion & Stakeholder Craft for Product Executives
+
+---
+
+### INTRO: THE STAKEHOLDER YOU REFUSE TO MAP (3 minutes)
+
+[INTRO MUSIC]
+
+**SLOANE:** Welcome back to The Influence Brief. I'm Sloane Bishop.
+
+**VICTOR:** And I'm Victor Reyes.
+
+**SLOANE:** Three episodes in, you've built the influence map, you've learned to pay in currencies, you've done the trust arithmetic, you've negotiated from underneath, and you've learned to say the last slide first. And there's a decent chance you've applied all of it to everyone in the building except the one person with the most direct power over your life: your boss. Today is managing up — and before anyone reaches for the skip button, we know exactly what those words evoke. The laughing-loudest-at-the-jokes person. The forwarded-praise person. That is not this episode.
+
+**VICTOR:** Here's the strange pattern we've both watched for twenty years. Executives who are ruthless, disciplined mappers of every peer and every skeptic go completely unsystematic the moment the subject is the person they report to. And I think it's because managing up *feels* morally suspect — like you're gaming someone you're supposed to simply serve well. So capable people refuse to do it, do their jobs brilliantly, communicate with their boss in whatever format comes naturally to *them*, get blindsided at review time, and conclude the boss is the problem. <sigh> Sometimes the boss is the problem. Usually the problem is that the single most consequential stakeholder on the map got left off the map on principle.
+
+**SLOANE:** So the reframe for the whole episode: managing up is not flattery, and it isn't self-protection. It's making the person above you *effective on your behalf* — because almost everything you want done above your head gets done by them, in rooms you're not in, using whatever understanding of your work they happen to carry in. Their model of you is your ambassador. You can curate the ambassador or you can leave it to chance.
+
+**VICTOR:** Three tools today. The operating manual — your boss as the most important entry on the influence map. The no-surprises contract — the update discipline that converts a nervous boss into an absent one, in the good sense. And disagreeing upward — how to fight the fight that's worth it and lose the ones that aren't. Scenario at the end: a new CEO from a sales background just inherited you, is openly skeptical of product-led anything, and has started making roadmap promises in customer meetings.
+
+[MUSIC FADES]
+
+---
+
+### SEGMENT 1: THE OPERATING MANUAL (6 minutes)
+
+**SLOANE:** Tool one. Take the four-column map from episode one — want, fear, power, position — and run it on your boss with the seriousness you'd run it on a hostile CRO. Most people, asked what their boss wants, recite the company OKRs. Wrong altitude. The real question is the one we always ask: what are they *actually* optimizing for this quarter, and what are they afraid of? And for a boss there's a fifth column that doesn't exist for peers: what does *their* boss — the CEO, the board — want from them? Because that's the scorecard your work ultimately gets marked against, two levels up, translated by someone else.
+
+**VICTOR:** And the fear column matters double here, for a mechanical reason: your boss experiences your work mostly as *risk*. Peers experience you as a trading partner. Your boss experiences you as a portfolio position — something that can blow up in their hands in front of their boss. Which means the emotional question running under every interaction you have with them is not "is this person smart" — you got hired, that's settled — it's "will this person embarrass me when I'm not looking." Everything in this episode is, one way or another, an answer to that question.
+
+**SLOANE:** Then the manual proper, which is the part almost nobody writes down. Three headings. First: how do they *consume information*? Peter Drucker's old distinction is still the most useful one — readers and listeners. A reader wants the memo before the meeting and resents being talked at; a listener wants to think out loud and will never read your beautiful six-pager. Send a reader a verbal ambush or a listener a document and the *same content* lands as incompetence. Second: how do they *decide*? First instinct then defend it? Slow accretion over three conversations? Whoever spoke to them last? You need to know, because it tells you whether the real decision happens in the meeting or before it. Third: what's their *tempo* — do they want weekly texture or monthly headlines?
+
+**VICTOR:** And notice — this is worth saying explicitly, because it's the ethical spine of the episode — nothing in that manual is manipulation. It's translation. You already do this instinctively for customers; you'd never ship an interface that ignores how users actually behave and then blame the users. Your boss has an interface. Learning it is just deciding that the success of your actual work shouldn't depend on whether your natural communication style happens to match their natural consumption style. <laugh> The executives who refuse on principle are running an A/B test where the B is their career.
+
+**SLOANE:** How you build it: mostly observation, but you're allowed to just *ask*, and hardly anyone does. "How do you like to get bad news?" is a completely legitimate question in a first one-on-one, and asking it is itself a deposit — it signals you intend for there to *be* a functioning channel. The rest you get from watching: what questions do they repeat? Repeated questions are the anxiety column filling itself in. What do they forward upward? That tells you what scores points on the scoreboard above them. Whose names do they say when they're stressed? That's the shadow map from episode one, one level up.
+
+**VICTOR:** One failure mode before we move on, because senior people make it constantly: building the manual and then using it only defensively — to avoid annoying the boss. That's half the value. The manual's real use is offensive, in the honorable sense: it tells you how to make your boss *dangerous on your behalf*. If you know what their boss wants from them, you can hand them wins denominated in that currency. An executive who walks into the board meeting armed with your numbers, your narrative, and a result that makes *them* look good is worth ten laptops of slides you presented yourself. Currencies of exchange, episode one — it's just that the highest-yield trading partner was above you the whole time.
+
+[PAUSE]
+
+---
+
+### SEGMENT 2: THE NO-SURPRISES CONTRACT (6 minutes)
+
+**VICTOR:** Tool two, and if you only install one thing from this episode, install this. The no-surprises contract: your boss should never learn anything important about your area from someone who isn't you. Not from their peer at lunch, not from a board member's coffee chat, not from a customer escalation, not from the incident channel. The contract has exactly one clause and it's absolute. And here's the part people underestimate — the contract is not about the *information*. It's about what the surprise does to your autonomy.
+
+**SLOANE:** Walk through the mechanics, because they're brutal and predictable. The first time your boss is surprised — genuinely blindsided, in front of someone who matters — they don't conclude "bad luck." They conclude "my model of that area is wrong, and I don't know what else I don't know." And the rational response to that conclusion is *supervision*. The check-in meetings appear. The pre-reviews of your decisions appear. People call it micromanagement and treat it as a personality flaw of the boss, and sometimes it is. But at least as often it's the invoice for a surprise. Trust equation, episode one: reliability isn't just doing what you said — it's your boss's reality matching the reality you've been describing. Every surprise is evidence of a gap between the two.
+
+**VICTOR:** And the converse is the whole game: bad news, delivered early, by you, with a plan attached, is the single highest-value currency you can pay upward. It feels backwards — you're volunteering your own failure — but run it from their side of the table. What you've actually demonstrated is: my early-warning system works, you'll never be ambushed while I'm running this, and I don't need pressure applied to tell the truth. Executives who do this consistently get *more* rope after bad quarters, not less. The ones who polish and delay get their calendars colonized. We'll do the full anatomy of the bad-news conversation in episode six; today's point is narrower — speed beats polish, every time, by a mile.
+
+**SLOANE:** Second clause of the contract — really the payoff clause — calibrated autonomy. There's a spectrum of ways to bring a decision to your boss, and most people use the wrong end of it. At one end: "what should I do about X?" — that's delegating your judgment upward, and every use of it trains them that you need steering. At the other end, the form David Marquet taught submarine crews: "I intend to do X, here's why, speak now if you see a problem." Intent language. It transfers the information without transferring the decision. The rule of thumb we'd both defend: reserve the genuine open question for maybe one decision in ten — the ones that are truly theirs — and use intent language for the rest. What you're doing is *teaching them your judgment*, decision by decision, and their willingness to leave you alone is exactly proportional to how well they've learned it.
+
+**VICTOR:** And the delivery vehicle for all of this is the update cadence, which people treat as bureaucratic overhead and is actually the cheapest influence instrument you own. A short, ruthlessly honest, *predictable* update — same shape, same day, reds genuinely red — does something subtle: it makes your boss feel informed *at all times*, which is what buys the freedom. Here's the test for whether yours works. If your boss reads it, they should be able to survive being ambushed about your area by *their* boss. That's the standard. You're not writing a status report. You're writing their briefing.
+
+**SLOANE:** The trap in this segment, because there is one: the no-surprises contract is about information, not permission. Some people install the contract and slide, message by message, into pre-clearing everything — surprise-avoidance curdles into approval-seeking, and six months later they've converted themselves into a very senior project manager. The contract says *they always know*. It does not say *they always decide*. Hold that line, because nobody will hold it for you. <breath> Which brings us to the hardest version of holding a line — the moments when what your boss wants is, in your professional judgment, wrong.
+
+[PAUSE]
+
+---
+
+### SEGMENT 3: DISAGREEING UPWARD (5 minutes)
+
+**VICTOR:** Tool three. Start with why this is genuinely hard, structurally, not just emotionally: episode two taught negotiation under power asymmetry, and disagreement with your boss is the purest case — they control your budget, your scope, and your next role, and there's no walking away from the table without walking away from the job. So people collapse into the two bad equilibria. Chronic deference: every disagreement swallowed, judgment fully outsourced — and here's the thing, your boss *notices*, and your agreement becomes worthless to them, because a yes from someone who always says yes carries zero information. Or chronic combat: every decision relitigated until you're expensive to be around. Both archetypes end careers; the deference one just does it more politely.
+
+**SLOANE:** The discipline that threads it has three parts, and the first is dissent in private, commit in public — old, still undefeated. Disagreement delivered in front of an audience isn't received as information; it's received as a status challenge, and now they're defending their standing, not evaluating your argument. So the real conversation happens in private. And if you lose it — this is the part that separates professionals — you walk out and execute the decision as if it were yours, without the eyebrow raised in the hallway, without "well, the decision's been made" in your team meeting. Half-visible dissent after the fact is the worst of every world: it undermines the decision *and* it's cowardly, because you're spending criticism without owning it.
+
+**VICTOR:** Second part: the form of the dissent itself. The formula I hold my own team to — strong opinion, held accountably: here's my recommendation, here's the strongest version of your position, not the strawman — argue their side better than they do, that's the credibility move from episode one — here's the specific evidence that would change my mind, and I own the outcome either way. That last piece is what makes it dissent instead of commentary. Anyone can disagree from the sidelines; the disagreement that moves a decision-maker is the one where the disagree-er has visible skin in the result.
+
+**SLOANE:** Third part: fight selection, because this is capital, and capital runs out. My actual heuristic — three tests, all must pass. Is it consequential: material and hard to reverse, not a matter of taste? Is it *mine*: inside the domain I was hired to have judgment about? — your credibility is domain-shaped, spend it where it's dense. And is it new information: am I telling them something they don't know, or just re-weighting things they've already weighed? If all three pass, spend fully — that's maybe two or three times a year. And when you lose one of those, lose gracefully, all the way down: no told-you-so stored in the drawer, and if the decision later fails, *you* bring the lessons, not the receipts. The way you lose a disagreement is the most closely watched thing you do all year.
+
+**VICTOR:** And name the line we keep circling, because episode four of a managing-up episode has to say it plainly: there is a boundary between managing up and abdicating. You are not paid to be agreeable. You're paid for judgment, and everything in this episode — the manual, the contract, the private dissent — is about making your judgment *land*, not about sanding it down until it fits. If you look up one day and can't remember the last time you told your boss something they didn't want to hear, the toolkit hasn't made you effective. It's made you decorative. <breath> Alright. Let's run all three tools against a live one.
+
+[MUSIC STING]
+
+---
+
+### SEGMENT 4: THE SCENARIO -- THE NEW CEO FROM SALES (5 minutes)
+
+**SLOANE:** The setup. You're the CPO. The founder-CEO you joined for just stepped up to the board, and the new CEO arrived six weeks ago from the outside — a sales background, two successful exits, zero product management in the biography. She inherited you; she didn't choose you. In her first month she's referred to the product org as "the backlog people" — twice, smiling, in public — and last week, in a customer meeting you weren't in, she promised a top-ten account a custom analytics suite by end of quarter. Your roadmap found out by email. The advice you're getting from your own team is to draw the line now: go in hard, defend the process, establish that roadmap commitments go through product. <laugh> Which is the influence equivalent of the better deck from episode one. Let's do it properly.
+
+**VICTOR:** Start with the manual, because six weeks of observation is plenty if you're actually looking. What does she want? Not "revenue" — too crude. She's an outside CEO succeeding a founder: her real quarter-one deliverable is proving to the board that the founder's company is safe in her hands, and her instrument for that is the only one she fully trusts — the pipeline. What does she fear? Being the sales person who couldn't run a product company. Read the "backlog people" jab again with that fear in view — that's not contempt, that's someone poking at the thing she doesn't yet control. How does she consume? Watch her in meetings: she doesn't read the pre-reads, she thinks out loud, she decides *in conversation* and she decides fast. A listener. Your six-page roadmap philosophy memo is a paper airplane. And the promise in the customer room? Run it through her manual instead of your grievance: in her entire successful career, "commit in the room, figure it out after" has been rewarded every single time. She isn't violating your process. She's never lived anywhere this *was* a process.
+
+**SLOANE:** So: the confrontation your team wants is a status challenge against a fast-deciding, insecure-about-product CEO in week six. You'd win the argument and install yourself permanently in her fear column as the internal critic — the person who makes her feel like the backlog people are auditing her. Instead, the first move is a deposit in her currency, and it's almost embarrassingly available: she is about to walk into more customer rooms, alone, under-armed. So you show up with the thing she doesn't know she needs — call it the commit-safe list. One page: here's what's shippable this quarter and next, here's the flexible zone where you can trade, here's the two landmines that will quietly cost us a year if promised. You've just converted the thing you feared — her promising in rooms — into a channel you arm. She sells better *because of you*. Note what happened to the interface: you didn't ask her to stop deciding in customer rooms — you'd lose — you changed what's in her hand when she does.
+
+**VICTOR:** Then install the contract, both directions. Hers to you is the standard one — she never learns about product from anyone but you, and given she's a listener, that's not a memo, that's ten minutes you claim in her calendar twice a week, headlines out loud, reds first. But the direction people miss: you need *her* in the contract too, and you can name it in exactly the deal language she respects — "when you're going to commit something in a room, one text first if you can; if you can't, tell me immediately after and it becomes real in the plan within a day, my problem not yours." You're not asking permission to be consulted. You're offering a service level. Sales executives understand service levels down to their bones. And the analytics-suite promise she already made? You *keep it*. Publicly, cheerfully, with a scoped version that ships on the date — because that promise is your one-time chance to demonstrate the thing that re-rates you in her model: that product makes her word good. That's reliability, episode one, paid in her denomination.
+
+**SLOANE:** And then — because managing up without a spine is just service — the disagreement worth having. Say the third customer promise is the real one: a whale asks for single-tenant deployment, she says yes in the room, and single-tenant would fork the architecture and quietly tax every feature for two years. Run the three tests: consequential, yes, barely reversible; yours, entirely — this is the judgment she's paying for; new information, yes — she cannot see the two-year tax from where she sits, that's not a flaw, it's a sightline. So you spend, and you spend in her format: private, verbal, short, and framed in her currency — "this deal closes and costs us the next six; here's how we keep the account without forking the platform; here's what I'd promise them instead, and I'll come say it with you." If she still says yes — and she might — you commit, fully, and you file the outcome under *her* learning curve about you, which is the longest game on the board. Ninety days from now she's telling the board product is the most commercially fluent org she's inherited. Nobody drew a line. The line drew itself.
+
+**VICTOR:** Trace the pattern once, because it's the episode: the manual told you who she actually is — a listener with a fear you can either poke or retire. The contract turned surprise, the thing that was killing you, into the service that made you indispensable. And the dissent, spent once, on the right thing, in her format, is what makes everything else in the relationship not-sycophancy. Same CEO. Same promises-in-rooms. You changed none of her behavior by force and all of it by interface.
+
+---
+
+### CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)
+
+**SLOANE:** Homework, one hour: write the actual operating manual for your actual boss. Four map columns plus the fifth — what their boss wants from them — plus reader-or-listener, how they decide, and how they want bad news, which you are allowed to simply ask. Then audit your last month of messages to them: count the "what should I do" asks versus the "I intend to" statements. If the ratio embarrasses you, fix it this week.
+
+**VICTOR:** Next episode: the meeting before the meeting. How decisions actually move through an organization — coalitions, sequencing, whose fingerprints go on the idea — and the playbook for the blocker: the executive who can stop your initiative cold, and how to move them without declaring a war you can't afford. I'm Victor Reyes.
+
+**SLOANE:** And I'm Sloane Bishop. The brief is delivered.
+
+[OUTRO MUSIC]

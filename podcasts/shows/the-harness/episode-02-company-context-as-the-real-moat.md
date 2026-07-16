@@ -1,7 +1,7 @@
 # Episode 2: Company Context as the Real Moat
 ## "How Notion, Stripe, and Cisco Turn Their Knowledge Into AI Advantage"
 
-**Duration:** ~45 minutes
+**Duration:** ~34 minutes
 **Hosts:** Priya Anand (Interviewer) & Marcus Hale (Expert)
 **Podcast:** The Harness -- Building the Enterprise AI Operating System
 

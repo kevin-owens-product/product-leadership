@@ -1,7 +1,7 @@
 # Episode 6: Monorepos & Code Organization
 ## "One Repo to Rule Them All? The Great Repository Debate"
 
-**Duration:** ~60 minutes
+**Duration:** ~20 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

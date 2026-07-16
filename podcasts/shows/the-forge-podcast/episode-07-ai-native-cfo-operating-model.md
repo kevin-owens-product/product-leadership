@@ -1,7 +1,7 @@
 # Episode 7: The AI-Native CFO Operating Model
 ## "How Finance Becomes the Control Tower for AI-Driven Value Creation"
 
-**Duration:** ~60 minutes
+**Duration:** ~52 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

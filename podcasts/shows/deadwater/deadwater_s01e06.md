@@ -2,6 +2,8 @@
 ## Episode 6: "Pizza Night"
 ### Season 1
 
+**Duration:** ~34 minutes
+
 ---
 
 [NARRATOR] On a Tuesday evening in January of the surveillance year, Roland Voss orders a large pizza from a delivery place two blocks from his Manhattan office. He orders it through a phone call, not an app - an old habit, or perhaps a deliberate choice in the direction of a man who is careful about his digital footprint in ways that extend even to his ordinary habits. He pays cash when the delivery arrives. He eats at his desk, working through the evening on a commercial project that is behind schedule. He eats most of the pizza. He puts two crusts and a handful of napkins and the empty parmesan packet into the box. He closes the box. He puts it in the wastebasket beside his desk.

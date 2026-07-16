@@ -1,7 +1,7 @@
 # Episode 1: Getting Started with Claude Code
 ## "Your Journey to AI-Powered Development Begins"
 
-**Duration:** ~60 minutes
+**Duration:** ~16 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

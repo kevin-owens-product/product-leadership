@@ -334,6 +334,55 @@ test('checkManifestAlignment mirrors the player matching rules', () => {
     assert.match(drift[0].message, /2 of 3 dialogue lines have no matching audio/);
 });
 
+test('checkManifestAlignment catches audio that resolves to the wrong line', () => {
+    const md = [
+        '**ALEX:** Line one.',
+        '',
+        '**RILEY:** Line two.',
+        '',
+        '**ALEX:** Line three.',
+        ''
+    ].join('\n');
+
+    // The regression this guards: inserting 2 lines above an already-rendered
+    // episode shifts dialogue onto the NEXT entry's rawLine. Every lookup still
+    // succeeds, so a presence-only check passes while the whole episode plays
+    // one line out of step.
+    const shifted = checkManifestAlignment(md, [
+        { rawLine: 0, text: 'Previous header line.', file: '0000.mp3' },
+        { rawLine: 2, text: 'Line one.', file: '0001.mp3' },
+        { rawLine: 4, text: 'Line two.', file: '0002.mp3' }
+    ]);
+    assert.equal(shifted.length, 1);
+    assert.equal(shifted[0].level, 'error', 'a wholly misaligned episode must fail the build');
+    assert.match(shifted[0].message, /AUDIO PLAYS THE WRONG LINE/);
+
+    // Text that agrees stays silent.
+    assert.deepEqual(checkManifestAlignment(md, [
+        { rawLine: 0, text: 'Line one.', file: '0000.mp3' },
+        { rawLine: 2, text: 'Line two.', file: '0001.mp3' },
+        { rawLine: 4, text: 'Line three.', file: '0002.mp3' }
+    ]), []);
+
+    // Expression tags and markdown syntax are stripped from the transcript but
+    // kept in the manifest — a difference the ear never hears, not drift.
+    const tagged = [
+        '**ALEX:** <laugh> Line one.',
+        '',
+        '**RILEY:** Use `json` here.',
+        ''
+    ].join('\n');
+    assert.deepEqual(checkManifestAlignment(tagged, [
+        { rawLine: 0, text: '<laugh> Line one.', file: '0000.mp3' },
+        { rawLine: 2, text: 'Use `json` here.', file: '0001.mp3' }
+    ]), [], 'expression tags / backticks must not be reported as misalignment');
+
+    // Manifests without text (older generators) can't be text-checked; stay quiet.
+    assert.deepEqual(checkManifestAlignment(md, [
+        { rawLine: 0, file: '0000.mp3' }, { rawLine: 2, file: '0001.mp3' }, { rawLine: 4, file: '0002.mp3' }
+    ]), []);
+});
+
 test('knownSpeakersFromManifest uppercases voiceMap keys and handles absence', () => {
     assert.equal(knownSpeakersFromManifest({}), null);
     assert.equal(knownSpeakersFromManifest({ voiceMap: {} }), null);

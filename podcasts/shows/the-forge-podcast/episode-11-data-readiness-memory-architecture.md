@@ -1,7 +1,7 @@
 # Episode 11: Data Readiness and Memory Architecture
 ## "Building the Context Layer That Becomes Your Competitive Moat"
 
-**Duration:** ~60 minutes
+**Duration:** ~50 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

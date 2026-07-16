@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0001.mp3",
     "duration": 3.204,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0002.mp3",
     "duration": 18.251,
-    "startTime": 4.704
+    "startTime": 7.404
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0003.mp3",
     "duration": 33.27,
-    "startTime": 22.955
+    "startTime": 25.655
   },
   {
     "index": 4,
@@ -57,8 +57,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0004.mp3",
-    "duration": 1.2,
-    "startTime": 56.226
+    "duration": 2.8,
+    "startTime": 58.926
   },
   {
     "index": 5,
@@ -71,7 +71,7 @@
     "chapter": "THE ROOM: CUPERTINO, LATE 2015 (4 minutes)",
     "file": "0005.mp3",
     "duration": 46.576,
-    "startTime": 57.426
+    "startTime": 61.726
   },
   {
     "index": 6,
@@ -84,7 +84,7 @@
     "chapter": "THE ROOM: CUPERTINO, LATE 2015 (4 minutes)",
     "file": "0006.mp3",
     "duration": 34.594,
-    "startTime": 104.001
+    "startTime": 108.301
   },
   {
     "index": 7,
@@ -97,7 +97,7 @@
     "chapter": "THE ROOM: CUPERTINO, LATE 2015 (4 minutes)",
     "file": "0007.mp3",
     "duration": 40.794,
-    "startTime": 138.595
+    "startTime": 142.895
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "THE ROOM: CUPERTINO, LATE 2015 (4 minutes)",
     "file": "0008.mp3",
     "duration": 49.941,
-    "startTime": 179.389
+    "startTime": 183.689
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "THE ROOM: CUPERTINO, LATE 2015 (4 minutes)",
     "file": "0009.mp3",
     "duration": 26.84,
-    "startTime": 229.33
+    "startTime": 233.63
   },
   {
     "index": 10,
@@ -134,7 +134,7 @@
     "chapter": "THE ROOM: CUPERTINO, LATE 2015 (4 minutes)",
     "file": "0010.mp3",
     "duration": 0.8,
-    "startTime": 256.17
+    "startTime": 260.47
   },
   {
     "index": 11,
@@ -147,7 +147,7 @@
     "chapter": "THE CASE AGAINST: KEEP THE JACK (5 minutes)",
     "file": "0011.mp3",
     "duration": 41.072,
-    "startTime": 256.97
+    "startTime": 261.27
   },
   {
     "index": 12,
@@ -160,7 +160,7 @@
     "chapter": "THE CASE AGAINST: KEEP THE JACK (5 minutes)",
     "file": "0012.mp3",
     "duration": 43.301,
-    "startTime": 298.042
+    "startTime": 302.342
   },
   {
     "index": 13,
@@ -173,7 +173,7 @@
     "chapter": "THE CASE AGAINST: KEEP THE JACK (5 minutes)",
     "file": "0013.mp3",
     "duration": 5.155,
-    "startTime": 341.344
+    "startTime": 345.644
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "THE CASE AGAINST: KEEP THE JACK (5 minutes)",
     "file": "0014.mp3",
     "duration": 57.603,
-    "startTime": 346.499
+    "startTime": 350.799
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "THE CASE AGAINST: KEEP THE JACK (5 minutes)",
     "file": "0015.mp3",
     "duration": 42.975,
-    "startTime": 404.102
+    "startTime": 408.402
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0016.mp3",
     "duration": 20.014,
-    "startTime": 447.076
+    "startTime": 451.376
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0017.mp3",
     "duration": 45.322,
-    "startTime": 467.09
+    "startTime": 471.39
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0018.mp3",
     "duration": 41.699,
-    "startTime": 512.412
+    "startTime": 516.712
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0019.mp3",
     "duration": 9.683,
-    "startTime": 554.111
+    "startTime": 558.411
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0020.mp3",
     "duration": 65.496,
-    "startTime": 563.794
+    "startTime": 568.094
   },
   {
     "index": 21,
@@ -277,7 +277,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0021.mp3",
     "duration": 50.707,
-    "startTime": 629.29
+    "startTime": 633.59
   },
   {
     "index": 22,
@@ -290,7 +290,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0022.mp3",
     "duration": 4.946,
-    "startTime": 679.997
+    "startTime": 684.297
   },
   {
     "index": 23,
@@ -303,7 +303,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0023.mp3",
     "duration": 15.047,
-    "startTime": 684.942
+    "startTime": 689.242
   },
   {
     "index": 24,
@@ -314,7 +314,7 @@
     "chapter": "THE CASE FOR: DELETE IT NOW (5 minutes)",
     "file": "0024.mp3",
     "duration": 0.8,
-    "startTime": 699.989
+    "startTime": 704.289
   },
   {
     "index": 25,
@@ -324,8 +324,8 @@
     "text": "[MUSIC STING]",
     "chapter": "THE REVEAL: WHAT APPLE DID (4 minutes)",
     "file": "0025.mp3",
-    "duration": 1,
-    "startTime": 700.789
+    "duration": 1.8,
+    "startTime": 705.089
   },
   {
     "index": 26,
@@ -338,7 +338,7 @@
     "chapter": "THE REVEAL: WHAT APPLE DID (4 minutes)",
     "file": "0026.mp3",
     "duration": 35.709,
-    "startTime": 701.789
+    "startTime": 706.889
   },
   {
     "index": 27,
@@ -351,7 +351,7 @@
     "chapter": "THE REVEAL: WHAT APPLE DID (4 minutes)",
     "file": "0027.mp3",
     "duration": 27.049,
-    "startTime": 737.498
+    "startTime": 742.598
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "THE REVEAL: WHAT APPLE DID (4 minutes)",
     "file": "0028.mp3",
     "duration": 50.707,
-    "startTime": 764.547
+    "startTime": 769.647
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "THE REVEAL: WHAT APPLE DID (4 minutes)",
     "file": "0029.mp3",
     "duration": 36.405,
-    "startTime": 815.254
+    "startTime": 820.354
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0030.mp3",
     "duration": 25.169,
-    "startTime": 851.659
+    "startTime": 856.759
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0031.mp3",
     "duration": 26.91,
-    "startTime": 876.827
+    "startTime": 881.927
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0032.mp3",
     "duration": 31.668,
-    "startTime": 903.738
+    "startTime": 908.838
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0033.mp3",
     "duration": 29.696,
-    "startTime": 935.406
+    "startTime": 940.506
   },
   {
     "index": 34,
@@ -442,7 +442,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0034.mp3",
     "duration": 21.964,
-    "startTime": 965.102
+    "startTime": 970.202
   },
   {
     "index": 35,
@@ -455,7 +455,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0035.mp3",
     "duration": 3.274,
-    "startTime": 987.067
+    "startTime": 992.167
   },
   {
     "index": 36,
@@ -465,7 +465,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0036.mp3",
-    "duration": 1.5,
-    "startTime": 990.341
+    "duration": 5.5,
+    "startTime": 995.441
   }
 ]

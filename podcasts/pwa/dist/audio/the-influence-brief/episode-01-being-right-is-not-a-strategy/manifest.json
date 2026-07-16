@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0001.mp3",
     "duration": 3.901,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0002.mp3",
     "duration": 1.741,
-    "startTime": 5.401
+    "startTime": 8.101
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0003.mp3",
     "duration": 37.241,
-    "startTime": 7.142
+    "startTime": 9.842
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0004.mp3",
     "duration": 31.438,
-    "startTime": 44.384
+    "startTime": 47.084
   },
   {
     "index": 5,
@@ -73,7 +73,7 @@
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0005.mp3",
     "duration": 23.636,
-    "startTime": 75.821
+    "startTime": 78.521
   },
   {
     "index": 6,
@@ -86,7 +86,7 @@
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0006.mp3",
     "duration": 15.604,
-    "startTime": 99.458
+    "startTime": 102.158
   },
   {
     "index": 7,
@@ -96,8 +96,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: THE HALF OF THE JOB NOBODY TRAINS (3 minutes)",
     "file": "0007.mp3",
-    "duration": 1.2,
-    "startTime": 115.061
+    "duration": 2.8,
+    "startTime": 117.761
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0008.mp3",
     "duration": 14.002,
-    "startTime": 116.261
+    "startTime": 120.561
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0009.mp3",
     "duration": 33.479,
-    "startTime": 130.263
+    "startTime": 134.563
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0010.mp3",
     "duration": 41.212,
-    "startTime": 163.742
+    "startTime": 168.042
   },
   {
     "index": 11,
@@ -149,7 +149,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0011.mp3",
     "duration": 23.357,
-    "startTime": 204.954
+    "startTime": 209.254
   },
   {
     "index": 12,
@@ -162,7 +162,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0012.mp3",
     "duration": 28.791,
-    "startTime": 228.312
+    "startTime": 232.612
   },
   {
     "index": 13,
@@ -175,7 +175,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0013.mp3",
     "duration": 27.676,
-    "startTime": 257.102
+    "startTime": 261.402
   },
   {
     "index": 14,
@@ -188,7 +188,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0014.mp3",
     "duration": 10.031,
-    "startTime": 284.779
+    "startTime": 289.079
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "SEGMENT 1: THE INFLUENCE MAP (6 minutes)",
     "file": "0015.mp3",
     "duration": 0.8,
-    "startTime": 294.81
+    "startTime": 299.11
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "SEGMENT 2: CURRENCIES OF EXCHANGE (6 minutes)",
     "file": "0016.mp3",
     "duration": 27.955,
-    "startTime": 295.61
+    "startTime": 299.91
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "SEGMENT 2: CURRENCIES OF EXCHANGE (6 minutes)",
     "file": "0017.mp3",
     "duration": 56.537,
-    "startTime": 323.565
+    "startTime": 327.865
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "SEGMENT 2: CURRENCIES OF EXCHANGE (6 minutes)",
     "file": "0018.mp3",
     "duration": 29.209,
-    "startTime": 380.102
+    "startTime": 384.402
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "SEGMENT 2: CURRENCIES OF EXCHANGE (6 minutes)",
     "file": "0019.mp3",
     "duration": 34.642,
-    "startTime": 409.31
+    "startTime": 413.61
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "SEGMENT 2: CURRENCIES OF EXCHANGE (6 minutes)",
     "file": "0020.mp3",
     "duration": 25.099,
-    "startTime": 443.953
+    "startTime": 448.253
   },
   {
     "index": 21,
@@ -275,7 +275,7 @@
     "chapter": "SEGMENT 2: CURRENCIES OF EXCHANGE (6 minutes)",
     "file": "0021.mp3",
     "duration": 0.8,
-    "startTime": 469.052
+    "startTime": 473.352
   },
   {
     "index": 22,
@@ -288,7 +288,7 @@
     "chapter": "SEGMENT 3: THE TRUST EQUATION (5 minutes)",
     "file": "0022.mp3",
     "duration": 19.087,
-    "startTime": 469.852
+    "startTime": 474.152
   },
   {
     "index": 23,
@@ -301,7 +301,7 @@
     "chapter": "SEGMENT 3: THE TRUST EQUATION (5 minutes)",
     "file": "0023.mp3",
     "duration": 36.662,
-    "startTime": 488.939
+    "startTime": 493.239
   },
   {
     "index": 24,
@@ -314,7 +314,7 @@
     "chapter": "SEGMENT 3: THE TRUST EQUATION (5 minutes)",
     "file": "0024.mp3",
     "duration": 40.236,
-    "startTime": 525.601
+    "startTime": 529.901
   },
   {
     "index": 25,
@@ -327,7 +327,7 @@
     "chapter": "SEGMENT 3: THE TRUST EQUATION (5 minutes)",
     "file": "0025.mp3",
     "duration": 34.224,
-    "startTime": 565.837
+    "startTime": 570.137
   },
   {
     "index": 26,
@@ -340,7 +340,7 @@
     "chapter": "SEGMENT 3: THE TRUST EQUATION (5 minutes)",
     "file": "0026.mp3",
     "duration": 22.313,
-    "startTime": 600.062
+    "startTime": 604.362
   },
   {
     "index": 27,
@@ -350,8 +350,8 @@
     "text": "[MUSIC STING]",
     "chapter": "SEGMENT 3: THE TRUST EQUATION (5 minutes)",
     "file": "0027.mp3",
-    "duration": 1,
-    "startTime": 622.374
+    "duration": 1.8,
+    "startTime": 626.674
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FUNDING THE PLATFORM REBUILD (5 minutes)",
     "file": "0028.mp3",
     "duration": 57.951,
-    "startTime": 623.374
+    "startTime": 628.474
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FUNDING THE PLATFORM REBUILD (5 minutes)",
     "file": "0029.mp3",
     "duration": 63.315,
-    "startTime": 681.326
+    "startTime": 686.426
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FUNDING THE PLATFORM REBUILD (5 minutes)",
     "file": "0030.mp3",
     "duration": 46.784,
-    "startTime": 744.641
+    "startTime": 749.741
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FUNDING THE PLATFORM REBUILD (5 minutes)",
     "file": "0031.mp3",
     "duration": 43.51,
-    "startTime": 791.425
+    "startTime": 796.525
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FUNDING THE PLATFORM REBUILD (5 minutes)",
     "file": "0032.mp3",
     "duration": 46.227,
-    "startTime": 834.936
+    "startTime": 840.036
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FUNDING THE PLATFORM REBUILD (5 minutes)",
     "file": "0033.mp3",
     "duration": 24.333,
-    "startTime": 881.163
+    "startTime": 886.263
   },
   {
     "index": 34,
@@ -442,7 +442,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0034.mp3",
     "duration": 19.505,
-    "startTime": 905.496
+    "startTime": 910.596
   },
   {
     "index": 35,
@@ -455,7 +455,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0035.mp3",
     "duration": 14.768,
-    "startTime": 925.001
+    "startTime": 930.101
   },
   {
     "index": 36,
@@ -468,7 +468,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0036.mp3",
     "duration": 3.344,
-    "startTime": 939.768
+    "startTime": 944.868
   },
   {
     "index": 37,
@@ -478,7 +478,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0037.mp3",
-    "duration": 1.5,
-    "startTime": 943.112
+    "duration": 5.5,
+    "startTime": 948.212
   }
 ]

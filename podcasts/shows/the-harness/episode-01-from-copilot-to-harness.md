@@ -1,7 +1,7 @@
 # Episode 1: From Copilot to Harness
 ## "Why the Model Is Not the Product"
 
-**Duration:** ~45 minutes
+**Duration:** ~36 minutes
 **Hosts:** Priya Anand (Interviewer) & Marcus Hale (Expert)
 **Podcast:** The Harness -- Building the Enterprise AI Operating System
 

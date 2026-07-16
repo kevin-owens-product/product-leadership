@@ -2,6 +2,8 @@
 ## Episode 3: "The Department"
 ### Season 1
 
+**Duration:** ~39 minutes
+
 ---
 
 [NARRATOR] In the spring of 2019, the chief of the South Shore Police Department was arrested in the parking garage of a restaurant in Garden City. He was taken into custody by federal agents who had spent three years building the case against him. The charges included conspiracy, obstruction of justice, and witness tampering in connection with a sustained cover-up of a brutal assault committed by officers under his command on a man in their custody. He pleaded guilty. He went to prison.

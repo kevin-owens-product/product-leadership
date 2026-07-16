@@ -1,7 +1,7 @@
 # Episode 2: Core Commands & Navigation
 ## "Understanding How Claude Navigates Code"
 
-**Duration:** ~60 minutes
+**Duration:** ~15 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

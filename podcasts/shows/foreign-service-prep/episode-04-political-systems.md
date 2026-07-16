@@ -1,7 +1,7 @@
 # Episode 4: Political Systems & International Relations
 ## "How the World Works"
 
-**Duration:** ~60 minutes
+**Duration:** ~19 minutes
 **Hosts:** Jordan Hayes (Former Foreign Service Officer) & Maya Torres (FSOT Candidate)
 
 ---

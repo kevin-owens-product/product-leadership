@@ -1,7 +1,7 @@
 # Episode 5: The Meeting Before the Meeting
 ## "Coalitions, Sequencing, and Neutralizing a Blocker Without a War"
 
-**Duration:** ~26 minutes
+**Duration:** ~23 minutes
 **Hosts:** Sloane Bishop & Victor Reyes
 **Podcast:** The Influence Brief -- Negotiation, Persuasion & Stakeholder Craft for Product Executives
 

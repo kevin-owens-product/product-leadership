@@ -1,5 +1,7 @@
 # Episode 7: AP Automation Technology & The AI Revolution
 
+**Duration:** ~14 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. Today we're diving into the technology that makes modern AP possible, from the early days of OCR to the cutting edge of agentic AI.

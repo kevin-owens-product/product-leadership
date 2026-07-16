@@ -1,7 +1,7 @@
 # Episode 5: Git Workflow & Collaboration
 ## "Version Control Made Effortless"
 
-**Duration:** ~60 minutes
+**Duration:** ~13 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

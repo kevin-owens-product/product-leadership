@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0001.mp3",
     "duration": 3.971,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0002.mp3",
     "duration": 1.672,
-    "startTime": 5.471
+    "startTime": 8.171
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0003.mp3",
     "duration": 35.618,
-    "startTime": 7.142
+    "startTime": 9.842
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0004.mp3",
     "duration": 39.261,
-    "startTime": 42.76
+    "startTime": 45.46
   },
   {
     "index": 5,
@@ -73,7 +73,7 @@
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0005.mp3",
     "duration": 39.122,
-    "startTime": 82.021
+    "startTime": 84.721
   },
   {
     "index": 6,
@@ -86,7 +86,7 @@
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0006.mp3",
     "duration": 32.344,
-    "startTime": 121.143
+    "startTime": 123.843
   },
   {
     "index": 7,
@@ -96,8 +96,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: THE NEGOTIATION YOU DIDN'T NOTICE YOU WERE IN (3 minutes)",
     "file": "0007.mp3",
-    "duration": 1.2,
-    "startTime": 153.487
+    "duration": 2.8,
+    "startTime": 156.187
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0008.mp3",
     "duration": 34.524,
-    "startTime": 154.687
+    "startTime": 158.987
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0009.mp3",
     "duration": 56.489,
-    "startTime": 189.211
+    "startTime": 193.511
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0010.mp3",
     "duration": 39.192,
-    "startTime": 245.7
+    "startTime": 250
   },
   {
     "index": 11,
@@ -149,7 +149,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0011.mp3",
     "duration": 42.744,
-    "startTime": 284.891
+    "startTime": 289.191
   },
   {
     "index": 12,
@@ -162,7 +162,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0012.mp3",
     "duration": 43.232,
-    "startTime": 327.635
+    "startTime": 331.935
   },
   {
     "index": 13,
@@ -175,7 +175,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0013.mp3",
     "duration": 36.127,
-    "startTime": 370.867
+    "startTime": 375.167
   },
   {
     "index": 14,
@@ -188,7 +188,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0014.mp3",
     "duration": 63.197,
-    "startTime": 406.994
+    "startTime": 411.294
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "SEGMENT 1: BATNA -- YOUR POWER IS YOUR ALTERNATIVES (6 minutes)",
     "file": "0015.mp3",
     "duration": 0.8,
-    "startTime": 470.191
+    "startTime": 474.491
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0016.mp3",
     "duration": 27.676,
-    "startTime": 470.991
+    "startTime": 475.291
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0017.mp3",
     "duration": 32.783,
-    "startTime": 498.667
+    "startTime": 502.967
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0018.mp3",
     "duration": 45.322,
-    "startTime": 531.45
+    "startTime": 535.75
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0019.mp3",
     "duration": 43.998,
-    "startTime": 576.772
+    "startTime": 581.072
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0020.mp3",
     "duration": 65.287,
-    "startTime": 620.77
+    "startTime": 625.07
   },
   {
     "index": 21,
@@ -277,7 +277,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0021.mp3",
     "duration": 42.953,
-    "startTime": 686.057
+    "startTime": 690.357
   },
   {
     "index": 22,
@@ -290,7 +290,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0022.mp3",
     "duration": 41.769,
-    "startTime": 729.01
+    "startTime": 733.31
   },
   {
     "index": 23,
@@ -301,7 +301,7 @@
     "chapter": "SEGMENT 2: ANCHORS -- WHOEVER FRAMES FIRST OWNS THE MIDPOINT (6 minutes)",
     "file": "0023.mp3",
     "duration": 0.8,
-    "startTime": 770.779
+    "startTime": 775.079
   },
   {
     "index": 24,
@@ -314,7 +314,7 @@
     "chapter": "SEGMENT 3: CALIBRATED QUESTIONS -- NEGOTIATING WITHOUT THE POWER TO SAY NO (5 minutes)",
     "file": "0024.mp3",
     "duration": 43.95,
-    "startTime": 771.579
+    "startTime": 775.879
   },
   {
     "index": 25,
@@ -327,7 +327,7 @@
     "chapter": "SEGMENT 3: CALIBRATED QUESTIONS -- NEGOTIATING WITHOUT THE POWER TO SAY NO (5 minutes)",
     "file": "0025.mp3",
     "duration": 46.576,
-    "startTime": 815.529
+    "startTime": 819.829
   },
   {
     "index": 26,
@@ -340,7 +340,7 @@
     "chapter": "SEGMENT 3: CALIBRATED QUESTIONS -- NEGOTIATING WITHOUT THE POWER TO SAY NO (5 minutes)",
     "file": "0026.mp3",
     "duration": 34.015,
-    "startTime": 862.104
+    "startTime": 866.404
   },
   {
     "index": 27,
@@ -353,7 +353,7 @@
     "chapter": "SEGMENT 3: CALIBRATED QUESTIONS -- NEGOTIATING WITHOUT THE POWER TO SAY NO (5 minutes)",
     "file": "0027.mp3",
     "duration": 50.407,
-    "startTime": 896.12
+    "startTime": 900.42
   },
   {
     "index": 28,
@@ -366,7 +366,7 @@
     "chapter": "SEGMENT 3: CALIBRATED QUESTIONS -- NEGOTIATING WITHOUT THE POWER TO SAY NO (5 minutes)",
     "file": "0028.mp3",
     "duration": 64.59,
-    "startTime": 946.527
+    "startTime": 950.827
   },
   {
     "index": 29,
@@ -379,7 +379,7 @@
     "chapter": "SEGMENT 3: CALIBRATED QUESTIONS -- NEGOTIATING WITHOUT THE POWER TO SAY NO (5 minutes)",
     "file": "0029.mp3",
     "duration": 58.321,
-    "startTime": 1011.117
+    "startTime": 1015.417
   },
   {
     "index": 30,
@@ -389,8 +389,8 @@
     "text": "[MUSIC STING]",
     "chapter": "SEGMENT 3: CALIBRATED QUESTIONS -- NEGOTIATING WITHOUT THE POWER TO SAY NO (5 minutes)",
     "file": "0030.mp3",
-    "duration": 1,
-    "startTime": 1069.438
+    "duration": 1.8,
+    "startTime": 1073.738
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0031.mp3",
     "duration": 47.063,
-    "startTime": 1070.438
+    "startTime": 1075.538
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0032.mp3",
     "duration": 32.901,
-    "startTime": 1117.501
+    "startTime": 1122.601
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0033.mp3",
     "duration": 71.787,
-    "startTime": 1150.402
+    "startTime": 1155.502
   },
   {
     "index": 34,
@@ -442,7 +442,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0034.mp3",
     "duration": 58.23,
-    "startTime": 1222.189
+    "startTime": 1227.289
   },
   {
     "index": 35,
@@ -455,7 +455,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0035.mp3",
     "duration": 70.163,
-    "startTime": 1280.419
+    "startTime": 1285.519
   },
   {
     "index": 36,
@@ -468,7 +468,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0036.mp3",
     "duration": 51.939,
-    "startTime": 1350.582
+    "startTime": 1355.682
   },
   {
     "index": 37,
@@ -481,7 +481,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0037.mp3",
     "duration": 47.551,
-    "startTime": 1402.522
+    "startTime": 1407.622
   },
   {
     "index": 38,
@@ -494,7 +494,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0038.mp3",
     "duration": 45.6,
-    "startTime": 1450.072
+    "startTime": 1455.172
   },
   {
     "index": 39,
@@ -507,7 +507,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- ANNUAL PLANNING AGAINST THE CFO (5 minutes)",
     "file": "0039.mp3",
     "duration": 18.321,
-    "startTime": 1495.673
+    "startTime": 1500.773
   },
   {
     "index": 40,
@@ -520,7 +520,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0040.mp3",
     "duration": 26.144,
-    "startTime": 1513.993
+    "startTime": 1519.093
   },
   {
     "index": 41,
@@ -533,7 +533,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0041.mp3",
     "duration": 16.509,
-    "startTime": 1540.137
+    "startTime": 1545.237
   },
   {
     "index": 42,
@@ -546,7 +546,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0042.mp3",
     "duration": 3.135,
-    "startTime": 1556.646
+    "startTime": 1561.746
   },
   {
     "index": 43,
@@ -556,7 +556,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0043.mp3",
-    "duration": 1.5,
-    "startTime": 1559.781
+    "duration": 5.5,
+    "startTime": 1564.881
   }
 ]

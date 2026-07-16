@@ -1,7 +1,7 @@
 # Episode 1: Mastering Situational Judgment
 ## "Think Like a Diplomat"
 
-**Duration:** ~60 minutes
+**Duration:** ~30 minutes
 **Hosts:** Jordan Hayes (Former Foreign Service Officer) & Maya Torres (FSOT Candidate)
 
 ---

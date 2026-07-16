@@ -1,7 +1,7 @@
 # Episode 9: Outcome-Based Pricing for AI Products
 ## "From Seat Licenses to Priced Value Delivery"
 
-**Duration:** ~60 minutes
+**Duration:** ~48 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

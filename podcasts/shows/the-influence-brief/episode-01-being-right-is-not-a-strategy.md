@@ -1,7 +1,7 @@
 # Episode 1: Being Right Is Not a Strategy
 ## "The Influence Map, Currencies of Exchange, and the Trust Equation"
 
-**Duration:** ~26 minutes
+**Duration:** ~16 minutes
 **Hosts:** Sloane Bishop & Victor Reyes
 **Podcast:** The Influence Brief -- Negotiation, Persuasion & Stakeholder Craft for Product Executives
 

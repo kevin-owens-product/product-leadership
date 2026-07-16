@@ -1,7 +1,7 @@
 # Episode 9: MCP Servers & Custom Tools
 ## "Extending Claude Code Beyond Its Built-In Powers"
 
-**Duration:** ~60 minutes
+**Duration:** ~11 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

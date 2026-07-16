@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: THE CONVERSATIONS THAT DEFINE YOU (3 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: THE CONVERSATIONS THAT DEFINE YOU (3 minutes)",
     "file": "0001.mp3",
     "duration": 4.876,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: THE CONVERSATIONS THAT DEFINE YOU (3 minutes)",
     "file": "0002.mp3",
     "duration": 1.672,
-    "startTime": 6.376
+    "startTime": 9.076
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: THE CONVERSATIONS THAT DEFINE YOU (3 minutes)",
     "file": "0003.mp3",
     "duration": 57.255,
-    "startTime": 8.048
+    "startTime": 10.748
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: THE CONVERSATIONS THAT DEFINE YOU (3 minutes)",
     "file": "0004.mp3",
     "duration": 36.336,
-    "startTime": 65.303
+    "startTime": 68.003
   },
   {
     "index": 5,
@@ -73,7 +73,7 @@
     "chapter": "INTRO: THE CONVERSATIONS THAT DEFINE YOU (3 minutes)",
     "file": "0005.mp3",
     "duration": 21.616,
-    "startTime": 101.638
+    "startTime": 104.338
   },
   {
     "index": 6,
@@ -83,8 +83,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: THE CONVERSATIONS THAT DEFINE YOU (3 minutes)",
     "file": "0006.mp3",
-    "duration": 1.2,
-    "startTime": 123.254
+    "duration": 2.8,
+    "startTime": 125.954
   },
   {
     "index": 7,
@@ -97,7 +97,7 @@
     "chapter": "SEGMENT 1: THE NO WITH A PATH (6 minutes)",
     "file": "0007.mp3",
     "duration": 43.789,
-    "startTime": 124.454
+    "startTime": 128.754
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "SEGMENT 1: THE NO WITH A PATH (6 minutes)",
     "file": "0008.mp3",
     "duration": 51.312,
-    "startTime": 168.243
+    "startTime": 172.543
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "SEGMENT 1: THE NO WITH A PATH (6 minutes)",
     "file": "0009.mp3",
     "duration": 73.159,
-    "startTime": 219.556
+    "startTime": 223.856
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "SEGMENT 1: THE NO WITH A PATH (6 minutes)",
     "file": "0010.mp3",
     "duration": 46.784,
-    "startTime": 292.714
+    "startTime": 297.014
   },
   {
     "index": 11,
@@ -149,7 +149,7 @@
     "chapter": "SEGMENT 1: THE NO WITH A PATH (6 minutes)",
     "file": "0011.mp3",
     "duration": 39.679,
-    "startTime": 339.499
+    "startTime": 343.799
   },
   {
     "index": 12,
@@ -160,7 +160,7 @@
     "chapter": "SEGMENT 1: THE NO WITH A PATH (6 minutes)",
     "file": "0012.mp3",
     "duration": 0.8,
-    "startTime": 379.178
+    "startTime": 383.478
   },
   {
     "index": 13,
@@ -173,7 +173,7 @@
     "chapter": "SEGMENT 2: THE BAD-NEWS BRIEF (6 minutes)",
     "file": "0013.mp3",
     "duration": 51.334,
-    "startTime": 379.978
+    "startTime": 384.278
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "SEGMENT 2: THE BAD-NEWS BRIEF (6 minutes)",
     "file": "0014.mp3",
     "duration": 51.055,
-    "startTime": 431.312
+    "startTime": 435.612
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "SEGMENT 2: THE BAD-NEWS BRIEF (6 minutes)",
     "file": "0015.mp3",
     "duration": 79.449,
-    "startTime": 482.367
+    "startTime": 486.667
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "SEGMENT 2: THE BAD-NEWS BRIEF (6 minutes)",
     "file": "0016.mp3",
     "duration": 71.578,
-    "startTime": 561.816
+    "startTime": 566.116
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "SEGMENT 2: THE BAD-NEWS BRIEF (6 minutes)",
     "file": "0017.mp3",
     "duration": 25.238,
-    "startTime": 633.394
+    "startTime": 637.694
   },
   {
     "index": 18,
@@ -236,7 +236,7 @@
     "chapter": "SEGMENT 2: THE BAD-NEWS BRIEF (6 minutes)",
     "file": "0018.mp3",
     "duration": 0.8,
-    "startTime": 658.632
+    "startTime": 662.932
   },
   {
     "index": 19,
@@ -249,7 +249,7 @@
     "chapter": "SEGMENT 3: TRUST REPAIR (5 minutes)",
     "file": "0019.mp3",
     "duration": 67.238,
-    "startTime": 659.432
+    "startTime": 663.732
   },
   {
     "index": 20,
@@ -262,7 +262,7 @@
     "chapter": "SEGMENT 3: TRUST REPAIR (5 minutes)",
     "file": "0020.mp3",
     "duration": 57.394,
-    "startTime": 726.67
+    "startTime": 730.97
   },
   {
     "index": 21,
@@ -275,7 +275,7 @@
     "chapter": "SEGMENT 3: TRUST REPAIR (5 minutes)",
     "file": "0021.mp3",
     "duration": 89.502,
-    "startTime": 784.064
+    "startTime": 788.364
   },
   {
     "index": 22,
@@ -288,7 +288,7 @@
     "chapter": "SEGMENT 3: TRUST REPAIR (5 minutes)",
     "file": "0022.mp3",
     "duration": 41.63,
-    "startTime": 873.566
+    "startTime": 877.866
   },
   {
     "index": 23,
@@ -298,8 +298,8 @@
     "text": "[MUSIC STING]",
     "chapter": "SEGMENT 3: TRUST REPAIR (5 minutes)",
     "file": "0023.mp3",
-    "duration": 1,
-    "startTime": 915.196
+    "duration": 1.8,
+    "startTime": 919.496
   },
   {
     "index": 24,
@@ -312,7 +312,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE WORST DAY, WITH THE FULL TOOLKIT (5 minutes)",
     "file": "0024.mp3",
     "duration": 60.111,
-    "startTime": 916.196
+    "startTime": 921.296
   },
   {
     "index": 25,
@@ -325,7 +325,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE WORST DAY, WITH THE FULL TOOLKIT (5 minutes)",
     "file": "0025.mp3",
     "duration": 64.708,
-    "startTime": 976.306
+    "startTime": 981.406
   },
   {
     "index": 26,
@@ -338,7 +338,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE WORST DAY, WITH THE FULL TOOLKIT (5 minutes)",
     "file": "0026.mp3",
     "duration": 51.612,
-    "startTime": 1041.015
+    "startTime": 1046.115
   },
   {
     "index": 27,
@@ -351,7 +351,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE WORST DAY, WITH THE FULL TOOLKIT (5 minutes)",
     "file": "0027.mp3",
     "duration": 87.6,
-    "startTime": 1092.627
+    "startTime": 1097.727
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE WORST DAY, WITH THE FULL TOOLKIT (5 minutes)",
     "file": "0028.mp3",
     "duration": 80.494,
-    "startTime": 1180.227
+    "startTime": 1185.327
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE WORST DAY, WITH THE FULL TOOLKIT (5 minutes)",
     "file": "0029.mp3",
     "duration": 56.907,
-    "startTime": 1260.721
+    "startTime": 1265.821
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "CLOSE: THE SERIES, DELIVERED (2 minutes)",
     "file": "0030.mp3",
     "duration": 39.54,
-    "startTime": 1317.628
+    "startTime": 1322.728
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "CLOSE: THE SERIES, DELIVERED (2 minutes)",
     "file": "0031.mp3",
     "duration": 47.62,
-    "startTime": 1357.167
+    "startTime": 1362.267
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "CLOSE: THE SERIES, DELIVERED (2 minutes)",
     "file": "0032.mp3",
     "duration": 3.344,
-    "startTime": 1404.788
+    "startTime": 1409.888
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "CLOSE: THE SERIES, DELIVERED (2 minutes)",
     "file": "0033.mp3",
     "duration": 4.528,
-    "startTime": 1408.132
+    "startTime": 1413.232
   },
   {
     "index": 34,
@@ -439,7 +439,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "CLOSE: THE SERIES, DELIVERED (2 minutes)",
     "file": "0034.mp3",
-    "duration": 1.5,
-    "startTime": 1412.659
+    "duration": 5.5,
+    "startTime": 1417.759
   }
 ]

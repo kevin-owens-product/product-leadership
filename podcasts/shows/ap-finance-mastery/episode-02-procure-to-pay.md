@@ -1,5 +1,7 @@
 # Episode 2: The Procure-to-Pay Journey
 
+**Duration:** ~17 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. In our first episode, we covered the fundamentals of accounts payable, the invoice lifecycle, and why AP matters strategically. Today we're going to zoom out and look at the full procure-to-pay journey.

@@ -1,5 +1,7 @@
 # Episode 9: The CFO Perspective & Strategic Finance
 
+**Duration:** ~14 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back. Today we're stepping into the shoes of the buyer. The CFO and finance leaders who decide whether to invest in AP automation.

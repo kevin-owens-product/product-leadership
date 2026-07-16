@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0001.mp3",
     "duration": 3.971,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0002.mp3",
     "duration": 1.672,
-    "startTime": 5.471
+    "startTime": 8.171
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0003.mp3",
     "duration": 35.709,
-    "startTime": 7.142
+    "startTime": 9.842
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0004.mp3",
     "duration": 45.74,
-    "startTime": 42.851
+    "startTime": 45.551
   },
   {
     "index": 5,
@@ -73,7 +73,7 @@
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0005.mp3",
     "duration": 44.346,
-    "startTime": 88.591
+    "startTime": 91.291
   },
   {
     "index": 6,
@@ -86,7 +86,7 @@
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0006.mp3",
     "duration": 25.447,
-    "startTime": 132.937
+    "startTime": 135.637
   },
   {
     "index": 7,
@@ -96,8 +96,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: THE DECK THAT DIED ON SLIDE FOUR (3 minutes)",
     "file": "0007.mp3",
-    "duration": 1.2,
-    "startTime": 158.384
+    "duration": 2.8,
+    "startTime": 161.084
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "SEGMENT 1: THE PYRAMID -- ANSWER FIRST, REASONS SECOND, EVIDENCE ON DEMAND (6 minutes)",
     "file": "0008.mp3",
     "duration": 34.642,
-    "startTime": 159.584
+    "startTime": 163.884
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "SEGMENT 1: THE PYRAMID -- ANSWER FIRST, REASONS SECOND, EVIDENCE ON DEMAND (6 minutes)",
     "file": "0009.mp3",
     "duration": 57.276,
-    "startTime": 194.227
+    "startTime": 198.527
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "SEGMENT 1: THE PYRAMID -- ANSWER FIRST, REASONS SECOND, EVIDENCE ON DEMAND (6 minutes)",
     "file": "0010.mp3",
     "duration": 48.617,
-    "startTime": 251.503
+    "startTime": 255.803
   },
   {
     "index": 11,
@@ -149,7 +149,7 @@
     "chapter": "SEGMENT 1: THE PYRAMID -- ANSWER FIRST, REASONS SECOND, EVIDENCE ON DEMAND (6 minutes)",
     "file": "0011.mp3",
     "duration": 59.018,
-    "startTime": 300.12
+    "startTime": 304.42
   },
   {
     "index": 12,
@@ -162,7 +162,7 @@
     "chapter": "SEGMENT 1: THE PYRAMID -- ANSWER FIRST, REASONS SECOND, EVIDENCE ON DEMAND (6 minutes)",
     "file": "0012.mp3",
     "duration": 55.026,
-    "startTime": 359.137
+    "startTime": 363.437
   },
   {
     "index": 13,
@@ -175,7 +175,7 @@
     "chapter": "SEGMENT 1: THE PYRAMID -- ANSWER FIRST, REASONS SECOND, EVIDENCE ON DEMAND (6 minutes)",
     "file": "0013.mp3",
     "duration": 38.007,
-    "startTime": 414.163
+    "startTime": 418.463
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "SEGMENT 1: THE PYRAMID -- ANSWER FIRST, REASONS SECOND, EVIDENCE ON DEMAND (6 minutes)",
     "file": "0014.mp3",
     "duration": 0.8,
-    "startTime": 452.17
+    "startTime": 456.47
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "SEGMENT 2: THE PRE-WIRE -- THE MEETING IS THE RATIFICATION, NOT THE DECISION (6 minutes)",
     "file": "0015.mp3",
     "duration": 31.181,
-    "startTime": 452.97
+    "startTime": 457.27
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "SEGMENT 2: THE PRE-WIRE -- THE MEETING IS THE RATIFICATION, NOT THE DECISION (6 minutes)",
     "file": "0016.mp3",
     "duration": 50.128,
-    "startTime": 484.151
+    "startTime": 488.451
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "SEGMENT 2: THE PRE-WIRE -- THE MEETING IS THE RATIFICATION, NOT THE DECISION (6 minutes)",
     "file": "0017.mp3",
     "duration": 53.054,
-    "startTime": 534.279
+    "startTime": 538.579
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "SEGMENT 2: THE PRE-WIRE -- THE MEETING IS THE RATIFICATION, NOT THE DECISION (6 minutes)",
     "file": "0018.mp3",
     "duration": 46.367,
-    "startTime": 587.333
+    "startTime": 591.633
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "SEGMENT 2: THE PRE-WIRE -- THE MEETING IS THE RATIFICATION, NOT THE DECISION (6 minutes)",
     "file": "0019.mp3",
     "duration": 59.693,
-    "startTime": 633.7
+    "startTime": 638
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "SEGMENT 2: THE PRE-WIRE -- THE MEETING IS THE RATIFICATION, NOT THE DECISION (6 minutes)",
     "file": "0020.mp3",
     "duration": 53.493,
-    "startTime": 693.393
+    "startTime": 697.693
   },
   {
     "index": 21,
@@ -275,7 +275,7 @@
     "chapter": "SEGMENT 2: THE PRE-WIRE -- THE MEETING IS THE RATIFICATION, NOT THE DECISION (6 minutes)",
     "file": "0021.mp3",
     "duration": 0.8,
-    "startTime": 746.886
+    "startTime": 751.186
   },
   {
     "index": 22,
@@ -288,7 +288,7 @@
     "chapter": "SEGMENT 3: SURVIVING THE ROOM (5 minutes)",
     "file": "0022.mp3",
     "duration": 56.837,
-    "startTime": 747.686
+    "startTime": 751.986
   },
   {
     "index": 23,
@@ -301,7 +301,7 @@
     "chapter": "SEGMENT 3: SURVIVING THE ROOM (5 minutes)",
     "file": "0023.mp3",
     "duration": 71.556,
-    "startTime": 804.523
+    "startTime": 808.823
   },
   {
     "index": 24,
@@ -314,7 +314,7 @@
     "chapter": "SEGMENT 3: SURVIVING THE ROOM (5 minutes)",
     "file": "0024.mp3",
     "duration": 63.594,
-    "startTime": 876.079
+    "startTime": 880.379
   },
   {
     "index": 25,
@@ -327,7 +327,7 @@
     "chapter": "SEGMENT 3: SURVIVING THE ROOM (5 minutes)",
     "file": "0025.mp3",
     "duration": 69.815,
-    "startTime": 939.673
+    "startTime": 943.973
   },
   {
     "index": 26,
@@ -340,7 +340,7 @@
     "chapter": "SEGMENT 3: SURVIVING THE ROOM (5 minutes)",
     "file": "0026.mp3",
     "duration": 24.96,
-    "startTime": 1009.488
+    "startTime": 1013.788
   },
   {
     "index": 27,
@@ -350,8 +350,8 @@
     "text": "[MUSIC STING]",
     "chapter": "SEGMENT 3: SURVIVING THE ROOM (5 minutes)",
     "file": "0027.mp3",
-    "duration": 1,
-    "startTime": 1034.448
+    "duration": 1.8,
+    "startTime": 1038.748
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0028.mp3",
     "duration": 58.6,
-    "startTime": 1035.448
+    "startTime": 1040.548
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0029.mp3",
     "duration": 62.41,
-    "startTime": 1094.047
+    "startTime": 1099.147
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0030.mp3",
     "duration": 79.916,
-    "startTime": 1156.457
+    "startTime": 1161.557
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0031.mp3",
     "duration": 68.4,
-    "startTime": 1236.373
+    "startTime": 1241.473
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0032.mp3",
     "duration": 64.408,
-    "startTime": 1304.773
+    "startTime": 1309.873
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0033.mp3",
     "duration": 72.789,
-    "startTime": 1369.181
+    "startTime": 1374.281
   },
   {
     "index": 34,
@@ -442,7 +442,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0034.mp3",
     "duration": 34.991,
-    "startTime": 1441.97
+    "startTime": 1447.07
   },
   {
     "index": 35,
@@ -455,7 +455,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- FIFTEEN MINUTES, HOSTILE MEMO, FULL BOARD (5 minutes)",
     "file": "0035.mp3",
     "duration": 21.686,
-    "startTime": 1476.961
+    "startTime": 1482.061
   },
   {
     "index": 36,
@@ -468,7 +468,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0036.mp3",
     "duration": 27.049,
-    "startTime": 1498.647
+    "startTime": 1503.747
   },
   {
     "index": 37,
@@ -481,7 +481,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0037.mp3",
     "duration": 18.112,
-    "startTime": 1525.696
+    "startTime": 1530.796
   },
   {
     "index": 38,
@@ -494,7 +494,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0038.mp3",
     "duration": 3.135,
-    "startTime": 1543.808
+    "startTime": 1548.908
   },
   {
     "index": 39,
@@ -504,7 +504,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0039.mp3",
-    "duration": 1.5,
-    "startTime": 1546.942
+    "duration": 5.5,
+    "startTime": 1552.042
   }
 ]

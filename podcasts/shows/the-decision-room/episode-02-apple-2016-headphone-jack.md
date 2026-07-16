@@ -1,7 +1,7 @@
 # Episode 2: Apple, September 2016
 ## "Ship a Phone With No Headphone Jack"
 
-**Duration:** ~28 minutes
+**Duration:** ~17 minutes
 **Hosts:** Dana Cole & Eli Vance
 **Podcast:** The Decision Room -- Famous Product Decisions, Argued From Inside the Room
 

@@ -1,7 +1,7 @@
 # Episode 8: Advanced Prompting Techniques
 ## "The Art of Communicating with Claude"
 
-**Duration:** ~60 minutes
+**Duration:** ~12 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

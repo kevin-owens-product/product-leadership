@@ -1,7 +1,7 @@
 # Episode 4: Your Boss Is a Stakeholder
 ## "The Operating Manual, the No-Surprises Contract, and Disagreeing Upward"
 
-**Duration:** ~26 minutes
+**Duration:** ~21 minutes
 **Hosts:** Sloane Bishop & Victor Reyes
 **Podcast:** The Influence Brief -- Negotiation, Persuasion & Stakeholder Craft for Product Executives
 

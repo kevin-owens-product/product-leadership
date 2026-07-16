@@ -1,7 +1,7 @@
 # Episode 6: Testing & Debugging
 ## "Write Better Tests, Find Bugs Faster"
 
-**Duration:** ~60 minutes
+**Duration:** ~13 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

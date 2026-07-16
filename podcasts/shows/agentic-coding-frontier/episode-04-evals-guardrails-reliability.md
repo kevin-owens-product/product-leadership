@@ -1,7 +1,7 @@
 # Episode 4: Evals, Guardrails, and Reliability
 ## "Shipping Agentic Systems Without Losing Control"
 
-**Duration:** ~60 minutes
+**Duration:** ~52 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 
 ---

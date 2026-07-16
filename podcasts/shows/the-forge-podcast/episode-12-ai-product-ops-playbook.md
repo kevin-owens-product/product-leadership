@@ -1,7 +1,7 @@
 # Episode 12: The AI Product Ops Playbook
 ## "Operating AI Products with Discipline, Speed, and Reliability"
 
-**Duration:** ~60 minutes
+**Duration:** ~50 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

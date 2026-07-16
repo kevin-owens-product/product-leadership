@@ -1,7 +1,7 @@
 # Episode 3: Software Engineering Excellence
 ## "Building and Scaling World-Class Engineering Teams"
 
-**Duration:** ~60 minutes
+**Duration:** ~25 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

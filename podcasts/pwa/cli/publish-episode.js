@@ -110,12 +110,13 @@ function main() {
         `validate   node cli/validate.js --show ${showId} --episode ${episodeNum}`,
         `tts        SUPERTONIC_DIR=${supertonicDir} node ../tools/generate-audio-supertonic.js ${ttsArgs.join(' ')}`,
         `backfill   node ../tools/backfill-manifest-durations.js --show ${showId}`,
+        `headers    node ../tools/sync-duration-headers.js --show ${showId}`,
         'build      node build-episodes.js'
     ];
     console.log('\nPlan:');
     plan.forEach((p, i) => console.log(`  ${i + 1}. ${p}`));
 
-    const totalSteps = 4;
+    const totalSteps = 5;
     const startedAt = Date.now();
 
     // Step 1 — validate (Markdown + show manifest only; audio manifests are
@@ -161,8 +162,18 @@ function main() {
         process.exit(1);
     }
 
-    // Step 4 — build (re-validates everything, including the new audio).
-    step(4, totalSteps, 'Building dist/…');
+    // Step 4 — sync the markdown Duration header to the freshly rendered
+    // length, so the episode list stops advertising the author's estimate.
+    // Scoped to this show: publishing one episode must never rewrite (and
+    // line-shift) scripts elsewhere in the catalog.
+    step(4, totalSteps, 'Syncing duration headers…');
+    if (!runNode(path.join(TOOLS_DIR, 'sync-duration-headers.js'), ['--show', showId])) {
+        console.error('\n✗ Duration header sync failed. Re-run this command to retry (TTS output is preserved).');
+        process.exit(1);
+    }
+
+    // Step 5 — build (re-validates everything, including the new audio).
+    step(5, totalSteps, 'Building dist/…');
     if (!runNode(path.join(PWA_DIR, 'build-episodes.js'), [])) {
         console.error('\n✗ Build failed. Fix the errors above, then re-run (TTS output is preserved).');
         process.exit(1);

@@ -2,6 +2,8 @@
 ## Episode 2: "Ocean Parkway"
 ### Season 1
 
+**Duration:** ~33 minutes
+
 ---
 
 [NARRATOR] Before Roland Voss was an architect, before he was a husband and a father and a youth sports coach and the kind of neighbor who shovels the elderly woman's walk across the street without being asked, he was a beach kid.

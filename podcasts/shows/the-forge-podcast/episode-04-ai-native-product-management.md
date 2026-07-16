@@ -1,7 +1,7 @@
 # Episode 4: AI-Native Product Management
 ## "How the Role of the Product Manager Fundamentally Changes in an AI-First World"
 
-**Duration:** ~60 minutes
+**Duration:** ~50 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

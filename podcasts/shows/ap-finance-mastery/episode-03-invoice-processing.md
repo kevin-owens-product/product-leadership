@@ -1,5 +1,7 @@
 # Episode 3: Invoice Processing Deep Dive
 
+**Duration:** ~18 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. We've covered AP fundamentals and the full procure-to-pay journey. Now it's time to go deep on the heart of AP automation: invoice processing.

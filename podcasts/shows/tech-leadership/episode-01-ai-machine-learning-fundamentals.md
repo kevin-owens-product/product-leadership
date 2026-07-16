@@ -1,7 +1,7 @@
 # Episode 1: AI & Machine Learning Fundamentals
 ## "The CPO's Guide to Understanding the AI Revolution"
 
-**Duration:** ~60 minutes
+**Duration:** ~30 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

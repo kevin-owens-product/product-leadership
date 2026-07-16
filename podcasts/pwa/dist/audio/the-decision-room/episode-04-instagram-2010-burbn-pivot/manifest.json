@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: THE SMALLEST ROOM YET (2 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: THE SMALLEST ROOM YET (2 minutes)",
     "file": "0001.mp3",
     "duration": 3.204,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: THE SMALLEST ROOM YET (2 minutes)",
     "file": "0002.mp3",
     "duration": 11.703,
-    "startTime": 4.704
+    "startTime": 7.404
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: THE SMALLEST ROOM YET (2 minutes)",
     "file": "0003.mp3",
     "duration": 21.825,
-    "startTime": 16.407
+    "startTime": 19.107
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: THE SMALLEST ROOM YET (2 minutes)",
     "file": "0004.mp3",
     "duration": 20.362,
-    "startTime": 38.232
+    "startTime": 40.932
   },
   {
     "index": 5,
@@ -70,8 +70,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: THE SMALLEST ROOM YET (2 minutes)",
     "file": "0005.mp3",
-    "duration": 1.2,
-    "startTime": 58.594
+    "duration": 2.8,
+    "startTime": 61.294
   },
   {
     "index": 6,
@@ -84,7 +84,7 @@
     "chapter": "THE ROOM: SOUTH PARK, SAN FRANCISCO, SUMMER 2010 (4 minutes)",
     "file": "0006.mp3",
     "duration": 35.43,
-    "startTime": 59.794
+    "startTime": 64.094
   },
   {
     "index": 7,
@@ -97,7 +97,7 @@
     "chapter": "THE ROOM: SOUTH PARK, SAN FRANCISCO, SUMMER 2010 (4 minutes)",
     "file": "0007.mp3",
     "duration": 37.707,
-    "startTime": 95.224
+    "startTime": 99.524
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "THE ROOM: SOUTH PARK, SAN FRANCISCO, SUMMER 2010 (4 minutes)",
     "file": "0008.mp3",
     "duration": 30.693,
-    "startTime": 132.931
+    "startTime": 137.231
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "THE ROOM: SOUTH PARK, SAN FRANCISCO, SUMMER 2010 (4 minutes)",
     "file": "0009.mp3",
     "duration": 28.373,
-    "startTime": 163.624
+    "startTime": 167.924
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "THE ROOM: SOUTH PARK, SAN FRANCISCO, SUMMER 2010 (4 minutes)",
     "file": "0010.mp3",
     "duration": 35.012,
-    "startTime": 191.997
+    "startTime": 196.297
   },
   {
     "index": 11,
@@ -149,7 +149,7 @@
     "chapter": "THE ROOM: SOUTH PARK, SAN FRANCISCO, SUMMER 2010 (4 minutes)",
     "file": "0011.mp3",
     "duration": 39.54,
-    "startTime": 227.009
+    "startTime": 231.309
   },
   {
     "index": 12,
@@ -160,7 +160,7 @@
     "chapter": "THE ROOM: SOUTH PARK, SAN FRANCISCO, SUMMER 2010 (4 minutes)",
     "file": "0012.mp3",
     "duration": 0.8,
-    "startTime": 266.549
+    "startTime": 270.849
   },
   {
     "index": 13,
@@ -173,7 +173,7 @@
     "chapter": "THE CASE AGAINST THE PIVOT: PRUNE, DON'T RAZE (5 minutes)",
     "file": "0013.mp3",
     "duration": 44.137,
-    "startTime": 267.349
+    "startTime": 271.649
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "THE CASE AGAINST THE PIVOT: PRUNE, DON'T RAZE (5 minutes)",
     "file": "0014.mp3",
     "duration": 45.949,
-    "startTime": 311.487
+    "startTime": 315.787
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "THE CASE AGAINST THE PIVOT: PRUNE, DON'T RAZE (5 minutes)",
     "file": "0015.mp3",
     "duration": 5.782,
-    "startTime": 357.435
+    "startTime": 361.735
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "THE CASE AGAINST THE PIVOT: PRUNE, DON'T RAZE (5 minutes)",
     "file": "0016.mp3",
     "duration": 53.006,
-    "startTime": 363.217
+    "startTime": 367.517
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "THE CASE AGAINST THE PIVOT: PRUNE, DON'T RAZE (5 minutes)",
     "file": "0017.mp3",
     "duration": 43.162,
-    "startTime": 416.223
+    "startTime": 420.523
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "THE CASE FOR THE PIVOT: THE USERS ALREADY VOTED (5 minutes)",
     "file": "0018.mp3",
     "duration": 28.512,
-    "startTime": 459.385
+    "startTime": 463.685
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "THE CASE FOR THE PIVOT: THE USERS ALREADY VOTED (5 minutes)",
     "file": "0019.mp3",
     "duration": 32.783,
-    "startTime": 487.897
+    "startTime": 492.197
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "THE CASE FOR THE PIVOT: THE USERS ALREADY VOTED (5 minutes)",
     "file": "0020.mp3",
     "duration": 7.384,
-    "startTime": 520.68
+    "startTime": 524.98
   },
   {
     "index": 21,
@@ -277,7 +277,7 @@
     "chapter": "THE CASE FOR THE PIVOT: THE USERS ALREADY VOTED (5 minutes)",
     "file": "0021.mp3",
     "duration": 53.145,
-    "startTime": 528.064
+    "startTime": 532.364
   },
   {
     "index": 22,
@@ -290,7 +290,7 @@
     "chapter": "THE CASE FOR THE PIVOT: THE USERS ALREADY VOTED (5 minutes)",
     "file": "0022.mp3",
     "duration": 30.741,
-    "startTime": 581.209
+    "startTime": 585.509
   },
   {
     "index": 23,
@@ -303,7 +303,7 @@
     "chapter": "THE CASE FOR THE PIVOT: THE USERS ALREADY VOTED (5 minutes)",
     "file": "0023.mp3",
     "duration": 53.354,
-    "startTime": 611.95
+    "startTime": 616.25
   },
   {
     "index": 24,
@@ -314,7 +314,7 @@
     "chapter": "THE CASE FOR THE PIVOT: THE USERS ALREADY VOTED (5 minutes)",
     "file": "0024.mp3",
     "duration": 0.8,
-    "startTime": 665.304
+    "startTime": 669.604
   },
   {
     "index": 25,
@@ -324,8 +324,8 @@
     "text": "[MUSIC STING]",
     "chapter": "THE REVEAL: WHAT SYSTROM AND KRIEGER DID (4 minutes)",
     "file": "0025.mp3",
-    "duration": 1,
-    "startTime": 666.104
+    "duration": 1.8,
+    "startTime": 670.404
   },
   {
     "index": 26,
@@ -338,7 +338,7 @@
     "chapter": "THE REVEAL: WHAT SYSTROM AND KRIEGER DID (4 minutes)",
     "file": "0026.mp3",
     "duration": 36.475,
-    "startTime": 667.104
+    "startTime": 672.204
   },
   {
     "index": 27,
@@ -351,7 +351,7 @@
     "chapter": "THE REVEAL: WHAT SYSTROM AND KRIEGER DID (4 minutes)",
     "file": "0027.mp3",
     "duration": 29.905,
-    "startTime": 703.579
+    "startTime": 708.679
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "THE REVEAL: WHAT SYSTROM AND KRIEGER DID (4 minutes)",
     "file": "0028.mp3",
     "duration": 36.336,
-    "startTime": 733.484
+    "startTime": 738.584
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "THE REVEAL: WHAT SYSTROM AND KRIEGER DID (4 minutes)",
     "file": "0029.mp3",
     "duration": 31.459,
-    "startTime": 769.82
+    "startTime": 774.92
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "THE REVEAL: WHAT SYSTROM AND KRIEGER DID (4 minutes)",
     "file": "0030.mp3",
     "duration": 17.345,
-    "startTime": 801.279
+    "startTime": 806.379
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0031.mp3",
     "duration": 3.622,
-    "startTime": 818.624
+    "startTime": 823.724
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0032.mp3",
     "duration": 25.238,
-    "startTime": 822.247
+    "startTime": 827.347
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0033.mp3",
     "duration": 30.95,
-    "startTime": 847.485
+    "startTime": 852.585
   },
   {
     "index": 34,
@@ -442,7 +442,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0034.mp3",
     "duration": 29.509,
-    "startTime": 878.435
+    "startTime": 883.535
   },
   {
     "index": 35,
@@ -455,7 +455,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0035.mp3",
     "duration": 25.865,
-    "startTime": 907.944
+    "startTime": 913.044
   },
   {
     "index": 36,
@@ -468,7 +468,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0036.mp3",
     "duration": 22.452,
-    "startTime": 933.809
+    "startTime": 938.909
   },
   {
     "index": 37,
@@ -481,7 +481,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0037.mp3",
     "duration": 3.274,
-    "startTime": 956.261
+    "startTime": 961.361
   },
   {
     "index": 38,
@@ -491,7 +491,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0038.mp3",
-    "duration": 1.5,
-    "startTime": 959.535
+    "duration": 5.5,
+    "startTime": 964.635
   }
 ]

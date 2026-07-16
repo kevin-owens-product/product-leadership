@@ -2,6 +2,8 @@
 ## Episode 5: "The Surveillance"
 ### Season 1
 
+**Duration:** ~34 minutes
+
 ---
 
 [NARRATOR] The first meeting of the full task force takes place on a Monday morning in February 2022, in a converted conference room three blocks from the SSPD's main building. Twelve detectives. A digital forensics team of six. Dr. Nina Park. Two FBI liaisons. Three state police representatives. A prosecutor from the DA's office. And Carol Marsh at the head of the table, who has been waiting for this room to exist for twelve years.

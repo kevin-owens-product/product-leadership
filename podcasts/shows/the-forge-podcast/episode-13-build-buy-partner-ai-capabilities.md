@@ -1,7 +1,7 @@
 # Episode 13: Build vs Buy vs Partner for AI Capabilities
 ## "A Decision Framework for Speed, Control, and Strategic Differentiation"
 
-**Duration:** ~60 minutes
+**Duration:** ~58 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 **Podcast:** The Forge Podcast -- PE, Software Transformation, and the AI-Native Future
 

@@ -21,10 +21,10 @@ export const CUE_REFERENCE_COMMENT = `<!--
   Cues       ->  place one cue alone on its own line, exactly as shown:
     \`[PAUSE]\`        short beat (0.8s)
     \`[LONG PAUSE]\`   longer beat (1.8s)
-    \`[MUSIC STING]\`  musical accent (1.0s)
-    \`[MUSIC FADES]\`  fade transition (1.2s)
-    \`[INTRO MUSIC]\`  opening theme (1.5s)
-    \`[OUTRO MUSIC]\`  closing theme (1.5s)
+    \`[MUSIC STING]\`  musical accent (1.8s, show theme)
+    \`[MUSIC FADES]\`  fade transition (2.8s, show theme)
+    \`[INTRO MUSIC]\`  opening theme (4.2s)
+    \`[OUTRO MUSIC]\`  closing theme (5.5s)
     \`[SFX]\` or \`[SOUND]\`            sound effect (0.7s)
     \`[AMBIENCE]\` or \`[AMBIENT BED]\` background bed (1.0s)
   Anything else in [BRACKETS] on its own line is a stage direction — it is

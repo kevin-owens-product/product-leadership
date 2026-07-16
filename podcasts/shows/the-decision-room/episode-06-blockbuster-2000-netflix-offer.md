@@ -1,7 +1,7 @@
 # Episode 6: Dallas, Early 2000
 ## "Buy Netflix for Fifty Million Dollars — or Laugh Them Out of the Room"
 
-**Duration:** ~28 minutes
+**Duration:** ~19 minutes
 **Hosts:** Dana Cole & Eli Vance
 **Podcast:** The Decision Room -- Famous Product Decisions, Argued From Inside the Room
 

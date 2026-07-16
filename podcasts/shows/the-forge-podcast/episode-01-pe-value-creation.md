@@ -1,7 +1,7 @@
 # Episode 1: The PE Operating Partner Playbook
 ## "How Private Equity Firms Create (and Destroy) Value Through Technology"
 
-**Duration:** ~60 minutes
+**Duration:** ~59 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 **Podcast:** The Forge Podcast -- PE, Software Transformation, and the AI-Native Future
 

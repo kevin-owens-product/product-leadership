@@ -1,7 +1,7 @@
 # Episode 3: Amazon, Fall 2004
 ## "Free Two-Day Shipping for $79, While Shipping Eats the P&L"
 
-**Duration:** ~28 minutes
+**Duration:** ~16 minutes
 **Hosts:** Dana Cole & Eli Vance
 **Podcast:** The Decision Room -- Famous Product Decisions, Argued From Inside the Room
 

@@ -2,6 +2,8 @@
 ## Episode 4: "Twelve Years of Silence"
 ### Season 1
 
+**Duration:** ~34 minutes
+
 ---
 
 [NARRATOR] Cold cases do not freeze evenly.

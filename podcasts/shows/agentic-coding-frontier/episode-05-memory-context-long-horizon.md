@@ -1,7 +1,7 @@
 # Episode 5: Memory, Context, and Long-Horizon Execution
 ## "Making Agents Stateful, Consistent, and Useful Over Time"
 
-**Duration:** ~60 minutes
+**Duration:** ~45 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 
 ---

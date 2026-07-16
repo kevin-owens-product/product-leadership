@@ -1,7 +1,7 @@
 # Episode 6: The 12-Month Enterprise AI Roadmap
 ## "A Sequenced Playbook for CTOs, CIOs, and Heads of Platform"
 
-**Duration:** ~45 minutes
+**Duration:** ~32 minutes
 **Hosts:** Priya Anand (Interviewer) & Marcus Hale (Expert)
 **Podcast:** The Harness -- Building the Enterprise AI Operating System
 

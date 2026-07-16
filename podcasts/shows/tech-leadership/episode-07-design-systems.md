@@ -1,7 +1,7 @@
 # Episode 7: Design Systems & Component Libraries
 ## "Building Consistent UI at Scale - The Design Systems Playbook"
 
-**Duration:** ~60 minutes
+**Duration:** ~20 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

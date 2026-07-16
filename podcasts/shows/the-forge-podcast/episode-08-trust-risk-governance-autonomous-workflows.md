@@ -1,7 +1,7 @@
 # Episode 8: Trust, Risk, and Governance in Autonomous Workflows
 ## "Designing Safety and Speed Without Slowing the Business"
 
-**Duration:** ~60 minutes
+**Duration:** ~44 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

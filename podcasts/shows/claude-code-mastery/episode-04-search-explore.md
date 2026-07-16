@@ -1,7 +1,7 @@
 # Episode 4: Search & Codebase Exploration
 ## "Navigate Unfamiliar Code with Confidence"
 
-**Duration:** ~60 minutes
+**Duration:** ~14 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

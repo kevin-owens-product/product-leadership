@@ -1,7 +1,7 @@
 # Episode 4: Software Architecture Patterns
 ## "Building Systems That Last - Architecture for the Long Game"
 
-**Duration:** ~60 minutes
+**Duration:** ~26 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

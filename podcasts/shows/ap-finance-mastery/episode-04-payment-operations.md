@@ -1,5 +1,7 @@
 # Episode 4: Payment Operations & Cash Management
 
+**Duration:** ~14 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back. We've covered AP fundamentals, procure-to-pay, and invoice processing. Today we're talking about what happens after the invoice is approved: payment operations and cash management.

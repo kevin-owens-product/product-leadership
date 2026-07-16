@@ -1,7 +1,7 @@
 # Episode 4: San Francisco, Summer 2010
 ## "Delete Everything but the Photos"
 
-**Duration:** ~28 minutes
+**Duration:** ~16 minutes
 **Hosts:** Dana Cole & Eli Vance
 **Podcast:** The Decision Room -- Famous Product Decisions, Argued From Inside the Room
 

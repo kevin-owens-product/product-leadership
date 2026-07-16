@@ -1,7 +1,7 @@
 # Episode 1: Netflix, January 2007
 ## "Launch Streaming While DVDs Pay Every Bill"
 
-**Duration:** ~28 minutes
+**Duration:** ~16 minutes
 **Hosts:** Dana Cole & Eli Vance
 **Podcast:** The Decision Room -- Famous Product Decisions, Argued From Inside the Room
 

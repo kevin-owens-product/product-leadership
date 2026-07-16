@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0001.mp3",
     "duration": 3.762,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0002.mp3",
     "duration": 19.596,
-    "startTime": 5.262
+    "startTime": 7.962
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0003.mp3",
     "duration": 23.288,
-    "startTime": 24.857
+    "startTime": 27.557
   },
   {
     "index": 4,
@@ -57,8 +57,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: BACK IN THE ROOM (2 minutes)",
     "file": "0004.mp3",
-    "duration": 1.2,
-    "startTime": 48.145
+    "duration": 2.8,
+    "startTime": 50.845
   },
   {
     "index": 5,
@@ -71,7 +71,7 @@
     "chapter": "THE ROOM: SEATTLE, FALL 2004 (4 minutes)",
     "file": "0005.mp3",
     "duration": 35.778,
-    "startTime": 49.345
+    "startTime": 53.645
   },
   {
     "index": 6,
@@ -84,7 +84,7 @@
     "chapter": "THE ROOM: SEATTLE, FALL 2004 (4 minutes)",
     "file": "0006.mp3",
     "duration": 47.572,
-    "startTime": 85.123
+    "startTime": 89.423
   },
   {
     "index": 7,
@@ -97,7 +97,7 @@
     "chapter": "THE ROOM: SEATTLE, FALL 2004 (4 minutes)",
     "file": "0007.mp3",
     "duration": 37.45,
-    "startTime": 132.696
+    "startTime": 136.996
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "THE ROOM: SEATTLE, FALL 2004 (4 minutes)",
     "file": "0008.mp3",
     "duration": 52.448,
-    "startTime": 170.146
+    "startTime": 174.446
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "THE ROOM: SEATTLE, FALL 2004 (4 minutes)",
     "file": "0009.mp3",
     "duration": 19.596,
-    "startTime": 222.594
+    "startTime": 226.894
   },
   {
     "index": 10,
@@ -134,7 +134,7 @@
     "chapter": "THE ROOM: SEATTLE, FALL 2004 (4 minutes)",
     "file": "0010.mp3",
     "duration": 0.8,
-    "startTime": 242.19
+    "startTime": 246.49
   },
   {
     "index": 11,
@@ -147,7 +147,7 @@
     "chapter": "THE CASE AGAINST: CAP IT OR KILL IT (5 minutes)",
     "file": "0011.mp3",
     "duration": 39.052,
-    "startTime": 242.99
+    "startTime": 247.29
   },
   {
     "index": 12,
@@ -160,7 +160,7 @@
     "chapter": "THE CASE AGAINST: CAP IT OR KILL IT (5 minutes)",
     "file": "0012.mp3",
     "duration": 46.018,
-    "startTime": 282.042
+    "startTime": 286.342
   },
   {
     "index": 13,
@@ -173,7 +173,7 @@
     "chapter": "THE CASE AGAINST: CAP IT OR KILL IT (5 minutes)",
     "file": "0013.mp3",
     "duration": 6.827,
-    "startTime": 328.06
+    "startTime": 332.36
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "THE CASE AGAINST: CAP IT OR KILL IT (5 minutes)",
     "file": "0014.mp3",
     "duration": 60.947,
-    "startTime": 334.887
+    "startTime": 339.187
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "THE CASE AGAINST: CAP IT OR KILL IT (5 minutes)",
     "file": "0015.mp3",
     "duration": 46.158,
-    "startTime": 395.834
+    "startTime": 400.134
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "THE CASE FOR: BUY THE DEFAULT (5 minutes)",
     "file": "0016.mp3",
     "duration": 20.014,
-    "startTime": 441.991
+    "startTime": 446.291
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "THE CASE FOR: BUY THE DEFAULT (5 minutes)",
     "file": "0017.mp3",
     "duration": 42.048,
-    "startTime": 462.005
+    "startTime": 466.305
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "THE CASE FOR: BUY THE DEFAULT (5 minutes)",
     "file": "0018.mp3",
     "duration": 6.409,
-    "startTime": 504.053
+    "startTime": 508.353
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "THE CASE FOR: BUY THE DEFAULT (5 minutes)",
     "file": "0019.mp3",
     "duration": 50.985,
-    "startTime": 510.461
+    "startTime": 514.761
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "THE CASE FOR: BUY THE DEFAULT (5 minutes)",
     "file": "0020.mp3",
     "duration": 51.961,
-    "startTime": 561.447
+    "startTime": 565.747
   },
   {
     "index": 21,
@@ -277,7 +277,7 @@
     "chapter": "THE CASE FOR: BUY THE DEFAULT (5 minutes)",
     "file": "0021.mp3",
     "duration": 35.848,
-    "startTime": 613.407
+    "startTime": 617.707
   },
   {
     "index": 22,
@@ -288,7 +288,7 @@
     "chapter": "THE CASE FOR: BUY THE DEFAULT (5 minutes)",
     "file": "0022.mp3",
     "duration": 0.8,
-    "startTime": 649.255
+    "startTime": 653.555
   },
   {
     "index": 23,
@@ -298,8 +298,8 @@
     "text": "[MUSIC STING]",
     "chapter": "THE REVEAL: WHAT AMAZON DID (4 minutes)",
     "file": "0023.mp3",
-    "duration": 1,
-    "startTime": 650.055
+    "duration": 1.8,
+    "startTime": 654.355
   },
   {
     "index": 24,
@@ -312,7 +312,7 @@
     "chapter": "THE REVEAL: WHAT AMAZON DID (4 minutes)",
     "file": "0024.mp3",
     "duration": 29.139,
-    "startTime": 651.055
+    "startTime": 656.155
   },
   {
     "index": 25,
@@ -325,7 +325,7 @@
     "chapter": "THE REVEAL: WHAT AMAZON DID (4 minutes)",
     "file": "0025.mp3",
     "duration": 31.947,
-    "startTime": 680.194
+    "startTime": 685.294
   },
   {
     "index": 26,
@@ -338,7 +338,7 @@
     "chapter": "THE REVEAL: WHAT AMAZON DID (4 minutes)",
     "file": "0026.mp3",
     "duration": 69.467,
-    "startTime": 712.141
+    "startTime": 717.241
   },
   {
     "index": 27,
@@ -351,7 +351,7 @@
     "chapter": "THE REVEAL: WHAT AMAZON DID (4 minutes)",
     "file": "0027.mp3",
     "duration": 46.061,
-    "startTime": 781.608
+    "startTime": 786.708
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0028.mp3",
     "duration": 26.562,
-    "startTime": 827.669
+    "startTime": 832.769
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0029.mp3",
     "duration": 29.975,
-    "startTime": 854.231
+    "startTime": 859.331
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0030.mp3",
     "duration": 23.706,
-    "startTime": 884.206
+    "startTime": 889.306
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0031.mp3",
     "duration": 49.083,
-    "startTime": 907.912
+    "startTime": 913.012
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0032.mp3",
     "duration": 16.649,
-    "startTime": 956.995
+    "startTime": 962.095
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0033.mp3",
     "duration": 3.274,
-    "startTime": 973.644
+    "startTime": 978.744
   },
   {
     "index": 34,
@@ -439,7 +439,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0034.mp3",
-    "duration": 1.5,
-    "startTime": 976.918
+    "duration": 5.5,
+    "startTime": 982.018
   }
 ]

@@ -1,5 +1,7 @@
 # Episode 6: Compliance, Fraud Prevention & Internal Controls
 
+**Duration:** ~15 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back. Today's topic is one that keeps CFOs and Controllers up at night: compliance, fraud prevention, and internal controls in accounts payable.

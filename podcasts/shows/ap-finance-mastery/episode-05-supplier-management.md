@@ -1,5 +1,7 @@
 # Episode 5: Supplier Management & Spend Analytics
 
+**Duration:** ~13 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. Today we're flipping the lens to look at the other side of every AP transaction: the supplier.

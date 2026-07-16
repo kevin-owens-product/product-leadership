@@ -1,7 +1,7 @@
 # Episode 3: Platform Power Dynamics and Data Moats
 ## "How B2B SaaS Companies Protect Their Value When Everyone Wants Their Data"
 
-**Duration:** ~60 minutes
+**Duration:** ~50 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

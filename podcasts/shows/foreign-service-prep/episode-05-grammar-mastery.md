@@ -1,7 +1,7 @@
 # Episode 5: Grammar Mastery
 ## "Writing with Precision"
 
-**Duration:** ~60 minutes
+**Duration:** ~20 minutes
 **Hosts:** Jordan Hayes (Former Foreign Service Officer) & Maya Torres (FSOT Candidate)
 
 ---

@@ -1,7 +1,7 @@
 # Episode 8: Testing Strategy & Quality Assurance
 ## "Building Confidence - The Art and Science of Testing"
 
-**Duration:** ~60 minutes
+**Duration:** ~19 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

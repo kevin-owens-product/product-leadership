@@ -1,7 +1,7 @@
 # Episode 6: No, Bad News, and Repair
 ## "Hard Conversations — and the Whole Toolkit in One Room"
 
-**Duration:** ~26 minutes
+**Duration:** ~24 minutes
 **Hosts:** Sloane Bishop & Victor Reyes
 **Podcast:** The Influence Brief -- Negotiation, Persuasion & Stakeholder Craft for Product Executives
 

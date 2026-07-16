@@ -1,7 +1,7 @@
 # Episode 2: Tools, MCP, and Orchestration
 ## "How Agents Use External Systems Reliably"
 
-**Duration:** ~60 minutes
+**Duration:** ~45 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 
 ---

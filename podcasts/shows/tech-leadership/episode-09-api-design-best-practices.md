@@ -1,7 +1,7 @@
 # Episode 9: API Design Best Practices
 ## "Building Interfaces Developers Love - The Art of API Design"
 
-**Duration:** ~60 minutes
+**Duration:** ~21 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

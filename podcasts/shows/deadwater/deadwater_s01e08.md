@@ -2,6 +2,8 @@
 ## Episode 8: "The Reckoning"
 ### Season 1
 
+**Duration:** ~30 minutes
+
 ---
 
 [NARRATOR] April. A Tuesday. Overcast. The kind of spring morning that hasn't decided yet whether it wants to be warm.

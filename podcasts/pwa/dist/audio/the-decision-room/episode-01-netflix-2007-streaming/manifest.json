@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: THE RULES OF THE ROOM (3 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: THE RULES OF THE ROOM (3 minutes)",
     "file": "0001.mp3",
     "duration": 3.135,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: THE RULES OF THE ROOM (3 minutes)",
     "file": "0002.mp3",
     "duration": 1.741,
-    "startTime": 4.635
+    "startTime": 7.335
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: THE RULES OF THE ROOM (3 minutes)",
     "file": "0003.mp3",
     "duration": 27.328,
-    "startTime": 6.376
+    "startTime": 9.076
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: THE RULES OF THE ROOM (3 minutes)",
     "file": "0004.mp3",
     "duration": 28.094,
-    "startTime": 33.704
+    "startTime": 36.404
   },
   {
     "index": 5,
@@ -73,7 +73,7 @@
     "chapter": "INTRO: THE RULES OF THE ROOM (3 minutes)",
     "file": "0005.mp3",
     "duration": 13.444,
-    "startTime": 61.799
+    "startTime": 64.499
   },
   {
     "index": 6,
@@ -83,8 +83,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: THE RULES OF THE ROOM (3 minutes)",
     "file": "0006.mp3",
-    "duration": 1.2,
-    "startTime": 75.243
+    "duration": 2.8,
+    "startTime": 77.943
   },
   {
     "index": 7,
@@ -97,7 +97,7 @@
     "chapter": "THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)",
     "file": "0007.mp3",
     "duration": 42.187,
-    "startTime": 76.443
+    "startTime": 80.743
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)",
     "file": "0008.mp3",
     "duration": 30.184,
-    "startTime": 118.63
+    "startTime": 122.93
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)",
     "file": "0009.mp3",
     "duration": 31.09,
-    "startTime": 148.814
+    "startTime": 153.114
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)",
     "file": "0010.mp3",
     "duration": 46.179,
-    "startTime": 179.904
+    "startTime": 184.204
   },
   {
     "index": 11,
@@ -149,7 +149,7 @@
     "chapter": "THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)",
     "file": "0011.mp3",
     "duration": 28.791,
-    "startTime": 226.082
+    "startTime": 230.382
   },
   {
     "index": 12,
@@ -162,7 +162,7 @@
     "chapter": "THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)",
     "file": "0012.mp3",
     "duration": 23.845,
-    "startTime": 254.873
+    "startTime": 259.173
   },
   {
     "index": 13,
@@ -173,7 +173,7 @@
     "chapter": "THE ROOM: LOS GATOS, JANUARY 2007 (4 minutes)",
     "file": "0013.mp3",
     "duration": 0.8,
-    "startTime": 278.718
+    "startTime": 283.018
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)",
     "file": "0014.mp3",
     "duration": 46.018,
-    "startTime": 279.518
+    "startTime": 283.818
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)",
     "file": "0015.mp3",
     "duration": 4.04,
-    "startTime": 325.537
+    "startTime": 329.837
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)",
     "file": "0016.mp3",
     "duration": 27.746,
-    "startTime": 329.577
+    "startTime": 333.877
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)",
     "file": "0017.mp3",
     "duration": 46.088,
-    "startTime": 357.323
+    "startTime": 361.623
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)",
     "file": "0018.mp3",
     "duration": 4.11,
-    "startTime": 403.411
+    "startTime": 407.711
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)",
     "file": "0019.mp3",
     "duration": 49.919,
-    "startTime": 407.521
+    "startTime": 411.821
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "THE CASE AGAINST: PROTECT THE MACHINE (5 minutes)",
     "file": "0020.mp3",
     "duration": 27.885,
-    "startTime": 457.44
+    "startTime": 461.74
   },
   {
     "index": 21,
@@ -277,7 +277,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0021.mp3",
     "duration": 8.359,
-    "startTime": 485.325
+    "startTime": 489.625
   },
   {
     "index": 22,
@@ -290,7 +290,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0022.mp3",
     "duration": 44.089,
-    "startTime": 493.684
+    "startTime": 497.984
   },
   {
     "index": 23,
@@ -303,7 +303,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0023.mp3",
     "duration": 5.294,
-    "startTime": 537.773
+    "startTime": 542.073
   },
   {
     "index": 24,
@@ -316,7 +316,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0024.mp3",
     "duration": 40.167,
-    "startTime": 543.068
+    "startTime": 547.368
   },
   {
     "index": 25,
@@ -329,7 +329,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0025.mp3",
     "duration": 43.58,
-    "startTime": 583.234
+    "startTime": 587.534
   },
   {
     "index": 26,
@@ -342,7 +342,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0026.mp3",
     "duration": 4.249,
-    "startTime": 626.815
+    "startTime": 631.115
   },
   {
     "index": 27,
@@ -355,7 +355,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0027.mp3",
     "duration": 46.527,
-    "startTime": 631.064
+    "startTime": 635.364
   },
   {
     "index": 28,
@@ -368,7 +368,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0028.mp3",
     "duration": 12.399,
-    "startTime": 677.591
+    "startTime": 681.891
   },
   {
     "index": 29,
@@ -379,7 +379,7 @@
     "chapter": "THE CASE FOR: CANNIBALIZE YOURSELF FIRST (5 minutes)",
     "file": "0029.mp3",
     "duration": 0.8,
-    "startTime": 689.99
+    "startTime": 694.29
   },
   {
     "index": 30,
@@ -389,8 +389,8 @@
     "text": "[MUSIC STING]",
     "chapter": "THE REVEAL: WHAT NETFLIX DID (4 minutes)",
     "file": "0030.mp3",
-    "duration": 1,
-    "startTime": 690.79
+    "duration": 1.8,
+    "startTime": 695.09
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "THE REVEAL: WHAT NETFLIX DID (4 minutes)",
     "file": "0031.mp3",
     "duration": 24.82,
-    "startTime": 691.79
+    "startTime": 696.89
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "THE REVEAL: WHAT NETFLIX DID (4 minutes)",
     "file": "0032.mp3",
     "duration": 20.501,
-    "startTime": 716.611
+    "startTime": 721.711
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "THE REVEAL: WHAT NETFLIX DID (4 minutes)",
     "file": "0033.mp3",
     "duration": 45.949,
-    "startTime": 737.112
+    "startTime": 742.212
   },
   {
     "index": 34,
@@ -442,7 +442,7 @@
     "chapter": "THE REVEAL: WHAT NETFLIX DID (4 minutes)",
     "file": "0034.mp3",
     "duration": 41.351,
-    "startTime": 783.061
+    "startTime": 788.161
   },
   {
     "index": 35,
@@ -455,7 +455,7 @@
     "chapter": "THE REVEAL: WHAT NETFLIX DID (4 minutes)",
     "file": "0035.mp3",
     "duration": 13.584,
-    "startTime": 824.412
+    "startTime": 829.512
   },
   {
     "index": 36,
@@ -468,7 +468,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0036.mp3",
     "duration": 6.966,
-    "startTime": 837.995
+    "startTime": 843.095
   },
   {
     "index": 37,
@@ -481,7 +481,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0037.mp3",
     "duration": 20.292,
-    "startTime": 844.961
+    "startTime": 850.061
   },
   {
     "index": 38,
@@ -494,7 +494,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0038.mp3",
     "duration": 30.811,
-    "startTime": 865.254
+    "startTime": 870.354
   },
   {
     "index": 39,
@@ -507,7 +507,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0039.mp3",
     "duration": 24.402,
-    "startTime": 896.065
+    "startTime": 901.165
   },
   {
     "index": 40,
@@ -520,7 +520,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0040.mp3",
     "duration": 19.853,
-    "startTime": 920.467
+    "startTime": 925.567
   },
   {
     "index": 41,
@@ -533,7 +533,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0041.mp3",
     "duration": 18.181,
-    "startTime": 940.32
+    "startTime": 945.42
   },
   {
     "index": 42,
@@ -546,7 +546,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0042.mp3",
     "duration": 3.413,
-    "startTime": 958.501
+    "startTime": 963.601
   },
   {
     "index": 43,
@@ -556,7 +556,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0043.mp3",
-    "duration": 1.5,
-    "startTime": 961.915
+    "duration": 5.5,
+    "startTime": 967.015
   }
 ]

@@ -1,7 +1,7 @@
 # Episode 10: The AI-Native GTM Stack
 ## "Unifying Marketing, Sales, and Customer Success with Product Intelligence"
 
-**Duration:** ~60 minutes
+**Duration:** ~39 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

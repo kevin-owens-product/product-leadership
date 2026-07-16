@@ -2,6 +2,8 @@
 ## Episode 1: "The Find"
 ### Season 1
 
+**Duration:** ~44 minutes
+
 ---
 
 [NARRATOR] There is a stretch of highway on the south shore of Long Island that most people drive through without really looking.

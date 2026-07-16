@@ -1,5 +1,7 @@
 # Episode 1: AP Fundamentals & The Invoice Lifecycle
 
+**Duration:** ~22 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome to AP and Finance Mastery, the podcast designed to take you from zero to expert on accounts payable, financial operations, and everything that makes the procure-to-pay world tick. I'm Morgan, and I've spent over twenty years in enterprise finance, from running AP departments to advising on finance transformation initiatives.

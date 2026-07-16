@@ -1,7 +1,7 @@
 # Episode 3: The Developer Enablement Stack
 ## "Platform Engineering Meets Agents -- Lessons from Stripe and Block"
 
-**Duration:** ~45 minutes
+**Duration:** ~32 minutes
 **Hosts:** Priya Anand (Interviewer) & Marcus Hale (Expert)
 **Podcast:** The Harness -- Building the Enterprise AI Operating System
 

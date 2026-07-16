@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: WHERE DECISIONS ACTUALLY HAPPEN (3 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: WHERE DECISIONS ACTUALLY HAPPEN (3 minutes)",
     "file": "0001.mp3",
     "duration": 3.762,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: WHERE DECISIONS ACTUALLY HAPPEN (3 minutes)",
     "file": "0002.mp3",
     "duration": 1.811,
-    "startTime": 5.262
+    "startTime": 7.962
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: WHERE DECISIONS ACTUALLY HAPPEN (3 minutes)",
     "file": "0003.mp3",
     "duration": 39.54,
-    "startTime": 7.073
+    "startTime": 9.773
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: WHERE DECISIONS ACTUALLY HAPPEN (3 minutes)",
     "file": "0004.mp3",
     "duration": 57.951,
-    "startTime": 46.613
+    "startTime": 49.313
   },
   {
     "index": 5,
@@ -73,7 +73,7 @@
     "chapter": "INTRO: WHERE DECISIONS ACTUALLY HAPPEN (3 minutes)",
     "file": "0005.mp3",
     "duration": 31.159,
-    "startTime": 104.564
+    "startTime": 107.264
   },
   {
     "index": 6,
@@ -83,8 +83,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: WHERE DECISIONS ACTUALLY HAPPEN (3 minutes)",
     "file": "0006.mp3",
-    "duration": 1.2,
-    "startTime": 135.723
+    "duration": 2.8,
+    "startTime": 138.423
   },
   {
     "index": 7,
@@ -97,7 +97,7 @@
     "chapter": "SEGMENT 1: COALITION MECHANICS (6 minutes)",
     "file": "0007.mp3",
     "duration": 41.978,
-    "startTime": 136.923
+    "startTime": 141.223
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "SEGMENT 1: COALITION MECHANICS (6 minutes)",
     "file": "0008.mp3",
     "duration": 46.924,
-    "startTime": 178.901
+    "startTime": 183.201
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "SEGMENT 1: COALITION MECHANICS (6 minutes)",
     "file": "0009.mp3",
     "duration": 48.596,
-    "startTime": 225.825
+    "startTime": 230.125
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "SEGMENT 1: COALITION MECHANICS (6 minutes)",
     "file": "0010.mp3",
     "duration": 42.069,
-    "startTime": 274.421
+    "startTime": 278.721
   },
   {
     "index": 11,
@@ -149,7 +149,7 @@
     "chapter": "SEGMENT 1: COALITION MECHANICS (6 minutes)",
     "file": "0011.mp3",
     "duration": 38.077,
-    "startTime": 316.49
+    "startTime": 320.79
   },
   {
     "index": 12,
@@ -160,7 +160,7 @@
     "chapter": "SEGMENT 1: COALITION MECHANICS (6 minutes)",
     "file": "0012.mp3",
     "duration": 0.8,
-    "startTime": 354.567
+    "startTime": 358.867
   },
   {
     "index": 13,
@@ -173,7 +173,7 @@
     "chapter": "SEGMENT 2: SEQUENCING AND ENGINEERED CO-AUTHORSHIP (6 minutes)",
     "file": "0013.mp3",
     "duration": 43.023,
-    "startTime": 355.367
+    "startTime": 359.667
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "SEGMENT 2: SEQUENCING AND ENGINEERED CO-AUTHORSHIP (6 minutes)",
     "file": "0014.mp3",
     "duration": 52.309,
-    "startTime": 398.39
+    "startTime": 402.69
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "SEGMENT 2: SEQUENCING AND ENGINEERED CO-AUTHORSHIP (6 minutes)",
     "file": "0015.mp3",
     "duration": 62.27,
-    "startTime": 450.699
+    "startTime": 454.999
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "SEGMENT 2: SEQUENCING AND ENGINEERED CO-AUTHORSHIP (6 minutes)",
     "file": "0016.mp3",
     "duration": 61.316,
-    "startTime": 512.969
+    "startTime": 517.269
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "SEGMENT 2: SEQUENCING AND ENGINEERED CO-AUTHORSHIP (6 minutes)",
     "file": "0017.mp3",
     "duration": 48.965,
-    "startTime": 574.285
+    "startTime": 578.585
   },
   {
     "index": 18,
@@ -236,7 +236,7 @@
     "chapter": "SEGMENT 2: SEQUENCING AND ENGINEERED CO-AUTHORSHIP (6 minutes)",
     "file": "0018.mp3",
     "duration": 0.8,
-    "startTime": 623.251
+    "startTime": 627.551
   },
   {
     "index": 19,
@@ -249,7 +249,7 @@
     "chapter": "SEGMENT 3: THE BLOCKER PLAYBOOK (5 minutes)",
     "file": "0019.mp3",
     "duration": 45.74,
-    "startTime": 624.051
+    "startTime": 628.351
   },
   {
     "index": 20,
@@ -262,7 +262,7 @@
     "chapter": "SEGMENT 3: THE BLOCKER PLAYBOOK (5 minutes)",
     "file": "0020.mp3",
     "duration": 79.449,
-    "startTime": 669.79
+    "startTime": 674.09
   },
   {
     "index": 21,
@@ -275,7 +275,7 @@
     "chapter": "SEGMENT 3: THE BLOCKER PLAYBOOK (5 minutes)",
     "file": "0021.mp3",
     "duration": 41.908,
-    "startTime": 749.24
+    "startTime": 753.54
   },
   {
     "index": 22,
@@ -288,7 +288,7 @@
     "chapter": "SEGMENT 3: THE BLOCKER PLAYBOOK (5 minutes)",
     "file": "0022.mp3",
     "duration": 79.449,
-    "startTime": 791.148
+    "startTime": 795.448
   },
   {
     "index": 23,
@@ -301,7 +301,7 @@
     "chapter": "SEGMENT 3: THE BLOCKER PLAYBOOK (5 minutes)",
     "file": "0023.mp3",
     "duration": 38.774,
-    "startTime": 870.597
+    "startTime": 874.897
   },
   {
     "index": 24,
@@ -311,8 +311,8 @@
     "text": "[MUSIC STING]",
     "chapter": "SEGMENT 3: THE BLOCKER PLAYBOOK (5 minutes)",
     "file": "0024.mp3",
-    "duration": 1,
-    "startTime": 909.371
+    "duration": 1.8,
+    "startTime": 913.671
   },
   {
     "index": 25,
@@ -325,7 +325,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE FOUNDER WHO SAYS NO (5 minutes)",
     "file": "0025.mp3",
     "duration": 62.083,
-    "startTime": 910.371
+    "startTime": 915.471
   },
   {
     "index": 26,
@@ -338,7 +338,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE FOUNDER WHO SAYS NO (5 minutes)",
     "file": "0026.mp3",
     "duration": 76.593,
-    "startTime": 972.454
+    "startTime": 977.554
   },
   {
     "index": 27,
@@ -351,7 +351,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE FOUNDER WHO SAYS NO (5 minutes)",
     "file": "0027.mp3",
     "duration": 87.9,
-    "startTime": 1049.047
+    "startTime": 1054.147
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE FOUNDER WHO SAYS NO (5 minutes)",
     "file": "0028.mp3",
     "duration": 82.632,
-    "startTime": 1136.947
+    "startTime": 1142.047
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE FOUNDER WHO SAYS NO (5 minutes)",
     "file": "0029.mp3",
     "duration": 65.426,
-    "startTime": 1219.579
+    "startTime": 1224.679
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "SEGMENT 4: THE SCENARIO -- THE FOUNDER WHO SAYS NO (5 minutes)",
     "file": "0030.mp3",
     "duration": 20.989,
-    "startTime": 1285.005
+    "startTime": 1290.105
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0031.mp3",
     "duration": 23.636,
-    "startTime": 1305.994
+    "startTime": 1311.094
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0032.mp3",
     "duration": 18.46,
-    "startTime": 1329.63
+    "startTime": 1334.73
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0033.mp3",
     "duration": 3.135,
-    "startTime": 1348.09
+    "startTime": 1353.19
   },
   {
     "index": 34,
@@ -439,7 +439,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "CLOSE: HOMEWORK & THE ROAD AHEAD (1 minute)",
     "file": "0034.mp3",
-    "duration": 1.5,
-    "startTime": 1351.225
+    "duration": 5.5,
+    "startTime": 1356.325
   }
 ]

@@ -1,7 +1,7 @@
 # Episode 15: Leadership and Talent in the AI-Native Organization
 ## "How Roles, Incentives, and Capability Models Must Evolve"
 
-**Duration:** ~60 minutes
+**Duration:** ~56 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 **Podcast:** The Forge Podcast — PE, Software Transformation, and the AI-Native Future
 

@@ -1,7 +1,7 @@
 # Episode 10: Best Practices & Productivity Tips
 ## "Master Your AI-Assisted Development Workflow"
 
-**Duration:** ~60 minutes
+**Duration:** ~11 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

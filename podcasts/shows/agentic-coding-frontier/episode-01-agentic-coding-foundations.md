@@ -1,7 +1,7 @@
 # Episode 1: Agentic Coding Foundations
 ## "From Chat Assistants to Autonomous Software Operators"
 
-**Duration:** ~60 minutes
+**Duration:** ~50 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 **Podcast:** Agentic Coding Frontier
 

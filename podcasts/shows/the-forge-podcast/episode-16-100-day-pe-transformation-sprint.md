@@ -1,7 +1,7 @@
 # Episode 16: The 100-Day PE AI Transformation Sprint
 ## "A High-Tempo Blueprint for Portfolio Company Value Creation"
 
-**Duration:** ~60 minutes
+**Duration:** ~57 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 **Podcast:** The Forge Podcast -- PE, Software Transformation, and the AI-Native Future
 

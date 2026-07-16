@@ -1,7 +1,7 @@
 # Episode 2: Large Language Models Deep Dive
 ## "LLMs Demystified - What Every Product Leader Needs to Know"
 
-**Duration:** ~60 minutes
+**Duration:** ~26 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

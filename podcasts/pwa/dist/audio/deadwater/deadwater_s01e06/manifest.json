@@ -2,7 +2,7 @@
   {
     "index": 0,
     "dialogueIndex": 0,
-    "rawLine": 6,
+    "rawLine": 8,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -14,7 +14,7 @@
   },
   {
     "index": 1,
-    "rawLine": 8,
+    "rawLine": 10,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -26,7 +26,7 @@
   {
     "index": 2,
     "dialogueIndex": 1,
-    "rawLine": 10,
+    "rawLine": 12,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -38,7 +38,7 @@
   },
   {
     "index": 3,
-    "rawLine": 12,
+    "rawLine": 14,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -50,7 +50,7 @@
   {
     "index": 4,
     "dialogueIndex": 2,
-    "rawLine": 14,
+    "rawLine": 16,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -62,7 +62,7 @@
   },
   {
     "index": 5,
-    "rawLine": 16,
+    "rawLine": 18,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -74,7 +74,7 @@
   {
     "index": 6,
     "dialogueIndex": 3,
-    "rawLine": 18,
+    "rawLine": 20,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -86,7 +86,7 @@
   },
   {
     "index": 7,
-    "rawLine": 20,
+    "rawLine": 22,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -98,7 +98,7 @@
   {
     "index": 8,
     "dialogueIndex": 4,
-    "rawLine": 22,
+    "rawLine": 24,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -110,7 +110,7 @@
   },
   {
     "index": 9,
-    "rawLine": 24,
+    "rawLine": 26,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -122,7 +122,7 @@
   {
     "index": 10,
     "dialogueIndex": 5,
-    "rawLine": 26,
+    "rawLine": 28,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -134,7 +134,7 @@
   },
   {
     "index": 11,
-    "rawLine": 28,
+    "rawLine": 30,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -146,7 +146,7 @@
   {
     "index": 12,
     "dialogueIndex": 6,
-    "rawLine": 30,
+    "rawLine": 32,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -158,7 +158,7 @@
   },
   {
     "index": 13,
-    "rawLine": 32,
+    "rawLine": 34,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -170,7 +170,7 @@
   {
     "index": 14,
     "dialogueIndex": 7,
-    "rawLine": 34,
+    "rawLine": 36,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -182,7 +182,7 @@
   },
   {
     "index": 15,
-    "rawLine": 36,
+    "rawLine": 38,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -194,7 +194,7 @@
   {
     "index": 16,
     "dialogueIndex": 8,
-    "rawLine": 38,
+    "rawLine": 40,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -207,7 +207,7 @@
   {
     "index": 17,
     "dialogueIndex": 9,
-    "rawLine": 40,
+    "rawLine": 42,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -219,7 +219,7 @@
   },
   {
     "index": 18,
-    "rawLine": 42,
+    "rawLine": 44,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -231,7 +231,7 @@
   {
     "index": 19,
     "dialogueIndex": 10,
-    "rawLine": 44,
+    "rawLine": 46,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -244,7 +244,7 @@
   {
     "index": 20,
     "dialogueIndex": 11,
-    "rawLine": 46,
+    "rawLine": 48,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -256,7 +256,7 @@
   },
   {
     "index": 21,
-    "rawLine": 48,
+    "rawLine": 50,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -268,7 +268,7 @@
   {
     "index": 22,
     "dialogueIndex": 12,
-    "rawLine": 50,
+    "rawLine": 52,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -281,7 +281,7 @@
   {
     "index": 23,
     "dialogueIndex": 13,
-    "rawLine": 52,
+    "rawLine": 54,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -293,7 +293,7 @@
   },
   {
     "index": 24,
-    "rawLine": 54,
+    "rawLine": 56,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -305,7 +305,7 @@
   {
     "index": 25,
     "dialogueIndex": 14,
-    "rawLine": 56,
+    "rawLine": 58,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -318,7 +318,7 @@
   {
     "index": 26,
     "dialogueIndex": 15,
-    "rawLine": 58,
+    "rawLine": 60,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -330,7 +330,7 @@
   },
   {
     "index": 27,
-    "rawLine": 60,
+    "rawLine": 62,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -342,7 +342,7 @@
   {
     "index": 28,
     "dialogueIndex": 16,
-    "rawLine": 62,
+    "rawLine": 64,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -355,7 +355,7 @@
   {
     "index": 29,
     "dialogueIndex": 17,
-    "rawLine": 64,
+    "rawLine": 66,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -367,7 +367,7 @@
   },
   {
     "index": 30,
-    "rawLine": 66,
+    "rawLine": 68,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -379,7 +379,7 @@
   {
     "index": 31,
     "dialogueIndex": 18,
-    "rawLine": 68,
+    "rawLine": 70,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -392,7 +392,7 @@
   {
     "index": 32,
     "dialogueIndex": 19,
-    "rawLine": 70,
+    "rawLine": 72,
     "type": "dialogue",
     "speaker": "DR. PARK",
     "voice": "F1",
@@ -405,7 +405,7 @@
   {
     "index": 33,
     "dialogueIndex": 20,
-    "rawLine": 72,
+    "rawLine": 74,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -417,7 +417,7 @@
   },
   {
     "index": 34,
-    "rawLine": 74,
+    "rawLine": 76,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -429,7 +429,7 @@
   {
     "index": 35,
     "dialogueIndex": 21,
-    "rawLine": 76,
+    "rawLine": 78,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -442,7 +442,7 @@
   {
     "index": 36,
     "dialogueIndex": 22,
-    "rawLine": 78,
+    "rawLine": 80,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -455,7 +455,7 @@
   {
     "index": 37,
     "dialogueIndex": 23,
-    "rawLine": 80,
+    "rawLine": 82,
     "type": "dialogue",
     "speaker": "DR. PARK",
     "voice": "F1",
@@ -467,7 +467,7 @@
   },
   {
     "index": 38,
-    "rawLine": 82,
+    "rawLine": 84,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -479,7 +479,7 @@
   {
     "index": 39,
     "dialogueIndex": 24,
-    "rawLine": 84,
+    "rawLine": 86,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -491,7 +491,7 @@
   },
   {
     "index": 40,
-    "rawLine": 86,
+    "rawLine": 88,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -503,7 +503,7 @@
   {
     "index": 41,
     "dialogueIndex": 25,
-    "rawLine": 88,
+    "rawLine": 90,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -516,7 +516,7 @@
   {
     "index": 42,
     "dialogueIndex": 26,
-    "rawLine": 90,
+    "rawLine": 92,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -528,7 +528,7 @@
   },
   {
     "index": 43,
-    "rawLine": 92,
+    "rawLine": 94,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -540,7 +540,7 @@
   {
     "index": 44,
     "dialogueIndex": 27,
-    "rawLine": 94,
+    "rawLine": 96,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -552,7 +552,7 @@
   },
   {
     "index": 45,
-    "rawLine": 96,
+    "rawLine": 98,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -564,7 +564,7 @@
   {
     "index": 46,
     "dialogueIndex": 28,
-    "rawLine": 98,
+    "rawLine": 100,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -577,7 +577,7 @@
   {
     "index": 47,
     "dialogueIndex": 29,
-    "rawLine": 100,
+    "rawLine": 102,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -589,7 +589,7 @@
   },
   {
     "index": 48,
-    "rawLine": 102,
+    "rawLine": 104,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -601,7 +601,7 @@
   {
     "index": 49,
     "dialogueIndex": 30,
-    "rawLine": 104,
+    "rawLine": 106,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -613,7 +613,7 @@
   },
   {
     "index": 50,
-    "rawLine": 106,
+    "rawLine": 108,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -625,7 +625,7 @@
   {
     "index": 51,
     "dialogueIndex": 31,
-    "rawLine": 108,
+    "rawLine": 110,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -638,7 +638,7 @@
   {
     "index": 52,
     "dialogueIndex": 32,
-    "rawLine": 110,
+    "rawLine": 112,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -651,7 +651,7 @@
   {
     "index": 53,
     "dialogueIndex": 33,
-    "rawLine": 112,
+    "rawLine": 114,
     "type": "dialogue",
     "speaker": "TULLY",
     "voice": "M3",
@@ -663,7 +663,7 @@
   },
   {
     "index": 54,
-    "rawLine": 114,
+    "rawLine": 116,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -675,7 +675,7 @@
   {
     "index": 55,
     "dialogueIndex": 34,
-    "rawLine": 116,
+    "rawLine": 118,
     "type": "dialogue",
     "speaker": "TULLY",
     "voice": "M3",
@@ -687,7 +687,7 @@
   },
   {
     "index": 56,
-    "rawLine": 118,
+    "rawLine": 120,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -699,7 +699,7 @@
   {
     "index": 57,
     "dialogueIndex": 35,
-    "rawLine": 120,
+    "rawLine": 122,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -711,7 +711,7 @@
   },
   {
     "index": 58,
-    "rawLine": 122,
+    "rawLine": 124,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -723,7 +723,7 @@
   {
     "index": 59,
     "dialogueIndex": 36,
-    "rawLine": 124,
+    "rawLine": 126,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -736,7 +736,7 @@
   {
     "index": 60,
     "dialogueIndex": 37,
-    "rawLine": 126,
+    "rawLine": 128,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -748,7 +748,7 @@
   },
   {
     "index": 61,
-    "rawLine": 128,
+    "rawLine": 130,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -760,7 +760,7 @@
   {
     "index": 62,
     "dialogueIndex": 38,
-    "rawLine": 130,
+    "rawLine": 132,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -772,7 +772,7 @@
   },
   {
     "index": 63,
-    "rawLine": 132,
+    "rawLine": 134,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -784,7 +784,7 @@
   {
     "index": 64,
     "dialogueIndex": 39,
-    "rawLine": 134,
+    "rawLine": 136,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -797,7 +797,7 @@
   {
     "index": 65,
     "dialogueIndex": 40,
-    "rawLine": 136,
+    "rawLine": 138,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -810,7 +810,7 @@
   {
     "index": 66,
     "dialogueIndex": 41,
-    "rawLine": 138,
+    "rawLine": 140,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -822,7 +822,7 @@
   },
   {
     "index": 67,
-    "rawLine": 140,
+    "rawLine": 142,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -834,7 +834,7 @@
   {
     "index": 68,
     "dialogueIndex": 42,
-    "rawLine": 142,
+    "rawLine": 144,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -846,7 +846,7 @@
   },
   {
     "index": 69,
-    "rawLine": 144,
+    "rawLine": 146,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -858,7 +858,7 @@
   {
     "index": 70,
     "dialogueIndex": 43,
-    "rawLine": 146,
+    "rawLine": 148,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -870,7 +870,7 @@
   },
   {
     "index": 71,
-    "rawLine": 148,
+    "rawLine": 150,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -882,7 +882,7 @@
   {
     "index": 72,
     "dialogueIndex": 44,
-    "rawLine": 150,
+    "rawLine": 152,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -894,7 +894,7 @@
   },
   {
     "index": 73,
-    "rawLine": 152,
+    "rawLine": 154,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -906,7 +906,7 @@
   {
     "index": 74,
     "dialogueIndex": 45,
-    "rawLine": 154,
+    "rawLine": 156,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -918,7 +918,7 @@
   },
   {
     "index": 75,
-    "rawLine": 156,
+    "rawLine": 158,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -930,7 +930,7 @@
   {
     "index": 76,
     "dialogueIndex": 46,
-    "rawLine": 158,
+    "rawLine": 160,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -942,7 +942,7 @@
   },
   {
     "index": 77,
-    "rawLine": 160,
+    "rawLine": 162,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -954,7 +954,7 @@
   {
     "index": 78,
     "dialogueIndex": 47,
-    "rawLine": 162,
+    "rawLine": 164,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -966,7 +966,7 @@
   },
   {
     "index": 79,
-    "rawLine": 164,
+    "rawLine": 166,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -978,7 +978,7 @@
   {
     "index": 80,
     "dialogueIndex": 48,
-    "rawLine": 166,
+    "rawLine": 168,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -991,7 +991,7 @@
   {
     "index": 81,
     "dialogueIndex": 49,
-    "rawLine": 168,
+    "rawLine": 170,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -1004,7 +1004,7 @@
   {
     "index": 82,
     "dialogueIndex": 50,
-    "rawLine": 170,
+    "rawLine": 172,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1017,7 +1017,7 @@
   {
     "index": 83,
     "dialogueIndex": 51,
-    "rawLine": 172,
+    "rawLine": 174,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1029,7 +1029,7 @@
   },
   {
     "index": 84,
-    "rawLine": 174,
+    "rawLine": 176,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1041,7 +1041,7 @@
   {
     "index": 85,
     "dialogueIndex": 52,
-    "rawLine": 176,
+    "rawLine": 178,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1053,7 +1053,7 @@
   },
   {
     "index": 86,
-    "rawLine": 178,
+    "rawLine": 180,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1065,7 +1065,7 @@
   {
     "index": 87,
     "dialogueIndex": 53,
-    "rawLine": 180,
+    "rawLine": 182,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1077,7 +1077,7 @@
   },
   {
     "index": 88,
-    "rawLine": 182,
+    "rawLine": 184,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1089,7 +1089,7 @@
   {
     "index": 89,
     "dialogueIndex": 54,
-    "rawLine": 184,
+    "rawLine": 186,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1101,7 +1101,7 @@
   },
   {
     "index": 90,
-    "rawLine": 186,
+    "rawLine": 188,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1113,7 +1113,7 @@
   {
     "index": 91,
     "dialogueIndex": 55,
-    "rawLine": 188,
+    "rawLine": 190,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1125,7 +1125,7 @@
   },
   {
     "index": 92,
-    "rawLine": 190,
+    "rawLine": 192,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1137,7 +1137,7 @@
   {
     "index": 93,
     "dialogueIndex": 56,
-    "rawLine": 192,
+    "rawLine": 194,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1149,7 +1149,7 @@
   },
   {
     "index": 94,
-    "rawLine": 194,
+    "rawLine": 196,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1161,7 +1161,7 @@
   {
     "index": 95,
     "dialogueIndex": 57,
-    "rawLine": 196,
+    "rawLine": 198,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1173,7 +1173,7 @@
   },
   {
     "index": 96,
-    "rawLine": 198,
+    "rawLine": 200,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -1185,7 +1185,7 @@
   {
     "index": 97,
     "dialogueIndex": 58,
-    "rawLine": 204,
+    "rawLine": 206,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1197,7 +1197,7 @@
   },
   {
     "index": 98,
-    "rawLine": 206,
+    "rawLine": 208,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1209,7 +1209,7 @@
   {
     "index": 99,
     "dialogueIndex": 59,
-    "rawLine": 208,
+    "rawLine": 210,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1222,7 +1222,7 @@
   {
     "index": 100,
     "dialogueIndex": 60,
-    "rawLine": 210,
+    "rawLine": 212,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1234,7 +1234,7 @@
   },
   {
     "index": 101,
-    "rawLine": 212,
+    "rawLine": 214,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1246,7 +1246,7 @@
   {
     "index": 102,
     "dialogueIndex": 61,
-    "rawLine": 214,
+    "rawLine": 216,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1259,7 +1259,7 @@
   {
     "index": 103,
     "dialogueIndex": 62,
-    "rawLine": 216,
+    "rawLine": 218,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1271,7 +1271,7 @@
   },
   {
     "index": 104,
-    "rawLine": 218,
+    "rawLine": 220,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1283,7 +1283,7 @@
   {
     "index": 105,
     "dialogueIndex": 63,
-    "rawLine": 220,
+    "rawLine": 222,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1296,7 +1296,7 @@
   {
     "index": 106,
     "dialogueIndex": 64,
-    "rawLine": 222,
+    "rawLine": 224,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -1308,7 +1308,7 @@
   },
   {
     "index": 107,
-    "rawLine": 224,
+    "rawLine": 226,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1320,7 +1320,7 @@
   {
     "index": 108,
     "dialogueIndex": 65,
-    "rawLine": 226,
+    "rawLine": 228,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -1332,7 +1332,7 @@
   },
   {
     "index": 109,
-    "rawLine": 228,
+    "rawLine": 230,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1344,7 +1344,7 @@
   {
     "index": 110,
     "dialogueIndex": 66,
-    "rawLine": 230,
+    "rawLine": 232,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -1356,7 +1356,7 @@
   },
   {
     "index": 111,
-    "rawLine": 232,
+    "rawLine": 234,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1368,7 +1368,7 @@
   {
     "index": 112,
     "dialogueIndex": 67,
-    "rawLine": 234,
+    "rawLine": 236,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -1380,7 +1380,7 @@
   },
   {
     "index": 113,
-    "rawLine": 236,
+    "rawLine": 238,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -1392,7 +1392,7 @@
   {
     "index": 114,
     "dialogueIndex": 68,
-    "rawLine": 238,
+    "rawLine": 240,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1405,7 +1405,7 @@
   {
     "index": 115,
     "dialogueIndex": 69,
-    "rawLine": 240,
+    "rawLine": 242,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -1417,7 +1417,7 @@
   },
   {
     "index": 116,
-    "rawLine": 242,
+    "rawLine": 244,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1429,7 +1429,7 @@
   {
     "index": 117,
     "dialogueIndex": 70,
-    "rawLine": 244,
+    "rawLine": 246,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -1442,7 +1442,7 @@
   {
     "index": 118,
     "dialogueIndex": 71,
-    "rawLine": 246,
+    "rawLine": 248,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1455,7 +1455,7 @@
   {
     "index": 119,
     "dialogueIndex": 72,
-    "rawLine": 248,
+    "rawLine": 250,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1467,7 +1467,7 @@
   },
   {
     "index": 120,
-    "rawLine": 250,
+    "rawLine": 252,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1479,7 +1479,7 @@
   {
     "index": 121,
     "dialogueIndex": 73,
-    "rawLine": 252,
+    "rawLine": 254,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1491,7 +1491,7 @@
   },
   {
     "index": 122,
-    "rawLine": 254,
+    "rawLine": 256,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1503,7 +1503,7 @@
   {
     "index": 123,
     "dialogueIndex": 74,
-    "rawLine": 256,
+    "rawLine": 258,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1515,7 +1515,7 @@
   },
   {
     "index": 124,
-    "rawLine": 258,
+    "rawLine": 260,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -1527,7 +1527,7 @@
   {
     "index": 125,
     "dialogueIndex": 75,
-    "rawLine": 260,
+    "rawLine": 262,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1539,7 +1539,7 @@
   },
   {
     "index": 126,
-    "rawLine": 262,
+    "rawLine": 264,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1551,7 +1551,7 @@
   {
     "index": 127,
     "dialogueIndex": 76,
-    "rawLine": 264,
+    "rawLine": 266,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1563,7 +1563,7 @@
   },
   {
     "index": 128,
-    "rawLine": 266,
+    "rawLine": 268,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1575,7 +1575,7 @@
   {
     "index": 129,
     "dialogueIndex": 77,
-    "rawLine": 268,
+    "rawLine": 270,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1587,7 +1587,7 @@
   },
   {
     "index": 130,
-    "rawLine": 270,
+    "rawLine": 272,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1599,7 +1599,7 @@
   {
     "index": 131,
     "dialogueIndex": 78,
-    "rawLine": 272,
+    "rawLine": 274,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1611,7 +1611,7 @@
   },
   {
     "index": 132,
-    "rawLine": 274,
+    "rawLine": 276,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1623,7 +1623,7 @@
   {
     "index": 133,
     "dialogueIndex": 79,
-    "rawLine": 276,
+    "rawLine": 278,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1636,7 +1636,7 @@
   {
     "index": 134,
     "dialogueIndex": 80,
-    "rawLine": 278,
+    "rawLine": 280,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1648,7 +1648,7 @@
   },
   {
     "index": 135,
-    "rawLine": 280,
+    "rawLine": 282,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1660,7 +1660,7 @@
   {
     "index": 136,
     "dialogueIndex": 81,
-    "rawLine": 282,
+    "rawLine": 284,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1672,7 +1672,7 @@
   },
   {
     "index": 137,
-    "rawLine": 284,
+    "rawLine": 286,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1684,7 +1684,7 @@
   {
     "index": 138,
     "dialogueIndex": 82,
-    "rawLine": 286,
+    "rawLine": 288,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1696,7 +1696,7 @@
   },
   {
     "index": 139,
-    "rawLine": 288,
+    "rawLine": 290,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1708,7 +1708,7 @@
   {
     "index": 140,
     "dialogueIndex": 83,
-    "rawLine": 290,
+    "rawLine": 292,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1720,7 +1720,7 @@
   },
   {
     "index": 141,
-    "rawLine": 292,
+    "rawLine": 294,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1732,7 +1732,7 @@
   {
     "index": 142,
     "dialogueIndex": 84,
-    "rawLine": 294,
+    "rawLine": 296,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1745,7 +1745,7 @@
   {
     "index": 143,
     "dialogueIndex": 85,
-    "rawLine": 296,
+    "rawLine": 298,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1757,7 +1757,7 @@
   },
   {
     "index": 144,
-    "rawLine": 298,
+    "rawLine": 300,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -1769,7 +1769,7 @@
   {
     "index": 145,
     "dialogueIndex": 86,
-    "rawLine": 304,
+    "rawLine": 306,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1781,7 +1781,7 @@
   },
   {
     "index": 146,
-    "rawLine": 306,
+    "rawLine": 308,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1793,7 +1793,7 @@
   {
     "index": 147,
     "dialogueIndex": 87,
-    "rawLine": 308,
+    "rawLine": 310,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1806,7 +1806,7 @@
   {
     "index": 148,
     "dialogueIndex": 88,
-    "rawLine": 310,
+    "rawLine": 312,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1818,7 +1818,7 @@
   },
   {
     "index": 149,
-    "rawLine": 312,
+    "rawLine": 314,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1830,7 +1830,7 @@
   {
     "index": 150,
     "dialogueIndex": 89,
-    "rawLine": 314,
+    "rawLine": 316,
     "type": "dialogue",
     "speaker": "MARSH",
     "voice": "F2",
@@ -1843,7 +1843,7 @@
   {
     "index": 151,
     "dialogueIndex": 90,
-    "rawLine": 316,
+    "rawLine": 318,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1856,7 +1856,7 @@
   {
     "index": 152,
     "dialogueIndex": 91,
-    "rawLine": 318,
+    "rawLine": 320,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -1868,7 +1868,7 @@
   },
   {
     "index": 153,
-    "rawLine": 320,
+    "rawLine": 322,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1880,7 +1880,7 @@
   {
     "index": 154,
     "dialogueIndex": 92,
-    "rawLine": 322,
+    "rawLine": 324,
     "type": "dialogue",
     "speaker": "REESE",
     "voice": "M1",
@@ -1893,7 +1893,7 @@
   {
     "index": 155,
     "dialogueIndex": 93,
-    "rawLine": 324,
+    "rawLine": 326,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1906,7 +1906,7 @@
   {
     "index": 156,
     "dialogueIndex": 94,
-    "rawLine": 326,
+    "rawLine": 328,
     "type": "dialogue",
     "speaker": "TULLY",
     "voice": "M3",
@@ -1918,7 +1918,7 @@
   },
   {
     "index": 157,
-    "rawLine": 328,
+    "rawLine": 330,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1930,7 +1930,7 @@
   {
     "index": 158,
     "dialogueIndex": 95,
-    "rawLine": 330,
+    "rawLine": 332,
     "type": "dialogue",
     "speaker": "TULLY",
     "voice": "M3",
@@ -1942,7 +1942,7 @@
   },
   {
     "index": 159,
-    "rawLine": 332,
+    "rawLine": 334,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -1954,7 +1954,7 @@
   {
     "index": 160,
     "dialogueIndex": 96,
-    "rawLine": 334,
+    "rawLine": 336,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1966,7 +1966,7 @@
   },
   {
     "index": 161,
-    "rawLine": 336,
+    "rawLine": 338,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -1978,7 +1978,7 @@
   {
     "index": 162,
     "dialogueIndex": 97,
-    "rawLine": 338,
+    "rawLine": 340,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -1990,7 +1990,7 @@
   },
   {
     "index": 163,
-    "rawLine": 340,
+    "rawLine": 342,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -2002,7 +2002,7 @@
   {
     "index": 164,
     "dialogueIndex": 98,
-    "rawLine": 342,
+    "rawLine": 344,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -2015,7 +2015,7 @@
   {
     "index": 165,
     "dialogueIndex": 99,
-    "rawLine": 344,
+    "rawLine": 346,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -2028,7 +2028,7 @@
   {
     "index": 166,
     "dialogueIndex": 100,
-    "rawLine": 346,
+    "rawLine": 348,
     "type": "dialogue",
     "speaker": "DR. PARK",
     "voice": "F1",
@@ -2040,7 +2040,7 @@
   },
   {
     "index": 167,
-    "rawLine": 348,
+    "rawLine": 350,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -2052,7 +2052,7 @@
   {
     "index": 168,
     "dialogueIndex": 101,
-    "rawLine": 350,
+    "rawLine": 352,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -2064,7 +2064,7 @@
   },
   {
     "index": 169,
-    "rawLine": 352,
+    "rawLine": 354,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",
@@ -2076,7 +2076,7 @@
   {
     "index": 170,
     "dialogueIndex": 102,
-    "rawLine": 354,
+    "rawLine": 356,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -2088,7 +2088,7 @@
   },
   {
     "index": 171,
-    "rawLine": 356,
+    "rawLine": 358,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -2100,7 +2100,7 @@
   {
     "index": 172,
     "dialogueIndex": 103,
-    "rawLine": 358,
+    "rawLine": 360,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -2113,7 +2113,7 @@
   {
     "index": 173,
     "dialogueIndex": 104,
-    "rawLine": 360,
+    "rawLine": 362,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -2125,7 +2125,7 @@
   },
   {
     "index": 174,
-    "rawLine": 362,
+    "rawLine": 364,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -2137,7 +2137,7 @@
   {
     "index": 175,
     "dialogueIndex": 105,
-    "rawLine": 364,
+    "rawLine": 366,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -2149,7 +2149,7 @@
   },
   {
     "index": 176,
-    "rawLine": 366,
+    "rawLine": 368,
     "type": "cue",
     "cue": "PAUSE",
     "text": "[PAUSE]",
@@ -2161,7 +2161,7 @@
   {
     "index": 177,
     "dialogueIndex": 106,
-    "rawLine": 368,
+    "rawLine": 370,
     "type": "dialogue",
     "speaker": "DONNA",
     "voice": "F3",
@@ -2174,7 +2174,7 @@
   {
     "index": 178,
     "dialogueIndex": 107,
-    "rawLine": 370,
+    "rawLine": 372,
     "type": "dialogue",
     "speaker": "NARRATOR",
     "voice": "M2",
@@ -2186,7 +2186,7 @@
   },
   {
     "index": 179,
-    "rawLine": 372,
+    "rawLine": 374,
     "type": "cue",
     "cue": "MUSIC STING",
     "text": "[MUSIC STING]",

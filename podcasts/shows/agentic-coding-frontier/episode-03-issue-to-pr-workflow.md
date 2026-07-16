@@ -1,7 +1,7 @@
 # Episode 3: The Issue-to-PR Agentic Workflow
 ## "Designing End-to-End Autonomous Development Loops"
 
-**Duration:** ~60 minutes
+**Duration:** ~43 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 
 ---

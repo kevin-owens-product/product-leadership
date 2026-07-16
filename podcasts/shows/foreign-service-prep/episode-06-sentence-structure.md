@@ -1,7 +1,7 @@
 # Episode 6: Sentence Structure & Style
 ## "The Art of Clear Communication"
 
-**Duration:** ~60 minutes
+**Duration:** ~22 minutes
 **Hosts:** Jordan Hayes (Former Foreign Service Officer) & Maya Torres (FSOT Candidate)
 
 ---

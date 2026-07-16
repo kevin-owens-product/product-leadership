@@ -1,7 +1,7 @@
 # Episode 7: Project Setup & Configuration
 ## "Tailoring Claude Code to Your Project's DNA"
 
-**Duration:** ~60 minutes
+**Duration:** ~12 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

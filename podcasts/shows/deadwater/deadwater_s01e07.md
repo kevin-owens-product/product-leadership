@@ -2,6 +2,8 @@
 ## Episode 7: "Double Life"
 ### Season 1
 
+**Duration:** ~35 minutes
+
 ---
 
 [NARRATOR] Twelve days.

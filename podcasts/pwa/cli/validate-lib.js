@@ -10,7 +10,12 @@
 // the linter is to flag lines that those parsers would silently drop or
 // misread.
 
+import { createRequire } from 'node:module';
 import { parseMarkdown } from '../src/parse/dialogue.js';
+
+// The music cues' lengths are owned by the synthesizer that renders them, so
+// the estimate here can't drift from the real audio. CommonJS, hence require.
+const { MUSIC_CUE_SECONDS } = createRequire(import.meta.url)('../../tools/cue-music.js');
 
 export const BOLD_SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 export const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
@@ -20,15 +25,11 @@ export const DURATION_HEADER_RE = /^\*\*Duration:\*\*\s*~?\s*\d+(?:\.\d+)?\s*min
 export const CUE_SECONDS = {
     'PAUSE': 0.8,
     'LONG PAUSE': 1.8,
-    'MUSIC STING': 1.0,
-    'MUSIC FADE': 1.2,
-    'MUSIC FADES': 1.2,
-    'INTRO MUSIC': 1.5,
-    'OUTRO MUSIC': 1.5,
     'SFX': 0.7,
     'SOUND': 0.7,
     'AMBIENCE': 1.0,
-    'AMBIENT BED': 1.0
+    'AMBIENT BED': 1.0,
+    ...MUSIC_CUE_SECONDS
 };
 
 // First words of valid cue tags — used to spot near-miss cues like
@@ -368,6 +369,43 @@ export function knownSpeakersFromManifest(manifest) {
  * neither works, the affected lines play NO audio — the usual cause is a
  * manifest generated from an older draft of the markdown.
  */
+// Normalize for comparison only. The manifest stores the raw script text while
+// the player's parser strips expression tags and markdown syntax, so the two
+// legitimately differ on characters that never reach the ear.
+function comparableText(text) {
+    return String(text || '')
+        .replace(/<(?:laugh|breath|sigh)>/gi, '')
+        .replace(/[`*_~]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase()
+        .slice(0, 40);
+}
+
+// Every line matching *something* is not the same as matching the RIGHT thing.
+// Insert a line into the markdown of an already-rendered episode and, because
+// dialogue sits on an even line grid, each line still resolves — to its
+// neighbour's audio. Lookups all succeed, so a presence-only check reports a
+// clean bill of health while the whole episode plays one line out of step.
+function checkMatchedTextAgrees(dialogue, byRaw) {
+    let wrong = 0;
+    let example = null;
+    for (const line of dialogue) {
+        const item = byRaw.get(line.rawLine);
+        if (!item || !item.text || !line.text) continue;
+        const want = comparableText(line.text);
+        const got = comparableText(item.text);
+        if (!want || !got || want === got) continue;
+        wrong += 1;
+        if (!example) example = { want: line.text.slice(0, 45), got: item.text.slice(0, 45) };
+    }
+    if (wrong === 0) return [];
+    return [{
+        level: 'error',
+        message: `AUDIO PLAYS THE WRONG LINE: ${wrong} of ${dialogue.length} dialogue lines resolve to a manifest entry whose text differs — the markdown was edited after the audio was generated, shifting line numbers. Transcript "${example.want}…" would play "${example.got}…". Regenerate this episode's audio (or undo the line shift).`
+    }];
+}
+
 export function checkManifestAlignment(markdown, items) {
     if (!Array.isArray(items) || items.length === 0) return [];
     // Playability is decided by the PLAYER's parser (src/parse/dialogue.js),
@@ -377,9 +415,11 @@ export function checkManifestAlignment(markdown, items) {
     const dialogue = parseMarkdown(markdown);
     if (dialogue.length === 0) return [];
 
-    const byRaw = new Set(items.map((it) => it.rawLine).filter((r) => typeof r === 'number'));
+    const byRaw = new Map(
+        items.filter((it) => typeof it.rawLine === 'number').map((it) => [it.rawLine, it])
+    );
     const matched = dialogue.filter((l) => byRaw.has(l.rawLine)).length;
-    if (matched === dialogue.length) return [];
+    if (matched === dialogue.length) return checkMatchedTextAgrees(dialogue, byRaw);
 
     const nonCue = items.filter((it) => it.type !== 'cue').length;
     const positionalOk = matched === 0 &&

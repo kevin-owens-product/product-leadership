@@ -1,7 +1,7 @@
 # Episode 6: Frontier Trends and the New Engineering Operating Model
 ## "Where Agentic Coding Goes Next"
 
-**Duration:** ~60 minutes
+**Duration:** ~45 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 
 ---

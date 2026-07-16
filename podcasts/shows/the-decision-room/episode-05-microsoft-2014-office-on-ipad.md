@@ -1,7 +1,7 @@
 # Episode 5: Redmond, March 2014
 ## "Ship Office on the iPad Before Windows Touch"
 
-**Duration:** ~28 minutes
+**Duration:** ~16 minutes
 **Hosts:** Dana Cole & Eli Vance
 **Podcast:** The Decision Room -- Famous Product Decisions, Argued From Inside the Room
 

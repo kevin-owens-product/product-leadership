@@ -1,7 +1,7 @@
 # Episode 3: Code Reading & Editing
 ## "Master the Art of Safe Code Modification"
 
-**Duration:** ~60 minutes
+**Duration:** ~14 minutes
 **Hosts:** Alex (Expert Developer) & Jamie (Learning Developer)
 
 ---

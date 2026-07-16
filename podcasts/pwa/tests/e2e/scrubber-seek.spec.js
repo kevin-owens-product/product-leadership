@@ -5,9 +5,28 @@ import { test, expect } from '@playwright/test';
 // home. These tests don't exercise the service worker, so block it.
 test.use({ serviceWorkers: 'block' });
 
-// Scrubber drag-to-seek coverage (Phase 1). The Forge episode plays in the
-// chunked fallback mode (no combined.mp3), so scrub labels are line-based;
-// Deadwater ships combined.mp3 + durations and exercises continuous mode.
+// Scrubber drag-to-seek coverage (Phase 1). Two playback modes to cover:
+// continuous (combined.mp3 + per-line durations) shows clock-time labels;
+// the chunked fallback shows line-based labels.
+//
+// Chunked mode is forced with forceChunkedFallback() rather than by opening a
+// show that happens to lack durations: every show in the catalog now ships
+// them, and pinning the test to whichever show was un-generated made it fail
+// the moment that show's audio was regenerated.
+async function forceChunkedFallback(page) {
+    await page.route('**/audio/**/manifest.json*', async (route) => {
+        const response = await route.fetch();
+        const manifest = await response.json();
+        const items = Array.isArray(manifest) ? manifest : manifest.lines || manifest.items || [];
+        // buildLineOffsets() needs per-line durations; without them main.js
+        // takes the chunked path. Drop them and keep everything else intact.
+        for (const item of items) {
+            delete item.duration;
+            delete item.startTime;
+        }
+        await route.fulfill({ response, json: manifest });
+    });
+}
 
 async function openEpisode(page, podcastTitle = 'Claude Code Mastery', episodeTitle = 'Getting Started with Claude Code') {
   await page.goto('/', { waitUntil: 'domcontentloaded' });
@@ -35,19 +54,31 @@ async function openEpisode(page, podcastTitle = 'Claude Code Mastery', episodeTi
 // Opening an episode auto-scrolls the page shortly afterwards, which would
 // shift the bar between boundingBox() and the synthetic mouse events. Wait
 // until the bar's on-screen position is stable before dragging.
+//
+// Stability needs a *sustained* rest, not one matching pair: the auto-scroll
+// starts a beat after the view activates, so a single 150ms match can land in
+// the stillness before it and hand back coordinates that go stale mid-drag.
+const STABLE_POLLS = 6; // ≈600ms of quiet, comfortably past the auto-scroll
 async function settledBox(page, locator) {
   await locator.scrollIntoViewIfNeeded();
   let prev = await locator.boundingBox();
-  for (let i = 0; i < 20; i += 1) {
-    await page.waitForTimeout(150);
+  let stable = 0;
+  for (let i = 0; i < 40; i += 1) {
+    await page.waitForTimeout(100);
     const cur = await locator.boundingBox();
-    if (prev && cur && Math.abs(cur.x - prev.x) < 1 && Math.abs(cur.y - prev.y) < 1) return cur;
+    if (prev && cur && Math.abs(cur.x - prev.x) < 1 && Math.abs(cur.y - prev.y) < 1) {
+      stable += 1;
+      if (stable >= STABLE_POLLS) return cur;
+    } else {
+      stable = 0;
+    }
     prev = cur;
   }
   return prev;
 }
 
 test('scrubber drag shows a preview bubble and only commits the seek on release', async ({ page }) => {
+  await forceChunkedFallback(page);
   await openEpisode(page);
 
   const bar = page.locator('#progress-bar');
@@ -80,6 +111,7 @@ test('scrubber drag shows a preview bubble and only commits the seek on release'
 });
 
 test('scrubber keyboard arrows do fine seeks and Home returns to the start', async ({ page }) => {
+  await forceChunkedFallback(page);
   await openEpisode(page);
 
   const bar = page.locator('#progress-bar');

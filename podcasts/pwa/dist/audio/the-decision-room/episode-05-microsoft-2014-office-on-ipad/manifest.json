@@ -7,7 +7,7 @@
     "text": "[INTRO MUSIC]",
     "chapter": "INTRO: A NEW CEO'S FIRST MOVE (2 minutes)",
     "file": "0000.mp3",
-    "duration": 1.5,
+    "duration": 4.2,
     "startTime": 0
   },
   {
@@ -21,7 +21,7 @@
     "chapter": "INTRO: A NEW CEO'S FIRST MOVE (2 minutes)",
     "file": "0001.mp3",
     "duration": 3.762,
-    "startTime": 1.5
+    "startTime": 4.2
   },
   {
     "index": 2,
@@ -34,7 +34,7 @@
     "chapter": "INTRO: A NEW CEO'S FIRST MOVE (2 minutes)",
     "file": "0002.mp3",
     "duration": 7.732,
-    "startTime": 5.262
+    "startTime": 7.962
   },
   {
     "index": 3,
@@ -47,7 +47,7 @@
     "chapter": "INTRO: A NEW CEO'S FIRST MOVE (2 minutes)",
     "file": "0003.mp3",
     "duration": 23.566,
-    "startTime": 12.994
+    "startTime": 15.694
   },
   {
     "index": 4,
@@ -60,7 +60,7 @@
     "chapter": "INTRO: A NEW CEO'S FIRST MOVE (2 minutes)",
     "file": "0004.mp3",
     "duration": 13.444,
-    "startTime": 36.56
+    "startTime": 39.26
   },
   {
     "index": 5,
@@ -70,8 +70,8 @@
     "text": "[MUSIC FADES]",
     "chapter": "INTRO: A NEW CEO'S FIRST MOVE (2 minutes)",
     "file": "0005.mp3",
-    "duration": 1.2,
-    "startTime": 50.005
+    "duration": 2.8,
+    "startTime": 52.705
   },
   {
     "index": 6,
@@ -84,7 +84,7 @@
     "chapter": "THE ROOM: REDMOND, MARCH 2014 (4 minutes)",
     "file": "0006.mp3",
     "duration": 40.306,
-    "startTime": 51.205
+    "startTime": 55.505
   },
   {
     "index": 7,
@@ -97,7 +97,7 @@
     "chapter": "THE ROOM: REDMOND, MARCH 2014 (4 minutes)",
     "file": "0007.mp3",
     "duration": 42.535,
-    "startTime": 91.511
+    "startTime": 95.811
   },
   {
     "index": 8,
@@ -110,7 +110,7 @@
     "chapter": "THE ROOM: REDMOND, MARCH 2014 (4 minutes)",
     "file": "0008.mp3",
     "duration": 35.709,
-    "startTime": 134.046
+    "startTime": 138.346
   },
   {
     "index": 9,
@@ -123,7 +123,7 @@
     "chapter": "THE ROOM: REDMOND, MARCH 2014 (4 minutes)",
     "file": "0009.mp3",
     "duration": 33.806,
-    "startTime": 169.755
+    "startTime": 174.055
   },
   {
     "index": 10,
@@ -136,7 +136,7 @@
     "chapter": "THE ROOM: REDMOND, MARCH 2014 (4 minutes)",
     "file": "0010.mp3",
     "duration": 31.041,
-    "startTime": 203.561
+    "startTime": 207.861
   },
   {
     "index": 11,
@@ -147,7 +147,7 @@
     "chapter": "THE ROOM: REDMOND, MARCH 2014 (4 minutes)",
     "file": "0011.mp3",
     "duration": 0.8,
-    "startTime": 234.602
+    "startTime": 238.902
   },
   {
     "index": 12,
@@ -160,7 +160,7 @@
     "chapter": "THE CASE AGAINST: THE MOATS DEFEND EACH OTHER (5 minutes)",
     "file": "0012.mp3",
     "duration": 39.819,
-    "startTime": 235.402
+    "startTime": 239.702
   },
   {
     "index": 13,
@@ -173,7 +173,7 @@
     "chapter": "THE CASE AGAINST: THE MOATS DEFEND EACH OTHER (5 minutes)",
     "file": "0013.mp3",
     "duration": 38.425,
-    "startTime": 275.221
+    "startTime": 279.521
   },
   {
     "index": 14,
@@ -186,7 +186,7 @@
     "chapter": "THE CASE AGAINST: THE MOATS DEFEND EACH OTHER (5 minutes)",
     "file": "0014.mp3",
     "duration": 6.757,
-    "startTime": 313.646
+    "startTime": 317.946
   },
   {
     "index": 15,
@@ -199,7 +199,7 @@
     "chapter": "THE CASE AGAINST: THE MOATS DEFEND EACH OTHER (5 minutes)",
     "file": "0015.mp3",
     "duration": 44.507,
-    "startTime": 320.403
+    "startTime": 324.703
   },
   {
     "index": 16,
@@ -212,7 +212,7 @@
     "chapter": "THE CASE AGAINST: THE MOATS DEFEND EACH OTHER (5 minutes)",
     "file": "0016.mp3",
     "duration": 36.684,
-    "startTime": 364.91
+    "startTime": 369.21
   },
   {
     "index": 17,
@@ -225,7 +225,7 @@
     "chapter": "THE CASE FOR: OFFICE IS THE MOAT — WINDOWS IS THE TAX (5 minutes)",
     "file": "0017.mp3",
     "duration": 46.297,
-    "startTime": 401.594
+    "startTime": 405.894
   },
   {
     "index": 18,
@@ -238,7 +238,7 @@
     "chapter": "THE CASE FOR: OFFICE IS THE MOAT — WINDOWS IS THE TAX (5 minutes)",
     "file": "0018.mp3",
     "duration": 47.69,
-    "startTime": 447.891
+    "startTime": 452.191
   },
   {
     "index": 19,
@@ -251,7 +251,7 @@
     "chapter": "THE CASE FOR: OFFICE IS THE MOAT — WINDOWS IS THE TAX (5 minutes)",
     "file": "0019.mp3",
     "duration": 4.11,
-    "startTime": 495.581
+    "startTime": 499.881
   },
   {
     "index": 20,
@@ -264,7 +264,7 @@
     "chapter": "THE CASE FOR: OFFICE IS THE MOAT — WINDOWS IS THE TAX (5 minutes)",
     "file": "0020.mp3",
     "duration": 41.63,
-    "startTime": 499.691
+    "startTime": 503.991
   },
   {
     "index": 21,
@@ -277,7 +277,7 @@
     "chapter": "THE CASE FOR: OFFICE IS THE MOAT — WINDOWS IS THE TAX (5 minutes)",
     "file": "0021.mp3",
     "duration": 47.642,
-    "startTime": 541.321
+    "startTime": 545.621
   },
   {
     "index": 22,
@@ -290,7 +290,7 @@
     "chapter": "THE CASE FOR: OFFICE IS THE MOAT — WINDOWS IS THE TAX (5 minutes)",
     "file": "0022.mp3",
     "duration": 40.724,
-    "startTime": 588.962
+    "startTime": 593.262
   },
   {
     "index": 23,
@@ -301,7 +301,7 @@
     "chapter": "THE CASE FOR: OFFICE IS THE MOAT — WINDOWS IS THE TAX (5 minutes)",
     "file": "0023.mp3",
     "duration": 0.8,
-    "startTime": 629.686
+    "startTime": 633.986
   },
   {
     "index": 24,
@@ -311,8 +311,8 @@
     "text": "[MUSIC STING]",
     "chapter": "THE REVEAL: WHAT MICROSOFT DID (4 minutes)",
     "file": "0024.mp3",
-    "duration": 1,
-    "startTime": 630.486
+    "duration": 1.8,
+    "startTime": 634.786
   },
   {
     "index": 25,
@@ -325,7 +325,7 @@
     "chapter": "THE REVEAL: WHAT MICROSOFT DID (4 minutes)",
     "file": "0025.mp3",
     "duration": 32.344,
-    "startTime": 631.486
+    "startTime": 636.586
   },
   {
     "index": 26,
@@ -338,7 +338,7 @@
     "chapter": "THE REVEAL: WHAT MICROSOFT DID (4 minutes)",
     "file": "0026.mp3",
     "duration": 42.187,
-    "startTime": 663.83
+    "startTime": 668.93
   },
   {
     "index": 27,
@@ -351,7 +351,7 @@
     "chapter": "THE REVEAL: WHAT MICROSOFT DID (4 minutes)",
     "file": "0027.mp3",
     "duration": 22.452,
-    "startTime": 706.017
+    "startTime": 711.117
   },
   {
     "index": 28,
@@ -364,7 +364,7 @@
     "chapter": "THE REVEAL: WHAT MICROSOFT DID (4 minutes)",
     "file": "0028.mp3",
     "duration": 48.617,
-    "startTime": 728.469
+    "startTime": 733.569
   },
   {
     "index": 29,
@@ -377,7 +377,7 @@
     "chapter": "THE REVEAL: WHAT MICROSOFT DID (4 minutes)",
     "file": "0029.mp3",
     "duration": 21.268,
-    "startTime": 777.086
+    "startTime": 782.186
   },
   {
     "index": 30,
@@ -390,7 +390,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0030.mp3",
     "duration": 4.04,
-    "startTime": 798.353
+    "startTime": 803.453
   },
   {
     "index": 31,
@@ -403,7 +403,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0031.mp3",
     "duration": 32.274,
-    "startTime": 802.394
+    "startTime": 807.494
   },
   {
     "index": 32,
@@ -416,7 +416,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0032.mp3",
     "duration": 27.189,
-    "startTime": 834.667
+    "startTime": 839.767
   },
   {
     "index": 33,
@@ -429,7 +429,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0033.mp3",
     "duration": 36.753,
-    "startTime": 861.856
+    "startTime": 866.956
   },
   {
     "index": 34,
@@ -442,7 +442,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0034.mp3",
     "duration": 25.169,
-    "startTime": 898.61
+    "startTime": 903.71
   },
   {
     "index": 35,
@@ -455,7 +455,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0035.mp3",
     "duration": 27.328,
-    "startTime": 923.778
+    "startTime": 928.878
   },
   {
     "index": 36,
@@ -468,7 +468,7 @@
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0036.mp3",
     "duration": 2.926,
-    "startTime": 951.106
+    "startTime": 956.206
   },
   {
     "index": 37,
@@ -478,7 +478,7 @@
     "text": "[OUTRO MUSIC]",
     "chapter": "WHAT TRANSFERS (5 minutes)",
     "file": "0037.mp3",
-    "duration": 1.5,
-    "startTime": 954.032
+    "duration": 5.5,
+    "startTime": 959.132
   }
 ]

@@ -1,7 +1,7 @@
 # Episode 2: Multi-Agent Architecture for Enterprise Software
 ## "Designing Systems Where AI Agents Collaborate on Complex Business Problems"
 
-**Duration:** ~60 minutes
+**Duration:** ~52 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 **Podcast:** The Forge Podcast — PE, Software Transformation & the AI-Native Future
 

@@ -1,7 +1,7 @@
 # Episode 4: Enterprise AI Transformation at Scale
 ## "Operating Models, Org Design, and the Cisco Playbook"
 
-**Duration:** ~45 minutes
+**Duration:** ~30 minutes
 **Hosts:** Priya Anand (Interviewer) & Marcus Hale (Expert)
 **Podcast:** The Harness -- Building the Enterprise AI Operating System
 

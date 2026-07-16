@@ -1,7 +1,7 @@
 # Episode 5: Systems Design at Scale
 ## "Building for Millions - The Art of Scaling Systems"
 
-**Duration:** ~60 minutes
+**Duration:** ~23 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

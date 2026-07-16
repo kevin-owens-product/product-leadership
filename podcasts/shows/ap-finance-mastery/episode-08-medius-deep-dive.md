@@ -1,5 +1,7 @@
 # Episode 8: Medius Deep Dive — The Platform & Product Suite
 
+**Duration:** ~14 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome back. This is the episode we've been building toward. Today we're going deep on Medius, the company, the platform, and the product suite.

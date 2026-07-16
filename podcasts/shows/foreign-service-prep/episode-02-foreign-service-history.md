@@ -1,7 +1,7 @@
 # Episode 2: History of the Foreign Service
 ## "From Franklin to Today"
 
-**Duration:** ~60 minutes
+**Duration:** ~24 minutes
 **Hosts:** Jordan Hayes (Former Foreign Service Officer) & Maya Torres (FSOT Candidate)
 
 ---

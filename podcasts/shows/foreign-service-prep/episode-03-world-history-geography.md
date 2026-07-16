@@ -1,7 +1,7 @@
 # Episode 3: World History & Geography
 ## "The Global Landscape"
 
-**Duration:** ~60 minutes
+**Duration:** ~20 minutes
 **Hosts:** Jordan Hayes (Former Foreign Service Officer) & Maya Torres (FSOT Candidate)
 
 ---

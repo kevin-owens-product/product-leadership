@@ -1,7 +1,7 @@
 # Episode 5: The Forge Method
 ## "A Systematic Framework for Transforming Software Companies from Legacy to AI-Native"
 
-**Duration:** ~60 minutes
+**Duration:** ~50 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

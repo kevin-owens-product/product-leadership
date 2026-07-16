@@ -1,7 +1,7 @@
 # Episode 5: Evals, Guardrails, and the Trust Layer
 ## "Shipping AI Safely in Regulated Enterprises"
 
-**Duration:** ~45 minutes
+**Duration:** ~31 minutes
 **Hosts:** Priya Anand (Interviewer) & Marcus Hale (Expert)
 **Podcast:** The Harness -- Building the Enterprise AI Operating System
 

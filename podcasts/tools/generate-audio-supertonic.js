@@ -49,6 +49,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { isMusicCue, renderCueWav, MUSIC_CUE_SECONDS } = require('./cue-music');
 
 const ROOT = path.resolve(__dirname, '..');
 const SHOWS_DIR = path.join(ROOT, 'shows');
@@ -56,18 +57,15 @@ const OUTPUT_ROOT = path.join(ROOT, 'pwa', 'audio');
 const BOLD_SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
 const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)(?:\s*[-:]\s*[^\]]+)?\]$/i;
+// Silence cues; the music cues come from cue-music.js, which renders them.
 const CUE_DURATIONS = {
   'PAUSE': 0.8,
   'LONG PAUSE': 1.8,
-  'MUSIC STING': 1.0,
-  'MUSIC FADE': 1.2,
-  'MUSIC FADES': 1.2,
-  'INTRO MUSIC': 1.5,
-  'OUTRO MUSIC': 1.5,
   'SFX': 0.7,
   'SOUND': 0.7,
   'AMBIENCE': 1.0,
   'AMBIENT BED': 1.0,
+  ...MUSIC_CUE_SECONDS,
 };
 const SILENCE_SAMPLE_RATE = 44100;
 
@@ -534,7 +532,13 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     const wavPath = path.join(outDir, wavName);
 
     if (event.type === 'cue') {
-      if (!fs.existsSync(wavPath) || FLAGS.force) {
+      const music = isMusicCue(event.cue);
+      if (music) {
+        // Always re-render: synthesis costs milliseconds and is deterministic
+        // (same bytes every run), whereas an existence check would keep the
+        // pre-music silence clip — or a stale theme — forever.
+        renderCueWav(wavPath, event.cue, showId);
+      } else if (!fs.existsSync(wavPath) || FLAGS.force) {
         writeSilenceWav(wavPath, event.duration);
       }
       wavs.push(wavPath);
@@ -546,6 +550,9 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
         text: `[${event.cue}]`,
         chapter: event.chapter,
         file: wavName,
+        // Music WAVs are re-rendered every run, so their MP3 must be too —
+        // otherwise the cached per-line MP3 keeps playing the old silence.
+        reencode: music,
       });
       continue;
     }
@@ -605,7 +612,7 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     for (const item of items) {
       const wav = path.join(outDir, item.file);
       const mp3 = wav.replace(/\.wav$/, '.mp3');
-      if (!fs.existsSync(mp3) || FLAGS.force) {
+      if (!fs.existsSync(mp3) || FLAGS.force || item.reencode) {
         try {
           wavToMp3(wav, mp3);
         } catch (err) {
@@ -644,7 +651,9 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   }
 
   const manifestPath = path.join(outDir, 'manifest.json');
-  fs.writeFileSync(manifestPath, JSON.stringify(items, null, 2) + '\n');
+  // `reencode` is build bookkeeping, not part of the shipped manifest.
+  const published = items.map(({ reencode, ...item }) => item);
+  fs.writeFileSync(manifestPath, JSON.stringify(published, null, 2) + '\n');
   log(`Wrote ${path.relative(ROOT, manifestPath)}`, 'ok');
 }
 

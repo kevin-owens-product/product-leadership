@@ -1,7 +1,7 @@
 # Episode 6: The Converged Executive
 ## "Merging CPO, CRO, and CTO into One AI-Native Operating System"
 
-**Duration:** ~60 minutes
+**Duration:** ~47 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

@@ -1,7 +1,7 @@
 # Episode 14: AI QA and Evaluation Systems
 ## "From Deterministic Test Cases to Probabilistic Confidence Engineering"
 
-**Duration:** ~60 minutes
+**Duration:** ~49 minutes
 **Hosts:** Alex (Interviewer) & Kevin (Expert)
 
 ---

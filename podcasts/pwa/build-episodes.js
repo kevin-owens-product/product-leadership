@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
 
 import { runValidation } from './cli/validate.js';
@@ -16,18 +17,16 @@ const BOLD_SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
 const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
 const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)(?:\s+-\s+FADE OUT)?\]$/i;
 const ESTIMATED_WORDS_PER_MINUTE = 145;
+// Music-cue lengths come from the synthesizer that renders them (see
+// ../tools/cue-music.js) so this estimate can't drift from the real audio.
 const ESTIMATED_CUE_SECONDS = {
     'PAUSE': 0.8,
     'LONG PAUSE': 1.8,
-    'MUSIC STING': 1.0,
-    'MUSIC FADE': 1.2,
-    'MUSIC FADES': 1.2,
-    'INTRO MUSIC': 1.5,
-    'OUTRO MUSIC': 1.5,
     'SFX': 0.7,
     'SOUND': 0.7,
     'AMBIENCE': 1.0,
-    'AMBIENT BED': 1.0
+    'AMBIENT BED': 1.0,
+    ...createRequire(import.meta.url)('../tools/cue-music.js').MUSIC_CUE_SECONDS
 };
 
 // Create dist directory

@@ -50,19 +50,22 @@ Rules the pipeline actually enforces:
   shows may instead use the bracket form `[NAME] text`.
 - **Chapters** — every `### HEADING` becomes a chapter marker.
 - **Duration header** — `**Duration:** ~NN minutes` is used to estimate the
-  episode length until real audio exists. Missing it is a lint warning.
-- **Cue tags** — a cue sits alone on its own line and inserts silence:
+  episode length until real audio exists. Missing it is a lint warning. Once
+  audio exists, `node ../tools/sync-duration-headers.js` rewrites the header
+  from the real manifest timeline, so it stops being an estimate.
+- **Cue tags** — a cue sits alone on its own line. The four music cues render
+  the show's theme (see below); the rest insert silence:
 
-  | Cue | Silence |
+  | Cue | Renders |
   | --- | --- |
-  | `[PAUSE]` | 0.8s |
-  | `[LONG PAUSE]` | 1.8s |
-  | `[MUSIC STING]` | 1.0s |
-  | `[MUSIC FADES]` / `[MUSIC FADE]` | 1.2s |
-  | `[INTRO MUSIC]` | 1.5s |
-  | `[OUTRO MUSIC]` | 1.5s |
-  | `[SFX]` / `[SOUND]` | 0.7s |
-  | `[AMBIENCE]` / `[AMBIENT BED]` | 1.0s |
+  | `[PAUSE]` | 0.8s silence |
+  | `[LONG PAUSE]` | 1.8s silence |
+  | `[MUSIC STING]` | ~1.8s sting |
+  | `[MUSIC FADES]` / `[MUSIC FADE]` | ~2.8s pad fade |
+  | `[INTRO MUSIC]` | ~4.2s theme |
+  | `[OUTRO MUSIC]` | ~5.5s theme, ringing out |
+  | `[SFX]` / `[SOUND]` | 0.7s silence |
+  | `[AMBIENCE]` / `[AMBIENT BED]` | 1.0s silence |
 
   A suffix after `-` or `:` is allowed (`[MUSIC STING - FADE TO SILENCE]`).
   Any other `[BRACKETED]` line is a stage direction: it is skipped and
@@ -79,6 +82,26 @@ Rules the pipeline actually enforces:
   Tags are lowercase; `<laugh>` is the most clearly audible of the three.
   Any other `<angle>` token is a lint error and is stripped from the audio
   rather than read aloud.
+
+## Show music
+
+The four music cues render a per-show theme — a plucked motif over a soft pad,
+synthesized by `podcasts/tools/cue-music.js` with no dependencies or asset
+files. Every parameter derives from a hash of the show id, so a new show gets a
+usable theme for free and re-rendering always produces identical bytes.
+
+Music is normalized to sit ~10 dB under speech, so it never competes with the
+dialogue. To give a show a deliberate character instead of the hashed default,
+add an entry to `SHOW_OVERRIDES` in that file:
+
+```js
+'the-decision-room': { rootHz: 174.61, mode: 'minorPentatonic', brightness: 0.7, tempo: 84 },
+```
+
+`mode` is `majorPentatonic` or `minorPentatonic`; `brightness` (0–1) controls
+pluck damping and pad shimmer. Cue WAVs are cached like dialogue, so after
+changing a theme delete the show's cue clips (or pass `--force`) and re-run
+`npm run audio:show` to hear it.
 
 ### `podcast.json`
 
@@ -117,14 +140,37 @@ cue-tag reference comment — and registers the episode in `podcast.json`.
 Lints every episode and checks generated audio, printing `file:line` messages.
 Errors (exit 1): unknown speakers, malformed/near-miss cue tags, unclosed
 brackets, colon-outside-bold speaker labels, broken `podcast.json` entries,
-missing audio files, and manifest timeline drift (against both the summed line
-durations and `combined.mp3` via ffprobe when available). Warnings: missing
-Duration header, missing `combined.mp3`, un-backfilled durations.
+missing audio files, manifest timeline drift (against both the summed line
+durations and `combined.mp3` via ffprobe when available), and
+`AUDIO PLAYS THE WRONG LINE` — dialogue that resolves to a manifest entry
+whose text disagrees, which is what a post-render line shift looks like.
+Warnings: missing Duration header, missing `combined.mp3`, un-backfilled
+durations.
 
 Options: `-- --show <id>`, `-- --episode <n>`, `-- --no-audio`.
 
 The same checks gate `npm run build` — a broken episode fails the build
 instead of shipping a silently truncated feed.
+
+### `node ../tools/sync-duration-headers.js [--show <id>] [--dry-run]`
+
+Rewrites every episode's `**Duration:** ~NN minutes` header from the real
+manifest timeline, and inserts one where it's missing. Episodes without
+generated audio are skipped. `publish-episode` runs it scoped to the show it
+just published; run it by hand after regenerating audio or after editing a
+script enough to change its length. Pass `--show` to scope it — an unscoped
+run touches every show in the catalog.
+
+Inserting a header shifts the lines below it, and manifests point at dialogue
+by markdown line number, so the tool shifts the manifest's `rawLine` values by
+the same amount — exactly what a re-render would produce, without paying for
+TTS again. Editing a script by hand does **not** get that fixup: change an
+already-rendered episode's line count and its audio silently plays one line
+out of step. `npm run validate` fails with `AUDIO PLAYS THE WRONG LINE` when
+that happens; regenerate the show's audio to fix it.
+
+(Distinct from `../tools/backfill-manifest-durations.js`, which writes
+`duration`/`startTime` into the manifests from the audio files.)
 
 ### `npm run publish-episode -- <show-id> <episode-nr> [--dry-run] [--force]`
 

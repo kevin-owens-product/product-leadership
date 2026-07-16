@@ -1,5 +1,7 @@
 # Episode 10: The Future of AP & Autonomous Finance
 
+**Duration:** ~16 minutes
+
 ## Introduction
 
 **MORGAN:** Welcome to the final episode of AP and Finance Mastery. We've covered an incredible amount of ground over the past nine episodes, from the fundamentals of accounts payable all the way through the Medius product suite and the CFO perspective. Today we're looking forward.

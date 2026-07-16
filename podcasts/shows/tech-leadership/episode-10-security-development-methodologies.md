@@ -1,7 +1,7 @@
 # Episode 10: Security & Development Methodologies
 ## "The Grand Finale - Secure Software and How to Build It"
 
-**Duration:** ~60 minutes
+**Duration:** ~21 minutes
 **Hosts:** Alex Chen (Technical Expert) & Sam Rivera (Product Leadership Perspective)
 
 ---

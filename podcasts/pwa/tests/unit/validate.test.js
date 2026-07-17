@@ -334,6 +334,48 @@ test('checkManifestAlignment mirrors the player matching rules', () => {
     assert.match(drift[0].message, /2 of 3 dialogue lines have no matching audio/);
 });
 
+test('checkShowManifest warns when two speakers share a voice', () => {
+    const show = (voiceMap) => checkShowManifest(
+        { id: 'x', title: 'X', episodes: [], voiceMap },
+        { fileExists: () => true }
+    );
+
+    const dup = warnings(show({ DANA: 'F4', ELI: 'M2', GUEST: 'M2' }));
+    assert.equal(dup.length, 1);
+    assert.match(dup[0].message, /ELI and GUEST the same voice \(M2\)/);
+
+    // Case differences in the voice id are still the same voice.
+    assert.equal(warnings(show({ A: 'm1', B: 'M1' })).length, 1);
+
+    assert.deepEqual(warnings(show({ DANA: 'F4', ELI: 'M2' })), []);
+    assert.deepEqual(warnings(show(undefined)), [], 'no voiceMap is not a manifest problem');
+});
+
+test('lintEpisodeMarkdown warns when 3+ speakers fall back to alternating voices', () => {
+    // Without a voiceMap the generator alternates M1/F1 by order of first
+    // appearance, so the third speaker silently reuses the first one's voice.
+    const md = (...speakers) =>
+        speakers.map((s) => `**${s}:** A line.`).join('\n\n') + '\n\n**Duration:** ~5 minutes\n';
+    const voiceWarns = (markdown) =>
+        warnings(lintEpisodeMarkdown(markdown, { knownSpeakers: null }))
+            .filter((i) => /voiceMap/.test(i.message));
+
+    const three = voiceWarns(md('ALEX', 'RILEY', 'JAMIE'));
+    assert.equal(three.length, 1);
+    assert.match(three[0].message, /3 speakers but no voiceMap/);
+    assert.match(three[0].message, /JAMIE reuses M1/);
+
+    // Two-handers — most of the catalog — alternate cleanly and must stay quiet.
+    assert.deepEqual(voiceWarns(md('ALEX', 'RILEY')), []);
+    // A voiceMap means voices are explicit; no fallback, no warning.
+    assert.deepEqual(
+        warnings(lintEpisodeMarkdown(md('ALEX', 'RILEY', 'JAMIE'), {
+            knownSpeakers: new Set(['ALEX', 'RILEY', 'JAMIE'])
+        })).filter((i) => /voiceMap/.test(i.message)),
+        []
+    );
+});
+
 test('checkManifestAlignment catches audio that resolves to the wrong line', () => {
     const md = [
         '**ALEX:** Line one.',

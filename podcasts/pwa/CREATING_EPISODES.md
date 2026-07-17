@@ -124,7 +124,10 @@ changing a theme delete the show's cue clips (or pass `--force`) and re-run
 
 `voiceMap` maps speaker labels to Supertonic voice styles (`M1`, `F1`, `M2`,
 `F2`, …). Without it, voices alternate M1/F1 by order of appearance and the
-linter skips unknown-speaker checks.
+linter skips unknown-speaker checks. That fallback only holds for a two-hander:
+a third speaker wraps back onto M1 and becomes indistinguishable from the
+first, so any show with 3+ speakers needs an explicit `voiceMap` (the linter
+warns). Mapping two speakers to the same voice warns too.
 
 ## Commands
 
@@ -145,7 +148,9 @@ durations and `combined.mp3` via ffprobe when available), and
 `AUDIO PLAYS THE WRONG LINE` — dialogue that resolves to a manifest entry
 whose text disagrees, which is what a post-render line shift looks like.
 Warnings: missing Duration header, missing `combined.mp3`, un-backfilled
-durations.
+durations, and voice collisions — two speakers mapped to the same voice, or
+3+ speakers with no `voiceMap` (the M1/F1 fallback would give the third
+speaker the first one's voice).
 
 Options: `-- --show <id>`, `-- --episode <n>`, `-- --no-audio`.
 

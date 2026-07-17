@@ -155,6 +155,27 @@ export function lintEpisodeMarkdown(markdown, { knownSpeakers = null } = {}) {
             'missing "**Duration:** ~NN minutes" header — episode length will be estimated from word count until audio is generated'));
     }
 
+    // No voiceMap means the generator falls back to alternating M1/F1 by order
+    // of first appearance (see pickVoice in ../tools/generate-audio-supertonic.js),
+    // which silently hands speakers 1 and 3 the same voice. Two-hander shows —
+    // most of the catalog — are unaffected, so only warn once it actually bites.
+    if (!speakers) {
+        const seen = [];
+        for (const line of String(markdown).split('\n')) {
+            const m = line.match(BOLD_SPEAKER_LINE_RE) || line.match(BRACKET_SPEAKER_LINE_RE);
+            const name = m && m[1].toUpperCase();
+            if (name && !seen.includes(name)) seen.push(name);
+        }
+        if (seen.length > 2) {
+            const collisions = seen
+                .map((name, i) => ({ name, voice: i % 2 === 0 ? 'M1' : 'F1' }))
+                .filter((_, i) => i >= 2)
+                .map(({ name, voice }) => `${name} reuses ${voice}`);
+            issues.push(issue(1, 'warning',
+                `${seen.length} speakers but no voiceMap in podcast.json — voices alternate M1/F1 by order of appearance, so ${collisions.join(', ')}; add a voiceMap to give each speaker a distinct voice`));
+        }
+    }
+
     return issues;
 }
 
@@ -212,6 +233,33 @@ export function checkShowManifest(manifest, { fileExists }) {
         }
         if (!ep.title) {
             issues.push({ level: 'warning', message: `${label}: missing "title"` });
+        }
+    }
+    issues.push(...checkVoiceMap(manifest.voiceMap));
+    return issues;
+}
+
+/**
+ * Two speakers sharing a voice makes them indistinguishable in the audio, and
+ * nothing downstream complains: the generator happily renders both, so the
+ * first sign is a listener unable to tell who is talking.
+ */
+function checkVoiceMap(voiceMap) {
+    if (!voiceMap || typeof voiceMap !== 'object') return [];
+    const byVoice = new Map();
+    for (const [speaker, voice] of Object.entries(voiceMap)) {
+        if (!voice) continue;
+        const key = String(voice).toUpperCase();
+        if (!byVoice.has(key)) byVoice.set(key, []);
+        byVoice.get(key).push(speaker.toUpperCase());
+    }
+    const issues = [];
+    for (const [voice, speakers] of byVoice) {
+        if (speakers.length > 1) {
+            issues.push({
+                level: 'warning',
+                message: `voiceMap gives ${speakers.join(' and ')} the same voice (${voice}) — they will be indistinguishable in the audio; assign distinct voices unless that is deliberate`
+            });
         }
     }
     return issues;

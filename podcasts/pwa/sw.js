@@ -208,17 +208,34 @@ async function validatedAudioCacheResponse(url, res) {
         throw new Error('Refusing to cache partial audio response');
     }
     const blob = await res.blob();
+    // Content-Length describes the bytes *on the wire*. When the server applies
+    // a transfer compression (Netlify brotli-encodes manifest.json), the browser
+    // transparently inflates the body but leaves the original header in place,
+    // so blob.size is the decompressed size and comparing the two reports a
+    // perfectly good download as truncated. Only trust the header when the body
+    // reached us unencoded.
+    const encoding = (res.headers.get('content-encoding') || '').trim().toLowerCase();
+    const wasCompressed = encoding !== '' && encoding !== 'identity';
     const expectedLength = Number(res.headers.get('content-length'));
-    if (Number.isFinite(expectedLength) && expectedLength > 0 && blob.size !== expectedLength) {
+    if (!wasCompressed && Number.isFinite(expectedLength) && expectedLength > 0 && blob.size !== expectedLength) {
         throw new Error(`Incomplete response (${blob.size}/${expectedLength} bytes)`);
     }
     if (url.includes('/combined.mp3') && blob.size <= 0) {
         throw new Error('Empty audio response');
     }
+    // `blob` holds the decoded bytes, so the transfer headers that described the
+    // encoded body no longer apply. Leaving them on the cached entry would claim
+    // an encoding that is already undone and a length that disagrees with the
+    // body — which rangeAwareAudioResponse would then copy onto its 206s.
+    const headers = new Headers(res.headers);
+    if (wasCompressed) {
+        headers.delete('content-encoding');
+    }
+    headers.set('Content-Length', String(blob.size));
     return new Response(blob, {
         status: res.status,
         statusText: res.statusText,
-        headers: res.headers
+        headers
     });
 }
 

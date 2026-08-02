@@ -1,0 +1,64 @@
+{
+  "id": "control-loop",
+  "title": "Control Loop",
+  "subtitle": "The Engineering Under the Agent",
+  "description": "An 8-part deep dive into the machinery beneath agentic systems: how control loops actually terminate, how context gets budgeted and compacted, how work fans out across subagents, how verification drives convergence, how code graphs get built and traversed, and how a production harness handles tools, permissions, sandboxes, traces, and cost. Written at mechanism altitude for engineers who already know why agents matter and now need to know how they are built.",
+  "author": "Dana Okafor & Theo Lindqvist",
+  "color": "#e11d48",
+  "icon": "🔁",
+  "voiceMap": {
+    "DANA": "F1",
+    "THEO": "M1"
+  },
+  "lang": "en",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-the-loop-is-the-architecture.md",
+      "title": "The Loop Is the Architecture",
+      "subtitle": "Control Flow, Termination, and Why Agents Diverge"
+    },
+    {
+      "id": 2,
+      "file": "episode-02-context-is-a-budget.md",
+      "title": "Context Is a Budget",
+      "subtitle": "Compaction, Context Rot, and Cache-Aware Prompt Layout"
+    },
+    {
+      "id": 3,
+      "file": "episode-03-topology.md",
+      "title": "Topology",
+      "subtitle": "Fan-Out, Pipelines, Subagents, and Isolation"
+    },
+    {
+      "id": 4,
+      "file": "episode-04-verification-driven-loops.md",
+      "title": "Verification-Driven Loops",
+      "subtitle": "Verifiers, Judge Panels, and the Economics of Being Right"
+    },
+    {
+      "id": 5,
+      "file": "episode-05-building-the-code-graph.md",
+      "title": "Graph Engineering I: Building the Code Graph",
+      "subtitle": "Parsing, Resolution, and Incremental Indexing"
+    },
+    {
+      "id": 6,
+      "file": "episode-06-retrieval-over-graphs.md",
+      "title": "Graph Engineering II: Retrieval Over Graphs",
+      "subtitle": "Traversal, Ranking, and Where Vectors Stop Working"
+    },
+    {
+      "id": 7,
+      "file": "episode-07-tools-permissions-sandboxes.md",
+      "title": "Harness Design I: Tools, Permissions, Sandboxes",
+      "subtitle": "The Interface Between a Model and the World"
+    },
+    {
+      "id": 8,
+      "file": "episode-08-observability-evals-economics.md",
+      "title": "Harness Design II: Observability, Evals, Economics",
+      "subtitle": "Traces, Replay, Regression Gates, and Cost per Resolved Task"
+    }
+  ]
+}

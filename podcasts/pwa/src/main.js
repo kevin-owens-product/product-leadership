@@ -59,6 +59,7 @@ import { createLibrary } from './ui/library.js';
 import { createSharePanel } from './ui/share-panel.js';
 import { initKeyboardShortcuts } from './ui/shortcuts.js';
 import { initSwipeGestures } from './ui/swipe.js';
+import { initBackNav, backTarget, performBack } from './app/back-nav.js';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -318,6 +319,21 @@ function stampViewEntering(view) {
     enteringTimer = setTimeout(() => view.classList.remove('entering'), 700);
 }
 
+// Android's back gesture is browser-history navigation, so without an entry of
+// our own it unloads the app instead of stepping back a screen. backNav owns a
+// single sentinel entry; every depth change has to re-reconcile it.
+const backNav = initBackNav({
+    canGoBack: () => backTarget(document) !== null,
+    goBack: () => performBack(document)
+});
+
+// Overlays open and close from a dozen call sites, so observe the class that
+// actually decides whether one is up rather than trying to hook each of them.
+document.querySelectorAll('.modal-overlay').forEach((overlay) => {
+    new MutationObserver(() => backNav.sync())
+        .observe(overlay, { attributes: true, attributeFilter: ['class'] });
+});
+
 // `morph` optionally names a shared-element pair { from, to } so the show
 // artwork flies card → hero (View Transitions; instant under reduced
 // motion or without support — see morphViews).
@@ -328,6 +344,7 @@ function showView(viewId, { transition = true, morph = null } = {}) {
         });
         if (viewId !== 'player-view') stampViewEntering(document.getElementById(viewId));
         updateMiniPlayerVisibility();
+        backNav.sync();
     };
     if (transition && morph) {
         morphViews(apply, morph);

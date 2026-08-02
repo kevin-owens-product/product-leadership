@@ -8,30 +8,30 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260802T191257Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260802T191257Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260802T191257Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260802T191257Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260802T191257Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260802T191257Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260802T191257Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260802T191257Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260802T191257Z';
-import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260802T191257Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260802T191257Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260802T191257Z';
+} from './state/storage.js?v=2.3.0%2B20260802T192253Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260802T192253Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260802T192253Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260802T192253Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260802T192253Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260802T192253Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260802T192253Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260802T192253Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260802T192253Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260802T192253Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260802T192253Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260802T192253Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260802T191257Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260802T191257Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260802T191257Z';
+} from './app/version.js?v=2.3.0%2B20260802T192253Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260802T192253Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260802T192253Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260802T191257Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260802T192253Z';
 import {
     combinedAudioUrl,
     withCacheKey,
@@ -39,26 +39,27 @@ import {
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260802T191257Z';
-import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260802T191257Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260802T191257Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260802T191257Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260802T191257Z';
-import { formatClock } from './ui/format.js?v=2.3.0%2B20260802T191257Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260802T191257Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260802T191257Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260802T191257Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260802T191257Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260802T191257Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260802T191257Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260802T191257Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260802T191257Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260802T191257Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260802T191257Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260802T191257Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260802T191257Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260802T191257Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260802T191257Z';
+} from './playback/manifest.js?v=2.3.0%2B20260802T192253Z';
+import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260802T192253Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260802T192253Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260802T192253Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260802T192253Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260802T192253Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260802T192253Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260802T192253Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260802T192253Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260802T192253Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260802T192253Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260802T192253Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260802T192253Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260802T192253Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260802T192253Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260802T192253Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260802T192253Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260802T192253Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260802T192253Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260802T192253Z';
+import { initBackNav, backTarget, performBack } from './app/back-nav.js?v=2.3.0%2B20260802T192253Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -318,6 +319,21 @@ function stampViewEntering(view) {
     enteringTimer = setTimeout(() => view.classList.remove('entering'), 700);
 }
 
+// Android's back gesture is browser-history navigation, so without an entry of
+// our own it unloads the app instead of stepping back a screen. backNav owns a
+// single sentinel entry; every depth change has to re-reconcile it.
+const backNav = initBackNav({
+    canGoBack: () => backTarget(document) !== null,
+    goBack: () => performBack(document)
+});
+
+// Overlays open and close from a dozen call sites, so observe the class that
+// actually decides whether one is up rather than trying to hook each of them.
+document.querySelectorAll('.modal-overlay').forEach((overlay) => {
+    new MutationObserver(() => backNav.sync())
+        .observe(overlay, { attributes: true, attributeFilter: ['class'] });
+});
+
 // `morph` optionally names a shared-element pair { from, to } so the show
 // artwork flies card → hero (View Transitions; instant under reduced
 // motion or without support — see morphViews).
@@ -328,6 +344,7 @@ function showView(viewId, { transition = true, morph = null } = {}) {
         });
         if (viewId !== 'player-view') stampViewEntering(document.getElementById(viewId));
         updateMiniPlayerVisibility();
+        backNav.sync();
     };
     if (transition && morph) {
         morphViews(apply, morph);

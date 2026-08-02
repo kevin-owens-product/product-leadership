@@ -2,10 +2,10 @@
 // "resync" pill), tap/keyboard seek, and transcript search with match
 // navigation.
 
-import { applyLiteralHighlight, includesQuery } from '../search/transcript-search.js?v=2.3.0%2B20260802T180633Z';
-import { renderTranscriptLine } from './render.js?v=2.3.0%2B20260802T180633Z';
-import { createTranscriptFollow } from './transcript-follow.js?v=2.3.0%2B20260802T180633Z';
-import { prefersReducedMotion } from './motion.js?v=2.3.0%2B20260802T180633Z';
+import { applyLiteralHighlight, includesQuery } from '../search/transcript-search.js?v=2.3.0%2B20260802T191257Z';
+import { renderTranscriptLine } from './render.js?v=2.3.0%2B20260802T191257Z';
+import { createTranscriptFollow } from './transcript-follow.js?v=2.3.0%2B20260802T191257Z';
+import { prefersReducedMotion } from './motion.js?v=2.3.0%2B20260802T191257Z';
 
 export function createTranscriptPanel({ getDialogueLines, onSeekLine, onAfterRender }) {
     let searchMatches = [];

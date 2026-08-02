@@ -8,30 +8,30 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260802T180633Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260802T180633Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260802T180633Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260802T180633Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260802T180633Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260802T180633Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260802T180633Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260802T180633Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260802T180633Z';
-import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260802T180633Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260802T180633Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260802T180633Z';
+} from './state/storage.js?v=2.3.0%2B20260802T191257Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260802T191257Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260802T191257Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260802T191257Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260802T191257Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260802T191257Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260802T191257Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260802T191257Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260802T191257Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260802T191257Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260802T191257Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260802T191257Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260802T180633Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260802T180633Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260802T180633Z';
+} from './app/version.js?v=2.3.0%2B20260802T191257Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260802T191257Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260802T191257Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260802T180633Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260802T191257Z';
 import {
     combinedAudioUrl,
     withCacheKey,
@@ -39,26 +39,26 @@ import {
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260802T180633Z';
-import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260802T180633Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260802T180633Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260802T180633Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260802T180633Z';
-import { formatClock } from './ui/format.js?v=2.3.0%2B20260802T180633Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260802T180633Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260802T180633Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260802T180633Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260802T180633Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260802T180633Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260802T180633Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260802T180633Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260802T180633Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260802T180633Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260802T180633Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260802T180633Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260802T180633Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260802T180633Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260802T180633Z';
+} from './playback/manifest.js?v=2.3.0%2B20260802T191257Z';
+import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260802T191257Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260802T191257Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260802T191257Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260802T191257Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260802T191257Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260802T191257Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260802T191257Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260802T191257Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260802T191257Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260802T191257Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260802T191257Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260802T191257Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260802T191257Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260802T191257Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260802T191257Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260802T191257Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260802T191257Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260802T191257Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260802T191257Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -1363,23 +1363,48 @@ document.getElementById('auto-play-toggle').addEventListener('click', () => {
 });
 
 // ===== EPISODE COMPLETE MODAL & QUEUE AUTO-ADVANCE =====
+// The 5s countdown is a courtesy for someone watching the screen, but it must
+// never be what *carries* playback forward. Once an episode ends the page stops
+// playing media, which drops the exemption that kept its timers running at full
+// rate — so a pending setTimeout is exactly the thing a backgrounded tab is
+// free to throttle or freeze. On a locked phone that reads as "auto-play
+// randomly stops between episodes". When nobody can see the countdown anyway,
+// skip it and advance straight from the 'ended' event, while the media element
+// is still warm and still allowed to start the next source without a gesture.
+let autoAdvanceTimer = null;
+
+function cancelAutoAdvanceTimer() {
+    if (autoAdvanceTimer !== null) {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = null;
+    }
+}
+
 function showCompleteModal({ allowAutoAdvance = true } = {}) {
     setPlayButtonState(false);
     setStatus('Episode complete! 🎉');
     hideUpNextBanner();
+    // A previous episode's countdown must not survive into this one, or two
+    // pending timers race and advance twice — silently skipping an episode.
+    cancelAutoAdvanceTimer();
 
     const next = getNextUp();
     const playNextBtn = document.getElementById('play-next-episode');
     playNextBtn.style.display = '';
 
     if (autoPlayNext && allowAutoAdvance && next) {
+        if (document.visibilityState === 'hidden') {
+            void playNextEpisode();
+            return;
+        }
         document.getElementById('complete-message').textContent = `Starting "${next.episode.title}" in 5 seconds...`;
         playNextBtn.textContent = 'Play Now';
         document.getElementById('complete-modal').classList.add('show');
 
-        setTimeout(() => {
+        autoAdvanceTimer = setTimeout(() => {
+            autoAdvanceTimer = null;
             if (document.getElementById('complete-modal').classList.contains('show')) {
-                playNextEpisode();
+                void playNextEpisode();
             }
         }, 5000);
     } else if (next) {
@@ -1397,6 +1422,7 @@ function showCompleteModal({ allowAutoAdvance = true } = {}) {
 // Queue entries are consumed as they play; crossing into another show swaps
 // the podcast context so per-show speed and accent color follow along.
 async function playNextEpisode() {
+    cancelAutoAdvanceTimer();
     document.getElementById('complete-modal').classList.remove('show');
     const next = getNextUp();
     if (!next) return;
@@ -1446,6 +1472,17 @@ async function playPreviousEpisode() {
         startPlayback();
     }
 }
+
+// The screen can go dark *during* the countdown — lock the phone the moment an
+// episode ends and the pending timer inherits all the throttling we just took
+// care to avoid. Nobody is reading a countdown on a dark screen, so collapse it
+// into an immediate advance instead of waiting out a timer that may not fire.
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'hidden') return;
+    if (autoAdvanceTimer === null) return;
+    cancelAutoAdvanceTimer();
+    void playNextEpisode();
+});
 
 document.getElementById('play-next-episode').addEventListener('click', playNextEpisode);
 document.getElementById('back-to-episodes').addEventListener('click', () => {

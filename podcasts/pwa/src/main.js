@@ -1363,23 +1363,48 @@ document.getElementById('auto-play-toggle').addEventListener('click', () => {
 });
 
 // ===== EPISODE COMPLETE MODAL & QUEUE AUTO-ADVANCE =====
+// The 5s countdown is a courtesy for someone watching the screen, but it must
+// never be what *carries* playback forward. Once an episode ends the page stops
+// playing media, which drops the exemption that kept its timers running at full
+// rate — so a pending setTimeout is exactly the thing a backgrounded tab is
+// free to throttle or freeze. On a locked phone that reads as "auto-play
+// randomly stops between episodes". When nobody can see the countdown anyway,
+// skip it and advance straight from the 'ended' event, while the media element
+// is still warm and still allowed to start the next source without a gesture.
+let autoAdvanceTimer = null;
+
+function cancelAutoAdvanceTimer() {
+    if (autoAdvanceTimer !== null) {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = null;
+    }
+}
+
 function showCompleteModal({ allowAutoAdvance = true } = {}) {
     setPlayButtonState(false);
     setStatus('Episode complete! 🎉');
     hideUpNextBanner();
+    // A previous episode's countdown must not survive into this one, or two
+    // pending timers race and advance twice — silently skipping an episode.
+    cancelAutoAdvanceTimer();
 
     const next = getNextUp();
     const playNextBtn = document.getElementById('play-next-episode');
     playNextBtn.style.display = '';
 
     if (autoPlayNext && allowAutoAdvance && next) {
+        if (document.visibilityState === 'hidden') {
+            void playNextEpisode();
+            return;
+        }
         document.getElementById('complete-message').textContent = `Starting "${next.episode.title}" in 5 seconds...`;
         playNextBtn.textContent = 'Play Now';
         document.getElementById('complete-modal').classList.add('show');
 
-        setTimeout(() => {
+        autoAdvanceTimer = setTimeout(() => {
+            autoAdvanceTimer = null;
             if (document.getElementById('complete-modal').classList.contains('show')) {
-                playNextEpisode();
+                void playNextEpisode();
             }
         }, 5000);
     } else if (next) {
@@ -1397,6 +1422,7 @@ function showCompleteModal({ allowAutoAdvance = true } = {}) {
 // Queue entries are consumed as they play; crossing into another show swaps
 // the podcast context so per-show speed and accent color follow along.
 async function playNextEpisode() {
+    cancelAutoAdvanceTimer();
     document.getElementById('complete-modal').classList.remove('show');
     const next = getNextUp();
     if (!next) return;
@@ -1446,6 +1472,17 @@ async function playPreviousEpisode() {
         startPlayback();
     }
 }
+
+// The screen can go dark *during* the countdown — lock the phone the moment an
+// episode ends and the pending timer inherits all the throttling we just took
+// care to avoid. Nobody is reading a countdown on a dark screen, so collapse it
+// into an immediate advance instead of waiting out a timer that may not fire.
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'hidden') return;
+    if (autoAdvanceTimer === null) return;
+    cancelAutoAdvanceTimer();
+    void playNextEpisode();
+});
 
 document.getElementById('play-next-episode').addEventListener('click', playNextEpisode);
 document.getElementById('back-to-episodes').addEventListener('click', () => {

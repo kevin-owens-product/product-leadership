@@ -9,7 +9,7 @@ import {
     combinedAudioUrl,
     manifestAudioUrl,
     withCacheKey
-} from '../playback/manifest.js?v=2.3.0%2B20260802T192253Z';
+} from '../playback/manifest.js?v=2.3.0%2B20260803T182016Z';
 
 // Send a message to the active service worker and wait for its reply via
 // MessageChannel. Resolves to null if there's no controller (e.g. SW not yet
@@ -112,6 +112,12 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
     async function reconcile() {
         const reply = await sendSwMessage({ type: 'LIST_OFFLINE_AUDIO' });
         if (!reply || !Array.isArray(reply.urls)) return;
+        // Every cached URL is resolved against the loaded library below, so
+        // running before the library exists resolves nothing and the result is
+        // indistinguishable from "the cache is empty" — except it then gets
+        // persisted, destroying the record of every download. Reconciling is
+        // only meaningful once there is something to reconcile against.
+        if (getPodcasts().length === 0) return;
         const haveSet = new Set();
         for (const fullUrl of reply.urls) {
             const m = fullUrl.match(/\/audio\/([^/]+)\/([^/]+)\/combined\.mp3/);

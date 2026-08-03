@@ -1,6 +1,6 @@
 // Service worker — atomic versioned precache.
 //
-// The build script substitutes 2.3.0+20260802T192253Z and ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
+// The build script substitutes 2.3.0+20260803T182016Z and ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
 // time. Each deploy gets a unique cache name and pre-fetches the entire app
 // shell during install. Activation atomically deletes any older shell cache
 // (preserving the user-downloaded audio cache). After activation + clients.claim,
@@ -12,7 +12,7 @@
 // shell list, which means precache is skipped and the SW just passes
 // requests through to the network. Audio downloads still work.
 
-const BUILD_VERSION = '2.3.0+20260802T192253Z';
+const BUILD_VERSION = '2.3.0+20260803T182016Z';
 const APP_SHELL_RAW = ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"];
 
 const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
@@ -69,7 +69,15 @@ self.addEventListener('fetch', (event) => {
     // version.json: always fresh from network so the version-mismatch detection
     // in the page can fire. No caching, no shell membership.
     if (url.pathname.endsWith('/version.json') || url.pathname.endsWith('version.json')) {
-        event.respondWith(fetch(req));
+        // Offline this fetch rejects, and an unhandled rejection in
+        // respondWith surfaces as a hard network error in the page. There is
+        // no new version to discover without a network, so answer with a shape
+        // the caller can simply fail to parse.
+        event.respondWith(fetch(req).catch(() => new Response('{}', {
+            status: 503,
+            statusText: 'Offline',
+            headers: { 'Content-Type': 'application/json' }
+        })));
         return;
     }
 
@@ -82,7 +90,7 @@ self.addEventListener('fetch', (event) => {
 
     // App shell: serve from the current shell cache. Each deploy has its own
     // cache, so the shell is always internally consistent.
-    if (isShellRequest(url)) {
+    if (isShellRequest(url, req)) {
         event.respondWith(shellFetch(req));
         return;
     }
@@ -90,17 +98,29 @@ self.addEventListener('fetch', (event) => {
     // Anything else (e.g. third-party scripts): pass through to network.
 });
 
-function isShellRequest(url) {
+function isShellRequest(url, req) {
     if (SHELL_PATHS.has(url.pathname)) return true;
     // Root path serves index.html in production hosting.
     if (url.pathname === '/' && SHELL_PATHS.has('/index.html')) return true;
+    // Any navigation belongs to the shell: this is a single-route app, so a
+    // document request that isn't a precached path is still answerable by
+    // index.html rather than by failing at the network.
+    if (req && req.mode === 'navigate' && SHELL_PATHS.has('/index.html')) return true;
     return false;
 }
 
+// A navigation to "/" is a different cache key than the "/index.html" the
+// precache stored, so matching the request alone can never satisfy the one
+// request every cold start begins with — and start_url is "/", so that is
+// exactly how the installed app launches. Offline it fell through to the
+// network and got a 503, which is why downloaded episodes looked like they had
+// vanished: the app was never getting far enough to look for them.
 async function shellFetch(req) {
     const cache = await caches.open(SHELL_CACHE);
     const cached = await cache.match(req, { ignoreSearch: true });
     if (cached) return cached;
+    const documentFallback = await matchDocumentFallback(cache, req);
+    if (documentFallback) return documentFallback;
     // Cache miss (e.g. dev mode where precache was skipped, or a file that
     // wasn't in the manifest at build time): fall back to network and store
     // it so subsequent loads are fast.
@@ -111,6 +131,16 @@ async function shellFetch(req) {
     } catch (err) {
         return new Response('Offline', { status: 503, statusText: 'Offline' });
     }
+}
+
+// Any request for a document — the root, or a deep link the SPA would have
+// routed itself — is answered by the cached shell.
+async function matchDocumentFallback(cache, req) {
+    const isDocument = req.mode === 'navigate'
+        || new URL(req.url).pathname === '/'
+        || (req.headers.get('accept') || '').includes('text/html');
+    if (!isDocument) return null;
+    return (await cache.match('/index.html', { ignoreSearch: true })) || null;
 }
 
 async function audioFetch(req) {

@@ -69,7 +69,15 @@ self.addEventListener('fetch', (event) => {
     // version.json: always fresh from network so the version-mismatch detection
     // in the page can fire. No caching, no shell membership.
     if (url.pathname.endsWith('/version.json') || url.pathname.endsWith('version.json')) {
-        event.respondWith(fetch(req));
+        // Offline this fetch rejects, and an unhandled rejection in
+        // respondWith surfaces as a hard network error in the page. There is
+        // no new version to discover without a network, so answer with a shape
+        // the caller can simply fail to parse.
+        event.respondWith(fetch(req).catch(() => new Response('{}', {
+            status: 503,
+            statusText: 'Offline',
+            headers: { 'Content-Type': 'application/json' }
+        })));
         return;
     }
 
@@ -82,7 +90,7 @@ self.addEventListener('fetch', (event) => {
 
     // App shell: serve from the current shell cache. Each deploy has its own
     // cache, so the shell is always internally consistent.
-    if (isShellRequest(url)) {
+    if (isShellRequest(url, req)) {
         event.respondWith(shellFetch(req));
         return;
     }
@@ -90,17 +98,29 @@ self.addEventListener('fetch', (event) => {
     // Anything else (e.g. third-party scripts): pass through to network.
 });
 
-function isShellRequest(url) {
+function isShellRequest(url, req) {
     if (SHELL_PATHS.has(url.pathname)) return true;
     // Root path serves index.html in production hosting.
     if (url.pathname === '/' && SHELL_PATHS.has('/index.html')) return true;
+    // Any navigation belongs to the shell: this is a single-route app, so a
+    // document request that isn't a precached path is still answerable by
+    // index.html rather than by failing at the network.
+    if (req && req.mode === 'navigate' && SHELL_PATHS.has('/index.html')) return true;
     return false;
 }
 
+// A navigation to "/" is a different cache key than the "/index.html" the
+// precache stored, so matching the request alone can never satisfy the one
+// request every cold start begins with — and start_url is "/", so that is
+// exactly how the installed app launches. Offline it fell through to the
+// network and got a 503, which is why downloaded episodes looked like they had
+// vanished: the app was never getting far enough to look for them.
 async function shellFetch(req) {
     const cache = await caches.open(SHELL_CACHE);
     const cached = await cache.match(req, { ignoreSearch: true });
     if (cached) return cached;
+    const documentFallback = await matchDocumentFallback(cache, req);
+    if (documentFallback) return documentFallback;
     // Cache miss (e.g. dev mode where precache was skipped, or a file that
     // wasn't in the manifest at build time): fall back to network and store
     // it so subsequent loads are fast.
@@ -111,6 +131,16 @@ async function shellFetch(req) {
     } catch (err) {
         return new Response('Offline', { status: 503, statusText: 'Offline' });
     }
+}
+
+// Any request for a document — the root, or a deep link the SPA would have
+// routed itself — is answered by the cached shell.
+async function matchDocumentFallback(cache, req) {
+    const isDocument = req.mode === 'navigate'
+        || new URL(req.url).pathname === '/'
+        || (req.headers.get('accept') || '').includes('text/html');
+    if (!isDocument) return null;
+    return (await cache.match('/index.html', { ignoreSearch: true })) || null;
 }
 
 async function audioFetch(req) {

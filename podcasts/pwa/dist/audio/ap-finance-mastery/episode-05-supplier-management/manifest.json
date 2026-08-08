@@ -9,7 +9,7 @@
     "text": "Welcome back to AP and Finance Mastery. Today we're flipping the lens to look at the other side of every AP transaction: the supplier.",
     "chapter": "INTRO",
     "file": "0000.mp3",
-    "duration": 8.777,
+    "duration": 8.986,
     "startTime": 0
   },
   {
@@ -22,8 +22,8 @@
     "text": "This is fascinating to me as a product person. In AP, you have two distinct user groups: the internal finance team and the external suppliers. Both matter enormously.",
     "chapter": "INTRO",
     "file": "0001.mp3",
-    "duration": 11.215,
-    "startTime": 8.777
+    "duration": 12.33,
+    "startTime": 8.986
   },
   {
     "index": 2,
@@ -35,8 +35,8 @@
     "text": "Exactly right. And too many AP platforms treat suppliers as an afterthought. The companies that get supplier management right create a competitive advantage that's hard to replicate.",
     "chapter": "INTRO",
     "file": "0002.mp3",
-    "duration": 11.076,
-    "startTime": 19.992
+    "duration": 11.424,
+    "startTime": 21.316
   },
   {
     "index": 3,
@@ -48,8 +48,8 @@
     "text": "Let's start with the basics. What is supplier master data?",
     "chapter": "INTRO",
     "file": "0003.mp3",
-    "duration": 3.762,
-    "startTime": 31.068
+    "duration": 4.11,
+    "startTime": 32.74
   },
   {
     "index": 4,
@@ -61,8 +61,8 @@
     "text": "Supplier master data is the central repository of information about every vendor a company does business with. It includes the supplier's legal name, tax identification number, addresses, banking details for payments, payment terms, contact information, and categorization data.",
     "chapter": "INTRO",
     "file": "0004.mp3",
-    "duration": 16.858,
-    "startTime": 34.83
+    "duration": 17.485,
+    "startTime": 36.85
   },
   {
     "index": 5,
@@ -74,8 +74,8 @@
     "text": "Sounds straightforward. What makes it challenging?",
     "chapter": "INTRO",
     "file": "0005.mp3",
-    "duration": 3.483,
-    "startTime": 51.688
+    "duration": 3.831,
+    "startTime": 54.335
   },
   {
     "index": 6,
@@ -87,8 +87,8 @@
     "text": "The mess. Most companies' supplier master data is in terrible shape. They have duplicate records for the same supplier under slightly different names. Acme Corp, Acme Corporation, ACME Inc, all the same company but three different records. They have outdated banking details, inactive suppliers that haven't been cleaned up, and inconsistent categorization.",
     "chapter": "INTRO",
     "file": "0006.mp3",
-    "duration": 21.964,
-    "startTime": 55.171
+    "duration": 22.661,
+    "startTime": 58.166
   },
   {
     "index": 7,
@@ -100,8 +100,8 @@
     "text": "What's the impact of messy master data?",
     "chapter": "INTRO",
     "file": "0007.mp3",
-    "duration": 2.438,
-    "startTime": 77.135
+    "duration": 2.647,
+    "startTime": 80.827
   },
   {
     "index": 8,
@@ -113,8 +113,8 @@
     "text": "It cascades into everything. Duplicate supplier records lead to duplicate payments. Outdated bank details mean failed payments. Inconsistent categorization makes spend analytics unreliable. And it creates fraud risk because it's easier to hide fictitious vendors in a messy master file.",
     "chapter": "INTRO",
     "file": "0008.mp3",
-    "duration": 17.833,
-    "startTime": 79.573
+    "duration": 18.599,
+    "startTime": 83.474
   },
   {
     "index": 9,
@@ -126,8 +126,8 @@
     "text": "How bad is the problem typically?",
     "chapter": "INTRO",
     "file": "0009.mp3",
-    "duration": 2.159,
-    "startTime": 97.406
+    "duration": 2.299,
+    "startTime": 102.073
   },
   {
     "index": 10,
@@ -139,8 +139,8 @@
     "text": "Studies suggest that five to ten percent of suppliers in a typical master file are duplicates. In companies that have grown through acquisitions or have decentralized operations, it can be much higher. I've seen companies with thirty to forty percent duplicate rates after merging supplier files from acquired entities.",
     "chapter": "INTRO",
     "file": "0010.mp3",
-    "duration": 19.039,
-    "startTime": 99.565
+    "duration": 19.526,
+    "startTime": 104.372
   },
   {
     "index": 11,
@@ -152,8 +152,8 @@
     "text": "How do new suppliers get set up?",
     "chapter": "INTRO",
     "file": "0011.mp3",
-    "duration": 2.09,
-    "startTime": 118.604
+    "duration": 2.299,
+    "startTime": 123.898
   },
   {
     "index": 12,
@@ -165,8 +165,8 @@
     "text": "Supplier onboarding is the process of collecting all the necessary information from a new supplier before you can do business with them and pay them. This includes legal entity verification, tax documentation like W-9 in the US or equivalent in other countries, banking details for payment, insurance certificates if required, compliance questionnaires, and sometimes background checks.",
     "chapter": "INTRO",
     "file": "0012.mp3",
-    "duration": 23.915,
-    "startTime": 120.694
+    "duration": 24.542,
+    "startTime": 126.197
   },
   {
     "index": 13,
@@ -178,8 +178,8 @@
     "text": "That sounds like a lot of back and forth.",
     "chapter": "INTRO",
     "file": "0013.mp3",
-    "duration": 2.647,
-    "startTime": 144.608
+    "duration": 2.856,
+    "startTime": 150.738
   },
   {
     "index": 14,
@@ -191,8 +191,8 @@
     "text": "It is. In a manual process, onboarding a new supplier can take weeks. Emails going back and forth, forms being filled out incorrectly, missing documentation, and internal approvals. During this time, the business can't issue POs to the supplier, which means they can't get the goods or services they need.",
     "chapter": "INTRO",
     "file": "0014.mp3",
-    "duration": 18.76,
-    "startTime": 147.255
+    "duration": 19.247,
+    "startTime": 153.594
   },
   {
     "index": 15,
@@ -204,8 +204,8 @@
     "text": "And automation can streamline this?",
     "chapter": "INTRO",
     "file": "0015.mp3",
-    "duration": 2.299,
-    "startTime": 166.015
+    "duration": 2.508,
+    "startTime": 172.842
   },
   {
     "index": 16,
@@ -217,8 +217,8 @@
     "text": "Dramatically. A supplier portal where vendors self-register, upload documents, and provide their information in structured forms can reduce onboarding from weeks to days. The system validates tax IDs automatically, screens against sanctions lists, checks for duplicate records, and routes for internal approval. Medius has a Supplier Onboarding module that does exactly this.",
     "chapter": "INTRO",
     "file": "0016.mp3",
-    "duration": 23.984,
-    "startTime": 168.314
+    "duration": 24.681,
+    "startTime": 175.35
   },
   {
     "index": 17,
@@ -230,8 +230,8 @@
     "text": "What about KYC and compliance requirements?",
     "chapter": "INTRO",
     "file": "0017.mp3",
-    "duration": 2.856,
-    "startTime": 192.298
+    "duration": 3.135,
+    "startTime": 200.031
   },
   {
     "index": 18,
@@ -243,8 +243,8 @@
     "text": "Know Your Customer requirements apply to supplier onboarding as well. Companies need to verify that the supplier is a legitimate business entity, not on any sanctions or denied-party lists, and compliant with anti-money laundering regulations. For suppliers in certain high-risk categories or geographies, enhanced due diligence may be required.",
     "chapter": "INTRO",
     "file": "0018.mp3",
-    "duration": 21.198,
-    "startTime": 195.154
+    "duration": 21.755,
+    "startTime": 203.165
   },
   {
     "index": 19,
@@ -256,8 +256,8 @@
     "text": "Tell me about supplier portals. What do they enable?",
     "chapter": "INTRO",
     "file": "0019.mp3",
-    "duration": 3.553,
-    "startTime": 216.352
+    "duration": 3.901,
+    "startTime": 224.921
   },
   {
     "index": 20,
@@ -269,8 +269,8 @@
     "text": "A supplier portal is a web-based interface where suppliers can interact with the buying company's AP and procurement systems. At minimum, it provides invoice submission, so suppliers can upload invoices directly rather than sending emails. Payment status visibility, so suppliers can see where their invoices are in the process and when payment is expected. And statement reconciliation, so suppliers can compare their records against the buyer's records.",
     "chapter": "INTRO",
     "file": "0020.mp3",
-    "duration": 28.164,
-    "startTime": 219.905
+    "duration": 28.93,
+    "startTime": 228.821
   },
   {
     "index": 21,
@@ -282,8 +282,8 @@
     "text": "That payment status piece seems huge. Isn't the number one supplier inquiry \"where's my payment?\"",
     "chapter": "INTRO",
     "file": "0021.mp3",
-    "duration": 5.851,
-    "startTime": 248.069
+    "duration": 6.409,
+    "startTime": 257.752
   },
   {
     "index": 22,
@@ -295,8 +295,8 @@
     "text": "Exactly. \"Where's my payment?\" accounts for the majority of supplier inquiries to AP departments. Every one of those calls or emails takes time from the AP team. If the supplier can log into a portal and see that their invoice was received on March 5th, approved on March 12th, and scheduled for payment on March 20th, they don't need to call.",
     "chapter": "INTRO",
     "file": "0022.mp3",
-    "duration": 21.616,
-    "startTime": 253.92
+    "duration": 22.173,
+    "startTime": 264.16
   },
   {
     "index": 23,
@@ -308,8 +308,8 @@
     "text": "And Medius has an AI solution for handling supplier inquiries?",
     "chapter": "INTRO",
     "file": "0023.mp3",
-    "duration": 3.901,
-    "startTime": 275.536
+    "duration": 4.249,
+    "startTime": 286.334
   },
   {
     "index": 24,
@@ -321,8 +321,8 @@
     "text": "Yes, Medius Supplier Conversations uses AI to automatically respond to supplier inquiries. The AI reads the incoming email, understands the question, looks up the relevant invoice or payment information, and generates a response. This can handle the vast majority of routine inquiries without any human involvement.",
     "chapter": "INTRO",
     "file": "0024.mp3",
-    "duration": 19.456,
-    "startTime": 279.437
+    "duration": 20.083,
+    "startTime": 290.583
   },
   {
     "index": 25,
@@ -334,8 +334,8 @@
     "text": "That's a great example of AI solving a real operational pain point.",
     "chapter": "INTRO",
     "file": "0025.mp3",
-    "duration": 4.18,
-    "startTime": 298.894
+    "duration": 4.598,
+    "startTime": 310.666
   },
   {
     "index": 26,
@@ -347,8 +347,8 @@
     "text": "It is. And it benefits both sides. The supplier gets a fast, accurate response. The AP team doesn't have to stop what they're doing to look up payment status for the hundredth time that week.",
     "chapter": "INTRO",
     "file": "0026.mp3",
-    "duration": 11.355,
-    "startTime": 303.073
+    "duration": 11.703,
+    "startTime": 315.264
   },
   {
     "index": 27,
@@ -360,8 +360,8 @@
     "text": "Let's shift to spend analytics. Why is spend visibility so important?",
     "chapter": "INTRO",
     "file": "0027.mp3",
-    "duration": 4.528,
-    "startTime": 314.428
+    "duration": 4.946,
+    "startTime": 326.967
   },
   {
     "index": 28,
@@ -373,8 +373,8 @@
     "text": "You can't manage what you can't see. Spend analytics is the process of collecting, cleansing, classifying, and analyzing procurement data to understand what a company is spending, with whom, on what, and whether it's getting good value.",
     "chapter": "INTRO",
     "file": "0028.mp3",
-    "duration": 13.166,
-    "startTime": 318.956
+    "duration": 13.584,
+    "startTime": 331.913
   },
   {
     "index": 29,
@@ -386,8 +386,8 @@
     "text": "What does good spend analytics look like?",
     "chapter": "INTRO",
     "file": "0029.mp3",
-    "duration": 2.577,
-    "startTime": 332.121
+    "duration": 2.786,
+    "startTime": 345.496
   },
   {
     "index": 30,
@@ -399,8 +399,8 @@
     "text": "At a basic level, you want to answer questions like: How much are we spending with each supplier? What are our top spend categories? Are we using preferred suppliers or is there a lot of maverick spend? How does spending compare across departments, regions, and time periods? Are we capturing all available discounts?",
     "chapter": "INTRO",
     "file": "0030.mp3",
-    "duration": 19.735,
-    "startTime": 334.699
+    "duration": 20.432,
+    "startTime": 348.283
   },
   {
     "index": 31,
@@ -412,8 +412,8 @@
     "text": "And at a more advanced level?",
     "chapter": "INTRO",
     "file": "0031.mp3",
-    "duration": 2.02,
-    "startTime": 354.434
+    "duration": 2.229,
+    "startTime": 368.714
   },
   {
     "index": 32,
@@ -425,8 +425,8 @@
     "text": "Advanced analytics gets into predictive insights. Which suppliers are at risk of financial distress? Where are there opportunities to consolidate spend and negotiate better pricing? What's the trend in our spending, and does it align with budget? Are there anomalous spending patterns that might indicate fraud? And how does our AP performance compare to industry benchmarks?",
     "chapter": "INTRO",
     "file": "0032.mp3",
-    "duration": 23.706,
-    "startTime": 356.454
+    "duration": 24.402,
+    "startTime": 370.943
   },
   {
     "index": 33,
@@ -438,8 +438,8 @@
     "text": "This sounds like a BI and reporting play.",
     "chapter": "INTRO",
     "file": "0033.mp3",
-    "duration": 2.717,
-    "startTime": 380.16
+    "duration": 2.995,
+    "startTime": 395.346
   },
   {
     "index": 34,
@@ -451,8 +451,8 @@
     "text": "It is, and it's one of the highest-value features of an AP platform. CFOs and procurement leaders live in dashboards. They want real-time visibility into spend, not a report that takes three weeks to compile. Medius Analytics integrates with Power BI, which is smart given their Microsoft ecosystem focus.",
     "chapter": "INTRO",
     "file": "0034.mp3",
-    "duration": 19.526,
-    "startTime": 382.877
+    "duration": 20.083,
+    "startTime": 398.341
   },
   {
     "index": 35,
@@ -464,8 +464,8 @@
     "text": "How does spend get categorized?",
     "chapter": "INTRO",
     "file": "0035.mp3",
-    "duration": 2.159,
-    "startTime": 402.403
+    "duration": 2.299,
+    "startTime": 418.424
   },
   {
     "index": 36,
@@ -477,8 +477,8 @@
     "text": "Spend categorization, also called spend classification, is the process of organizing purchases into a standardized taxonomy. The most common standard is UNSPSC, the United Nations Standard Products and Services Code, which provides a hierarchical classification with four levels.",
     "chapter": "INTRO",
     "file": "0036.mp3",
-    "duration": 18.181,
-    "startTime": 404.562
+    "duration": 18.947,
+    "startTime": 420.723
   },
   {
     "index": 37,
@@ -490,8 +490,8 @@
     "text": "But most companies don't use a standard taxonomy, do they?",
     "chapter": "INTRO",
     "file": "0037.mp3",
-    "duration": 3.483,
-    "startTime": 422.743
+    "duration": 3.831,
+    "startTime": 439.671
   },
   {
     "index": 38,
@@ -503,8 +503,8 @@
     "text": "Most don't, or they use it inconsistently. This is one of the hardest data challenges in procurement. When invoices are coded to GL accounts, you know the accounting category, like office supplies or professional services, but you don't know the detailed procurement category, like whether those office supplies are printer paper or ergonomic keyboards.",
     "chapter": "INTRO",
     "file": "0038.mp3",
-    "duration": 20.989,
-    "startTime": 426.226
+    "duration": 21.616,
+    "startTime": 443.502
   },
   {
     "index": 39,
@@ -516,8 +516,8 @@
     "text": "And AI can help with categorization?",
     "chapter": "INTRO",
     "file": "0039.mp3",
-    "duration": 2.368,
-    "startTime": 447.215
+    "duration": 2.647,
+    "startTime": 465.118
   },
   {
     "index": 40,
@@ -529,8 +529,8 @@
     "text": "It's one of the most impactful AI use cases in spend management. AI can analyze invoice line items, supplier information, and historical patterns to automatically categorize spend. This turns a manual data cleansing exercise that used to take months into an automated process that runs continuously.",
     "chapter": "INTRO",
     "file": "0040.mp3",
-    "duration": 18.251,
-    "startTime": 449.584
+    "duration": 19.017,
+    "startTime": 467.765
   },
   {
     "index": 41,
@@ -542,8 +542,8 @@
     "text": "What about tail spend? I've heard that term.",
     "chapter": "INTRO",
     "file": "0041.mp3",
-    "duration": 3.065,
-    "startTime": 467.835
+    "duration": 3.344,
+    "startTime": 486.782
   },
   {
     "index": 42,
@@ -555,8 +555,8 @@
     "text": "Tail spend is the long tail of low-value purchases from a large number of suppliers. Typically, the Pareto principle applies: eighty percent of spend is with twenty percent of suppliers, the strategic suppliers. The remaining twenty percent of spend, the tail, is spread across eighty percent of suppliers.",
     "chapter": "INTRO",
     "file": "0042.mp3",
-    "duration": 19.526,
-    "startTime": 470.9
+    "duration": 20.014,
+    "startTime": 490.126
   },
   {
     "index": 43,
@@ -568,8 +568,8 @@
     "text": "Why does tail spend matter?",
     "chapter": "INTRO",
     "file": "0043.mp3",
-    "duration": 1.881,
-    "startTime": 490.426
+    "duration": 2.09,
+    "startTime": 510.14
   },
   {
     "index": 44,
@@ -581,8 +581,8 @@
     "text": "Because it's where the inefficiency hides. Those thousands of small suppliers each generate invoices that need to be processed, payments that need to be made, and master data that needs to be maintained. The cost of managing a supplier with ten-thousand dollars in annual spend might be higher than the cost of managing a supplier with ten million, on a per-transaction basis.",
     "chapter": "INTRO",
     "file": "0044.mp3",
-    "duration": 22.173,
-    "startTime": 492.307
+    "duration": 22.8,
+    "startTime": 512.229
   },
   {
     "index": 45,
@@ -594,8 +594,8 @@
     "text": "So what's the solution?",
     "chapter": "INTRO",
     "file": "0045.mp3",
-    "duration": 1.602,
-    "startTime": 514.48
+    "duration": 1.741,
+    "startTime": 535.03
   },
   {
     "index": 46,
@@ -607,8 +607,8 @@
     "text": "Several approaches. Consolidate where possible by reducing the number of suppliers. Use purchasing cards or virtual cards for low-value transactions to bypass the traditional P2P process. Automate onboarding and self-service to reduce the cost of managing small suppliers. And use AI to handle the routine processing of tail spend invoices.",
     "chapter": "INTRO",
     "file": "0046.mp3",
-    "duration": 22.173,
-    "startTime": 516.082
+    "duration": 23.009,
+    "startTime": 536.771
   },
   {
     "index": 47,
@@ -620,8 +620,8 @@
     "text": "How do companies measure and manage supplier performance?",
     "chapter": "INTRO",
     "file": "0047.mp3",
-    "duration": 3.692,
-    "startTime": 538.255
+    "duration": 4.04,
+    "startTime": 559.78
   },
   {
     "index": 48,
@@ -633,8 +633,8 @@
     "text": "Supplier scorecards typically measure on-time delivery, quality metrics, pricing compliance meaning are they honoring contracted prices, responsiveness to issues, and invoice accuracy, meaning how often their invoices match POs without discrepancies.",
     "chapter": "INTRO",
     "file": "0048.mp3",
-    "duration": 15.116,
-    "startTime": 541.947
+    "duration": 15.604,
+    "startTime": 563.82
   },
   {
     "index": 49,
@@ -646,8 +646,8 @@
     "text": "And the relationship dynamic between buyers and suppliers? Is it typically adversarial or collaborative?",
     "chapter": "INTRO",
     "file": "0049.mp3",
-    "duration": 6.757,
-    "startTime": 557.063
+    "duration": 7.384,
+    "startTime": 579.424
   },
   {
     "index": 50,
@@ -659,8 +659,8 @@
     "text": "Traditionally, it's been more adversarial than it should be. Procurement squeezes suppliers on price. AP pushes out payment terms. Suppliers pad invoices to compensate. It's a lose-lose dynamic.",
     "chapter": "INTRO",
     "file": "0050.mp3",
-    "duration": 12.469,
-    "startTime": 563.82
+    "duration": 12.817,
+    "startTime": 586.808
   },
   {
     "index": 51,
@@ -672,8 +672,8 @@
     "text": "What does a better model look like?",
     "chapter": "INTRO",
     "file": "0051.mp3",
-    "duration": 2.159,
-    "startTime": 576.29
+    "duration": 2.368,
+    "startTime": 599.626
   },
   {
     "index": 52,
@@ -685,8 +685,8 @@
     "text": "The best buyer-supplier relationships are collaborative. The buyer pays on time or early, the supplier provides competitive pricing and priority service. Information flows freely in both directions. And technology enables this by providing transparency. When a supplier can see exactly where their invoice is in the process and when they'll get paid, it builds trust.",
     "chapter": "INTRO",
     "file": "0052.mp3",
-    "duration": 22.452,
-    "startTime": 578.449
+    "duration": 23.148,
+    "startTime": 601.994
   },
   {
     "index": 53,
@@ -698,8 +698,8 @@
     "text": "So the supplier experience is actually a competitive differentiator for AP platforms?",
     "chapter": "INTRO",
     "file": "0053.mp3",
-    "duration": 5.782,
-    "startTime": 600.901
+    "duration": 6.339,
+    "startTime": 625.142
   },
   {
     "index": 54,
@@ -711,8 +711,8 @@
     "text": "Absolutely. If Medius makes it easy and pleasant for suppliers to interact with their customers, those suppliers become advocates for the platform. They might even recommend Medius to the buyer company they work with. That's a powerful go-to-market motion.",
     "chapter": "INTRO",
     "file": "0054.mp3",
-    "duration": 15.186,
-    "startTime": 606.683
+    "duration": 15.673,
+    "startTime": 631.481
   },
   {
     "index": 55,
@@ -724,8 +724,8 @@
     "text": "I love that. The supplier network effect.",
     "chapter": "INTRO",
     "file": "0055.mp3",
-    "duration": 3.065,
-    "startTime": 621.868
+    "duration": 3.344,
+    "startTime": 647.155
   },
   {
     "index": 56,
@@ -737,8 +737,8 @@
     "text": "Exactly. And it's why companies like Coupa and Ariba invested heavily in supplier networks. The more suppliers on your network, the more value you provide to buyers, which attracts more buyers, which attracts more suppliers.",
     "chapter": "INTRO",
     "file": "0056.mp3",
-    "duration": 13.514,
-    "startTime": 624.933
+    "duration": 13.932,
+    "startTime": 650.499
   },
   {
     "index": 57,
@@ -750,8 +750,8 @@
     "text": "You mentioned duplicate suppliers earlier. How do you detect and clean those up?",
     "chapter": "INTRO",
     "file": "0057.mp3",
-    "duration": 5.016,
-    "startTime": 638.447
+    "duration": 5.433,
+    "startTime": 664.431
   },
   {
     "index": 58,
@@ -763,8 +763,8 @@
     "text": "Duplicate detection uses a combination of exact matching and fuzzy matching. Exact matching catches obvious duplicates with the same tax ID or same bank account. Fuzzy matching uses algorithms to identify probable duplicates based on similar names, addresses, and other attributes.",
     "chapter": "INTRO",
     "file": "0058.mp3",
-    "duration": 17.345,
-    "startTime": 643.463
+    "duration": 17.972,
+    "startTime": 669.864
   },
   {
     "index": 59,
@@ -776,8 +776,8 @@
     "text": "What's the process for cleanup?",
     "chapter": "INTRO",
     "file": "0059.mp3",
-    "duration": 1.95,
-    "startTime": 660.808
+    "duration": 2.159,
+    "startTime": 687.836
   },
   {
     "index": 60,
@@ -789,8 +789,8 @@
     "text": "It's typically a project. You run the detection algorithms, review the results with human oversight because false positives happen, merge the duplicate records, and then put controls in place to prevent new duplicates from being created. The prevention piece is key: requiring tax ID validation during onboarding, checking for existing records before creating new ones, and having governance over who can create supplier records.",
     "chapter": "INTRO",
     "file": "0060.mp3",
-    "duration": 25.796,
-    "startTime": 662.759
+    "duration": 26.562,
+    "startTime": 689.996
   },
   {
     "index": 61,
@@ -802,8 +802,8 @@
     "text": "Let's talk about early payment programs and their impact on suppliers.",
     "chapter": "INTRO",
     "file": "0061.mp3",
-    "duration": 4.389,
-    "startTime": 688.554
+    "duration": 4.807,
+    "startTime": 716.558
   },
   {
     "index": 62,
@@ -815,8 +815,8 @@
     "text": "Early payment programs, whether they're traditional discounts, dynamic discounting, or supply chain finance, can be transformative for suppliers. Many suppliers, especially small and medium businesses, struggle with cash flow. Getting paid in ten days instead of sixty days can mean the difference between making payroll and not.",
     "chapter": "INTRO",
     "file": "0062.mp3",
-    "duration": 20.014,
-    "startTime": 692.943
+    "duration": 20.571,
+    "startTime": 721.364
   },
   {
     "index": 63,
@@ -828,8 +828,8 @@
     "text": "So there's a social impact angle here too?",
     "chapter": "INTRO",
     "file": "0063.mp3",
-    "duration": 2.577,
-    "startTime": 712.957
+    "duration": 2.786,
+    "startTime": 741.935
   },
   {
     "index": 64,
@@ -841,8 +841,8 @@
     "text": "There is. Programs that provide early payment to small and diverse suppliers are increasingly part of corporate ESG and supplier diversity initiatives. An AP platform that facilitates early payment programs is creating real value in the supply chain, not just moving paper around.",
     "chapter": "INTRO",
     "file": "0064.mp3",
-    "duration": 17.833,
-    "startTime": 715.534
+    "duration": 18.53,
+    "startTime": 744.721
   },
   {
     "index": 65,
@@ -854,8 +854,8 @@
     "text": "This is a great product narrative. You're not just automating invoices, you're enabling healthier supply chains.",
     "chapter": "INTRO",
     "file": "0065.mp3",
-    "duration": 6.618,
-    "startTime": 733.367
+    "duration": 7.245,
+    "startTime": 763.251
   },
   {
     "index": 66,
@@ -867,8 +867,8 @@
     "text": "Exactly. And that narrative resonates with stakeholders beyond just the AP department. Procurement cares about supplier health. The CFO cares about working capital. The CEO cares about ESG. AP automation that enables early payment programs touches all of those priorities.",
     "chapter": "INTRO",
     "file": "0066.mp3",
-    "duration": 17.903,
-    "startTime": 739.985
+    "duration": 18.599,
+    "startTime": 770.496
   },
   {
     "index": 67,
@@ -880,8 +880,8 @@
     "text": "Morgan, this episode has completely changed how I think about the supplier side of AP. It's not just about processing invoices efficiently. It's about building relationships, enabling transparency, and creating value across the supply chain.",
     "chapter": "INTRO",
     "file": "0067.mp3",
-    "duration": 14.489,
-    "startTime": 757.887
+    "duration": 15.882,
+    "startTime": 789.095
   },
   {
     "index": 68,
@@ -893,8 +893,8 @@
     "text": "And that perspective is exactly what a CPO needs. The product isn't just a tool for AP clerks. It's a platform that sits at the intersection of buyers and suppliers and can create enormous value for both sides. Next episode, we're going to dive into a topic that every finance leader worries about: compliance, fraud prevention, and internal controls.",
     "chapter": "INTRO",
     "file": "0068.mp3",
-    "duration": 22.173,
-    "startTime": 772.376
+    "duration": 22.8,
+    "startTime": 804.977
   },
   {
     "index": 69,
@@ -906,8 +906,8 @@
     "text": "That sounds critical. See you next time.",
     "chapter": "INTRO",
     "file": "0069.mp3",
-    "duration": 2.926,
-    "startTime": 794.55
+    "duration": 3.204,
+    "startTime": 827.777
   },
   {
     "index": 70,
@@ -919,8 +919,8 @@
     "text": "See you next time.",
     "chapter": "INTRO",
     "file": "0070.mp3",
-    "duration": 1.463,
-    "startTime": 797.475
+    "duration": 1.533,
+    "startTime": 830.982
   },
   {
     "index": 71,
@@ -932,7 +932,7 @@
     "text": "Next Episode: Compliance, Fraud Prevention & Internal Controls",
     "chapter": "INTRO",
     "file": "0071.mp3",
-    "duration": 4.598,
-    "startTime": 798.938
+    "duration": 4.737,
+    "startTime": 832.514
   }
 ]

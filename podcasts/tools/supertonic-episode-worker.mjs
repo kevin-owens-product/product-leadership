@@ -30,6 +30,25 @@ const {
 console.log(`Loading Supertonic ONNX models from ${onnxDir}`);
 const textToSpeech = await loadTextToSpeech(onnxDir, false);
 
+// Peak-normalize float PCM before writeWavFile. writeWavFile hard-clips to
+// [-1, 1], so hot voices (e.g. some M1/F2 renders) otherwise ship as
+// flat-topped distortion. Target matches the healthy catalog (~-3 dBFS).
+const TARGET_PEAK = typeof job.targetPeak === 'number' ? job.targetPeak : 10 ** (-3 / 20);
+
+function peakNormalize(wav, targetPeak = TARGET_PEAK) {
+  if (!wav || wav.length === 0) return wav;
+  let peak = 0;
+  for (let i = 0; i < wav.length; i += 1) {
+    const a = Math.abs(wav[i]);
+    if (a > peak) peak = a;
+  }
+  if (peak <= 0 || peak <= targetPeak) return wav;
+  const scale = targetPeak / peak;
+  const out = new Array(wav.length);
+  for (let i = 0; i < wav.length; i += 1) out[i] = wav[i] * scale;
+  return out;
+}
+
 for (let i = 0; i < job.lines.length; i += 1) {
   const line = job.lines[i];
   const voiceStyle = loadVoiceStyle([line.voiceStylePath], false);
@@ -42,5 +61,5 @@ for (let i = 0; i < job.lines.length; i += 1) {
     job.speed,
   );
   fs.mkdirSync(path.dirname(line.outputPath), { recursive: true });
-  writeWavFile(line.outputPath, wav, textToSpeech.sampleRate);
+  writeWavFile(line.outputPath, peakNormalize(wav), textToSpeech.sampleRate);
 }

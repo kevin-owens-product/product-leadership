@@ -9,7 +9,7 @@
     "text": "Welcome back. This is the episode we've been building toward. Today we're going deep on Medius, the company, the platform, and the product suite.",
     "chapter": "INTRO",
     "file": "0000.mp3",
-    "duration": 8.568,
+    "duration": 8.847,
     "startTime": 0
   },
   {
@@ -22,8 +22,8 @@
     "text": "As someone about to join as CPO, this is the episode I need most. I want to understand the full picture: where Medius came from, what it does today, and where the opportunities are.",
     "chapter": "INTRO",
     "file": "0001.mp3",
-    "duration": 11.633,
-    "startTime": 8.568
+    "duration": 12.748,
+    "startTime": 8.847
   },
   {
     "index": 2,
@@ -35,8 +35,8 @@
     "text": "Let's start from the beginning.",
     "chapter": "INTRO",
     "file": "0002.mp3",
-    "duration": 1.95,
-    "startTime": 20.201
+    "duration": 2.02,
+    "startTime": 21.595
   },
   {
     "index": 3,
@@ -48,8 +48,8 @@
     "text": "Tell me about Medius's origins.",
     "chapter": "INTRO",
     "file": "0003.mp3",
-    "duration": 2.09,
-    "startTime": 22.152
+    "duration": 2.299,
+    "startTime": 23.615
   },
   {
     "index": 4,
@@ -61,8 +61,8 @@
     "text": "Medius was founded in Sweden and has been in the AP and e-procurement space for over twenty years. That Nordic heritage matters because the Nordics have been at the forefront of digital finance. Sweden was one of the first countries to embrace electronic invoicing, and Scandinavian companies generally have more mature finance operations.",
     "chapter": "INTRO",
     "file": "0004.mp3",
-    "duration": 20.919,
-    "startTime": 24.242
+    "duration": 21.407,
+    "startTime": 25.913
   },
   {
     "index": 5,
@@ -74,8 +74,8 @@
     "text": "How has the company evolved?",
     "chapter": "INTRO",
     "file": "0005.mp3",
-    "duration": 1.95,
-    "startTime": 45.161
+    "duration": 2.09,
+    "startTime": 47.32
   },
   {
     "index": 6,
@@ -87,8 +87,8 @@
     "text": "Through a combination of organic growth and strategic acquisitions. The original core was AP automation, focused on invoice capture, matching, and workflow. In 2019, they acquired Wax Digital, which brought procurement capabilities including sourcing, contract management, and supplier management. In 2022, they acquired OnPay Solutions, which added payment processing and was the foundation for what became Medius Payments. And they also brought in Expensya for expense management.",
     "chapter": "INTRO",
     "file": "0006.mp3",
-    "duration": 31.09,
-    "startTime": 47.111
+    "duration": 32.204,
+    "startTime": 49.41
   },
   {
     "index": 7,
@@ -100,8 +100,8 @@
     "text": "So it's been a deliberate build-out from AP automation to a full spend management suite.",
     "chapter": "INTRO",
     "file": "0007.mp3",
-    "duration": 5.573,
-    "startTime": 78.201
+    "duration": 6.13,
+    "startTime": 81.614
   },
   {
     "index": 8,
@@ -113,8 +113,8 @@
     "text": "Exactly. Each acquisition filled a strategic gap. The vision is a platform that covers the entire source-to-pay lifecycle: find suppliers, negotiate contracts, procure goods and services, process invoices, make payments, and analyze the entire spend.",
     "chapter": "INTRO",
     "file": "0008.mp3",
-    "duration": 16.161,
-    "startTime": 83.774
+    "duration": 16.788,
+    "startTime": 87.744
   },
   {
     "index": 9,
@@ -126,8 +126,8 @@
     "text": "Where does Medius stand in the market today?",
     "chapter": "INTRO",
     "file": "0009.mp3",
-    "duration": 2.647,
-    "startTime": 99.935
+    "duration": 2.926,
+    "startTime": 104.533
   },
   {
     "index": 10,
@@ -139,8 +139,8 @@
     "text": "The validation is strong. Medius was named a Leader in the March 2025 Gartner Magic Quadrant for Accounts Payable Applications. That's the most important analyst recognition in this space. They were also named a Leader and Elite Performer for AI and Innovation by Ardent Partners in their 2026 AP Automation and Payments Technology Advisor.",
     "chapter": "INTRO",
     "file": "0010.mp3",
-    "duration": 22.661,
-    "startTime": 102.582
+    "duration": 23.288,
+    "startTime": 107.458
   },
   {
     "index": 11,
@@ -152,8 +152,8 @@
     "text": "What does the Gartner recognition mean specifically?",
     "chapter": "INTRO",
     "file": "0011.mp3",
-    "duration": 3.204,
-    "startTime": 125.243
+    "duration": 3.553,
+    "startTime": 130.746
   },
   {
     "index": 12,
@@ -165,8 +165,8 @@
     "text": "Being in the Leaders quadrant means Gartner believes Medius has both a strong ability to execute and a completeness of vision. It's table stakes for selling to large enterprises, who often require Gartner Leader status as a qualification criterion. The Ardent Partners recognition for AI and Innovation signals that the market sees Medius as ahead of the curve on the technology that matters most going forward.",
     "chapter": "INTRO",
     "file": "0012.mp3",
-    "duration": 24.054,
-    "startTime": 128.447
+    "duration": 24.751,
+    "startTime": 134.299
   },
   {
     "index": 13,
@@ -178,8 +178,8 @@
     "text": "And the customer base?",
     "chapter": "INTRO",
     "file": "0013.mp3",
-    "duration": 1.602,
-    "startTime": 152.501
+    "duration": 1.811,
+    "startTime": 159.049
   },
   {
     "index": 14,
@@ -191,8 +191,8 @@
     "text": "Medius serves a range of company sizes but is particularly strong in the mid-market and upper-mid-market. They have a strong presence in the Nordics, Netherlands, UK, and are expanding in the US and globally. Customers have scored Medius above benchmark for ROI, total cost of ownership, and business value.",
     "chapter": "INTRO",
     "file": "0014.mp3",
-    "duration": 19.665,
-    "startTime": 154.103
+    "duration": 20.153,
+    "startTime": 160.86
   },
   {
     "index": 15,
@@ -204,8 +204,8 @@
     "text": "Let's go through each product module. Start with the core AP automation.",
     "chapter": "INTRO",
     "file": "0015.mp3",
-    "duration": 4.667,
-    "startTime": 173.769
+    "duration": 5.085,
+    "startTime": 181.013
   },
   {
     "index": 16,
@@ -217,8 +217,8 @@
     "text": "The core AP automation platform handles the full invoice lifecycle we've discussed throughout this series. Invoice capture uses what Medius calls touchless capture technology. AI-powered extraction that removes manual data entry, learns from corrections, and improves over time. The goal is that you only have to correct an error once, and the system never makes the same mistake again.",
     "chapter": "INTRO",
     "file": "0016.mp3",
-    "duration": 23.427,
-    "startTime": 178.436
+    "duration": 24.124,
+    "startTime": 186.099
   },
   {
     "index": 17,
@@ -230,8 +230,8 @@
     "text": "What about the matching engine?",
     "chapter": "INTRO",
     "file": "0017.mp3",
-    "duration": 1.881,
-    "startTime": 201.863
+    "duration": 2.09,
+    "startTime": 210.222
   },
   {
     "index": 18,
@@ -243,8 +243,8 @@
     "text": "The invoice matching engine handles two-way, three-way, and four-way matching. It supports PO-backed invoices with automatic matching against purchase orders and goods receipts. For non-PO invoices, it routes them through configurable approval workflows.",
     "chapter": "INTRO",
     "file": "0018.mp3",
-    "duration": 15.882,
-    "startTime": 203.744
+    "duration": 16.44,
+    "startTime": 212.312
   },
   {
     "index": 19,
@@ -256,8 +256,8 @@
     "text": "Tell me about deviation management.",
     "chapter": "INTRO",
     "file": "0019.mp3",
-    "duration": 2.368,
-    "startTime": 219.626
+    "duration": 2.577,
+    "startTime": 228.752
   },
   {
     "index": 20,
@@ -269,8 +269,8 @@
     "text": "This is an important feature. Deviation management lets managers define custom rules for acceptable purchase order deviations. Instead of a one-size-fits-all tolerance threshold, you can set different rules for different suppliers, commodity categories, or business units. A five percent price variance might be acceptable for commodity items but not for precision equipment.",
     "chapter": "INTRO",
     "file": "0020.mp3",
-    "duration": 23.079,
-    "startTime": 221.995
+    "duration": 23.775,
+    "startTime": 231.329
   },
   {
     "index": 21,
@@ -282,8 +282,8 @@
     "text": "And the approval workflows?",
     "chapter": "INTRO",
     "file": "0021.mp3",
-    "duration": 1.881,
-    "startTime": 245.074
+    "duration": 2.09,
+    "startTime": 255.105
   },
   {
     "index": 22,
@@ -295,8 +295,8 @@
     "text": "Fully configurable. Routing based on amount, department, GL coding, supplier, and custom criteria. Support for delegation, escalation, and mobile approval. The workflows need to be flexible enough to handle any organization's approval matrix while being simple enough that administrators can configure them without IT involvement.",
     "chapter": "INTRO",
     "file": "0022.mp3",
-    "duration": 20.919,
-    "startTime": 246.954
+    "duration": 21.477,
+    "startTime": 257.194
   },
   {
     "index": 23,
@@ -308,8 +308,8 @@
     "text": "Let's talk about Payments. This launched in June 2025.",
     "chapter": "INTRO",
     "file": "0023.mp3",
-    "duration": 4.249,
-    "startTime": 267.874
+    "duration": 4.667,
+    "startTime": 278.671
   },
   {
     "index": 24,
@@ -321,8 +321,8 @@
     "text": "Medius Payments is a significant strategic move. It embeds payment execution directly into the AP workflow. The key concept is Straight Through Payments: payment batches are built and executed directly from Medius without needing to upload files to the ERP or use separate banking portals.",
     "chapter": "INTRO",
     "file": "0024.mp3",
-    "duration": 18.321,
-    "startTime": 272.123
+    "duration": 19.087,
+    "startTime": 283.338
   },
   {
     "index": 25,
@@ -334,8 +334,8 @@
     "text": "What payment methods does it support?",
     "chapter": "INTRO",
     "file": "0025.mp3",
-    "duration": 2.368,
-    "startTime": 290.444
+    "duration": 2.647,
+    "startTime": 302.425
   },
   {
     "index": 26,
@@ -347,8 +347,8 @@
     "text": "ACH for the US, SEPA for Europe, BACS and CHAPS for the UK, BankGiro for Sweden, wire transfers globally, checks for the US market, and virtual cards. Payments are routed through customers' existing bank accounts, so there's no need to change banking relationships.",
     "chapter": "INTRO",
     "file": "0026.mp3",
-    "duration": 16.718,
-    "startTime": 292.812
+    "duration": 17.276,
+    "startTime": 305.072
   },
   {
     "index": 27,
@@ -360,8 +360,8 @@
     "text": "What's the architectural approach?",
     "chapter": "INTRO",
     "file": "0027.mp3",
-    "duration": 2.159,
-    "startTime": 309.53
+    "duration": 2.368,
+    "startTime": 322.348
   },
   {
     "index": 28,
@@ -373,8 +373,8 @@
     "text": "Unlike bolt-on payment tools, Medius Payments is natively built into the AP workflow. Approval rules, fraud detection, and audit trails are embedded directly into the payment process. This is a key differentiator because many competitors integrate with third-party payment processors, which creates handoff points and potential gaps in the control framework.",
     "chapter": "INTRO",
     "file": "0028.mp3",
-    "duration": 22.104,
-    "startTime": 311.69
+    "duration": 22.661,
+    "startTime": 324.716
   },
   {
     "index": 29,
@@ -386,8 +386,8 @@
     "text": "What's the product opportunity here?",
     "chapter": "INTRO",
     "file": "0029.mp3",
-    "duration": 2.159,
-    "startTime": 333.793
+    "duration": 2.368,
+    "startTime": 347.377
   },
   {
     "index": 30,
@@ -399,8 +399,8 @@
     "text": "Enormous. Payments are a natural extension of AP automation that increases platform stickiness, provides additional revenue through payment processing fees and card rebates, and creates a more complete end-to-end experience. The challenge is scaling the payment infrastructure across multiple countries and payment methods while maintaining the reliability and security that finance teams demand.",
     "chapter": "INTRO",
     "file": "0030.mp3",
-    "duration": 24.402,
-    "startTime": 335.953
+    "duration": 25.099,
+    "startTime": 349.745
   },
   {
     "index": 31,
@@ -412,8 +412,8 @@
     "text": "Tell me about the AI-specific products.",
     "chapter": "INTRO",
     "file": "0031.mp3",
-    "duration": 2.717,
-    "startTime": 360.355
+    "duration": 2.926,
+    "startTime": 374.844
   },
   {
     "index": 32,
@@ -425,8 +425,8 @@
     "text": "Medius Copilot is an AI assistant designed for invoice approvers. When an approver opens an invoice, the Copilot provides contextual information: how this invoice compares to previous invoices from the same supplier, whether there are any anomalies, what the matching status is, and any relevant notes or history. It's designed to reduce the time and expertise needed to make good approval decisions.",
     "chapter": "INTRO",
     "file": "0032.mp3",
-    "duration": 25.887,
-    "startTime": 363.072
+    "duration": 26.722,
+    "startTime": 377.77
   },
   {
     "index": 33,
@@ -438,8 +438,8 @@
     "text": "And Supplier Conversations?",
     "chapter": "INTRO",
     "file": "0033.mp3",
-    "duration": 1.95,
-    "startTime": 388.958
+    "duration": 2.159,
+    "startTime": 404.493
   },
   {
     "index": 34,
@@ -451,8 +451,8 @@
     "text": "Medius Supplier Conversations uses AI to handle inbound supplier inquiries. When a supplier emails asking about payment status, the AI reads the email, looks up the relevant information in the system, and generates an accurate response. This addresses one of the biggest operational burdens in AP: the constant stream of \"where's my payment\" inquiries.",
     "chapter": "INTRO",
     "file": "0034.mp3",
-    "duration": 22.104,
-    "startTime": 390.909
+    "duration": 22.8,
+    "startTime": 406.652
   },
   {
     "index": 35,
@@ -464,8 +464,8 @@
     "text": "How much of that inquiry volume can be handled automatically?",
     "chapter": "INTRO",
     "file": "0035.mp3",
-    "duration": 3.692,
-    "startTime": 413.012
+    "duration": 4.04,
+    "startTime": 429.452
   },
   {
     "index": 36,
@@ -477,8 +477,8 @@
     "text": "The goal is to handle the vast majority of routine inquiries, which represent eighty to ninety percent of total volume, without human involvement. The remaining complex inquiries get routed to the appropriate person with full context.",
     "chapter": "INTRO",
     "file": "0036.mp3",
-    "duration": 13.235,
-    "startTime": 416.704
+    "duration": 13.653,
+    "startTime": 433.492
   },
   {
     "index": 37,
@@ -490,8 +490,8 @@
     "text": "These AI features are exactly the kind of differentiation that matters in a competitive market.",
     "chapter": "INTRO",
     "file": "0037.mp3",
-    "duration": 5.921,
-    "startTime": 429.94
+    "duration": 6.478,
+    "startTime": 447.146
   },
   {
     "index": 38,
@@ -503,8 +503,8 @@
     "text": "Agreed. And they align with the broader industry trend toward agentic AI. The question isn't just \"can AI do this?\" but \"can AI do this reliably enough that finance teams trust it?\"",
     "chapter": "INTRO",
     "file": "0038.mp3",
-    "duration": 11.494,
-    "startTime": 435.861
+    "duration": 11.773,
+    "startTime": 453.624
   },
   {
     "index": 39,
@@ -516,8 +516,8 @@
     "text": "What about the broader spend management modules?",
     "chapter": "INTRO",
     "file": "0039.mp3",
-    "duration": 2.926,
-    "startTime": 447.355
+    "duration": 3.204,
+    "startTime": 465.397
   },
   {
     "index": 40,
@@ -529,8 +529,8 @@
     "text": "Medius Procurement helps companies control purchasing by providing a pre-approval purchase model. Employees buy from approved catalogs at negotiated prices. This reduces maverick spending and ensures PO coverage, which makes downstream AP processing much smoother.",
     "chapter": "INTRO",
     "file": "0040.mp3",
-    "duration": 16.509,
-    "startTime": 450.28
+    "duration": 17.136,
+    "startTime": 468.601
   },
   {
     "index": 41,
@@ -542,8 +542,8 @@
     "text": "And Sourcing?",
     "chapter": "INTRO",
     "file": "0041.mp3",
-    "duration": 1.324,
-    "startTime": 466.79
+    "duration": 1.393,
+    "startTime": 485.737
   },
   {
     "index": 42,
@@ -555,8 +555,8 @@
     "text": "Medius Sourcing supports the process of finding and evaluating suppliers. It includes RFx management for running competitive bidding processes, analytics for comparing supplier proposals, and tools for negotiation. The data from sourcing flows into contracts, which flow into purchase orders, which flow into invoice matching. It's the beginning of the source-to-pay chain.",
     "chapter": "INTRO",
     "file": "0042.mp3",
-    "duration": 22.87,
-    "startTime": 468.113
+    "duration": 23.497,
+    "startTime": 487.13
   },
   {
     "index": 43,
@@ -568,8 +568,8 @@
     "text": "Contract Management?",
     "chapter": "INTRO",
     "file": "0043.mp3",
-    "duration": 1.602,
-    "startTime": 490.983
+    "duration": 1.741,
+    "startTime": 510.627
   },
   {
     "index": 44,
@@ -581,8 +581,8 @@
     "text": "Medius Contract Management provides visibility into the company's contract portfolio. Automated renewal alerts prevent contracts from auto-renewing unexpectedly. Reporting drills down by contract type, value, category, and expiration date. And contract pricing feeds into the PO and invoice matching process to ensure suppliers are billing according to contracted rates.",
     "chapter": "INTRO",
     "file": "0044.mp3",
-    "duration": 23.148,
-    "startTime": 492.585
+    "duration": 23.845,
+    "startTime": 512.369
   },
   {
     "index": 45,
@@ -594,8 +594,8 @@
     "text": "What about Expense Management?",
     "chapter": "INTRO",
     "file": "0045.mp3",
-    "duration": 2.229,
-    "startTime": 515.734
+    "duration": 2.438,
+    "startTime": 536.214
   },
   {
     "index": 46,
@@ -607,8 +607,8 @@
     "text": "This comes from the Expensya acquisition. It provides control over business expenses with AI that automatically populates expense reports with itemized, categorized charges. Employees photograph receipts, and the AI extracts the data, categorizes the expense, and checks it against company policy.",
     "chapter": "INTRO",
     "file": "0046.mp3",
-    "duration": 18.251,
-    "startTime": 517.963
+    "duration": 19.017,
+    "startTime": 538.652
   },
   {
     "index": 47,
@@ -620,8 +620,8 @@
     "text": "How does this integrate with the AP suite?",
     "chapter": "INTRO",
     "file": "0047.mp3",
-    "duration": 2.717,
-    "startTime": 536.214
+    "duration": 2.926,
+    "startTime": 557.669
   },
   {
     "index": 48,
@@ -633,8 +633,8 @@
     "text": "It's part of the unified spend visibility story. Direct spend flows through procurement and AP. Indirect spend flows through AP. And employee expenses flow through expense management. Together, you get a complete picture of every dollar the company spends. That complete visibility is what CFOs want.",
     "chapter": "INTRO",
     "file": "0048.mp3",
-    "duration": 18.53,
-    "startTime": 538.93
+    "duration": 19.296,
+    "startTime": 560.595
   },
   {
     "index": 49,
@@ -646,8 +646,8 @@
     "text": "Tell me about the analytics capabilities.",
     "chapter": "INTRO",
     "file": "0049.mp3",
-    "duration": 2.717,
-    "startTime": 557.46
+    "duration": 2.995,
+    "startTime": 579.89
   },
   {
     "index": 50,
@@ -659,8 +659,8 @@
     "text": "Medius Analytics provides dashboards and reporting across the entire spend management lifecycle. AP performance metrics like processing time, touchless rate, and cost per invoice. Spend analytics by supplier, category, department, and time period. Workflow analytics showing where bottlenecks exist. And benchmarking data that lets customers compare their performance against industry standards.",
     "chapter": "INTRO",
     "file": "0050.mp3",
-    "duration": 24.681,
-    "startTime": 560.177
+    "duration": 25.587,
+    "startTime": 582.886
   },
   {
     "index": 51,
@@ -672,8 +672,8 @@
     "text": "And the Power BI integration?",
     "chapter": "INTRO",
     "file": "0051.mp3",
-    "duration": 1.881,
-    "startTime": 584.858
+    "duration": 2.02,
+    "startTime": 608.472
   },
   {
     "index": 52,
@@ -685,8 +685,8 @@
     "text": "Smart move given the Microsoft ecosystem focus. Many Medius customers are Microsoft shops running Dynamics. Power BI is their standard analytics tool. Providing native Power BI integration means Medius data flows into the dashboards and reports that finance leaders already use.",
     "chapter": "INTRO",
     "file": "0052.mp3",
-    "duration": 17.136,
-    "startTime": 586.739
+    "duration": 17.833,
+    "startTime": 610.493
   },
   {
     "index": 53,
@@ -698,8 +698,8 @@
     "text": "Let's talk architecture.",
     "chapter": "INTRO",
     "file": "0053.mp3",
-    "duration": 1.741,
-    "startTime": 603.875
+    "duration": 1.95,
+    "startTime": 628.325
   },
   {
     "index": 54,
@@ -711,8 +711,8 @@
     "text": "Medius is a true cloud, multi-tenant SaaS product built on Microsoft Azure. Multi-tenant means all customers run on the same infrastructure with logical data separation, which enables faster updates, better economies of scale, and consistent performance.",
     "chapter": "INTRO",
     "file": "0054.mp3",
-    "duration": 15.604,
-    "startTime": 605.616
+    "duration": 16.161,
+    "startTime": 630.276
   },
   {
     "index": 55,
@@ -724,8 +724,8 @@
     "text": "What about ERP integrations?",
     "chapter": "INTRO",
     "file": "0055.mp3",
-    "duration": 2.299,
-    "startTime": 621.22
+    "duration": 2.508,
+    "startTime": 646.437
   },
   {
     "index": 56,
@@ -737,8 +737,8 @@
     "text": "This is where Medius shines. They have deep, pre-built integrations with Microsoft Dynamics 365 Finance and Operations, Dynamics 365 Business Central, and legacy Dynamics products like AX and NAV through an on-premise integration gateway. They also integrate with SAP and Infor M3.",
     "chapter": "INTRO",
     "file": "0056.mp3",
-    "duration": 20.48,
-    "startTime": 623.519
+    "duration": 21.316,
+    "startTime": 648.945
   },
   {
     "index": 57,
@@ -750,8 +750,8 @@
     "text": "How deep are the integrations?",
     "chapter": "INTRO",
     "file": "0057.mp3",
-    "duration": 1.95,
-    "startTime": 643.999
+    "duration": 2.159,
+    "startTime": 670.261
   },
   {
     "index": 58,
@@ -763,8 +763,8 @@
     "text": "For Dynamics, they're very deep. Medius is available in the Microsoft marketplace and is positioned as the preferred AP automation solution for the Dynamics ecosystem. The integration handles PO synchronization, goods receipt data, GL account mappings, payment file generation, and master data sync. For SAP and others, the integrations exist but may not be as deep as the Dynamics integrations.",
     "chapter": "INTRO",
     "file": "0058.mp3",
-    "duration": 25.099,
-    "startTime": 645.949
+    "duration": 25.935,
+    "startTime": 672.42
   },
   {
     "index": 59,
@@ -776,8 +776,8 @@
     "text": "How is Medius priced?",
     "chapter": "INTRO",
     "file": "0059.mp3",
-    "duration": 1.672,
-    "startTime": 671.048
+    "duration": 1.811,
+    "startTime": 698.355
   },
   {
     "index": 60,
@@ -789,8 +789,8 @@
     "text": "Medius offers two primary AP automation packages. AP Essentials is the entry point, built for finance teams replacing manual AP processes. It includes core invoice capture, processing, approval workflows, the supplier portal, and analytics. AP 360 is the premium tier for organizations with greater scale and complexity. It provides deeper visibility, stronger controls, and end-to-end invoice-to-payment capabilities.",
     "chapter": "INTRO",
     "file": "0060.mp3",
-    "duration": 28.234,
-    "startTime": 672.72
+    "duration": 29.07,
+    "startTime": 700.166
   },
   {
     "index": 61,
@@ -802,8 +802,8 @@
     "text": "And the other modules?",
     "chapter": "INTRO",
     "file": "0061.mp3",
-    "duration": 1.602,
-    "startTime": 700.954
+    "duration": 1.741,
+    "startTime": 729.236
   },
   {
     "index": 62,
@@ -815,8 +815,8 @@
     "text": "Payments, Supplier Onboarding, Procurement, Sourcing, Expense Management, and Contract Management can all be added to either package as modular add-ons. This gives customers flexibility to start with AP automation and expand over time.",
     "chapter": "INTRO",
     "file": "0062.mp3",
-    "duration": 14.768,
-    "startTime": 702.556
+    "duration": 15.256,
+    "startTime": 730.977
   },
   {
     "index": 63,
@@ -828,8 +828,8 @@
     "text": "How should I think about Medius's competitive positioning?",
     "chapter": "INTRO",
     "file": "0063.mp3",
-    "duration": 3.483,
-    "startTime": 717.324
+    "duration": 3.762,
+    "startTime": 746.233
   },
   {
     "index": 64,
@@ -841,8 +841,8 @@
     "text": "Medius's strengths are the comprehensive suite covering source-to-pay, the deep Microsoft ecosystem integration, the AI capabilities that are ahead of most competitors, and the strong European presence. The European market is particularly important because of e-invoicing mandates and the complexity of multi-country operations.",
     "chapter": "INTRO",
     "file": "0064.mp3",
-    "duration": 20.292,
-    "startTime": 720.807
+    "duration": 20.85,
+    "startTime": 749.994
   },
   {
     "index": 65,
@@ -854,8 +854,8 @@
     "text": "And the challenges?",
     "chapter": "INTRO",
     "file": "0065.mp3",
-    "duration": 1.463,
-    "startTime": 741.099
+    "duration": 1.602,
+    "startTime": 770.844
   },
   {
     "index": 66,
@@ -867,8 +867,8 @@
     "text": "The main challenges are expanding the US market presence where competitors like Tipalti and Stampli have strong brand recognition, deepening SAP and Oracle integrations to compete for customers on those ERPs, scaling the payments business which requires significant investment, and continuing to innovate on AI while maintaining the reliability that finance teams demand.",
     "chapter": "INTRO",
     "file": "0066.mp3",
-    "duration": 22.152,
-    "startTime": 742.562
+    "duration": 23.057,
+    "startTime": 772.446
   },
   {
     "index": 67,
@@ -880,8 +880,8 @@
     "text": "Where can a CPO make the biggest impact?",
     "chapter": "INTRO",
     "file": "0067.mp3",
-    "duration": 2.856,
-    "startTime": 764.714
+    "duration": 3.065,
+    "startTime": 795.504
   },
   {
     "index": 68,
@@ -893,8 +893,8 @@
     "text": "Several areas stand out. Accelerating the AI roadmap, particularly around autonomous AP workflows. Deepening the payments product to become truly competitive with Tipalti. Improving the user experience across all modules since some modules from acquisitions may need UX harmonization. Building out e-invoicing compliance capabilities as mandates spread. And expanding the analytics story to provide truly predictive insights, not just backward-looking reports.",
     "chapter": "INTRO",
     "file": "0068.mp3",
-    "duration": 29.07,
-    "startTime": 767.57
+    "duration": 30.114,
+    "startTime": 798.569
   },
   {
     "index": 69,
@@ -906,8 +906,8 @@
     "text": "That's a rich product agenda.",
     "chapter": "INTRO",
     "file": "0069.mp3",
-    "duration": 1.95,
-    "startTime": 796.639
+    "duration": 2.159,
+    "startTime": 828.683
   },
   {
     "index": 70,
@@ -919,8 +919,8 @@
     "text": "It is. And the good news is that Medius has strong foundations to build on. The technology is modern, the market position is validated by analysts, and the customer base provides a solid platform for growth.",
     "chapter": "INTRO",
     "file": "0070.mp3",
-    "duration": 12.817,
-    "startTime": 798.59
+    "duration": 13.166,
+    "startTime": 830.842
   },
   {
     "index": 71,
@@ -932,8 +932,8 @@
     "text": "Morgan, this deep dive has been invaluable. I feel like I have a solid understanding of the full Medius product suite, where it's strong, where there are opportunities, and how it fits in the competitive landscape.",
     "chapter": "INTRO",
     "file": "0071.mp3",
-    "duration": 12.469,
-    "startTime": 811.407
+    "duration": 13.653,
+    "startTime": 844.008
   },
   {
     "index": 72,
@@ -945,8 +945,8 @@
     "text": "The key takeaway is that Medius is well-positioned in a growing market with strong technology and clear opportunities for product-led growth. In the next episode, we're going to look at AP from the buyer's perspective: the CFO. Understanding how CFOs think about AP and what they want from AP software is essential for product strategy.",
     "chapter": "INTRO",
     "file": "0072.mp3",
-    "duration": 21.407,
-    "startTime": 823.876
+    "duration": 21.964,
+    "startTime": 857.661
   },
   {
     "index": 73,
@@ -958,8 +958,8 @@
     "text": "That's going to be crucial for how we position and sell the product. See you next time.",
     "chapter": "INTRO",
     "file": "0073.mp3",
-    "duration": 5.155,
-    "startTime": 845.283
+    "duration": 5.642,
+    "startTime": 879.626
   },
   {
     "index": 74,
@@ -971,8 +971,8 @@
     "text": "See you next time.",
     "chapter": "INTRO",
     "file": "0074.mp3",
-    "duration": 1.463,
-    "startTime": 850.438
+    "duration": 1.533,
+    "startTime": 885.268
   },
   {
     "index": 75,
@@ -984,7 +984,7 @@
     "text": "Next Episode: The CFO Perspective & Strategic Finance",
     "chapter": "INTRO",
     "file": "0075.mp3",
-    "duration": 4.389,
-    "startTime": 851.901
+    "duration": 4.528,
+    "startTime": 886.801
   }
 ]

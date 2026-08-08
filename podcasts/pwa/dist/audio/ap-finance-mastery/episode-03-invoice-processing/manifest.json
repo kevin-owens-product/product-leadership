@@ -9,7 +9,7 @@
     "text": "Welcome back to AP and Finance Mastery. We've covered AP fundamentals and the full procure-to-pay journey. Now it's time to go deep on the heart of AP automation: invoice processing.",
     "chapter": "INTRO",
     "file": "0000.mp3",
-    "duration": 12.121,
+    "duration": 12.469,
     "startTime": 0
   },
   {
@@ -22,8 +22,8 @@
     "text": "This is the one I've been waiting for. As a product leader at an AP automation company, invoice processing is our bread and butter. I need to understand every detail.",
     "chapter": "INTRO",
     "file": "0001.mp3",
-    "duration": 10.449,
-    "startTime": 12.121
+    "duration": 11.494,
+    "startTime": 12.469
   },
   {
     "index": 2,
@@ -35,8 +35,8 @@
     "text": "Then let's get into it. Invoice processing is where the magic happens, where messy, unstructured documents from thousands of different suppliers get transformed into clean, validated, properly coded transactions in your ERP. It's also where the biggest automation gains are possible.",
     "chapter": "INTRO",
     "file": "0002.mp3",
-    "duration": 16.858,
-    "startTime": 22.57
+    "duration": 17.485,
+    "startTime": 23.963
   },
   {
     "index": 3,
@@ -48,8 +48,8 @@
     "text": "Let's start at the very beginning. How do invoices actually arrive at a company?",
     "chapter": "INTRO",
     "file": "0003.mp3",
-    "duration": 4.946,
-    "startTime": 39.427
+    "duration": 5.433,
+    "startTime": 41.448
   },
   {
     "index": 4,
@@ -61,8 +61,8 @@
     "text": "This is where reality gets messy fast. Invoices arrive through multiple channels simultaneously, and each channel has different characteristics. First, you still have paper mail. Physical invoices sent through the postal service. This is declining but far from dead, especially in certain industries and regions.",
     "chapter": "INTRO",
     "file": "0004.mp3",
-    "duration": 19.456,
-    "startTime": 44.373
+    "duration": 20.014,
+    "startTime": 46.881
   },
   {
     "index": 5,
@@ -74,8 +74,8 @@
     "text": "What percentage of invoices are still paper?",
     "chapter": "INTRO",
     "file": "0005.mp3",
-    "duration": 2.786,
-    "startTime": 63.83
+    "duration": 3.065,
+    "startTime": 66.895
   },
   {
     "index": 6,
@@ -87,8 +87,8 @@
     "text": "It varies enormously by region and industry. In the Nordics, paper is almost gone, maybe five percent. In the US, it's still thirty to forty percent for many mid-market companies. In some developing markets, it's even higher. The global trend is clearly toward electronic, but paper will persist for years.",
     "chapter": "INTRO",
     "file": "0006.mp3",
-    "duration": 19.108,
-    "startTime": 66.616
+    "duration": 19.665,
+    "startTime": 69.96
   },
   {
     "index": 7,
@@ -100,8 +100,8 @@
     "text": "What other channels?",
     "chapter": "INTRO",
     "file": "0007.mp3",
-    "duration": 1.533,
-    "startTime": 85.724
+    "duration": 1.672,
+    "startTime": 89.625
   },
   {
     "index": 8,
@@ -113,8 +113,8 @@
     "text": "Email is probably the most common channel globally. Suppliers send PDF invoices as email attachments. This is better than paper but still creates challenges because the data is locked inside a PDF that needs to be extracted. Then you have EDI, Electronic Data Interchange, which is structured data exchange between systems. It's been around since the 1970s and is still heavily used in manufacturing, retail, and automotive.",
     "chapter": "INTRO",
     "file": "0008.mp3",
-    "duration": 27.049,
-    "startTime": 87.257
+    "duration": 27.885,
+    "startTime": 91.297
   },
   {
     "index": 9,
@@ -126,8 +126,8 @@
     "text": "EDI seems old-school but effective.",
     "chapter": "INTRO",
     "file": "0009.mp3",
-    "duration": 2.508,
-    "startTime": 114.306
+    "duration": 2.786,
+    "startTime": 119.182
   },
   {
     "index": 10,
@@ -139,8 +139,8 @@
     "text": "It is. EDI invoices are already structured data, so there's no extraction needed. The challenge is that EDI is expensive to set up and maintain, and it's typically only used with high-volume suppliers. A company might have EDI connections with their top fifty suppliers but receive invoices from five thousand other suppliers via email and paper.",
     "chapter": "INTRO",
     "file": "0010.mp3",
-    "duration": 22.104,
-    "startTime": 116.814
+    "duration": 22.8,
+    "startTime": 121.969
   },
   {
     "index": 11,
@@ -152,8 +152,8 @@
     "text": "Any other channels?",
     "chapter": "INTRO",
     "file": "0011.mp3",
-    "duration": 1.533,
-    "startTime": 138.918
+    "duration": 1.672,
+    "startTime": 144.769
   },
   {
     "index": 12,
@@ -165,8 +165,8 @@
     "text": "Supplier portals, where suppliers log into a web portal and enter their invoice data directly. This shifts the data entry burden to the supplier. And increasingly, e-invoicing networks like Peppol, which we'll talk about in detail later. These are structured electronic invoices that follow a standard format and can be processed automatically.",
     "chapter": "INTRO",
     "file": "0012.mp3",
-    "duration": 21.268,
-    "startTime": 140.45
+    "duration": 21.825,
+    "startTime": 146.441
   },
   {
     "index": 13,
@@ -178,8 +178,8 @@
     "text": "This is the core technology challenge, right? Getting data out of invoices?",
     "chapter": "INTRO",
     "file": "0013.mp3",
-    "duration": 4.528,
-    "startTime": 161.718
+    "duration": 5.016,
+    "startTime": 168.266
   },
   {
     "index": 14,
@@ -191,8 +191,8 @@
     "text": "It's the foundation everything else is built on. If you can't accurately extract data from invoices, nothing downstream works. Let me walk you through the evolution of this technology. First generation was manual data entry. A human reads the invoice and types the data into the system. Slow, expensive, error-prone, but still how many companies operate.",
     "chapter": "INTRO",
     "file": "0014.mp3",
-    "duration": 21.755,
-    "startTime": 166.246
+    "duration": 22.521,
+    "startTime": 173.281
   },
   {
     "index": 15,
@@ -204,8 +204,8 @@
     "text": "What came next?",
     "chapter": "INTRO",
     "file": "0015.mp3",
-    "duration": 1.324,
-    "startTime": 188.001
+    "duration": 1.463,
+    "startTime": 195.803
   },
   {
     "index": 16,
@@ -217,8 +217,8 @@
     "text": "Second generation was template-based OCR, Optical Character Recognition. You scan the paper invoice or process the PDF, and the software uses pre-defined templates to know where to look for specific data. The supplier name is in the top left, the invoice number is here, the total is there. The problem is you need a separate template for every supplier, and if a supplier changes their invoice layout, the template breaks.",
     "chapter": "INTRO",
     "file": "0016.mp3",
-    "duration": 26.353,
-    "startTime": 189.324
+    "duration": 27.328,
+    "startTime": 197.266
   },
   {
     "index": 17,
@@ -230,8 +230,8 @@
     "text": "That sounds like a maintenance nightmare.",
     "chapter": "INTRO",
     "file": "0017.mp3",
-    "duration": 2.647,
-    "startTime": 215.677
+    "duration": 2.856,
+    "startTime": 224.594
   },
   {
     "index": 18,
@@ -243,8 +243,8 @@
     "text": "It was. Companies with thousands of suppliers would need thousands of templates. Third generation is intelligent data capture, sometimes called template-free extraction. This uses machine learning to understand invoice layouts without needing pre-defined templates. The AI has been trained on millions of invoices and can identify fields like invoice number, date, total, and line items regardless of the layout.",
     "chapter": "INTRO",
     "file": "0018.mp3",
-    "duration": 25.517,
-    "startTime": 218.324
+    "duration": 26.353,
+    "startTime": 227.45
   },
   {
     "index": 19,
@@ -256,8 +256,8 @@
     "text": "And that's where the industry is now?",
     "chapter": "INTRO",
     "file": "0019.mp3",
-    "duration": 2.299,
-    "startTime": 243.841
+    "duration": 2.508,
+    "startTime": 253.802
   },
   {
     "index": 20,
@@ -269,8 +269,8 @@
     "text": "The leading vendors are there, yes. But the state of the art is actually moving beyond that to what I'd call fourth generation: AI-powered extraction using large language models and computer vision. These systems don't just find fields on a page, they actually understand the document. They can handle handwritten annotations, interpret ambiguous layouts, cross-reference data across multiple pages, and even validate extracted data against business rules.",
     "chapter": "INTRO",
     "file": "0020.mp3",
-    "duration": 27.537,
-    "startTime": 246.14
+    "duration": 28.443,
+    "startTime": 256.31
   },
   {
     "index": 21,
@@ -282,8 +282,8 @@
     "text": "What accuracy rates are we talking about?",
     "chapter": "INTRO",
     "file": "0021.mp3",
-    "duration": 2.647,
-    "startTime": 273.677
+    "duration": 2.856,
+    "startTime": 284.753
   },
   {
     "index": 22,
@@ -295,8 +295,8 @@
     "text": "This is the critical metric. Template-based OCR typically achieves seventy to eighty-five percent accuracy at the field level. Intelligent capture gets to ninety to ninety-five percent. The best AI-powered systems claim ninety-seven to ninety-nine percent accuracy for header-level data. But accuracy varies significantly by field type and invoice complexity.",
     "chapter": "INTRO",
     "file": "0022.mp3",
-    "duration": 22.591,
-    "startTime": 276.324
+    "duration": 23.357,
+    "startTime": 287.609
   },
   {
     "index": 23,
@@ -308,8 +308,8 @@
     "text": "You mentioned header-level data. What's the difference between header and line level?",
     "chapter": "INTRO",
     "file": "0023.mp3",
-    "duration": 4.946,
-    "startTime": 298.915
+    "duration": 5.433,
+    "startTime": 310.966
   },
   {
     "index": 24,
@@ -321,8 +321,8 @@
     "text": "Header-level data is the information that applies to the entire invoice: supplier name, invoice number, invoice date, due date, total amount, tax amount, PO number, and currency. Line-level data is the individual items on the invoice: item description, quantity, unit price, line total, item code, and potentially GL coding per line.",
     "chapter": "INTRO",
     "file": "0024.mp3",
-    "duration": 21.895,
-    "startTime": 303.861
+    "duration": 22.521,
+    "startTime": 316.4
   },
   {
     "index": 25,
@@ -334,8 +334,8 @@
     "text": "And line-level extraction is harder?",
     "chapter": "INTRO",
     "file": "0025.mp3",
-    "duration": 2.368,
-    "startTime": 325.756
+    "duration": 2.577,
+    "startTime": 338.921
   },
   {
     "index": 26,
@@ -347,8 +347,8 @@
     "text": "Significantly harder. Header data usually appears in consistent locations with clear labels. Line data is in tables that vary enormously in structure across suppliers. Some invoices have simple tables with four columns. Others have complex tables with subtotals, grouped items, multiple tax rates per line, and descriptions that span multiple rows.",
     "chapter": "INTRO",
     "file": "0026.mp3",
-    "duration": 22.243,
-    "startTime": 328.124
+    "duration": 22.87,
+    "startTime": 341.499
   },
   {
     "index": 27,
@@ -360,8 +360,8 @@
     "text": "Why does line-level data matter?",
     "chapter": "INTRO",
     "file": "0027.mp3",
-    "duration": 2.09,
-    "startTime": 350.367
+    "duration": 2.299,
+    "startTime": 364.368
   },
   {
     "index": 28,
@@ -373,8 +373,8 @@
     "text": "For three-way matching. If you only extract the header total, you can do a two-way match: does the total match the PO total? But for true three-way matching, you need line-level data so you can match individual line items against individual PO lines and goods receipt lines. This catches issues that header-level matching misses.",
     "chapter": "INTRO",
     "file": "0028.mp3",
-    "duration": 19.944,
-    "startTime": 352.457
+    "duration": 20.71,
+    "startTime": 366.667
   },
   {
     "index": 29,
@@ -386,8 +386,8 @@
     "text": "Like what?",
     "chapter": "INTRO",
     "file": "0029.mp3",
-    "duration": 1.254,
-    "startTime": 372.401
+    "duration": 1.324,
+    "startTime": 387.378
   },
   {
     "index": 30,
@@ -399,8 +399,8 @@
     "text": "Like the supplier billing for the right total amount but with different quantities and prices than agreed. Maybe the PO says one hundred units at ten dollars each. The invoice says eighty units at twelve fifty each. The total is the same, one thousand dollars, but the quantities and prices are wrong. Header matching would pass this. Line matching would catch it.",
     "chapter": "INTRO",
     "file": "0030.mp3",
-    "duration": 21.825,
-    "startTime": 373.655
+    "duration": 22.452,
+    "startTime": 388.701
   },
   {
     "index": 31,
@@ -412,8 +412,8 @@
     "text": "After extraction, what validation happens?",
     "chapter": "INTRO",
     "file": "0031.mp3",
-    "duration": 2.717,
-    "startTime": 395.479
+    "duration": 2.995,
+    "startTime": 411.153
   },
   {
     "index": 32,
@@ -425,8 +425,8 @@
     "text": "Multiple layers of validation. First, mandatory field validation: does the invoice have all required fields? Missing an invoice number? Reject. No supplier identifier? Reject. Second, mathematical validation: do the line items add up to the subtotal? Does the subtotal plus tax equal the total? You'd be surprised how often suppliers' own math is wrong.",
     "chapter": "INTRO",
     "file": "0032.mp3",
-    "duration": 22.73,
-    "startTime": 398.196
+    "duration": 23.636,
+    "startTime": 414.148
   },
   {
     "index": 33,
@@ -438,8 +438,8 @@
     "text": "Really?",
     "chapter": "INTRO",
     "file": "0033.mp3",
-    "duration": 1.184,
-    "startTime": 420.927
+    "duration": 1.324,
+    "startTime": 437.784
   },
   {
     "index": 34,
@@ -451,8 +451,8 @@
     "text": "More often than you'd think. Tax calculations are especially error-prone, particularly with multiple tax rates. Third is duplicate detection. Is this invoice a duplicate of one we've already received? This is more complex than it sounds. Exact duplicates are easy, same invoice number, same amount, same supplier. But fuzzy duplicates are tricky, maybe the same invoice was sent twice with a slightly different format, or a credit note and re-issue created confusion.",
     "chapter": "INTRO",
     "file": "0034.mp3",
-    "duration": 29.07,
-    "startTime": 422.111
+    "duration": 30.045,
+    "startTime": 439.108
   },
   {
     "index": 35,
@@ -464,8 +464,8 @@
     "text": "What other validations?",
     "chapter": "INTRO",
     "file": "0035.mp3",
-    "duration": 1.741,
-    "startTime": 451.18
+    "duration": 1.881,
+    "startTime": 469.153
   },
   {
     "index": 36,
@@ -477,8 +477,8 @@
     "text": "Supplier validation: is this supplier in our master data? Are their bank details current and verified? Tax validation: is the tax ID valid? Is the tax rate correct for this type of goods in this jurisdiction? Date validation: is the invoice date reasonable? Is the due date consistent with our agreed payment terms? And increasingly, fraud detection: does this invoice look suspicious based on historical patterns?",
     "chapter": "INTRO",
     "file": "0036.mp3",
-    "duration": 28.303,
-    "startTime": 452.922
+    "duration": 29.279,
+    "startTime": 471.033
   },
   {
     "index": 37,
@@ -490,8 +490,8 @@
     "text": "Let's talk about GL coding. How do invoices get coded to the right accounts?",
     "chapter": "INTRO",
     "file": "0037.mp3",
-    "duration": 4.667,
-    "startTime": 481.225
+    "duration": 5.155,
+    "startTime": 500.312
   },
   {
     "index": 38,
@@ -503,8 +503,8 @@
     "text": "For PO-backed invoices, the coding is usually inherited from the purchase order. When someone created the PO, they specified which GL account, cost center, and project to charge. The invoice simply inherits that coding. Easy.",
     "chapter": "INTRO",
     "file": "0038.mp3",
-    "duration": 14.141,
-    "startTime": 485.892
+    "duration": 14.629,
+    "startTime": 505.467
   },
   {
     "index": 39,
@@ -516,8 +516,8 @@
     "text": "And for non-PO invoices?",
     "chapter": "INTRO",
     "file": "0039.mp3",
-    "duration": 1.881,
-    "startTime": 500.033
+    "duration": 2.09,
+    "startTime": 520.095
   },
   {
     "index": 40,
@@ -529,8 +529,8 @@
     "text": "That's where it gets interesting. Historically, the AP clerk or the approver would manually assign GL codes. This requires knowledge of the chart of accounts, which in a large enterprise can have thousands of accounts. Getting it wrong means the expense shows up in the wrong place in the financial statements.",
     "chapter": "INTRO",
     "file": "0040.mp3",
-    "duration": 18.76,
-    "startTime": 501.914
+    "duration": 19.247,
+    "startTime": 522.185
   },
   {
     "index": 41,
@@ -542,8 +542,8 @@
     "text": "And AI can help here?",
     "chapter": "INTRO",
     "file": "0041.mp3",
-    "duration": 1.602,
-    "startTime": 520.674
+    "duration": 1.741,
+    "startTime": 541.433
   },
   {
     "index": 42,
@@ -555,8 +555,8 @@
     "text": "It's one of the most impactful applications of AI in AP. The system learns from historical coding patterns. If the last fifty invoices from this supplier were coded to GL account 61000 office supplies, there's a high probability the next one should be too. The AI suggests the coding, and the user just confirms or corrects. Over time, the suggestions get better and better.",
     "chapter": "INTRO",
     "file": "0042.mp3",
-    "duration": 23.845,
-    "startTime": 522.276
+    "duration": 24.611,
+    "startTime": 543.174
   },
   {
     "index": 43,
@@ -568,8 +568,8 @@
     "text": "What about split coding? An invoice that needs to be allocated across multiple cost centers?",
     "chapter": "INTRO",
     "file": "0043.mp3",
-    "duration": 5.991,
-    "startTime": 546.121
+    "duration": 6.548,
+    "startTime": 567.785
   },
   {
     "index": 44,
@@ -581,8 +581,8 @@
     "text": "Common and complex. A consulting invoice might need to be split sixty percent to marketing and forty percent to product development. Or an IT hardware invoice might need to be split across ten different departments. The system needs to support these splits and ideally learn the patterns for common split scenarios.",
     "chapter": "INTRO",
     "file": "0044.mp3",
-    "duration": 19.596,
-    "startTime": 552.112
+    "duration": 20.153,
+    "startTime": 574.333
   },
   {
     "index": 45,
@@ -594,8 +594,8 @@
     "text": "Tell me about approval workflows.",
     "chapter": "INTRO",
     "file": "0045.mp3",
-    "duration": 2.299,
-    "startTime": 571.708
+    "duration": 2.508,
+    "startTime": 594.487
   },
   {
     "index": 46,
@@ -607,8 +607,8 @@
     "text": "Approval workflows are the rules that determine who needs to approve an invoice before it can be paid. They're typically based on a combination of factors: the invoice amount, who over five thousand dollars needs VP approval. The department or cost center being charged. The expense type, capital expenditures might require different approvers than operating expenses. And whether there's a PO, PO-backed invoices that match perfectly might need no additional approval.",
     "chapter": "INTRO",
     "file": "0046.mp3",
-    "duration": 29.209,
-    "startTime": 574.007
+    "duration": 30.114,
+    "startTime": 596.994
   },
   {
     "index": 47,
@@ -620,8 +620,8 @@
     "text": "How complex do these workflows get?",
     "chapter": "INTRO",
     "file": "0047.mp3",
-    "duration": 2.368,
-    "startTime": 603.215
+    "duration": 2.577,
+    "startTime": 627.109
   },
   {
     "index": 48,
@@ -633,8 +633,8 @@
     "text": "Very complex in large organizations. You might have rules like: invoices under one thousand dollars with a matching PO are auto-approved. Invoices between one thousand and ten thousand require department manager approval. Invoices over ten thousand require VP approval. Capital expenditures over fifty thousand require CFO approval. And if the original approver is on vacation, it escalates to their backup.",
     "chapter": "INTRO",
     "file": "0048.mp3",
-    "duration": 27.049,
-    "startTime": 605.584
+    "duration": 28.025,
+    "startTime": 629.686
   },
   {
     "index": 49,
@@ -646,8 +646,8 @@
     "text": "Delegation and escalation are key features then?",
     "chapter": "INTRO",
     "file": "0049.mp3",
-    "duration": 3.065,
-    "startTime": 632.633
+    "duration": 3.344,
+    "startTime": 657.711
   },
   {
     "index": 50,
@@ -659,8 +659,8 @@
     "text": "Essential. If an approver is out of office and doesn't have delegation set up, invoices pile up in their queue. Late payments follow. The best AP systems handle this elegantly with automatic delegation, escalation after configurable time periods, and mobile approval so people can approve on their phones.",
     "chapter": "INTRO",
     "file": "0050.mp3",
-    "duration": 19.247,
-    "startTime": 635.698
+    "duration": 19.735,
+    "startTime": 661.054
   },
   {
     "index": 51,
@@ -672,8 +672,8 @@
     "text": "Mobile approval seems critical. People aren't sitting at their desks all day.",
     "chapter": "INTRO",
     "file": "0051.mp3",
-    "duration": 4.876,
-    "startTime": 654.946
+    "duration": 5.364,
+    "startTime": 680.79
   },
   {
     "index": 52,
@@ -685,8 +685,8 @@
     "text": "It's become table stakes. An approver should be able to review an invoice, see the relevant context like the PO and goods receipt, and approve or reject with a single tap on their phone. Anything that adds friction to the approval process slows down the entire invoice lifecycle.",
     "chapter": "INTRO",
     "file": "0052.mp3",
-    "duration": 16.37,
-    "startTime": 659.822
+    "duration": 16.997,
+    "startTime": 686.153
   },
   {
     "index": 53,
@@ -698,8 +698,8 @@
     "text": "Let's talk about the ultimate goal: touchless invoices.",
     "chapter": "INTRO",
     "file": "0053.mp3",
-    "duration": 3.622,
-    "startTime": 676.192
+    "duration": 3.901,
+    "startTime": 703.15
   },
   {
     "index": 54,
@@ -711,8 +711,8 @@
     "text": "Touchless processing, or straight-through processing, means an invoice goes from receipt to payment-ready with zero human intervention. The system captures the data, validates it, matches it against the PO and goods receipt, applies the correct coding, and queues it for payment. No one needs to look at it.",
     "chapter": "INTRO",
     "file": "0054.mp3",
-    "duration": 18.621,
-    "startTime": 679.814
+    "duration": 19.247,
+    "startTime": 707.051
   },
   {
     "index": 55,
@@ -724,8 +724,8 @@
     "text": "And you mentioned the benchmarks are eighty-five percent for top performers versus twenty-seven percent average?",
     "chapter": "INTRO",
     "file": "0055.mp3",
-    "duration": 6.409,
-    "startTime": 698.435
+    "duration": 7.036,
+    "startTime": 726.299
   },
   {
     "index": 56,
@@ -737,8 +737,8 @@
     "text": "Right. And that gap represents an enormous amount of manual labor. Think about it. If a company processes fifty thousand invoices a month and has a twenty-seven percent touchless rate, that means thirty-six thousand five hundred invoices need some form of human intervention. If they could get to eighty-five percent, only seven thousand five hundred would need human attention.",
     "chapter": "INTRO",
     "file": "0056.mp3",
-    "duration": 22.73,
-    "startTime": 704.844
+    "duration": 23.497,
+    "startTime": 733.334
   },
   {
     "index": 57,
@@ -750,8 +750,8 @@
     "text": "That's a massive reduction. What determines whether an invoice can be processed touchlessly?",
     "chapter": "INTRO",
     "file": "0057.mp3",
-    "duration": 5.712,
-    "startTime": 727.574
+    "duration": 6.269,
+    "startTime": 756.831
   },
   {
     "index": 58,
@@ -763,8 +763,8 @@
     "text": "Several factors. Does it have a PO? PO-backed invoices are much more likely to be touchless because they can be matched automatically. Is the data extraction accurate? Any field that the AI can't extract with high confidence requires human verification. Does it match within tolerance? Even small discrepancies require human review unless tolerance rules are configured. Is the supplier known and verified? New or unverified suppliers need additional checks.",
     "chapter": "INTRO",
     "file": "0058.mp3",
-    "duration": 28.652,
-    "startTime": 733.286
+    "duration": 29.627,
+    "startTime": 763.101
   },
   {
     "index": 59,
@@ -776,8 +776,8 @@
     "text": "So improving the touchless rate is really about systematically eliminating the reasons invoices need human attention?",
     "chapter": "INTRO",
     "file": "0059.mp3",
-    "duration": 7.314,
-    "startTime": 761.938
+    "duration": 8.011,
+    "startTime": 792.727
   },
   {
     "index": 60,
@@ -789,8 +789,8 @@
     "text": "Exactly. Better data capture reduces extraction exceptions. Better matching rules reduce false positives. Better tolerance configuration reduces unnecessary reviews. Better supplier onboarding reduces unknown supplier issues. It's a continuous improvement process.",
     "chapter": "INTRO",
     "file": "0060.mp3",
-    "duration": 16.788,
-    "startTime": 769.252
+    "duration": 17.345,
+    "startTime": 800.738
   },
   {
     "index": 61,
@@ -802,8 +802,8 @@
     "text": "Let's talk about e-invoicing. This seems like a game-changer.",
     "chapter": "INTRO",
     "file": "0061.mp3",
-    "duration": 4.11,
-    "startTime": 786.04
+    "duration": 4.458,
+    "startTime": 818.084
   },
   {
     "index": 62,
@@ -815,8 +815,8 @@
     "text": "E-invoicing is arguably the most important trend in the AP space right now. Instead of sending a PDF that needs to be interpreted by AI, the supplier sends a structured electronic document in a standardized format. The data is already clean, labeled, and machine-readable.",
     "chapter": "INTRO",
     "file": "0062.mp3",
-    "duration": 16.579,
-    "startTime": 790.15
+    "duration": 17.136,
+    "startTime": 822.542
   },
   {
     "index": 63,
@@ -828,8 +828,8 @@
     "text": "What are the main standards?",
     "chapter": "INTRO",
     "file": "0063.mp3",
-    "duration": 1.881,
-    "startTime": 806.729
+    "duration": 2.09,
+    "startTime": 839.678
   },
   {
     "index": 64,
@@ -841,8 +841,8 @@
     "text": "The dominant standard in Europe is Peppol, Pan-European Public Procurement Online. It defines both the document format and the network for transmitting e-invoices. Within Peppol, invoices use formats like UBL, Universal Business Language, or CII, Cross-Industry Invoice. Different European countries have their own localizations called CIUS, Core Invoice Usage Specifications.",
     "chapter": "INTRO",
     "file": "0064.mp3",
-    "duration": 24.054,
-    "startTime": 808.61
+    "duration": 24.89,
+    "startTime": 841.768
   },
   {
     "index": 65,
@@ -854,8 +854,8 @@
     "text": "And this is becoming mandatory?",
     "chapter": "INTRO",
     "file": "0065.mp3",
-    "duration": 2.02,
-    "startTime": 832.664
+    "duration": 2.229,
+    "startTime": 866.658
   },
   {
     "index": 66,
@@ -867,8 +867,8 @@
     "text": "Yes, that's the big news. The EU's VAT in the Digital Age directive, known as ViDA, is pushing mandatory e-invoicing across all EU member states. Italy already mandated e-invoicing in 2019. France is phasing it in starting 2026. Germany, Spain, Belgium, and others are following. Outside Europe, countries like India, Brazil, Saudi Arabia, and Mexico already have mandatory e-invoicing.",
     "chapter": "INTRO",
     "file": "0066.mp3",
-    "duration": 26.98,
-    "startTime": 834.684
+    "duration": 27.955,
+    "startTime": 868.887
   },
   {
     "index": 67,
@@ -880,8 +880,8 @@
     "text": "What does this mean for AP automation vendors?",
     "chapter": "INTRO",
     "file": "0067.mp3",
-    "duration": 3.065,
-    "startTime": 861.664
+    "duration": 3.344,
+    "startTime": 896.842
   },
   {
     "index": 68,
@@ -893,8 +893,8 @@
     "text": "It's both a threat and an opportunity. The threat is that if all invoices arrive as structured e-invoices, the data capture and extraction problem goes away, which has been a core value proposition of AP automation. The opportunity is that e-invoicing creates new needs: compliance with country-specific mandates, integration with e-invoicing networks, archival and audit requirements, and handling the transition period where companies receive both e-invoices and traditional invoices.",
     "chapter": "INTRO",
     "file": "0068.mp3",
-    "duration": 30.811,
-    "startTime": 864.729
+    "duration": 31.786,
+    "startTime": 900.186
   },
   {
     "index": 69,
@@ -906,8 +906,8 @@
     "text": "So the product strategy needs to evolve from \"we extract data from messy invoices\" to \"we handle all invoice types and ensure compliance.\"",
     "chapter": "INTRO",
     "file": "0069.mp3",
-    "duration": 8.986,
-    "startTime": 895.54
+    "duration": 9.892,
+    "startTime": 931.972
   },
   {
     "index": 70,
@@ -919,8 +919,8 @@
     "text": "Precisely. And the companies that handle this transition well will win. The ones that only know how to do OCR will struggle.",
     "chapter": "INTRO",
     "file": "0070.mp3",
-    "duration": 8.359,
-    "startTime": 904.526
+    "duration": 8.638,
+    "startTime": 941.864
   },
   {
     "index": 71,
@@ -932,8 +932,8 @@
     "text": "Let's talk metrics. What benchmarks should I know?",
     "chapter": "INTRO",
     "file": "0071.mp3",
-    "duration": 3.204,
-    "startTime": 912.885
+    "duration": 3.553,
+    "startTime": 950.501
   },
   {
     "index": 72,
@@ -945,8 +945,8 @@
     "text": "Cost per invoice is the headline metric. APQC data shows top performers at about two dollars per invoice, median around six to seven dollars, and bottom performers over ten dollars. Invoice cycle time, from receipt to payment-ready, top performers are under three days, average is around eight to ten days, worst performers take weeks.",
     "chapter": "INTRO",
     "file": "0072.mp3",
-    "duration": 20.919,
-    "startTime": 916.089
+    "duration": 21.546,
+    "startTime": 954.054
   },
   {
     "index": 73,
@@ -958,8 +958,8 @@
     "text": "What drives those differences?",
     "chapter": "INTRO",
     "file": "0073.mp3",
-    "duration": 1.95,
-    "startTime": 937.009
+    "duration": 2.159,
+    "startTime": 975.6
   },
   {
     "index": 74,
@@ -971,8 +971,8 @@
     "text": "Automation level is the biggest factor. But it's also about process design, exception handling efficiency, and organizational factors like how quickly approvers respond. A company can have great automation technology but still have slow cycle times if invoices sit in approval queues for days.",
     "chapter": "INTRO",
     "file": "0074.mp3",
-    "duration": 17.206,
-    "startTime": 938.959
+    "duration": 17.903,
+    "startTime": 977.76
   },
   {
     "index": 75,
@@ -984,8 +984,8 @@
     "text": "What about error rates?",
     "chapter": "INTRO",
     "file": "0075.mp3",
-    "duration": 1.672,
-    "startTime": 956.165
+    "duration": 1.811,
+    "startTime": 995.662
   },
   {
     "index": 76,
@@ -997,8 +997,8 @@
     "text": "The invoice error rate, meaning invoices processed with incorrect data, is typically one to three percent for automated processes and five to ten percent for manual processes. Each error has a downstream cost: incorrect financial reporting, overpayments, tax errors, and the cost of finding and correcting the mistake.",
     "chapter": "INTRO",
     "file": "0076.mp3",
-    "duration": 19.805,
-    "startTime": 957.837
+    "duration": 20.362,
+    "startTime": 997.473
   },
   {
     "index": 77,
@@ -1010,8 +1010,8 @@
     "text": "I want to understand the human side. What does a typical AP clerk's day look like?",
     "chapter": "INTRO",
     "file": "0077.mp3",
-    "duration": 5.294,
-    "startTime": 977.642
+    "duration": 5.782,
+    "startTime": 1017.836
   },
   {
     "index": 78,
@@ -1023,8 +1023,8 @@
     "text": "In a manual environment, it's genuinely tedious. They arrive and check for new invoices in the mail, the AP email inbox, and any portals. They open each invoice, key the data into the ERP, look up the PO number, check the three-way match manually, chase down approvers via email, resolve exceptions by calling suppliers, and manage a backlog that never seems to shrink.",
     "chapter": "INTRO",
     "file": "0078.mp3",
-    "duration": 22.939,
-    "startTime": 982.936
+    "duration": 23.636,
+    "startTime": 1023.617
   },
   {
     "index": 79,
@@ -1036,8 +1036,8 @@
     "text": "And in an automated environment?",
     "chapter": "INTRO",
     "file": "0079.mp3",
-    "duration": 2.159,
-    "startTime": 1005.875
+    "duration": 2.368,
+    "startTime": 1047.253
   },
   {
     "index": 80,
@@ -1049,8 +1049,8 @@
     "text": "The day looks completely different. The system has already captured and matched most invoices overnight. The clerk's dashboard shows a list of exceptions that need their attention. They spend their time on high-value activities: investigating discrepancies, resolving supplier disputes, analyzing spend patterns, and handling the complex edge cases that the AI can't handle.",
     "chapter": "INTRO",
     "file": "0080.mp3",
-    "duration": 23.218,
-    "startTime": 1008.035
+    "duration": 23.915,
+    "startTime": 1049.622
   },
   {
     "index": 81,
@@ -1062,8 +1062,8 @@
     "text": "So the role evolves from data entry to exception management?",
     "chapter": "INTRO",
     "file": "0081.mp3",
-    "duration": 3.831,
-    "startTime": 1031.253
+    "duration": 4.249,
+    "startTime": 1073.536
   },
   {
     "index": 82,
@@ -1075,8 +1075,8 @@
     "text": "Exactly. And that's a much more engaging and valuable role. The best AP professionals today are problem solvers and analysts, not data entry operators. This is important for how you position the product, not as a replacement for people, but as a tool that elevates their work.",
     "chapter": "INTRO",
     "file": "0082.mp3",
-    "duration": 16.579,
-    "startTime": 1035.084
+    "duration": 17.206,
+    "startTime": 1077.786
   },
   {
     "index": 83,
@@ -1088,8 +1088,8 @@
     "text": "That's a powerful positioning.",
     "chapter": "INTRO",
     "file": "0083.mp3",
-    "duration": 2.02,
-    "startTime": 1051.663
+    "duration": 2.229,
+    "startTime": 1094.992
   },
   {
     "index": 84,
@@ -1101,8 +1101,8 @@
     "text": "It resonates with every AP leader I've worked with. No one went into accounting hoping to type invoice numbers into spreadsheets all day.",
     "chapter": "INTRO",
     "file": "0084.mp3",
-    "duration": 8.568,
-    "startTime": 1053.683
+    "duration": 8.777,
+    "startTime": 1097.221
   },
   {
     "index": 85,
@@ -1114,8 +1114,8 @@
     "text": "Morgan, this deep dive on invoice processing has been incredibly valuable. I feel like I understand the core technology challenge and the user experience we need to deliver.",
     "chapter": "INTRO",
     "file": "0085.mp3",
-    "duration": 10.24,
-    "startTime": 1062.252
+    "duration": 11.215,
+    "startTime": 1105.998
   },
   {
     "index": 86,
@@ -1127,8 +1127,8 @@
     "text": "And we've only covered the invoice processing piece. Next episode, we're going to tackle payment operations and cash management. That's where AP meets the bank account, and there's a whole other world of complexity around how companies actually move money.",
     "chapter": "INTRO",
     "file": "0086.mp3",
-    "duration": 14.35,
-    "startTime": 1072.492
+    "duration": 14.768,
+    "startTime": 1117.213
   },
   {
     "index": 87,
@@ -1140,8 +1140,8 @@
     "text": "Looking forward to it. See you next time.",
     "chapter": "INTRO",
     "file": "0087.mp3",
-    "duration": 2.995,
-    "startTime": 1086.841
+    "duration": 3.344,
+    "startTime": 1131.981
   },
   {
     "index": 88,
@@ -1153,8 +1153,8 @@
     "text": "See you next time.",
     "chapter": "INTRO",
     "file": "0088.mp3",
-    "duration": 1.463,
-    "startTime": 1089.837
+    "duration": 1.533,
+    "startTime": 1135.325
   },
   {
     "index": 89,
@@ -1166,7 +1166,7 @@
     "text": "Next Episode: Payment Operations & Cash Management",
     "chapter": "INTRO",
     "file": "0089.mp3",
-    "duration": 3.831,
-    "startTime": 1091.3
+    "duration": 3.971,
+    "startTime": 1136.857
   }
 ]

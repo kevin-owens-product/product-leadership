@@ -33,6 +33,11 @@
  *   --speed <f>       Forwarded to Supertonic (default 1.05).
  *   --no-mp3          Skip the ffmpeg WAV→MP3 concat step.
  *
+ * Peak headroom:
+ *   The episode worker peak-normalizes each rendered line to -3 dBFS before
+ *   writing PCM16. writeWavFile hard-clips floats to [-1,1], so without this
+ *   hot voices ship as flat-topped distortion (see ap-finance-mastery).
+ *
  * Env:
  *   SUPERTONIC_DIR    Path to your local supertonic repo checkout. Required.
  *                     Must contain nodejs/example_onnx.js and assets/voice_styles/*.json.
@@ -273,6 +278,51 @@ function safeRename(src, dest) {
   if (path.resolve(src) === path.resolve(dest)) return;
   if (fs.existsSync(dest)) fs.rmSync(dest);
   fs.renameSync(src, dest);
+}
+
+// Safety net: peak-normalize mono PCM16 WAVs that still hit full scale
+// (e.g. older single-line path, or a worker that skipped normalize).
+const TARGET_PEAK_I16 = Math.floor(32767 * Math.pow(10, -3 / 20)); // -3 dBFS
+
+function peakNormalizeWavFile(wavPath) {
+  const buf = fs.readFileSync(wavPath);
+  if (buf.toString('ascii', 0, 4) !== 'RIFF' || buf.toString('ascii', 8, 12) !== 'WAVE') return false;
+  let offset = 12;
+  let dataOffset = null;
+  let dataSize = null;
+  let bits = null;
+  let channels = null;
+  let audioFormat = null;
+  while (offset + 8 <= buf.length) {
+    const id = buf.toString('ascii', offset, offset + 4);
+    const size = buf.readUInt32LE(offset + 4);
+    const body = offset + 8;
+    if (id === 'fmt ') {
+      audioFormat = buf.readUInt16LE(body);
+      channels = buf.readUInt16LE(body + 2);
+      bits = buf.readUInt16LE(body + 14);
+    } else if (id === 'data') {
+      dataOffset = body;
+      dataSize = size;
+      break;
+    }
+    offset = body + size + (size % 2);
+  }
+  if (dataOffset == null || audioFormat !== 1 || bits !== 16 || channels !== 1) return false;
+  let peak = 0;
+  for (let i = 0; i < dataSize; i += 2) {
+    const s = Math.abs(buf.readInt16LE(dataOffset + i));
+    if (s > peak) peak = s;
+  }
+  if (peak <= TARGET_PEAK_I16) return false;
+  const scale = TARGET_PEAK_I16 / peak;
+  const out = Buffer.from(buf);
+  for (let i = 0; i < dataSize; i += 2) {
+    const s = buf.readInt16LE(dataOffset + i);
+    out.writeInt16LE(Math.max(-32768, Math.min(32767, Math.round(s * scale))), dataOffset + i);
+  }
+  fs.writeFileSync(wavPath, out);
+  return true;
 }
 
 function runSupertonicLine({ exampleScript, voiceName, text, outDir, lang }) {
@@ -594,10 +644,17 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
       });
       produced.forEach((producedPath, idx) => {
         safeRename(producedPath, pending[idx].wavPath);
+        peakNormalizeWavFile(pending[idx].wavPath);
       });
     } finally {
       fs.rmSync(tmpDir, { recursive: true, force: true });
     }
+  }
+
+  // Cached lines / music cues: still enforce headroom so a prior hot render
+  // cannot ship again just because --force was omitted for some lines.
+  for (const wavPath of wavs) {
+    if (fs.existsSync(wavPath)) peakNormalizeWavFile(wavPath);
   }
 
   fs.rmSync(path.join(outDir, '.tmp'), { recursive: true, force: true });

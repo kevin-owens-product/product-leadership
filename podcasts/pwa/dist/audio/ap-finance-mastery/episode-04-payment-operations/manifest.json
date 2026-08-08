@@ -9,7 +9,7 @@
     "text": "Welcome back. We've covered AP fundamentals, procure-to-pay, and invoice processing. Today we're talking about what happens after the invoice is approved: payment operations and cash management.",
     "chapter": "INTRO",
     "file": "0000.mp3",
-    "duration": 12.608,
+    "duration": 12.957,
     "startTime": 0
   },
   {
@@ -22,8 +22,8 @@
     "text": "This is where the money actually moves. And I know Medius recently launched Medius Payments, so understanding the payment landscape is critical for me.",
     "chapter": "INTRO",
     "file": "0001.mp3",
-    "duration": 9.125,
-    "startTime": 12.608
+    "duration": 9.961,
+    "startTime": 12.957
   },
   {
     "index": 2,
@@ -35,8 +35,8 @@
     "text": "Payments are the new frontier for AP automation. For years, AP platforms handled everything up to the point of approval, then handed off to the ERP or bank for payment. Now the smartest vendors are embedding payments directly into their platforms. Let's explore why.",
     "chapter": "INTRO",
     "file": "0002.mp3",
-    "duration": 16.231,
-    "startTime": 21.734
+    "duration": 16.788,
+    "startTime": 22.918
   },
   {
     "index": 3,
@@ -48,8 +48,8 @@
     "text": "Let's start with the basics. How do companies actually pay their suppliers?",
     "chapter": "INTRO",
     "file": "0003.mp3",
-    "duration": 4.598,
-    "startTime": 37.965
+    "duration": 5.085,
+    "startTime": 39.706
   },
   {
     "index": 4,
@@ -61,8 +61,8 @@
     "text": "There are more payment methods than most people realize, and the mix varies dramatically by region. In the US, checks are still surprisingly common. They've been declining for years but still represent about twenty to thirty percent of B2B payments. ACH, Automated Clearing House, is the dominant electronic payment method in the US. It's a batch-based system that processes payments through the Federal Reserve.",
     "chapter": "INTRO",
     "file": "0004.mp3",
-    "duration": 25.308,
-    "startTime": 42.562
+    "duration": 26.074,
+    "startTime": 44.791
   },
   {
     "index": 5,
@@ -74,8 +74,8 @@
     "text": "What about outside the US?",
     "chapter": "INTRO",
     "file": "0005.mp3",
-    "duration": 1.881,
-    "startTime": 67.87
+    "duration": 2.02,
+    "startTime": 70.865
   },
   {
     "index": 6,
@@ -87,8 +87,8 @@
     "text": "Europe has SEPA, the Single Euro Payments Area, which provides standardized credit transfers and direct debits across the eurozone. The UK has BACS for batch payments and Faster Payments for real-time. The Nordics are largely cashless with highly efficient payment infrastructure. Asia has a mix of domestic systems. Wire transfers are used globally for high-value or urgent payments, but they're expensive, typically fifteen to forty-five dollars per transaction.",
     "chapter": "INTRO",
     "file": "0006.mp3",
-    "duration": 29.07,
-    "startTime": 69.751
+    "duration": 29.975,
+    "startTime": 72.886
   },
   {
     "index": 7,
@@ -100,8 +100,8 @@
     "text": "And virtual cards? I keep hearing about those.",
     "chapter": "INTRO",
     "file": "0007.mp3",
-    "duration": 3.344,
-    "startTime": 98.82
+    "duration": 3.692,
+    "startTime": 102.861
   },
   {
     "index": 8,
@@ -113,8 +113,8 @@
     "text": "Virtual cards are one of the most interesting developments in B2B payments. The buying company generates a single-use virtual credit card number for a specific payment. The supplier charges that virtual card. The buying company gets all the benefits of credit card float and typically earns a rebate of one to two percent on the transaction.",
     "chapter": "INTRO",
     "file": "0008.mp3",
-    "duration": 21.616,
-    "startTime": 102.164
+    "duration": 22.243,
+    "startTime": 106.553
   },
   {
     "index": 9,
@@ -126,8 +126,8 @@
     "text": "Wait, the buyer actually earns money by paying suppliers?",
     "chapter": "INTRO",
     "file": "0009.mp3",
-    "duration": 3.622,
-    "startTime": 123.78
+    "duration": 3.971,
+    "startTime": 128.796
   },
   {
     "index": 10,
@@ -139,8 +139,8 @@
     "text": "Yes. Virtual card rebates can generate significant revenue for large companies. If a company pays a hundred million dollars a year via virtual card with a one-and-a-half percent rebate, that's one-and-a-half million dollars in annual rebate revenue. Some companies fund their entire AP department with virtual card rebates.",
     "chapter": "INTRO",
     "file": "0010.mp3",
-    "duration": 20.292,
-    "startTime": 127.402
+    "duration": 20.85,
+    "startTime": 132.766
   },
   {
     "index": 11,
@@ -152,8 +152,8 @@
     "text": "That's a compelling value proposition.",
     "chapter": "INTRO",
     "file": "0011.mp3",
-    "duration": 2.438,
-    "startTime": 147.695
+    "duration": 2.647,
+    "startTime": 153.616
   },
   {
     "index": 12,
@@ -165,8 +165,8 @@
     "text": "It is. But there's a catch. Suppliers pay a card interchange fee of two to three percent. So while the buyer benefits, the supplier's margin gets squeezed. Not every supplier will accept virtual card payments, especially those with thin margins.",
     "chapter": "INTRO",
     "file": "0012.mp3",
-    "duration": 14.559,
-    "startTime": 150.133
+    "duration": 14.977,
+    "startTime": 156.263
   },
   {
     "index": 13,
@@ -178,8 +178,8 @@
     "text": "How does the actual payment process work operationally?",
     "chapter": "INTRO",
     "file": "0013.mp3",
-    "duration": 3.413,
-    "startTime": 164.692
+    "duration": 3.762,
+    "startTime": 171.24
   },
   {
     "index": 14,
@@ -191,8 +191,8 @@
     "text": "Most companies run payments in batches, called payment runs. Typically, the AP team schedules payment runs on a set cadence, maybe twice a week or weekly. During a payment run, the system gathers all approved invoices that are due for payment, groups them by supplier and payment method, and creates a payment batch.",
     "chapter": "INTRO",
     "file": "0014.mp3",
-    "duration": 19.456,
-    "startTime": 168.105
+    "duration": 19.944,
+    "startTime": 175.001
   },
   {
     "index": 15,
@@ -204,8 +204,8 @@
     "text": "Why batch rather than pay in real-time?",
     "chapter": "INTRO",
     "file": "0015.mp3",
-    "duration": 2.508,
-    "startTime": 187.561
+    "duration": 2.717,
+    "startTime": 194.945
   },
   {
     "index": 16,
@@ -217,8 +217,8 @@
     "text": "Several reasons. Bank fees often have per-batch components rather than per-transaction, so batching is cheaper. It gives the treasury team control over cash outflows. It allows for netting, where you offset credits against debits for the same supplier. And it provides a natural checkpoint for review before large amounts of money leave the company.",
     "chapter": "INTRO",
     "file": "0016.mp3",
-    "duration": 21.128,
-    "startTime": 190.069
+    "duration": 21.755,
+    "startTime": 197.662
   },
   {
     "index": 17,
@@ -230,8 +230,8 @@
     "text": "What does the payment approval process look like?",
     "chapter": "INTRO",
     "file": "0017.mp3",
-    "duration": 2.995,
-    "startTime": 211.198
+    "duration": 3.274,
+    "startTime": 219.417
   },
   {
     "index": 18,
@@ -243,8 +243,8 @@
     "text": "This varies by company but usually involves segregation of duties. The person who approves invoices shouldn't be the same person who executes payments. Typically, AP prepares the payment batch, a manager reviews and approves it, and then treasury or a senior finance person releases the batch to the bank.",
     "chapter": "INTRO",
     "file": "0018.mp3",
-    "duration": 19.247,
-    "startTime": 214.193
+    "duration": 19.735,
+    "startTime": 222.691
   },
   {
     "index": 19,
@@ -256,8 +256,8 @@
     "text": "And the bank files?",
     "chapter": "INTRO",
     "file": "0019.mp3",
-    "duration": 1.463,
-    "startTime": 233.44
+    "duration": 1.602,
+    "startTime": 242.427
   },
   {
     "index": 20,
@@ -269,8 +269,8 @@
     "text": "The payment batch needs to be transmitted to the bank in a specific format. In the US, NACHA format for ACH payments. In Europe, ISO 20022 XML format for SEPA payments. These are standardized file formats that tell the bank who to pay, how much, and to which account. Getting these formats right is critical because a malformed file means failed payments.",
     "chapter": "INTRO",
     "file": "0020.mp3",
-    "duration": 23.357,
-    "startTime": 234.903
+    "duration": 24.193,
+    "startTime": 244.029
   },
   {
     "index": 21,
@@ -282,8 +282,8 @@
     "text": "Let's go deeper on payment terms. You mentioned Net 30 and early payment discounts last episode.",
     "chapter": "INTRO",
     "file": "0021.mp3",
-    "duration": 6.2,
-    "startTime": 258.261
+    "duration": 6.757,
+    "startTime": 268.222
   },
   {
     "index": 22,
@@ -295,8 +295,8 @@
     "text": "Payment terms are one of the most strategically important aspects of AP. The most common terms are Net 30, meaning payment due in thirty days, and Net 60. But there's an enormous range. Some industries operate on Net 90 or even Net 120. And then there are discount terms.",
     "chapter": "INTRO",
     "file": "0022.mp3",
-    "duration": 17.624,
-    "startTime": 264.46
+    "duration": 18.251,
+    "startTime": 274.979
   },
   {
     "index": 23,
@@ -308,8 +308,8 @@
     "text": "Tell me more about early payment discounts.",
     "chapter": "INTRO",
     "file": "0023.mp3",
-    "duration": 2.786,
-    "startTime": 282.084
+    "duration": 3.065,
+    "startTime": 293.23
   },
   {
     "index": 24,
@@ -321,8 +321,8 @@
     "text": "The classic is 2/10 Net 30. Pay within ten days and get two percent off, otherwise pay in full within thirty days. The math on this is compelling. Two percent for paying twenty days early annualizes to about thirty-six percent. That's a better return than almost any investment a company can make with its cash.",
     "chapter": "INTRO",
     "file": "0024.mp3",
-    "duration": 19.526,
-    "startTime": 284.871
+    "duration": 20.083,
+    "startTime": 296.295
   },
   {
     "index": 25,
@@ -334,8 +334,8 @@
     "text": "So why doesn't every company take advantage of these discounts?",
     "chapter": "INTRO",
     "file": "0025.mp3",
-    "duration": 3.831,
-    "startTime": 304.397
+    "duration": 4.249,
+    "startTime": 316.378
   },
   {
     "index": 26,
@@ -347,8 +347,8 @@
     "text": "Because many companies can't process invoices fast enough to capture them. If it takes your AP team fifteen days to receive, capture, validate, match, and approve an invoice, the ten-day discount window has already closed. This is one of the most powerful ROI arguments for AP automation. Faster processing means you can capture discounts that were previously unattainable.",
     "chapter": "INTRO",
     "file": "0026.mp3",
-    "duration": 22.939,
-    "startTime": 308.228
+    "duration": 23.775,
+    "startTime": 320.628
   },
   {
     "index": 27,
@@ -360,8 +360,8 @@
     "text": "How much money are we talking about?",
     "chapter": "INTRO",
     "file": "0027.mp3",
-    "duration": 2.229,
-    "startTime": 331.168
+    "duration": 2.438,
+    "startTime": 344.403
   },
   {
     "index": 28,
@@ -373,8 +373,8 @@
     "text": "For a large company with a billion dollars in addressable spend, capturing just one percent more in early payment discounts is ten million dollars straight to the bottom line. And it's not just 2/10 Net 30. Dynamic discounting allows buyers and suppliers to negotiate custom discount rates based on when the payment is made. Pay in five days and get two-and-a-half percent. Pay in fifteen days and get one percent. The earlier the payment, the bigger the discount.",
     "chapter": "INTRO",
     "file": "0028.mp3",
-    "duration": 28.443,
-    "startTime": 333.397
+    "duration": 29.279,
+    "startTime": 346.841
   },
   {
     "index": 29,
@@ -386,8 +386,8 @@
     "text": "Let's revisit DPO in the context of cash management.",
     "chapter": "INTRO",
     "file": "0029.mp3",
-    "duration": 3.483,
-    "startTime": 361.839
+    "duration": 3.831,
+    "startTime": 376.12
   },
   {
     "index": 30,
@@ -399,8 +399,8 @@
     "text": "Days Payable Outstanding is the single most important metric that treasury and the CFO care about in AP. As we discussed, the S&P 1500 average is about fifty-one days. But the range is enormous. Tech companies often have DPO in the sixties or seventies. Retailers might be in the forties. And there are famous examples of companies pushing DPO to extreme levels.",
     "chapter": "INTRO",
     "file": "0030.mp3",
-    "duration": 24.054,
-    "startTime": 365.322
+    "duration": 24.89,
+    "startTime": 379.951
   },
   {
     "index": 31,
@@ -412,8 +412,8 @@
     "text": "What's the tension here?",
     "chapter": "INTRO",
     "file": "0031.mp3",
-    "duration": 1.602,
-    "startTime": 389.376
+    "duration": 1.741,
+    "startTime": 404.841
   },
   {
     "index": 32,
@@ -425,8 +425,8 @@
     "text": "It's a three-way tension. Finance wants high DPO to conserve cash. Procurement wants to pay on time to maintain good supplier relationships and negotiate better terms. And AP is caught in the middle trying to execute whatever strategy has been decided while keeping the lights on operationally.",
     "chapter": "INTRO",
     "file": "0032.mp3",
-    "duration": 17.694,
-    "startTime": 390.979
+    "duration": 18.321,
+    "startTime": 406.582
   },
   {
     "index": 33,
@@ -438,8 +438,8 @@
     "text": "How does this connect to working capital?",
     "chapter": "INTRO",
     "file": "0033.mp3",
-    "duration": 2.508,
-    "startTime": 408.672
+    "duration": 2.786,
+    "startTime": 424.903
   },
   {
     "index": 34,
@@ -451,8 +451,8 @@
     "text": "Working capital optimization is the holy grail for CFOs. The Cash Conversion Cycle is the key formula: Days Sales Outstanding plus Days Inventory Outstanding minus Days Payable Outstanding. A lower CCC means less cash is tied up in operations. Increasing DPO reduces the CCC, freeing up cash. For a large company, improving DPO by even five days can free up tens or hundreds of millions in cash.",
     "chapter": "INTRO",
     "file": "0034.mp3",
-    "duration": 26.422,
-    "startTime": 411.18
+    "duration": 27.398,
+    "startTime": 427.689
   },
   {
     "index": 35,
@@ -464,8 +464,8 @@
     "text": "That's a boardroom-level impact from an AP metric.",
     "chapter": "INTRO",
     "file": "0035.mp3",
-    "duration": 3.344,
-    "startTime": 437.602
+    "duration": 3.622,
+    "startTime": 455.087
   },
   {
     "index": 36,
@@ -477,8 +477,8 @@
     "text": "Absolutely. Which is why the best CPOs at AP automation companies understand that their software directly impacts CFO-level metrics. You're not selling invoice processing. You're selling working capital optimization.",
     "chapter": "INTRO",
     "file": "0036.mp3",
-    "duration": 13.862,
-    "startTime": 440.946
+    "duration": 14.28,
+    "startTime": 458.709
   },
   {
     "index": 37,
@@ -490,8 +490,8 @@
     "text": "What about international payments? That must add complexity.",
     "chapter": "INTRO",
     "file": "0037.mp3",
-    "duration": 4.249,
-    "startTime": 454.808
+    "duration": 4.598,
+    "startTime": 472.99
   },
   {
     "index": 38,
@@ -503,8 +503,8 @@
     "text": "Cross-border payments are orders of magnitude more complex. You're dealing with multiple currencies, fluctuating exchange rates, correspondent banking networks, different regulatory regimes, and SWIFT messaging.",
     "chapter": "INTRO",
     "file": "0038.mp3",
-    "duration": 13.235,
-    "startTime": 459.058
+    "duration": 13.653,
+    "startTime": 477.587
   },
   {
     "index": 39,
@@ -516,8 +516,8 @@
     "text": "Walk me through how a cross-border payment works.",
     "chapter": "INTRO",
     "file": "0039.mp3",
-    "duration": 3.065,
-    "startTime": 472.293
+    "duration": 3.413,
+    "startTime": 491.24
   },
   {
     "index": 40,
@@ -529,8 +529,8 @@
     "text": "Say a US company needs to pay a German supplier in euros. The US company instructs their bank to send a payment. The bank converts dollars to euros at an exchange rate that includes a spread. The payment travels through the SWIFT network, potentially through one or more correspondent banks, each of which may take a fee. The payment arrives at the German supplier's bank, maybe two to five days later.",
     "chapter": "INTRO",
     "file": "0040.mp3",
-    "duration": 24.89,
-    "startTime": 475.358
+    "duration": 25.587,
+    "startTime": 494.654
   },
   {
     "index": 41,
@@ -542,8 +542,8 @@
     "text": "And the exchange rate risk?",
     "chapter": "INTRO",
     "file": "0041.mp3",
-    "duration": 1.881,
-    "startTime": 500.248
+    "duration": 2.02,
+    "startTime": 520.24
   },
   {
     "index": 42,
@@ -555,8 +555,8 @@
     "text": "FX risk is real. Between the time the invoice is received and the time the payment is made, the exchange rate can move significantly. A company paying a hundred-million-euro annual spend from the US could see millions of dollars in FX variance. Sophisticated treasury teams use hedging strategies, forward contracts, and payment timing to manage this risk.",
     "chapter": "INTRO",
     "file": "0042.mp3",
-    "duration": 23.079,
-    "startTime": 502.129
+    "duration": 23.775,
+    "startTime": 522.26
   },
   {
     "index": 43,
@@ -568,8 +568,8 @@
     "text": "This is why Medius Payments supporting multiple payment methods and currencies is so important.",
     "chapter": "INTRO",
     "file": "0043.mp3",
-    "duration": 5.851,
-    "startTime": 525.207
+    "duration": 6.409,
+    "startTime": 546.036
   },
   {
     "index": 44,
@@ -581,8 +581,8 @@
     "text": "Exactly. A platform that can handle ACH in the US, SEPA in Europe, BACS in the UK, and wire transfers globally, all from a single interface, is enormously valuable to companies with international operations.",
     "chapter": "INTRO",
     "file": "0044.mp3",
-    "duration": 14.002,
-    "startTime": 531.059
+    "duration": 14.42,
+    "startTime": 552.444
   },
   {
     "index": 45,
@@ -594,8 +594,8 @@
     "text": "What happens after the payment is sent?",
     "chapter": "INTRO",
     "file": "0045.mp3",
-    "duration": 2.438,
-    "startTime": 545.061
+    "duration": 2.647,
+    "startTime": 566.864
   },
   {
     "index": 46,
@@ -607,8 +607,8 @@
     "text": "Payment reconciliation. The AP team needs to confirm that each payment was successfully executed. This means matching the payment confirmation from the bank against the invoices that were included in the payment batch. Then matching the bank statement entries against the payments in the accounting system.",
     "chapter": "INTRO",
     "file": "0046.mp3",
-    "duration": 18.342,
-    "startTime": 547.499
+    "duration": 18.83,
+    "startTime": 569.511
   },
   {
     "index": 47,
@@ -620,8 +620,8 @@
     "text": "Sounds straightforward?",
     "chapter": "INTRO",
     "file": "0047.mp3",
-    "duration": 1.741,
-    "startTime": 565.841
+    "duration": 1.881,
+    "startTime": 588.341
   },
   {
     "index": 48,
@@ -633,8 +633,8 @@
     "text": "In theory. In practice, it's messy. Banks may consolidate multiple payments into a single statement entry. Payment amounts may differ slightly from invoice amounts due to bank fees, FX differences, or partial payments. Suppliers may apply payments to different invoices than intended. And timing differences between when you send a payment and when it clears create reconciliation headaches.",
     "chapter": "INTRO",
     "file": "0048.mp3",
-    "duration": 24.124,
-    "startTime": 567.582
+    "duration": 25.029,
+    "startTime": 590.221
   },
   {
     "index": 49,
@@ -646,8 +646,8 @@
     "text": "How often does reconciliation happen?",
     "chapter": "INTRO",
     "file": "0049.mp3",
-    "duration": 2.299,
-    "startTime": 591.706
+    "duration": 2.508,
+    "startTime": 615.251
   },
   {
     "index": 50,
@@ -659,8 +659,8 @@
     "text": "Daily bank reconciliation is best practice, though many companies do it weekly or even monthly. The longer you wait, the harder it is to resolve discrepancies. Automated bank reconciliation is a key feature of modern AP platforms.",
     "chapter": "INTRO",
     "file": "0050.mp3",
-    "duration": 14.211,
-    "startTime": 594.004
+    "duration": 14.698,
+    "startTime": 617.759
   },
   {
     "index": 51,
@@ -672,8 +672,8 @@
     "text": "Let's talk about why AP automation vendors are moving into payments. This is directly relevant to Medius Payments.",
     "chapter": "INTRO",
     "file": "0051.mp3",
-    "duration": 7.245,
-    "startTime": 608.215
+    "duration": 7.941,
+    "startTime": 632.457
   },
   {
     "index": 52,
@@ -685,8 +685,8 @@
     "text": "Historically, AP automation handled everything up to the point of approval. The approved invoice was then pushed to the ERP, which generated a payment file for the bank. This handoff created a gap. The AP platform had visibility into invoices but lost visibility once the payment was handed off.",
     "chapter": "INTRO",
     "file": "0052.mp3",
-    "duration": 18.669,
-    "startTime": 615.46
+    "duration": 19.435,
+    "startTime": 640.398
   },
   {
     "index": 53,
@@ -698,8 +698,8 @@
     "text": "And embedded payments close that gap?",
     "chapter": "INTRO",
     "file": "0053.mp3",
-    "duration": 2.368,
-    "startTime": 634.129
+    "duration": 2.577,
+    "startTime": 659.833
   },
   {
     "index": 54,
@@ -711,8 +711,8 @@
     "text": "Exactly. With embedded payments, the entire flow from invoice receipt to payment execution happens within a single platform. Medius launched Medius Payments in June 2025 with exactly this vision. They call it Straight Through Payments: payment batches are built and executed directly from Medius without needing to upload files to the ERP or bank separately.",
     "chapter": "INTRO",
     "file": "0054.mp3",
-    "duration": 23.706,
-    "startTime": 636.497
+    "duration": 24.333,
+    "startTime": 662.41
   },
   {
     "index": 55,
@@ -724,8 +724,8 @@
     "text": "What are the benefits?",
     "chapter": "INTRO",
     "file": "0055.mp3",
-    "duration": 1.602,
-    "startTime": 660.203
+    "duration": 1.741,
+    "startTime": 686.743
   },
   {
     "index": 56,
@@ -737,8 +737,8 @@
     "text": "Several. Complete visibility from invoice to payment in one system. Simplified workflow since there's no handoff between systems. Better fraud protection because approval rules and fraud detection are embedded in the payment flow. Faster payment execution. And better supplier experience because you can provide real-time payment status.",
     "chapter": "INTRO",
     "file": "0056.mp3",
-    "duration": 21.128,
-    "startTime": 661.805
+    "duration": 21.825,
+    "startTime": 688.485
   },
   {
     "index": 57,
@@ -750,8 +750,8 @@
     "text": "And the competitive angle?",
     "chapter": "INTRO",
     "file": "0057.mp3",
-    "duration": 1.811,
-    "startTime": 682.933
+    "duration": 1.95,
+    "startTime": 710.31
   },
   {
     "index": 58,
@@ -763,8 +763,8 @@
     "text": "This is becoming the new battleground in AP automation. Tipalti has been strong in payments for years. Coupa has payment capabilities. Bill dot com is payments-first. Medius entering this space signals that a complete AP platform must include embedded payments to remain competitive.",
     "chapter": "INTRO",
     "file": "0058.mp3",
-    "duration": 17.276,
-    "startTime": 684.744
+    "duration": 17.903,
+    "startTime": 712.26
   },
   {
     "index": 59,
@@ -776,8 +776,8 @@
     "text": "What makes embedded payments hard?",
     "chapter": "INTRO",
     "file": "0059.mp3",
-    "duration": 2.229,
-    "startTime": 702.02
+    "duration": 2.368,
+    "startTime": 730.163
   },
   {
     "index": 60,
@@ -789,8 +789,8 @@
     "text": "The regulatory complexity is enormous. Payment processors need to comply with banking regulations in every country they operate in. You need partnerships with banks and payment networks. You need to handle FX, sanctions screening, and anti-money laundering requirements. It's a fundamentally different business from software, and it requires significant investment and expertise.",
     "chapter": "INTRO",
     "file": "0060.mp3",
-    "duration": 23.357,
-    "startTime": 704.249
+    "duration": 24.193,
+    "startTime": 732.531
   },
   {
     "index": 61,
@@ -802,8 +802,8 @@
     "text": "Before we wrap up, tell me about supply chain finance.",
     "chapter": "INTRO",
     "file": "0061.mp3",
-    "duration": 3.622,
-    "startTime": 727.607
+    "duration": 3.901,
+    "startTime": 756.724
   },
   {
     "index": 62,
@@ -815,8 +815,8 @@
     "text": "Supply chain finance, sometimes called reverse factoring, is a financing arrangement where a bank or financial institution pays the supplier early on behalf of the buyer. The supplier gets paid quickly, the buyer extends their DPO, and the bank earns a small fee. Everyone wins.",
     "chapter": "INTRO",
     "file": "0062.mp3",
-    "duration": 16.579,
-    "startTime": 731.229
+    "duration": 17.206,
+    "startTime": 760.625
   },
   {
     "index": 63,
@@ -828,8 +828,8 @@
     "text": "How does it work in practice?",
     "chapter": "INTRO",
     "file": "0063.mp3",
-    "duration": 1.95,
-    "startTime": 747.808
+    "duration": 2.159,
+    "startTime": 777.831
   },
   {
     "index": 64,
@@ -841,8 +841,8 @@
     "text": "The buyer approves an invoice and tells the supply chain finance provider that this invoice is good. The provider pays the supplier immediately, minus a small discount. The buyer pays the provider at the original due date. The discount rate is based on the buyer's credit rating, which is usually much better than the supplier's, so the cost of financing is lower than if the supplier tried to get early payment on their own.",
     "chapter": "INTRO",
     "file": "0064.mp3",
-    "duration": 24.96,
-    "startTime": 749.758
+    "duration": 25.656,
+    "startTime": 779.991
   },
   {
     "index": 65,
@@ -854,8 +854,8 @@
     "text": "And dynamic discounting?",
     "chapter": "INTRO",
     "file": "0065.mp3",
-    "duration": 1.811,
-    "startTime": 774.718
+    "duration": 1.95,
+    "startTime": 805.647
   },
   {
     "index": 66,
@@ -867,8 +867,8 @@
     "text": "Dynamic discounting is a simpler version where the buyer uses their own cash to pay early in exchange for a discount. No bank involved. The discount rate is calculated on a sliding scale based on how many days early the payment is made. It's essentially the buyer earning a return on their excess cash by paying suppliers early.",
     "chapter": "INTRO",
     "file": "0066.mp3",
-    "duration": 20.292,
-    "startTime": 776.529
+    "duration": 20.85,
+    "startTime": 807.597
   },
   {
     "index": 67,
@@ -880,8 +880,8 @@
     "text": "Both of these require a platform that can facilitate the transactions?",
     "chapter": "INTRO",
     "file": "0067.mp3",
-    "duration": 4.18,
-    "startTime": 796.821
+    "duration": 4.598,
+    "startTime": 828.447
   },
   {
     "index": 68,
@@ -893,8 +893,8 @@
     "text": "Exactly. And having payments embedded in the AP platform makes this much easier to implement. It's another reason why the payments play is strategically important.",
     "chapter": "INTRO",
     "file": "0068.mp3",
-    "duration": 10.17,
-    "startTime": 801.001
+    "duration": 10.449,
+    "startTime": 833.045
   },
   {
     "index": 69,
@@ -906,8 +906,8 @@
     "text": "Morgan, the payments landscape is much deeper than I expected. There's real product strategy here around embedded payments, virtual cards, and supply chain finance.",
     "chapter": "INTRO",
     "file": "0069.mp3",
-    "duration": 10.031,
-    "startTime": 811.171
+    "duration": 11.006,
+    "startTime": 843.494
   },
   {
     "index": 70,
@@ -919,8 +919,8 @@
     "text": "And we've barely scratched the surface of things like real-time payments, open banking APIs, and cryptocurrency in B2B. Payments is a space that's evolving rapidly. Next episode, we're going to shift to the supplier side of the equation. Supplier management, spend analytics, and why the supplier experience matters more than most AP teams realize.",
     "chapter": "INTRO",
     "file": "0070.mp3",
-    "duration": 21.616,
-    "startTime": 821.202
+    "duration": 22.173,
+    "startTime": 854.5
   },
   {
     "index": 71,
@@ -932,8 +932,8 @@
     "text": "Can't wait. Thanks Morgan.",
     "chapter": "INTRO",
     "file": "0071.mp3",
-    "duration": 2.02,
-    "startTime": 842.818
+    "duration": 2.159,
+    "startTime": 876.673
   },
   {
     "index": 72,
@@ -945,8 +945,8 @@
     "text": "See you next time.",
     "chapter": "INTRO",
     "file": "0072.mp3",
-    "duration": 1.463,
-    "startTime": 844.839
+    "duration": 1.533,
+    "startTime": 878.833
   },
   {
     "index": 73,
@@ -958,7 +958,7 @@
     "text": "Next Episode: Supplier Management & Spend Analytics",
     "chapter": "INTRO",
     "file": "0073.mp3",
-    "duration": 3.971,
-    "startTime": 846.301
+    "duration": 4.04,
+    "startTime": 880.365
   }
 ]

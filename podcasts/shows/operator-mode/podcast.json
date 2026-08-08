@@ -1,0 +1,112 @@
+{
+  "id": "operator-mode",
+  "title": "Operator Mode",
+  "subtitle": "From Company to Portfolio. Every Decision Compounds.",
+  "description": "A two-season AI value-creation apprenticeship for operators who need to connect product judgment, production AI, operating design, scaling, and private-equity returns. Season One puts you inside Harborline Systems from underwrite to exit. Season Two, Portfolio Control, promotes you into a three-company operating-partner simulation where capital, agents, talent, platform boundaries, regulation, M&A, and fund liquidity collide. Every episode gives you incomplete evidence, forces a decision, and carries the consequences forward.",
+  "author": "Asha Raman & Cole Mercer",
+  "color": "#14b8a6",
+  "icon": "⚙️",
+  "voiceMap": {
+    "ASHA": "F4",
+    "COLE": "M5"
+  },
+  "lang": "en",
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-underwrite-the-deal.md",
+      "title": "Underwrite the Deal",
+      "subtitle": "The Return Bridge, the Investment Committee, and the Price of Being Wrong"
+    },
+    {
+      "id": 2,
+      "file": "episode-02-find-the-truth-in-the-numbers.md",
+      "title": "Find the Truth in the Numbers",
+      "subtitle": "ARR Quality, Cohorts, Cash, and the Constraint Hiding in Plain Sight"
+    },
+    {
+      "id": 3,
+      "file": "episode-03-choose-the-bets.md",
+      "title": "Choose the Bets",
+      "subtitle": "Customer Truth, the AI Wedge, and Capital Allocation Under Uncertainty"
+    },
+    {
+      "id": 4,
+      "file": "episode-04-make-ai-economically-real.md",
+      "title": "Make AI Economically Real",
+      "subtitle": "Quality, Latency, Cost, Trust, and the Production Service Envelope"
+    },
+    {
+      "id": 5,
+      "file": "episode-05-build-the-revenue-engine.md",
+      "title": "Build the Revenue Engine",
+      "subtitle": "Pricing, Pipeline, Implementation, Retention, and Expansion"
+    },
+    {
+      "id": 6,
+      "file": "episode-06-run-the-company.md",
+      "title": "Run the Company",
+      "subtitle": "The Metric Tree, Operating Cadence, Talent, and the Board"
+    },
+    {
+      "id": 7,
+      "file": "episode-07-buy-integrate-compound.md",
+      "title": "Buy, Integrate, Compound",
+      "subtitle": "Add-On Diligence, Synergy Proof, and the 180-Day Integration"
+    },
+    {
+      "id": 8,
+      "file": "episode-08-defend-the-exit.md",
+      "title": "Defend the Exit",
+      "subtitle": "Revenue Quality, AI Durability, Buyer Diligence, and the Final Return"
+    },
+    {
+      "id": 9,
+      "file": "episode-09-run-the-portfolio-not-the-pilots.md",
+      "title": "Run the Portfolio, Not the Pilots",
+      "subtitle": "Concentration, Shared Capability, and the Capital Allocation You Cannot Avoid"
+    },
+    {
+      "id": 10,
+      "file": "episode-10-prove-the-counterfactual.md",
+      "title": "Prove the Counterfactual",
+      "subtitle": "Causal Value, Finance Sign-Off, and the Difference Between Usage and Impact"
+    },
+    {
+      "id": 11,
+      "file": "episode-11-delegate-authority-not-accountability.md",
+      "title": "Delegate Authority, Not Accountability",
+      "subtitle": "Agent Identity, Permissions, Loss Limits, and the Boundary of Autonomy"
+    },
+    {
+      "id": 12,
+      "file": "episode-12-capture-the-productivity.md",
+      "title": "Capture the Productivity",
+      "subtitle": "Capacity, Roles, Incentives, and the Savings That Do Not Happen by Themselves"
+    },
+    {
+      "id": 13,
+      "file": "episode-13-choose-the-platform-boundary.md",
+      "title": "Choose the Platform Boundary",
+      "subtitle": "APIs, Ecosystem Power, Data Rights, and Blast Radius"
+    },
+    {
+      "id": 14,
+      "file": "episode-14-cross-the-border.md",
+      "title": "Cross the Border",
+      "subtitle": "Regulation, Localization, Data Residency, and the Country P&L"
+    },
+    {
+      "id": 15,
+      "file": "episode-15-build-the-roll-up-machine.md",
+      "title": "Build the Roll-Up Machine",
+      "subtitle": "Acquisition Cohorts, Integration Throughput, and Cumulative Leverage"
+    },
+    {
+      "id": 16,
+      "file": "episode-16-admit-the-thesis-broke.md",
+      "title": "Admit the Thesis Broke",
+      "subtitle": "Liquidity, Leadership, Continuation Conflicts, and the Fund Return"
+    }
+  ]
+}

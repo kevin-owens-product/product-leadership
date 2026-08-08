@@ -1,7 +1,7 @@
 // Share & export: timestamp/episode share links plus bookmark/progress JSON
 // exports, all launched from the share modal.
 
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from '../share-export/export.js?v=2.3.0%2B20260803T182016Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from '../share-export/export.js?v=2.3.0%2B20260807T235302Z';
 
 export function createSharePanel({
     loadState,

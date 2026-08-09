@@ -2,7 +2,7 @@
 
 **Duration:** ~13 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. Today we're flipping the lens to look at the other side of every AP transaction: the supplier.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Supplier Master Data
+### Supplier Master Data
 
 **KEVIN:** Let's start with the basics. What is supplier master data?
 
@@ -32,7 +32,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Supplier Onboarding
+### Supplier Onboarding
 
 **KEVIN:** How do new suppliers get set up?
 
@@ -52,7 +52,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Supplier Portals and Self-Service
+### Supplier Portals and Self-Service
 
 **KEVIN:** Tell me about supplier portals. What do they enable?
 
@@ -72,7 +72,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Spend Analytics
+### Spend Analytics
 
 **KEVIN:** Let's shift to spend analytics. Why is spend visibility so important?
 
@@ -92,7 +92,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Spend Categorization
+### Spend Categorization
 
 **KEVIN:** How does spend get categorized?
 
@@ -108,7 +108,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Tail Spend
+### Tail Spend
 
 **KEVIN:** What about tail spend? I've heard that term.
 
@@ -124,7 +124,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Supplier Performance and Relationships
+### Supplier Performance and Relationships
 
 **KEVIN:** How do companies measure and manage supplier performance?
 
@@ -148,7 +148,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Duplicate Supplier Detection
+### Duplicate Supplier Detection
 
 **KEVIN:** You mentioned duplicate suppliers earlier. How do you detect and clean those up?
 
@@ -160,7 +160,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Early Payment Programs
+### Early Payment Programs
 
 **KEVIN:** Let's talk about early payment programs and their impact on suppliers.
 
@@ -176,7 +176,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, this episode has completely changed how I think about the supplier side of AP. It's not just about processing invoices efficiently. It's about building relationships, enabling transparency, and creating value across the supply chain.
 

@@ -2,7 +2,7 @@
 
 **Duration:** ~14 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back. We've covered AP fundamentals, procure-to-pay, and invoice processing. Today we're talking about what happens after the invoice is approved: payment operations and cash management.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Payment Methods Overview
+### Payment Methods Overview
 
 **KEVIN:** Let's start with the basics. How do companies actually pay their suppliers?
 
@@ -36,7 +36,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Payment Runs and Batch Processing
+### Payment Runs and Batch Processing
 
 **KEVIN:** How does the actual payment process work operationally?
 
@@ -56,7 +56,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Payment Terms Strategy
+### Payment Terms Strategy
 
 **KEVIN:** Let's go deeper on payment terms. You mentioned Net 30 and early payment discounts last episode.
 
@@ -76,7 +76,7 @@
 
 **[MUSIC TRANSITION]**
 
-## DPO and Working Capital
+### DPO and Working Capital
 
 **KEVIN:** Let's revisit DPO in the context of cash management.
 
@@ -96,7 +96,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Cross-Border Payments
+### Cross-Border Payments
 
 **KEVIN:** What about international payments? That must add complexity.
 
@@ -116,7 +116,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Payment Reconciliation
+### Payment Reconciliation
 
 **KEVIN:** What happens after the payment is sent?
 
@@ -132,7 +132,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Embedded Payments: The New Frontier
+### Embedded Payments: The New Frontier
 
 **KEVIN:** Let's talk about why AP automation vendors are moving into payments. This is directly relevant to Medius Payments.
 
@@ -156,7 +156,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Supply Chain Finance and Dynamic Discounting
+### Supply Chain Finance and Dynamic Discounting
 
 **KEVIN:** Before we wrap up, tell me about supply chain finance.
 
@@ -176,7 +176,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, the payments landscape is much deeper than I expected. There's real product strategy here around embedded payments, virtual cards, and supply chain finance.
 

@@ -30,8 +30,20 @@ async function openEpisode(page, podcastTitle = 'Claude Code Mastery', episodeTi
   }).toPass({ timeout: 20000 });
 }
 
-test('404 per-line audio surfaces a coalesced skip-ahead retry toast', async ({ page }) => {
-  // Every chunk 404s — playback must keep advancing and show ONE toast.
+test('404 per-line audio stops with one actionable episode retry toast', async ({ page }) => {
+  // Every chunk 404s — playback stops after the bounded probe instead of
+  // stacking a per-line warning underneath the final episode-level failure.
+  // Remove duration metadata so this fixture deterministically exercises the
+  // legacy per-line path even when the catalog later gains combined audio.
+  await page.route('**/audio/claude-code-mastery/episode-01-getting-started/manifest.json*', async route => {
+    const response = await route.fetch();
+    const items = await response.json();
+    for (const item of items) {
+      delete item.startTime;
+      delete item.duration;
+    }
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(items) });
+  });
   await page.route('**/audio/claude-code-mastery/episode-01-getting-started/*.mp3*', route =>
     route.fulfill({ status: 404, contentType: 'text/plain', body: 'not found' })
   );
@@ -39,17 +51,12 @@ test('404 per-line audio surfaces a coalesced skip-ahead retry toast', async ({ 
   await openEpisode(page);
   await page.locator('#play-btn').click();
 
-  const toast = page.locator('#toast-region .toast', { hasText: 'Audio failed for a line' });
-  await expect(toast).toBeVisible();
-  await expect(toast.locator('.toast-action')).toHaveText('Retry');
-
-  // Identical failures coalesce: a run of 404'ing lines shows one toast, not N.
-  await page.waitForTimeout(800);
-  await expect(page.locator('#toast-region .toast', { hasText: 'Audio failed for a line' })).toHaveCount(1);
-
   // Circuit breaker: after 3 consecutive failures playback STOPS instead of
   // sprinting through the episode and marking it complete with no sound.
-  await expect(page.locator('#toast-region .toast', { hasText: "Episode audio isn't loading" })).toBeVisible();
+  const episodeToast = page.locator('#toast-region .toast', { hasText: "Episode audio isn't loading" });
+  await expect(episodeToast).toBeVisible();
+  await expect(episodeToast.locator('.toast-action')).toHaveText('Retry');
+  await expect(page.locator('#toast-region .toast', { hasText: 'Audio failed for a line' })).toHaveCount(0);
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Play');
   await expect(page.locator('#complete-modal')).not.toBeVisible();
 });

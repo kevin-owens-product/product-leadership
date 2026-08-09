@@ -2,7 +2,7 @@
 
 **Duration:** ~22 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome to AP and Finance Mastery, the podcast designed to take you from zero to expert on accounts payable, financial operations, and everything that makes the procure-to-pay world tick. I'm Morgan, and I've spent over twenty years in enterprise finance, from running AP departments to advising on finance transformation initiatives.
 
@@ -14,7 +14,7 @@
 
 **[MUSIC TRANSITION]**
 
-## What is Accounts Payable?
+### What is Accounts Payable?
 
 **MORGAN:** At its simplest, accounts payable is the money a company owes to its suppliers and vendors for goods and services that have been received but not yet paid for. It's a liability on the balance sheet. But that definition barely scratches the surface of what AP actually does inside an organization.
 
@@ -36,7 +36,7 @@
 
 **[MUSIC TRANSITION]**
 
-## AP on the Balance Sheet
+### AP on the Balance Sheet
 
 **KEVIN:** You mentioned AP is a liability on the balance sheet. Let me make sure I understand the accounting side. How does this actually work?
 
@@ -60,7 +60,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Invoice Lifecycle
+### The Invoice Lifecycle
 
 **KEVIN:** Let's get into the mechanics. Walk me through the life of an invoice from start to finish.
 
@@ -96,7 +96,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Coding, Matching, and Approval
+### Coding, Matching, and Approval
 
 **KEVIN:** What happens after validation?
 
@@ -140,7 +140,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Types of Invoices
+### Types of Invoices
 
 **KEVIN:** You mentioned PO and non-PO invoices. Are there other types I should know about?
 
@@ -160,7 +160,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Key AP Terminology
+### Key AP Terminology
 
 **KEVIN:** Let me make sure I have the key terminology down. Can we do a rapid-fire glossary?
 
@@ -180,7 +180,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Pain Points in Manual AP
+### Pain Points in Manual AP
 
 **KEVIN:** Let's talk about what goes wrong. What are the biggest pain points when AP is done manually?
 
@@ -208,7 +208,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Key AP Metrics and Benchmarks
+### Key AP Metrics and Benchmarks
 
 **KEVIN:** Let's go deeper on metrics. As a product person, I want to understand what our customers measure and care about.
 
@@ -228,7 +228,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Why AP Automation Exists
+### Why AP Automation Exists
 
 **KEVIN:** So pulling it all together, why does AP automation exist as a software category?
 
@@ -248,7 +248,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, this has been an incredible foundation. I feel like I've gone from knowing almost nothing about AP to having a solid framework for understanding the space.
 

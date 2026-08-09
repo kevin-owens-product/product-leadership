@@ -2,7 +2,7 @@
 
 **Duration:** ~17 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. In our first episode, we covered the fundamentals of accounts payable, the invoice lifecycle, and why AP matters strategically. Today we're going to zoom out and look at the full procure-to-pay journey.
 
@@ -14,7 +14,7 @@
 
 **[MUSIC TRANSITION]**
 
-## What is Procure-to-Pay?
+### What is Procure-to-Pay?
 
 **MORGAN:** Procure-to-pay, or P2P, is the end-to-end business process that covers everything from identifying a need for goods or services through to making the final payment to the supplier. It spans two major organizational functions: procurement, which handles the buying, and finance slash AP, which handles the paying.
 
@@ -32,7 +32,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The P2P Cycle Step by Step
+### The P2P Cycle Step by Step
 
 **KEVIN:** Walk me through the full P2P cycle, step by step.
 
@@ -60,7 +60,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Purchase Orders and Goods Receipt
+### Purchase Orders and Goods Receipt
 
 **KEVIN:** Okay, so we've sourced our laptops. Now a purchase order gets created?
 
@@ -84,7 +84,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Three-Way Matching in Detail
+### Three-Way Matching in Detail
 
 **KEVIN:** Now we get to the part we touched on last episode. Three-way matching.
 
@@ -112,7 +112,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Non-PO Spend: The Hardest Problem
+### Non-PO Spend: The Hardest Problem
 
 **KEVIN:** Let's talk about the invoices that don't have a PO. You said this is the hardest problem in AP.
 
@@ -136,7 +136,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Maverick Spending
+### Maverick Spending
 
 **KEVIN:** You mentioned people bypassing the procurement process. Tell me about maverick spending.
 
@@ -160,7 +160,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Source-to-Pay: The Bigger Picture
+### Source-to-Pay: The Bigger Picture
 
 **KEVIN:** I've also heard the term source-to-pay, or S2P. How does that relate to P2P?
 
@@ -176,7 +176,7 @@
 
 **[MUSIC TRANSITION]**
 
-## ERPs and P2P
+### ERPs and P2P
 
 **KEVIN:** Let's talk about ERPs. How do systems like SAP, Oracle, and Microsoft Dynamics handle P2P?
 
@@ -196,7 +196,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The P2P Automation Opportunity
+### The P2P Automation Opportunity
 
 **KEVIN:** Let's wrap up with the big picture. Why is P2P automation such a massive market?
 

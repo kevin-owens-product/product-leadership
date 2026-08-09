@@ -8,58 +8,58 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260807T235302Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260807T235302Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260807T235302Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260807T235302Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260807T235302Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260807T235302Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260807T235302Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260807T235302Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260807T235302Z';
-import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260807T235302Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260807T235302Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260807T235302Z';
+} from './state/storage.js?v=2.3.0%2B20260809T173920Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260809T173920Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260809T173920Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260809T173920Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260809T173920Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260809T173920Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260809T173920Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260809T173920Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260809T173920Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260809T173920Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260809T173920Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260809T173920Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260807T235302Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260807T235302Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260807T235302Z';
+} from './app/version.js?v=2.3.0%2B20260809T173920Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260809T173920Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260809T173920Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260807T235302Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260809T173920Z';
 import {
-    combinedAudioUrl,
     withCacheKey,
     epKeyOf,
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260807T235302Z';
-import { createDownloadsManager } from './downloads/downloads.js?v=2.3.0%2B20260807T235302Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260807T235302Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260807T235302Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260807T235302Z';
-import { formatClock } from './ui/format.js?v=2.3.0%2B20260807T235302Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260807T235302Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260807T235302Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260807T235302Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260807T235302Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260807T235302Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260807T235302Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260807T235302Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260807T235302Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260807T235302Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260807T235302Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260807T235302Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260807T235302Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260807T235302Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260807T235302Z';
-import { initBackNav, backTarget, performBack } from './app/back-nav.js?v=2.3.0%2B20260807T235302Z';
+} from './playback/manifest.js?v=2.3.0%2B20260809T173920Z';
+import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js?v=2.3.0%2B20260809T173920Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260809T173920Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260809T173920Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260809T173920Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260809T173920Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260809T173920Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260809T173920Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260809T173920Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260809T173920Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260809T173920Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260809T173920Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260809T173920Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260809T173920Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260809T173920Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260809T173920Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260809T173920Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260809T173920Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260809T173920Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260809T173920Z';
+import { initBackNav, backTarget, performBack } from './app/back-nav.js?v=2.3.0%2B20260809T173920Z';
+import { classifyContinuousAudioFailure } from './playback/audio-errors.js?v=2.3.0%2B20260809T173920Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -100,6 +100,11 @@ let lineOffsets = [];
 let episodeAudioDuration = 0;
 let lastPersistedLine = -1;
 let lastPrebufferedEpKey = null;
+let prebufferedNextAudio = null;
+let episodeAudioLoadFailed = false;
+let episodeOpenRequest = 0;
+let audioSourceGeneration = 0;
+let continuousPlayIntentGeneration = null;
 
 // The podcast that owns the loaded episode. `currentPodcast` follows the
 // user's browsing context (it changes when they open another show from home
@@ -168,7 +173,7 @@ const podcastsLoader = createPodcastsLoader({
 
 const queuePanel = createQueuePanel({
     getPodcasts,
-    isCurrentItem: (item) => currentPodcast?.id === item.podcastId && currentEpisode?.id === item.episodeNum,
+    isCurrentItem: (item) => playerPodcast?.id === item.podcastId && currentEpisode?.id === item.episodeNum,
     onOpenItem: (podcast, episode) => {
         openPodcast(podcast);
         setTimeout(() => openEpisode(episode, { promptResume: true }), 100);
@@ -214,7 +219,7 @@ const mediaSession = createMediaSessionController({
     getState: () => ({
         isPlaying,
         isPaused,
-        currentPodcast,
+        currentPodcast: playerPodcast || currentPodcast,
         currentEpisode,
         dialogueLines,
         currentLineIndex,
@@ -262,7 +267,7 @@ const miniPlayer = createMiniPlayer({
 
 const sharePanel = createSharePanel({
     loadState,
-    getCurrentPodcast: () => currentPodcast,
+    getCurrentPodcast: () => playerPodcast || currentPodcast,
     getCurrentEpisode: () => currentEpisode,
     getCurrentLineIndex: () => currentLineIndex,
     getDialogueLines: () => dialogueLines
@@ -292,7 +297,8 @@ function applySpeechRate(rate, { persistShow = true, save = true } = {}) {
     if (popValue) popValue.textContent = label;
     updateSpeedPresetButtons();
     speechPlayers.setRate(speechRate);
-    if (persistShow && currentPodcast) setShowSpeed(currentPodcast.id, speechRate);
+    const speedOwner = playerPodcast || currentPodcast;
+    if (persistShow && speedOwner) setShowSpeed(speedOwner.id, speechRate);
     if (save) saveState();
     updateMediaSessionPositionState();
 }
@@ -443,7 +449,7 @@ document.addEventListener('click', (event) => {
 // === Next-episode pre-buffer ===
 
 function maybePrebufferNextEpisode() {
-    if (!currentPodcast || !currentEpisode) return;
+    if (!playerPodcast || !currentEpisode) return;
     if (!speechPlayers.isContinuousReady()) return;
     const duration = speechPlayers.getDuration();
     const position = speechPlayers.getCurrentTime();
@@ -453,10 +459,18 @@ function maybePrebufferNextEpisode() {
     const nextKey = epKeyOf(next.podcast, next.episode);
     if (lastPrebufferedEpKey === nextKey) return;
     lastPrebufferedEpKey = nextKey;
-    // Fire-and-forget: warms the browser HTTP cache so auto-play starts
-    // without a network round-trip when this episode ends.
-    const url = combinedAudioUrl(next.podcast.id, next.episode);
-    fetch(url, { mode: 'no-cors' }).catch(() => { /* ignore */ });
+    const sourceKey = getEpisodeKey();
+    const episodeFile = next.episode.file || next.episode.filename || null;
+    // Only warm the tiny, no-store manifest. The previous implementation
+    // downloaded the full bare combined.mp3, then playback requested the same
+    // 8+ MB file again with ?v=<manifest hash>; on mobile those competing
+    // transfers could make the automatic handoff fail at time zero.
+    void loadSupertonicAudioManifest(next.podcast.id, episodeFile).then((audioManifest) => {
+        if (!audioManifest || getEpisodeKey() !== sourceKey) return;
+        const stillNext = getNextUp();
+        if (!stillNext || epKeyOf(stillNext.podcast, stillNext.episode) !== nextKey) return;
+        prebufferedNextAudio = { key: nextKey, audioManifest };
+    });
 }
 
 // What plays after the current episode: queue first, then the next
@@ -465,7 +479,7 @@ function getNextUp() {
     return findNextUp({
         queue: queuePanel.getQueue(),
         podcasts: getPodcasts(),
-        currentPodcastId: currentPodcast?.id ?? null,
+        currentPodcastId: playerPodcast?.id ?? null,
         currentEpisodeId: currentEpisode?.id ?? null
     });
 }
@@ -477,8 +491,11 @@ function getNextUp() {
 function openPodcast(podcast, { transition = true, sourceArt = null } = {}) {
     currentPodcast = podcast;
     // Each show remembers its own playback speed (falls back to the current
-    // global rate for shows without a saved preference).
-    applySpeechRate(getShowSpeed(podcast.id, speechRate), { persistShow: false, save: false });
+    // global rate for shows without a saved preference). Browsing another show
+    // must not change the rate of the episode that is still playing.
+    if (!currentEpisode || playerPodcast?.id === podcast.id) {
+        applySpeechRate(getShowSpeed(podcast.id, speechRate), { persistShow: false, save: false });
+    }
     document.getElementById('current-podcast-title').textContent = podcast.title;
     document.getElementById('current-podcast-subtitle').textContent = podcast.subtitle;
     document.getElementById('nav-podcast-name').textContent = podcast.title;
@@ -552,13 +569,15 @@ function saveState() {
         autoPlayNext
     };
 
-    // Save current podcast/episode
-    if (currentPodcast) {
-        state.currentPodcastId = currentPodcast.id;
-    }
-    if (currentEpisode) {
+    // Persist the owner of the loaded episode, not whichever show the user is
+    // currently browsing behind the mini player.
+    const playbackOwner = playerPodcast || (currentEpisode ? currentPodcast : null);
+    if (playbackOwner && currentEpisode) {
+        state.currentPodcastId = playbackOwner.id;
         state.currentEpisodeId = currentEpisode.id;
         state.currentLineIndex = currentLineIndex;
+    } else if (currentPodcast) {
+        state.currentPodcastId = currentPodcast.id;
     }
 
     // Get existing progress
@@ -573,8 +592,8 @@ function saveState() {
     }
 
     // Update current episode progress (with podcast-scoped key)
-    if (currentPodcast && currentEpisode && dialogueLines.length > 0) {
-        const epKey = `${currentPodcast.id}-${currentEpisode.id}`;
+    if (playbackOwner && currentEpisode && dialogueLines.length > 0) {
+        const epKey = `${playbackOwner.id}-${currentEpisode.id}`;
         const pct = Math.round((currentLineIndex / dialogueLines.length) * 100);
         state.episodeProgress[epKey] = {
             line: currentLineIndex,
@@ -614,22 +633,31 @@ function restoreState() {
 async function openEpisode(episode, options = {}) {
     const {
         promptResume = true,
-        preferredLine = null
+        preferredLine = null,
+        podcast: requestedPodcast = currentPodcast,
+        prefetchedAudioManifest = null
     } = options;
-    await stopPlayback();
+    if (!requestedPodcast) return false;
+    const requestId = ++episodeOpenRequest;
+    await stopPlayback({ preserveOpenRequest: true });
+    if (requestId !== episodeOpenRequest) return false;
     currentEpisode = episode;
-    playerPodcast = currentPodcast;
+    playerPodcast = requestedPodcast;
+    applySpeechRate(getShowSpeed(requestedPodcast.id, speechRate), { persistShow: false, save: false });
     const speakerVoiceMap = parseSpeakerVoiceMap(episode.content);
     dialogueLines = parseMarkdown(episode.content, speakerVoiceMap);
     chapters = parseChapters(episode.content);
     alignChapterLineIndexes(chapters, dialogueLines);
 
-    const podcastId = currentPodcast ? currentPodcast.id : null;
+    const podcastId = requestedPodcast.id;
     const episodeFile = episode.file || episode.filename || null;
-    const audioManifest = await loadSupertonicAudioManifest(podcastId, episodeFile);
+    const audioManifest = prefetchedAudioManifest
+        || await loadSupertonicAudioManifest(podcastId, episodeFile);
+    if (requestId !== episodeOpenRequest) return false;
     lineOffsets = [];
     episodeAudioDuration = 0;
     lastPersistedLine = -1;
+    episodeAudioLoadFailed = false;
     if (audioManifest) {
         const matched = attachAudioUrls(dialogueLines, audioManifest);
         currentAudioManifestBase = audioManifest.base;
@@ -637,6 +665,7 @@ async function openEpisode(episode, options = {}) {
             console.log(`Loaded ${matched}/${dialogueLines.length} Supertonic audio lines from ${audioManifest.base}`);
         } else {
             console.warn(`Supertonic audio manifest found at ${audioManifest.base} but no lines matched`);
+            episodeAudioLoadFailed = true;
         }
         const built = buildLineOffsets(dialogueLines);
         if (built) {
@@ -656,12 +685,13 @@ async function openEpisode(episode, options = {}) {
     } else {
         currentAudioManifestBase = '';
         speechPlayers.setEpisode({});
+        episodeAudioLoadFailed = true;
         console.warn(`No Supertonic audio manifest found for ${podcastId || 'unknown podcast'} / ${episodeFile || 'unknown episode'}`);
     }
 
     // Restore progress (with podcast-scoped key)
     const state = loadState();
-    const epKey = currentPodcast ? `${currentPodcast.id}-${episode.id}` : episode.id;
+    const epKey = `${requestedPodcast.id}-${episode.id}`;
     const progress = state.episodeProgress?.[epKey];
     const savedLine = Number.isInteger(progress?.line) ? progress.line : 0;
     const lastLine = Math.max(0, dialogueLines.length - 1);
@@ -689,7 +719,7 @@ async function openEpisode(episode, options = {}) {
 
     // Hero type stack: show + episode number under the title; the breadcrumb
     // stays in the DOM (visually hidden) as the screen-reader location line.
-    const podcastName = currentPodcast ? currentPodcast.title : 'Podcast';
+    const podcastName = requestedPodcast.title;
     const showLine = document.getElementById('np-show-name');
     if (showLine) showLine.textContent = `${podcastName} · Episode ${episode.id}`;
     document.getElementById('player-breadcrumb').textContent = `Home › ${podcastName} › Episode ${episode.id}`;
@@ -697,7 +727,7 @@ async function openEpisode(episode, options = {}) {
     // Hero artwork (same generated cover the mini player / Media Session use).
     const heroArt = document.getElementById('np-art');
     if (heroArt) {
-        const artUrl = currentPodcast ? generatePodcastArtwork(currentPodcast) : null;
+        const artUrl = generatePodcastArtwork(requestedPodcast);
         if (artUrl) {
             heroArt.src = artUrl;
             heroArt.hidden = false;
@@ -713,8 +743,11 @@ async function openEpisode(episode, options = {}) {
     bookmarksPanel.render();
     updateProgress();
     lastPrebufferedEpKey = null;
+    prebufferedNextAudio = null;
     hideUpNextBanner();
-    setStatus('Ready - Tap play to start');
+    setStatus(episodeAudioLoadFailed
+        ? 'Episode audio metadata isn\'t loading — tap play to retry'
+        : 'Ready - Tap play to start');
     syncMediaSession({ includeMetadata: true, includePosition: true });
     miniPlayer.update();
 
@@ -728,6 +761,7 @@ async function openEpisode(episode, options = {}) {
             ? { from: listArt, to: () => document.getElementById('np-art') }
             : null
     });
+    return true;
 }
 
 document.getElementById('back-to-list').addEventListener('click', () => {
@@ -759,7 +793,7 @@ function parseChapters(content) {
 }
 
 function getEpisodeKey() {
-    return currentPodcast && currentEpisode ? `${currentPodcast.id}-${currentEpisode.id}` : null;
+    return playerPodcast && currentEpisode ? `${playerPodcast.id}-${currentEpisode.id}` : null;
 }
 
 // ===== PROGRESS =====
@@ -865,6 +899,8 @@ speechPlayers.on('timeupdate', () => {
 });
 
 speechPlayers.on('play', () => {
+    continuousPlayIntentGeneration = null;
+    resetCombinedRecovery(audioSourceGeneration);
     isPlaying = true;
     isPaused = false;
     setPlayButtonState(true);
@@ -902,97 +938,307 @@ speechPlayers.on('ended', () => {
     if (sleepStop) sleep.consumeEpisodeEndStop();
 });
 
-// Continuous mode is enabled from manifest durations alone — a missing or
-// unsupported combined.mp3 only reveals itself when the element errors. The
-// per-line clips are still there, so downgrade the episode to chunked
-// playback instead of stranding it behind a retry that can never succeed.
-// One-shot per episode: mid-stream network drops keep the retry toast.
-let demotedEpisodeKey = null;
-function demoteToChunked() {
-    if (!currentEpisode) return false;
-    const key = getEpisodeKey();
-    if (demotedEpisodeKey === key) return false;
-    if (!dialogueLines.some((l) => l.audioUrl)) return false;
-    demotedEpisodeKey = key;
+// A media failure can arrive twice (the element's `error` event and the
+// rejected play() promise), and Chrome can report a transient range failure as
+// code 4 "format error". Coordinate both signals through one bounded recovery
+// state keyed to the currently loaded source. This prevents an old source's
+// AbortError from demoting a newly opened episode and prevents the screenshot's
+// immediate combined -> three failing line clips cascade.
+const COMBINED_RETRY_DELAYS_MS = [200, 650];
+let combinedRecoveryGeneration = -1;
+let combinedRecoveryAttempts = 0;
+let combinedRecoveryTimer = null;
+let combinedRecoveryInFlight = false;
+let combinedRecoveryAttemptFailure = null;
+let combinedRecoveryShouldResume = false;
+let combinedRecoveryPrefersFallback = false;
+let combinedRecoveryCacheEvicted = false;
+let combinedRecoveryFinalizing = false;
+
+function snapshotAudioFailure(error) {
+    return {
+        code: Number(error?.code) || 0,
+        name: String(error?.name || ''),
+        message: String(error?.message || '')
+    };
+}
+
+function resetCombinedRecovery(generation = audioSourceGeneration) {
+    if (combinedRecoveryTimer !== null) {
+        clearTimeout(combinedRecoveryTimer);
+        combinedRecoveryTimer = null;
+    }
+    combinedRecoveryGeneration = generation;
+    combinedRecoveryAttempts = 0;
+    combinedRecoveryInFlight = false;
+    combinedRecoveryAttemptFailure = null;
+    combinedRecoveryShouldResume = false;
+    combinedRecoveryPrefersFallback = false;
+    combinedRecoveryCacheEvicted = false;
+    combinedRecoveryFinalizing = false;
+}
+
+function invalidateContinuousSource() {
+    continuousPlayIntentGeneration = null;
+    audioSourceGeneration += 1;
+    resetCombinedRecovery(audioSourceGeneration);
+}
+
+function pauseForUserAction(status, toastMessage, {
+    actionLabel = 'Retry',
+    onAction = retryAudioLoad
+} = {}) {
+    continuousPlayIntentGeneration = null;
+    isPlaying = false;
+    isPaused = false;
+    try { speechPlayers.pause(); } catch { /* ignore */ }
+    setPlayButtonState(false);
+    setStatus(status);
+    miniPlayer.update();
+    mediaSession.updatePlaybackState();
+    void releaseWakeLock();
+    if (toastMessage) {
+        toasts.show(toastMessage, {
+            actionLabel,
+            duration: 0,
+            onAction: () => {
+                nowPlayingViz.ensureContext();
+                onAction();
+            }
+        });
+    }
+}
+
+async function evictCurrentCombinedCache(generation) {
+    if (generation !== audioSourceGeneration || combinedRecoveryCacheEvicted) return;
+    combinedRecoveryCacheEvicted = true;
+    const rawSrc = speechPlayers.audio?.currentSrc || speechPlayers.audio?.src;
+    if (!rawSrc) return;
+    try {
+        const url = new URL(rawSrc, location.href).toString();
+        const reply = await sendSwMessage({ type: 'DELETE_AUDIO_URLS', urls: [url] });
+        if (reply?.removed > 0) void downloads.reconcile();
+    } catch (err) {
+        console.debug('Could not evict failed combined audio cache entry:', err);
+    }
+}
+
+async function probeChunkFallback(generation) {
+    if (generation !== audioSourceGeneration) return false;
+    const candidate = dialogueLines[currentLineIndex]?.audioUrl
+        || dialogueLines.find((line) => line.audioUrl)?.audioUrl;
+    if (!candidate) return false;
+    try {
+        const response = await fetch(candidate, {
+            cache: 'no-store',
+            headers: { Range: 'bytes=0-1023' }
+        });
+        if (!response.ok) return false;
+        // Consume the probe so a successful response can warm the HTTP cache.
+        await response.arrayBuffer();
+        return generation === audioSourceGeneration;
+    } catch {
+        return false;
+    }
+}
+
+function demoteToChunked(generation) {
+    if (generation !== audioSourceGeneration || !speechPlayers.isContinuousReady()) return false;
+    if (!dialogueLines.some((line) => line.audioUrl)) return false;
     const line = currentLineIndex;
+    invalidateContinuousSource();
     speechPlayers.setEpisode({});
     currentLineIndex = line;
-    console.warn('combined.mp3 unavailable — demoting episode to per-chunk playback');
+    console.warn('combined.mp3 unavailable after retries — using verified per-line audio');
     return true;
 }
 
-speechPlayers.on('error', (err) => {
-    console.warn('Audio element error:', err);
-    if (!currentEpisode || !speechPlayers.isContinuousReady()) return;
-    // Source never became playable (load-time 404/decode failure, not a
-    // mid-stream drop): fall back to the per-line clips.
-    if (!(speechPlayers.getCurrentTime() > 0) && demoteToChunked()) {
-        if (isPlaying && !isPaused) { isPlaying = false; void startPlayback(); }
+async function finalizeCombinedFailure(generation) {
+    if (generation !== audioSourceGeneration || combinedRecoveryFinalizing) return;
+    combinedRecoveryFinalizing = true;
+    const shouldResume = combinedRecoveryShouldResume;
+    const chunkReady = await probeChunkFallback(generation);
+    if (generation !== audioSourceGeneration) return;
+    combinedRecoveryFinalizing = false;
+    if (chunkReady && demoteToChunked(generation)) {
+        isPlaying = false;
+        isPaused = false;
+        if (shouldResume) void startPlayback();
         return;
     }
-    setStatus('Audio playback error');
-    toasts.show('Audio failed to load', {
-        actionLabel: 'Retry',
-        onAction: retryAudioLoad
+    pauseForUserAction(
+        'Episode audio isn\'t loading — tap Retry',
+        'Episode audio isn\'t loading — check your connection and try again'
+    );
+}
+
+function reloadContinuousAtLine(line, generation) {
+    const audio = speechPlayers.audio;
+    const restorePosition = () => {
+        if (generation === audioSourceGeneration) speechPlayers.seekToLine(line);
+    };
+    // Safari can discard a currentTime assignment made immediately after
+    // load(); repeat it once metadata establishes the seekable timeline.
+    audio?.addEventListener?.('loadedmetadata', restorePosition, { once: true });
+    try { audio?.load(); } catch { /* ignore */ }
+    restorePosition();
+}
+
+async function runCombinedRecoveryAttempt(generation) {
+    if (generation !== audioSourceGeneration || combinedRecoveryGeneration !== generation) return;
+    combinedRecoveryTimer = null;
+    combinedRecoveryInFlight = true;
+    combinedRecoveryAttemptFailure = null;
+    const line = currentLineIndex;
+    if (combinedRecoveryPrefersFallback && combinedRecoveryAttempts > 1) {
+        await evictCurrentCombinedCache(generation);
+    }
+    if (generation !== audioSourceGeneration) return;
+    reloadContinuousAtLine(line, generation);
+    try {
+        if (combinedRecoveryShouldResume) {
+            continuousPlayIntentGeneration = generation;
+            await speechPlayers.play();
+        }
+    } catch (error) {
+        combinedRecoveryAttemptFailure = snapshotAudioFailure(error);
+    } finally {
+        if (generation !== audioSourceGeneration) return;
+        combinedRecoveryInFlight = false;
+    }
+    if (combinedRecoveryAttemptFailure) {
+        scheduleCombinedRecovery(combinedRecoveryAttemptFailure, {
+            generation,
+            resume: combinedRecoveryShouldResume
+        });
+    }
+}
+
+function scheduleCombinedRecovery(error, {
+    generation = audioSourceGeneration,
+    resume = false,
+    immediate = false
+} = {}) {
+    if (generation !== audioSourceGeneration || !speechPlayers.isContinuousReady()) return false;
+    const failure = snapshotAudioFailure(error);
+    const action = classifyContinuousAudioFailure(failure);
+    if (action === 'gesture') {
+        resetCombinedRecovery(generation);
+        pauseForUserAction('Tap play to continue', 'Next episode is ready — tap Play to continue', {
+            actionLabel: 'Play',
+            // Keep play() in the click activation instead of deferring it to a
+            // retry timer; Safari otherwise rejects the handoff again.
+            onAction: () => { void requestContinuousPlayback(); }
+        });
+        return true;
+    }
+    const hasCurrentIntent = resume
+        || continuousPlayIntentGeneration === generation
+        || (isPlaying && !isPaused);
+    // Ignore preload/source-swap errors when nobody asked this generation to
+    // play. A later explicit play() will surface a current, actionable error.
+    if (!hasCurrentIntent) return false;
+    if (combinedRecoveryGeneration !== generation) resetCombinedRecovery(generation);
+    combinedRecoveryShouldResume = combinedRecoveryShouldResume || hasCurrentIntent;
+    combinedRecoveryPrefersFallback = combinedRecoveryPrefersFallback || action === 'fallback';
+    if (combinedRecoveryInFlight) {
+        combinedRecoveryAttemptFailure = failure;
+        return true;
+    }
+    if (combinedRecoveryTimer !== null || combinedRecoveryFinalizing) return true;
+    if (combinedRecoveryAttempts >= COMBINED_RETRY_DELAYS_MS.length) {
+        void finalizeCombinedFailure(generation);
+        return true;
+    }
+    const delay = immediate ? 0 : COMBINED_RETRY_DELAYS_MS[combinedRecoveryAttempts];
+    combinedRecoveryAttempts += 1;
+    setStatus(combinedRecoveryAttempts === 1 ? 'Reconnecting audio…' : 'Retrying episode audio…');
+    combinedRecoveryTimer = setTimeout(() => {
+        void runCombinedRecoveryAttempt(generation);
+    }, delay);
+    return true;
+}
+
+speechPlayers.on('error', (error) => {
+    const failure = snapshotAudioFailure(error);
+    const generation = audioSourceGeneration;
+    console.warn('Audio element error:', failure);
+    scheduleCombinedRecovery(failure, {
+        generation,
+        resume: continuousPlayIntentGeneration === generation || (isPlaying && !isPaused)
     });
 });
 
-// Re-fetch the combined.mp3 the <audio> element choked on (e.g. a dropped
-// connection mid-stream), restore the position, and resume.
 function retryAudioLoad() {
     if (!speechPlayers.isContinuousReady()) return;
-    const line = currentLineIndex;
-    try { speechPlayers.audio.load(); } catch { /* ignore */ }
-    speechPlayers.seekToLine(line);
-    speechPlayers.play().catch((err) => handlePlayFailure(err));
-}
-
-// Distinguish autoplay-policy rejections (expected — just ask for a tap)
-// from real load/decode failures (surface a retry toast).
-function handlePlayFailure(err) {
-    if (err && err.name === 'NotAllowedError') {
-        setStatus('Tap play to start');
-        return;
-    }
-    // play() rejecting before any audio ever rendered usually means the
-    // combined.mp3 doesn't exist — switch to the per-line clips and go.
-    if (!(speechPlayers.getCurrentTime() > 0) && demoteToChunked()) {
-        void startPlayback();
-        return;
-    }
-    console.warn('play() failed:', err);
-    setStatus('Audio playback error');
-    toasts.show('Playback failed to start', {
-        actionLabel: 'Retry',
-        onAction: () => {
-            nowPlayingViz.ensureContext();
-            void togglePlayPause();
-        }
+    const generation = audioSourceGeneration;
+    resetCombinedRecovery(generation);
+    continuousPlayIntentGeneration = generation;
+    scheduleCombinedRecovery({ name: 'NetworkError' }, {
+        generation,
+        resume: true,
+        immediate: true
     });
 }
 
+function handlePlayFailure(error, generation = audioSourceGeneration) {
+    if (generation !== audioSourceGeneration) return;
+    const failure = snapshotAudioFailure(error);
+    console.warn('play() failed:', failure);
+    scheduleCombinedRecovery(failure, { generation, resume: true });
+}
+
+async function requestContinuousPlayback() {
+    const generation = audioSourceGeneration;
+    continuousPlayIntentGeneration = generation;
+    try {
+        await speechPlayers.play();
+    } catch (error) {
+        handlePlayFailure(error, generation);
+    }
+}
+
+async function retryEpisodeAudioSetup() {
+    const episode = currentEpisode;
+    const podcast = playerPodcast;
+    const line = currentLineIndex;
+    if (!episode || !podcast) return;
+    const loaded = await openEpisode(episode, {
+        podcast,
+        promptResume: false,
+        preferredLine: line
+    });
+    if (loaded) void startPlayback();
+}
+
 async function startPlayback() {
-    if (dialogueLines.length === 0) return;
+    if (dialogueLines.length === 0) return false;
+    if (episodeAudioLoadFailed) {
+        setPlayButtonState(false);
+        setStatus('Episode audio metadata isn\'t loading — tap Retry');
+        toasts.show('Episode audio metadata isn\'t loading — check your connection and try again', {
+            actionLabel: 'Retry',
+            duration: 0,
+            onAction: () => { void retryEpisodeAudioSetup(); }
+        });
+        return false;
+    }
 
     if (speechPlayers.isContinuousReady()) {
         // Continuous mode: combined.mp3 plays as a single <audio>; line tracking
         // happens in the 'linechange' event listener. Player events flip the UI.
-        if (isPlaying && !isPaused) return;
+        if (isPlaying && !isPaused) return true;
         if (!isPlaying) {
             // Fresh start (or resume from saved progress): seek to currentLineIndex.
             speechPlayers.seekToLine(currentLineIndex);
         }
-        try {
-            await speechPlayers.play();
-        } catch (err) {
-            handlePlayFailure(err);
-        }
+        await requestContinuousPlayback();
         syncMediaSession({ includeMetadata: true, includePosition: true });
-        return;
+        return isPlaying && !isPaused;
     }
 
     // Legacy chunked fallback (manifest lacks per-line durations).
-    if (isPlaying && !isPaused) return;
+    if (isPlaying && !isPaused) return true;
     const sessionId = playbackSessions.createSession();
     isPlaying = true;
     isPaused = false;
@@ -1002,6 +1248,8 @@ async function startPlayback() {
     await requestWakeLock();
 
     let consecutiveAudioFailures = 0;
+    let lineFailureToast = null;
+    let chunkStopStatus = 'Ready';
     while (currentLineIndex < dialogueLines.length && isPlaying) {
         if (!playbackSessions.isActive(sessionId)) break;
         if (sleep.checkExpiry()) break;
@@ -1015,9 +1263,27 @@ async function startPlayback() {
         try {
             await speak(line.text, line.type, line.audioUrl ? { audioUrl: line.audioUrl } : undefined);
             consecutiveAudioFailures = 0;
+            lineFailureToast?.dismiss();
+            lineFailureToast = null;
         } catch (e) {
             console.error('Speech error:', e);
             const failedLine = currentLineIndex;
+            if (e?.name === 'NotAllowedError') {
+                currentLineIndex = failedLine;
+                isPlaying = false;
+                chunkStopStatus = 'Tap play to continue';
+                lineFailureToast?.dismiss();
+                lineFailureToast = null;
+                toasts.show('Next episode is ready — tap Play to continue', {
+                    actionLabel: 'Play',
+                    duration: 0,
+                    onAction: () => {
+                        nowPlayingViz.ensureContext();
+                        void startPlayback();
+                    }
+                });
+                break;
+            }
             consecutiveAudioFailures++;
             if (consecutiveAudioFailures >= 3) {
                 // Nothing is loading (offline, missing audio deploy, bad
@@ -1026,6 +1292,9 @@ async function startPlayback() {
                 // complete with no sound.
                 currentLineIndex = Math.max(0, failedLine - (consecutiveAudioFailures - 1));
                 isPlaying = false;
+                chunkStopStatus = 'Episode audio isn\'t loading — tap Retry';
+                lineFailureToast?.dismiss();
+                lineFailureToast = null;
                 toasts.show("Episode audio isn't loading — check your connection and try again", {
                     actionLabel: 'Retry',
                     onAction: () => { void jumpToLine(currentLineIndex, true); }
@@ -1034,10 +1303,12 @@ async function startPlayback() {
             }
             // Identical messages coalesce into one toast, so a run of failing
             // lines doesn't stack notifications.
-            toasts.show('Audio failed for a line — skipping ahead', {
-                actionLabel: 'Retry',
-                onAction: () => { void jumpToLine(failedLine, true); }
-            });
+            if (!lineFailureToast) {
+                lineFailureToast = toasts.show('Audio failed for a line — skipping ahead', {
+                    actionLabel: 'Retry',
+                    onAction: () => { void jumpToLine(failedLine, true); }
+                });
+            }
         }
         if (!playbackSessions.isActive(sessionId)) break;
         if (isPlaying && !isPaused) {
@@ -1062,13 +1333,16 @@ async function startPlayback() {
         isPaused = false;
         await releaseWakeLock();
         setPlayButtonState(false);
-        setStatus('Ready');
+        setStatus(chunkStopStatus);
         miniPlayer.update();
         syncMediaSession({ includeMetadata: true, includePosition: true });
     }
+    return currentLineIndex >= dialogueLines.length;
 }
 
-async function stopPlayback() {
+async function stopPlayback({ preserveOpenRequest = false } = {}) {
+    if (!preserveOpenRequest) episodeOpenRequest += 1;
+    invalidateContinuousSource();
     playbackSessions.invalidate();
     nowPlayingViz.stop();
     isPlaying = false;
@@ -1087,8 +1361,9 @@ async function togglePlayPause() {
     if (speechPlayers.isContinuousReady()) {
         if (!isPlaying || isPaused) {
             if (!isPlaying) speechPlayers.seekToLine(currentLineIndex);
-            try { await speechPlayers.play(); } catch (err) { handlePlayFailure(err); }
+            await requestContinuousPlayback();
         } else {
+            continuousPlayIntentGeneration = null;
             speechPlayers.pause();
         }
         syncMediaSession({ includeMetadata: true, includePosition: true });
@@ -1129,7 +1404,7 @@ async function jumpToLine(index, autoStart = false) {
         miniPlayer.update();
         syncMediaSession({ includeMetadata: false, includePosition: true });
         if (autoStart || wasPlaying) {
-            try { await speechPlayers.play(); } catch (err) { handlePlayFailure(err); }
+            await requestContinuousPlayback();
         }
         saveState();
         return;
@@ -1443,12 +1718,23 @@ async function playNextEpisode() {
     document.getElementById('complete-modal').classList.remove('show');
     const next = getNextUp();
     if (!next) return;
-    if (next.queueIndex >= 0) queuePanel.removeAt(next.queueIndex);
+    const nextKey = epKeyOf(next.podcast, next.episode);
+    const prefetchedAudioManifest = prebufferedNextAudio?.key === nextKey
+        ? prebufferedNextAudio.audioManifest
+        : null;
     if (!currentPodcast || currentPodcast.id !== next.podcast.id) {
         openPodcast(next.podcast);
     }
-    await openEpisode(next.episode, { promptResume: false, preferredLine: 0 });
-    startPlayback();
+    const loaded = await openEpisode(next.episode, {
+        podcast: next.podcast,
+        promptResume: false,
+        preferredLine: 0,
+        prefetchedAudioManifest
+    });
+    if (!loaded) return;
+    // Do not discard a queued target until its episode has actually loaded.
+    if (next.queueIndex >= 0) queuePanel.removeAt(next.queueIndex);
+    await startPlayback();
 }
 
 // "Up next" affordance: a small banner in the controls panel during the last
@@ -1482,11 +1768,17 @@ document.getElementById('up-next-play')?.addEventListener('click', () => {
 });
 
 async function playPreviousEpisode() {
-    const episodes = currentPodcast?.episodes || [];
+    const owner = playerPodcast;
+    const episodes = owner?.episodes || [];
     const prevEp = episodes.find(e => e.id === currentEpisode.id - 1);
     if (prevEp) {
-        await openEpisode(prevEp, { promptResume: false, preferredLine: 0 });
-        startPlayback();
+        if (currentPodcast?.id !== owner.id) openPodcast(owner);
+        const loaded = await openEpisode(prevEp, {
+            podcast: owner,
+            promptResume: false,
+            preferredLine: 0
+        });
+        if (loaded) await startPlayback();
     }
 }
 

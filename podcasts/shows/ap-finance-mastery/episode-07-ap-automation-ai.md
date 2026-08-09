@@ -2,7 +2,7 @@
 
 **Duration:** ~14 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. Today we're diving into the technology that makes modern AP possible, from the early days of OCR to the cutting edge of agentic AI.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Evolution of AP Technology
+### The Evolution of AP Technology
 
 **KEVIN:** Take me through the generations.
 
@@ -32,7 +32,7 @@
 
 **[MUSIC TRANSITION]**
 
-## OCR: The Foundation
+### OCR: The Foundation
 
 **KEVIN:** Let's start with OCR since it's the foundation of everything.
 
@@ -48,7 +48,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Machine Learning in AP
+### Machine Learning in AP
 
 **KEVIN:** How specifically is machine learning applied beyond data extraction?
 
@@ -68,7 +68,7 @@
 
 **[MUSIC TRANSITION]**
 
-## NLP and Large Language Models
+### NLP and Large Language Models
 
 **KEVIN:** Where do NLP and LLMs fit in?
 
@@ -88,7 +88,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Agentic AI
+### Agentic AI
 
 **KEVIN:** I keep hearing about agentic AI. What does that mean in the AP context?
 
@@ -104,7 +104,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Integration Patterns
+### Integration Patterns
 
 **KEVIN:** Let's talk about integration. AP automation doesn't exist in a vacuum.
 
@@ -120,7 +120,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Cloud vs On-Premise
+### Cloud vs On-Premise
 
 **KEVIN:** Is the cloud vs on-premise debate settled in AP?
 
@@ -132,7 +132,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Competitive Landscape
+### The Competitive Landscape
 
 **KEVIN:** Let's talk about the AP automation vendor landscape. Who are the major players?
 
@@ -152,7 +152,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Build vs Buy
+### Build vs Buy
 
 **KEVIN:** Do companies ever try to build their own AP automation?
 
@@ -168,7 +168,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Next Five Years
+### The Next Five Years
 
 **KEVIN:** Where is AP technology heading?
 
@@ -180,7 +180,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, this technology deep dive has been exactly what I needed. I can see the product strategy taking shape: AI-native automation, embedded payments, global compliance, and platform convergence.
 

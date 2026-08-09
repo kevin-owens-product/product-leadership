@@ -1,6 +1,6 @@
 // Service worker — atomic versioned precache.
 //
-// The build script substitutes 2.3.0+20260807T235302Z and ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
+// The build script substitutes 2.3.0+20260809T173920Z and ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
 // time. Each deploy gets a unique cache name and pre-fetches the entire app
 // shell during install. Activation atomically deletes any older shell cache
 // (preserving the user-downloaded audio cache). After activation + clients.claim,
@@ -12,8 +12,8 @@
 // shell list, which means precache is skipped and the SW just passes
 // requests through to the network. Audio downloads still work.
 
-const BUILD_VERSION = '2.3.0+20260807T235302Z';
-const APP_SHELL_RAW = ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"];
+const BUILD_VERSION = '2.3.0+20260809T173920Z';
+const APP_SHELL_RAW = ["/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"];
 
 const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
 // Persistent across deploys — only deleted when the user explicitly removes
@@ -154,7 +154,20 @@ async function audioFetch(req) {
     }
 
     try {
-        return await fetch(req);
+        const network = await fetch(req);
+        if (network && network.ok) return network;
+        // fetch() resolves for HTTP failures. Treat a transient 4xx/5xx like
+        // an offline network error so a user-downloaded episode remains
+        // playable; valid audio range responses (206) are `ok` and return
+        // above.
+        if (cache) {
+            const cachedFallback = await cache.match(req, { ignoreSearch: true });
+            if (cachedFallback) {
+                console.warn('[sw] using downloaded audio after network HTTP failure:', req.url, network?.status);
+                return rangeAwareAudioResponse(req, cachedFallback);
+            }
+        }
+        return network;
     } catch (err) {
         if (cache) {
             const cachedFallback = await cache.match(req, { ignoreSearch: true });

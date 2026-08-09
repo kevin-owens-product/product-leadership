@@ -2,7 +2,7 @@
 
 **Duration:** ~16 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome to the final episode of AP and Finance Mastery. We've covered an incredible amount of ground over the past nine episodes, from the fundamentals of accounts payable all the way through the Medius product suite and the CFO perspective. Today we're looking forward.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Vision of Autonomous AP
+### The Vision of Autonomous AP
 
 **KEVIN:** Let's start with the big vision. What does autonomous AP look like?
 
@@ -32,7 +32,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Agentic AI in Finance
+### Agentic AI in Finance
 
 **KEVIN:** Tell me more about agentic AI specifically in finance.
 
@@ -48,7 +48,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Real-Time Payments
+### Real-Time Payments
 
 **KEVIN:** What about the shift to real-time payments?
 
@@ -68,7 +68,7 @@
 
 **[MUSIC TRANSITION]**
 
-## E-Invoicing Mandates Going Global
+### E-Invoicing Mandates Going Global
 
 **KEVIN:** We touched on e-invoicing earlier. How is this evolving?
 
@@ -88,7 +88,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Convergence of AP, AR, and Treasury
+### Convergence of AP, AR, and Treasury
 
 **KEVIN:** I've been hearing about convergence. What does that mean?
 
@@ -108,7 +108,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Open Banking and API-First Finance
+### Open Banking and API-First Finance
 
 **KEVIN:** What about open banking?
 
@@ -124,7 +124,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Changing Role of AP Professionals
+### The Changing Role of AP Professionals
 
 **KEVIN:** What happens to the people in AP as all this automation takes hold?
 
@@ -144,7 +144,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Sustainability and ESG
+### Sustainability and ESG
 
 **KEVIN:** How does ESG connect to AP?
 
@@ -156,7 +156,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Platform Play
+### The Platform Play
 
 **KEVIN:** Let's talk about the broader strategic direction. Why are AP vendors expanding into full spend management?
 
@@ -168,7 +168,7 @@
 
 **[MUSIC TRANSITION]**
 
-## What Makes a Great AP Product in 2026
+### What Makes a Great AP Product in 2026
 
 **KEVIN:** If you had to describe the ideal AP product today, what would it look like?
 
@@ -180,7 +180,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Kevin's Takeaways
+### Kevin's Takeaways
 
 **KEVIN:** Morgan, let me share what I've taken away from this series and how it shapes my thinking as I head into Medius.
 
@@ -210,7 +210,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Series Recap
+### Series Recap
 
 **MORGAN:** Let's do a quick recap for our listeners. Episode one covered AP fundamentals, the invoice lifecycle, and why AP matters. Episode two expanded to the full procure-to-pay journey. Episode three went deep on invoice processing technology. Episode four explored payment operations and cash management. Episode five covered supplier management and spend analytics. Episode six addressed compliance, fraud prevention, and controls. Episode seven surveyed AP automation technology and AI. Episode eight was our Medius deep dive. Episode nine explored the CFO perspective. And today we've looked at the future.
 
@@ -220,7 +220,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, thank you for being an incredible guide through this domain. Your depth of knowledge and ability to connect the tactical details to strategic implications has been exactly what I needed.
 

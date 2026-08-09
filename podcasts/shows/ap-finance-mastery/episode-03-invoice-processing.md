@@ -2,7 +2,7 @@
 
 **Duration:** ~18 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back to AP and Finance Mastery. We've covered AP fundamentals and the full procure-to-pay journey. Now it's time to go deep on the heart of AP automation: invoice processing.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Invoice Ingestion Channels
+### Invoice Ingestion Channels
 
 **KEVIN:** Let's start at the very beginning. How do invoices actually arrive at a company?
 
@@ -36,7 +36,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Data Capture and Extraction
+### Data Capture and Extraction
 
 **KEVIN:** This is the core technology challenge, right? Getting data out of invoices?
 
@@ -60,7 +60,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Header vs Line-Level Data
+### Header vs Line-Level Data
 
 **KEVIN:** You mentioned header-level data. What's the difference between header and line level?
 
@@ -80,7 +80,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Invoice Validation
+### Invoice Validation
 
 **KEVIN:** After extraction, what validation happens?
 
@@ -96,7 +96,7 @@
 
 **[MUSIC TRANSITION]**
 
-## GL Coding and Cost Allocation
+### GL Coding and Cost Allocation
 
 **KEVIN:** Let's talk about GL coding. How do invoices get coded to the right accounts?
 
@@ -116,7 +116,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Approval Workflows
+### Approval Workflows
 
 **KEVIN:** Tell me about approval workflows.
 
@@ -136,7 +136,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Touchless Processing: The Holy Grail
+### Touchless Processing: The Holy Grail
 
 **KEVIN:** Let's talk about the ultimate goal: touchless invoices.
 
@@ -156,7 +156,7 @@
 
 **[MUSIC TRANSITION]**
 
-## E-Invoicing Standards
+### E-Invoicing Standards
 
 **KEVIN:** Let's talk about e-invoicing. This seems like a game-changer.
 
@@ -180,7 +180,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Invoice Processing Benchmarks
+### Invoice Processing Benchmarks
 
 **KEVIN:** Let's talk metrics. What benchmarks should I know?
 
@@ -196,7 +196,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The AP Clerk's Daily Life
+### The AP Clerk's Daily Life
 
 **KEVIN:** I want to understand the human side. What does a typical AP clerk's day look like?
 
@@ -216,7 +216,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, this deep dive on invoice processing has been incredibly valuable. I feel like I understand the core technology challenge and the user experience we need to deliver.
 

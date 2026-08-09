@@ -2,7 +2,7 @@
 
 **Duration:** ~14 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back. Today we're stepping into the shoes of the buyer. The CFO and finance leaders who decide whether to invest in AP automation.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## What Keeps CFOs Up at Night
+### What Keeps CFOs Up at Night
 
 **KEVIN:** What are the top priorities for CFOs today?
 
@@ -28,7 +28,7 @@
 
 **[MUSIC TRANSITION]**
 
-## AP's Impact on Financial Statements
+### AP's Impact on Financial Statements
 
 **KEVIN:** Help me understand exactly how AP affects the financial statements.
 
@@ -48,7 +48,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Working Capital and the Cash Conversion Cycle
+### Working Capital and the Cash Conversion Cycle
 
 **KEVIN:** Let's go deeper on working capital.
 
@@ -64,7 +64,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Business Case for AP Automation
+### The Business Case for AP Automation
 
 **KEVIN:** How do you build the ROI case for AP automation?
 
@@ -84,7 +84,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Accruals and Period-End Close
+### Accruals and Period-End Close
 
 **KEVIN:** Tell me about the period-end close and why AP data quality matters.
 
@@ -104,7 +104,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Global Operations
+### Global Operations
 
 **KEVIN:** What about companies with global operations? That must add layers of complexity.
 
@@ -124,7 +124,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Finance Transformation Agenda
+### The Finance Transformation Agenda
 
 **KEVIN:** How does AP automation fit into broader finance transformation?
 
@@ -140,7 +140,7 @@
 
 **[MUSIC TRANSITION]**
 
-## What Finance Leaders Want from Software
+### What Finance Leaders Want from Software
 
 **KEVIN:** Let's get specific. What do finance leaders actually want from AP software?
 
@@ -160,7 +160,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Selling to the CFO
+### Selling to the CFO
 
 **KEVIN:** How should we think about the sales motion?
 
@@ -176,7 +176,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Building Products CFOs Love
+### Building Products CFOs Love
 
 **KEVIN:** Final section. As a CPO, how do I build products that CFOs love?
 
@@ -194,7 +194,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, understanding the CFO perspective is going to fundamentally shape how I approach product strategy at Medius. It's about outcomes, not features. Visibility, not complexity. And trust, above all.
 

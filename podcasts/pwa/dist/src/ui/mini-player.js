@@ -1,8 +1,8 @@
 // Persistent bottom mini player shown on non-player screens whenever an
 // episode is loaded (playing OR paused — like Overcast/Pocket Casts).
 
-import { setPlayButtonState } from './dom.js?v=2.3.0%2B20260807T235302Z';
-import { generatePodcastArtwork } from './artwork.js?v=2.3.0%2B20260807T235302Z';
+import { setPlayButtonState } from './dom.js?v=2.3.0%2B20260809T173920Z';
+import { generatePodcastArtwork } from './artwork.js?v=2.3.0%2B20260809T173920Z';
 
 export function createMiniPlayer({
     getPlayerPodcast,

@@ -7,7 +7,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Welcome back to AP and Finance Mastery. Today we're diving into the technology that makes modern AP possible, from the early days of OCR to the cutting edge of agentic AI.",
-    "chapter": "INTRO",
+    "chapter": "Introduction",
     "file": "0000.mp3",
     "duration": 11.424,
     "startTime": 0
@@ -20,7 +20,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "As a product leader, this is my home turf. But I want to understand how the technology has evolved specifically in the AP context and where it's heading.",
-    "chapter": "INTRO",
+    "chapter": "Introduction",
     "file": "0001.mp3",
     "duration": 10.24,
     "startTime": 11.424
@@ -33,7 +33,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Let's map it out. The evolution of AP technology is a fascinating journey from paper to intelligence.",
-    "chapter": "INTRO",
+    "chapter": "Introduction",
     "file": "0002.mp3",
     "duration": 6.548,
     "startTime": 21.664
@@ -46,7 +46,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Take me through the generations.",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0003.mp3",
     "duration": 2.299,
     "startTime": 28.212
@@ -59,7 +59,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Generation one was manual AP. Paper invoices, filing cabinets, rubber stamps for approval, handwritten ledgers, and checks written by hand. This was the norm until the 1980s and 1990s, and honestly, many companies still operate closer to this than they'd admit.",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0004.mp3",
     "duration": 17.903,
     "startTime": 30.511
@@ -72,7 +72,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Generation two?",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0005.mp3",
     "duration": 1.533,
     "startTime": 48.414
@@ -85,7 +85,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Basic automation, roughly the 1990s to 2000s. ERPs like SAP and Oracle digitized the transaction recording. Invoices were still manually keyed in, but at least the data lived in a database. Workflows were basic. Reports could be generated. It was better than paper but still heavily manual.",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0006.mp3",
     "duration": 19.992,
     "startTime": 49.946
@@ -98,7 +98,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Then what changed?",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0007.mp3",
     "duration": 1.533,
     "startTime": 69.939
@@ -111,7 +111,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Generation three was intelligent automation, from about 2005 to 2020. This is where dedicated AP automation platforms emerged. They brought OCR for data capture, digital workflows for approvals, automated matching engines, and basic analytics. Companies like Basware, ReadSoft, which eventually became part of the Medius story, and others pioneered this space.",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0008.mp3",
     "duration": 25.517,
     "startTime": 71.471
@@ -124,7 +124,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And generation four?",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0009.mp3",
     "duration": 1.672,
     "startTime": 96.988
@@ -137,7 +137,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "That's where we are now. AI-native AP automation. Machine learning for data extraction, natural language processing for understanding document context, predictive models for coding and fraud detection, and increasingly, large language models and agentic AI that can handle complex tasks autonomously.",
-    "chapter": "INTRO",
+    "chapter": "The Evolution of AP Technology",
     "file": "0010.mp3",
     "duration": 18.669,
     "startTime": 98.66
@@ -150,7 +150,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let's start with OCR since it's the foundation of everything.",
-    "chapter": "INTRO",
+    "chapter": "OCR: The Foundation",
     "file": "0011.mp3",
     "duration": 4.389,
     "startTime": 117.329
@@ -163,7 +163,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "OCR, Optical Character Recognition, converts images of text into machine-readable text. In AP, it's used to extract text from scanned paper invoices or PDF files. The basic technology has been around since the 1970s, but it took decades to become reliable enough for production use.",
-    "chapter": "INTRO",
+    "chapter": "OCR: The Foundation",
     "file": "0012.mp3",
     "duration": 19.087,
     "startTime": 121.717
@@ -176,7 +176,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What are OCR's limitations?",
-    "chapter": "INTRO",
+    "chapter": "OCR: The Foundation",
     "file": "0013.mp3",
     "duration": 2.159,
     "startTime": 140.804
@@ -189,7 +189,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Traditional OCR just converts images to text. It doesn't understand what the text means. It can tell you there's a \"12,500.00\" on the page, but it doesn't know if that's the invoice total, a line item amount, or a PO number. That's why template-based OCR required pre-configured templates to tell the system where to look for each field.",
-    "chapter": "INTRO",
+    "chapter": "OCR: The Foundation",
     "file": "0014.mp3",
     "duration": 23.357,
     "startTime": 142.963
@@ -202,7 +202,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And template-free approaches?",
-    "chapter": "INTRO",
+    "chapter": "OCR: The Foundation",
     "file": "0015.mp3",
     "duration": 2.229,
     "startTime": 166.321
@@ -215,7 +215,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Template-free data capture uses machine learning models trained on millions of invoices to identify fields based on context, layout, and surrounding text. The model learns that a number in the bottom right corner near the word \"Total\" is likely the invoice total. This was the breakthrough that made AP automation scalable because you no longer needed a template for every supplier.",
-    "chapter": "INTRO",
+    "chapter": "OCR: The Foundation",
     "file": "0016.mp3",
     "duration": 23.775,
     "startTime": 168.55
@@ -228,7 +228,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "How specifically is machine learning applied beyond data extraction?",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0017.mp3",
     "duration": 4.737,
     "startTime": 192.325
@@ -241,7 +241,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "ML is everywhere in modern AP. For extraction, as we discussed, it identifies and extracts fields without templates. For classification, it determines what type of document this is, an invoice, a credit note, a purchase order, a statement. For GL coding prediction, it suggests the correct accounts based on historical patterns.",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0018.mp3",
     "duration": 21.895,
     "startTime": 197.062
@@ -254,7 +254,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What else?",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0019.mp3",
     "duration": 1.324,
     "startTime": 218.957
@@ -267,7 +267,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "For approval routing, ML can predict who should approve a particular invoice based on past routing decisions. For fraud detection, it identifies anomalous patterns that deviate from established baselines. For cash flow forecasting, it predicts when invoices will arrive and when they'll be paid based on historical patterns. And for supplier behavior modeling, it predicts which suppliers are likely to offer early payment discounts or which are at risk of delayed deliveries.",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0020.mp3",
     "duration": 30.323,
     "startTime": 220.28
@@ -280,7 +280,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "How much training data do you need for these models to work well?",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0021.mp3",
     "duration": 4.11,
     "startTime": 250.604
@@ -293,7 +293,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "This is a key question for product strategy. For extraction, the general models need millions of training documents, but they work reasonably well out of the box. For company-specific models like GL coding prediction, you typically need a few months of historical data, maybe a thousand transactions per GL code, before the predictions become reliable. This creates a cold-start problem for new customers.",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0022.mp3",
     "duration": 25.169,
     "startTime": 254.714
@@ -306,7 +306,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "How do you solve the cold-start problem?",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0023.mp3",
     "duration": 2.647,
     "startTime": 279.882
@@ -319,7 +319,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Transfer learning. You train a base model on data from many customers, anonymized of course, and then fine-tune it for each specific customer. The base model provides reasonable predictions from day one, and they improve as the system processes more of that customer's specific invoices.",
-    "chapter": "INTRO",
+    "chapter": "Machine Learning in AP",
     "file": "0024.mp3",
     "duration": 17.694,
     "startTime": 282.529
@@ -332,7 +332,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Where do NLP and LLMs fit in?",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0025.mp3",
     "duration": 2.229,
     "startTime": 300.223
@@ -345,7 +345,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Natural Language Processing was initially used for things like parsing email content to extract invoice-related information, understanding unstructured text in invoice descriptions, and routing supplier inquiries to the right category.",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0026.mp3",
     "duration": 14.629,
     "startTime": 302.452
@@ -358,7 +358,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And LLMs take this much further?",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0027.mp3",
     "duration": 2.299,
     "startTime": 317.081
@@ -371,7 +371,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Yes. Large Language Models like the ones powering modern AI assistants can understand complex document layouts, interpret ambiguous field labels in any language, extract data from documents they've never seen before with remarkable accuracy, generate human-quality responses to supplier inquiries, and explain why a particular invoice was flagged, in natural language.",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0028.mp3",
     "duration": 23.566,
     "startTime": 319.379
@@ -384,7 +384,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "This is what Medius Copilot is built on?",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0029.mp3",
     "duration": 2.717,
     "startTime": 342.946
@@ -397,7 +397,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Exactly. Medius Copilot is an AI assistant that helps invoice approvers understand what they're looking at. Instead of just showing an invoice and saying \"approve or reject,\" the copilot can explain the context. For example: \"This invoice from Acme Corp is twelve percent higher than their usual monthly invoice. The increase appears to be due to two additional line items for rush delivery charges. The PO authorized standard delivery. You may want to verify with the requestor.\"",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0030.mp3",
     "duration": 31.508,
     "startTime": 345.662
@@ -410,7 +410,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's incredibly powerful. It's not just automation, it's augmented intelligence.",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0031.mp3",
     "duration": 5.364,
     "startTime": 377.17
@@ -423,7 +423,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Right. The human still makes the decision, but they have much better information to make it with.",
-    "chapter": "INTRO",
+    "chapter": "NLP and Large Language Models",
     "file": "0032.mp3",
     "duration": 5.851,
     "startTime": 382.534
@@ -436,7 +436,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "I keep hearing about agentic AI. What does that mean in the AP context?",
-    "chapter": "INTRO",
+    "chapter": "Agentic AI",
     "file": "0033.mp3",
     "duration": 5.224,
     "startTime": 388.385
@@ -449,7 +449,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Agentic AI refers to AI systems that can take actions autonomously, not just analyze data and make recommendations. In AP, an agentic AI system might receive a supplier email about a missing payment, look up the invoice in the system, identify that it's stuck in an approval queue, send a reminder to the approver, and respond to the supplier with a status update. All without human intervention.",
-    "chapter": "INTRO",
+    "chapter": "Agentic AI",
     "file": "0034.mp3",
     "duration": 24.82,
     "startTime": 393.61
@@ -462,7 +462,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's a fundamentally different value proposition. From \"we help you process invoices\" to \"we handle your AP operations.\"",
-    "chapter": "INTRO",
+    "chapter": "Agentic AI",
     "file": "0035.mp3",
     "duration": 8.986,
     "startTime": 418.43
@@ -475,7 +475,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Exactly. And it's where the industry is heading. The vision is an AP department where the AI handles ninety-five percent of transactions end-to-end, and humans only get involved for genuinely complex exceptions and strategic decisions.",
-    "chapter": "INTRO",
+    "chapter": "Agentic AI",
     "file": "0036.mp3",
     "duration": 15.047,
     "startTime": 427.416
@@ -488,7 +488,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What are the barriers to getting there?",
-    "chapter": "INTRO",
+    "chapter": "Agentic AI",
     "file": "0037.mp3",
     "duration": 2.577,
     "startTime": 442.463
@@ -501,7 +501,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Trust is the biggest one. Finance teams are understandably cautious about letting AI make decisions that involve money. There are also accuracy requirements. A ninety-nine percent accuracy rate sounds great, but if you process a million invoices, that's ten thousand errors. Regulatory and audit concerns about AI decision-making. And the change management challenge of redesigning AP teams around AI-first workflows.",
-    "chapter": "INTRO",
+    "chapter": "Agentic AI",
     "file": "0038.mp3",
     "duration": 26.771,
     "startTime": 445.04
@@ -514,7 +514,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let's talk about integration. AP automation doesn't exist in a vacuum.",
-    "chapter": "INTRO",
+    "chapter": "Integration Patterns",
     "file": "0039.mp3",
     "duration": 5.224,
     "startTime": 471.811
@@ -527,7 +527,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Integration is the lifeblood of AP automation. The platform needs to connect with ERPs to read PO and master data and write back validated invoices and payments. It needs to connect with banks for payment execution and reconciliation. It needs to connect with e-invoicing networks for structured invoice receipt. And increasingly, it needs to connect with other enterprise systems like contract management, expense management, and business intelligence.",
-    "chapter": "INTRO",
+    "chapter": "Integration Patterns",
     "file": "0040.mp3",
     "duration": 28.93,
     "startTime": 477.035
@@ -540,7 +540,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What are the main integration approaches?",
-    "chapter": "INTRO",
+    "chapter": "Integration Patterns",
     "file": "0041.mp3",
     "duration": 2.786,
     "startTime": 505.966
@@ -553,7 +553,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Point-to-point APIs are the most common for modern cloud platforms. Pre-built connectors for major ERPs like SAP, Oracle, and Dynamics reduce implementation time. Middleware platforms like MuleSoft or Dell Boomi can broker complex integrations. EDI for traditional supply chain integration. And file-based integration is still common for bank connections and some ERP scenarios.",
-    "chapter": "INTRO",
+    "chapter": "Integration Patterns",
     "file": "0042.mp3",
     "duration": 25.726,
     "startTime": 508.752
@@ -566,7 +566,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "How important is the ERP integration for Medius specifically?",
-    "chapter": "INTRO",
+    "chapter": "Integration Patterns",
     "file": "0043.mp3",
     "duration": 4.737,
     "startTime": 534.478
@@ -579,7 +579,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It's existential. Medius's deep integration with Microsoft Dynamics is one of their strongest competitive advantages. They're a preferred solution in the Dynamics ecosystem. Expanding that same depth of integration to SAP and Oracle would significantly expand their addressable market.",
-    "chapter": "INTRO",
+    "chapter": "Integration Patterns",
     "file": "0044.mp3",
     "duration": 18.181,
     "startTime": 539.215
@@ -592,7 +592,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Is the cloud vs on-premise debate settled in AP?",
-    "chapter": "INTRO",
+    "chapter": "Cloud vs On-Premise",
     "file": "0045.mp3",
     "duration": 3.553,
     "startTime": 557.396
@@ -605,7 +605,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Largely, yes. The market has moved decisively to cloud and SaaS. Cloud offers faster deployment, automatic updates, scalability, and lower total cost of ownership. Medius is cloud-native, built on Microsoft Azure, which is exactly the right architecture.",
-    "chapter": "INTRO",
+    "chapter": "Cloud vs On-Premise",
     "file": "0046.mp3",
     "duration": 16.718,
     "startTime": 560.949
@@ -618,7 +618,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Are there holdouts?",
-    "chapter": "INTRO",
+    "chapter": "Cloud vs On-Premise",
     "file": "0047.mp3",
     "duration": 1.602,
     "startTime": 577.667
@@ -631,7 +631,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Some large enterprises, particularly in regulated industries like banking and government, still have on-premise requirements or hybrid architectures. Some companies in countries with data residency requirements need assurance that their data stays in-country. But even these organizations are increasingly comfortable with cloud solutions that meet their compliance requirements.",
-    "chapter": "INTRO",
+    "chapter": "Cloud vs On-Premise",
     "file": "0048.mp3",
     "duration": 23.636,
     "startTime": 579.269
@@ -644,7 +644,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let's talk about the AP automation vendor landscape. Who are the major players?",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0049.mp3",
     "duration": 5.712,
     "startTime": 602.905
@@ -657,7 +657,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "The market is fragmented but consolidating. At the top, you have the ERP vendors themselves, SAP with Ariba and Concur, Oracle with its procurement cloud, Coupa which was acquired by Thoma Bravo. Then you have the dedicated AP automation players like Medius, Basware, Tipalti, and Stampli.",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0050.mp3",
     "duration": 18.739,
     "startTime": 608.617
@@ -670,7 +670,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "How do they differentiate?",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0051.mp3",
     "duration": 1.881,
     "startTime": 627.356
@@ -683,7 +683,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Tipalti is strong in global payments, particularly for companies with lots of cross-border payees like marketplaces and gig economy platforms. Stampli differentiates on user experience and speed of deployment, targeting the mid-market. Basware has a large e-invoicing network, particularly strong in Europe. Coupa goes broad as a full business spend management platform.",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0052.mp3",
     "duration": 23.775,
     "startTime": 629.237
@@ -696,7 +696,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And where does Medius fit?",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0053.mp3",
     "duration": 2.02,
     "startTime": 653.012
@@ -709,7 +709,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Medius positions as an AI-native, end-to-end spend management platform. Their strengths are deep Microsoft integration, strong European presence especially in the Nordics, a comprehensive suite from sourcing to payment, and increasingly their AI capabilities including Copilot and Supplier Conversations. They were named a Gartner Magic Quadrant Leader for AP Applications in 2025.",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0054.mp3",
     "duration": 25.678,
     "startTime": 655.032
@@ -722,7 +722,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What's the competitive threat?",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0055.mp3",
     "duration": 2.09,
     "startTime": 680.71
@@ -735,7 +735,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "The biggest strategic threat is probably Coupa, which has scale and breadth. The tactical threats are specialists like Stampli who win on user experience in specific segments. And the sleeper threat is the ERPs themselves improving their native AP capabilities enough that the standalone case weakens.",
-    "chapter": "INTRO",
+    "chapter": "The Competitive Landscape",
     "file": "0056.mp3",
     "duration": 19.247,
     "startTime": 682.799
@@ -748,7 +748,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Do companies ever try to build their own AP automation?",
-    "chapter": "INTRO",
+    "chapter": "Build vs Buy",
     "file": "0057.mp3",
     "duration": 3.901,
     "startTime": 702.047
@@ -761,7 +761,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Some do, usually large enterprises with strong IT teams. It almost always ends badly. The problem is that AP automation looks simpler than it is. Extracting data from invoices, handling multi-country tax rules, integrating with banks, maintaining e-invoicing compliance, these are deeply specialized capabilities that require continuous investment.",
-    "chapter": "INTRO",
+    "chapter": "Build vs Buy",
     "file": "0058.mp3",
     "duration": 22.939,
     "startTime": 705.948
@@ -774,7 +774,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What happens to the build attempts?",
-    "chapter": "INTRO",
+    "chapter": "Build vs Buy",
     "file": "0059.mp3",
     "duration": 2.438,
     "startTime": 728.887
@@ -787,7 +787,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "They typically start well, handle the simple cases, and then stall when they hit the long tail of complexity. The ninety-five different PDF layouts from ninety-five different suppliers. The tax rule that changed in Germany last month. The bank file format quirk that causes payment failures. Companies end up spending more maintaining their custom solution than a commercial platform would cost.",
-    "chapter": "INTRO",
+    "chapter": "Build vs Buy",
     "file": "0060.mp3",
     "duration": 24.193,
     "startTime": 731.325
@@ -800,7 +800,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's a strong argument for best-of-breed platforms.",
-    "chapter": "INTRO",
+    "chapter": "Build vs Buy",
     "file": "0061.mp3",
     "duration": 3.553,
     "startTime": 755.519
@@ -813,7 +813,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It is. And it's an argument that resonates when you can demonstrate the breadth of edge cases your platform handles that a custom solution would need to replicate.",
-    "chapter": "INTRO",
+    "chapter": "Build vs Buy",
     "file": "0062.mp3",
     "duration": 9.961,
     "startTime": 759.071
@@ -826,7 +826,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Where is AP technology heading?",
-    "chapter": "INTRO",
+    "chapter": "The Next Five Years",
     "file": "0063.mp3",
     "duration": 2.299,
     "startTime": 769.033
@@ -839,7 +839,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Five key trends. First, autonomous AP where AI handles the vast majority of transactions without human intervention. Second, embedded payments becoming standard in every AP platform. Third, e-invoicing compliance becoming a must-have as mandates spread globally. Fourth, real-time analytics and predictive insights replacing retrospective reporting. And fifth, platform convergence where AP, procurement, expense, and treasury capabilities merge into unified spend management platforms.",
-    "chapter": "INTRO",
+    "chapter": "The Next Five Years",
     "file": "0064.mp3",
     "duration": 31.995,
     "startTime": 771.332
@@ -852,7 +852,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's a roadmap for Medius right there.",
-    "chapter": "INTRO",
+    "chapter": "The Next Five Years",
     "file": "0065.mp3",
     "duration": 2.717,
     "startTime": 803.327
@@ -865,7 +865,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It is. And the winners will be the platforms that execute on these trends while maintaining the deep, reliable automation that customers depend on daily.",
-    "chapter": "INTRO",
+    "chapter": "The Next Five Years",
     "file": "0066.mp3",
     "duration": 9.474,
     "startTime": 806.044
@@ -878,7 +878,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Morgan, this technology deep dive has been exactly what I needed. I can see the product strategy taking shape: AI-native automation, embedded payments, global compliance, and platform convergence.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0067.mp3",
     "duration": 13.584,
     "startTime": 815.517
@@ -891,7 +891,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Next episode is the one I'm most excited about. We're going to do a full deep dive on Medius itself. The product suite, the architecture, the competitive positioning, and where a CPO can make the biggest impact.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0068.mp3",
     "duration": 13.026,
     "startTime": 829.101
@@ -904,7 +904,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's going to be the most directly relevant episode for me. Can't wait.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0069.mp3",
     "duration": 4.737,
     "startTime": 842.127
@@ -917,7 +917,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "See you next time.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0070.mp3",
     "duration": 1.533,
     "startTime": 846.864
@@ -930,7 +930,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Next Episode: Medius Deep Dive — The Platform & Product Suite",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0071.mp3",
     "duration": 4.528,
     "startTime": 848.397

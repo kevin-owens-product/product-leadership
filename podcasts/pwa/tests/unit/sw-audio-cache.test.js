@@ -105,6 +105,21 @@ test('audioFetch serves exact versioned offline cache hits', async () => {
   assert.equal(await response.text(), 'cached-current');
 });
 
+test('audioFetch falls back to a downloaded episode on an HTTP origin failure', async () => {
+  const cachedUrl = 'https://example.test/audio/show/ep/combined.mp3?v=downloaded';
+  const requestedUrl = 'https://example.test/audio/show/ep/combined.mp3?v=current';
+  const cache = createCache([[cachedUrl, new Response('downloaded-audio')]]);
+  const { context } = loadServiceWorker({
+    cacheImpl: cache,
+    fetchImpl: async () => new Response('temporary failure', { status: 503 })
+  });
+
+  const response = await context.audioFetch(new Request(requestedUrl));
+
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), 'downloaded-audio');
+});
+
 test('CACHE_AUDIO_URLS only writes fetched responses when the whole episode succeeds', async () => {
   const cache = createCache();
   const urls = [

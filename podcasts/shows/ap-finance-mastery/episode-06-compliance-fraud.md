@@ -2,7 +2,7 @@
 
 **Duration:** ~15 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back. Today's topic is one that keeps CFOs and Controllers up at night: compliance, fraud prevention, and internal controls in accounts payable.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Types of AP Fraud
+### Types of AP Fraud
 
 **KEVIN:** Let's start with the threat landscape. What kinds of fraud target AP?
 
@@ -40,7 +40,7 @@
 
 **[MUSIC TRANSITION]**
 
-## The Scale of the Problem
+### The Scale of the Problem
 
 **KEVIN:** What does the data say about how widespread AP fraud is?
 
@@ -56,7 +56,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Internal Controls Framework
+### Internal Controls Framework
 
 **KEVIN:** Let's talk about internal controls. What's the framework?
 
@@ -72,7 +72,7 @@
 
 **[MUSIC TRANSITION]**
 
-## SOX Compliance
+### SOX Compliance
 
 **KEVIN:** Tell me about SOX compliance and AP.
 
@@ -92,7 +92,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Tax Compliance
+### Tax Compliance
 
 **KEVIN:** What about tax compliance in AP?
 
@@ -112,7 +112,7 @@
 
 **[MUSIC TRANSITION]**
 
-## AI-Powered Fraud Detection
+### AI-Powered Fraud Detection
 
 **KEVIN:** How does AI help with fraud detection specifically?
 
@@ -132,7 +132,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Duplicate Payment Detection
+### Duplicate Payment Detection
 
 **KEVIN:** Let's go deeper on duplicate payments specifically.
 
@@ -148,7 +148,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Building a Culture of Compliance
+### Building a Culture of Compliance
 
 **KEVIN:** Beyond technology, how do you build a culture of compliance?
 
@@ -168,7 +168,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Real-World Fraud Cases
+### Real-World Fraud Cases
 
 **KEVIN:** Can you share some real-world examples to bring this to life?
 
@@ -184,7 +184,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, this episode has been eye-opening. I knew fraud and compliance were important, but the scale of the problem and the sophistication of the solutions are both greater than I expected.
 

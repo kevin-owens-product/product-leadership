@@ -154,7 +154,20 @@ async function audioFetch(req) {
     }
 
     try {
-        return await fetch(req);
+        const network = await fetch(req);
+        if (network && network.ok) return network;
+        // fetch() resolves for HTTP failures. Treat a transient 4xx/5xx like
+        // an offline network error so a user-downloaded episode remains
+        // playable; valid audio range responses (206) are `ok` and return
+        // above.
+        if (cache) {
+            const cachedFallback = await cache.match(req, { ignoreSearch: true });
+            if (cachedFallback) {
+                console.warn('[sw] using downloaded audio after network HTTP failure:', req.url, network?.status);
+                return rangeAwareAudioResponse(req, cachedFallback);
+            }
+        }
+        return network;
     } catch (err) {
         if (cache) {
             const cachedFallback = await cache.match(req, { ignoreSearch: true });

@@ -7,7 +7,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Welcome to AP and Finance Mastery, the podcast designed to take you from zero to expert on accounts payable, financial operations, and everything that makes the procure-to-pay world tick. I'm Morgan, and I've spent over twenty years in enterprise finance, from running AP departments to advising on finance transformation initiatives.",
-    "chapter": "INTRO",
+    "chapter": "Introduction",
     "file": "0000.mp3",
     "duration": 21.337,
     "startTime": 0
@@ -20,7 +20,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And I'm Kevin. I'm a product leader who's about to join Medius as Chief Product Officer, and I'll be honest, I need to get smart on this domain fast. I've spent my career building software products, but accounts payable is a new world for me. So Morgan, I'm going to be asking a lot of questions.",
-    "chapter": "INTRO",
+    "chapter": "Introduction",
     "file": "0001.mp3",
     "duration": 17.903,
     "startTime": 21.337
@@ -33,7 +33,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "That's exactly what makes this series valuable, Kevin. You bring the product mindset, I bring the domain expertise, and together we're going to cover everything from the basics of what AP actually is, all the way through to where the industry is heading with AI and autonomous finance.",
-    "chapter": "INTRO",
+    "chapter": "Introduction",
     "file": "0002.mp3",
     "duration": 16.718,
     "startTime": 39.24
@@ -46,7 +46,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let's start at the very beginning. What is accounts payable, and why should someone like me, a product leader, care deeply about understanding it?",
-    "chapter": "INTRO",
+    "chapter": "Introduction",
     "file": "0003.mp3",
     "duration": 9.683,
     "startTime": 55.958
@@ -59,7 +59,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "At its simplest, accounts payable is the money a company owes to its suppliers and vendors for goods and services that have been received but not yet paid for. It's a liability on the balance sheet. But that definition barely scratches the surface of what AP actually does inside an organization.",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0004.mp3",
     "duration": 18.112,
     "startTime": 65.641
@@ -72,7 +72,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "So it's not just the department that pays bills?",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0005.mp3",
     "duration": 3.065,
     "startTime": 83.753
@@ -85,7 +85,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "That's the common misconception, and it's one that has held AP back for decades. Yes, AP processes invoices and makes payments. But it's also the gatekeeper of cash flow, the first line of defense against fraud, a critical compliance function, and increasingly a strategic lever for working capital optimization.",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0006.mp3",
     "duration": 19.805,
     "startTime": 86.818
@@ -98,7 +98,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Walk me through this. When I think of a typical company, where does AP sit in the organization?",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0007.mp3",
     "duration": 6.687,
     "startTime": 106.622
@@ -111,7 +111,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "AP typically sits within the finance function, reporting up to a Controller or VP of Finance, who reports to the CFO. In larger companies, you might have a dedicated AP Manager or Director overseeing a team of AP clerks and specialists. In smaller companies, AP might be handled by one or two people who also do other accounting tasks.",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0008.mp3",
     "duration": 22.173,
     "startTime": 113.31
@@ -124,7 +124,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And what's the scale we're talking about? How many invoices does a typical company process?",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0009.mp3",
     "duration": 5.921,
     "startTime": 135.483
@@ -137,7 +137,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It varies enormously. A small business might process a few hundred invoices a month. A mid-market company, say five hundred million to a few billion in revenue, might process ten thousand to fifty thousand invoices a month. Large enterprises can process hundreds of thousands or even millions of invoices per month across their global operations.",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0010.mp3",
     "duration": 22.173,
     "startTime": 141.404
@@ -150,7 +150,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Millions of invoices. That's a massive operational challenge.",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0011.mp3",
     "duration": 4.528,
     "startTime": 163.577
@@ -163,7 +163,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Exactly. And every single one of those invoices needs to be received, validated, coded to the right general ledger account, approved by the right person, matched against a purchase order in many cases, and then paid on time. Any breakdown in that chain creates real problems: late payments damage supplier relationships, duplicate payments waste money, coding errors mess up financial reporting, and lack of visibility makes it impossible for the CFO to forecast cash flow accurately.",
-    "chapter": "INTRO",
+    "chapter": "What is Accounts Payable?",
     "file": "0012.mp3",
     "duration": 31.159,
     "startTime": 168.105
@@ -176,7 +176,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "You mentioned AP is a liability on the balance sheet. Let me make sure I understand the accounting side. How does this actually work?",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0013.mp3",
     "duration": 8.916,
     "startTime": 199.264
@@ -189,7 +189,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Great question. When a company receives goods or services from a supplier, it incurs an obligation to pay. That obligation gets recorded as accounts payable, which is a current liability. Current meaning it's expected to be paid within one year, usually much sooner, like thirty or sixty days.",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0014.mp3",
     "duration": 18.251,
     "startTime": 208.181
@@ -202,7 +202,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And this is different from long-term debt?",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0015.mp3",
     "duration": 2.926,
     "startTime": 226.432
@@ -215,7 +215,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Right. Long-term debt is things like loans and bonds. AP is trade payables, the money you owe your suppliers for the normal course of doing business. On the balance sheet, it sits in current liabilities alongside things like accrued expenses and short-term debt.",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0016.mp3",
     "duration": 16.37,
     "startTime": 229.357
@@ -228,7 +228,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "How does AP affect working capital?",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0017.mp3",
     "duration": 2.717,
     "startTime": 245.727
@@ -241,7 +241,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "This is where it gets strategically interesting. Working capital is current assets minus current liabilities. The three big levers of working capital are accounts receivable, which is money owed to you, inventory, and accounts payable, money you owe to others. Here's the key insight: increasing AP, meaning taking longer to pay, actually improves your working capital position because you're holding onto cash longer.",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0018.mp3",
     "duration": 25.935,
     "startTime": 248.444
@@ -254,7 +254,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "So there's a tension there. The company wants to hold cash, but suppliers want to get paid quickly.",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0019.mp3",
     "duration": 6.478,
     "startTime": 274.379
@@ -267,7 +267,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Exactly. That tension is at the heart of AP strategy. The metric that captures this is Days Payable Outstanding, or DPO. It measures the average number of days it takes a company to pay its suppliers. The average DPO across the S&P 1500 is about fifty-one days. But it varies hugely by industry and company strategy.",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0020.mp3",
     "duration": 21.964,
     "startTime": 280.857
@@ -280,7 +280,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "So a higher DPO means the company is holding onto cash longer, which is good for the company but potentially bad for suppliers?",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0021.mp3",
     "duration": 8.568,
     "startTime": 302.822
@@ -293,7 +293,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Precisely. And this is why AP is strategic. The CFO cares deeply about DPO because it directly affects free cash flow. But push DPO too high and you damage supplier relationships, potentially lose early payment discounts, and might even face supply disruptions if critical suppliers get squeezed.",
-    "chapter": "INTRO",
+    "chapter": "AP on the Balance Sheet",
     "file": "0022.mp3",
     "duration": 19.574,
     "startTime": 311.39
@@ -306,7 +306,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let's get into the mechanics. Walk me through the life of an invoice from start to finish.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0023.mp3",
     "duration": 5.851,
     "startTime": 330.964
@@ -319,7 +319,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Alright, let's follow a single invoice through its entire journey. Let's say a company has ordered office furniture from a supplier. The furniture gets delivered, and now the supplier wants to get paid.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0024.mp3",
     "duration": 12.26,
     "startTime": 336.816
@@ -332,7 +332,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Step one?",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0025.mp3",
     "duration": 1.324,
     "startTime": 349.076
@@ -345,7 +345,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Step one is invoice receipt. The supplier sends an invoice to the company. Now, this is where things already get messy in many organizations. That invoice might arrive as a paper document in the mail, as a PDF attached to an email, through an electronic data interchange or EDI connection, through a supplier portal, or as a structured e-invoice in a format like Peppol or UBL.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0026.mp3",
     "duration": 24.611,
     "startTime": 350.399
@@ -358,7 +358,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And companies receive invoices through all of these channels simultaneously?",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0027.mp3",
     "duration": 5.224,
     "startTime": 375.011
@@ -371,7 +371,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Yes, that's one of the fundamental challenges. A single company might receive invoices through five or six different channels. Each channel requires different handling. Paper needs to be scanned. Emails need to be monitored. EDI needs technical integration. Consolidating all of this into a single process is challenge number one.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0028.mp3",
     "duration": 20.989,
     "startTime": 380.235
@@ -384,7 +384,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Okay, the invoice has arrived. What happens next?",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0029.mp3",
     "duration": 3.971,
     "startTime": 401.224
@@ -397,7 +397,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Step two is data capture and extraction. Someone or something needs to read that invoice and extract the key data: supplier name, invoice number, invoice date, due date, line items, quantities, unit prices, total amount, tax amounts, purchase order number if there is one, and payment terms.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0030.mp3",
     "duration": 18.599,
     "startTime": 405.195
@@ -410,7 +410,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's a lot of data fields.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0031.mp3",
     "duration": 2.09,
     "startTime": 423.794
@@ -423,7 +423,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It is. And in a manual environment, a human being is keying all of that into the ERP system by hand. That's slow, expensive, and error-prone. This is where automation technology like OCR and AI-powered data extraction comes in, and it's a huge part of what Medius does.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0032.mp3",
     "duration": 18.042,
     "startTime": 425.884
@@ -436,7 +436,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "So after the data is captured, what's next?",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0033.mp3",
     "duration": 2.856,
     "startTime": 443.926
@@ -449,7 +449,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Step three is validation. The system checks: Is this a known supplier? Is the invoice number unique, or is it a potential duplicate? Do the math add up? Is the tax calculated correctly? Are the payment terms consistent with what we've agreed with this supplier?",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0034.mp3",
     "duration": 17.067,
     "startTime": 446.782
@@ -462,7 +462,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And if something fails validation?",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0035.mp3",
     "duration": 2.438,
     "startTime": 463.848
@@ -475,7 +475,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It gets flagged as an exception and routed to a human for review. One of the biggest metrics in AP is the percentage of invoices that can pass through without any human intervention, called touchless processing or straight-through processing. Top-performing AP departments achieve an eighty-five percent touchless rate. The average is closer to twenty-seven percent.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0036.mp3",
     "duration": 23.148,
     "startTime": 466.286
@@ -488,7 +488,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's a massive gap. So the automation opportunity is enormous.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0037.mp3",
     "duration": 4.737,
     "startTime": 489.435
@@ -501,7 +501,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Exactly. And that gap is essentially the total addressable market for AP automation software.",
-    "chapter": "INTRO",
+    "chapter": "The Invoice Lifecycle",
     "file": "0038.mp3",
     "duration": 6.618,
     "startTime": 494.172
@@ -514,7 +514,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What happens after validation?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0039.mp3",
     "duration": 2.229,
     "startTime": 500.789
@@ -527,7 +527,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Step four is GL coding. GL stands for General Ledger. Every invoice needs to be coded to the right account in the chart of accounts so it shows up correctly in financial reporting. Was this office furniture a capital expenditure or an operating expense? Which cost center should it be charged to? Which department? Which project?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0040.mp3",
     "duration": 21.546,
     "startTime": 503.019
@@ -540,7 +540,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And who makes that decision?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0041.mp3",
     "duration": 2.02,
     "startTime": 524.565
@@ -553,7 +553,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "For PO-backed invoices, where a purchase order was created before the goods were ordered, the coding is usually inherited from the purchase order. The person who created the PO already specified the GL account and cost center. For non-PO invoices, which is a huge category, the AP clerk or the invoice approver needs to assign the correct coding. This is where mistakes happen frequently, and it's another area where AI can help by suggesting the right coding based on historical patterns.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0042.mp3",
     "duration": 30.602,
     "startTime": 526.585
@@ -566,7 +566,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "You keep mentioning PO-backed versus non-PO invoices. Let me make sure I understand the difference.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0043.mp3",
     "duration": 7.175,
     "startTime": 557.187
@@ -579,7 +579,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "A PO-backed invoice is one where someone in the company created a purchase order before the goods or services were ordered. The PO specifies what's being bought, from whom, at what price, and the GL coding. When the invoice arrives, it can be matched against the PO. A non-PO invoice has no corresponding purchase order. Think of things like utility bills, subscriptions, one-off consulting fees, or expenses that don't go through a formal procurement process.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0044.mp3",
     "duration": 29.07,
     "startTime": 564.362
@@ -592,7 +592,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And I'm guessing non-PO invoices are harder to process?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0045.mp3",
     "duration": 3.971,
     "startTime": 593.431
@@ -605,7 +605,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Much harder. There's nothing to match them against, so they need to be manually reviewed, coded, and approved. In many companies, non-PO invoices make up thirty to fifty percent of all invoices. They're the bane of every AP department's existence.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0046.mp3",
     "duration": 15.116,
     "startTime": 597.402
@@ -618,7 +618,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Okay, so for PO invoices, the next step is matching?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0047.mp3",
     "duration": 4.04,
     "startTime": 612.518
@@ -631,7 +631,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Right. Step five is matching, specifically three-way matching. This is a foundational control in AP. You compare three documents: the purchase order, which says what was ordered and at what price, the goods receipt or receiving report, which confirms what was actually delivered, and the invoice, which is what the supplier is billing for.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0048.mp3",
     "duration": 21.964,
     "startTime": 616.559
@@ -644,7 +644,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And all three should agree?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0049.mp3",
     "duration": 2.09,
     "startTime": 638.523
@@ -657,7 +657,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Ideally, yes. The quantities should match, the prices should match, and the total should match. When they do, the invoice can be approved automatically. When they don't, you have an exception. Maybe the supplier shipped ninety-five units but the PO was for a hundred. Maybe the price on the invoice is two percent higher than the PO price. These exceptions need to be investigated and resolved.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0050.mp3",
     "duration": 24.96,
     "startTime": 640.613
@@ -670,7 +670,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And that investigation takes time.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0051.mp3",
     "duration": 2.508,
     "startTime": 665.572
@@ -683,7 +683,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It does. And it's one of the biggest bottlenecks in invoice processing. Companies set tolerance thresholds to avoid getting bogged down in tiny discrepancies. For example, you might set a rule that says price variances under two percent or five dollars are automatically accepted. But larger variances require human review.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0052.mp3",
     "duration": 20.223,
     "startTime": 668.08
@@ -696,7 +696,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "After matching, what's next?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0053.mp3",
     "duration": 2.02,
     "startTime": 688.303
@@ -709,7 +709,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Step six is approval. Even after matching, many organizations require one or more people to formally approve the invoice before it can be paid. Approval workflows can be simple, just one person signs off, or complex, with multiple levels based on the invoice amount, the department, the expense type, or other criteria.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0054.mp3",
     "duration": 20.153,
     "startTime": 690.323
@@ -722,7 +722,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And then payment?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0055.mp3",
     "duration": 1.533,
     "startTime": 710.476
@@ -735,7 +735,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Step seven is payment, but we'll cover that in depth in a later episode. In short, approved invoices go into a payment queue, they're batched into payment runs, and the payments are executed through various methods like checks, ACH, wire transfers, or virtual cards.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0056.mp3",
     "duration": 15.813,
     "startTime": 712.008
@@ -748,7 +748,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And the last step?",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0057.mp3",
     "duration": 1.672,
     "startTime": 727.821
@@ -761,7 +761,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Step eight is reconciliation. After payment, the AP team needs to confirm that the payment was successfully received by the supplier, match the payment against the bank statement, and close out the invoice in the accounting system. Any discrepancies need to be investigated.",
-    "chapter": "INTRO",
+    "chapter": "Coding, Matching, and Approval",
     "file": "0058.mp3",
     "duration": 16.927,
     "startTime": 729.493
@@ -774,7 +774,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "You mentioned PO and non-PO invoices. Are there other types I should know about?",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0059.mp3",
     "duration": 6.06,
     "startTime": 746.42
@@ -787,7 +787,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Absolutely. Let me walk through the main categories. Standard invoices are the most common. A supplier sends a bill for goods or services delivered. Credit notes are essentially negative invoices. The supplier is giving money back, maybe because goods were returned, there was a pricing error, or a volume discount kicked in. Credit notes need to be matched against the original invoice.",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0060.mp3",
     "duration": 24.96,
     "startTime": 752.481
@@ -800,7 +800,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That sounds like it could get complicated.",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0061.mp3",
     "duration": 2.995,
     "startTime": 777.44
@@ -813,7 +813,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It does. Debit notes are the opposite. The buyer issues a debit note to the supplier when there's an underpayment or overcharge that needs correcting. Then you have recurring invoices for subscriptions and regular services, like your monthly cloud hosting bill or office lease payment. These are often processed through automated schedules.",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0062.mp3",
     "duration": 20.919,
     "startTime": 780.436
@@ -826,7 +826,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Any others?",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0063.mp3",
     "duration": 1.324,
     "startTime": 801.355
@@ -839,7 +839,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Self-billing is an interesting one. Instead of the supplier sending an invoice, the buyer generates the invoice based on what they received. This is common in manufacturing and retail where deliveries happen frequently. The buyer says, we received this many units at this price, here's the invoice we're generating on your behalf. It actually eliminates a lot of matching issues.",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0064.mp3",
     "duration": 23.148,
     "startTime": 802.679
@@ -852,7 +852,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's clever. Any other types I should know about?",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0065.mp3",
     "duration": 3.831,
     "startTime": 825.827
@@ -865,7 +865,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Pro-forma invoices, which are preliminary invoices sent before goods are shipped, usually for customs purposes. Interim invoices for long-term projects where the supplier bills periodically for work completed. And consolidated invoices where a supplier bundles multiple deliveries or services into a single invoice.",
-    "chapter": "INTRO",
+    "chapter": "Types of Invoices",
     "file": "0066.mp3",
     "duration": 20.432,
     "startTime": 829.658
@@ -878,7 +878,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let me make sure I have the key terminology down. Can we do a rapid-fire glossary?",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0067.mp3",
     "duration": 5.782,
     "startTime": 850.09
@@ -891,7 +891,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Sure. General Ledger or GL: the master set of accounts used to record all financial transactions. Chart of Accounts: the complete listing of every account in the GL. Cost Center: a department, project, or organizational unit that costs are allocated to.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0068.mp3",
     "duration": 17.763,
     "startTime": 855.872
@@ -904,7 +904,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Got it. What about accruals?",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0069.mp3",
     "duration": 2.647,
     "startTime": 873.635
@@ -917,7 +917,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Accruals are expenses that have been incurred but not yet invoiced or paid. At month-end, the finance team estimates these and records them so the financial statements are accurate. This is directly related to AP because uninvoiced receipts create accruals. Aging Reports show outstanding invoices broken down by how long they've been unpaid: current, thirty days, sixty days, ninety days, and beyond. This is a critical report for managing cash flow and supplier relationships.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0070.mp3",
     "duration": 30.393,
     "startTime": 876.282
@@ -930,7 +930,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And payment terms? I've seen things like Net 30 and 2/10 Net 30.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0071.mp3",
     "duration": 5.503,
     "startTime": 906.675
@@ -943,7 +943,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Net 30 means the full invoice amount is due within thirty days. Net 60 means sixty days. 2/10 Net 30 is an early payment discount. It means you get a two percent discount if you pay within ten days, otherwise the full amount is due in thirty days. That two percent discount annualized is actually a thirty-six percent return on your money, which is why capturing early payment discounts is such a big deal.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0072.mp3",
     "duration": 26.492,
     "startTime": 912.178
@@ -956,7 +956,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Thirty-six percent? That's a huge return.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0073.mp3",
     "duration": 3.065,
     "startTime": 938.67
@@ -969,7 +969,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "It is. And yet, many companies fail to capture these discounts because their invoice processing is too slow. By the time the invoice is approved, the discount window has closed. This is one of the most compelling ROI arguments for AP automation.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Terminology",
     "file": "0074.mp3",
     "duration": 15.743,
     "startTime": 941.735
@@ -982,7 +982,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let's talk about what goes wrong. What are the biggest pain points when AP is done manually?",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0075.mp3",
     "duration": 6.2,
     "startTime": 957.479
@@ -995,7 +995,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Where do I start? Lost invoices are probably the most common problem. Paper invoices get misrouted, email invoices end up in the wrong inbox, and suddenly no one can find the invoice that's due next week. The supplier calls asking where their payment is, and the AP team scrambles.",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0076.mp3",
     "duration": 17.345,
     "startTime": 963.678
@@ -1008,7 +1008,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What else?",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0077.mp3",
     "duration": 1.324,
     "startTime": 981.024
@@ -1021,7 +1021,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Duplicate payments are a massive issue. Studies suggest that companies lose between point one and point five percent of their total disbursements to duplicate payments. For a company spending a billion dollars a year through AP, that's one to five million dollars in duplicate payments.",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0078.mp3",
     "duration": 17.415,
     "startTime": 982.347
@@ -1034,7 +1034,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's real money.",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0079.mp3",
     "duration": 1.602,
     "startTime": 999.762
@@ -1047,7 +1047,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Late payments are another huge problem. The average AP department starts with an on-time payment rate of only thirty-five percent. That means two-thirds of invoices are paid late. That damages supplier relationships, can result in late fees, and you miss those early payment discounts we talked about.",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0080.mp3",
     "duration": 19.526,
     "startTime": 1001.364
@@ -1060,7 +1060,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What about visibility?",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0081.mp3",
     "duration": 1.811,
     "startTime": 1020.89
@@ -1073,7 +1073,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Lack of visibility is probably the most strategic pain point. When AP is manual, the CFO has no real-time view of outstanding liabilities. They can't accurately forecast cash needs. They don't know which invoices are stuck in approval queues. They can't see spending patterns across the organization. It's like flying blind.",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0082.mp3",
     "duration": 21.407,
     "startTime": 1022.701
@@ -1086,7 +1086,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And I imagine there's a labor cost issue too?",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0083.mp3",
     "duration": 3.065,
     "startTime": 1044.108
@@ -1099,7 +1099,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Absolutely. The cost per invoice is the key metric here. According to APQC benchmarking data, top-performing AP departments process an invoice for about two dollars. The median is about six to seven dollars. Bottom performers spend more than ten dollars per invoice. When you're processing tens of thousands of invoices a month, that cost difference is enormous.",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0084.mp3",
     "duration": 23.148,
     "startTime": 1047.173
@@ -1112,7 +1112,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What drives that cost difference?",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0085.mp3",
     "duration": 2.299,
     "startTime": 1070.322
@@ -1125,7 +1125,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Mostly labor. In a manual environment, you have people opening envelopes, keying data, chasing approvals, resolving exceptions, making phone calls to suppliers, and manually entering payment information. In an automated environment, software handles most of that, and the AP team focuses on exceptions and strategic tasks.",
-    "chapter": "INTRO",
+    "chapter": "Pain Points in Manual AP",
     "file": "0086.mp3",
     "duration": 20.78,
     "startTime": 1072.621
@@ -1138,7 +1138,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Let's go deeper on metrics. As a product person, I want to understand what our customers measure and care about.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0087.mp3",
     "duration": 7.523,
     "startTime": 1093.401
@@ -1151,7 +1151,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "The big ones are: Days Payable Outstanding, which we covered, typically around fifty-one days for the S&P 1500. Cost per invoice, where the spread between two dollars and ten dollars tells you how automated your process is. Invoice processing time, measured from receipt to payment-ready. Top performers do it in under three days. Bottom performers take a week or more.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0088.mp3",
     "duration": 24.263,
     "startTime": 1100.924
@@ -1164,7 +1164,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "What about touchless processing rate?",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0089.mp3",
     "duration": 2.577,
     "startTime": 1125.187
@@ -1177,7 +1177,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "That's increasingly the gold standard metric. It measures the percentage of invoices that flow from receipt all the way to payment-ready without any human intervention. Top performers hit eighty-five percent. The average is twenty-seven percent. Every percentage point improvement represents real savings.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0090.mp3",
     "duration": 19.108,
     "startTime": 1127.764
@@ -1190,7 +1190,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Any other important metrics?",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0091.mp3",
     "duration": 2.159,
     "startTime": 1146.873
@@ -1203,7 +1203,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Invoices processed per full-time employee is a productivity metric. Top performers process three times more invoices per person than bottom performers. Exception rate matters too: what percentage of invoices require manual intervention and why? First-pass match rate tells you how often the three-way match succeeds on the first try. And early payment discount capture rate tells you how much money you're leaving on the table.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0092.mp3",
     "duration": 26.631,
     "startTime": 1149.032
@@ -1216,7 +1216,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "This is incredibly helpful for thinking about product metrics and value propositions.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0093.mp3",
     "duration": 5.991,
     "startTime": 1175.663
@@ -1229,7 +1229,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Exactly. When you're building AP software, every feature should tie back to moving one of these metrics in the right direction.",
-    "chapter": "INTRO",
+    "chapter": "Key AP Metrics and Benchmarks",
     "file": "0094.mp3",
     "duration": 8.081,
     "startTime": 1181.654
@@ -1242,7 +1242,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "So pulling it all together, why does AP automation exist as a software category?",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0095.mp3",
     "duration": 5.782,
     "startTime": 1189.735
@@ -1255,7 +1255,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Because the gap between manual AP and best-in-class AP is enormous, and it's all addressable with software. Think about it. Manual data entry can be replaced with AI-powered data extraction. Paper-based routing can be replaced with digital workflows. Three-way matching can be fully automated. Exception handling can be guided by intelligent rules. Payment execution can be embedded in the same platform. And analytics can give the CFO real-time visibility.",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0096.mp3",
     "duration": 29.905,
     "startTime": 1195.516
@@ -1268,7 +1268,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "And the market size?",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0097.mp3",
     "duration": 1.741,
     "startTime": 1225.422
@@ -1281,7 +1281,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "The AP automation market is estimated at around four to five billion dollars and growing at double-digit rates annually. But the real opportunity is much larger because penetration is still relatively low. Many companies, even large ones, are still running largely manual AP processes.",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0098.mp3",
     "duration": 18.181,
     "startTime": 1227.163
@@ -1294,7 +1294,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "That's surprising to me. Why haven't they automated already?",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0099.mp3",
     "duration": 4.04,
     "startTime": 1245.345
@@ -1307,7 +1307,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Several reasons. Some companies have tried and failed with first-generation tools that were clunky and hard to integrate. Some are locked into ERP-centric processes and think their ERP handles AP well enough, even though it usually doesn't. Some face organizational inertia, where AP is seen as a back-office function not worth investing in. And some simply haven't quantified the cost of their current state.",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0100.mp3",
     "duration": 26.701,
     "startTime": 1249.385
@@ -1320,7 +1320,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "So there's a massive education and awareness challenge alongside the technology challenge.",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0101.mp3",
     "duration": 5.921,
     "startTime": 1276.086
@@ -1333,7 +1333,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Exactly. And that's why a CPO at Medius needs to understand not just the technology, but the human and organizational dynamics of AP. Your customers aren't just buying software. They're buying a transformation of how their finance team works.",
-    "chapter": "INTRO",
+    "chapter": "Why AP Automation Exists",
     "file": "0102.mp3",
     "duration": 15.047,
     "startTime": 1282.007
@@ -1346,7 +1346,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Morgan, this has been an incredible foundation. I feel like I've gone from knowing almost nothing about AP to having a solid framework for understanding the space.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0103.mp3",
     "duration": 10.519,
     "startTime": 1297.054
@@ -1359,7 +1359,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "And we've only scratched the surface. In the next episode, we're going to zoom out and look at the full procure-to-pay journey, from the moment someone in the company needs to buy something all the way through to the payment. That P2P perspective is essential for understanding where AP fits in the bigger picture.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0104.mp3",
     "duration": 19.317,
     "startTime": 1307.572
@@ -1372,7 +1372,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "I'm looking forward to it. For our listeners, if you're also new to this space or want a refresher, I'd encourage you to think about the metrics we discussed today. Cost per invoice, DPO, touchless rate. Those are the numbers that tell you how well an AP operation is running.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0105.mp3",
     "duration": 17.694,
     "startTime": 1326.889
@@ -1385,7 +1385,7 @@
     "speaker": "MORGAN",
     "voice": "F2",
     "text": "Great advice. See you in the next episode.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0106.mp3",
     "duration": 3.065,
     "startTime": 1344.583
@@ -1398,7 +1398,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Thanks Morgan. See you next time.",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0107.mp3",
     "duration": 2.786,
     "startTime": 1347.648
@@ -1411,7 +1411,7 @@
     "speaker": "KEVIN",
     "voice": "M1",
     "text": "Next Episode: The Procure-to-Pay Journey",
-    "chapter": "INTRO",
+    "chapter": "Wrap Up",
     "file": "0108.mp3",
     "duration": 3.344,
     "startTime": 1350.434

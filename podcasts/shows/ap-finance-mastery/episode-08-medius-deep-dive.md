@@ -2,7 +2,7 @@
 
 **Duration:** ~14 minutes
 
-## Introduction
+### Introduction
 
 **MORGAN:** Welcome back. This is the episode we've been building toward. Today we're going deep on Medius, the company, the platform, and the product suite.
 
@@ -12,7 +12,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Company History and DNA
+### Company History and DNA
 
 **KEVIN:** Tell me about Medius's origins.
 
@@ -28,7 +28,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Market Position and Recognition
+### Market Position and Recognition
 
 **KEVIN:** Where does Medius stand in the market today?
 
@@ -44,7 +44,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Core Product: Medius AP Automation
+### Core Product: Medius AP Automation
 
 **KEVIN:** Let's go through each product module. Start with the core AP automation.
 
@@ -64,7 +64,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Medius Payments
+### Medius Payments
 
 **KEVIN:** Let's talk about Payments. This launched in June 2025.
 
@@ -84,7 +84,7 @@
 
 **[MUSIC TRANSITION]**
 
-## AI Capabilities: Copilot and Supplier Conversations
+### AI Capabilities: Copilot and Supplier Conversations
 
 **KEVIN:** Tell me about the AI-specific products.
 
@@ -104,7 +104,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Procurement, Sourcing, and Contract Management
+### Procurement, Sourcing, and Contract Management
 
 **KEVIN:** What about the broader spend management modules?
 
@@ -120,7 +120,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Expense Management
+### Expense Management
 
 **KEVIN:** What about Expense Management?
 
@@ -132,7 +132,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Analytics
+### Analytics
 
 **KEVIN:** Tell me about the analytics capabilities.
 
@@ -144,7 +144,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Platform Architecture
+### Platform Architecture
 
 **KEVIN:** Let's talk architecture.
 
@@ -160,7 +160,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Pricing Model
+### Pricing Model
 
 **KEVIN:** How is Medius priced?
 
@@ -172,7 +172,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Competitive Positioning
+### Competitive Positioning
 
 **KEVIN:** How should I think about Medius's competitive positioning?
 
@@ -192,7 +192,7 @@
 
 **[MUSIC TRANSITION]**
 
-## Wrap Up
+### Wrap Up
 
 **KEVIN:** Morgan, this deep dive has been invaluable. I feel like I have a solid understanding of the full Medius product suite, where it's strong, where there are opportunities, and how it fits in the competitive landscape.
 

@@ -99,8 +99,10 @@ let chapters = [];
 let lineOffsets = [];
 let episodeAudioDuration = 0;
 let lastPersistedLine = -1;
-let lastPrebufferedEpKey = null;
 let prebufferedNextAudio = null;
+let prebufferingNextEpKey = null;
+let lastPrebufferAttemptKey = null;
+let lastPrebufferAttemptAt = 0;
 let episodeAudioLoadFailed = false;
 let episodeOpenRequest = 0;
 let audioSourceGeneration = 0;
@@ -118,12 +120,10 @@ const speechPlayers = createSpeechPlayers({
     getSpeechRate: () => speechRate
 });
 
-// Ambient audio-reactive bars on the player screen. The AudioContext is only
-// ever created inside a user gesture (play button / Space key) — required on
-// iOS Safari, where a context created elsewhere would stay suspended and
-// silence the <audio> element it routes.
+// Ambient play-state bars on the player screen. They are intentionally CSS
+// only: routing the podcast element through Web Audio lets mobile browsers
+// silence it when that context is suspended in the background.
 const nowPlayingViz = createNowPlayingVisualizer({
-    audio: speechPlayers.audio,
     container: document.getElementById('now-playing-viz'),
     prefersReducedMotion: () => prefersReducedMotion()
 });
@@ -259,7 +259,6 @@ const miniPlayer = createMiniPlayer({
     getPlaybackFraction,
     isPlayingActive: () => isPlaying && !isPaused,
     onToggle: () => {
-        nowPlayingViz.ensureContext();
         void togglePlayPause();
     },
     onExpand: expandMiniPlayer
@@ -451,25 +450,30 @@ document.addEventListener('click', (event) => {
 function maybePrebufferNextEpisode() {
     if (!playerPodcast || !currentEpisode) return;
     if (!speechPlayers.isContinuousReady()) return;
-    const duration = speechPlayers.getDuration();
-    const position = speechPlayers.getCurrentTime();
-    if (!duration || duration - position > 30) return;
     const next = getNextUp();
     if (!next) return;
     const nextKey = epKeyOf(next.podcast, next.episode);
-    if (lastPrebufferedEpKey === nextKey) return;
-    lastPrebufferedEpKey = nextKey;
+    if (prebufferedNextAudio?.key === nextKey || prebufferingNextEpKey === nextKey) return;
+    const now = Date.now();
+    // A temporary manifest failure should be retried, but never on every
+    // timeupdate tick. Starting early leaves several retry windows before the
+    // current episode ends and Android can suspend asynchronous page work.
+    if (lastPrebufferAttemptKey === nextKey && now - lastPrebufferAttemptAt < 15_000) return;
+    lastPrebufferAttemptKey = nextKey;
+    lastPrebufferAttemptAt = now;
+    prebufferingNextEpKey = nextKey;
     const sourceKey = getEpisodeKey();
     const episodeFile = next.episode.file || next.episode.filename || null;
-    // Only warm the tiny, no-store manifest. The previous implementation
-    // downloaded the full bare combined.mp3, then playback requested the same
-    // 8+ MB file again with ?v=<manifest hash>; on mobile those competing
-    // transfers could make the automatic handoff fail at time zero.
+    // Prepare the tiny, no-store manifest as soon as playback starts. The
+    // source itself remains untouched: fetching the full next MP3 would waste
+    // bandwidth and compete with the current episode on mobile connections.
     void loadSupertonicAudioManifest(next.podcast.id, episodeFile).then((audioManifest) => {
         if (!audioManifest || getEpisodeKey() !== sourceKey) return;
         const stillNext = getNextUp();
         if (!stillNext || epKeyOf(stillNext.podcast, stillNext.episode) !== nextKey) return;
         prebufferedNextAudio = { key: nextKey, audioManifest };
+    }).finally(() => {
+        if (prebufferingNextEpKey === nextKey) prebufferingNextEpKey = null;
     });
 }
 
@@ -742,8 +746,10 @@ async function openEpisode(episode, options = {}) {
     chaptersPanel.renderMarkers();
     bookmarksPanel.render();
     updateProgress();
-    lastPrebufferedEpKey = null;
     prebufferedNextAudio = null;
+    prebufferingNextEpKey = null;
+    lastPrebufferAttemptKey = null;
+    lastPrebufferAttemptAt = 0;
     hideUpNextBanner();
     setStatus(episodeAudioLoadFailed
         ? 'Episode audio metadata isn\'t loading — tap play to retry'
@@ -854,11 +860,9 @@ function speak(text, speaker, options) {
 
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        // Background/lockscreen: stop the rAF loop (audio keeps playing).
+        // Background/lockscreen: stop decorative motion (audio keeps playing).
         nowPlayingViz.stop();
     } else {
-        // Foreground again: recover from any iOS 'interrupted' context state.
-        nowPlayingViz.resumeIfNeeded();
         if (isPlaying && !isPaused) nowPlayingViz.start();
     }
 });
@@ -906,8 +910,11 @@ speechPlayers.on('play', () => {
     setPlayButtonState(true);
     miniPlayer.update();
     mediaSession.updatePlaybackState();
-    nowPlayingViz.resumeIfNeeded();
     if (!document.hidden) nowPlayingViz.start();
+    // Fetch only the next episode's tiny manifest while this media session is
+    // definitely active. Waiting for the final seconds is unreliable when a
+    // locked Android PWA throttles timeupdate and fetch callbacks.
+    maybePrebufferNextEpisode();
     void requestWakeLock();
 });
 
@@ -1002,7 +1009,6 @@ function pauseForUserAction(status, toastMessage, {
             actionLabel,
             duration: 0,
             onAction: () => {
-                nowPlayingViz.ensureContext();
                 onAction();
             }
         });
@@ -1278,7 +1284,6 @@ async function startPlayback() {
                     actionLabel: 'Play',
                     duration: 0,
                     onAction: () => {
-                        nowPlayingViz.ensureContext();
                         void startPlayback();
                     }
                 });
@@ -1466,8 +1471,6 @@ function estimateLineJumpFromSeconds(seconds) {
 // All four skip buttons honor user-configurable intervals from the settings
 // panel; holding a skip button repeats the skip until released.
 document.getElementById('play-btn').addEventListener('click', () => {
-    // User gesture: safe point to create/resume the visualizer AudioContext.
-    nowPlayingViz.ensureContext();
     void togglePlayPause();
 });
 
@@ -1932,7 +1935,6 @@ initKeyboardShortcuts({
     getSkipForward: () => settings.skipForward(),
     getSpeechRate: () => speechRate,
     applySpeechRate,
-    ensureVizContext: () => nowPlayingViz.ensureContext(),
     playNextEpisode,
     playPreviousEpisode
 });

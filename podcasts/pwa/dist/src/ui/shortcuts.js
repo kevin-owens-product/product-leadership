@@ -16,7 +16,6 @@ export function initKeyboardShortcuts({
     getSkipForward,
     getSpeechRate,
     applySpeechRate,
-    ensureVizContext,
     playNextEpisode,
     playPreviousEpisode
 }) {
@@ -49,7 +48,6 @@ export function initKeyboardShortcuts({
         switch (event.key) {
             case ' ':
                 event.preventDefault();
-                ensureVizContext();
                 void togglePlayPause();
                 break;
             case 'ArrowLeft':

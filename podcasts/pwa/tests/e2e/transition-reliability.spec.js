@@ -95,6 +95,63 @@ async function openApEpisode(page, number) {
   await expect(page.locator('#player-view')).toHaveClass(/active/, { timeout: 20000 });
 }
 
+test('background auto-advance keeps podcast audio on the native media path', async ({ page }) => {
+  let nextManifestRequests = 0;
+  await page.route('**/audio/ap-finance-mastery/episode-05-supplier-management/manifest.json*', route => {
+    nextManifestRequests += 1;
+    void route.continue();
+  });
+  await page.addInitScript(() => {
+    window.__audioContextConstructions = 0;
+    class ForbiddenAudioContext {
+      constructor() {
+        window.__audioContextConstructions += 1;
+        throw new Error('Podcast audio must not be routed through Web Audio');
+      }
+    }
+    Object.defineProperty(window, 'AudioContext', {
+      configurable: true,
+      value: ForbiddenAudioContext
+    });
+    Object.defineProperty(window, 'webkitAudioContext', {
+      configurable: true,
+      value: ForbiddenAudioContext
+    });
+  });
+  await installControlledAudio(page);
+  await openApEpisode(page, 4);
+  const nextManifestLoaded = page.waitForResponse(response =>
+    response.url().includes('/episode-05-supplier-management/manifest.json') && response.ok()
+  );
+  await page.locator('#play-btn').click();
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
+  await nextManifestLoaded;
+  await expect.poll(() => nextManifestRequests).toBeGreaterThan(0);
+
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', {
+      configurable: true,
+      get: () => 'hidden'
+    });
+    Object.defineProperty(document, 'hidden', {
+      configurable: true,
+      get: () => true
+    });
+    document.dispatchEvent(new Event('visibilitychange'));
+    window.__sharedAudio.finish();
+  });
+
+  await expect(page.locator('#player-episode-title')).toContainText(
+    'Supplier Management & Spend Analytics',
+    { timeout: 15000 }
+  );
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
+  await expect.poll(() => page.evaluate(() =>
+    window.__sharedAudio.playCalls.some((src) => src.includes('episode-05-supplier-management'))
+  )).toBe(true);
+  expect(await page.evaluate(() => window.__audioContextConstructions)).toBe(0);
+});
+
 test('native media retries a transient first-range failure during auto-advance', async ({ page }) => {
   await page.addInitScript(() => {
     const NativeAudio = window.Audio;

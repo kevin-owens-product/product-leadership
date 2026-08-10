@@ -1,5 +1,5 @@
-import { escapeHtml } from '../security/sanitize.js?v=2.3.0%2B20260810T192017Z';
-import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.3.0%2B20260810T192017Z';
+import { escapeHtml } from '../security/sanitize.js?v=2.3.0%2B20260810T220215Z';
+import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.3.0%2B20260810T220215Z';
 
 // Hand-drawn inline SVG glyphs (1.8px round strokes — the shared .icon
 // language from player.css). No emoji glyphs in list chrome.

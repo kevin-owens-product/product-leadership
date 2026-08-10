@@ -1,10 +1,12 @@
 {
   "id": "ap-finance-mastery",
   "title": "AP & Finance Mastery",
-  "subtitle": "The CPO's Guide to Accounts Payable & Financial Operations",
-  "description": "A comprehensive deep dive into accounts payable, procure-to-pay, payment operations, and finance automation. Built for product leaders joining the AP automation space who need to become domain experts fast.",
+  "subtitle": "From Accounts Payable to the CFO Spend Control Tower",
+  "description": "A two-season operator curriculum spanning accounts payable, source-to-pay, supplier lifecycle, procurement, spend intelligence, working capital, payment control, and the Office of the CFO. Built for product leaders who need to turn finance technology into measurable cash, control, and enterprise value.",
+  "author": "Kevin & Morgan",
   "color": "#059669",
   "icon": "💰",
+  "lang": "en",
   "voiceMap": {
     "KEVIN": "M1",
     "MORGAN": "F2"
@@ -19,6 +21,16 @@
     {"id": 7, "file": "episode-07-ap-automation-ai.md", "title": "AP Automation Technology & The AI Revolution"},
     {"id": 8, "file": "episode-08-medius-deep-dive.md", "title": "Medius Deep Dive — The Platform & Product Suite"},
     {"id": 9, "file": "episode-09-cfo-perspective.md", "title": "The CFO Perspective & Strategic Finance"},
-    {"id": 10, "file": "episode-10-future-of-ap.md", "title": "The Future of AP & Autonomous Finance"}
+    {"id": 10, "file": "episode-10-future-of-ap.md", "title": "The Future of AP & Autonomous Finance"},
+    {"id": 11, "file": "episode-11-build-cfo-spend-truth.md", "title": "Build the CFO's Spend Truth", "subtitle": "Season 2 · Reconcile Every Dollar Before You Transform It"},
+    {"id": 12, "file": "episode-12-choose-spend-to-control.md", "title": "Choose the Spend to Control", "subtitle": "Season 2 · Turn Fragmented Data Into an Investable Opportunity Map"},
+    {"id": 13, "file": "episode-13-create-one-supplier-truth.md", "title": "Create One Supplier Truth", "subtitle": "Season 2 · Govern Identity, Risk and the Full Supplier Lifecycle"},
+    {"id": 14, "file": "episode-14-source-the-value.md", "title": "Source the Value", "subtitle": "Season 2 · Redesign Demand Before You Negotiate Price"},
+    {"id": 15, "file": "episode-15-make-the-contract-buyable.md", "title": "Make the Contract Buyable", "subtitle": "Season 2 · Convert Negotiated Terms Into Everyday Buying Behavior"},
+    {"id": 16, "file": "episode-16-make-ap-the-learning-loop.md", "title": "Make AP the Learning Loop", "subtitle": "Season 2 · Use Exceptions to Repair the System Upstream"},
+    {"id": 17, "file": "episode-17-turn-terms-into-cash.md", "title": "Turn Terms Into Cash", "subtitle": "Season 2 · Balance Liquidity, Yield and Supplier Resilience"},
+    {"id": 18, "file": "episode-18-move-money-with-proof.md", "title": "Move Money With Proof", "subtitle": "Season 2 · Automate Payments Without Delegating Accountability"},
+    {"id": 19, "file": "episode-19-sequence-the-medius-suite.md", "title": "Sequence the Medius Suite", "subtitle": "Season 2 · Make a Portfolio of Products Behave Like a Platform"},
+    {"id": 20, "file": "episode-20-defend-the-cfo-return.md", "title": "Defend the CFO Return", "subtitle": "Season 2 · Reconcile Spend, Cash, Control and Enterprise Value"}
   ]
 }

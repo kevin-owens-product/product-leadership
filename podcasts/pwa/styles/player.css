@@ -163,9 +163,10 @@
     pointer-events: none;
 }
 
-/* Audio-reactive halo: the analyser bars live BEHIND the artwork and
-   emerge past its edges as a glowing aura — part of the hero, not a
-   separate widget. Bars animate transform/opacity only. */
+/* Now-playing halo: decorative CSS bars live BEHIND the artwork and emerge
+   past its edges as a glowing aura. They intentionally never route or inspect
+   the podcast audio; native media output must remain independent so mobile
+   background playback cannot be silenced by a suspended AudioContext. */
 .now-playing-viz {
     position: absolute;
     /* Taller than the artwork, narrower than it: loud bars emerge past the
@@ -192,6 +193,22 @@
     transform: scaleY(0.12);
     transform-origin: center;
     will-change: transform, opacity;
+}
+
+.now-playing-viz.live .viz-bar {
+    animation: viz-halo-pulse var(--viz-duration, 760ms) ease-in-out infinite alternate;
+    animation-delay: var(--viz-delay, 0ms);
+}
+
+@keyframes viz-halo-pulse {
+    from {
+        transform: scaleY(0.12);
+        opacity: 0.3;
+    }
+    to {
+        transform: scaleY(var(--viz-peak, 0.72));
+        opacity: 0.86;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

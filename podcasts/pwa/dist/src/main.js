@@ -8,58 +8,58 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.3.0%2B20260809T173920Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260809T173920Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260809T173920Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260809T173920Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260809T173920Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260809T173920Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260809T173920Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260809T173920Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260809T173920Z';
-import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260809T173920Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260809T173920Z';
-import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260809T173920Z';
+} from './state/storage.js?v=2.3.0%2B20260810T192017Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.3.0%2B20260810T192017Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.3.0%2B20260810T192017Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.3.0%2B20260810T192017Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.3.0%2B20260810T192017Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.3.0%2B20260810T192017Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.3.0%2B20260810T192017Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.3.0%2B20260810T192017Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.3.0%2B20260810T192017Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.3.0%2B20260810T192017Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.3.0%2B20260810T192017Z';
+import { createToastManager } from './ui/toast.js?v=2.3.0%2B20260810T192017Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.3.0%2B20260809T173920Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260809T173920Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260809T173920Z';
+} from './app/version.js?v=2.3.0%2B20260810T192017Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.3.0%2B20260810T192017Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.3.0%2B20260810T192017Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.3.0%2B20260809T173920Z';
+} from './parse/dialogue.js?v=2.3.0%2B20260810T192017Z';
 import {
     withCacheKey,
     epKeyOf,
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.3.0%2B20260809T173920Z';
-import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js?v=2.3.0%2B20260809T173920Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260809T173920Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260809T173920Z';
-import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260809T173920Z';
-import { formatClock } from './ui/format.js?v=2.3.0%2B20260809T173920Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260809T173920Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260809T173920Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260809T173920Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260809T173920Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260809T173920Z';
-import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260809T173920Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260809T173920Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260809T173920Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260809T173920Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260809T173920Z';
-import { createLibrary } from './ui/library.js?v=2.3.0%2B20260809T173920Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260809T173920Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260809T173920Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260809T173920Z';
-import { initBackNav, backTarget, performBack } from './app/back-nav.js?v=2.3.0%2B20260809T173920Z';
-import { classifyContinuousAudioFailure } from './playback/audio-errors.js?v=2.3.0%2B20260809T173920Z';
+} from './playback/manifest.js?v=2.3.0%2B20260810T192017Z';
+import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js?v=2.3.0%2B20260810T192017Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.3.0%2B20260810T192017Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.3.0%2B20260810T192017Z';
+import { findNextUp } from './state/queue-next.js?v=2.3.0%2B20260810T192017Z';
+import { formatClock } from './ui/format.js?v=2.3.0%2B20260810T192017Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.3.0%2B20260810T192017Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.3.0%2B20260810T192017Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.3.0%2B20260810T192017Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.3.0%2B20260810T192017Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.3.0%2B20260810T192017Z';
+import { createStatsTracker } from './state/stats.js?v=2.3.0%2B20260810T192017Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.3.0%2B20260810T192017Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.3.0%2B20260810T192017Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.3.0%2B20260810T192017Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.3.0%2B20260810T192017Z';
+import { createLibrary } from './ui/library.js?v=2.3.0%2B20260810T192017Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.3.0%2B20260810T192017Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.3.0%2B20260810T192017Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.3.0%2B20260810T192017Z';
+import { initBackNav, backTarget, performBack } from './app/back-nav.js?v=2.3.0%2B20260810T192017Z';
+import { classifyContinuousAudioFailure } from './playback/audio-errors.js?v=2.3.0%2B20260810T192017Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -99,8 +99,10 @@ let chapters = [];
 let lineOffsets = [];
 let episodeAudioDuration = 0;
 let lastPersistedLine = -1;
-let lastPrebufferedEpKey = null;
 let prebufferedNextAudio = null;
+let prebufferingNextEpKey = null;
+let lastPrebufferAttemptKey = null;
+let lastPrebufferAttemptAt = 0;
 let episodeAudioLoadFailed = false;
 let episodeOpenRequest = 0;
 let audioSourceGeneration = 0;
@@ -118,12 +120,10 @@ const speechPlayers = createSpeechPlayers({
     getSpeechRate: () => speechRate
 });
 
-// Ambient audio-reactive bars on the player screen. The AudioContext is only
-// ever created inside a user gesture (play button / Space key) — required on
-// iOS Safari, where a context created elsewhere would stay suspended and
-// silence the <audio> element it routes.
+// Ambient play-state bars on the player screen. They are intentionally CSS
+// only: routing the podcast element through Web Audio lets mobile browsers
+// silence it when that context is suspended in the background.
 const nowPlayingViz = createNowPlayingVisualizer({
-    audio: speechPlayers.audio,
     container: document.getElementById('now-playing-viz'),
     prefersReducedMotion: () => prefersReducedMotion()
 });
@@ -259,7 +259,6 @@ const miniPlayer = createMiniPlayer({
     getPlaybackFraction,
     isPlayingActive: () => isPlaying && !isPaused,
     onToggle: () => {
-        nowPlayingViz.ensureContext();
         void togglePlayPause();
     },
     onExpand: expandMiniPlayer
@@ -451,25 +450,30 @@ document.addEventListener('click', (event) => {
 function maybePrebufferNextEpisode() {
     if (!playerPodcast || !currentEpisode) return;
     if (!speechPlayers.isContinuousReady()) return;
-    const duration = speechPlayers.getDuration();
-    const position = speechPlayers.getCurrentTime();
-    if (!duration || duration - position > 30) return;
     const next = getNextUp();
     if (!next) return;
     const nextKey = epKeyOf(next.podcast, next.episode);
-    if (lastPrebufferedEpKey === nextKey) return;
-    lastPrebufferedEpKey = nextKey;
+    if (prebufferedNextAudio?.key === nextKey || prebufferingNextEpKey === nextKey) return;
+    const now = Date.now();
+    // A temporary manifest failure should be retried, but never on every
+    // timeupdate tick. Starting early leaves several retry windows before the
+    // current episode ends and Android can suspend asynchronous page work.
+    if (lastPrebufferAttemptKey === nextKey && now - lastPrebufferAttemptAt < 15_000) return;
+    lastPrebufferAttemptKey = nextKey;
+    lastPrebufferAttemptAt = now;
+    prebufferingNextEpKey = nextKey;
     const sourceKey = getEpisodeKey();
     const episodeFile = next.episode.file || next.episode.filename || null;
-    // Only warm the tiny, no-store manifest. The previous implementation
-    // downloaded the full bare combined.mp3, then playback requested the same
-    // 8+ MB file again with ?v=<manifest hash>; on mobile those competing
-    // transfers could make the automatic handoff fail at time zero.
+    // Prepare the tiny, no-store manifest as soon as playback starts. The
+    // source itself remains untouched: fetching the full next MP3 would waste
+    // bandwidth and compete with the current episode on mobile connections.
     void loadSupertonicAudioManifest(next.podcast.id, episodeFile).then((audioManifest) => {
         if (!audioManifest || getEpisodeKey() !== sourceKey) return;
         const stillNext = getNextUp();
         if (!stillNext || epKeyOf(stillNext.podcast, stillNext.episode) !== nextKey) return;
         prebufferedNextAudio = { key: nextKey, audioManifest };
+    }).finally(() => {
+        if (prebufferingNextEpKey === nextKey) prebufferingNextEpKey = null;
     });
 }
 
@@ -742,8 +746,10 @@ async function openEpisode(episode, options = {}) {
     chaptersPanel.renderMarkers();
     bookmarksPanel.render();
     updateProgress();
-    lastPrebufferedEpKey = null;
     prebufferedNextAudio = null;
+    prebufferingNextEpKey = null;
+    lastPrebufferAttemptKey = null;
+    lastPrebufferAttemptAt = 0;
     hideUpNextBanner();
     setStatus(episodeAudioLoadFailed
         ? 'Episode audio metadata isn\'t loading — tap play to retry'
@@ -854,11 +860,9 @@ function speak(text, speaker, options) {
 
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        // Background/lockscreen: stop the rAF loop (audio keeps playing).
+        // Background/lockscreen: stop decorative motion (audio keeps playing).
         nowPlayingViz.stop();
     } else {
-        // Foreground again: recover from any iOS 'interrupted' context state.
-        nowPlayingViz.resumeIfNeeded();
         if (isPlaying && !isPaused) nowPlayingViz.start();
     }
 });
@@ -906,8 +910,11 @@ speechPlayers.on('play', () => {
     setPlayButtonState(true);
     miniPlayer.update();
     mediaSession.updatePlaybackState();
-    nowPlayingViz.resumeIfNeeded();
     if (!document.hidden) nowPlayingViz.start();
+    // Fetch only the next episode's tiny manifest while this media session is
+    // definitely active. Waiting for the final seconds is unreliable when a
+    // locked Android PWA throttles timeupdate and fetch callbacks.
+    maybePrebufferNextEpisode();
     void requestWakeLock();
 });
 
@@ -1002,7 +1009,6 @@ function pauseForUserAction(status, toastMessage, {
             actionLabel,
             duration: 0,
             onAction: () => {
-                nowPlayingViz.ensureContext();
                 onAction();
             }
         });
@@ -1278,7 +1284,6 @@ async function startPlayback() {
                     actionLabel: 'Play',
                     duration: 0,
                     onAction: () => {
-                        nowPlayingViz.ensureContext();
                         void startPlayback();
                     }
                 });
@@ -1466,8 +1471,6 @@ function estimateLineJumpFromSeconds(seconds) {
 // All four skip buttons honor user-configurable intervals from the settings
 // panel; holding a skip button repeats the skip until released.
 document.getElementById('play-btn').addEventListener('click', () => {
-    // User gesture: safe point to create/resume the visualizer AudioContext.
-    nowPlayingViz.ensureContext();
     void togglePlayPause();
 });
 
@@ -1932,7 +1935,6 @@ initKeyboardShortcuts({
     getSkipForward: () => settings.skipForward(),
     getSpeechRate: () => speechRate,
     applySpeechRate,
-    ensureVizContext: () => nowPlayingViz.ensureContext(),
     playNextEpisode,
     playPreviousEpisode
 });

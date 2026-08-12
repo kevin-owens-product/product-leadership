@@ -16,9 +16,9 @@
     <!-- App styles, split by concern (was one inline <style> block).
          Load order matters: base -> player -> components preserves the
          original cascade. All three are precached in the SW app shell. -->
-    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260810T220215Z">
-    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260810T220215Z">
-    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260810T220215Z">
+    <link rel="stylesheet" href="styles/base.css?v=2.3.0%2B20260811T211033Z">
+    <link rel="stylesheet" href="styles/player.css?v=2.3.0%2B20260811T211033Z">
+    <link rel="stylesheet" href="styles/components.css?v=2.3.0%2B20260811T211033Z">
 </head>
 <body>
     <!-- Podcasts Home View -->
@@ -99,15 +99,43 @@
             </div>
         </header>
 
+        <div class="season-nav-shell" id="season-nav" hidden>
+            <div class="season-tabs" id="season-tabs" role="tablist" aria-label="Choose a season"></div>
+            <label class="season-select-wrap" id="season-select-wrap" hidden>
+                <span class="sr-only">Choose a season</span>
+                <select class="season-select" id="season-select" aria-label="Choose a season"></select>
+            </label>
+        </div>
+
+        <section class="season-deck" id="season-deck" aria-labelledby="season-heading" hidden>
+            <div class="season-deck-copy">
+                <div class="season-kicker" id="season-kicker">Season</div>
+                <h2 class="season-heading" id="season-heading">Season title</h2>
+                <p class="season-description" id="season-description"></p>
+                <div class="season-progress-row">
+                    <span id="season-progress-label">0 of 0 played</span>
+                    <span id="season-duration-label"></span>
+                </div>
+                <div class="season-progress-track" aria-hidden="true">
+                    <span class="season-progress-fill" id="season-progress-fill"></span>
+                </div>
+            </div>
+            <button class="season-continue-btn" id="continue-episode" type="button">
+                <span class="season-continue-label" id="continue-episode-label">Start season</span>
+                <span class="season-continue-title" id="continue-episode-title"></span>
+                <span class="season-continue-meta" id="continue-episode-meta"></span>
+            </button>
+        </section>
+
         <div class="search-container">
             <input type="text" class="search-input" id="episode-search" placeholder="Search episodes..." aria-label="Search episodes">
         </div>
 
         <div class="filter-row" role="group" aria-label="Filter and sort episodes">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="unplayed">Unplayed</button>
-            <button class="filter-btn" data-filter="in-progress">In Progress</button>
-            <button class="filter-btn" data-filter="completed">Completed</button>
+            <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" type="button" data-filter="unplayed" aria-pressed="false">Unplayed</button>
+            <button class="filter-btn" type="button" data-filter="in-progress" aria-pressed="false">In Progress</button>
+            <button class="filter-btn" type="button" data-filter="completed" aria-pressed="false">Completed</button>
             <select class="sort-select" id="episode-sort" aria-label="Sort episodes">
                 <option value="default">Default Order</option>
                 <option value="newest">Newest First</option>
@@ -117,7 +145,8 @@
             </select>
         </div>
 
-        <div id="episode-list">
+        <div id="episode-results-status" class="sr-only" role="status" aria-live="polite"></div>
+        <div id="episode-list" role="region" aria-label="Episodes">
             <div role="status" aria-label="Loading episodes">
                 <div class="skeleton-card row" aria-hidden="true">
                     <div class="skeleton-lines">
@@ -625,6 +654,6 @@
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.3.0%2B20260810T220215Z"></script>
+    <script type="module" src="./src/main.js?v=2.3.0%2B20260811T211033Z"></script>
 </body>
 </html>

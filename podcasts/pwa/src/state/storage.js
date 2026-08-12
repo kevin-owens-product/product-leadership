@@ -1,5 +1,5 @@
 export const STORAGE_KEY = 'tlu_podcast_state';
-export const STATE_SCHEMA_VERSION = 2;
+export const STATE_SCHEMA_VERSION = 3;
 
 const LISTENING_STATS_DEFAULT = {
   totalTime: 0,
@@ -12,6 +12,13 @@ const LISTENING_STATS_DEFAULT = {
 
 function isObject(value) {
   return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+
+function normalizeSeasonSelections(value) {
+  if (!isObject(value)) return {};
+  return Object.fromEntries(Object.entries(value).filter(([podcastId, seasonNumber]) =>
+    podcastId && Number.isInteger(seasonNumber) && seasonNumber > 0
+  ));
 }
 
 export function safeJSONParse(raw, fallback) {
@@ -66,6 +73,7 @@ export function migrateState(state) {
     bookmarks: isObject(input.bookmarks) ? input.bookmarks : {},
     speechRate: typeof input.speechRate === 'number' ? input.speechRate : undefined,
     autoPlayNext: typeof input.autoPlayNext === 'boolean' ? input.autoPlayNext : undefined,
+    seasonSelections: normalizeSeasonSelections(input.seasonSelections),
     alexVoiceIndex: input.alexVoiceIndex,
     samVoiceIndex: input.samVoiceIndex,
     currentPodcastId: input.currentPodcastId,

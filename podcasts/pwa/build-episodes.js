@@ -132,6 +132,13 @@ if (fs.existsSync(showsDir)) {
                 icon: manifest.icon || '🎙️',
                 episodes: []
             };
+            if (Array.isArray(manifest.seasons) && manifest.seasons.length > 0) {
+                podcastData.seasons = manifest.seasons.map((season) => ({
+                    number: season.number,
+                    title: season.title,
+                    description: season.description || ''
+                }));
+            }
 
             // Process each episode
             for (const epMeta of manifest.episodes) {
@@ -171,6 +178,7 @@ if (fs.existsSync(showsDir)) {
                         subtitle: epMeta.subtitle,
                         content: content
                     };
+                    if (Number.isInteger(epMeta.season)) episodeRecord.season = epMeta.season;
                     if (durationSeconds == null) durationSeconds = estimateDurationSeconds(rawContent);
                     if (durationSeconds != null) episodeRecord.durationSeconds = durationSeconds;
                     podcastData.episodes.push(episodeRecord);

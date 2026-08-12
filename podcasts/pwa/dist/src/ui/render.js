@@ -1,5 +1,5 @@
-import { escapeHtml } from '../security/sanitize.js?v=2.3.0%2B20260810T220215Z';
-import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.3.0%2B20260810T220215Z';
+import { escapeHtml } from '../security/sanitize.js?v=2.3.0%2B20260811T211033Z';
+import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.3.0%2B20260811T211033Z';
 
 // Hand-drawn inline SVG glyphs (1.8px round strokes — the shared .icon
 // language from player.css). No emoji glyphs in list chrome.
@@ -55,16 +55,18 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
     card.style.setProperty('--card-hue', String(getShowIdentity(podcast).hue));
   }
   const started = Number.isFinite(avgProgress) && avgProgress > 0;
+  const seasonCount = Array.isArray(podcast.seasons) && podcast.seasons.length > 1
+    ? podcast.seasons.length
+    : 0;
   card.innerHTML = `
     <div class="podcast-card-header">
       ${artTile}
       <div class="podcast-info">
         <div class="podcast-title">${escapeHtml(podcast.title)}</div>
         <div class="podcast-subtitle">${escapeHtml(podcast.subtitle)}</div>
-        <div class="podcast-meta">
-          <span>${epCount} episodes</span>
-          <span aria-hidden="true">·</span>
-          <span>${totalLabel}</span>
+        <div class="podcast-meta${seasonCount ? ' multi-season' : ''}">
+          <span class="podcast-meta-summary">${seasonCount ? `${seasonCount} seasons · ` : ''}${epCount} episodes</span>
+          <span class="podcast-meta-duration">${totalLabel}</span>
           ${started ? `<span class="podcast-progress-pct">${avgProgress}%</span>` : ''}
         </div>
       </div>
@@ -75,7 +77,7 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
   `;
 }
 
-export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState) {
+export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState, { seasonNumber = null } = {}) {
   const state = downloadState || 'none';
   const downloadGlyph = state === 'downloaded' ? ICON_CHECK : ICON_DOWNLOAD;
   const downloadTitle = state === 'downloaded'
@@ -99,7 +101,7 @@ export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, do
     : '';
   card.innerHTML = `
     <div class="ep-header">
-      <span class="ep-number">Episode ${ep.id}</span>
+      <span class="ep-number">${seasonNumber ? `Season ${seasonNumber} · ` : ''}Episode ${ep.id}</span>
       ${statusChip}
       <button class="ep-download-btn ${state}" type="button" data-action="download" data-ep-id="${ep.id}" title="${downloadTitle}" aria-label="${downloadTitle}">${downloadGlyph}</button>
     </div>

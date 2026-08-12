@@ -116,11 +116,22 @@ changing a theme delete the show's cue clips (or pass `--force`) and re-run
   "icon": "🎙️",
   "voiceMap": { "ALEX": "M1", "RILEY": "F2" },
   "lang": "en",
+  "seasons": [
+    { "number": 1, "title": "Foundations", "description": "Build the core operating model." },
+    { "number": 2, "title": "Advanced Practice", "description": "Apply the model under pressure." }
+  ],
   "episodes": [
-    { "id": 1, "file": "episode-01-getting-started.md", "title": "Getting Started", "subtitle": "…" }
+    { "id": 1, "season": 1, "file": "episode-01-getting-started.md", "title": "Getting Started", "subtitle": "…" }
   ]
 }
 ```
+
+`seasons` is optional. Add it only after a show has at least two published
+seasons. Every season needs a unique positive `number`, a listener-facing
+`title`, and a short `description`; when `seasons` exists, every episode must
+declare the matching numeric `season`. The app then renders a season navigator,
+season progress, and a smart continue action. Shows without `seasons` retain the
+standard flat episode list.
 
 `voiceMap` maps speaker labels to Supertonic voice styles (`M1`, `F1`, `M2`,
 `F2`, …). Without it, voices alternate M1/F1 by order of appearance and the

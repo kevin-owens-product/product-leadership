@@ -19,7 +19,12 @@ test('migrateState normalizes malformed payload', () => {
     episodeProgress: null,
     bookmarks: [],
     speechRate: 1.25,
-    autoPlayNext: true
+    autoPlayNext: true,
+    seasonSelections: {
+      'ap-finance-mastery': 2,
+      broken: 'two',
+      zero: 0
+    }
   });
 
   assert.equal(state.schemaVersion, STATE_SCHEMA_VERSION);
@@ -28,6 +33,11 @@ test('migrateState normalizes malformed payload', () => {
   assert.deepEqual(state.bookmarks, {});
   assert.equal(state.speechRate, 1.25);
   assert.equal(state.autoPlayNext, true);
+  assert.deepEqual(state.seasonSelections, { 'ap-finance-mastery': 2 });
+});
+
+test('migrateState defaults missing season selections', () => {
+  assert.deepEqual(migrateState({}).seasonSelections, {});
 });
 
 test('loadQueue recovers from malformed localStorage data', () => {

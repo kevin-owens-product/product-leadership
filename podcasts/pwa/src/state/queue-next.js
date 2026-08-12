@@ -3,6 +3,13 @@
 // current show. Returns { podcast, episode, queueIndex } where queueIndex
 // is -1 for the sequential fallback, or null when nothing is up next.
 
+export function findAdjacentEpisode(podcast, currentEpisodeId, offset) {
+  const episodes = Array.isArray(podcast?.episodes) ? podcast.episodes : [];
+  const currentIndex = episodes.findIndex((episode) => episode.id === currentEpisodeId);
+  if (currentIndex < 0) return null;
+  return episodes[currentIndex + offset] || null;
+}
+
 export function findNextUp({
   queue = [],
   podcasts = [],
@@ -21,6 +28,6 @@ export function findNextUp({
   }
   if (currentPodcastId === null || currentEpisodeId === null) return null;
   const current = podcasts.find((p) => p.id === currentPodcastId);
-  const nextEp = current?.episodes?.find((e) => e.id === currentEpisodeId + 1);
+  const nextEp = findAdjacentEpisode(current, currentEpisodeId, 1);
   return nextEp ? { podcast: current, episode: nextEp, queueIndex: -1 } : null;
 }

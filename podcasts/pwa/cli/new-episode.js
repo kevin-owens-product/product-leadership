@@ -194,6 +194,21 @@ async function main() {
         process.exit(1);
     }
 
+    let seasonNumber = null;
+    if (Array.isArray(manifest.seasons) && manifest.seasons.length > 0) {
+        const seasons = manifest.seasons
+            .filter((season) => Number.isInteger(season?.number))
+            .sort((a, b) => a.number - b.number);
+        console.log('\nSeasons:');
+        seasons.forEach((season) => console.log(`  ${season.number}. ${season.title}`));
+        const defaultSeason = seasons.at(-1)?.number;
+        seasonNumber = parseInt(await ask('Season number', String(defaultSeason || '')), 10);
+        if (!seasons.some((season) => season.number === seasonNumber)) {
+            console.error(`Season ${seasonNumber} is not declared in ${showId}/podcast.json.`);
+            process.exit(1);
+        }
+    }
+
     const title = await askRequired('Episode title');
     const subtitle = await ask('Episode subtitle');
 
@@ -216,7 +231,9 @@ async function main() {
     });
     fs.writeFileSync(filePath, markdown);
 
-    episodes.push({ id: number, file: fileName, title, subtitle });
+    const episodeEntry = { id: number, file: fileName, title, subtitle };
+    if (seasonNumber != null) episodeEntry.season = seasonNumber;
+    episodes.push(episodeEntry);
     episodes.sort((a, b) => (a.id || 0) - (b.id || 0));
     manifest.episodes = episodes;
     writeManifest(showId, manifest);

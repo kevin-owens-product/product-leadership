@@ -201,6 +201,81 @@ test('valid show manifest passes', () => {
     assert.deepEqual(checkShowManifest(manifest, { fileExists: () => true }), []);
 });
 
+test('valid multi-season manifest passes', () => {
+    const manifest = {
+        id: 's', title: 'S',
+        seasons: [
+            { number: 1, title: 'Foundations', description: 'Learn the system.' },
+            { number: 2, title: 'Advanced', description: 'Operate the system.' }
+        ],
+        episodes: [
+            { id: 1, season: 1, file: 'a.md', title: 'A' },
+            { id: 2, season: 2, file: 'b.md', title: 'B' }
+        ]
+    };
+    assert.deepEqual(checkShowManifest(manifest, { fileExists: () => true }), []);
+});
+
+test('multi-season manifest rejects duplicate and incomplete season definitions', () => {
+    const manifest = {
+        id: 's', title: 'S',
+        seasons: [
+            { number: 1, title: 'One', description: 'First.' },
+            { number: 1, title: '', description: '' }
+        ],
+        episodes: [{ id: 1, season: 1, file: 'a.md', title: 'A' }]
+    };
+    const messages = errors(checkShowManifest(manifest, { fileExists: () => true })).map((issue) => issue.message);
+    assert.ok(messages.some((message) => /duplicate season number 1/.test(message)));
+});
+
+test('season definitions require listener-facing titles and descriptions', () => {
+    const manifest = {
+        id: 's', title: 'S',
+        seasons: [
+            { number: 1, title: '', description: 'First.' },
+            { number: 2, title: 'Two', description: '' }
+        ],
+        episodes: [
+            { id: 1, season: 1, file: 'a.md', title: 'A' },
+            { id: 2, season: 2, file: 'b.md', title: 'B' }
+        ]
+    };
+    const messages = errors(checkShowManifest(manifest, { fileExists: () => true })).map((issue) => issue.message);
+    assert.ok(messages.some((message) => /season 1: missing "title"/.test(message)));
+    assert.ok(messages.some((message) => /season 2: missing "description"/.test(message)));
+});
+
+test('multi-season manifest requires valid episode membership and a used season', () => {
+    const manifest = {
+        id: 's', title: 'S',
+        seasons: [
+            { number: 1, title: 'One', description: 'First.' },
+            { number: 2, title: 'Two', description: 'Second.' },
+            { number: 3, title: 'Three', description: 'Third.' }
+        ],
+        episodes: [
+            { id: 1, file: 'a.md', title: 'A' },
+            { id: 2, season: 9, file: 'b.md', title: 'B' },
+            { id: 3, season: 1, file: 'c.md', title: 'C' }
+        ]
+    };
+    const messages = errors(checkShowManifest(manifest, { fileExists: () => true })).map((issue) => issue.message);
+    assert.ok(messages.some((message) => /episode 1: missing positive integer "season"/.test(message)));
+    assert.ok(messages.some((message) => /episode 2: season 9 is not declared/.test(message)));
+    assert.ok(messages.some((message) => /season 2: has no episodes/.test(message)));
+    assert.ok(messages.some((message) => /season 3: has no episodes/.test(message)));
+});
+
+test('episode season metadata without show seasons is rejected', () => {
+    const manifest = {
+        id: 's', title: 'S',
+        episodes: [{ id: 1, season: 1, file: 'a.md', title: 'A' }]
+    };
+    const messages = errors(checkShowManifest(manifest, { fileExists: () => true })).map((issue) => issue.message);
+    assert.ok(messages.some((message) => /show has no "seasons" definitions/.test(message)));
+});
+
 // --- checkAudioManifest -----------------------------------------------------
 
 const timedItems = (durations) => {

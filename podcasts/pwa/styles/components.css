@@ -445,6 +445,262 @@ body.light-theme .podcast-card {
     color: var(--on-accent);
 }
 
+/* Multi-season shows get a compact, sticky navigator plus an action-led
+   season summary. Single-season shows keep this entire surface hidden. */
+.season-nav-shell {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+    padding: var(--space-2) 0;
+    margin-bottom: var(--space-3);
+    background: color-mix(in oklab, var(--surface-0) 92%, transparent);
+    backdrop-filter: blur(14px);
+}
+
+.season-nav-shell[hidden],
+.season-deck[hidden],
+.season-tabs[hidden],
+.season-select-wrap[hidden] {
+    display: none;
+}
+
+.season-tabs {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+}
+
+.season-tab {
+    min-height: 48px;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    cursor: pointer;
+    box-shadow: var(--edge-highlight);
+    transition: transform var(--dur-1) var(--ease-out);
+}
+
+.season-tab:active {
+    transform: scale(0.98);
+}
+
+.season-tab.active {
+    background: var(--show-chip);
+    border-color: var(--show-accent);
+    color: var(--show-text);
+}
+
+.season-tab-name {
+    font-size: var(--fs-small);
+    font-weight: 750;
+}
+
+.season-tab-progress {
+    color: var(--text-tertiary);
+    font-size: var(--fs-caption);
+    font-variant-numeric: tabular-nums;
+}
+
+.season-tab.active .season-tab-progress {
+    color: var(--show-text);
+}
+
+.season-select-wrap,
+.season-select {
+    width: 100%;
+}
+
+.season-select {
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--show-accent);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+    color: var(--text-primary);
+    font: inherit;
+}
+
+.season-deck {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 0.55fr);
+    gap: var(--space-5);
+    align-items: stretch;
+    padding: var(--space-5);
+    margin-bottom: var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background:
+        radial-gradient(110% 150% at 100% 0%, var(--show-chip), transparent 58%),
+        var(--surface-1);
+    box-shadow: var(--shadow-1), var(--edge-highlight);
+}
+
+.season-deck-copy {
+    min-width: 0;
+}
+
+.season-kicker {
+    color: var(--show-text);
+    font-size: var(--fs-caption);
+    font-weight: 750;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+}
+
+.season-heading {
+    margin-top: var(--space-1);
+    color: var(--text-primary);
+    font-size: var(--fs-title);
+    line-height: 1.2;
+}
+
+.season-description {
+    margin-top: var(--space-2);
+    color: var(--text-secondary);
+    font-size: var(--fs-small);
+    line-height: 1.45;
+}
+
+.season-progress-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    color: var(--text-tertiary);
+    font-size: var(--fs-label);
+    font-variant-numeric: tabular-nums;
+}
+
+.season-progress-track {
+    height: 4px;
+    margin-top: var(--space-2);
+    overflow: hidden;
+    border-radius: var(--radius-full);
+    background: var(--tint-1);
+}
+
+.season-progress-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--show-accent);
+}
+
+.season-continue-btn {
+    min-height: 112px;
+    padding: var(--space-4);
+    border: none;
+    border-radius: var(--radius-md);
+    background: var(--show-accent);
+    color: var(--show-on-accent);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-1);
+    transition: transform var(--dur-1) var(--ease-out);
+}
+
+.season-continue-btn:active {
+    transform: scale(0.98);
+}
+
+.season-continue-btn:disabled {
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    cursor: default;
+}
+
+.season-continue-label {
+    font-size: var(--fs-caption);
+    font-weight: 800;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+}
+
+.season-continue-title {
+    font-size: var(--fs-body-sm);
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.season-continue-meta {
+    font-size: var(--fs-label);
+    font-variant-numeric: tabular-nums;
+    opacity: 0.78;
+}
+
+.season-search-scope {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-md);
+    background: var(--show-chip);
+    color: var(--show-text);
+    font-size: var(--fs-small);
+}
+
+.season-search-scope button,
+.search-all-seasons-btn {
+    min-height: 44px;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--show-accent);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--show-text);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.search-all-seasons-btn {
+    display: block;
+    margin: var(--space-4) auto 0;
+}
+
+#episode-list {
+    scroll-margin-top: 68px;
+}
+
+@media (max-width: 560px) {
+    .season-deck {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+        padding: var(--space-4);
+    }
+
+    .season-continue-btn {
+        min-height: 88px;
+    }
+
+    .season-search-scope {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .season-tab,
+    .season-continue-btn {
+        transition: none;
+    }
+
+    .season-tab:active,
+    .season-continue-btn:active {
+        transform: none;
+    }
+}
+
 /* Filter Controls — pill chips on the token system; the active chip
    is a show-accent fill with dark ink (DESIGN.md §3). */
 .filter-row {
@@ -1252,6 +1508,12 @@ body.light-theme .podcast-card {
     color: var(--text-tertiary);
 }
 
+.podcast-meta-summary,
+.podcast-meta-duration,
+.podcast-progress-pct {
+    flex-shrink: 0;
+}
+
 /* Progress micro-badge: tinted percent, only when listening began. */
 .podcast-progress-pct {
     margin-left: auto;
@@ -1532,6 +1794,17 @@ body.light-theme .podcast-card {
 
 /* ---------- Mobile (≤ 600px) ---------- */
 @media (max-width: 600px) {
+    /* Keep multi-season card facts as readable phrases instead of allowing
+       each word to collapse into a narrow grid. */
+    .podcast-meta.multi-season {
+        flex-wrap: wrap;
+        row-gap: var(--space-1);
+    }
+
+    .podcast-meta.multi-season .podcast-meta-summary {
+        flex-basis: 100%;
+    }
+
     /* Bigger touch targets on speed presets */
     .speed-preset-btn {
         min-height: 44px;

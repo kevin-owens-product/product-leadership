@@ -42,7 +42,7 @@ import {
 import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js';
 import { createMediaSessionController } from './playback/media-session.js';
 import { createSleepController } from './playback/sleep-controller.js';
-import { findNextUp } from './state/queue-next.js';
+import { findAdjacentEpisode, findNextUp } from './state/queue-next.js';
 import { formatClock } from './ui/format.js';
 import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js';
 import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js';
@@ -156,6 +156,20 @@ const library = createLibrary({
     isLoaded: () => podcastsLoader.isLoaded(),
     loadState,
     getCurrentPodcast: () => currentPodcast,
+    getPlaybackContext: () => ({
+        podcastId: playerPodcast?.id ?? null,
+        episodeId: currentEpisode?.id ?? null
+    }),
+    persistSeasonSelection: (podcastId, seasonNumber) => {
+        const state = loadState();
+        saveAppState({
+            ...state,
+            seasonSelections: {
+                ...(state.seasonSelections || {}),
+                [podcastId]: seasonNumber
+            }
+        });
+    },
     downloads,
     onOpenPodcast: (podcast, sourceArt) => openPodcast(podcast, { sourceArt }),
     onOpenEpisode: (episode) => { void openEpisode(episode); }
@@ -647,6 +661,7 @@ async function openEpisode(episode, options = {}) {
     if (requestId !== episodeOpenRequest) return false;
     currentEpisode = episode;
     playerPodcast = requestedPodcast;
+    library.selectSeasonForEpisode(requestedPodcast, episode);
     applySpeechRate(getShowSpeed(requestedPodcast.id, speechRate), { persistShow: false, save: false });
     const speakerVoiceMap = parseSpeakerVoiceMap(episode.content);
     dialogueLines = parseMarkdown(episode.content, speakerVoiceMap);
@@ -1772,8 +1787,7 @@ document.getElementById('up-next-play')?.addEventListener('click', () => {
 
 async function playPreviousEpisode() {
     const owner = playerPodcast;
-    const episodes = owner?.episodes || [];
-    const prevEp = episodes.find(e => e.id === currentEpisode.id - 1);
+    const prevEp = findAdjacentEpisode(owner, currentEpisode?.id, -1);
     if (prevEp) {
         if (currentPodcast?.id !== owner.id) openPodcast(owner);
         const loaded = await openEpisode(prevEp, {
@@ -1891,14 +1905,19 @@ window.addEventListener('load', () => {
     const params = new URLSearchParams(window.location.search);
     const podcastId = params.get('podcast');
     const episodeNum = params.get('episode');
+    const seasonNum = params.get('season');
     const lineNum = params.get('line');
 
     const podcasts = getPodcasts();
     if (podcastId && podcasts.length > 0) {
         const podcast = podcasts.find(p => p.id === podcastId);
-        if (podcast && episodeNum) {
-            const episode = podcast.episodes.find(e => e.id === parseInt(episodeNum));
+        if (podcast) {
+            const episode = episodeNum
+                ? podcast.episodes.find(e => e.id === parseInt(episodeNum))
+                : null;
             if (episode) {
+                // Episode identity wins if an explicit season query conflicts.
+                library.selectSeasonForEpisode(podcast, episode);
                 openPodcast(podcast);
                 setTimeout(() => {
                     openEpisode(episode, { promptResume: !lineNum });
@@ -1908,6 +1927,12 @@ window.addEventListener('load', () => {
                         }, 500);
                     }
                 }, 100);
+            } else {
+                const requestedSeason = parseInt(seasonNum, 10);
+                if (Number.isInteger(requestedSeason)) {
+                    library.selectSeason(podcast, requestedSeason);
+                }
+                openPodcast(podcast);
             }
         }
     }

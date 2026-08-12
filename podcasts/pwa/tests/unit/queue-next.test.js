@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { findNextUp } from '../../src/state/queue-next.js';
+import { findAdjacentEpisode, findNextUp } from '../../src/state/queue-next.js';
 
 const podcasts = [
   {
@@ -63,6 +63,38 @@ test('falls back to the next sequential episode with an empty queue', () => {
   });
   assert.equal(next.episode.id, 3);
   assert.equal(next.queueIndex, -1);
+});
+
+test('sequential playback crosses an explicit season boundary', () => {
+  const seasonal = [{
+    id: 'operator',
+    seasons: [{ number: 1 }, { number: 2 }],
+    episodes: [{ id: 8, season: 1 }, { id: 9, season: 2 }]
+  }];
+  const next = findNextUp({
+    queue: [],
+    podcasts: seasonal,
+    currentPodcastId: 'operator',
+    currentEpisodeId: 8
+  });
+  assert.equal(next.episode.id, 9);
+  assert.equal(next.episode.season, 2);
+});
+
+test('manifest order drives next and previous playback across non-contiguous ids', () => {
+  const seasonal = {
+    id: 'future-season',
+    seasons: [{ number: 1 }, { number: 2 }],
+    episodes: [{ id: 8, season: 1 }, { id: 101, season: 2 }]
+  };
+  const next = findNextUp({
+    queue: [],
+    podcasts: [seasonal],
+    currentPodcastId: 'future-season',
+    currentEpisodeId: 8
+  });
+  assert.equal(next.episode.id, 101);
+  assert.equal(findAdjacentEpisode(seasonal, 101, -1).id, 8);
 });
 
 test('returns null at the end of a show with nothing queued', () => {

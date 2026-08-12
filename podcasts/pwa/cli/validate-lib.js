@@ -204,6 +204,36 @@ export function checkShowManifest(manifest, { fileExists }) {
         return issues;
     }
 
+    const declaredSeasons = new Map();
+    const hasSeasonMetadata = manifest.seasons != null;
+    if (hasSeasonMetadata) {
+        if (!Array.isArray(manifest.seasons) || manifest.seasons.length < 2) {
+            issues.push({ level: 'error', message: '"seasons" must contain at least two season definitions' });
+        } else {
+            for (const season of manifest.seasons) {
+                if (!season || typeof season !== 'object') {
+                    issues.push({ level: 'error', message: 'seasons[] contains a non-object entry' });
+                    continue;
+                }
+                if (!Number.isInteger(season.number) || season.number < 1) {
+                    issues.push({ level: 'error', message: 'season is missing a positive integer "number"' });
+                    continue;
+                }
+                if (declaredSeasons.has(season.number)) {
+                    issues.push({ level: 'error', message: `duplicate season number ${season.number}` });
+                    continue;
+                }
+                declaredSeasons.set(season.number, 0);
+                if (!season.title || typeof season.title !== 'string') {
+                    issues.push({ level: 'error', message: `season ${season.number}: missing "title"` });
+                }
+                if (!season.description || typeof season.description !== 'string') {
+                    issues.push({ level: 'error', message: `season ${season.number}: missing "description"` });
+                }
+            }
+        }
+    }
+
     const seenIds = new Set();
     const seenFiles = new Set();
     for (const ep of manifest.episodes) {
@@ -233,6 +263,22 @@ export function checkShowManifest(manifest, { fileExists }) {
         }
         if (!ep.title) {
             issues.push({ level: 'warning', message: `${label}: missing "title"` });
+        }
+        if (hasSeasonMetadata) {
+            if (!Number.isInteger(ep.season) || ep.season < 1) {
+                issues.push({ level: 'error', message: `${label}: missing positive integer "season"` });
+            } else if (!declaredSeasons.has(ep.season)) {
+                issues.push({ level: 'error', message: `${label}: season ${ep.season} is not declared in "seasons"` });
+            } else {
+                declaredSeasons.set(ep.season, declaredSeasons.get(ep.season) + 1);
+            }
+        } else if (ep.season != null) {
+            issues.push({ level: 'error', message: `${label}: has "season" but the show has no "seasons" definitions` });
+        }
+    }
+    for (const [seasonNumber, episodeCount] of declaredSeasons) {
+        if (episodeCount === 0) {
+            issues.push({ level: 'error', message: `season ${seasonNumber}: has no episodes` });
         }
     }
     issues.push(...checkVoiceMap(manifest.voiceMap));

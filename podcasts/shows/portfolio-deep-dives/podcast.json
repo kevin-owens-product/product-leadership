@@ -1,0 +1,268 @@
+{
+  "id": "portfolio-deep-dives",
+  "title": "Portfolio Deep Dives",
+  "subtitle": "One company at a time across a mid-market private equity portfolio",
+  "description": "Nora and James spend each episode on a single portfolio company: what it does, the industry it sits in, the problem it solves for customers, the pressures it faces and where AI and new technology could change the business. Thirty companies across seven seasons. Built from public sources only; not investment or legal advice.",
+  "author": "Nora & James",
+  "color": "#1F4E79",
+  "icon": "🔎",
+  "lang": "en",
+  "ttsEngine": "kokoro",
+  "voiceMap": {
+    "JAMES": "M1",
+    "NORA": "F2"
+  },
+  "kokoroVoiceMap": {
+    "NORA": "af_heart",
+    "JAMES": "am_michael"
+  },
+  "seasons": [
+    {
+      "number": 1,
+      "title": "Legal and professional services",
+      "description": "Law firm software, expert witnesses, litigation economics and dispute resolution."
+    },
+    {
+      "number": 2,
+      "title": "Data, analytics and financial administration",
+      "description": "Credit data, regulatory software, supply chain research, farm data and ESOP administration."
+    },
+    {
+      "number": 3,
+      "title": "Healthcare services",
+      "description": "Medical communications, diagnostics, veterinary care and home care."
+    },
+    {
+      "number": 4,
+      "title": "Testing, inspection and compliance",
+      "description": "Environmental permitting, cleanroom certification, safety inspection, water operations and lab testing."
+    },
+    {
+      "number": 5,
+      "title": "Industrial field services and products",
+      "description": "On-site machining and repair, test plugs, compressed air tools and food service fixtures."
+    },
+    {
+      "number": 6,
+      "title": "Education and training",
+      "description": "Corporate skills practice, tutoring and veterinary education."
+    },
+    {
+      "number": 7,
+      "title": "Consumer and multi-unit",
+      "description": "Golf club fitting, doughnuts, aesthetics clinics and confectionery franchises."
+    }
+  ],
+  "episodes": [
+    {
+      "id": 1,
+      "file": "episode-01-bighand.md",
+      "title": "BigHand",
+      "subtitle": "Pricing the Law Firm of the Future",
+      "season": 1
+    },
+    {
+      "id": 2,
+      "file": "episode-02-expert-institute.md",
+      "title": "Expert Institute",
+      "subtitle": "The Expert, the Record and the Fifty-Dollar Question",
+      "season": 1
+    },
+    {
+      "id": 3,
+      "file": "episode-03-resolution-economics.md",
+      "title": "Resolution Economics",
+      "subtitle": "The Economists in the Room",
+      "season": 1
+    },
+    {
+      "id": 4,
+      "file": "episode-04-signature-resolution.md",
+      "title": "Signature Resolution",
+      "subtitle": "Retired Judges, New Rooms",
+      "season": 1
+    },
+    {
+      "id": 5,
+      "file": "episode-05-creditinfo.md",
+      "title": "Creditinfo",
+      "subtitle": "Who Gets a Loan, and Who Decides",
+      "season": 2
+    },
+    {
+      "id": 6,
+      "file": "episode-06-cleversoft.md",
+      "title": "cleversoft",
+      "subtitle": "Software for the Rulebook",
+      "season": 2
+    },
+    {
+      "id": 7,
+      "file": "episode-07-zero100.md",
+      "title": "Zero100",
+      "subtitle": "Selling Answers to the People Who Run Supply Chains",
+      "season": 2
+    },
+    {
+      "id": 8,
+      "file": "episode-08-agdata.md",
+      "title": "AGDATA",
+      "subtitle": "Fifty-Six Million Receipts from the Farm Economy",
+      "season": 2
+    },
+    {
+      "id": 9,
+      "file": "episode-09-blue-ridge-esop.md",
+      "title": "Blue Ridge ESOP Associates",
+      "subtitle": "The Paperwork Behind Employee Ownership",
+      "season": 2
+    },
+    {
+      "id": 10,
+      "file": "episode-10-prime-global.md",
+      "title": "Prime Global",
+      "subtitle": "When Scientists Write for Doctors, and AI Wants to Help",
+      "season": 3
+    },
+    {
+      "id": 11,
+      "file": "episode-11-genova-diagnostics.md",
+      "title": "Genova Diagnostics",
+      "subtitle": "Three Hundred Biomarkers and the Question of What They Mean",
+      "season": 3
+    },
+    {
+      "id": 12,
+      "file": "episode-12-suveto.md",
+      "title": "Suveto",
+      "subtitle": "The Vets Who Want to Own the Clinic",
+      "season": 3
+    },
+    {
+      "id": 13,
+      "file": "episode-13-synergy-homecare.md",
+      "title": "SYNERGY HomeCare",
+      "subtitle": "Care at Home, Listening In",
+      "season": 3
+    },
+    {
+      "id": 14,
+      "file": "episode-14-all4.md",
+      "title": "ALL4",
+      "subtitle": "The Permit Writers and the Machines",
+      "season": 4
+    },
+    {
+      "id": 15,
+      "file": "episode-15-technical-safety-services.md",
+      "title": "Technical Safety Services",
+      "subtitle": "The Paperwork That Keeps Medicine Clean",
+      "season": 4
+    },
+    {
+      "id": 16,
+      "file": "episode-16-entro.md",
+      "title": "ENTRO",
+      "subtitle": "Sixteen Companies, One Door",
+      "season": 4
+    },
+    {
+      "id": 17,
+      "file": "episode-17-usa-water.md",
+      "title": "USA Water",
+      "subtitle": "The People Who Keep the Taps Running",
+      "season": 4
+    },
+    {
+      "id": 18,
+      "file": "episode-18-nsl-analytical.md",
+      "title": "NSL Analytical",
+      "subtitle": "The Report Is the Product",
+      "season": 4
+    },
+    {
+      "id": 19,
+      "file": "episode-19-colt-group.md",
+      "title": "Colt Group",
+      "subtitle": "Fixing the Pipe Without Stopping the Plant",
+      "season": 5
+    },
+    {
+      "id": 20,
+      "file": "episode-20-in-place-machining.md",
+      "title": "In-Place Machining",
+      "subtitle": "Bringing the Machine Shop to the Machine",
+      "season": 5
+    },
+    {
+      "id": 21,
+      "file": "episode-21-usa-industries.md",
+      "title": "USA Industries",
+      "subtitle": "The Right Plug at Two in the Morning",
+      "season": 5
+    },
+    {
+      "id": 22,
+      "file": "episode-22-milton-industries.md",
+      "title": "Milton Industries",
+      "subtitle": "The Business of Compressed Air",
+      "season": 5
+    },
+    {
+      "id": 23,
+      "file": "episode-23-brass-smith.md",
+      "title": "Brass Smith Innovations",
+      "subtitle": "The Glass Between You and the Buffet",
+      "season": 5
+    },
+    {
+      "id": 24,
+      "file": "episode-24-skill-dynamics.md",
+      "title": "Skill Dynamics",
+      "subtitle": "Practice, Not Content",
+      "season": 6
+    },
+    {
+      "id": 25,
+      "file": "episode-25-schuelerhilfe.md",
+      "title": "Schülerhilfe",
+      "subtitle": "Can a Tutor Beat a Free Chatbot?",
+      "season": 6
+    },
+    {
+      "id": 26,
+      "file": "episode-26-improve-international.md",
+      "title": "Improve International",
+      "subtitle": "Teaching the Vets",
+      "season": 6
+    },
+    {
+      "id": 27,
+      "file": "episode-27-club-champion.md",
+      "title": "Club Champion",
+      "subtitle": "The Fitter and the Co-Pilot",
+      "season": 7
+    },
+    {
+      "id": 28,
+      "file": "episode-28-shipley-do-nuts.md",
+      "title": "Shipley Do-Nuts",
+      "subtitle": "One in Four Orders",
+      "season": 7
+    },
+    {
+      "id": 29,
+      "file": "episode-29-sev-laser.md",
+      "title": "SEV Laser",
+      "subtitle": "The Front Desk That Never Sleeps",
+      "season": 7
+    },
+    {
+      "id": 30,
+      "file": "episode-30-kilwins.md",
+      "title": "Kilwins",
+      "subtitle": "Fudge, Forecasts and the Final Scoop",
+      "season": 7
+    }
+  ]
+}

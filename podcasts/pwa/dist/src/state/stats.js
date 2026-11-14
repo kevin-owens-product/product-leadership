@@ -1,7 +1,7 @@
 // Listening statistics: total time, completed episodes, streaks, average
 // speed — persisted via state/storage.js and surfaced in the stats modal.
 
-import { loadListeningStats, saveListeningStats } from './storage.js?v=2.5.1%2B20261114T145313Z';
+import { loadListeningStats, saveListeningStats } from './storage.js?v=2.5.1%2B20261114T173458Z';
 
 export function createStatsTracker({ getSpeechRate, isListening }) {
     const listeningStats = loadListeningStats();

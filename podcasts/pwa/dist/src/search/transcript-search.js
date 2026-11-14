@@ -1,4 +1,4 @@
-import { escapeRegExp } from '../security/sanitize.js?v=2.4.0%2B20261114T133136Z';
+import { escapeRegExp } from '../security/sanitize.js?v=2.5.0%2B20261114T143444Z';
 
 export function clearHighlight(textEl) {
   if (!textEl) return;

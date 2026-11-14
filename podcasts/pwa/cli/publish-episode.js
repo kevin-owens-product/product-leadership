@@ -82,6 +82,13 @@ function main() {
     const basename = episode.file.replace(/\.md$/, '');
     const audioDir = path.join(AUDIO_ROOT, showId, basename);
     const supertonicDir = process.env.SUPERTONIC_DIR || path.join(os.homedir(), 'code', 'supertonic');
+    // Episode `engine` overrides the show's `ttsEngine`; see ../tools/KOKORO_SETUP.md.
+    const engine = episode.engine || manifest.ttsEngine || 'supertonic';
+    const kokoroDir = process.env.KOKORO_DIR || path.join(os.homedir(), 'code', 'kokoro');
+    const engineEnv = engine === 'kokoro'
+        ? { KOKORO_DIR: kokoroDir, ...(process.env.KOKORO_PYTHON ? { KOKORO_PYTHON: process.env.KOKORO_PYTHON } : {}) }
+        : { SUPERTONIC_DIR: supertonicDir };
+    const engineEnvText = Object.entries(engineEnv).map(([k, v]) => `${k}=${v}`).join(' ');
 
     // Resume estimate: one WAV per parsed event, cached by the generator.
     let totalEvents = 0;
@@ -108,7 +115,7 @@ function main() {
     const ttsArgs = ['--show', showId, '--episode', String(episodeNum), ...(FORCE ? ['--force'] : [])];
     const plan = [
         `validate   node cli/validate.js --show ${showId} --episode ${episodeNum}`,
-        `tts        SUPERTONIC_DIR=${supertonicDir} node ../tools/generate-audio-supertonic.js ${ttsArgs.join(' ')}`,
+        `tts        ${engineEnvText} node ../tools/generate-audio-supertonic.js ${ttsArgs.join(' ')}`,
         `backfill   node ../tools/backfill-manifest-durations.js --show ${showId}`,
         `headers    node ../tools/sync-duration-headers.js --show ${showId}`,
         'build      node build-episodes.js'
@@ -140,12 +147,16 @@ function main() {
 
     // Step 2 — TTS.
     step(2, totalSteps, `Generating TTS audio (resumable — re-run this command if it is interrupted)…`);
-    if (!fs.existsSync(supertonicDir)) {
+    if (engine === 'kokoro' && !fs.existsSync(kokoroDir)) {
+        console.error(`✗ KOKORO_DIR not found at ${kokoroDir}. Set KOKORO_DIR or download the Kokoro model files there (see ../tools/KOKORO_SETUP.md).`);
+        process.exit(1);
+    }
+    if (engine !== 'kokoro' && !fs.existsSync(supertonicDir)) {
         console.error(`✗ SUPERTONIC_DIR not found at ${supertonicDir}. Set SUPERTONIC_DIR or clone Supertonic there (see ../tools/SUPERTONIC_SETUP.md).`);
         process.exit(1);
     }
     if (!runNode(path.join(TOOLS_DIR, 'generate-audio-supertonic.js'), ttsArgs, {
-        env: { SUPERTONIC_DIR: supertonicDir }
+        env: engineEnv
     })) {
         const nowCached = fs.existsSync(audioDir)
             ? fs.readdirSync(audioDir).filter((f) => /^\d{4}\.wav$/.test(f)).length

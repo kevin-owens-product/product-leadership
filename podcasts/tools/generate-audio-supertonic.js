@@ -32,6 +32,15 @@
  *   --total-step <n>  Forwarded to Supertonic (default 8, higher = better quality).
  *   --speed <f>       Forwarded to Supertonic (default 1.05).
  *   --no-mp3          Skip the ffmpeg WAV→MP3 concat step.
+ *   --engine <name>   TTS engine: "supertonic" or "kokoro". Overrides the
+ *                     episode's `engine` and the show's `ttsEngine` in
+ *                     podcast.json. Default: supertonic.
+ *
+ * Engines:
+ *   supertonic  Supertonic 3 (archived upstream Sept 2026). Voices M1..M5/F1..F5.
+ *   kokoro      Kokoro-82M (Apache-2.0) through the Python kokoro-onnx package,
+ *               run by tools/kokoro-episode-worker.py. Voices such as
+ *               am_michael / af_heart. See KOKORO_SETUP.md.
  *
  * Peak headroom:
  *   The episode worker peak-normalizes each rendered line to -3 dBFS before
@@ -39,14 +48,21 @@
  *   hot voices ship as flat-topped distortion (see ap-finance-mastery).
  *
  * Env:
- *   SUPERTONIC_DIR    Path to your local supertonic repo checkout. Required.
- *                     Must contain nodejs/example_onnx.js and assets/voice_styles/*.json.
+ *   SUPERTONIC_DIR    Path to your local supertonic repo checkout. Required for
+ *                     the supertonic engine. Must contain nodejs/example_onnx.js
+ *                     and assets/voice_styles/*.json.
+ *   KOKORO_DIR        Folder holding kokoro-v1.0.onnx and voices-v1.0.bin.
+ *                     Required for the kokoro engine.
+ *   KOKORO_PYTHON     Python interpreter with kokoro-onnx installed
+ *                     (default: python3).
  *
  * Voice mapping:
  *   Reads `voiceMap` from podcasts/shows/<id>/podcast.json, e.g.
  *     "voiceMap": { "ALEX": "M1", "RILEY": "F2", "SAM": "F1" }
  *   Keys are matched case-insensitively against the **NAME:** label in each
  *   episode markdown. Falls back to alternating M1/F1 if the map is missing.
+ *   The kokoro engine reads `kokoroVoiceMap` instead (same keys, Kokoro voice
+ *   ids as values) and falls back to alternating am_michael/af_heart.
  */
 
 'use strict';
@@ -91,6 +107,14 @@ const EPISODE_ARG = opt('episode');
 const TOTAL_STEP = String(opt('total-step', '8'));
 const SPEED = String(opt('speed', '1.05'));
 const SUPERTONIC_DIR = process.env.SUPERTONIC_DIR;
+const KOKORO_DIR = process.env.KOKORO_DIR;
+const KOKORO_PYTHON = process.env.KOKORO_PYTHON || 'python3';
+const ENGINE_ARG = opt('engine');
+const ENGINES = new Set(['supertonic', 'kokoro']);
+if (ENGINE_ARG && !ENGINES.has(ENGINE_ARG)) {
+  console.error(`Unknown --engine ${ENGINE_ARG}; expected one of ${[...ENGINES].join(', ')}`);
+  process.exit(1);
+}
 
 const FLAGS = {
   all: flag('all'),
@@ -148,7 +172,22 @@ function resolveVoiceStyle(voiceName) {
   return file;
 }
 
-function pickVoice(speakerName, voiceMap, fallbackIndex) {
+function checkKokoro() {
+  if (!KOKORO_DIR) {
+    die('KOKORO_DIR is not set. Point it at the folder holding kokoro-v1.0.onnx and voices-v1.0.bin (see KOKORO_SETUP.md).');
+  }
+  for (const f of ['kokoro-v1.0.onnx', 'voices-v1.0.bin']) {
+    if (!fs.existsSync(path.join(KOKORO_DIR, f))) die(`Could not find ${path.join(KOKORO_DIR, f)} (see KOKORO_SETUP.md).`);
+  }
+  const res = spawnSync(KOKORO_PYTHON, ['-c', 'import kokoro_onnx, soundfile, scipy'], { stdio: 'ignore' });
+  if (res.status !== 0) die(`${KOKORO_PYTHON} cannot import kokoro_onnx, soundfile and scipy. Install them (see KOKORO_SETUP.md) or set KOKORO_PYTHON.`);
+}
+
+function episodeEngine(episodeMeta, showManifest) {
+  return ENGINE_ARG || episodeMeta.engine || showManifest.ttsEngine || 'supertonic';
+}
+
+function pickVoice(speakerName, voiceMap, fallbackIndex, engine = 'supertonic') {
   const key = String(speakerName || '').toUpperCase();
   if (voiceMap && voiceMap[key]) return voiceMap[key];
   // Case-insensitive lookup
@@ -157,7 +196,8 @@ function pickVoice(speakerName, voiceMap, fallbackIndex) {
       if (k.toUpperCase() === key) return voiceMap[k];
     }
   }
-  // Fallback: alternate M1 / F1 by order of appearance
+  // Fallback: alternate male / female by order of appearance
+  if (engine === 'kokoro') return fallbackIndex % 2 === 0 ? 'am_michael' : 'af_heart';
   return fallbackIndex % 2 === 0 ? 'M1' : 'F1';
 }
 
@@ -174,7 +214,11 @@ function normalizeExpressionTags(text) {
     .replace(/ {2,}/g, ' ');
 }
 
-function cleanText(text) {
+function cleanText(text, engine = 'supertonic') {
+  if (engine === 'kokoro') {
+    // Kokoro has no expression tags; drop them so they are never read aloud.
+    return cleanText(text).replace(/<\s*[a-zA-Z_]+\s*>/g, '').replace(/ {2,}/g, ' ').trim();
+  }
   return normalizeExpressionTags(
     text
       .replace(/\*\*([^*]+)\*\*/g, '$1')
@@ -255,6 +299,7 @@ function findEpisodes(showManifest, showDir) {
     file: ep.file,
     basename: path.basename(ep.file, '.md'),
     path: path.join(showDir, ep.file),
+    engine: ep.engine,
   }));
 }
 
@@ -415,6 +460,31 @@ function runSupertonicBatch({ exampleScript, lines, outDir, lang }) {
   return saved;
 }
 
+function runKokoroBatch({ lines, outDir }) {
+  ensureDir(outDir);
+  for (const f of fs.readdirSync(outDir)) {
+    if (f.endsWith('.wav')) fs.rmSync(path.join(outDir, f));
+  }
+  const workerPath = path.join(__dirname, 'kokoro-episode-worker.py');
+  const jobPath = path.join(outDir, 'job.json');
+  const job = {
+    kokoroDir: KOKORO_DIR,
+    speed: Number(opt('speed', '1.0')),
+    lines: lines.map((line, idx) => ({
+      index: line.index,
+      text: cleanText(line.text, 'kokoro'),
+      voice: line.voice,
+      outputPath: path.join(outDir, `${String(idx).padStart(4, '0')}.wav`),
+    })),
+  };
+  fs.writeFileSync(jobPath, JSON.stringify(job, null, 2));
+  const result = spawnSync(KOKORO_PYTHON, [workerPath, '--input', jobPath], {
+    stdio: ['ignore', 'inherit', 'inherit'],
+  });
+  if (result.status !== 0) throw new Error(`Kokoro worker exited with status ${result.status}`);
+  return job.lines.map((line) => line.outputPath);
+}
+
 // Minimal WAV concatenator. Assumes all inputs share the same 16-bit PCM
 // format that Supertonic produces. Reads PCM data following the `data` chunk
 // header and rewrites a fresh header for the combined file.
@@ -548,6 +618,8 @@ function concatToMp3(wavs, mp3Path) {
 }
 
 async function generateEpisode({ exampleScript, showId, episode, manifest }) {
+  const engine = episodeEngine(episode, manifest);
+  log(`${episode.basename}: engine ${engine}`);
   const events = parseEpisode(episode.path);
   const dialogue = events.filter((event) => event.type === 'dialogue');
   const cues = events.filter((event) => event.type === 'cue');
@@ -569,7 +641,7 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   const outDir = path.join(OUTPUT_ROOT, showId, episode.basename);
   ensureDir(outDir);
 
-  const voiceMap = manifest.voiceMap || {};
+  const voiceMap = (engine === 'kokoro' ? manifest.kokoroVoiceMap : manifest.voiceMap) || {};
   const speakerOrder = new Map();
   const items = [];
   const wavs = [];
@@ -609,7 +681,7 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
 
     const line = event;
     if (!speakerOrder.has(line.speaker)) speakerOrder.set(line.speaker, speakerOrder.size);
-    const voice = pickVoice(line.speaker, voiceMap, speakerOrder.get(line.speaker));
+    const voice = pickVoice(line.speaker, voiceMap, speakerOrder.get(line.speaker), engine);
 
     if (fs.existsSync(wavPath) && !FLAGS.force) {
       process.stdout.write(`\r  line ${dialogueIndex + 1}/${dialogue.length} (cached)        `);
@@ -633,15 +705,17 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   }
 
   if (pending.length > 0) {
-    console.log(`\n  rendering ${pending.length}/${dialogue.length} uncached lines with one Supertonic worker`);
+    console.log(`\n  rendering ${pending.length}/${dialogue.length} uncached lines with one ${engine} worker`);
     const tmpDir = path.join(outDir, '.tmp', 'batch');
     try {
-      const produced = runSupertonicBatch({
-        exampleScript,
-        lines: pending,
-        outDir: tmpDir,
-        lang: manifest.lang || 'en',
-      });
+      const produced = engine === 'kokoro'
+        ? runKokoroBatch({ lines: pending, outDir: tmpDir })
+        : runSupertonicBatch({
+          exampleScript: exampleScript || checkSupertonic(),
+          lines: pending,
+          outDir: tmpDir,
+          lang: manifest.lang || 'en',
+        });
       produced.forEach((producedPath, idx) => {
         safeRename(producedPath, pending[idx].wavPath);
         peakNormalizeWavFile(pending[idx].wavPath);
@@ -715,7 +789,7 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
 }
 
 async function main() {
-  console.log('\n=== PodLearn Audio Generator (Supertonic) ===\n');
+  console.log('\n=== PodLearn Audio Generator (Supertonic / Kokoro) ===\n');
 
   const { showDir, manifest } = loadShow(SHOW_ID);
   const episodes = findEpisodes(manifest, showDir);
@@ -726,8 +800,6 @@ async function main() {
     return;
   }
 
-  const exampleScript = FLAGS.dryRun ? null : checkSupertonic();
-
   let targets;
   if (FLAGS.all) {
     targets = episodes;
@@ -736,6 +808,10 @@ async function main() {
   } else {
     die('Specify --episode <n> or --all');
   }
+
+  const engines = new Set(targets.map((ep) => episodeEngine(ep, manifest)));
+  const exampleScript = !FLAGS.dryRun && engines.has('supertonic') ? checkSupertonic() : null;
+  if (!FLAGS.dryRun && engines.has('kokoro')) checkKokoro();
 
   for (const ep of targets) {
     console.log(`\n--- ${SHOW_ID}/${ep.file} ---`);

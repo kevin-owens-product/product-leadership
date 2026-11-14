@@ -14,6 +14,9 @@ built, and `dist/audio/` must be committed (Netlify serves the committed
 > further releases. Supertonic 3 is the final model. Source and weights now live under the
 > `supertone-oss-archive` organization on GitHub and Hugging Face (the URLs below). The old
 > `supertone-inc` / `Supertone` URLs still redirect today but may stop working.
+>
+> **New episodes now use Kokoro-82M.** See [KOKORO_SETUP.md](./KOKORO_SETUP.md). This guide stays
+> for re-rendering existing Supertonic episodes.
 
 ## One-time setup
 

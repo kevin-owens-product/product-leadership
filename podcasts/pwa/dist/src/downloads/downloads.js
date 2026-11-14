@@ -9,7 +9,7 @@ import {
     combinedAudioUrl,
     manifestAudioUrl,
     withCacheKey
-} from '../playback/manifest.js?v=2.6.0%2B20261114T211355Z';
+} from '../playback/manifest.js?v=2.6.2%2B20261114T222541Z';
 
 // Send a message to the active service worker and wait for its reply via
 // MessageChannel. Resolves to null if there's no controller (e.g. SW not yet

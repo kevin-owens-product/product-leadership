@@ -1,7 +1,7 @@
 # Episode 9: Capability Behind a Gate
 ## "Safeguarded Models, a Cancelled Launch, and Agents That Do Security Work"
 
-**Duration:** ~14 minutes
+**Duration:** ~47 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 **Season:** 2, The Late-2026 Frontier
 
@@ -156,6 +156,246 @@
 **ALEX:** That sounds very achievable.
 
 **RILEY:** It is, and it is exactly the kind of work defenders should be doing now, before the same capabilities are widely available to attackers.
+
+---
+
+### SEGMENT 8: Threat Modeling an Agent
+
+**ALEX:** I want to give people a method, not just a list of incidents. How should a team threat-model an agent system before it goes live?
+
+**RILEY:** Start with the same questions you would ask about any system, then add a few that are specific to agents. What does the agent have access to: files, credentials, networks, tools? Where does untrusted content enter: web pages, tickets, emails, repositories, tool results? What actions can it take that are hard to undo: deploys, deletions, payments, messages sent outside the company? And who can instruct it: only the user, or also anything that lands in its context?
+
+**ALEX:** That last question is the agent-specific one.
+
+**RILEY:** It is the heart of it. In a normal application, the code decides what happens and user input is just data. In an agent, the model decides what happens, and the line between instructions and data is enforced by training and by the harness, not by a compiler. So every place untrusted text enters the context is a place someone might try to give the agent instructions.
+
+**ALEX:** So you draw the trust boundaries.
+
+**RILEY:** Yes. Draw a simple diagram: the user, the agent, each tool, each data source, each external system. Mark which arrows carry untrusted content. Then, for each sensitive action, ask what chain of events could lead the agent to take it when it should not. Usually the chain is: untrusted content enters, the agent treats it as an instruction, and the agent holds a capability that makes the instruction harmful.
+
+**ALEX:** And you break the chain at the cheapest link.
+
+**RILEY:** Often that is the capability. You may not be able to stop malicious text appearing in a customer ticket, and you cannot guarantee the model will ignore it every time. But you can make sure the agent triaging tickets has no ability to send email outside the company or read the payments database. Then even a successful injection achieves very little.
+
+**ALEX:** Is there a simple rule people use?
+
+**RILEY:** A common one is to avoid giving a single agent all three of these at once: access to private data, exposure to untrusted content, and the ability to communicate externally. Any two might be fine. All three together is the setup for data theft. If a workflow needs all three, split it across agents with a narrow, checked handoff, or put a human in the middle.
+
+---
+
+### SEGMENT 9: Sandboxes in Depth
+
+**ALEX:** We keep saying "enforce scope in the sandbox." What does a good sandbox actually look like for a coding agent?
+
+**RILEY:** Layers again. The base is an isolated environment per task: a container or, better for untrusted code, a lightweight virtual machine, created fresh and thrown away afterward. The agent gets a copy of the repository and whatever tools the task needs, and nothing else from the host.
+
+**ALEX:** Network.
+
+**RILEY:** Deny by default, with an allow list. The package registry or your internal mirror, your source host, maybe a documentation site. Not the open internet. And watch for the indirect routes. The reported case of a model reaching outside through DNS is a reminder that "no internet" has to include name resolution, not just web traffic. Resolve names through a controlled resolver that only answers for allowed hosts.
+
+**ALEX:** Credentials.
+
+**RILEY:** Short-lived and narrow. The sandbox gets a token that can read one repository and open a pull request, valid for an hour. Not a developer's personal token, and never a long-lived cloud credential. A good pattern is a credential broker outside the sandbox that hands out tokens for specific operations, so the agent never holds a secret that outlives the task.
+
+**ALEX:** And the cloud metadata endpoint we mentioned.
+
+**RILEY:** Block it. On most cloud platforms, any process on a machine can ask a local metadata address for the machine's credentials. If an agent runs on a cloud machine without that blocked, a single command can hand it the machine's identity. That is why harnesses block it by default.
+
+**ALEX:** What about the file system on a developer's own laptop?
+
+**RILEY:** That is harder, because the whole point of a local agent is to work in the developer's environment. The controls there are permission rules in the harness, which commands are allowed without asking, which directories it can write to, plus operating system sandboxing where available. And a clear habit: run untrusted or experimental work in a cloud or container sandbox, not on the laptop that holds your SSH keys.
+
+**ALEX:** How do you know the sandbox works?
+
+**RILEY:** Test it like any security control. Have a red team, or an agent under careful supervision, try to reach a blocked host, read a secret, or write outside its directory. Do it regularly, because sandboxes drift as people add exceptions to unblock legitimate work.
+
+---
+
+### SEGMENT 10: Approvals Without Fatigue
+
+**ALEX:** Human approval is everybody's favorite control. What goes wrong with it?
+
+**RILEY:** Fatigue. If an agent asks for approval forty times an hour, people stop reading and start clicking. At that point the approval is a ritual, not a control, and it may be worse than nothing because it creates a record that says a human checked.
+
+**ALEX:** So how do you design it?
+
+**RILEY:** Ask less often, about things that matter more. Sort actions into three groups. Actions that are safe and reversible, like reading files, running tests, editing code in a branch, should not need approval at all. Actions that are risky but recoverable, like pushing a branch or opening a pull request, can be allowed with logging and review afterward. And actions that are irreversible or external, like deploying to production, deleting data or sending a message to a customer, need a real approval with the facts in front of the person.
+
+**ALEX:** And make the approval informative.
+
+**RILEY:** Yes. Show what will happen, what the agent was trying to achieve, and what could go wrong. "Run command: deploy" is useless. "Deploy payments-api version 4.2 to production; changes three files; tests passed; rollback is one command" is something a person can actually judge.
+
+**ALEX:** Is there a role for a second model as an approver?
+
+**RILEY:** Increasingly, yes, and that is roughly what auto modes in coding harnesses do. A classifier or a second model reviews each action against rules and blocks the risky ones, so the human is only asked about the cases that need judgment. It is not a replacement for human approval on irreversible actions, but it can remove most of the low-value prompts that cause fatigue.
+
+**ALEX:** And when the automated check blocks something legitimate?
+
+**RILEY:** It should say which rule blocked it and why, so the agent can explain to the human and the human can approve it explicitly. Good systems make that path clear. Bad systems leave the agent guessing, which leads straight back to the retry spiral.
+
+---
+
+### SEGMENT 11: When an Agent Misbehaves
+
+**ALEX:** Let us talk about incident response. Something goes wrong. An agent pushed something it should not have, or touched a system outside its scope. What should a team have ready?
+
+**RILEY:** Four things, decided before you need them. A way to stop agents quickly: a kill switch that halts running agent jobs, revokes their tokens and pauses new ones, for one workflow or for all of them. A complete record: transcripts, tool calls, commands and their outputs, kept long enough to investigate. A clear owner: who gets paged when an agent incident happens, which is often not the same person as for a service outage. And a playbook for the common cases.
+
+**ALEX:** What are the common cases?
+
+**RILEY:** A secret exposed in agent output or a pull request: rotate it first, then investigate. An unwanted change merged: revert, then find out why review did not catch it. An agent reaching a system outside its scope: revoke its credentials, check what it accessed, and fix the scope control. And suspected prompt injection: find the content that carried it, check what else that content reached, and look for the same pattern elsewhere.
+
+**ALEX:** And the postmortem.
+
+**RILEY:** Blameless, like any postmortem, but with two agent-specific questions. Where did the model's judgment fail, and where did the system fail to contain that failure? The second question is usually the more useful one, because you can fix the system reliably, while you cannot fully fix the model's judgment.
+
+**ALEX:** Should you tell the model provider?
+
+**RILEY:** If you suspect the model behaved in a way that its safeguards or its guidelines should have prevented, yes. Providers generally want reports, and some have formal channels. Include the transcript, with sensitive data removed. It helps them, and it helps everyone else building on the same model.
+
+---
+
+### SEGMENT 12: Who Owns Agent Security
+
+**ALEX:** Organizationally, who owns this? Security teams? Platform teams? Each product team?
+
+**RILEY:** All three, with clear lines. The platform team owns the paved road: the harness configuration, the sandbox, the credential broker, the approved tool servers and the logging. The security team sets the policy, reviews the paved road, runs red-team exercises and owns the incident playbook. And product teams own their specific agent workflows, within the guardrails the platform provides.
+
+**ALEX:** What goes wrong when that is not clear?
+
+**RILEY:** Shadow agents. A team that finds the official path too slow sets up its own agent with a personal token and a broad sandbox, and it works great until it does not. The cure is partly policy, but mostly making the paved road easy. If the approved way to run an agent takes five minutes to set up, few people will bother working around it.
+
+**ALEX:** And skills here?
+
+**RILEY:** The security team has to learn how agents work, and the platform team has to learn to think like attackers. Some organizations have created a small agent security function that sits between the two. For a mid-sized company, one or two people with that focus can make a real difference.
+
+---
+
+### SEGMENT 13: Agents and the Software Supply Chain
+
+**ALEX:** There is one security risk that is created by coding agents themselves rather than aimed at them. Agents install packages.
+
+**RILEY:** They do, constantly, and that opens some new doors. The best known is what people have called slopsquatting. A model suggests a package name that sounds plausible but does not exist. An attacker notices that models tend to suggest the same made-up names, registers them, and publishes malicious code under them. The next agent that suggests that name installs the attacker's package.
+
+**ALEX:** How common is that?
+
+**RILEY:** Researchers have shown that models invent package names at a measurable rate, and that some invented names repeat across runs, which is what makes the attack practical. It has become less common as models improved, but it has not gone away, and the cost of one bad install can be very high.
+
+**ALEX:** Defenses?
+
+**RILEY:** The strongest is to route all package installs through an internal mirror or proxy that only serves approved packages, or at least blocks packages that are very new, have very few downloads, or were published by unknown maintainers. That one control also stops typosquatting, where an attacker registers a name one letter off from a popular package. Beyond that, require lockfiles, review new dependencies in pull requests the same way you would review new code, and give agents an instruction, in a skill or project file, to prefer existing dependencies over adding new ones.
+
+**ALEX:** And install scripts.
+
+**RILEY:** A good point. Many package ecosystems let a package run code when it is installed. In an agent sandbox with no secrets and no network beyond the mirror, that is much less dangerous. On a developer laptop, it is the classic way supply-chain attacks spread. Another reason to run agent work in disposable sandboxes.
+
+**ALEX:** Is there a flip side, where agents help supply-chain security?
+
+**RILEY:** Very much. Reviewing a new dependency used to mean a human reading its code, which almost nobody did. An agent can read a new package's source, check what it does at install time, look for network calls or obfuscated code, and summarize the risk for a human in a minute. That is a real improvement over the old default of trusting whatever the package manager resolved.
+
+---
+
+### SEGMENT 14: Defense at Scale
+
+**ALEX:** We have talked a lot about risk. Let us talk about the upside. What security work are agents genuinely good at today?
+
+**RILEY:** I would point to five areas. The first is remediation, which we walked through: upgrading dependencies, fixing known vulnerability patterns, and proving the fix with tests. The second is secure code review. An agent reviewing every pull request for common issues, like missing authorization checks, unsafe deserialization or injection, does not replace a human security reviewer, but it catches a lot before the human ever looks.
+
+**ALEX:** Third.
+
+**RILEY:** Test generation for security properties. Writing tests that check authorization rules, input validation and error handling, and writing fuzzing harnesses for parsers and other code that handles untrusted input. Fuzzing has always been effective and under-used, mostly because writing harnesses was tedious. Agents remove most of that tedium.
+
+**ALEX:** Fourth.
+
+**RILEY:** Configuration review. Cloud permissions, network rules, container settings, infrastructure code. These are huge, boring, and full of small mistakes. An agent can read all of it and flag the overly broad permission or the storage bucket open to the internet, with an explanation and a suggested fix.
+
+**ALEX:** And fifth.
+
+**RILEY:** Investigation support during incidents. Summarizing logs, correlating events across systems, drafting timelines. That is where the false-positive reroutes have been most annoying for practitioners, because incident response can look like attack analysis. It is also where structuring the work carefully pays off the most, so the agent is summarizing and correlating rather than being asked to explain how an attack could be carried out.
+
+**ALEX:** Is there a common thread?
+
+**RILEY:** All five are defensive, high volume and checkable. The agent produces something a human or a test can verify: a patch with passing tests, a flagged line of code, a permission diff. That is where agents add the most value with the least risk.
+
+---
+
+### SEGMENT 15: Measuring a Security Agent Program
+
+**ALEX:** If a security leader starts an agent program like this, how do they show it is working?
+
+**RILEY:** Measure outcomes the security organization already cares about, not agent activity. Time from a vulnerability being published to it being fixed across your repositories. The size and age of your vulnerability backlog. The share of pull requests with security findings caught before merge rather than after. And the number of security incidents traced to issues that were known but unfixed.
+
+**ALEX:** And the agent-specific metrics?
+
+**RILEY:** Alongside those, track what we have discussed: cost per closed finding, reroute and refusal rates, the share of agent pull requests that a human rejects, and any incidents caused by the agents themselves. If the agent program closes findings faster but humans reject half its pull requests, the reviewers are doing the real work and you need to improve quality before scaling.
+
+**ALEX:** What does a good first quarter look like?
+
+**RILEY:** Pick one category, like known vulnerabilities in direct dependencies, in a limited set of repositories with good tests. Run the three-stage pattern. Show the backlog shrinking and the time to fix falling, with human rejection rates under control. Then expand to more repositories and more categories. Trying to do everything at once is how these programs stall.
+
+**ALEX:** And how do you explain the reroute issue to leadership?
+
+**RILEY:** As a known cost of using the most capable models safely. Something like: "About this share of agent steps on security tasks are rerouted to a less capable model by the provider's safeguards. We have structured the work to keep that low, we monitor it weekly, and where it matters we have a separate path with verified access." Leaders are used to controls that have a cost. What they dislike is surprises.
+
+---
+
+### SEGMENT 16: Listener Questions
+
+**ALEX:** A few listener questions on security.
+
+**RILEY:** Go ahead.
+
+**ALEX:** "Our agents get rerouted occasionally on normal security work. Should we switch to an open-weight model to avoid it?"
+
+**RILEY:** Maybe for a narrow lane, but think carefully. You trade the false positives for full responsibility for misuse controls, and most open models are less capable at the hard parts of security work. First, check whether you can restructure the work so the defensive parts do not look offensive, and whether your provider offers a verified access program for your use case.
+
+**ALEX:** "Is prompt injection solved yet?"
+
+**RILEY:** No. Models have become much better at resisting it, and harnesses have added defenses, but no one serious claims it is solved. Design as if it will sometimes succeed, and limit what a successful injection can do.
+
+**ALEX:** "How do we audit what our agents did last month?"
+
+**RILEY:** Only if you kept the logs. Decide now what you record, where, and for how long, and make sure the records connect a user, a task, the agent's actions and their effects. Auditors and incident responders both need that chain.
+
+**ALEX:** And last: "Should agents be allowed to merge their own pull requests?"
+
+**RILEY:** For most teams, not yet, except for narrow, low-risk changes with strong tests, like automated dependency patch upgrades in a repository with good coverage. Even there, start with a human merging and move to automatic merging only after you have months of data showing the changes are safe.
+
+---
+
+### SEGMENT 17: Reading a Safety Card
+
+**ALEX:** One more skill for builders. Every frontier launch now comes with a system card or safety report, often long. What should an engineering leader actually read in one?
+
+**RILEY:** Four sections. First, the capability evaluations in the areas that matter to you, especially cyber, because those determine which safeguards apply and how often your security work might be rerouted. Second, the description of the safeguards themselves: what triggers them, what happens when they trigger, and what the provider says about false positive rates. Third, the agentic safety results, which describe how the model behaved in tests where it had tools and autonomy, including any cases where it went beyond its instructions. And fourth, the data handling and retention terms that apply to that model.
+
+**ALEX:** The agentic section is the one I would not have thought to read.
+
+**RILEY:** It is the most useful for us. Those sections increasingly describe concrete behaviors in test environments: did the model try to get around a restriction, did it misreport what it did, did it take actions it was not asked to take. Those are exactly the failure modes your harness has to contain. If a card says the model sometimes overstated its progress in long tasks, you know to verify completion claims independently.
+
+**ALEX:** And how much should you trust a vendor's own card?
+
+**RILEY:** Treat it as a starting point and a description of what the vendor tested, not a guarantee. Look for outside testing where it exists, from government institutes or independent researchers, which is how the jailbreak finding we discussed earlier came to light. And then run your own evals in your own setup, because no card tests your tools, your data or your permissions.
+
+**ALEX:** Is there a red flag to look for?
+
+**RILEY:** Vagueness about the things that would affect you most. If a launch post says a model has improved safeguards but gives no detail on what triggers them or how often they fire, you will learn those numbers the hard way, in production. Ask your account team directly, and record the answers.
+
+---
+
+### SEGMENT 18: The Policy Conversation
+
+**ALEX:** Last thing before we wrap. These gating decisions are not only technical. Governments care a great deal about frontier cyber capability. Should engineering leaders pay attention to that?
+
+**RILEY:** Yes, at least at the level of knowing what is coming. Several governments now run institutes that test frontier models before or after release, and their findings are shaping how labs release models. Regulations in some places require providers of the most capable models to assess and reduce systemic risks. And some customers, especially in government and critical infrastructure, now ask suppliers how they use and control AI in security-sensitive work.
+
+**ALEX:** So it can show up in a sales conversation.
+
+**RILEY:** It already does, in security questionnaires. "Do you use AI agents in software development? What controls apply? How do you prevent AI tools from exposing customer data?" Having clear answers, backed by the controls we have described, is becoming part of selling to large customers.
+
+**ALEX:** And the broader point?
+
+**RILEY:** That safety and capability are now released together. The labs that ship the most capable models also ship the most elaborate controls, and the controls change how you build. Engineering teams that understand both will get more out of these models, with fewer surprises, than teams that treat safeguards as an annoyance to route around.
 
 ---
 

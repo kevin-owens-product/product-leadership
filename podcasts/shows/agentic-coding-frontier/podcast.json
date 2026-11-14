@@ -23,6 +23,7 @@
       "description": "The autumn 2026 model lineup, MCP's stateless spec, safeguarded capability, and agents that use computers, voice and background jobs. Built from public sources."
     }
   ],
+  "kokoroSpeed": 0.75,
   "kokoroVoiceMap": {
     "ALEX": "am_michael",
     "RILEY": "af_heart"

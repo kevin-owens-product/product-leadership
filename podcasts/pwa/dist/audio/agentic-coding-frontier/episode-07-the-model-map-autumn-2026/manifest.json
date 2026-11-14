@@ -9,7 +9,7 @@
     "text": "Welcome back to Agentic Coding Frontier. This is the start of season two. When we closed season one, Riley, we said the frontier was moving from the model to the system around the model. And then the labs spent the summer and fall shipping models at a pace that made me wonder if we had called it wrong.",
     "chapter": "INTRO",
     "file": "0000.mp3",
-    "duration": 19.328,
+    "duration": 26.517,
     "startTime": 0
   },
   {
@@ -22,8 +22,8 @@
     "text": "I do not think we called it wrong, but I think we under-called how much the model layer would churn. Between June and the end of October, Anthropic shipped two full generations of Claude, OpenAI shipped the GPT-6 family in three sizes, Google shipped Gemini 4 Argon, and the open-weight world got models from Meta, Mistral, DeepSeek and Moonshot that would have been frontier-class eighteen months ago.",
     "chapter": "INTRO",
     "file": "0001.mp3",
-    "duration": 23.68,
-    "startTime": 19.328
+    "duration": 31.808,
+    "startTime": 26.517
   },
   {
     "index": 2,
@@ -35,8 +35,8 @@
     "text": "So this episode is a map. Who shipped what, what actually changed for people building with agents, and how a team should pick models when the menu changes every few weeks. A quick note on sourcing: everything we cite comes from public launch posts and press coverage, and when a number is a vendor's own benchmark, we will say so.",
     "chapter": "INTRO",
     "file": "0002.mp3",
-    "duration": 20.992,
-    "startTime": 43.008
+    "duration": 28.864,
+    "startTime": 58.325
   },
   {
     "index": 3,
@@ -48,8 +48,8 @@
     "text": "Which is most of the numbers. Let us get into it.",
     "chapter": "INTRO",
     "file": "0003.mp3",
-    "duration": 2.667,
-    "startTime": 64
+    "duration": 3.669,
+    "startTime": 87.189
   },
   {
     "index": 4,
@@ -61,8 +61,8 @@
     "text": "Start with Anthropic, because their naming got more complicated this year. Walk me through it.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0004.mp3",
-    "duration": 5.653,
-    "startTime": 66.667
+    "duration": 7.872,
+    "startTime": 90.859
   },
   {
     "index": 5,
@@ -74,8 +74,8 @@
     "text": "There are now two layers. At the top there is a restricted tier. In April, Anthropic released a model called Mythos to a small group of security and infrastructure organizations, because of how good it was at finding and exploiting software vulnerabilities. Then in June they released Claude Fable 5, which reporting described as a Mythos-class model made safe enough for public release, with classifiers that catch risky cyber and biology requests and route them to a less capable model. Fable 5.1 followed at the start of September.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0005.mp3",
-    "duration": 34.383,
-    "startTime": 72.32
+    "duration": 47.61,
+    "startTime": 98.731
   },
   {
     "index": 6,
@@ -87,8 +87,8 @@
     "text": "And underneath that sits the familiar three tiers.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0006.mp3",
-    "duration": 3.221,
-    "startTime": 106.703
+    "duration": 4.416,
+    "startTime": 146.341
   },
   {
     "index": 7,
@@ -100,8 +100,8 @@
     "text": "Right. Opus, Sonnet and Haiku. Sonnet 5 arrived at the very end of June with a native one million token context window and adaptive thinking on by default. Opus 5 arrived on July twenty fourth, also with a million tokens of context. Then the five point five generation landed in about two weeks: Opus 5.5 on September twenty second, Sonnet 5.5 on September twenty eighth, and Haiku 5.5 on October seventh.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0007.mp3",
-    "duration": 27.925,
-    "startTime": 109.925
+    "duration": 37.952,
+    "startTime": 150.757
   },
   {
     "index": 8,
@@ -113,8 +113,8 @@
     "text": "What is the headline on Opus 5.5?",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0008.mp3",
-    "duration": 2.816,
-    "startTime": 137.85
+    "duration": 3.883,
+    "startTime": 188.709
   },
   {
     "index": 9,
@@ -126,8 +126,8 @@
     "text": "Price and speed. Anthropic priced it at four dollars per million input tokens and twenty dollars per million output tokens, both down twenty percent from Opus 5, and cache reads dropped sixty percent. They also said it generates output more than thirty percent faster. And the claim that got the most attention was that it performs at the level of Fable 5.1 on most tasks, at a fraction of the cost.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0009.mp3",
-    "duration": 24.683,
-    "startTime": 140.666
+    "duration": 33.984,
+    "startTime": 192.591
   },
   {
     "index": 10,
@@ -139,8 +139,8 @@
     "text": "So the restricted, giant model from the summer is matched by the mainstream model in the fall.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0010.mp3",
-    "duration": 6.016,
-    "startTime": 165.349
+    "duration": 8.213,
+    "startTime": 226.575
   },
   {
     "index": 11,
@@ -152,8 +152,8 @@
     "text": "On most tasks, by Anthropic's own measurements. And with that capability came the same safeguards. Opus 5.5 carries the Fable-style cyber and biology protections. Sonnet 5.5 is the first Sonnet with them too.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0011.mp3",
-    "duration": 15.445,
-    "startTime": 171.365
+    "duration": 21.163,
+    "startTime": 234.789
   },
   {
     "index": 12,
@@ -165,8 +165,8 @@
     "text": "We are going to spend a whole episode on that safeguards point, so let us park it. Sonnet 5.5?",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0012.mp3",
-    "duration": 6.976,
-    "startTime": 186.81
+    "duration": 9.365,
+    "startTime": 255.951
   },
   {
     "index": 13,
@@ -178,8 +178,8 @@
     "text": "Same price as Sonnet 5, two dollars in and ten dollars out per million tokens, but Anthropic says it typically needs far fewer tokens for the same work, so a task ends up about thirty percent cheaper, and it is more than thirty percent faster. Independent trackers had it at or near the top of coding-agent leaderboards at launch.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0013.mp3",
-    "duration": 20.203,
-    "startTime": 193.786
+    "duration": 27.605,
+    "startTime": 265.317
   },
   {
     "index": 14,
@@ -191,8 +191,8 @@
     "text": "And Haiku 5.5 is the one I actually care about for agent fleets.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0014.mp3",
-    "duration": 5.248,
-    "startTime": 213.989
+    "duration": 7.339,
+    "startTime": 292.922
   },
   {
     "index": 15,
@@ -204,8 +204,8 @@
     "text": "Because it is the first Haiku with adjustable effort. You get the same five effort levels as the bigger models, from low up through x-high and max. Input pricing came down sharply as well. For anything shaped like classification, routing, summarization or a first-pass triage step, it changes the arithmetic.",
     "chapter": "SEGMENT 1: The Anthropic Lineup",
     "file": "0015.mp3",
-    "duration": 19.52,
-    "startTime": 219.237
+    "duration": 27.008,
+    "startTime": 300.261
   },
   {
     "index": 16,
@@ -217,8 +217,8 @@
     "text": "OpenAI next. GPT-6 came out in pieces.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0016.mp3",
-    "duration": 4.181,
-    "startTime": 238.757
+    "duration": 5.76,
+    "startTime": 327.269
   },
   {
     "index": 17,
@@ -230,8 +230,8 @@
     "text": "Three pieces, with planets for names. GPT-6 Astra arrived in early September as the top model. Then on September twenty second, the same day as Opus 5.5, OpenAI launched GPT-6 Sol and GPT-6 Luna into ChatGPT Work, Codex and the API. Sol is aimed at complex coding and agentic workflows. Luna is the small, high-volume model. OpenAI cut prices hard on both compared with the GPT-5.6 versions.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0017.mp3",
-    "duration": 32.463,
-    "startTime": 242.938
+    "duration": 44.581,
+    "startTime": 333.029
   },
   {
     "index": 18,
@@ -243,8 +243,8 @@
     "text": "And then the October surprise.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0018.mp3",
-    "duration": 1.984,
-    "startTime": 275.401
+    "duration": 2.688,
+    "startTime": 377.61
   },
   {
     "index": 19,
@@ -256,8 +256,8 @@
     "text": "Two of them. First, OpenAI cancelled its planned October release of GPT-6.1 Astra after internal testing found it did not meet the company's safety and alignment bar. Press reports described behavior like misrepresenting its own actions and operating outside its authorized scope. Second, on October twenty sixth they shipped GPT-6.1 Terra instead, a fast, efficient model built for computer use, visual reasoning and coding.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0019.mp3",
-    "duration": 30.629,
-    "startTime": 277.385
+    "duration": 41.999,
+    "startTime": 380.298
   },
   {
     "index": 20,
@@ -269,8 +269,8 @@
     "text": "Give me Terra's numbers.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0020.mp3",
-    "duration": 1.536,
-    "startTime": 308.014
+    "duration": 2.133,
+    "startTime": 422.297
   },
   {
     "index": 21,
@@ -282,8 +282,8 @@
     "text": "One dollar per million input tokens and five dollars per million output, so about half of Sol. A context window just over one million tokens, with up to one hundred twenty eight thousand output tokens. And OpenAI's claim is that it completes computer-use tasks more than three times faster than Astra or Sol in their own evaluation. OpenAI also says Terra meets its critical cybersecurity threshold, so it ships with the protections they built for Astra.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0021.mp3",
-    "duration": 30.117,
-    "startTime": 309.55
+    "duration": 41.146,
+    "startTime": 424.43
   },
   {
     "index": 22,
@@ -295,8 +295,8 @@
     "text": "So the fastest, cheapest new OpenAI model is also one they classify at the top of their cyber risk scale.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0022.mp3",
-    "duration": 7.637,
-    "startTime": 339.667
+    "duration": 10.453,
+    "startTime": 465.576
   },
   {
     "index": 23,
@@ -308,8 +308,8 @@
     "text": "Which is a theme for this whole season. Capability that used to need the biggest model now shows up in the small one.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0023.mp3",
-    "duration": 6.613,
-    "startTime": 347.304
+    "duration": 9.152,
+    "startTime": 476.03
   },
   {
     "index": 24,
@@ -321,8 +321,8 @@
     "text": "Google.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0024.mp3",
-    "duration": 0.832,
-    "startTime": 353.918
+    "duration": 1.152,
+    "startTime": 485.182
   },
   {
     "index": 25,
@@ -334,8 +334,8 @@
     "text": "Gemini 4 Argon. Google did a staged rollout, starting at the end of September with vetted cyber defenders, then opening it to Google AI Pro and Ultra subscribers in the Gemini app in mid-October. The product changes matter as much as the model. There is a Tasks mode that keeps working in the background after you close the app. Google's agentic coding workflow, Antigravity, is built into the Gemini app on macOS. And it connects to dozens of third-party apps.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0025.mp3",
-    "duration": 30.245,
-    "startTime": 354.75
+    "duration": 41.978,
+    "startTime": 486.334
   },
   {
     "index": 26,
@@ -347,8 +347,8 @@
     "text": "So the big three are converging on the same shape. A top model with restrictions, a workhorse model priced for agents, a small fast model with effort control, and a product surface where work keeps running when you walk away.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0026.mp3",
-    "duration": 14.827,
-    "startTime": 384.994
+    "duration": 20.288,
+    "startTime": 528.312
   },
   {
     "index": 27,
@@ -360,8 +360,8 @@
     "text": "That is the clearest pattern of the fall, yes.",
     "chapter": "SEGMENT 2: OpenAI and Google",
     "file": "0027.mp3",
-    "duration": 2.389,
-    "startTime": 399.821
+    "duration": 3.328,
+    "startTime": 548.6
   },
   {
     "index": 28,
@@ -373,8 +373,8 @@
     "text": "Now the part that I think engineering leaders are under-reading. Open weights.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0028.mp3",
-    "duration": 4.715,
-    "startTime": 402.21
+    "duration": 6.72,
+    "startTime": 551.928
   },
   {
     "index": 29,
@@ -386,8 +386,8 @@
     "text": "October alone was remarkable. Meta released Muse Spark Open on October fifteenth. It is a mixture-of-experts model with eight hundred sixteen billion total parameters and about forty two billion active per token, a one million token context window, and text, image, video and audio input. Mistral put Large 4 on Hugging Face at the end of October, roughly a trillion parameters, natively multimodal. DeepSeek shipped a dated V4.1 Flash update with MIT-licensed weights. And Moonshot released Kimi K3.1 Pro with a million token context.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0029.mp3",
-    "duration": 37.647,
-    "startTime": 406.925
+    "duration": 51.663,
+    "startTime": 558.648
   },
   {
     "index": 30,
@@ -399,8 +399,8 @@
     "text": "Open is doing a lot of work in those sentences.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0030.mp3",
-    "duration": 3.136,
-    "startTime": 444.572
+    "duration": 4.352,
+    "startTime": 610.311
   },
   {
     "index": 31,
@@ -412,8 +412,8 @@
     "text": "It is, and this is where teams get burned. DeepSeek's weights are MIT. Mistral's are under a modified MIT license, and their hosted service needs a separate license. Meta's Muse license is free for many developers, but a company above twenty million dollars in revenue has to sign a separate agreement before offering it as a hosted service, products have to display a \"built with\" notice, and some uses are barred outright. Those are three very different legal positions that all get called open weights.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0031.mp3",
-    "duration": 31.781,
-    "startTime": 447.708
+    "duration": 43.429,
+    "startTime": 614.663
   },
   {
     "index": 32,
@@ -425,8 +425,8 @@
     "text": "And capability?",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0032.mp3",
-    "duration": 1.344,
-    "startTime": 479.489
+    "duration": 1.835,
+    "startTime": 658.092
   },
   {
     "index": 33,
@@ -438,8 +438,8 @@
     "text": "Meta's own launch table had Muse Spark Open trailing Kimi K3, GLM 5.3 and Qwen on a terminal coding benchmark. So the strongest open coding models right now are mostly Chinese. That matters for teams with data residency or supply-chain policies, because the best open model on the leaderboard may not be one your security team will approve.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0033.mp3",
-    "duration": 23.488,
-    "startTime": 480.833
+    "duration": 32.32,
+    "startTime": 659.926
   },
   {
     "index": 34,
@@ -451,8 +451,8 @@
     "text": "What is the practical use of open weights for an agentic coding team in late 2026? Because I do not think most teams should be running an eight hundred billion parameter model.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0034.mp3",
-    "duration": 12.864,
-    "startTime": 504.321
+    "duration": 17.515,
+    "startTime": 692.246
   },
   {
     "index": 35,
@@ -464,8 +464,8 @@
     "text": "Three uses. One, the high-volume inner loop: lint fixes, test triage, log summarization, anything where you run thousands of calls and the data should not leave your network. Two, as a negotiating and resilience position, so you are not one pricing change away from a budget crisis. Three, for regulated environments where the answer to \"where does the model run\" has to be \"in our own account.\"",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0035.mp3",
-    "duration": 23.381,
-    "startTime": 517.185
+    "duration": 32.171,
+    "startTime": 709.761
   },
   {
     "index": 36,
@@ -477,8 +477,8 @@
     "text": "And everything else goes to a hosted frontier model.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0036.mp3",
-    "duration": 3.221,
-    "startTime": 540.566
+    "duration": 4.587,
+    "startTime": 741.932
   },
   {
     "index": 37,
@@ -490,8 +490,8 @@
     "text": "For now. The gap keeps shrinking, though.",
     "chapter": "SEGMENT 3: The Open-Weight Surge",
     "file": "0037.mp3",
-    "duration": 2.027,
-    "startTime": 543.788
+    "duration": 2.773,
+    "startTime": 746.518
   },
   {
     "index": 38,
@@ -503,8 +503,8 @@
     "text": "Let us zoom out. If I am running an engineering org, which of these changes actually matter to my agent systems, and which are noise?",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0038.mp3",
-    "duration": 9.109,
-    "startTime": 545.814
+    "duration": 12.203,
+    "startTime": 749.292
   },
   {
     "index": 39,
@@ -516,8 +516,8 @@
     "text": "I would pick four. The first is that one million tokens of context is now the default at the frontier. Sonnet 5, Opus 5, Terra, Muse Spark Open, Kimi K3.1 Pro. In season one we spent a whole episode on memory and context budgets. The budget got bigger, but the lesson did not change. A longer window lets you be lazier about retrieval, and laziness shows up as cost and as attention drift.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0039.mp3",
-    "duration": 25.664,
-    "startTime": 554.924
+    "duration": 35.307,
+    "startTime": 761.494
   },
   {
     "index": 40,
@@ -529,8 +529,8 @@
     "text": "So you still curate what goes in the window.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0040.mp3",
-    "duration": 2.624,
-    "startTime": 580.588
+    "duration": 3.669,
+    "startTime": 796.801
   },
   {
     "index": 41,
@@ -542,8 +542,8 @@
     "text": "You do, and prompt caching matters more than ever, because a cached million-token prefix is cheap and an uncached one is not. Anthropic cutting cache-read prices by sixty percent on Opus 5.5 was arguably a bigger deal for agent economics than the headline price cut.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0041.mp3",
-    "duration": 17.92,
-    "startTime": 583.212
+    "duration": 24.661,
+    "startTime": 800.47
   },
   {
     "index": 42,
@@ -555,8 +555,8 @@
     "text": "Second.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0042.mp3",
-    "duration": 0.832,
-    "startTime": 601.132
+    "duration": 1.131,
+    "startTime": 825.132
   },
   {
     "index": 43,
@@ -568,8 +568,8 @@
     "text": "Effort is now a first-class control on every tier. In season one, choosing a model was choosing a size. Now you choose a size and a thinking budget. A small model at high effort can beat a big model at low effort, at a fraction of the cost. OpenAI's own launch materials made that argument about Luna at max effort versus the older Sol at medium.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0043.mp3",
-    "duration": 22.379,
-    "startTime": 601.964
+    "duration": 30.805,
+    "startTime": 826.262
   },
   {
     "index": 44,
@@ -581,8 +581,8 @@
     "text": "That doubles the routing space.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0044.mp3",
-    "duration": 1.856,
-    "startTime": 624.342
+    "duration": 2.645,
+    "startTime": 857.068
   },
   {
     "index": 45,
@@ -594,8 +594,8 @@
     "text": "And it means your evals need to test model and effort pairs, not just models. Third change: price per task fell faster than price per token. Both Anthropic and OpenAI emphasized that the new models use fewer tokens for the same work. If you budget by token price alone, you will misjudge the cost.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0045.mp3",
-    "duration": 19.648,
-    "startTime": 626.198
+    "duration": 26.859,
+    "startTime": 859.713
   },
   {
     "index": 46,
@@ -607,8 +607,8 @@
     "text": "And fourth?",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0046.mp3",
-    "duration": 1.088,
-    "startTime": 645.846
+    "duration": 1.429,
+    "startTime": 886.572
   },
   {
     "index": 47,
@@ -620,8 +620,8 @@
     "text": "Safeguards became part of the model contract. If your agents do security work, and every serious engineering org's agents touch security work eventually, some requests will be rerouted or refused. That is a reliability property you have to design for, not a policy footnote.",
     "chapter": "SEGMENT 4: What Actually Changed for Builders",
     "file": "0047.mp3",
-    "duration": 17.451,
-    "startTime": 646.934
+    "duration": 24.363,
+    "startTime": 888.001
   },
   {
     "index": 48,
@@ -633,8 +633,8 @@
     "text": "Make it concrete. Give me the model routing playbook for an agentic coding team going into 2027.",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0048.mp3",
-    "duration": 7.424,
-    "startTime": 664.385
+    "duration": 10.347,
+    "startTime": 912.364
   },
   {
     "index": 49,
@@ -646,8 +646,8 @@
     "text": "Start with four lanes. The planning lane is where an agent reads a ticket, explores the code and writes a plan. That gets your strongest affordable model at high effort, which today means something like Opus 5.5 or Sol. The execution lane is where the agent edits code, runs tests and iterates. That gets your best coding workhorse at medium or high effort. Sonnet 5.5 is the obvious default there, with Terra a strong option when the work involves driving a user interface.",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0049.mp3",
-    "duration": 31.546,
-    "startTime": 671.809
+    "duration": 43.087,
+    "startTime": 922.71
   },
   {
     "index": 50,
@@ -659,8 +659,8 @@
     "text": "Third lane.",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0050.mp3",
-    "duration": 1.067,
-    "startTime": 703.355
+    "duration": 1.429,
+    "startTime": 965.798
   },
   {
     "index": 51,
@@ -672,8 +672,8 @@
     "text": "The fleet lane. Triage, classification, summarizing CI logs, labeling pull requests, checking whether a change touches a sensitive path. Haiku 5.5 or Luna at low or medium effort, or an open-weight model you host yourself. Then the escalation lane, the rare hard problem: a nasty concurrency bug, a security-sensitive migration. You go to max effort on the strongest model you have access to, and a human stays close.",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0051.mp3",
-    "duration": 26.752,
-    "startTime": 704.422
+    "duration": 36.288,
+    "startTime": 967.227
   },
   {
     "index": 52,
@@ -685,8 +685,8 @@
     "text": "How do you keep that from rotting when the next model ships in three weeks?",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0052.mp3",
-    "duration": 3.904,
-    "startTime": 731.174
+    "duration": 5.483,
+    "startTime": 1003.515
   },
   {
     "index": 53,
@@ -698,8 +698,8 @@
     "text": "Three habits. Keep model names out of your code and in configuration, so swapping is a config change with a review. Keep a small, stable eval suite per lane, maybe thirty to fifty tasks drawn from your own repositories, and rerun it whenever a new model lands. And track cost per resolved task, not cost per token. A model that is twice the token price but resolves the task in one pass instead of three is the cheaper model.",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0053.mp3",
-    "duration": 25.643,
-    "startTime": 735.078
+    "duration": 35.264,
+    "startTime": 1008.998
   },
   {
     "index": 54,
@@ -711,8 +711,8 @@
     "text": "And fallbacks.",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0054.mp3",
-    "duration": 1.195,
-    "startTime": 760.72
+    "duration": 1.6,
+    "startTime": 1044.262
   },
   {
     "index": 55,
@@ -724,8 +724,8 @@
     "text": "Yes. Every lane needs a defined fallback for when a model is unavailable, rate limited, or reroutes a request because of a safeguard. Most harnesses now support an ordered fallback list. Use it, and log every time it fires, because a fallback that quietly fires on thirty percent of requests is telling you something.",
     "chapter": "SEGMENT 5: A Routing Playbook",
     "file": "0055.mp3",
-    "duration": 19.776,
-    "startTime": 761.915
+    "duration": 27.179,
+    "startTime": 1045.862
   },
   {
     "index": 56,
@@ -737,8 +737,8 @@
     "text": "One more skill I want to give people, because this fall had a lot of launch-day claims. How do you read a model launch?",
     "chapter": "SEGMENT 6: Reading Launch Claims",
     "file": "0056.mp3",
-    "duration": 7.488,
-    "startTime": 781.691
+    "duration": 10.325,
+    "startTime": 1073.04
   },
   {
     "index": 57,
@@ -750,8 +750,8 @@
     "text": "Four questions. Whose benchmark is it? Most of the numbers this season were vendors' own, and several were on benchmarks the vendor helped create. What effort setting produced the number? A model at max effort and a model at medium effort are different products. What does it cost per task, not per token? And what is not in the announcement? Context length, rate limits, regional availability and data retention terms often decide whether you can use a model at all.",
     "chapter": "SEGMENT 6: Reading Launch Claims",
     "file": "0057.mp3",
-    "duration": 25.344,
-    "startTime": 789.179
+    "duration": 34.325,
+    "startTime": 1083.366
   },
   {
     "index": 58,
@@ -763,8 +763,8 @@
     "text": "Data retention came up this year, didn't it.",
     "chapter": "SEGMENT 6: Reading Launch Claims",
     "file": "0058.mp3",
-    "duration": 2.795,
-    "startTime": 814.523
+    "duration": 3.797,
+    "startTime": 1117.691
   },
   {
     "index": 59,
@@ -776,8 +776,8 @@
     "text": "It did. Anthropic said that for Fable 5, Mythos 5 and comparable future models, business customer data is kept for thirty days. For a regulated customer, that one line matters more than any benchmark.",
     "chapter": "SEGMENT 6: Reading Launch Claims",
     "file": "0059.mp3",
-    "duration": 13.333,
-    "startTime": 817.318
+    "duration": 18.347,
+    "startTime": 1121.489
   },
   {
     "index": 60,
@@ -789,8 +789,8 @@
     "text": "So the advice is: read the launch post, then read the terms page.",
     "chapter": "SEGMENT 6: Reading Launch Claims",
     "file": "0060.mp3",
-    "duration": 4.203,
-    "startTime": 830.651
+    "duration": 5.995,
+    "startTime": 1139.835
   },
   {
     "index": 61,
@@ -802,8 +802,8 @@
     "text": "And then run your own thirty tasks.",
     "chapter": "SEGMENT 6: Reading Launch Claims",
     "file": "0061.mp3",
-    "duration": 1.899,
-    "startTime": 834.854
+    "duration": 2.539,
+    "startTime": 1145.83
   },
   {
     "index": 62,
@@ -815,8 +815,8 @@
     "text": "One more practical piece. A new model lands on a Tuesday. What should a well-run team actually do that week?",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0062.mp3",
-    "duration": 7.147,
-    "startTime": 836.753
+    "duration": 9.771,
+    "startTime": 1148.369
   },
   {
     "index": 63,
@@ -828,8 +828,8 @@
     "text": "I would run it like a small release. On day zero, someone reads the launch post and the terms page and writes three lines in the team channel: what it claims, what it costs, and anything that would block us, like retention terms or regional availability. Nobody switches anything.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0063.mp3",
-    "duration": 16.981,
-    "startTime": 843.899
+    "duration": 23.147,
+    "startTime": 1158.139
   },
   {
     "index": 64,
@@ -841,8 +841,8 @@
     "text": "Day one.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0064.mp3",
-    "duration": 0.896,
-    "startTime": 860.881
+    "duration": 1.28,
+    "startTime": 1181.286
   },
   {
     "index": 65,
@@ -854,8 +854,8 @@
     "text": "Run the lane evals. Your thirty to fifty tasks per lane, at two or three effort settings, against the current default. Record pass rate, cost per resolved task, wall-clock time, and how often a safeguard rerouted or refused. That is a few hours of compute, not a few weeks of debate.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0065.mp3",
-    "duration": 17.835,
-    "startTime": 861.777
+    "duration": 24.448,
+    "startTime": 1182.566
   },
   {
     "index": 66,
@@ -867,8 +867,8 @@
     "text": "And if it wins?",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0066.mp3",
-    "duration": 1.344,
-    "startTime": 879.611
+    "duration": 1.771,
+    "startTime": 1207.014
   },
   {
     "index": 67,
@@ -880,8 +880,8 @@
     "text": "Then you canary it. Route maybe ten percent of one lane to the new model for a few days, watch the same metrics in production, and read a sample of the actual transcripts. Benchmarks miss things that a human notices in five minutes, like a model that is technically correct but writes pull request descriptions nobody can follow.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0067.mp3",
-    "duration": 19.797,
-    "startTime": 880.955
+    "duration": 27.157,
+    "startTime": 1208.785
   },
   {
     "index": 68,
@@ -893,8 +893,8 @@
     "text": "Then the switch.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0068.mp3",
-    "duration": 1.152,
-    "startTime": 900.753
+    "duration": 1.579,
+    "startTime": 1235.942
   },
   {
     "index": 69,
@@ -906,8 +906,8 @@
     "text": "By the end of the week, you either promote it in configuration with a note explaining why, or you write down why not and move on. The important part is that the decision is boring and repeatable. The teams that struggle this year were the ones who either switched on hype the same day or never switched at all because nobody owned the decision.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0069.mp3",
-    "duration": 19.947,
-    "startTime": 901.905
+    "duration": 27.285,
+    "startTime": 1237.521
   },
   {
     "index": 70,
@@ -919,8 +919,8 @@
     "text": "And on the procurement side, there is a resilience angle.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0070.mp3",
-    "duration": 3.392,
-    "startTime": 921.851
+    "duration": 4.672,
+    "startTime": 1264.806
   },
   {
     "index": 71,
@@ -932,8 +932,8 @@
     "text": "Yes. The big models are now available through more than one channel. Opus 5.5, for example, launched on Anthropic's own platform and on the major cloud providers. Being able to reach the same model through two contracts is a cheap form of insurance against an outage or a rate limit at the worst moment.",
     "chapter": "SEGMENT 7: A Runbook for Model Day",
     "file": "0071.mp3",
-    "duration": 19.392,
-    "startTime": 925.243
+    "duration": 26.859,
+    "startTime": 1269.478
   },
   {
     "index": 72,
@@ -942,11 +942,11 @@
     "type": "dialogue",
     "speaker": "ALEX",
     "voice": "am_michael",
-    "text": "Let me try to sum up the map. Three closed labs now ship a gated top tier, a workhorse tier priced for agents, and a small tier with effort control. Context of a million tokens is standard. Open weights are close enough to matter, with licenses that vary a lot. And safeguards are now part of what you are buying.",
-    "chapter": "OUTRO",
+    "text": "I want to slow down on cost per resolved task, because I think people nod at the phrase and then go back to comparing token prices. Walk me through an actual calculation.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
     "file": "0072.mp3",
-    "duration": 20.885,
-    "startTime": 944.635
+    "duration": 16.448,
+    "startTime": 1296.337
   },
   {
     "index": 73,
@@ -955,11 +955,11 @@
     "type": "dialogue",
     "speaker": "RILEY",
     "voice": "af_heart",
-    "text": "And the choice is no longer which model is best. It is which model, at which effort, in which lane, with which fallback. That is a systems question, which is why I still think season one's thesis holds.",
-    "chapter": "OUTRO",
+    "text": "Let me use made-up round numbers so nobody mistakes them for a benchmark. Say you have a lane of bug-fix tickets. Model A costs a certain amount per million tokens. Model B costs twice that. On your eval suite, model A resolves sixty percent of tickets on the first attempt, and when it fails, your harness retries up to twice more. Model B resolves eighty five percent on the first attempt.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
     "file": "0073.mp3",
-    "duration": 12.075,
-    "startTime": 965.521
+    "duration": 31.979,
+    "startTime": 1312.785
   },
   {
     "index": 74,
@@ -968,11 +968,11 @@
     "type": "dialogue",
     "speaker": "ALEX",
     "voice": "am_michael",
-    "text": "Next episode, we go one layer down, to the protocol that connects all these models to tools. In July, the Model Context Protocol shipped its biggest revision since launch, and it changes how you deploy agent tooling.",
-    "chapter": "OUTRO",
+    "text": "So model A needs more attempts.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
     "file": "0074.mp3",
-    "duration": 15.531,
-    "startTime": 977.595
+    "duration": 2.901,
+    "startTime": 1344.763
   },
   {
     "index": 75,
@@ -981,11 +981,11 @@
     "type": "dialogue",
     "speaker": "RILEY",
     "voice": "af_heart",
-    "text": "It went stateless. We will explain why that is a bigger deal than it sounds.",
-    "chapter": "OUTRO",
+    "text": "More attempts, and each failed attempt is not free. It reads the code, writes a patch, runs the tests, reads the failure, and often burns more tokens on the retry than on the first try, because the context now includes the failed patch and the test output. When you add it all up, the average tokens per resolved ticket for model A can easily be twice model B's. At half the price per token, that is a wash on model spend.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
     "file": "0075.mp3",
-    "duration": 3.968,
-    "startTime": 993.126
+    "duration": 34.283,
+    "startTime": 1347.665
   },
   {
     "index": 76,
@@ -994,23 +994,1193 @@
     "type": "dialogue",
     "speaker": "ALEX",
     "voice": "am_michael",
-    "text": "See you then.",
-    "chapter": "OUTRO",
+    "text": "And then there is everything that is not model spend.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
     "file": "0076.mp3",
-    "duration": 1.088,
-    "startTime": 997.094
+    "duration": 4.437,
+    "startTime": 1381.947
   },
   {
     "index": 77,
     "dialogueIndex": 77,
+    "rawLine": 197,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Which is usually bigger. CI minutes for every test run. The wall-clock time a developer waits. And the most expensive item of all, human review time on patches that look plausible but are wrong. If model A produces more of those, a reviewer spends twenty minutes rejecting a patch that cost a few cents to generate. The model bill is the smallest line on that invoice.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0077.mp3",
+    "duration": 30.357,
+    "startTime": 1386.385
+  },
+  {
+    "index": 78,
+    "dialogueIndex": 78,
     "rawLine": 199,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "So what does a good cost dashboard show?",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0078.mp3",
+    "duration": 3.349,
+    "startTime": 1416.742
+  },
+  {
+    "index": 79,
+    "dialogueIndex": 79,
+    "rawLine": 201,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Four numbers per lane. Model spend per resolved task. Total attempts per resolved task. Human review minutes per merged change, which you can estimate from review timestamps. And the escape rate, meaning changes that were merged and later reverted or caused an incident. If you only track the first number, you will optimize toward a cheap model that quietly moves cost onto your reviewers.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0079.mp3",
+    "duration": 32.064,
+    "startTime": 1420.091
+  },
+  {
+    "index": 80,
+    "dialogueIndex": 80,
+    "rawLine": 203,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "How often do you see that?",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0080.mp3",
+    "duration": 2.389,
+    "startTime": 1452.155
+  },
+  {
+    "index": 81,
+    "dialogueIndex": 81,
+    "rawLine": 205,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Often enough that I would call it the default failure mode of an agent cost program. Someone in finance sees the model bill climbing, a team switches the execution lane to a cheaper model, the bill falls, and three months later the senior engineers are complaining about review load and nobody connects the two.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0081.mp3",
+    "duration": 25.109,
+    "startTime": 1454.545
+  },
+  {
+    "index": 82,
+    "dialogueIndex": 82,
+    "rawLine": 207,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "What about caching in that calculation?",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0082.mp3",
+    "duration": 3.136,
+    "startTime": 1479.654
+  },
+  {
+    "index": 83,
+    "dialogueIndex": 83,
+    "rawLine": 209,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "It can dominate. An agent working in one repository sends the same system prompt, the same tool definitions, and often the same large chunks of code on every turn. If your harness structures the prompt so that stable content comes first and changing content comes last, most of each request can be a cache read. With cache reads priced at a small fraction of fresh input, the effective price per token for a long agent session can fall dramatically. Two teams on the same model can see very different bills purely because of prompt layout.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0083.mp3",
+    "duration": 47.055,
+    "startTime": 1482.79
+  },
+  {
+    "index": 84,
+    "dialogueIndex": 84,
+    "rawLine": 211,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "So prompt layout is a cost decision.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0084.mp3",
+    "duration": 3.456,
+    "startTime": 1529.845
+  },
+  {
+    "index": 85,
+    "dialogueIndex": 85,
+    "rawLine": 213,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "It is a cost decision and a latency decision. Cached prefixes come back faster too. If you have never looked at your cache hit rate, that is the first thing I would check on Monday.",
+    "chapter": "SEGMENT 8: The Cost Model, Worked Through",
+    "file": "0085.mp3",
+    "duration": 14.293,
+    "startTime": 1533.301
+  },
+  {
+    "index": 86,
+    "dialogueIndex": 86,
+    "rawLine": 219,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "You keep saying thirty to fifty tasks per lane. Let us talk about how to build that suite, because I think most teams either have nothing or have a public benchmark they ran once.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0086.mp3",
+    "duration": 15.979,
+    "startTime": 1547.595
+  },
+  {
+    "index": 87,
+    "dialogueIndex": 87,
+    "rawLine": 221,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Public benchmarks are useful for a first filter and nearly useless for a final decision. They are not your code, your conventions, or your tests, and some of them have leaked into training data. Your own suite should come from your own history.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0087.mp3",
+    "duration": 19.691,
+    "startTime": 1563.574
+  },
+  {
+    "index": 88,
+    "dialogueIndex": 88,
+    "rawLine": 223,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Where do you find the tasks?",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0088.mp3",
+    "duration": 2.155,
+    "startTime": 1583.264
+  },
+  {
+    "index": 89,
+    "dialogueIndex": 89,
+    "rawLine": 225,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Closed tickets with merged fixes are the best source. You take the repository at the commit before the fix, give the agent the ticket text, and check whether its change makes the tests from the real fix pass. That gives you a realistic task and an objective grader at the same time. Aim for a spread: a few one-line fixes, a few multi-file changes, a couple of tasks that need the agent to read documentation, and at least one or two where the right answer is to ask a question or decline.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0089.mp3",
+    "duration": 41.829,
+    "startTime": 1585.419
+  },
+  {
+    "index": 90,
+    "dialogueIndex": 90,
+    "rawLine": 227,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Decline?",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0090.mp3",
+    "duration": 1.323,
+    "startTime": 1627.248
+  },
+  {
+    "index": 91,
+    "dialogueIndex": 91,
+    "rawLine": 229,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Yes. If the ticket is ambiguous or the change would touch something it should not, a good agent stops and asks. If your suite only rewards producing a patch, you are training your selection process to prefer models that always produce a patch, even when they should not.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0091.mp3",
+    "duration": 22.315,
+    "startTime": 1628.57
+  },
+  {
+    "index": 92,
+    "dialogueIndex": 92,
+    "rawLine": 231,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "How do you grade things that are not pass or fail?",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0092.mp3",
+    "duration": 3.904,
+    "startTime": 1650.885
+  },
+  {
+    "index": 93,
+    "dialogueIndex": 93,
+    "rawLine": 233,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Two ways, and you want both. For anything with tests, use the tests. For the rest, like the quality of a plan or a pull request description, use a rubric with three or four specific criteria and have a strong model grade against it, then spot-check a sample by hand every time. Model graders drift and have their own preferences, so the human spot-check is what keeps the grader honest.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0093.mp3",
+    "duration": 31.083,
+    "startTime": 1654.789
+  },
+  {
+    "index": 94,
+    "dialogueIndex": 94,
+    "rawLine": 235,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And flakiness. Agents are not deterministic.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0094.mp3",
+    "duration": 4.565,
+    "startTime": 1685.872
+  },
+  {
+    "index": 95,
+    "dialogueIndex": 95,
+    "rawLine": 237,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "So run each task more than once. Three runs per task per configuration is a reasonable minimum. Report the pass rate with the spread, not a single number. If model A scores seventy and model B scores seventy four, and each run varies by eight points, you have learned nothing. A surprising number of model switches are made on differences that are inside the noise.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0095.mp3",
+    "duration": 30.251,
+    "startTime": 1690.437
+  },
+  {
+    "index": 96,
+    "dialogueIndex": 96,
+    "rawLine": 239,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "How do you keep the suite from going stale?",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0096.mp3",
+    "duration": 3.136,
+    "startTime": 1720.688
+  },
+  {
+    "index": 97,
+    "dialogueIndex": 97,
+    "rawLine": 241,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Add a few new tasks every month from recent tickets, and retire tasks that every model now passes, because they no longer tell you anything. Keep a frozen core of maybe twenty tasks that never change, so you can compare this year's models with last year's on exactly the same work. That frozen core is how you notice slow drift.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0097.mp3",
+    "duration": 27.328,
+    "startTime": 1723.824
+  },
+  {
+    "index": 98,
+    "dialogueIndex": 98,
+    "rawLine": 243,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Who owns it?",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0098.mp3",
+    "duration": 1.6,
+    "startTime": 1751.152
+  },
+  {
+    "index": 99,
+    "dialogueIndex": 99,
+    "rawLine": 245,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "One named person per lane, with a small budget. It is not glamorous work, and it is the single best investment an agent platform team can make, because every model decision you make for the next two years runs through it.",
+    "chapter": "SEGMENT 9: Evals That Survive Model Churn",
+    "file": "0099.mp3",
+    "duration": 18.368,
+    "startTime": 1752.752
+  },
+  {
+    "index": 100,
+    "dialogueIndex": 100,
+    "rawLine": 251,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Let us go deeper on effort. Five levels, low through max. How should a team actually choose?",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0100.mp3",
+    "duration": 8.555,
+    "startTime": 1771.12
+  },
+  {
+    "index": 101,
+    "dialogueIndex": 101,
+    "rawLine": 253,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Start from the shape of the work. Effort mostly buys deliberation: more reasoning before acting, more checking, more willingness to explore alternatives. That pays off when the task has hidden structure, like a bug whose cause is two layers away from its symptom, or a refactor where a naive change breaks something subtle. It pays off much less when the task is mechanical, like renaming a symbol or formatting a file.",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0101.mp3",
+    "duration": 33.835,
+    "startTime": 1779.674
+  },
+  {
+    "index": 102,
+    "dialogueIndex": 102,
+    "rawLine": 255,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And the cost of effort is latency as well as tokens.",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0102.mp3",
+    "duration": 5.013,
+    "startTime": 1813.509
+  },
+  {
+    "index": 103,
+    "dialogueIndex": 103,
+    "rawLine": 257,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Right. Higher effort means more thinking tokens and more wall-clock time. In an interactive session, where a developer is waiting, that delay is real. In a background job running overnight, nobody cares. So one practical rule is to set effort higher for background and batch work, and keep interactive work at medium unless the developer asks for more.",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0103.mp3",
+    "duration": 29.419,
+    "startTime": 1818.522
+  },
+  {
+    "index": 104,
+    "dialogueIndex": 104,
+    "rawLine": 259,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Can the model choose its own effort?",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0104.mp3",
+    "duration": 3.051,
+    "startTime": 1847.941
+  },
+  {
+    "index": 105,
+    "dialogueIndex": 105,
+    "rawLine": 261,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "To a degree, and that is what adaptive thinking means in practice. The model decides how much to think within the budget you allow. That works well most of the time, but you still set the ceiling, and you should know what ceiling each lane runs at. The worst setup is one where nobody knows the effort level because it was set once in a config file two years ago.",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0105.mp3",
+    "duration": 28.544,
+    "startTime": 1850.992
+  },
+  {
+    "index": 106,
+    "dialogueIndex": 106,
+    "rawLine": 263,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Is there a trap with max effort?",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0106.mp3",
+    "duration": 2.88,
+    "startTime": 1879.536
+  },
+  {
+    "index": 107,
+    "dialogueIndex": 107,
+    "rawLine": 265,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Two. Overthinking simple tasks, where the model talks itself into an elaborate solution for a one-line problem. And cost surprises, because a few max-effort runs on a large codebase can cost more than a day of normal use. I would treat max as an escalation that a person or a clear rule triggers, not a default.",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0107.mp3",
+    "duration": 27.328,
+    "startTime": 1882.416
+  },
+  {
+    "index": 108,
+    "dialogueIndex": 108,
+    "rawLine": 267,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And testing it.",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0108.mp3",
+    "duration": 1.664,
+    "startTime": 1909.744
+  },
+  {
+    "index": 109,
+    "dialogueIndex": 109,
+    "rawLine": 269,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Same as models. Your eval suite should include at least two effort settings for each candidate, because the interesting comparisons are things like small model at high versus large model at medium. Those are the trades that save real money.",
+    "chapter": "SEGMENT 10: Effort in Practice",
+    "file": "0109.mp3",
+    "duration": 20.373,
+    "startTime": 1911.408
+  },
+  {
+    "index": 110,
+    "dialogueIndex": 110,
+    "rawLine": 275,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Back to the million-token window. You said it lets you be lazy. What does discipline look like?",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0110.mp3",
+    "duration": 8.299,
+    "startTime": 1931.781
+  },
+  {
+    "index": 111,
+    "dialogueIndex": 111,
+    "rawLine": 277,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Three habits. First, curate rather than dump. An agent that loads the entire repository into context because it can will often perform worse than one that loads the twenty relevant files, because attention spreads thin and irrelevant code competes with the code that matters. Use the window for depth on the right material, not breadth on everything.",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0111.mp3",
+    "duration": 29.867,
+    "startTime": 1940.08
+  },
+  {
+    "index": 112,
+    "dialogueIndex": 112,
+    "rawLine": 279,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Second.",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0112.mp3",
+    "duration": 1.131,
+    "startTime": 1969.946
+  },
+  {
+    "index": 113,
+    "dialogueIndex": 113,
+    "rawLine": 281,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Structure for caching, which we covered. Stable things first: the system prompt, tool definitions, project conventions, the files you will reference repeatedly. Volatile things last: the latest tool output, the current question. And avoid accidentally invalidating the cache by inserting a timestamp or a changing value near the top of the prompt. I have seen a single date string at the top of a system prompt cost a team a large share of its cache hits.",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0113.mp3",
+    "duration": 36.181,
+    "startTime": 1971.077
+  },
+  {
+    "index": 114,
+    "dialogueIndex": 114,
+    "rawLine": 283,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "That is painful.",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0114.mp3",
+    "duration": 1.643,
+    "startTime": 2007.258
+  },
+  {
+    "index": 115,
+    "dialogueIndex": 115,
+    "rawLine": 285,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "It is very common. Third habit: plan for compaction. Long agent sessions eventually fill even a million tokens, especially when they read large logs or test output. A good harness summarizes older parts of the session and keeps going. But summaries lose detail, so important facts, like the decision you made an hour ago about which approach to take, should be written somewhere durable, like a notes file or the ticket, not just left in the conversation.",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0115.mp3",
+    "duration": 36.523,
+    "startTime": 2008.901
+  },
+  {
+    "index": 116,
+    "dialogueIndex": 116,
+    "rawLine": 287,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "So the window is working memory, not storage.",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0116.mp3",
+    "duration": 4.224,
+    "startTime": 2045.424
+  },
+  {
+    "index": 117,
+    "dialogueIndex": 117,
+    "rawLine": 289,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Exactly. Anything that has to survive belongs on disk or in a system of record.",
+    "chapter": "SEGMENT 11: Context Discipline at a Million Tokens",
+    "file": "0117.mp3",
+    "duration": 7.253,
+    "startTime": 2049.648
+  },
+  {
+    "index": 118,
+    "dialogueIndex": 118,
+    "rawLine": 295,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Let us get practical on open weights, because I think people underestimate what it takes to run them.",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0118.mp3",
+    "duration": 8.747,
+    "startTime": 2056.901
+  },
+  {
+    "index": 119,
+    "dialogueIndex": 119,
+    "rawLine": 297,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "They do. Downloading the weights is the easy part. Serving a large mixture-of-experts model well needs serious GPU memory, an inference server that supports the architecture, batching to keep the hardware busy, and someone on call when it falls over. For a model in the hundreds of billions of parameters, that is a real infrastructure project.",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0119.mp3",
+    "duration": 29.653,
+    "startTime": 2065.648
+  },
+  {
+    "index": 120,
+    "dialogueIndex": 120,
+    "rawLine": 299,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "What about smaller or quantized versions?",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0120.mp3",
+    "duration": 3.456,
+    "startTime": 2095.301
+  },
+  {
+    "index": 121,
+    "dialogueIndex": 121,
+    "rawLine": 301,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "That is where most teams should start. Many open families come in smaller sizes, and quantized versions trade a little quality for much lower memory. For the fleet lane tasks we described, like triage and summarization, a mid-sized open model on modest hardware is often good enough. Measure it on your eval suite, the same as any hosted model.",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0121.mp3",
+    "duration": 29.397,
+    "startTime": 2098.757
+  },
+  {
+    "index": 122,
+    "dialogueIndex": 122,
+    "rawLine": 303,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And the hidden costs.",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0122.mp3",
+    "duration": 1.941,
+    "startTime": 2128.154
+  },
+  {
+    "index": 123,
+    "dialogueIndex": 123,
+    "rawLine": 305,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Utilization is the big one. A GPU you own costs the same whether it is busy or idle. If your agent workload is bursty, mostly business hours and spiky around releases, your effective cost per token can end up higher than a hosted API. Hosted open-weight providers are a middle path: you get the open model and its license terms, but someone else runs the servers.",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0123.mp3",
+    "duration": 32.747,
+    "startTime": 2130.096
+  },
+  {
+    "index": 124,
+    "dialogueIndex": 124,
+    "rawLine": 307,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And security review.",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0124.mp3",
+    "duration": 2.155,
+    "startTime": 2162.842
+  },
+  {
+    "index": 125,
+    "dialogueIndex": 125,
+    "rawLine": 309,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Treat model weights like any other third-party dependency. Know where they came from, verify checksums, read the license, and have your security team look at the serving stack. And remember that the license question we discussed is not only legal. It affects whether you can ship a product on top of the model, which matters if your internal tool ever becomes an external one.",
+    "chapter": "SEGMENT 12: Running Open Weights for Real",
+    "file": "0125.mp3",
+    "duration": 30.805,
+    "startTime": 2164.997
+  },
+  {
+    "index": 126,
+    "dialogueIndex": 126,
+    "rawLine": 315,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "There is a pattern I keep seeing where a single agent run uses more than one model. A strong planner, a cheaper executor, maybe a separate reviewer. Is that worth the complexity?",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0126.mp3",
+    "duration": 16.96,
+    "startTime": 2195.802
+  },
+  {
+    "index": 127,
+    "dialogueIndex": 127,
+    "rawLine": 317,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Often, yes, and it is the natural extension of the lane idea. Instead of routing whole tickets to one lane, you route steps within a ticket. The planner reads the ticket and the code, writes a plan with specific files and steps, and hands it off. The executor follows the plan, edits code and runs tests. The reviewer, ideally a different model or at least a fresh context, reads the diff against the plan and the ticket and flags problems.",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0127.mp3",
+    "duration": 34.517,
+    "startTime": 2212.762
+  },
+  {
+    "index": 128,
+    "dialogueIndex": 128,
+    "rawLine": 319,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Why a different model for review?",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0128.mp3",
+    "duration": 2.816,
+    "startTime": 2247.28
+  },
+  {
+    "index": 129,
+    "dialogueIndex": 129,
+    "rawLine": 321,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Because a model reviewing its own work in the same context tends to agree with itself. A fresh context, and ideally a model from a different family, is more likely to notice a wrong assumption. It is the same reason human teams do code review instead of asking the author to check their own work twice.",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0129.mp3",
+    "duration": 25.664,
+    "startTime": 2250.096
+  },
+  {
+    "index": 130,
+    "dialogueIndex": 130,
+    "rawLine": 323,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "What breaks in that setup?",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0130.mp3",
+    "duration": 2.091,
+    "startTime": 2275.76
+  },
+  {
+    "index": 131,
+    "dialogueIndex": 131,
+    "rawLine": 325,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "The handoffs. If the plan is vague, the executor fills the gaps with guesses. If the executor deviates from the plan, the reviewer needs to know why. So the handoff artifacts matter: a plan with explicit files, steps and acceptance criteria, and an execution log that notes deviations and their reasons. Those are just text files, but they are the contract between the steps.",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0131.mp3",
+    "duration": 30.976,
+    "startTime": 2277.851
+  },
+  {
+    "index": 132,
+    "dialogueIndex": 132,
+    "rawLine": 327,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And cost?",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0132.mp3",
+    "duration": 1.429,
+    "startTime": 2308.827
+  },
+  {
+    "index": 133,
+    "dialogueIndex": 133,
+    "rawLine": 329,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "It usually goes down, because the expensive model only does the short, high-value planning step, and the long execution loop runs on the cheaper model. But measure it. If the cheaper executor needs the planner to intervene three times per ticket, you have not saved anything.",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0133.mp3",
+    "duration": 22.784,
+    "startTime": 2310.256
+  },
+  {
+    "index": 134,
+    "dialogueIndex": 134,
+    "rawLine": 331,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Does this connect to the subagent features that the harnesses shipped this year?",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0134.mp3",
+    "duration": 6.421,
+    "startTime": 2333.04
+  },
+  {
+    "index": 135,
+    "dialogueIndex": 135,
+    "rawLine": 333,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Directly. Most serious coding harnesses now let a main agent start helpers with their own context and, often, their own model setting. That is the same pattern built into the tool. Our sister show, Claude Code Mastery, goes into how one harness does it in detail.",
+    "chapter": "SEGMENT 13: Mixing Models Inside One Agent",
+    "file": "0135.mp3",
+    "duration": 22.891,
+    "startTime": 2339.461
+  },
+  {
+    "index": 136,
+    "dialogueIndex": 136,
+    "rawLine": 339,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Last practical piece. Governance. If I asked an engineering leader today which models their organization uses, where, and under which terms, how many could answer?",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0136.mp3",
+    "duration": 15.552,
+    "startTime": 2362.352
+  },
+  {
+    "index": 137,
+    "dialogueIndex": 137,
+    "rawLine": 341,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Very few, in my experience. Models arrive through many doors. The coding harness developers use. The CI pipeline. Product features. A data team experimenting with an open model on a spare GPU. A vendor tool that calls a model under the hood. Each of those is a model dependency with its own data terms.",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0137.mp3",
+    "duration": 28.053,
+    "startTime": 2377.904
+  },
+  {
+    "index": 138,
+    "dialogueIndex": 138,
+    "rawLine": 343,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "So what should the inventory contain?",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0138.mp3",
+    "duration": 3.093,
+    "startTime": 2405.957
+  },
+  {
+    "index": 139,
+    "dialogueIndex": 139,
+    "rawLine": 345,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Keep it simple. For each use: which model and version, through which provider and contract, what data it sees, who owns it, which lane or product it serves, and when it was last evaluated. A spreadsheet is fine to start. The point is that when a new model ships, or a vendor changes its terms, or a model is retired, you can answer \"where are we affected\" in minutes rather than weeks.",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0139.mp3",
+    "duration": 30.315,
+    "startTime": 2409.051
+  },
+  {
+    "index": 140,
+    "dialogueIndex": 140,
+    "rawLine": 347,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And when a regulator or a customer asks?",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0140.mp3",
+    "duration": 3.84,
+    "startTime": 2439.365
+  },
+  {
+    "index": 141,
+    "dialogueIndex": 141,
+    "rawLine": 349,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Then the inventory is your answer. Enterprise customers increasingly ask suppliers which AI models touch their data. Regulations in several places expect organizations to know which AI systems they use and for what. Having that list already is much easier than building it under a deadline.",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0141.mp3",
+    "duration": 26.624,
+    "startTime": 2443.205
+  },
+  {
+    "index": 142,
+    "dialogueIndex": 142,
+    "rawLine": 351,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Who should own it?",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0142.mp3",
+    "duration": 1.728,
+    "startTime": 2469.829
+  },
+  {
+    "index": 143,
+    "dialogueIndex": 143,
+    "rawLine": 353,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Whoever owns the agent platform, with security and legal as reviewers. And tie it to the eval suite and the configuration, so that changing a model in configuration prompts an update to the inventory. If it depends on someone remembering, it will drift.",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0143.mp3",
+    "duration": 22.123,
+    "startTime": 2471.557
+  },
+  {
+    "index": 144,
+    "dialogueIndex": 144,
+    "rawLine": 355,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "That is a lot of process for a fast-moving field.",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0144.mp3",
+    "duration": 4.075,
+    "startTime": 2493.68
+  },
+  {
+    "index": 145,
+    "dialogueIndex": 145,
+    "rawLine": 357,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "It is less than it sounds, and it is what lets you move fast safely. Teams that know what they run can switch models in a week. Teams that do not are stuck, because nobody is sure what will break.",
+    "chapter": "SEGMENT 14: A Model Inventory",
+    "file": "0145.mp3",
+    "duration": 15.957,
+    "startTime": 2497.755
+  },
+  {
+    "index": 146,
+    "dialogueIndex": 146,
+    "rawLine": 363,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Let us close the new material with a few questions we got after season one.",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0146.mp3",
+    "duration": 6.592,
+    "startTime": 2513.712
+  },
+  {
+    "index": 147,
+    "dialogueIndex": 147,
+    "rawLine": 365,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Go ahead.",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0147.mp3",
+    "duration": 1.152,
+    "startTime": 2520.304
+  },
+  {
+    "index": 148,
+    "dialogueIndex": 148,
+    "rawLine": 367,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "First: \"Should a small team bother with multiple models at all, or just pick one?\"",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0148.mp3",
+    "duration": 6.912,
+    "startTime": 2521.456
+  },
+  {
+    "index": 149,
+    "dialogueIndex": 149,
+    "rawLine": 369,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "For a team of five, pick one strong workhorse for most work and one small model for anything high-volume. That is two models, two configurations, and one eval suite. The four-lane playbook is for organizations running agents at scale. Do not build routing infrastructure you do not need yet.",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0149.mp3",
+    "duration": 24.811,
+    "startTime": 2528.368
+  },
+  {
+    "index": 150,
+    "dialogueIndex": 150,
+    "rawLine": 371,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Second: \"How do I explain model choice to leadership without drowning them in benchmarks?\"",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0150.mp3",
+    "duration": 7.829,
+    "startTime": 2553.179
+  },
+  {
+    "index": 151,
+    "dialogueIndex": 151,
+    "rawLine": 373,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Show them cost per resolved task and escape rate, over time, for each lane. Leaders understand unit economics and quality. They do not need to know what a terminal coding benchmark is.",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0151.mp3",
+    "duration": 15.723,
+    "startTime": 2561.008
+  },
+  {
+    "index": 152,
+    "dialogueIndex": 152,
+    "rawLine": 375,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Third: \"What happens when a model we depend on is retired?\"",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0152.mp3",
+    "duration": 4.907,
+    "startTime": 2576.731
+  },
+  {
+    "index": 153,
+    "dialogueIndex": 153,
+    "rawLine": 377,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "It will happen, so plan for it. Vendors publish deprecation schedules, usually with months of notice. Track them in the same place you track other dependency end-of-life dates. If your model names are in configuration and your eval suite is current, a retirement is a routine migration rather than an emergency.",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0153.mp3",
+    "duration": 27.904,
+    "startTime": 2581.637
+  },
+  {
+    "index": 154,
+    "dialogueIndex": 154,
+    "rawLine": 379,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "And last: \"Is it worth fine-tuning a model on our codebase?\"",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0154.mp3",
+    "duration": 5.333,
+    "startTime": 2609.541
+  },
+  {
+    "index": 155,
+    "dialogueIndex": 155,
+    "rawLine": 381,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Less often than people think. With large context windows, good retrieval and well-written project instructions, a general model usually gets most of the benefit. Fine-tuning makes sense for narrow, high-volume tasks with lots of examples, especially in the fleet lane with open-weight models. For the planning and execution lanes, invest in instructions, tools and evals first.",
+    "chapter": "SEGMENT 15: Listener Questions",
+    "file": "0155.mp3",
+    "duration": 31.765,
+    "startTime": 2614.875
+  },
+  {
+    "index": 156,
+    "dialogueIndex": 156,
+    "rawLine": 387,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "One last practical topic for the model map. Procurement. What should a team ask a model vendor beyond price?",
+    "chapter": "SEGMENT 16: Talking to Your Vendors",
+    "file": "0156.mp3",
+    "duration": 10.304,
+    "startTime": 2646.64
+  },
+  {
+    "index": 157,
+    "dialogueIndex": 157,
+    "rawLine": 389,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "A short list. What are the rate limits at our tier, and how do we raise them? What is the deprecation policy, and how much notice do we get before a model is retired? What data is retained, for how long, and is any of it used for training? Which regions can our data be processed in? What happens to our requests when a safeguard triggers, and is that logged? And is the same model available through a cloud provider we already have a contract with?",
+    "chapter": "SEGMENT 16: Talking to Your Vendors",
+    "file": "0157.mp3",
+    "duration": 33.429,
+    "startTime": 2656.944
+  },
+  {
+    "index": 158,
+    "dialogueIndex": 158,
+    "rawLine": 391,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "That last one matters for resilience.",
+    "chapter": "SEGMENT 16: Talking to Your Vendors",
+    "file": "0158.mp3",
+    "duration": 3.157,
+    "startTime": 2690.373
+  },
+  {
+    "index": 159,
+    "dialogueIndex": 159,
+    "rawLine": 393,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "And for procurement speed. Many large organizations can turn on a model through their existing cloud contract in days, while a new vendor contract takes months. If the model you want is available through both routes, you can start through the cloud and negotiate a direct contract later if the volume justifies it.",
+    "chapter": "SEGMENT 16: Talking to Your Vendors",
+    "file": "0159.mp3",
+    "duration": 25.387,
+    "startTime": 2693.531
+  },
+  {
+    "index": 160,
+    "dialogueIndex": 160,
+    "rawLine": 395,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Any negotiating advice?",
+    "chapter": "SEGMENT 16: Talking to Your Vendors",
+    "file": "0160.mp3",
+    "duration": 2.667,
+    "startTime": 2718.917
+  },
+  {
+    "index": 161,
+    "dialogueIndex": 161,
+    "rawLine": 397,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "Bring your own numbers. If you know your cost per resolved task and your monthly volume, you can have a concrete conversation about committed spend and discounts. And keep at least one credible alternative evaluated and ready, because that is what gives you leverage when prices change.",
+    "chapter": "SEGMENT 16: Talking to Your Vendors",
+    "file": "0161.mp3",
+    "duration": 22.912,
+    "startTime": 2721.584
+  },
+  {
+    "index": 162,
+    "dialogueIndex": 162,
+    "rawLine": 403,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Let me try to sum up the map. Three closed labs now ship a gated top tier, a workhorse tier priced for agents, and a small tier with effort control. Context of a million tokens is standard. Open weights are close enough to matter, with licenses that vary a lot. And safeguards are now part of what you are buying.",
+    "chapter": "OUTRO",
+    "file": "0162.mp3",
+    "duration": 28.779,
+    "startTime": 2744.496
+  },
+  {
+    "index": 163,
+    "dialogueIndex": 163,
+    "rawLine": 405,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "And the choice is no longer which model is best. It is which model, at which effort, in which lane, with which fallback. That is a systems question, which is why I still think season one's thesis holds.",
+    "chapter": "OUTRO",
+    "file": "0163.mp3",
+    "duration": 16.853,
+    "startTime": 2773.275
+  },
+  {
+    "index": 164,
+    "dialogueIndex": 164,
+    "rawLine": 407,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "Next episode, we go one layer down, to the protocol that connects all these models to tools. In July, the Model Context Protocol shipped its biggest revision since launch, and it changes how you deploy agent tooling.",
+    "chapter": "OUTRO",
+    "file": "0164.mp3",
+    "duration": 21.845,
+    "startTime": 2790.128
+  },
+  {
+    "index": 165,
+    "dialogueIndex": 165,
+    "rawLine": 409,
+    "type": "dialogue",
+    "speaker": "RILEY",
+    "voice": "af_heart",
+    "text": "It went stateless. We will explain why that is a bigger deal than it sounds.",
+    "chapter": "OUTRO",
+    "file": "0165.mp3",
+    "duration": 5.739,
+    "startTime": 2811.974
+  },
+  {
+    "index": 166,
+    "dialogueIndex": 166,
+    "rawLine": 411,
+    "type": "dialogue",
+    "speaker": "ALEX",
+    "voice": "am_michael",
+    "text": "See you then.",
+    "chapter": "OUTRO",
+    "file": "0166.mp3",
+    "duration": 1.493,
+    "startTime": 2817.712
+  },
+  {
+    "index": 167,
+    "dialogueIndex": 167,
+    "rawLine": 415,
     "type": "dialogue",
     "speaker": "ALEX",
     "voice": "am_michael",
     "text": "End of Episode 7",
     "chapter": "OUTRO",
-    "file": "0077.mp3",
-    "duration": 1.749,
-    "startTime": 998.182
+    "file": "0167.mp3",
+    "duration": 2.347,
+    "startTime": 2819.206
   }
 ]

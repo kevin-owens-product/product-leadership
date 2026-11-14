@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Control Loop</title>
+    <link>https://productleader.netlify.app/?podcast=control-loop</link>
+    <atom:link href="https://productleader.netlify.app/feeds/control-loop.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>An 8-part deep dive into the machinery beneath agentic systems: how control loops actually terminate, how context gets budgeted and compacted, how work fans out across subagents, how verification drives convergence, how code graphs get built and traversed, and how a production harness handles tools, permissions, sandboxes, traces, and cost. Written at mechanism altitude for engineers who already know why agents matter and now need to know how they are built.</description>
+    <itunes:subtitle>The Engineering Under the Agent</itunes:subtitle>
+    <itunes:author>Dana Okafor &amp; Theo Lindqvist</itunes:author>
+    <itunes:summary>An 8-part deep dive into the machinery beneath agentic systems: how control loops actually terminate, how context gets budgeted and compacted, how work fans out across subagents, how verification drives convergence, how code graphs get built and traversed, and how a production harness handles tools, permissions, sandboxes, traces, and cost. Written at mechanism altitude for engineers who already know why agents matter and now need to know how they are built.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>The Loop Is the Architecture</title>
+      <description>Control Flow, Termination, and Why Agents Diverge</description>
+      <itunes:subtitle>Control Flow, Termination, and Why Agents Diverge</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-01-the-loop-is-the-architecture</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=1</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-01-the-loop-is-the-architecture/combined.mp3" length="22958976" type="audio/mpeg"/>
+      <itunes:duration>0:36:16</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Context Is a Budget</title>
+      <description>Compaction, Context Rot, and Cache-Aware Prompt Layout</description>
+      <itunes:subtitle>Compaction, Context Rot, and Cache-Aware Prompt Layout</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-02-context-is-a-budget</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=2</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-02-context-is-a-budget/combined.mp3" length="19850588" type="audio/mpeg"/>
+      <itunes:duration>0:31:17</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Topology</title>
+      <description>Fan-Out, Pipelines, Subagents, and Isolation</description>
+      <itunes:subtitle>Fan-Out, Pipelines, Subagents, and Isolation</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-03-topology</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=3</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-03-topology/combined.mp3" length="17425517" type="audio/mpeg"/>
+      <itunes:duration>0:27:25</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Verification-Driven Loops</title>
+      <description>Verifiers, Judge Panels, and the Economics of Being Right</description>
+      <itunes:subtitle>Verifiers, Judge Panels, and the Economics of Being Right</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-04-verification-driven-loops</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=4</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-04-verification-driven-loops/combined.mp3" length="17482346" type="audio/mpeg"/>
+      <itunes:duration>0:27:27</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Graph Engineering I: Building the Code Graph</title>
+      <description>Parsing, Resolution, and Incremental Indexing</description>
+      <itunes:subtitle>Parsing, Resolution, and Incremental Indexing</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-05-building-the-code-graph</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=5</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-05-building-the-code-graph/combined.mp3" length="18300058" type="audio/mpeg"/>
+      <itunes:duration>0:28:34</itunes:duration>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Graph Engineering II: Retrieval Over Graphs</title>
+      <description>Traversal, Ranking, and Where Vectors Stop Working</description>
+      <itunes:subtitle>Traversal, Ranking, and Where Vectors Stop Working</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-06-retrieval-over-graphs</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=6</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-06-retrieval-over-graphs/combined.mp3" length="18734875" type="audio/mpeg"/>
+      <itunes:duration>0:29:25</itunes:duration>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Harness Design I: Tools, Permissions, Sandboxes</title>
+      <description>The Interface Between a Model and the World</description>
+      <itunes:subtitle>The Interface Between a Model and the World</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-07-tools-permissions-sandboxes</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=7</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-07-tools-permissions-sandboxes/combined.mp3" length="17335931" type="audio/mpeg"/>
+      <itunes:duration>0:27:10</itunes:duration>
+      <itunes:episode>7</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Harness Design II: Observability, Evals, Economics</title>
+      <description>Traces, Replay, Regression Gates, and Cost per Resolved Task</description>
+      <itunes:subtitle>Traces, Replay, Regression Gates, and Cost per Resolved Task</itunes:subtitle>
+      <guid isPermaLink="false">control-loop/episode-08-observability-evals-economics</guid>
+      <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=8</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-08-observability-evals-economics/combined.mp3" length="16638791" type="audio/mpeg"/>
+      <itunes:duration>0:26:10</itunes:duration>
+      <itunes:episode>8</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

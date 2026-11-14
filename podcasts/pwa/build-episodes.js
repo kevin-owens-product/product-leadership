@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 import { runValidation } from './cli/validate.js';
 
@@ -107,6 +108,62 @@ function estimateDurationSeconds(markdown) {
     return Math.max(60, Math.round((words / ESTIMATED_WORDS_PER_MINUTE) * 60 + cueSeconds));
 }
 
+// Transcripts are served as standalone files and fetched when an episode is
+// opened, so the catalog that every launch downloads stays small. Wipe the
+// previous copy so removed episodes don't linger.
+const transcriptsDistDir = path.join(distDir, 'transcripts');
+fs.rmSync(transcriptsDistDir, { recursive: true, force: true });
+
+// Short content hash used as a cache key: a transcript URL only changes when
+// the script does, so caches stay valid across deploys that don't touch it.
+function contentHash(text) {
+    return createHash('sha1').update(text).digest('hex').slice(0, 12);
+}
+
+// When an episode first landed in the repo. Feeds use it as pubDate. One git
+// pass maps every show file to the date it was added (the oldest add wins
+// when a file was deleted and re-added). podcast.json can override it with an
+// ISO `published` date per episode.
+const firstAddedByPath = new Map();
+try {
+    const result = spawnSync('git', ['log', '--diff-filter=A', '--name-only', '--format=@%aI', '--', '.'], {
+        cwd: showsDir,
+        encoding: 'utf8',
+        maxBuffer: 64 * 1024 * 1024
+    });
+    const top = spawnSync('git', ['rev-parse', '--show-toplevel'], { cwd: showsDir, encoding: 'utf8' });
+    if (result.status === 0 && top.status === 0) {
+        const repoRoot = top.stdout.trim();
+        let date = null;
+        for (const line of result.stdout.split('\n')) {
+            if (line.startsWith('@')) date = new Date(line.slice(1)).toISOString();
+            else if (line.trim() && date) firstAddedByPath.set(path.join(repoRoot, line.trim()), date);
+        }
+    }
+} catch {
+    // Not a git checkout: fall back to file mtimes below.
+}
+
+function firstCommitDate(filePath) {
+    const known = firstAddedByPath.get(path.resolve(filePath));
+    if (known) return known;
+    try {
+        return fs.statSync(filePath).mtime.toISOString();
+    } catch {
+        return null;
+    }
+}
+
+// Audio manifests live in pwa/audio while rendering and in the committed
+// dist/audio afterwards; read whichever exists.
+function findAudioFile(showId, basename, fileName) {
+    for (const root of [path.join(__dirname, 'audio'), path.join(distDir, 'audio')]) {
+        const candidate = path.join(root, showId, basename, fileName);
+        if (fs.existsSync(candidate)) return candidate;
+    }
+    return null;
+}
+
 // Find all podcasts
 const podcasts = [];
 
@@ -147,17 +204,14 @@ if (fs.existsSync(showsDir)) {
                 if (fs.existsSync(epPath)) {
                     console.log(`   ✓ ${epMeta.file}`);
                     const rawContent = fs.readFileSync(epPath, 'utf8');
-                    let content = rawContent;
-                    // Escape for template literal
-                    content = content.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
 
                     // Pull total duration (seconds) from the audio manifest if it
                     // exists, so episode cards can show the real length instead
                     // of a hardcoded estimate.
                     const basename = epMeta.file.replace(/\.md$/, '');
-                    const audioManifestPath = path.join(__dirname, 'audio', manifest.id, basename, 'manifest.json');
+                    const audioManifestPath = findAudioFile(manifest.id, basename, 'manifest.json');
                     let durationSeconds = null;
-                    if (fs.existsSync(audioManifestPath)) {
+                    if (audioManifestPath) {
                         try {
                             const items = JSON.parse(fs.readFileSync(audioManifestPath, 'utf8'));
                             if (Array.isArray(items) && items.length > 0) {
@@ -171,13 +225,23 @@ if (fs.existsSync(showsDir)) {
                         }
                     }
 
+                    const transcriptDir = path.join(transcriptsDistDir, manifest.id);
+                    fs.mkdirSync(transcriptDir, { recursive: true });
+                    fs.writeFileSync(path.join(transcriptDir, epMeta.file), rawContent);
+
                     const episodeRecord = {
                         id: epMeta.id,
                         file: epMeta.file,
                         title: epMeta.title,
                         subtitle: epMeta.subtitle,
-                        content: content
+                        transcriptHash: contentHash(rawContent)
                     };
+                    const published = typeof epMeta.published === 'string' && !Number.isNaN(Date.parse(epMeta.published))
+                        ? new Date(epMeta.published).toISOString()
+                        : firstCommitDate(epPath);
+                    if (published) episodeRecord.published = published;
+                    const combinedPath = findAudioFile(manifest.id, basename, 'combined.mp3');
+                    if (combinedPath) episodeRecord.audioBytes = fs.statSync(combinedPath).size;
                     if (Number.isInteger(epMeta.season)) episodeRecord.season = epMeta.season;
                     if (durationSeconds == null) durationSeconds = estimateDurationSeconds(rawContent);
                     if (durationSeconds != null) episodeRecord.durationSeconds = durationSeconds;
@@ -196,13 +260,87 @@ if (podcasts.length === 0) {
     console.log('\n⚠️  No podcasts found. Create shows/<name>/podcast.json to add podcasts.');
 }
 
-// Generate podcasts.js
-const podcastsJs = `// Auto-generated podcast data - ${new Date().toISOString()}
-window.PODCASTS = ${JSON.stringify(podcasts, null, 2)};
-`;
+// === Podcast feeds ===
+//
+// One RSS feed per show so episodes can be followed in Apple Podcasts,
+// Overcast, Pocket Casts or CarPlay. Each enclosure is the episode's existing
+// combined.mp3. itunes:block keeps the feeds out of public directories: they
+// work for anyone with the link, but nobody finds them by searching.
+const SITE_URL = (process.env.SITE_URL || 'https://productleader.netlify.app').replace(/\/+$/, '');
+const feedsDistDir = path.join(distDir, 'feeds');
+fs.rmSync(feedsDistDir, { recursive: true, force: true });
+fs.mkdirSync(feedsDistDir, { recursive: true });
 
-fs.writeFileSync(path.join(distDir, 'podcasts.js'), podcastsJs);
+function xmlEscape(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+}
+
+function itunesDuration(seconds) {
+    const total = Math.max(0, Math.round(seconds));
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const sec = total % 60;
+    return `${h}:${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+}
+
+let feedCount = 0;
+for (const podcast of podcasts) {
+    const items = podcast.episodes
+        .filter((ep) => Number.isFinite(ep.audioBytes) && ep.audioBytes > 0)
+        .map((ep) => {
+            const basename = ep.file.replace(/\.md$/, '');
+            const audioUrl = `${SITE_URL}/audio/${encodeURIComponent(podcast.id)}/${encodeURIComponent(basename)}/combined.mp3`;
+            const link = `${SITE_URL}/?podcast=${encodeURIComponent(podcast.id)}&episode=${encodeURIComponent(ep.id)}`;
+            const season = Number.isInteger(ep.season) ? `\n      <itunes:season>${ep.season}</itunes:season>` : '';
+            const pubDate = ep.published ? new Date(ep.published).toUTCString() : new Date().toUTCString();
+            return `    <item>
+      <title>${xmlEscape(ep.title)}</title>
+      <description>${xmlEscape(ep.subtitle || ep.title)}</description>
+      <itunes:subtitle>${xmlEscape(ep.subtitle || '')}</itunes:subtitle>
+      <guid isPermaLink="false">${xmlEscape(`${podcast.id}/${basename}`)}</guid>
+      <link>${xmlEscape(link)}</link>
+      <pubDate>${pubDate}</pubDate>
+      <enclosure url="${xmlEscape(audioUrl)}" length="${ep.audioBytes}" type="audio/mpeg"/>${Number.isFinite(ep.durationSeconds) ? `\n      <itunes:duration>${itunesDuration(ep.durationSeconds)}</itunes:duration>` : ''}${season}
+      <itunes:episode>${ep.id}</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>`;
+        });
+    if (items.length === 0) continue;
+    const showLink = `${SITE_URL}/?podcast=${encodeURIComponent(podcast.id)}`;
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>${xmlEscape(podcast.title)}</title>
+    <link>${xmlEscape(showLink)}</link>
+    <atom:link href="${xmlEscape(`${SITE_URL}/feeds/${podcast.id}.xml`)}" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>${xmlEscape(podcast.description || podcast.subtitle || podcast.title)}</description>
+    <itunes:subtitle>${xmlEscape(podcast.subtitle || '')}</itunes:subtitle>
+    <itunes:author>${xmlEscape(podcast.author)}</itunes:author>
+    <itunes:summary>${xmlEscape(podcast.description || podcast.subtitle || '')}</itunes:summary>
+    <itunes:image href="${SITE_URL}/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>${podcast.seasons ? 'serial' : 'episodic'}</itunes:type>
+    <itunes:block>yes</itunes:block>
+${items.join('\n')}
+  </channel>
+</rss>
+`;
+    fs.writeFileSync(path.join(feedsDistDir, `${podcast.id}.xml`), xml);
+    podcast.feedUrl = `feeds/${podcast.id}.xml`;
+    feedCount += 1;
+}
+// Generate podcasts.js (compact: it is the one file every launch downloads).
+fs.writeFileSync(path.join(distDir, 'podcasts.js'), `// Auto-generated podcast data - ${new Date().toISOString()}
+window.PODCASTS = ${JSON.stringify(podcasts)};
+`);
 console.log('\n✓ Generated: podcasts.js');
+console.log(`✓ Generated: ${feedCount} podcast feeds in feeds/`);
 
 // Generate build version metadata for deploy artifacts.
 const sourceVersionPath = path.join(__dirname, 'version.json');
@@ -374,7 +512,7 @@ if (fs.existsSync(audioSrcDir)) {
 // gets a fresh cache name and pre-fetches a self-consistent set of assets.
 function listAppShellFiles(dir) {
     const out = [];
-    const skipDirs = new Set(['audio']);
+    const skipDirs = new Set(['audio', 'transcripts', 'feeds']);
     const skipFiles = new Set(['sw.js', 'version.json', '_headers', 'netlify.toml', 'README.md', '.DS_Store']);
     function walk(absolute, relative) {
         for (const entry of fs.readdirSync(absolute, { withFileTypes: true })) {

@@ -8,58 +8,60 @@ import {
     STATE_SCHEMA_VERSION,
     loadAppState,
     saveAppState
-} from './state/storage.js?v=2.6.3%2B20261114T225325Z';
-import { bindNavTabs } from './ui/tabs.js?v=2.6.3%2B20261114T225325Z';
-import { registerServiceWorker } from './sw/register-sw.js?v=2.6.3%2B20261114T225325Z';
-import { createPlaybackSessionController } from './playback/controller.js?v=2.6.3%2B20261114T225325Z';
-import { createSpeechPlayers } from './playback/audio.js?v=2.6.3%2B20261114T225325Z';
-import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.6.3%2B20261114T225325Z';
-import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.6.3%2B20261114T225325Z';
-import { createRepeatSkipper } from './ui/long-press.js?v=2.6.3%2B20261114T225325Z';
-import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.6.3%2B20261114T225325Z';
-import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.6.3%2B20261114T225325Z';
-import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.6.3%2B20261114T225325Z';
-import { createToastManager } from './ui/toast.js?v=2.6.3%2B20261114T225325Z';
+} from './state/storage.js?v=2.7.0%2B20261114T232640Z';
+import { bindNavTabs } from './ui/tabs.js?v=2.7.0%2B20261114T232640Z';
+import { registerServiceWorker } from './sw/register-sw.js?v=2.7.0%2B20261114T232640Z';
+import { createPlaybackSessionController } from './playback/controller.js?v=2.7.0%2B20261114T232640Z';
+import { createSpeechPlayers } from './playback/audio.js?v=2.7.0%2B20261114T232640Z';
+import { parseChaptersFromContent, extractEpisodeDurationMinutes } from './playback/chapters.js?v=2.7.0%2B20261114T232640Z';
+import { createScrubber, bufferedEndFraction } from './ui/scrubber.js?v=2.7.0%2B20261114T232640Z';
+import { createRepeatSkipper } from './ui/long-press.js?v=2.7.0%2B20261114T232640Z';
+import { getShowSpeed, setShowSpeed, clampSpeed, SPEED_PREFS_KEY } from './state/speed-prefs.js?v=2.7.0%2B20261114T232640Z';
+import { transitionViews, morphViews, spawnRipple, showSkipFlyout, prefersReducedMotion } from './ui/motion.js?v=2.7.0%2B20261114T232640Z';
+import { createNowPlayingVisualizer } from './playback/visualizer.js?v=2.7.0%2B20261114T232640Z';
+import { createToastManager } from './ui/toast.js?v=2.7.0%2B20261114T232640Z';
 import {
     VERSION_STORAGE_KEY,
     checkForUpdates
-} from './app/version.js?v=2.6.3%2B20261114T225325Z';
-import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.6.3%2B20261114T225325Z';
-import { createWakeLockManager } from './app/wake-lock.js?v=2.6.3%2B20261114T225325Z';
+} from './app/version.js?v=2.7.0%2B20261114T232640Z';
+import { createPodcastsLoader, getPodcasts } from './app/podcasts-loader.js?v=2.7.0%2B20261114T232640Z';
+import { createWakeLockManager } from './app/wake-lock.js?v=2.7.0%2B20261114T232640Z';
 import {
     SPEAKER_LINE_RE,
     parseSpeakerVoiceMap,
     parseMarkdown,
     alignChapterLineIndexes
-} from './parse/dialogue.js?v=2.6.3%2B20261114T225325Z';
+} from './parse/dialogue.js?v=2.7.0%2B20261114T232640Z';
 import {
     withCacheKey,
     epKeyOf,
     loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
-} from './playback/manifest.js?v=2.6.3%2B20261114T225325Z';
-import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js?v=2.6.3%2B20261114T225325Z';
-import { createMediaSessionController } from './playback/media-session.js?v=2.6.3%2B20261114T225325Z';
-import { createSleepController } from './playback/sleep-controller.js?v=2.6.3%2B20261114T225325Z';
-import { findAdjacentEpisode, findNextUp } from './state/queue-next.js?v=2.6.3%2B20261114T225325Z';
-import { formatClock } from './ui/format.js?v=2.6.3%2B20261114T225325Z';
-import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.6.3%2B20261114T225325Z';
-import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.6.3%2B20261114T225325Z';
-import { initModalA11y } from './ui/modal-a11y.js?v=2.6.3%2B20261114T225325Z';
-import { createMiniPlayer } from './ui/mini-player.js?v=2.6.3%2B20261114T225325Z';
-import { createSettingsPanel } from './ui/settings-panel.js?v=2.6.3%2B20261114T225325Z';
-import { createStatsTracker } from './state/stats.js?v=2.6.3%2B20261114T225325Z';
-import { createQueuePanel } from './ui/queue-panel.js?v=2.6.3%2B20261114T225325Z';
-import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.6.3%2B20261114T225325Z';
-import { createChaptersPanel } from './ui/chapters-panel.js?v=2.6.3%2B20261114T225325Z';
-import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.6.3%2B20261114T225325Z';
-import { createLibrary } from './ui/library.js?v=2.6.3%2B20261114T225325Z';
-import { createSharePanel } from './ui/share-panel.js?v=2.6.3%2B20261114T225325Z';
-import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.6.3%2B20261114T225325Z';
-import { initSwipeGestures } from './ui/swipe.js?v=2.6.3%2B20261114T225325Z';
-import { initBackNav, backTarget, performBack } from './app/back-nav.js?v=2.6.3%2B20261114T225325Z';
-import { classifyContinuousAudioFailure } from './playback/audio-errors.js?v=2.6.3%2B20261114T225325Z';
+} from './playback/manifest.js?v=2.7.0%2B20261114T232640Z';
+import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js?v=2.7.0%2B20261114T232640Z';
+import { ensureEpisodeContent } from './app/transcripts.js?v=2.7.0%2B20261114T232640Z';
+import { createNewEpisodeTracker } from './state/new-episodes.js?v=2.7.0%2B20261114T232640Z';
+import { createMediaSessionController } from './playback/media-session.js?v=2.7.0%2B20261114T232640Z';
+import { createSleepController } from './playback/sleep-controller.js?v=2.7.0%2B20261114T232640Z';
+import { findAdjacentEpisode, findNextUp } from './state/queue-next.js?v=2.7.0%2B20261114T232640Z';
+import { formatClock } from './ui/format.js?v=2.7.0%2B20261114T232640Z';
+import { generatePodcastArtwork, applyShowPalette, clearShowPalette } from './ui/artwork.js?v=2.7.0%2B20261114T232640Z';
+import { activateCardWithKeyboard, updateToggleButton, setPlayButtonState, setPressedState } from './ui/dom.js?v=2.7.0%2B20261114T232640Z';
+import { initModalA11y } from './ui/modal-a11y.js?v=2.7.0%2B20261114T232640Z';
+import { createMiniPlayer } from './ui/mini-player.js?v=2.7.0%2B20261114T232640Z';
+import { createSettingsPanel } from './ui/settings-panel.js?v=2.7.0%2B20261114T232640Z';
+import { createStatsTracker } from './state/stats.js?v=2.7.0%2B20261114T232640Z';
+import { createQueuePanel } from './ui/queue-panel.js?v=2.7.0%2B20261114T232640Z';
+import { createBookmarksPanel } from './ui/bookmarks-panel.js?v=2.7.0%2B20261114T232640Z';
+import { createChaptersPanel } from './ui/chapters-panel.js?v=2.7.0%2B20261114T232640Z';
+import { createTranscriptPanel } from './ui/transcript-panel.js?v=2.7.0%2B20261114T232640Z';
+import { createLibrary } from './ui/library.js?v=2.7.0%2B20261114T232640Z';
+import { createSharePanel } from './ui/share-panel.js?v=2.7.0%2B20261114T232640Z';
+import { initKeyboardShortcuts } from './ui/shortcuts.js?v=2.7.0%2B20261114T232640Z';
+import { initSwipeGestures } from './ui/swipe.js?v=2.7.0%2B20261114T232640Z';
+import { initBackNav, backTarget, performBack } from './app/back-nav.js?v=2.7.0%2B20261114T232640Z';
+import { classifyContinuousAudioFailure } from './playback/audio-errors.js?v=2.7.0%2B20261114T232640Z';
 
 // Queue-able notifications with retry actions — the user-visible surface for
 // audio load failures, offline-download failures, and app updates.
@@ -143,6 +145,8 @@ const stats = createStatsTracker({
     isListening: () => isPlaying && !isPaused
 });
 
+const newEpisodes = createNewEpisodeTracker();
+
 const downloads = createDownloadsManager({
     toasts,
     setStatus,
@@ -171,13 +175,20 @@ const library = createLibrary({
         });
     },
     downloads,
+    newEpisodes,
+    toasts,
     onOpenPodcast: (podcast, sourceArt) => openPodcast(podcast, { sourceArt }),
-    onOpenEpisode: (episode) => { void openEpisode(episode); }
+    onOpenEpisode: (episode) => { void openEpisode(episode); },
+    onResumeEpisode: (podcast, episode) => {
+        openPodcast(podcast);
+        setTimeout(() => openEpisode(episode, { promptResume: true }), 100);
+    }
 });
 
 const podcastsLoader = createPodcastsLoader({
     toasts,
     onLoaded: () => {
+        newEpisodes.syncCatalog(getPodcasts());
         library.renderPodcastsList();
         // First paint of the library: give the home list its staggered
         // entrance (later showView calls stamp this themselves).
@@ -659,20 +670,31 @@ async function openEpisode(episode, options = {}) {
     const requestId = ++episodeOpenRequest;
     await stopPlayback({ preserveOpenRequest: true });
     if (requestId !== episodeOpenRequest) return false;
-    currentEpisode = episode;
-    playerPodcast = requestedPodcast;
-    library.selectSeasonForEpisode(requestedPodcast, episode);
-    applySpeechRate(getShowSpeed(requestedPodcast.id, speechRate), { persistShow: false, save: false });
-    const speakerVoiceMap = parseSpeakerVoiceMap(episode.content);
-    dialogueLines = parseMarkdown(episode.content, speakerVoiceMap);
-    chapters = parseChapters(episode.content);
-    alignChapterLineIndexes(chapters, dialogueLines);
-
     const podcastId = requestedPodcast.id;
     const episodeFile = episode.file || episode.filename || null;
-    const audioManifest = prefetchedAudioManifest
-        || await loadSupertonicAudioManifest(podcastId, episodeFile);
+    // The script and the audio manifest load in parallel; the catalog only
+    // carries metadata, so the transcript arrives here on first open.
+    const [content, audioManifest] = await Promise.all([
+        ensureEpisodeContent(podcastId, episode),
+        prefetchedAudioManifest || loadSupertonicAudioManifest(podcastId, episodeFile)
+    ]);
     if (requestId !== episodeOpenRequest) return false;
+    if (typeof content !== 'string') {
+        toasts.show(`Couldn’t load "${episode.title}". Check your connection.`, {
+            actionLabel: 'Retry',
+            onAction: () => { void openEpisode(episode, options); }
+        });
+        return false;
+    }
+    currentEpisode = episode;
+    playerPodcast = requestedPodcast;
+    newEpisodes.markOpened(requestedPodcast, episode);
+    library.selectSeasonForEpisode(requestedPodcast, episode);
+    applySpeechRate(getShowSpeed(requestedPodcast.id, speechRate), { persistShow: false, save: false });
+    const speakerVoiceMap = parseSpeakerVoiceMap(content);
+    dialogueLines = parseMarkdown(content, speakerVoiceMap);
+    chapters = parseChapters(content);
+    alignChapterLineIndexes(chapters, dialogueLines);
     lineOffsets = [];
     episodeAudioDuration = 0;
     lastPersistedLine = -1;

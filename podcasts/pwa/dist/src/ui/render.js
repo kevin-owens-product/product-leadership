@@ -1,5 +1,5 @@
-import { escapeHtml } from '../security/sanitize.js?v=2.6.3%2B20261114T225325Z';
-import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.6.3%2B20261114T225325Z';
+import { escapeHtml } from '../security/sanitize.js?v=2.7.0%2B20261114T232640Z';
+import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.7.0%2B20261114T232640Z';
 
 // Hand-drawn inline SVG glyphs (1.8px round strokes — the shared .icon
 // language from player.css). No emoji glyphs in list chrome.
@@ -31,7 +31,7 @@ export function setStaticHtml(el, html) {
   el.innerHTML = html;
 }
 
-export function renderPodcastCard(card, podcast, epCount, avgProgress) {
+export function renderPodcastCard(card, podcast, epCount, avgProgress, { newCount = 0 } = {}) {
   let totalSeconds = 0;
   let haveDurations = false;
   if (Array.isArray(podcast.episodes)) {
@@ -62,7 +62,7 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
     <div class="podcast-card-header">
       ${artTile}
       <div class="podcast-info">
-        <div class="podcast-title">${escapeHtml(podcast.title)}</div>
+        <div class="podcast-title">${escapeHtml(podcast.title)}${newCount > 0 ? ` <span class="podcast-new-badge">${newCount} new</span>` : ''}</div>
         <div class="podcast-subtitle">${escapeHtml(podcast.subtitle)}</div>
         <div class="podcast-meta${seasonCount ? ' multi-season' : ''}">
           <span class="podcast-meta-summary">${seasonCount ? `${seasonCount} seasons · ` : ''}${epCount} episodes</span>
@@ -77,7 +77,7 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress) {
   `;
 }
 
-export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState, { seasonNumber = null } = {}) {
+export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState, { seasonNumber = null, isNew = false } = {}) {
   const state = downloadState || 'none';
   const downloadGlyph = state === 'downloaded' ? ICON_CHECK : ICON_DOWNLOAD;
   const downloadTitle = state === 'downloaded'
@@ -98,6 +98,8 @@ export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, do
     ? `<span class="ep-status completed">${ICON_CHECK_SMALL}Played</span>`
     : inProgress
     ? `<span class="ep-status in-progress">${progress.percent}%</span>`
+    : isNew
+    ? '<span class="ep-status new">New</span>'
     : '';
   card.innerHTML = `
     <div class="ep-header">
@@ -112,6 +114,26 @@ export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, do
       <span class="ep-mini-progress"${inProgress ? '' : ' hidden'} aria-hidden="true"><span class="ep-progress-bar" style="width: ${progress.percent}%"></span></span>
       ${remainingLabel ? `<span class="ep-remaining">${remainingLabel}</span>` : ''}
     </div>
+  `;
+}
+
+// One tile in the home screen's "Continue listening" row.
+export function renderContinueCard(card, podcast, episode, percent) {
+  const artUrl = generatePodcastArtwork(podcast);
+  const remaining = Number.isFinite(episode.durationSeconds)
+    ? formatDurationLabel(Math.round(episode.durationSeconds * (100 - percent) / 100))
+    : '';
+  if (card?.style?.setProperty) {
+    card.style.setProperty('--card-hue', String(getShowIdentity(podcast).hue));
+  }
+  card.innerHTML = `
+    ${artUrl ? `<img class="continue-card-art" src="${artUrl}" alt="" loading="lazy">` : `<div class="continue-card-art">${escapeHtml(podcast.icon || '🎙️')}</div>`}
+    <div class="continue-card-info">
+      <div class="continue-card-show">${escapeHtml(podcast.title)}</div>
+      <div class="continue-card-title">${escapeHtml(episode.title)}</div>
+      <div class="continue-card-meta">${remaining ? `${remaining} left` : `${percent}%`}</div>
+    </div>
+    <div class="continue-card-bar" aria-hidden="true"><span style="width: ${percent}%"></span></div>
   `;
 }
 

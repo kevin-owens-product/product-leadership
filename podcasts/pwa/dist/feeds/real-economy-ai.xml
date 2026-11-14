@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AI in the Real Economy</title>
+    <link>https://productleader.netlify.app/?podcast=real-economy-ai</link>
+    <atom:link href="https://productleader.netlify.app/feeds/real-economy-ai.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>Two hosts look at where AI actually moves EBITDA in non-software portfolio companies: field and business services, healthcare services and other regulated work, manufacturing and consumer franchise systems, plus a 100-day plan a fund can run. Built from public sources; not legal advice.</description>
+    <itunes:subtitle>AI value creation in the businesses that make, fix, deliver and care for things</itunes:subtitle>
+    <itunes:author>Maya &amp; Grant</itunes:author>
+    <itunes:summary>Two hosts look at where AI actually moves EBITDA in non-software portfolio companies: field and business services, healthcare services and other regulated work, manufacturing and consumer franchise systems, plus a 100-day plan a fund can run. Built from public sources; not legal advice.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>The Other Ninety Percent</title>
+      <description>Why AI Value in Private Equity Lives Outside Software</description>
+      <itunes:subtitle>Why AI Value in Private Equity Lives Outside Software</itunes:subtitle>
+      <guid isPermaLink="false">real-economy-ai/episode-01-the-other-ninety-percent</guid>
+      <link>https://productleader.netlify.app/?podcast=real-economy-ai&amp;episode=1</link>
+      <pubDate>Sat, 14 Nov 2026 14:54:52 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/real-economy-ai/episode-01-the-other-ninety-percent/combined.mp3" length="24921736" type="audio/mpeg"/>
+      <itunes:duration>0:48:33</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Answer Every Call</title>
+      <description>Field Services, Business Services, and the AI-Enabled Roll-Up</description>
+      <itunes:subtitle>Field Services, Business Services, and the AI-Enabled Roll-Up</itunes:subtitle>
+      <guid isPermaLink="false">real-economy-ai/episode-02-answer-every-call</guid>
+      <link>https://productleader.netlify.app/?podcast=real-economy-ai&amp;episode=2</link>
+      <pubDate>Sat, 14 Nov 2026 14:54:52 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/real-economy-ai/episode-02-answer-every-call/combined.mp3" length="24647338" type="audio/mpeg"/>
+      <itunes:duration>0:48:17</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>When the Paperwork Is the Product</title>
+      <description>Healthcare Services and Other Regulated Work</description>
+      <itunes:subtitle>Healthcare Services and Other Regulated Work</itunes:subtitle>
+      <guid isPermaLink="false">real-economy-ai/episode-03-when-the-paperwork-is-the-product</guid>
+      <link>https://productleader.netlify.app/?podcast=real-economy-ai&amp;episode=3</link>
+      <pubDate>Sat, 14 Nov 2026 14:54:52 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/real-economy-ai/episode-03-when-the-paperwork-is-the-product/combined.mp3" length="26214557" type="audio/mpeg"/>
+      <itunes:duration>0:46:37</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Factories, Franchises, and the 100-Day Plan</title>
+      <description>Industrial and Consumer AI, Data Rights, and a Plan a Fund Can Run</description>
+      <itunes:subtitle>Industrial and Consumer AI, Data Rights, and a Plan a Fund Can Run</itunes:subtitle>
+      <guid isPermaLink="false">real-economy-ai/episode-04-factories-franchises-and-the-100-day-plan</guid>
+      <link>https://productleader.netlify.app/?podcast=real-economy-ai&amp;episode=4</link>
+      <pubDate>Sat, 14 Nov 2026 14:54:52 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/real-economy-ai/episode-04-factories-franchises-and-the-100-day-plan/combined.mp3" length="25587665" type="audio/mpeg"/>
+      <itunes:duration>0:49:58</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

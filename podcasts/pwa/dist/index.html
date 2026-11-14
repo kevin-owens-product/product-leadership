@@ -16,9 +16,9 @@
     <!-- App styles, split by concern (was one inline <style> block).
          Load order matters: base -> player -> components preserves the
          original cascade. All three are precached in the SW app shell. -->
-    <link rel="stylesheet" href="styles/base.css?v=2.6.3%2B20261114T225325Z">
-    <link rel="stylesheet" href="styles/player.css?v=2.6.3%2B20261114T225325Z">
-    <link rel="stylesheet" href="styles/components.css?v=2.6.3%2B20261114T225325Z">
+    <link rel="stylesheet" href="styles/base.css?v=2.7.0%2B20261114T232640Z">
+    <link rel="stylesheet" href="styles/player.css?v=2.7.0%2B20261114T232640Z">
+    <link rel="stylesheet" href="styles/components.css?v=2.7.0%2B20261114T232640Z">
 </head>
 <body>
     <!-- Podcasts Home View -->
@@ -43,6 +43,11 @@
                 New content available! <button type="button" id="apply-update-btn">Update Now</button>
             </div>
         </header>
+
+        <section class="continue-shelf" id="continue-listening" aria-labelledby="continue-listening-heading" hidden>
+            <h2 class="continue-shelf-heading" id="continue-listening-heading">Continue listening</h2>
+            <div class="continue-shelf-row" id="continue-listening-row"></div>
+        </section>
 
         <div class="search-container">
             <input type="text" class="search-input" id="podcast-search" placeholder="Search podcasts..." aria-label="Search podcasts">
@@ -126,6 +131,17 @@
                 <span class="season-continue-meta" id="continue-episode-meta"></span>
             </button>
         </section>
+
+        <div class="bulk-actions" id="bulk-actions" hidden>
+            <button class="bulk-btn" id="bulk-download-btn" type="button">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+                <span id="bulk-download-label">Download season</span>
+            </button>
+            <button class="bulk-btn" id="feed-btn" type="button" hidden>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 11a8 8 0 0 1 8 8"/><path d="M5 5a14 14 0 0 1 14 14"/><circle cx="6" cy="18" r="1.5"/></svg>
+                <span>Listen in a podcast app</span>
+            </button>
+        </div>
 
         <div class="search-container">
             <input type="text" class="search-input" id="episode-search" placeholder="Search episodes..." aria-label="Search episodes">
@@ -654,6 +670,6 @@
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.6.3%2B20261114T225325Z"></script>
+    <script type="module" src="./src/main.js?v=2.7.0%2B20261114T232640Z"></script>
 </body>
 </html>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Agentic Coding Frontier</title>
+    <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier</link>
+    <atom:link href="https://productleader.netlify.app/feeds/agentic-coding-frontier.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>A practical deep dive into the frontier of AI agents, multi-agent systems, and agentic coding techniques. Learn how elite teams design, evaluate, and scale autonomous development workflows from idea to production.</description>
+    <itunes:subtitle>Bleeding-Edge AI Agents and Autonomous Software Workflows</itunes:subtitle>
+    <itunes:author>Alex &amp; Riley</itunes:author>
+    <itunes:summary>A practical deep dive into the frontier of AI agents, multi-agent systems, and agentic coding techniques. Learn how elite teams design, evaluate, and scale autonomous development workflows from idea to production.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>serial</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>Agentic Coding Foundations</title>
+      <description>From Chat Assistants to Autonomous Software Operators</description>
+      <itunes:subtitle>From Chat Assistants to Autonomous Software Operators</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-01-agentic-coding-foundations</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=1</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-01-agentic-coding-foundations/combined.mp3" length="31762157" type="audio/mpeg"/>
+      <itunes:duration>0:50:12</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Tools, MCP, and Orchestration</title>
+      <description>How Agents Use External Systems Reliably</description>
+      <itunes:subtitle>How Agents Use External Systems Reliably</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-02-tools-mcp-orchestration</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=2</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-02-tools-mcp-orchestration/combined.mp3" length="28410911" type="audio/mpeg"/>
+      <itunes:duration>0:45:02</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Issue-to-PR Agentic Workflow</title>
+      <description>Designing End-to-End Autonomous Development Loops</description>
+      <itunes:subtitle>Designing End-to-End Autonomous Development Loops</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-03-issue-to-pr-workflow</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=3</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-03-issue-to-pr-workflow/combined.mp3" length="26316595" type="audio/mpeg"/>
+      <itunes:duration>0:42:37</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Evals, Guardrails, and Reliability</title>
+      <description>Shipping Agentic Systems Without Losing Control</description>
+      <itunes:subtitle>Shipping Agentic Systems Without Losing Control</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-04-evals-guardrails-reliability</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=4</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-04-evals-guardrails-reliability/combined.mp3" length="32711955" type="audio/mpeg"/>
+      <itunes:duration>0:52:25</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Memory, Context, and Long-Horizon Execution</title>
+      <description>Making Agents Stateful, Consistent, and Useful Over Time</description>
+      <itunes:subtitle>Making Agents Stateful, Consistent, and Useful Over Time</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-05-memory-context-long-horizon</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=5</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-05-memory-context-long-horizon/combined.mp3" length="28241684" type="audio/mpeg"/>
+      <itunes:duration>0:45:10</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Frontier Trends and the New Engineering Operating Model</title>
+      <description>Where Agentic Coding Goes Next</description>
+      <itunes:subtitle>Where Agentic Coding Goes Next</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-06-frontier-trends-and-operating-model</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=6</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-06-frontier-trends-and-operating-model/combined.mp3" length="28162571" type="audio/mpeg"/>
+      <itunes:duration>0:44:33</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Model Map, Autumn 2026</title>
+      <description>Who Shipped What, and How to Choose</description>
+      <itunes:subtitle>Who Shipped What, and How to Choose</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-07-the-model-map-autumn-2026</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=7</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-07-the-model-map-autumn-2026/combined.mp3" length="27095713" type="audio/mpeg"/>
+      <itunes:duration>0:47:02</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>7</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>MCP Goes Stateless</title>
+      <description>The July Spec, Tasks, Apps, and the Standards Moving to a Foundation</description>
+      <itunes:subtitle>The July Spec, Tasks, Apps, and the Standards Moving to a Foundation</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-08-mcp-goes-stateless</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=8</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-08-mcp-goes-stateless/combined.mp3" length="26844105" type="audio/mpeg"/>
+      <itunes:duration>0:46:38</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>8</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Capability Behind a Gate</title>
+      <description>Safeguarded Models, a Cancelled Launch, and Agents That Do Security Work</description>
+      <itunes:subtitle>Safeguarded Models, a Cancelled Launch, and Agents That Do Security Work</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-09-capability-behind-a-gate</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=9</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-09-capability-behind-a-gate/combined.mp3" length="26947360" type="audio/mpeg"/>
+      <itunes:duration>0:46:44</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>9</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Agents With Hands</title>
+      <description>Computer Use, Real-Time Voice, Background Work, and Our Predictions Revisited</description>
+      <itunes:subtitle>Computer Use, Real-Time Voice, Background Work, and Our Predictions Revisited</itunes:subtitle>
+      <guid isPermaLink="false">agentic-coding-frontier/episode-10-agents-with-hands</guid>
+      <link>https://productleader.netlify.app/?podcast=agentic-coding-frontier&amp;episode=10</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/agentic-coding-frontier/episode-10-agents-with-hands/combined.mp3" length="25922065" type="audio/mpeg"/>
+      <itunes:duration>0:45:06</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>10</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

@@ -141,3 +141,18 @@ export function getSeasonListeningAction({ podcast, seasons, selectedSeason, sta
 
   return { kind: 'complete', episode: null, season: selected };
 }
+
+// Half-finished episodes across every show, most recently played first — the
+// home screen's "Continue listening" row.
+export function getContinueListening(podcasts, state = {}, limit = 6) {
+  const items = [];
+  for (const podcast of Array.isArray(podcasts) ? podcasts : []) {
+    for (const episode of podcast.episodes || []) {
+      const progress = episodeProgress(state, podcast.id, episode);
+      if (progress.percent <= 0 || progress.percent >= 98) continue;
+      items.push({ podcast, episode, percent: progress.percent, timestamp: progress.timestamp });
+    }
+  }
+  items.sort((a, b) => b.timestamp - a.timestamp);
+  return items.slice(0, Math.max(0, limit));
+}

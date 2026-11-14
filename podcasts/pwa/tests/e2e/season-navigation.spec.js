@@ -15,7 +15,6 @@ async function visibleEpisodeIds(page) {
 }
 
 for (const show of [
-  { id: 'ap-finance-mastery', seasonOne: [1, 10], seasonTwo: [11, 20], count: 10 },
   { id: 'operator-mode', seasonOne: [1, 8], seasonTwo: [9, 16], count: 8 }
 ]) {
   test(`${show.id} renders and remembers explicit seasons`, async ({ page }) => {
@@ -51,14 +50,14 @@ test('single-season shows keep the flat list without season chrome', async ({ pa
 });
 
 test('deep-linked episode wins and Back returns to its season', async ({ page }) => {
-  await page.goto('/?podcast=ap-finance-mastery&episode=20&season=1', { waitUntil: 'domcontentloaded' });
+  await page.goto('/?podcast=operator-mode&episode=16&season=1', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#player-view')).toHaveClass(/active/);
-  await expect(page.locator('#player-episode-title')).toHaveText('Defend the CFO Return');
+  await expect(page.locator('#player-episode-title')).toHaveText('Admit the Thesis Broke');
   await page.locator('#back-to-list').click();
   await expect(page.locator('.season-tab[data-season="2"]')).toHaveAttribute('aria-selected', 'true');
   const ids = await visibleEpisodeIds(page);
-  expect(ids[0]).toBe(11);
-  expect(ids.at(-1)).toBe(20);
+  expect(ids[0]).toBe(9);
+  expect(ids.at(-1)).toBe(16);
 });
 
 test('season-only deep link opens the requested season list', async ({ page }) => {
@@ -76,15 +75,15 @@ test('completing Season 1 selects Season 2 and offers the next listening action'
   await page.addInitScript(() => {
     localStorage.setItem('tlu_podcast_state', JSON.stringify({
       schemaVersion: 3,
-      completedEpisodes: Array.from({ length: 10 }, (_, index) => `ap-finance-mastery-${index + 1}`),
+      completedEpisodes: Array.from({ length: 8 }, (_, index) => `operator-mode-${index + 1}`),
       episodeProgress: {},
       bookmarks: {},
       seasonSelections: {}
     }));
   });
-  await openShow(page, 'ap-finance-mastery');
+  await openShow(page, 'operator-mode');
   await expect(page.locator('.season-tab[data-season="2"]')).toHaveAttribute('aria-selected', 'true');
-  await expect(page.locator('#continue-episode')).toHaveAttribute('data-episode-id', '11');
+  await expect(page.locator('#continue-episode')).toHaveAttribute('data-episode-id', '9');
   await expect(page.locator('#continue-episode-label')).toHaveText('Start Season 2');
 });
 
@@ -92,38 +91,38 @@ test('a fully played show reports series completion', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('tlu_podcast_state', JSON.stringify({
       schemaVersion: 3,
-      completedEpisodes: Array.from({ length: 20 }, (_, index) => `ap-finance-mastery-${index + 1}`),
+      completedEpisodes: Array.from({ length: 16 }, (_, index) => `operator-mode-${index + 1}`),
       episodeProgress: {},
       bookmarks: {},
-      seasonSelections: { 'ap-finance-mastery': 2 }
+      seasonSelections: { 'operator-mode': 2 }
     }));
   });
-  await openShow(page, 'ap-finance-mastery');
+  await openShow(page, 'operator-mode');
   await expect(page.locator('#continue-episode-label')).toHaveText('Series complete');
   await expect(page.locator('#continue-episode-title')).toHaveText('All episodes played');
 });
 
 test('season search offers a deliberate all-season escape', async ({ page }) => {
-  await openShow(page, 'ap-finance-mastery');
-  await page.locator('#episode-search').fill('Defend the CFO Return');
+  await openShow(page, 'operator-mode');
+  await page.locator('#episode-search').fill('Admit the Thesis Broke');
   await expect(page.locator('.episode-card')).toHaveCount(0);
   await expect(page.locator('#search-all-seasons')).toContainText('1 more');
   await page.locator('#search-all-seasons').click();
   await expect(page.locator('.episode-card')).toHaveCount(1);
-  await expect(page.locator('.episode-card')).toHaveAttribute('data-episode-id', '20');
+  await expect(page.locator('.episode-card')).toHaveAttribute('data-episode-id', '16');
   await expect(page.locator('.season-search-scope')).toContainText('all 2 seasons');
   await expect(page.locator('.filter-btn[data-filter="all"]')).toHaveText('All 1');
 });
 
 test('season search exposes later-season matches even when the active season also matches', async ({ page }) => {
-  await openShow(page, 'ap-finance-mastery');
-  await page.locator('#episode-search').fill('cash');
+  await openShow(page, 'operator-mode');
+  await page.locator('#episode-search').fill('run');
   const selectedCount = await page.locator('.episode-card').count();
   expect(selectedCount).toBeGreaterThan(0);
   await expect(page.locator('#search-all-seasons')).toContainText(/more across all seasons/);
   await page.locator('#search-all-seasons').click();
   expect(await page.locator('.episode-card').count()).toBeGreaterThan(selectedCount);
-  await page.locator('#episode-search').fill('supplier');
+  await page.locator('#episode-search').fill('build');
   await expect(page.locator('.season-search-scope')).toContainText('all 2 seasons');
 });
 
@@ -131,21 +130,21 @@ test('season search and status filter render one scoped cross-season escape', as
   await page.addInitScript(() => {
     localStorage.setItem('tlu_podcast_state', JSON.stringify({
       schemaVersion: 3,
-      completedEpisodes: ['ap-finance-mastery-17'],
+      completedEpisodes: ['operator-mode-15'],
       episodeProgress: {},
       bookmarks: {},
       seasonSelections: {}
     }));
   });
-  await openShow(page, 'ap-finance-mastery');
-  await page.locator('#episode-search').fill('cash');
+  await openShow(page, 'operator-mode');
+  await page.locator('#episode-search').fill('build');
   await page.locator('.filter-btn[data-filter="completed"]').click();
   await expect(page.locator('#search-all-seasons')).toHaveCount(1);
   await expect(page.locator('.filter-btn[data-filter="completed"]')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('#search-all-seasons').click();
   await expect(page.locator('#search-all-seasons')).toHaveCount(0);
   await expect(page.locator('.episode-card')).toHaveCount(1);
-  await page.locator('#episode-search').fill('no such finance episode');
+  await page.locator('#episode-search').fill('no such operator episode');
   await expect(page.locator('#episode-list .no-items')).toContainText('across all 2 seasons');
 });
 
@@ -168,7 +167,7 @@ test('season navigation composes with sorting and keyboard controls', async ({ p
 
 test('mobile season controls are reachable, sticky, and do not overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await openShow(page, 'ap-finance-mastery');
+  await openShow(page, 'agentic-coding-frontier');
   const nav = page.locator('#season-nav');
   const seasonTwo = page.locator('.season-tab[data-season="2"]');
   const initial = await seasonTwo.boundingBox();

@@ -11,12 +11,96 @@
     "RILEY": "F2"
   },
   "lang": "en",
+  "seasons": [
+    {
+      "number": 1,
+      "title": "Foundations",
+      "description": "From chat assistants to autonomous software operators: tools, workflows, evals, memory and the new engineering operating model."
+    },
+    {
+      "number": 2,
+      "title": "The Late-2026 Frontier",
+      "description": "The autumn 2026 model lineup, MCP's stateless spec, safeguarded capability, and agents that use computers, voice and background jobs. Built from public sources."
+    }
+  ],
+  "kokoroVoiceMap": {
+    "ALEX": "am_michael",
+    "RILEY": "af_heart"
+  },
   "episodes": [
-    {"id": 1, "file": "episode-01-agentic-coding-foundations.md", "title": "Agentic Coding Foundations", "subtitle": "From Chat Assistants to Autonomous Software Operators"},
-    {"id": 2, "file": "episode-02-tools-mcp-orchestration.md", "title": "Tools, MCP, and Orchestration", "subtitle": "How Agents Use External Systems Reliably"},
-    {"id": 3, "file": "episode-03-issue-to-pr-workflow.md", "title": "The Issue-to-PR Agentic Workflow", "subtitle": "Designing End-to-End Autonomous Development Loops"},
-    {"id": 4, "file": "episode-04-evals-guardrails-reliability.md", "title": "Evals, Guardrails, and Reliability", "subtitle": "Shipping Agentic Systems Without Losing Control"},
-    {"id": 5, "file": "episode-05-memory-context-long-horizon.md", "title": "Memory, Context, and Long-Horizon Execution", "subtitle": "Making Agents Stateful, Consistent, and Useful Over Time"},
-    {"id": 6, "file": "episode-06-frontier-trends-and-operating-model.md", "title": "Frontier Trends and the New Engineering Operating Model", "subtitle": "Where Agentic Coding Goes Next"}
+    {
+      "id": 1,
+      "file": "episode-01-agentic-coding-foundations.md",
+      "title": "Agentic Coding Foundations",
+      "subtitle": "From Chat Assistants to Autonomous Software Operators",
+      "season": 1
+    },
+    {
+      "id": 2,
+      "file": "episode-02-tools-mcp-orchestration.md",
+      "title": "Tools, MCP, and Orchestration",
+      "subtitle": "How Agents Use External Systems Reliably",
+      "season": 1
+    },
+    {
+      "id": 3,
+      "file": "episode-03-issue-to-pr-workflow.md",
+      "title": "The Issue-to-PR Agentic Workflow",
+      "subtitle": "Designing End-to-End Autonomous Development Loops",
+      "season": 1
+    },
+    {
+      "id": 4,
+      "file": "episode-04-evals-guardrails-reliability.md",
+      "title": "Evals, Guardrails, and Reliability",
+      "subtitle": "Shipping Agentic Systems Without Losing Control",
+      "season": 1
+    },
+    {
+      "id": 5,
+      "file": "episode-05-memory-context-long-horizon.md",
+      "title": "Memory, Context, and Long-Horizon Execution",
+      "subtitle": "Making Agents Stateful, Consistent, and Useful Over Time",
+      "season": 1
+    },
+    {
+      "id": 6,
+      "file": "episode-06-frontier-trends-and-operating-model.md",
+      "title": "Frontier Trends and the New Engineering Operating Model",
+      "subtitle": "Where Agentic Coding Goes Next",
+      "season": 1
+    },
+    {
+      "id": 7,
+      "season": 2,
+      "engine": "kokoro",
+      "file": "episode-07-the-model-map-autumn-2026.md",
+      "title": "The Model Map, Autumn 2026",
+      "subtitle": "Who Shipped What, and How to Choose"
+    },
+    {
+      "id": 8,
+      "season": 2,
+      "engine": "kokoro",
+      "file": "episode-08-mcp-goes-stateless.md",
+      "title": "MCP Goes Stateless",
+      "subtitle": "The July Spec, Tasks, Apps, and the Standards Moving to a Foundation"
+    },
+    {
+      "id": 9,
+      "season": 2,
+      "engine": "kokoro",
+      "file": "episode-09-capability-behind-a-gate.md",
+      "title": "Capability Behind a Gate",
+      "subtitle": "Safeguarded Models, a Cancelled Launch, and Agents That Do Security Work"
+    },
+    {
+      "id": 10,
+      "season": 2,
+      "engine": "kokoro",
+      "file": "episode-10-agents-with-hands.md",
+      "title": "Agents With Hands",
+      "subtitle": "Computer Use, Real-Time Voice, Background Work, and Our Predictions Revisited"
+    }
   ]
 }

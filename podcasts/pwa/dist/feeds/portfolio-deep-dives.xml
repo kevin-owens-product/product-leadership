@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Portfolio Deep Dives</title>
+    <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives</link>
+    <atom:link href="https://productleader.netlify.app/feeds/portfolio-deep-dives.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>Nora and James spend each episode on a single portfolio company: what it does, the industry it sits in, the problem it solves for customers, the pressures it faces and where AI and new technology could change the business. Thirty companies across seven seasons. Built from public sources only; not investment or legal advice.</description>
+    <itunes:subtitle>One company at a time across a mid-market private equity portfolio</itunes:subtitle>
+    <itunes:author>Nora &amp; James</itunes:author>
+    <itunes:summary>Nora and James spend each episode on a single portfolio company: what it does, the industry it sits in, the problem it solves for customers, the pressures it faces and where AI and new technology could change the business. Thirty companies across seven seasons. Built from public sources only; not investment or legal advice.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>serial</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>BigHand</title>
+      <description>Pricing the Law Firm of the Future</description>
+      <itunes:subtitle>Pricing the Law Firm of the Future</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-01-bighand</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=1</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-01-bighand/combined.mp3" length="25709569" type="audio/mpeg"/>
+      <itunes:duration>0:44:14</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Expert Institute</title>
+      <description>The Expert, the Record and the Fifty-Dollar Question</description>
+      <itunes:subtitle>The Expert, the Record and the Fifty-Dollar Question</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-02-expert-institute</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=2</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-02-expert-institute/combined.mp3" length="27303695" type="audio/mpeg"/>
+      <itunes:duration>0:46:59</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Resolution Economics</title>
+      <description>The Economists in the Room</description>
+      <itunes:subtitle>The Economists in the Room</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-03-resolution-economics</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=3</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-03-resolution-economics/combined.mp3" length="27738592" type="audio/mpeg"/>
+      <itunes:duration>0:47:45</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Signature Resolution</title>
+      <description>Retired Judges, New Rooms</description>
+      <itunes:subtitle>Retired Judges, New Rooms</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-04-signature-resolution</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=4</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-04-signature-resolution/combined.mp3" length="27388400" type="audio/mpeg"/>
+      <itunes:duration>0:47:06</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Creditinfo</title>
+      <description>Who Gets a Loan, and Who Decides</description>
+      <itunes:subtitle>Who Gets a Loan, and Who Decides</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-05-creditinfo</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=5</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-05-creditinfo/combined.mp3" length="27531028" type="audio/mpeg"/>
+      <itunes:duration>0:47:24</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>cleversoft</title>
+      <description>Software for the Rulebook</description>
+      <itunes:subtitle>Software for the Rulebook</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-06-cleversoft</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=6</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-06-cleversoft/combined.mp3" length="28861366" type="audio/mpeg"/>
+      <itunes:duration>0:49:48</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Zero100</title>
+      <description>Selling Answers to the People Who Run Supply Chains</description>
+      <itunes:subtitle>Selling Answers to the People Who Run Supply Chains</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-07-zero100</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=7</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-07-zero100/combined.mp3" length="27250577" type="audio/mpeg"/>
+      <itunes:duration>0:46:56</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>7</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>AGDATA</title>
+      <description>Fifty-Six Million Receipts from the Farm Economy</description>
+      <itunes:subtitle>Fifty-Six Million Receipts from the Farm Economy</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-08-agdata</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=8</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-08-agdata/combined.mp3" length="27593220" type="audio/mpeg"/>
+      <itunes:duration>0:47:31</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>8</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Blue Ridge ESOP Associates</title>
+      <description>The Paperwork Behind Employee Ownership</description>
+      <itunes:subtitle>The Paperwork Behind Employee Ownership</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-09-blue-ridge-esop</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=9</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-09-blue-ridge-esop/combined.mp3" length="27951027" type="audio/mpeg"/>
+      <itunes:duration>0:48:05</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>9</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Prime Global</title>
+      <description>When Scientists Write for Doctors, and AI Wants to Help</description>
+      <itunes:subtitle>When Scientists Write for Doctors, and AI Wants to Help</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-10-prime-global</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=10</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-10-prime-global/combined.mp3" length="28056584" type="audio/mpeg"/>
+      <itunes:duration>0:48:17</itunes:duration>
+      <itunes:season>3</itunes:season>
+      <itunes:episode>10</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Genova Diagnostics</title>
+      <description>Three Hundred Biomarkers and the Question of What They Mean</description>
+      <itunes:subtitle>Three Hundred Biomarkers and the Question of What They Mean</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-11-genova-diagnostics</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=11</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-11-genova-diagnostics/combined.mp3" length="28200265" type="audio/mpeg"/>
+      <itunes:duration>0:48:43</itunes:duration>
+      <itunes:season>3</itunes:season>
+      <itunes:episode>11</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Suveto</title>
+      <description>The Vets Who Want to Own the Clinic</description>
+      <itunes:subtitle>The Vets Who Want to Own the Clinic</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-12-suveto</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=12</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-12-suveto/combined.mp3" length="26822008" type="audio/mpeg"/>
+      <itunes:duration>0:46:13</itunes:duration>
+      <itunes:season>3</itunes:season>
+      <itunes:episode>12</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>SYNERGY HomeCare</title>
+      <description>Care at Home, Listening In</description>
+      <itunes:subtitle>Care at Home, Listening In</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-13-synergy-homecare</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=13</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-13-synergy-homecare/combined.mp3" length="27790281" type="audio/mpeg"/>
+      <itunes:duration>0:47:45</itunes:duration>
+      <itunes:season>3</itunes:season>
+      <itunes:episode>13</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>ALL4</title>
+      <description>The Permit Writers and the Machines</description>
+      <itunes:subtitle>The Permit Writers and the Machines</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-14-all4</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=14</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-14-all4/combined.mp3" length="29403059" type="audio/mpeg"/>
+      <itunes:duration>0:50:38</itunes:duration>
+      <itunes:season>4</itunes:season>
+      <itunes:episode>14</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Technical Safety Services</title>
+      <description>The Paperwork That Keeps Medicine Clean</description>
+      <itunes:subtitle>The Paperwork That Keeps Medicine Clean</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-15-technical-safety-services</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=15</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-15-technical-safety-services/combined.mp3" length="27999055" type="audio/mpeg"/>
+      <itunes:duration>0:48:19</itunes:duration>
+      <itunes:season>4</itunes:season>
+      <itunes:episode>15</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>ENTRO</title>
+      <description>Sixteen Companies, One Door</description>
+      <itunes:subtitle>Sixteen Companies, One Door</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-16-entro</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=16</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-16-entro/combined.mp3" length="27339524" type="audio/mpeg"/>
+      <itunes:duration>0:47:12</itunes:duration>
+      <itunes:season>4</itunes:season>
+      <itunes:episode>16</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>USA Water</title>
+      <description>The People Who Keep the Taps Running</description>
+      <itunes:subtitle>The People Who Keep the Taps Running</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-17-usa-water</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=17</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-17-usa-water/combined.mp3" length="27907824" type="audio/mpeg"/>
+      <itunes:duration>0:48:04</itunes:duration>
+      <itunes:season>4</itunes:season>
+      <itunes:episode>17</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>NSL Analytical</title>
+      <description>The Report Is the Product</description>
+      <itunes:subtitle>The Report Is the Product</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-18-nsl-analytical</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=18</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-18-nsl-analytical/combined.mp3" length="27465927" type="audio/mpeg"/>
+      <itunes:duration>0:47:25</itunes:duration>
+      <itunes:season>4</itunes:season>
+      <itunes:episode>18</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Colt Group</title>
+      <description>Fixing the Pipe Without Stopping the Plant</description>
+      <itunes:subtitle>Fixing the Pipe Without Stopping the Plant</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-19-colt-group</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=19</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-19-colt-group/combined.mp3" length="27163455" type="audio/mpeg"/>
+      <itunes:duration>0:46:49</itunes:duration>
+      <itunes:season>5</itunes:season>
+      <itunes:episode>19</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>In-Place Machining</title>
+      <description>Bringing the Machine Shop to the Machine</description>
+      <itunes:subtitle>Bringing the Machine Shop to the Machine</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-20-in-place-machining</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=20</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-20-in-place-machining/combined.mp3" length="27210735" type="audio/mpeg"/>
+      <itunes:duration>0:46:53</itunes:duration>
+      <itunes:season>5</itunes:season>
+      <itunes:episode>20</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>USA Industries</title>
+      <description>The Right Plug at Two in the Morning</description>
+      <itunes:subtitle>The Right Plug at Two in the Morning</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-21-usa-industries</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=21</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-21-usa-industries/combined.mp3" length="27367701" type="audio/mpeg"/>
+      <itunes:duration>0:47:03</itunes:duration>
+      <itunes:season>5</itunes:season>
+      <itunes:episode>21</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Milton Industries</title>
+      <description>The Business of Compressed Air</description>
+      <itunes:subtitle>The Business of Compressed Air</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-22-milton-industries</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=22</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-22-milton-industries/combined.mp3" length="26079539" type="audio/mpeg"/>
+      <itunes:duration>0:44:40</itunes:duration>
+      <itunes:season>5</itunes:season>
+      <itunes:episode>22</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Brass Smith Innovations</title>
+      <description>The Glass Between You and the Buffet</description>
+      <itunes:subtitle>The Glass Between You and the Buffet</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-23-brass-smith</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=23</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-23-brass-smith/combined.mp3" length="26626731" type="audio/mpeg"/>
+      <itunes:duration>0:45:42</itunes:duration>
+      <itunes:season>5</itunes:season>
+      <itunes:episode>23</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Skill Dynamics</title>
+      <description>Practice, Not Content</description>
+      <itunes:subtitle>Practice, Not Content</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-24-skill-dynamics</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=24</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-24-skill-dynamics/combined.mp3" length="27633566" type="audio/mpeg"/>
+      <itunes:duration>0:47:32</itunes:duration>
+      <itunes:season>6</itunes:season>
+      <itunes:episode>24</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Schülerhilfe</title>
+      <description>Can a Tutor Beat a Free Chatbot?</description>
+      <itunes:subtitle>Can a Tutor Beat a Free Chatbot?</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-25-schuelerhilfe</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=25</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-25-schuelerhilfe/combined.mp3" length="26754080" type="audio/mpeg"/>
+      <itunes:duration>0:46:04</itunes:duration>
+      <itunes:season>6</itunes:season>
+      <itunes:episode>25</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Improve International</title>
+      <description>Teaching the Vets</description>
+      <itunes:subtitle>Teaching the Vets</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-26-improve-international</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=26</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-26-improve-international/combined.mp3" length="27897405" type="audio/mpeg"/>
+      <itunes:duration>0:47:56</itunes:duration>
+      <itunes:season>6</itunes:season>
+      <itunes:episode>26</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Club Champion</title>
+      <description>The Fitter and the Co-Pilot</description>
+      <itunes:subtitle>The Fitter and the Co-Pilot</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-27-club-champion</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=27</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-27-club-champion/combined.mp3" length="26390298" type="audio/mpeg"/>
+      <itunes:duration>0:45:34</itunes:duration>
+      <itunes:season>7</itunes:season>
+      <itunes:episode>27</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Shipley Do-Nuts</title>
+      <description>One in Four Orders</description>
+      <itunes:subtitle>One in Four Orders</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-28-shipley-do-nuts</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=28</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-28-shipley-do-nuts/combined.mp3" length="26539876" type="audio/mpeg"/>
+      <itunes:duration>0:45:42</itunes:duration>
+      <itunes:season>7</itunes:season>
+      <itunes:episode>28</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>SEV Laser</title>
+      <description>The Front Desk That Never Sleeps</description>
+      <itunes:subtitle>The Front Desk That Never Sleeps</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-29-sev-laser</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=29</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-29-sev-laser/combined.mp3" length="27708244" type="audio/mpeg"/>
+      <itunes:duration>0:47:37</itunes:duration>
+      <itunes:season>7</itunes:season>
+      <itunes:episode>29</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Kilwins</title>
+      <description>Fudge, Forecasts and the Final Scoop</description>
+      <itunes:subtitle>Fudge, Forecasts and the Final Scoop</itunes:subtitle>
+      <guid isPermaLink="false">portfolio-deep-dives/episode-30-kilwins</guid>
+      <link>https://productleader.netlify.app/?podcast=portfolio-deep-dives&amp;episode=30</link>
+      <pubDate>Sat, 14 Nov 2026 22:56:03 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/portfolio-deep-dives/episode-30-kilwins/combined.mp3" length="27118250" type="audio/mpeg"/>
+      <itunes:duration>0:46:51</itunes:duration>
+      <itunes:season>7</itunes:season>
+      <itunes:episode>30</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tech Leadership Unpacked</title>
+    <link>https://productleader.netlify.app/?podcast=tech-leadership</link>
+    <atom:link href="https://productleader.netlify.app/feeds/tech-leadership.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>A comprehensive podcast series breaking down complex technical concepts for CPOs and product leaders managing billion-dollar SaaS companies.</description>
+    <itunes:subtitle>10-Hour Series for Product Leaders</itunes:subtitle>
+    <itunes:author>Alex Chen &amp; Sam Rivera</itunes:author>
+    <itunes:summary>A comprehensive podcast series breaking down complex technical concepts for CPOs and product leaders managing billion-dollar SaaS companies.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>AI &amp; Machine Learning Fundamentals</title>
+      <description>The CPO&apos;s Guide to the AI Revolution</description>
+      <itunes:subtitle>The CPO&apos;s Guide to the AI Revolution</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-01-ai-machine-learning-fundamentals</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=1</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-01-ai-machine-learning-fundamentals/combined.mp3" length="17434115" type="audio/mpeg"/>
+      <itunes:duration>0:30:07</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Large Language Models Deep Dive</title>
+      <description>LLMs Demystified</description>
+      <itunes:subtitle>LLMs Demystified</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-02-large-language-models</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=2</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-02-large-language-models/combined.mp3" length="15158124" type="audio/mpeg"/>
+      <itunes:duration>0:26:20</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Software Engineering Excellence</title>
+      <description>Building World-Class Teams</description>
+      <itunes:subtitle>Building World-Class Teams</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-03-software-engineering-excellence</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=3</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-03-software-engineering-excellence/combined.mp3" length="14495569" type="audio/mpeg"/>
+      <itunes:duration>0:25:27</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Software Architecture Patterns</title>
+      <description>Building Systems That Last</description>
+      <itunes:subtitle>Building Systems That Last</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-04-software-architecture-patterns</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=4</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-04-software-architecture-patterns/combined.mp3" length="15047893" type="audio/mpeg"/>
+      <itunes:duration>0:26:13</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Systems Design at Scale</title>
+      <description>Building for Millions</description>
+      <itunes:subtitle>Building for Millions</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-05-systems-design-at-scale</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=5</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-05-systems-design-at-scale/combined.mp3" length="13349485" type="audio/mpeg"/>
+      <itunes:duration>0:23:28</itunes:duration>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Monorepos &amp; Code Organization</title>
+      <description>One Repo to Rule Them All?</description>
+      <itunes:subtitle>One Repo to Rule Them All?</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-06-monorepos-code-organization</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=6</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-06-monorepos-code-organization/combined.mp3" length="11260282" type="audio/mpeg"/>
+      <itunes:duration>0:20:05</itunes:duration>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Design Systems &amp; Components</title>
+      <description>Building Consistent UI at Scale</description>
+      <itunes:subtitle>Building Consistent UI at Scale</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-07-design-systems</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=7</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-07-design-systems/combined.mp3" length="11427679" type="audio/mpeg"/>
+      <itunes:duration>0:20:15</itunes:duration>
+      <itunes:episode>7</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Testing Strategy</title>
+      <description>Building Confidence in Your Code</description>
+      <itunes:subtitle>Building Confidence in Your Code</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-08-testing-strategy</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=8</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-08-testing-strategy/combined.mp3" length="10908061" type="audio/mpeg"/>
+      <itunes:duration>0:19:27</itunes:duration>
+      <itunes:episode>8</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>API Design Best Practices</title>
+      <description>Interfaces Developers Love</description>
+      <itunes:subtitle>Interfaces Developers Love</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-09-api-design-best-practices</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=9</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-09-api-design-best-practices/combined.mp3" length="11406013" type="audio/mpeg"/>
+      <itunes:duration>0:20:40</itunes:duration>
+      <itunes:episode>9</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Security &amp; Methodologies</title>
+      <description>The Grand Finale</description>
+      <itunes:subtitle>The Grand Finale</itunes:subtitle>
+      <guid isPermaLink="false">tech-leadership/episode-10-security-development-methodologies</guid>
+      <link>https://productleader.netlify.app/?podcast=tech-leadership&amp;episode=10</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/tech-leadership/episode-10-security-development-methodologies/combined.mp3" length="11924155" type="audio/mpeg"/>
+      <itunes:duration>0:21:26</itunes:duration>
+      <itunes:episode>10</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

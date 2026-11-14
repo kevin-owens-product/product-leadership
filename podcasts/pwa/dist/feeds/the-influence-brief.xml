@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Influence Brief</title>
+    <link>https://productleader.netlify.app/?podcast=the-influence-brief</link>
+    <atom:link href="https://productleader.netlify.app/feeds/the-influence-brief.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>A practical series on the half of the executive job nobody trains you for: moving people. Stakeholder mapping, currencies of exchange, the trust equation, negotiation under power asymmetry, executive communication, and managing up — each episode gives you one working tool and one realistic product-org scenario to apply it in.</description>
+    <itunes:subtitle>Negotiation, Persuasion &amp; Stakeholder Craft for Product Executives</itunes:subtitle>
+    <itunes:author>Sloane Bishop &amp; Victor Reyes</itunes:author>
+    <itunes:summary>A practical series on the half of the executive job nobody trains you for: moving people. Stakeholder mapping, currencies of exchange, the trust equation, negotiation under power asymmetry, executive communication, and managing up — each episode gives you one working tool and one realistic product-org scenario to apply it in.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>Being Right Is Not a Strategy</title>
+      <description>The Influence Map, Currencies of Exchange, and the Trust Equation</description>
+      <itunes:subtitle>The Influence Map, Currencies of Exchange, and the Trust Equation</itunes:subtitle>
+      <guid isPermaLink="false">the-influence-brief/episode-01-being-right-is-not-a-strategy</guid>
+      <link>https://productleader.netlify.app/?podcast=the-influence-brief&amp;episode=1</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/the-influence-brief/episode-01-being-right-is-not-a-strategy/combined.mp3" length="8804346" type="audio/mpeg"/>
+      <itunes:duration>0:15:54</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Negotiating When They Own the Room</title>
+      <description>BATNA, Reservation Points, and Anchors Under Power Asymmetry</description>
+      <itunes:subtitle>BATNA, Reservation Points, and Anchors Under Power Asymmetry</itunes:subtitle>
+      <guid isPermaLink="false">the-influence-brief/episode-02-negotiation-under-power-asymmetry</guid>
+      <link>https://productleader.netlify.app/?podcast=the-influence-brief&amp;episode=2</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/the-influence-brief/episode-02-negotiation-under-power-asymmetry/combined.mp3" length="14725462" type="audio/mpeg"/>
+      <itunes:duration>0:26:10</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Say the Answer First</title>
+      <description>The Pyramid, the Pre-Wire, and the Fifteen-Minute Board Slot</description>
+      <itunes:subtitle>The Pyramid, the Pre-Wire, and the Fifteen-Minute Board Slot</itunes:subtitle>
+      <guid isPermaLink="false">the-influence-brief/episode-03-executive-communication</guid>
+      <link>https://productleader.netlify.app/?podcast=the-influence-brief&amp;episode=3</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/the-influence-brief/episode-03-executive-communication/combined.mp3" length="14531894" type="audio/mpeg"/>
+      <itunes:duration>0:25:58</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Your Boss Is a Stakeholder</title>
+      <description>The Operating Manual, the No-Surprises Contract, and Disagreeing Upward</description>
+      <itunes:subtitle>The Operating Manual, the No-Surprises Contract, and Disagreeing Upward</itunes:subtitle>
+      <guid isPermaLink="false">the-influence-brief/episode-04-managing-up</guid>
+      <link>https://productleader.netlify.app/?podcast=the-influence-brief&amp;episode=4</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/the-influence-brief/episode-04-managing-up/combined.mp3" length="11747541" type="audio/mpeg"/>
+      <itunes:duration>0:21:03</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Meeting Before the Meeting</title>
+      <description>Coalitions, Sequencing, and Neutralizing a Blocker Without a War</description>
+      <itunes:subtitle>Coalitions, Sequencing, and Neutralizing a Blocker Without a War</itunes:subtitle>
+      <guid isPermaLink="false">the-influence-brief/episode-05-coalitions-and-the-meeting-before-the-meeting</guid>
+      <link>https://productleader.netlify.app/?podcast=the-influence-brief&amp;episode=5</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/the-influence-brief/episode-05-coalitions-and-the-meeting-before-the-meeting/combined.mp3" length="12727657" type="audio/mpeg"/>
+      <itunes:duration>0:22:42</itunes:duration>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>No, Bad News, and Repair</title>
+      <description>Hard Conversations — and the Whole Toolkit in One Room</description>
+      <itunes:subtitle>Hard Conversations — and the Whole Toolkit in One Room</itunes:subtitle>
+      <guid isPermaLink="false">the-influence-brief/episode-06-hard-conversations-and-the-assembled-toolkit</guid>
+      <link>https://productleader.netlify.app/?podcast=the-influence-brief&amp;episode=6</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/the-influence-brief/episode-06-hard-conversations-and-the-assembled-toolkit/combined.mp3" length="13228634" type="audio/mpeg"/>
+      <itunes:duration>0:23:43</itunes:duration>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

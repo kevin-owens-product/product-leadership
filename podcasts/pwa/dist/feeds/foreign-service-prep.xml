@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Diplomat&apos;s Edge</title>
+    <link>https://productleader.netlify.app/?podcast=foreign-service-prep</link>
+    <atom:link href="https://productleader.netlify.app/feeds/foreign-service-prep.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>Master the Foreign Service Officer Test with engaging discussions, real scenarios, and expert insights. Two hosts - a former FSO and an aspiring diplomat - break down everything you need to know.</description>
+    <itunes:subtitle>Your Complete FSOT Preparation Guide</itunes:subtitle>
+    <itunes:author>PodLearn</itunes:author>
+    <itunes:summary>Master the Foreign Service Officer Test with engaging discussions, real scenarios, and expert insights. Two hosts - a former FSO and an aspiring diplomat - break down everything you need to know.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>Mastering Situational Judgment</title>
+      <description>Think Like a Diplomat</description>
+      <itunes:subtitle>Think Like a Diplomat</itunes:subtitle>
+      <guid isPermaLink="false">foreign-service-prep/episode-01-situational-judgment</guid>
+      <link>https://productleader.netlify.app/?podcast=foreign-service-prep&amp;episode=1</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/foreign-service-prep/episode-01-situational-judgment/combined.mp3" length="18589498" type="audio/mpeg"/>
+      <itunes:duration>0:29:31</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>History of the Foreign Service</title>
+      <description>From Franklin to Today</description>
+      <itunes:subtitle>From Franklin to Today</itunes:subtitle>
+      <guid isPermaLink="false">foreign-service-prep/episode-02-foreign-service-history</guid>
+      <link>https://productleader.netlify.app/?podcast=foreign-service-prep&amp;episode=2</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/foreign-service-prep/episode-02-foreign-service-history/combined.mp3" length="15336948" type="audio/mpeg"/>
+      <itunes:duration>0:23:53</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>World History &amp; Geography</title>
+      <description>The Global Landscape</description>
+      <itunes:subtitle>The Global Landscape</itunes:subtitle>
+      <guid isPermaLink="false">foreign-service-prep/episode-03-world-history-geography</guid>
+      <link>https://productleader.netlify.app/?podcast=foreign-service-prep&amp;episode=3</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/foreign-service-prep/episode-03-world-history-geography/combined.mp3" length="12751450" type="audio/mpeg"/>
+      <itunes:duration>0:20:03</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Political Systems &amp; International Relations</title>
+      <description>How the World Works</description>
+      <itunes:subtitle>How the World Works</itunes:subtitle>
+      <guid isPermaLink="false">foreign-service-prep/episode-04-political-systems</guid>
+      <link>https://productleader.netlify.app/?podcast=foreign-service-prep&amp;episode=4</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/foreign-service-prep/episode-04-political-systems/combined.mp3" length="12292272" type="audio/mpeg"/>
+      <itunes:duration>0:19:26</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Grammar Mastery</title>
+      <description>Writing with Precision</description>
+      <itunes:subtitle>Writing with Precision</itunes:subtitle>
+      <guid isPermaLink="false">foreign-service-prep/episode-05-grammar-mastery</guid>
+      <link>https://productleader.netlify.app/?podcast=foreign-service-prep&amp;episode=5</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/foreign-service-prep/episode-05-grammar-mastery/combined.mp3" length="12298815" type="audio/mpeg"/>
+      <itunes:duration>0:20:11</itunes:duration>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Sentence Structure &amp; Style</title>
+      <description>The Art of Clear Communication</description>
+      <itunes:subtitle>The Art of Clear Communication</itunes:subtitle>
+      <guid isPermaLink="false">foreign-service-prep/episode-06-sentence-structure</guid>
+      <link>https://productleader.netlify.app/?podcast=foreign-service-prep&amp;episode=6</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/foreign-service-prep/episode-06-sentence-structure/combined.mp3" length="13585681" type="audio/mpeg"/>
+      <itunes:duration>0:22:10</itunes:duration>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

@@ -19,6 +19,10 @@ const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
 // Persistent across deploys — only deleted when the user explicitly removes
 // a downloaded episode.
 const OFFLINE_AUDIO_CACHE = 'podlearn-offline-audio-v1';
+// Episode scripts fetched on open. Their URLs carry a content hash, so an
+// entry stays valid across deploys until that script changes. Kept across
+// deploys like the audio cache; small (tens of KB per episode).
+const TRANSCRIPT_CACHE = 'podlearn-transcripts-v1';
 
 const APP_SHELL = Array.isArray(APP_SHELL_RAW) ? APP_SHELL_RAW : [];
 const SHELL_PATHS = new Set(APP_SHELL);
@@ -50,7 +54,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
     console.log('[sw] activate', BUILD_VERSION);
     event.waitUntil((async () => {
-        const keep = new Set([SHELL_CACHE, OFFLINE_AUDIO_CACHE]);
+        const keep = new Set([SHELL_CACHE, OFFLINE_AUDIO_CACHE, TRANSCRIPT_CACHE]);
         const names = await caches.keys();
         await Promise.all(names.map((name) => keep.has(name) ? null : caches.delete(name)));
         await self.clients.claim();
@@ -85,6 +89,13 @@ self.addEventListener('fetch', (event) => {
     // stream from network. Never auto-cache so storage stays bounded.
     if (url.pathname.includes('/audio/')) {
         event.respondWith(audioFetch(req));
+        return;
+    }
+
+    // Transcripts: cache-first by exact (hash-versioned) URL, then network,
+    // then any older cached copy of the same script when offline.
+    if (url.pathname.includes('/transcripts/')) {
+        event.respondWith(transcriptFetch(req));
         return;
     }
 
@@ -141,6 +152,40 @@ async function matchDocumentFallback(cache, req) {
         || (req.headers.get('accept') || '').includes('text/html');
     if (!isDocument) return null;
     return (await cache.match('/index.html', { ignoreSearch: true })) || null;
+}
+
+async function transcriptFetch(req) {
+    const stores = await Promise.all([
+        caches.open(TRANSCRIPT_CACHE),
+        caches.open(OFFLINE_AUDIO_CACHE)
+    ]).catch(() => []);
+    for (const cache of stores) {
+        const hit = await cache.match(req);
+        if (hit) return hit;
+    }
+    try {
+        const res = await fetch(req);
+        if (res && res.ok && stores[0]) {
+            // Drop older versions of this script before storing the new one.
+            await stores[0].delete(req, { ignoreSearch: true });
+            await stores[0].put(req, res.clone());
+        }
+        if (res && res.ok) return res;
+        const stale = await matchAny(stores, req);
+        return stale || res;
+    } catch (err) {
+        const stale = await matchAny(stores, req);
+        if (stale) return stale;
+        return new Response('Offline', { status: 503, statusText: 'Offline' });
+    }
+}
+
+async function matchAny(cacheList, req) {
+    for (const cache of cacheList) {
+        const hit = await cache.match(req, { ignoreSearch: true });
+        if (hit) return hit;
+    }
+    return null;
 }
 
 async function audioFetch(req) {
@@ -292,7 +337,7 @@ self.addEventListener('message', (event) => {
         event.waitUntil((async () => {
             const names = await caches.keys();
             await Promise.all(names
-                .filter((n) => n !== OFFLINE_AUDIO_CACHE)
+                .filter((n) => n !== OFFLINE_AUDIO_CACHE && n !== TRANSCRIPT_CACHE)
                 .map((n) => caches.delete(n)));
         })());
         return;

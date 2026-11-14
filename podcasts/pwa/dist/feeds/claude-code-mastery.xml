@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Claude Code Mastery</title>
+    <link>https://productleader.netlify.app/?podcast=claude-code-mastery</link>
+    <atom:link href="https://productleader.netlify.app/feeds/claude-code-mastery.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>Learn to leverage Claude Code for faster, smarter software development. From basic commands to advanced workflows, become a power user of Anthropic&apos;s AI coding assistant.</description>
+    <itunes:subtitle>Master AI-Powered Software Development</itunes:subtitle>
+    <itunes:author>Unknown</itunes:author>
+    <itunes:summary>Learn to leverage Claude Code for faster, smarter software development. From basic commands to advanced workflows, become a power user of Anthropic&apos;s AI coding assistant.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>serial</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>Getting Started with Claude Code</title>
+      <description>Getting Started with Claude Code</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-01-getting-started</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=1</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-01-getting-started/combined.mp3" length="9978553" type="audio/mpeg"/>
+      <itunes:duration>0:15:45</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Core Commands &amp; Navigation</title>
+      <description>Core Commands &amp; Navigation</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-02-core-commands</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=2</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-02-core-commands/combined.mp3" length="9819033" type="audio/mpeg"/>
+      <itunes:duration>0:15:28</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Code Reading &amp; Editing</title>
+      <description>Code Reading &amp; Editing</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-03-code-editing</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=3</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-03-code-editing/combined.mp3" length="8847268" type="audio/mpeg"/>
+      <itunes:duration>0:14:08</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Search &amp; Codebase Exploration</title>
+      <description>Search &amp; Codebase Exploration</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-04-search-explore</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=4</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-04-search-explore/combined.mp3" length="8672278" type="audio/mpeg"/>
+      <itunes:duration>0:13:46</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Git Workflow &amp; Collaboration</title>
+      <description>Git Workflow &amp; Collaboration</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-05-git-workflow</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=5</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-05-git-workflow/combined.mp3" length="8212028" type="audio/mpeg"/>
+      <itunes:duration>0:13:14</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Testing &amp; Debugging</title>
+      <description>Testing &amp; Debugging</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-06-testing-debugging</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=6</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-06-testing-debugging/combined.mp3" length="8050204" type="audio/mpeg"/>
+      <itunes:duration>0:13:04</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Project Setup &amp; Configuration</title>
+      <description>Project Setup &amp; Configuration</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-07-project-setup</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=7</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-07-project-setup/combined.mp3" length="7156753" type="audio/mpeg"/>
+      <itunes:duration>0:11:35</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>7</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Advanced Prompting Techniques</title>
+      <description>Advanced Prompting Techniques</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-08-advanced-prompting</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=8</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-08-advanced-prompting/combined.mp3" length="7217293" type="audio/mpeg"/>
+      <itunes:duration>0:11:47</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>8</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>MCP Servers &amp; Custom Tools</title>
+      <description>MCP Servers &amp; Custom Tools</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-09-mcp-tools</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=9</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-09-mcp-tools/combined.mp3" length="6600452" type="audio/mpeg"/>
+      <itunes:duration>0:10:35</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>9</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Best Practices &amp; Productivity Tips</title>
+      <description>Best Practices &amp; Productivity Tips</description>
+      <itunes:subtitle></itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-10-best-practices</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=10</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-10-best-practices/combined.mp3" length="6458658" type="audio/mpeg"/>
+      <itunes:duration>0:10:34</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>10</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>New Models, Effort, and Auto Mode</title>
+      <description>What Changed in 2026 Before You Type a Single Prompt</description>
+      <itunes:subtitle>What Changed in 2026 Before You Type a Single Prompt</itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-11-new-models-effort-auto-mode</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=11</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-11-new-models-effort-auto-mode/combined.mp3" length="30722183" type="audio/mpeg"/>
+      <itunes:duration>0:46:56</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>11</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Subagents, Forks, and Workflows</title>
+      <description>From One Claude to Many</description>
+      <itunes:subtitle>From One Claude to Many</itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-12-subagents-forks-workflows</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=12</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-12-subagents-forks-workflows/combined.mp3" length="29578637" type="audio/mpeg"/>
+      <itunes:duration>0:45:18</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>12</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Claude Code Everywhere</title>
+      <description>The Web, Your Phone, Routines, and Remote Control</description>
+      <itunes:subtitle>The Web, Your Phone, Routines, and Remote Control</itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-13-claude-code-everywhere</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=13</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-13-claude-code-everywhere/combined.mp3" length="30712119" type="audio/mpeg"/>
+      <itunes:duration>0:46:48</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>13</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Beyond the Terminal</title>
+      <description>Artifacts, Design, the Browser, Computer Use, and Testing Your Own Plugins</description>
+      <itunes:subtitle>Artifacts, Design, the Browser, Computer Use, and Testing Your Own Plugins</itunes:subtitle>
+      <guid isPermaLink="false">claude-code-mastery/episode-14-beyond-the-terminal</guid>
+      <link>https://productleader.netlify.app/?podcast=claude-code-mastery&amp;episode=14</link>
+      <pubDate>Sat, 14 Nov 2026 14:42:45 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/claude-code-mastery/episode-14-beyond-the-terminal/combined.mp3" length="29384883" type="audio/mpeg"/>
+      <itunes:duration>0:45:03</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>14</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

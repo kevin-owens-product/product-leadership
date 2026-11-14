@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The AI Diligence Room</title>
+    <link>https://productleader.netlify.app/?podcast=ai-diligence-room</link>
+    <atom:link href="https://productleader.netlify.app/feeds/ai-diligence-room.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>Two hosts work through AI due diligence the way a deal team does it: testing AI claims, looking under the hood at data rights, models, cost and security, running the disruption test, and turning findings into price, contract terms, insurance and a hundred-day plan. Built from public sources; not legal or investment advice.</description>
+    <itunes:subtitle>Buying companies when every seller has an AI story</itunes:subtitle>
+    <itunes:author>Nadia &amp; Owen</itunes:author>
+    <itunes:summary>Two hosts work through AI due diligence the way a deal team does it: testing AI claims, looking under the hood at data rights, models, cost and security, running the disruption test, and turning findings into price, contract terms, insurance and a hundred-day plan. Built from public sources; not legal or investment advice.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>Kicking the Tires on &quot;AI-Native&quot;</title>
+      <description>Why AI Diligence Now, and How to Test an AI Claim</description>
+      <itunes:subtitle>Why AI Diligence Now, and How to Test an AI Claim</itunes:subtitle>
+      <guid isPermaLink="false">ai-diligence-room/episode-01-kicking-the-tires-on-ai-native</guid>
+      <link>https://productleader.netlify.app/?podcast=ai-diligence-room&amp;episode=1</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/ai-diligence-room/episode-01-kicking-the-tires-on-ai-native/combined.mp3" length="33780727" type="audio/mpeg"/>
+      <itunes:duration>0:48:50</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Under the Hood</title>
+      <description>Data Rights, Models, Costs, Security and AI Technical Debt</description>
+      <itunes:subtitle>Data Rights, Models, Costs, Security and AI Technical Debt</itunes:subtitle>
+      <guid isPermaLink="false">ai-diligence-room/episode-02-under-the-hood</guid>
+      <link>https://productleader.netlify.app/?podcast=ai-diligence-room&amp;episode=2</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/ai-diligence-room/episode-02-under-the-hood/combined.mp3" length="33787710" type="audio/mpeg"/>
+      <itunes:duration>0:48:47</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Disruption Test</title>
+      <description>Is AI a Threat to the Business You&apos;re Buying?</description>
+      <itunes:subtitle>Is AI a Threat to the Business You&apos;re Buying?</itunes:subtitle>
+      <guid isPermaLink="false">ai-diligence-room/episode-03-the-disruption-test</guid>
+      <link>https://productleader.netlify.app/?podcast=ai-diligence-room&amp;episode=3</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/ai-diligence-room/episode-03-the-disruption-test/combined.mp3" length="32812148" type="audio/mpeg"/>
+      <itunes:duration>0:47:40</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>From Findings to Price</title>
+      <description>Valuation, Contract Terms, Insurance and the First Hundred Days</description>
+      <itunes:subtitle>Valuation, Contract Terms, Insurance and the First Hundred Days</itunes:subtitle>
+      <guid isPermaLink="false">ai-diligence-room/episode-04-from-findings-to-price</guid>
+      <link>https://productleader.netlify.app/?podcast=ai-diligence-room&amp;episode=4</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/ai-diligence-room/episode-04-from-findings-to-price/combined.mp3" length="33692582" type="audio/mpeg"/>
+      <itunes:duration>0:48:37</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

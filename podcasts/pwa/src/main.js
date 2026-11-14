@@ -40,6 +40,8 @@ import {
     buildLineOffsets
 } from './playback/manifest.js';
 import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js';
+import { ensureEpisodeContent } from './app/transcripts.js';
+import { createNewEpisodeTracker } from './state/new-episodes.js';
 import { createMediaSessionController } from './playback/media-session.js';
 import { createSleepController } from './playback/sleep-controller.js';
 import { findAdjacentEpisode, findNextUp } from './state/queue-next.js';
@@ -143,6 +145,8 @@ const stats = createStatsTracker({
     isListening: () => isPlaying && !isPaused
 });
 
+const newEpisodes = createNewEpisodeTracker();
+
 const downloads = createDownloadsManager({
     toasts,
     setStatus,
@@ -171,13 +175,20 @@ const library = createLibrary({
         });
     },
     downloads,
+    newEpisodes,
+    toasts,
     onOpenPodcast: (podcast, sourceArt) => openPodcast(podcast, { sourceArt }),
-    onOpenEpisode: (episode) => { void openEpisode(episode); }
+    onOpenEpisode: (episode) => { void openEpisode(episode); },
+    onResumeEpisode: (podcast, episode) => {
+        openPodcast(podcast);
+        setTimeout(() => openEpisode(episode, { promptResume: true }), 100);
+    }
 });
 
 const podcastsLoader = createPodcastsLoader({
     toasts,
     onLoaded: () => {
+        newEpisodes.syncCatalog(getPodcasts());
         library.renderPodcastsList();
         // First paint of the library: give the home list its staggered
         // entrance (later showView calls stamp this themselves).
@@ -659,20 +670,31 @@ async function openEpisode(episode, options = {}) {
     const requestId = ++episodeOpenRequest;
     await stopPlayback({ preserveOpenRequest: true });
     if (requestId !== episodeOpenRequest) return false;
-    currentEpisode = episode;
-    playerPodcast = requestedPodcast;
-    library.selectSeasonForEpisode(requestedPodcast, episode);
-    applySpeechRate(getShowSpeed(requestedPodcast.id, speechRate), { persistShow: false, save: false });
-    const speakerVoiceMap = parseSpeakerVoiceMap(episode.content);
-    dialogueLines = parseMarkdown(episode.content, speakerVoiceMap);
-    chapters = parseChapters(episode.content);
-    alignChapterLineIndexes(chapters, dialogueLines);
-
     const podcastId = requestedPodcast.id;
     const episodeFile = episode.file || episode.filename || null;
-    const audioManifest = prefetchedAudioManifest
-        || await loadSupertonicAudioManifest(podcastId, episodeFile);
+    // The script and the audio manifest load in parallel; the catalog only
+    // carries metadata, so the transcript arrives here on first open.
+    const [content, audioManifest] = await Promise.all([
+        ensureEpisodeContent(podcastId, episode),
+        prefetchedAudioManifest || loadSupertonicAudioManifest(podcastId, episodeFile)
+    ]);
     if (requestId !== episodeOpenRequest) return false;
+    if (typeof content !== 'string') {
+        toasts.show(`Couldn’t load "${episode.title}". Check your connection.`, {
+            actionLabel: 'Retry',
+            onAction: () => { void openEpisode(episode, options); }
+        });
+        return false;
+    }
+    currentEpisode = episode;
+    playerPodcast = requestedPodcast;
+    newEpisodes.markOpened(requestedPodcast, episode);
+    library.selectSeasonForEpisode(requestedPodcast, episode);
+    applySpeechRate(getShowSpeed(requestedPodcast.id, speechRate), { persistShow: false, save: false });
+    const speakerVoiceMap = parseSpeakerVoiceMap(content);
+    dialogueLines = parseMarkdown(content, speakerVoiceMap);
+    chapters = parseChapters(content);
+    alignChapterLineIndexes(chapters, dialogueLines);
     lineOffsets = [];
     episodeAudioDuration = 0;
     lastPersistedLine = -1;

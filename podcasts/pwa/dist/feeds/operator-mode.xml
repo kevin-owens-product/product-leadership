@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operator Mode</title>
+    <link>https://productleader.netlify.app/?podcast=operator-mode</link>
+    <atom:link href="https://productleader.netlify.app/feeds/operator-mode.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>A two-season AI value-creation apprenticeship for operators who need to connect product judgment, production AI, operating design, scaling, and private-equity returns. Season One puts you inside Harborline Systems from underwrite to exit. Season Two, Portfolio Control, promotes you into a three-company operating-partner simulation where capital, agents, talent, platform boundaries, regulation, M&amp;A, and fund liquidity collide. Every episode gives you incomplete evidence, forces a decision, and carries the consequences forward.</description>
+    <itunes:subtitle>From Company to Portfolio. Every Decision Compounds.</itunes:subtitle>
+    <itunes:author>Asha Raman &amp; Cole Mercer</itunes:author>
+    <itunes:summary>A two-season AI value-creation apprenticeship for operators who need to connect product judgment, production AI, operating design, scaling, and private-equity returns. Season One puts you inside Harborline Systems from underwrite to exit. Season Two, Portfolio Control, promotes you into a three-company operating-partner simulation where capital, agents, talent, platform boundaries, regulation, M&amp;A, and fund liquidity collide. Every episode gives you incomplete evidence, forces a decision, and carries the consequences forward.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>serial</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>Underwrite the Deal</title>
+      <description>The Return Bridge, the Investment Committee, and the Price of Being Wrong</description>
+      <itunes:subtitle>The Return Bridge, the Investment Committee, and the Price of Being Wrong</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-01-underwrite-the-deal</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=1</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-01-underwrite-the-deal/combined.mp3" length="17035131" type="audio/mpeg"/>
+      <itunes:duration>0:30:29</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Find the Truth in the Numbers</title>
+      <description>ARR Quality, Cohorts, Cash, and the Constraint Hiding in Plain Sight</description>
+      <itunes:subtitle>ARR Quality, Cohorts, Cash, and the Constraint Hiding in Plain Sight</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-02-find-the-truth-in-the-numbers</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=2</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-02-find-the-truth-in-the-numbers/combined.mp3" length="17805286" type="audio/mpeg"/>
+      <itunes:duration>0:31:49</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Choose the Bets</title>
+      <description>Customer Truth, the AI Wedge, and Capital Allocation Under Uncertainty</description>
+      <itunes:subtitle>Customer Truth, the AI Wedge, and Capital Allocation Under Uncertainty</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-03-choose-the-bets</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=3</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-03-choose-the-bets/combined.mp3" length="18604703" type="audio/mpeg"/>
+      <itunes:duration>0:33:12</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Make AI Economically Real</title>
+      <description>Quality, Latency, Cost, Trust, and the Production Service Envelope</description>
+      <itunes:subtitle>Quality, Latency, Cost, Trust, and the Production Service Envelope</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-04-make-ai-economically-real</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=4</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-04-make-ai-economically-real/combined.mp3" length="20060197" type="audio/mpeg"/>
+      <itunes:duration>0:35:40</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Build the Revenue Engine</title>
+      <description>Pricing, Pipeline, Implementation, Retention, and Expansion</description>
+      <itunes:subtitle>Pricing, Pipeline, Implementation, Retention, and Expansion</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-05-build-the-revenue-engine</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=5</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-05-build-the-revenue-engine/combined.mp3" length="21954651" type="audio/mpeg"/>
+      <itunes:duration>0:39:03</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>5</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Run the Company</title>
+      <description>The Metric Tree, Operating Cadence, Talent, and the Board</description>
+      <itunes:subtitle>The Metric Tree, Operating Cadence, Talent, and the Board</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-06-run-the-company</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=6</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-06-run-the-company/combined.mp3" length="22720094" type="audio/mpeg"/>
+      <itunes:duration>0:40:11</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>6</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Buy, Integrate, Compound</title>
+      <description>Add-On Diligence, Synergy Proof, and the 180-Day Integration</description>
+      <itunes:subtitle>Add-On Diligence, Synergy Proof, and the 180-Day Integration</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-07-buy-integrate-compound</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=7</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-07-buy-integrate-compound/combined.mp3" length="20828042" type="audio/mpeg"/>
+      <itunes:duration>0:37:01</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>7</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Defend the Exit</title>
+      <description>Revenue Quality, AI Durability, Buyer Diligence, and the Final Return</description>
+      <itunes:subtitle>Revenue Quality, AI Durability, Buyer Diligence, and the Final Return</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-08-defend-the-exit</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=8</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-08-defend-the-exit/combined.mp3" length="21068943" type="audio/mpeg"/>
+      <itunes:duration>0:37:37</itunes:duration>
+      <itunes:season>1</itunes:season>
+      <itunes:episode>8</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Run the Portfolio, Not the Pilots</title>
+      <description>Concentration, Shared Capability, and the Capital Allocation You Cannot Avoid</description>
+      <itunes:subtitle>Concentration, Shared Capability, and the Capital Allocation You Cannot Avoid</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-09-run-the-portfolio-not-the-pilots</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=9</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-09-run-the-portfolio-not-the-pilots/combined.mp3" length="19693724" type="audio/mpeg"/>
+      <itunes:duration>0:34:52</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>9</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Prove the Counterfactual</title>
+      <description>Causal Value, Finance Sign-Off, and the Difference Between Usage and Impact</description>
+      <itunes:subtitle>Causal Value, Finance Sign-Off, and the Difference Between Usage and Impact</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-10-prove-the-counterfactual</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=10</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-10-prove-the-counterfactual/combined.mp3" length="20714801" type="audio/mpeg"/>
+      <itunes:duration>0:36:35</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>10</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Delegate Authority, Not Accountability</title>
+      <description>Agent Identity, Permissions, Loss Limits, and the Boundary of Autonomy</description>
+      <itunes:subtitle>Agent Identity, Permissions, Loss Limits, and the Boundary of Autonomy</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-11-delegate-authority-not-accountability</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=11</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-11-delegate-authority-not-accountability/combined.mp3" length="20547485" type="audio/mpeg"/>
+      <itunes:duration>0:36:12</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>11</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Capture the Productivity</title>
+      <description>Capacity, Roles, Incentives, and the Savings That Do Not Happen by Themselves</description>
+      <itunes:subtitle>Capacity, Roles, Incentives, and the Savings That Do Not Happen by Themselves</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-12-capture-the-productivity</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=12</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-12-capture-the-productivity/combined.mp3" length="20083880" type="audio/mpeg"/>
+      <itunes:duration>0:35:31</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>12</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Choose the Platform Boundary</title>
+      <description>APIs, Ecosystem Power, Data Rights, and Blast Radius</description>
+      <itunes:subtitle>APIs, Ecosystem Power, Data Rights, and Blast Radius</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-13-choose-the-platform-boundary</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=13</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-13-choose-the-platform-boundary/combined.mp3" length="20494353" type="audio/mpeg"/>
+      <itunes:duration>0:36:18</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>13</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Cross the Border</title>
+      <description>Regulation, Localization, Data Residency, and the Country P&amp;L</description>
+      <itunes:subtitle>Regulation, Localization, Data Residency, and the Country P&amp;L</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-14-cross-the-border</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=14</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-14-cross-the-border/combined.mp3" length="20065599" type="audio/mpeg"/>
+      <itunes:duration>0:35:29</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>14</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Build the Roll-Up Machine</title>
+      <description>Acquisition Cohorts, Integration Throughput, and Cumulative Leverage</description>
+      <itunes:subtitle>Acquisition Cohorts, Integration Throughput, and Cumulative Leverage</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-15-build-the-roll-up-machine</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=15</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-15-build-the-roll-up-machine/combined.mp3" length="21764356" type="audio/mpeg"/>
+      <itunes:duration>0:38:38</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>15</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>Admit the Thesis Broke</title>
+      <description>Liquidity, Leadership, Continuation Conflicts, and the Fund Return</description>
+      <itunes:subtitle>Liquidity, Leadership, Continuation Conflicts, and the Fund Return</itunes:subtitle>
+      <guid isPermaLink="false">operator-mode/episode-16-admit-the-thesis-broke</guid>
+      <link>https://productleader.netlify.app/?podcast=operator-mode&amp;episode=16</link>
+      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/operator-mode/episode-16-admit-the-thesis-broke/combined.mp3" length="21183889" type="audio/mpeg"/>
+      <itunes:duration>0:37:36</itunes:duration>
+      <itunes:season>2</itunes:season>
+      <itunes:episode>16</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

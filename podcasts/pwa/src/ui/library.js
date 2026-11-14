@@ -2,9 +2,10 @@
 // including search, status filters, and sorting.
 
 import { updateVersionBadge } from '../app/version.js';
-import { formatDurationLabel, renderPodcastCard, renderEpisodeCard } from './render.js';
+import { formatDurationLabel, renderPodcastCard, renderEpisodeCard, renderContinueCard } from './render.js';
 import { activateCardWithKeyboard } from './dom.js';
 import {
+    getContinueListening,
     getPodcastSeasons,
     getSeasonListeningAction,
     getSeasonStats,
@@ -21,8 +22,11 @@ export function createLibrary({
     getPlaybackContext = () => null,
     persistSeasonSelection = () => {},
     downloads,
+    newEpisodes = { isNew: () => false, countNew: () => 0 },
+    toasts = { show: () => {} },
     onOpenPodcast,
-    onOpenEpisode
+    onOpenEpisode,
+    onResumeEpisode = () => {}
 }) {
     let currentFilter = 'all';
     let currentSort = 'default';
@@ -68,6 +72,7 @@ export function createLibrary({
         document.getElementById('podcast-count').textContent = `${podcasts.length} podcasts · ${totalEpisodes} episodes`;
 
         const state = loadState();
+        renderContinueShelf(podcasts, state, filter);
         const listEl = document.getElementById('podcasts-list');
         listEl.innerHTML = '';
 
@@ -101,7 +106,9 @@ export function createLibrary({
             // No aria-label: the accessible name comes from the card's visible
             // content (title, subtitle, counts), so what sighted users see is
             // exactly what screen readers announce (WCAG 2.5.3 label-in-name).
-            renderPodcastCard(card, podcast, epCount, avgProgress);
+            renderPodcastCard(card, podcast, epCount, avgProgress, {
+                newCount: newEpisodes.countNew(podcast, state)
+            });
 
             // The card's artwork tile seeds the card→header morph.
             const open = () => onOpenPodcast(podcast, card.querySelector('.podcast-icon'));
@@ -133,6 +140,122 @@ export function createLibrary({
         addCard.addEventListener('click', openCreateModal);
         activateCardWithKeyboard(addCard, openCreateModal);
         listEl.appendChild(addCard);
+    }
+
+    // Half-finished episodes from any show, one tap to resume. Hidden while
+    // searching so the results sit right under the search box.
+    function renderContinueShelf(podcasts, state, filter) {
+        const shelf = document.getElementById('continue-listening');
+        const row = document.getElementById('continue-listening-row');
+        if (!shelf || !row) return;
+        const items = filter ? [] : getContinueListening(podcasts, state, 8);
+        row.replaceChildren();
+        shelf.hidden = items.length === 0;
+        for (const { podcast, episode, percent } of items) {
+            const card = document.createElement('div');
+            card.className = 'continue-card';
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.dataset.podcastId = podcast.id;
+            card.dataset.episodeId = String(episode.id);
+            renderContinueCard(card, podcast, episode, percent);
+            const resume = () => onResumeEpisode(podcast, episode);
+            card.addEventListener('click', resume);
+            activateCardWithKeyboard(card, resume);
+            row.appendChild(card);
+        }
+    }
+
+    // "Download season" / "Download all" plus the podcast-app feed link.
+    // Sizes come from the catalog (audioBytes), so the label can say how much
+    // storage a batch takes before anything is fetched.
+    let bulkProgress = null;
+    function formatBytes(bytes) {
+        if (!Number.isFinite(bytes) || bytes <= 0) return '';
+        if (bytes >= 1e9) return `${(bytes / 1e9).toFixed(1)} GB`;
+        return `${Math.max(1, Math.round(bytes / 1e6))} MB`;
+    }
+
+    function renderBulkActions(podcast, scopeEpisodes, scopeLabel) {
+        const row = document.getElementById('bulk-actions');
+        const button = document.getElementById('bulk-download-btn');
+        const label = document.getElementById('bulk-download-label');
+        const feedBtn = document.getElementById('feed-btn');
+        if (!row || !button || !label) return;
+        const withAudio = scopeEpisodes.filter((episode) => Number(episode.audioBytes) > 0);
+        if (feedBtn) feedBtn.hidden = !podcast.feedUrl;
+        if (withAudio.length === 0) {
+            button.hidden = true;
+            row.hidden = !podcast.feedUrl;
+            return;
+        }
+        row.hidden = false;
+        button.hidden = false;
+        const pending = withAudio.filter((episode) => !downloads.isDownloaded(podcast, episode));
+        const busy = bulkProgress && bulkProgress.podcastId === podcast.id;
+        button.disabled = Boolean(busy) || (downloads.isBatchRunning?.() && !busy);
+        button.classList.toggle('downloaded', pending.length === 0);
+        delete button.dataset.mode;
+        if (busy) {
+            label.textContent = `Downloading ${Math.min(bulkProgress.done + 1, bulkProgress.total)} of ${bulkProgress.total}…`;
+        } else if (pending.length === 0) {
+            label.textContent = `${scopeLabel} downloaded · Remove`;
+            button.dataset.mode = 'remove';
+        } else {
+            const bytes = pending.reduce((sum, episode) => sum + (Number(episode.audioBytes) || 0), 0);
+            const count = `${pending.length} ${pending.length === 1 ? 'episode' : 'episodes'}`;
+            label.textContent = `Download ${scopeLabel.toLowerCase()} · ${count} · ${formatBytes(bytes)}`;
+            button.dataset.mode = 'download';
+        }
+        button.onclick = async () => {
+            const mode = button.dataset.mode;
+            if (mode === 'remove') {
+                await downloads.removeMany(podcast, withAudio);
+                toasts.show(`Removed ${scopeLabel.toLowerCase()} downloads`);
+                return;
+            }
+            if (mode !== 'download') return;
+            bulkProgress = { podcastId: podcast.id, done: 0, total: pending.length };
+            refreshEpisodeList();
+            let result;
+            try {
+                result = await downloads.downloadMany(podcast, pending, {
+                    onProgress: (done, total) => {
+                        bulkProgress = { podcastId: podcast.id, done, total };
+                        refreshEpisodeList();
+                    }
+                });
+            } finally {
+                bulkProgress = null;
+                refreshEpisodeList();
+            }
+            if (result.failed > 0) {
+                toasts.show(`Downloaded ${result.ok} of ${result.ok + result.failed}. Some episodes failed`, {
+                    actionLabel: 'Retry',
+                    onAction: () => button.click()
+                });
+            } else if (result.ok > 0) {
+                toasts.show(`${scopeLabel} saved for offline listening`);
+            }
+        };
+        if (feedBtn) {
+            feedBtn.onclick = async () => {
+                const feedUrl = new URL(podcast.feedUrl, location.href).toString();
+                let copied = false;
+                try {
+                    await navigator.clipboard.writeText(feedUrl);
+                    copied = true;
+                } catch {
+                    copied = false;
+                }
+                toasts.show(copied
+                    ? 'Feed link copied. In Apple Podcasts use Follow a Show by URL; in Overcast use Add URL'
+                    : `Feed link: ${feedUrl}`, {
+                    actionLabel: 'Open',
+                    onAction: () => { location.href = feedUrl.replace(/^https?:/, 'podcast:'); }
+                });
+            };
+        }
     }
 
     function resetEpisodeControlsForPodcast(podcast) {
@@ -371,6 +494,8 @@ export function createLibrary({
         if (!currentPodcast || !Array.isArray(currentPodcast.episodes)) {
             document.getElementById('episode-list').innerHTML = '<p class="loading-text">No episodes found</p>';
             hideSeasonChrome();
+            const bulk = document.getElementById('bulk-actions');
+            if (bulk) bulk.hidden = true;
             return;
         }
 
@@ -392,6 +517,11 @@ export function createLibrary({
             hideSeasonChrome();
             searchAllSeasons = false;
         }
+        renderBulkActions(
+            currentPodcast,
+            seasonEpisodes,
+            hasSeasons ? `Season ${selectedSeason}` : 'All episodes'
+        );
         const allStats = getSeasonStats(currentPodcast.id, currentPodcast.episodes, state);
         document.getElementById('total-progress-badge').textContent = `${allStats.percent}% Complete`;
 
@@ -481,7 +611,8 @@ export function createLibrary({
                 ? 'downloading'
                 : downloads.isDownloaded(currentPodcast, episode) ? 'downloaded' : 'none';
             renderEpisodeCard(card, episode, progress, complete, inProgress, downloadState, {
-                seasonNumber: hasSeasons ? episode.season : null
+                seasonNumber: hasSeasons ? episode.season : null,
+                isNew: newEpisodes.isNew(currentPodcast, episode, state)
             });
             const handleEpisodeCardActivation = (event) => {
                 const button = event.target.closest('.ep-download-btn');

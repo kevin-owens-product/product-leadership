@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Talking AI to the Board and LPs</title>
+    <link>https://productleader.netlify.app/?podcast=talking-ai-to-the-board</link>
+    <atom:link href="https://productleader.netlify.app/feeds/talking-ai-to-the-board.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <description>Two hosts on how private equity firms and portfolio company leaders tell the AI story to the people who hold them accountable: board reporting with evidence instead of vanity metrics, the fund&apos;s portfolio view, what to tell limited partners under the marketing rules, and presenting AI at exit so it adds value instead of inviting a discount. Built from public sources; not legal or investment advice.</description>
+    <itunes:subtitle>Reporting AI value to boards, investment committees, LPs and buyers</itunes:subtitle>
+    <itunes:author>Claire &amp; Marcus</itunes:author>
+    <itunes:summary>Two hosts on how private equity firms and portfolio company leaders tell the AI story to the people who hold them accountable: board reporting with evidence instead of vanity metrics, the fund&apos;s portfolio view, what to tell limited partners under the marketing rules, and presenting AI at exit so it adds value instead of inviting a discount. Built from public sources; not legal or investment advice.</itunes:summary>
+    <itunes:image href="https://productleader.netlify.app/icon-512.png"/>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+    <itunes:block>yes</itunes:block>
+    <item>
+      <title>The Board Wants a Number</title>
+      <description>Reporting AI Value to a Portfolio Company Board</description>
+      <itunes:subtitle>Reporting AI Value to a Portfolio Company Board</itunes:subtitle>
+      <guid isPermaLink="false">talking-ai-to-the-board/episode-01-the-board-wants-a-number</guid>
+      <link>https://productleader.netlify.app/?podcast=talking-ai-to-the-board&amp;episode=1</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/talking-ai-to-the-board/episode-01-the-board-wants-a-number/combined.mp3" length="29008358" type="audio/mpeg"/>
+      <itunes:duration>0:51:25</itunes:duration>
+      <itunes:episode>1</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Portfolio View</title>
+      <description>Reporting AI Across a Fund: Metrics, Maturity, Risk and the Marks</description>
+      <itunes:subtitle>Reporting AI Across a Fund: Metrics, Maturity, Risk and the Marks</itunes:subtitle>
+      <guid isPermaLink="false">talking-ai-to-the-board/episode-02-the-portfolio-view</guid>
+      <link>https://productleader.netlify.app/?podcast=talking-ai-to-the-board&amp;episode=2</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/talking-ai-to-the-board/episode-02-the-portfolio-view/combined.mp3" length="29553141" type="audio/mpeg"/>
+      <itunes:duration>0:53:07</itunes:duration>
+      <itunes:episode>2</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>What You Tell Your LPs</title>
+      <description>Letters, Annual Meetings, Questionnaires, Fundraising, and the Rules on Claims</description>
+      <itunes:subtitle>Letters, Annual Meetings, Questionnaires, Fundraising, and the Rules on Claims</itunes:subtitle>
+      <guid isPermaLink="false">talking-ai-to-the-board/episode-03-what-you-tell-your-lps</guid>
+      <link>https://productleader.netlify.app/?podcast=talking-ai-to-the-board&amp;episode=3</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/talking-ai-to-the-board/episode-03-what-you-tell-your-lps/combined.mp3" length="28784902" type="audio/mpeg"/>
+      <itunes:duration>0:51:20</itunes:duration>
+      <itunes:episode>3</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+    <item>
+      <title>The Exit Story</title>
+      <description>Presenting AI to Buyers So It Adds Value Instead of Inviting a Discount</description>
+      <itunes:subtitle>Presenting AI to Buyers So It Adds Value Instead of Inviting a Discount</itunes:subtitle>
+      <guid isPermaLink="false">talking-ai-to-the-board/episode-04-the-exit-story</guid>
+      <link>https://productleader.netlify.app/?podcast=talking-ai-to-the-board&amp;episode=4</link>
+      <pubDate>Sat, 14 Nov 2026 21:16:24 GMT</pubDate>
+      <enclosure url="https://productleader.netlify.app/audio/talking-ai-to-the-board/episode-04-the-exit-story/combined.mp3" length="27704943" type="audio/mpeg"/>
+      <itunes:duration>0:49:22</itunes:duration>
+      <itunes:episode>4</itunes:episode>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>

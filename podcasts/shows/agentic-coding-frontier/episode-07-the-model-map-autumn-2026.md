@@ -1,7 +1,7 @@
 # Episode 7: The Model Map, Autumn 2026
 ## "Who Shipped What, and How to Choose"
 
-**Duration:** ~17 minutes
+**Duration:** ~47 minutes
 **Hosts:** Alex (Practitioner) & Riley (Research Lead)
 **Season:** 2, The Late-2026 Frontier
 
@@ -180,6 +180,222 @@
 **ALEX:** And on the procurement side, there is a resilience angle.
 
 **RILEY:** Yes. The big models are now available through more than one channel. Opus 5.5, for example, launched on Anthropic's own platform and on the major cloud providers. Being able to reach the same model through two contracts is a cheap form of insurance against an outage or a rate limit at the worst moment.
+
+---
+
+### SEGMENT 8: The Cost Model, Worked Through
+
+**ALEX:** I want to slow down on cost per resolved task, because I think people nod at the phrase and then go back to comparing token prices. Walk me through an actual calculation.
+
+**RILEY:** Let me use made-up round numbers so nobody mistakes them for a benchmark. Say you have a lane of bug-fix tickets. Model A costs a certain amount per million tokens. Model B costs twice that. On your eval suite, model A resolves sixty percent of tickets on the first attempt, and when it fails, your harness retries up to twice more. Model B resolves eighty five percent on the first attempt.
+
+**ALEX:** So model A needs more attempts.
+
+**RILEY:** More attempts, and each failed attempt is not free. It reads the code, writes a patch, runs the tests, reads the failure, and often burns more tokens on the retry than on the first try, because the context now includes the failed patch and the test output. When you add it all up, the average tokens per resolved ticket for model A can easily be twice model B's. At half the price per token, that is a wash on model spend.
+
+**ALEX:** And then there is everything that is not model spend.
+
+**RILEY:** Which is usually bigger. CI minutes for every test run. The wall-clock time a developer waits. And the most expensive item of all, human review time on patches that look plausible but are wrong. If model A produces more of those, a reviewer spends twenty minutes rejecting a patch that cost a few cents to generate. The model bill is the smallest line on that invoice.
+
+**ALEX:** So what does a good cost dashboard show?
+
+**RILEY:** Four numbers per lane. Model spend per resolved task. Total attempts per resolved task. Human review minutes per merged change, which you can estimate from review timestamps. And the escape rate, meaning changes that were merged and later reverted or caused an incident. If you only track the first number, you will optimize toward a cheap model that quietly moves cost onto your reviewers.
+
+**ALEX:** How often do you see that?
+
+**RILEY:** Often enough that I would call it the default failure mode of an agent cost program. Someone in finance sees the model bill climbing, a team switches the execution lane to a cheaper model, the bill falls, and three months later the senior engineers are complaining about review load and nobody connects the two.
+
+**ALEX:** What about caching in that calculation?
+
+**RILEY:** It can dominate. An agent working in one repository sends the same system prompt, the same tool definitions, and often the same large chunks of code on every turn. If your harness structures the prompt so that stable content comes first and changing content comes last, most of each request can be a cache read. With cache reads priced at a small fraction of fresh input, the effective price per token for a long agent session can fall dramatically. Two teams on the same model can see very different bills purely because of prompt layout.
+
+**ALEX:** So prompt layout is a cost decision.
+
+**RILEY:** It is a cost decision and a latency decision. Cached prefixes come back faster too. If you have never looked at your cache hit rate, that is the first thing I would check on Monday.
+
+---
+
+### SEGMENT 9: Evals That Survive Model Churn
+
+**ALEX:** You keep saying thirty to fifty tasks per lane. Let us talk about how to build that suite, because I think most teams either have nothing or have a public benchmark they ran once.
+
+**RILEY:** Public benchmarks are useful for a first filter and nearly useless for a final decision. They are not your code, your conventions, or your tests, and some of them have leaked into training data. Your own suite should come from your own history.
+
+**ALEX:** Where do you find the tasks?
+
+**RILEY:** Closed tickets with merged fixes are the best source. You take the repository at the commit before the fix, give the agent the ticket text, and check whether its change makes the tests from the real fix pass. That gives you a realistic task and an objective grader at the same time. Aim for a spread: a few one-line fixes, a few multi-file changes, a couple of tasks that need the agent to read documentation, and at least one or two where the right answer is to ask a question or decline.
+
+**ALEX:** Decline?
+
+**RILEY:** Yes. If the ticket is ambiguous or the change would touch something it should not, a good agent stops and asks. If your suite only rewards producing a patch, you are training your selection process to prefer models that always produce a patch, even when they should not.
+
+**ALEX:** How do you grade things that are not pass or fail?
+
+**RILEY:** Two ways, and you want both. For anything with tests, use the tests. For the rest, like the quality of a plan or a pull request description, use a rubric with three or four specific criteria and have a strong model grade against it, then spot-check a sample by hand every time. Model graders drift and have their own preferences, so the human spot-check is what keeps the grader honest.
+
+**ALEX:** And flakiness. Agents are not deterministic.
+
+**RILEY:** So run each task more than once. Three runs per task per configuration is a reasonable minimum. Report the pass rate with the spread, not a single number. If model A scores seventy and model B scores seventy four, and each run varies by eight points, you have learned nothing. A surprising number of model switches are made on differences that are inside the noise.
+
+**ALEX:** How do you keep the suite from going stale?
+
+**RILEY:** Add a few new tasks every month from recent tickets, and retire tasks that every model now passes, because they no longer tell you anything. Keep a frozen core of maybe twenty tasks that never change, so you can compare this year's models with last year's on exactly the same work. That frozen core is how you notice slow drift.
+
+**ALEX:** Who owns it?
+
+**RILEY:** One named person per lane, with a small budget. It is not glamorous work, and it is the single best investment an agent platform team can make, because every model decision you make for the next two years runs through it.
+
+---
+
+### SEGMENT 10: Effort in Practice
+
+**ALEX:** Let us go deeper on effort. Five levels, low through max. How should a team actually choose?
+
+**RILEY:** Start from the shape of the work. Effort mostly buys deliberation: more reasoning before acting, more checking, more willingness to explore alternatives. That pays off when the task has hidden structure, like a bug whose cause is two layers away from its symptom, or a refactor where a naive change breaks something subtle. It pays off much less when the task is mechanical, like renaming a symbol or formatting a file.
+
+**ALEX:** And the cost of effort is latency as well as tokens.
+
+**RILEY:** Right. Higher effort means more thinking tokens and more wall-clock time. In an interactive session, where a developer is waiting, that delay is real. In a background job running overnight, nobody cares. So one practical rule is to set effort higher for background and batch work, and keep interactive work at medium unless the developer asks for more.
+
+**ALEX:** Can the model choose its own effort?
+
+**RILEY:** To a degree, and that is what adaptive thinking means in practice. The model decides how much to think within the budget you allow. That works well most of the time, but you still set the ceiling, and you should know what ceiling each lane runs at. The worst setup is one where nobody knows the effort level because it was set once in a config file two years ago.
+
+**ALEX:** Is there a trap with max effort?
+
+**RILEY:** Two. Overthinking simple tasks, where the model talks itself into an elaborate solution for a one-line problem. And cost surprises, because a few max-effort runs on a large codebase can cost more than a day of normal use. I would treat max as an escalation that a person or a clear rule triggers, not a default.
+
+**ALEX:** And testing it.
+
+**RILEY:** Same as models. Your eval suite should include at least two effort settings for each candidate, because the interesting comparisons are things like small model at high versus large model at medium. Those are the trades that save real money.
+
+---
+
+### SEGMENT 11: Context Discipline at a Million Tokens
+
+**ALEX:** Back to the million-token window. You said it lets you be lazy. What does discipline look like?
+
+**RILEY:** Three habits. First, curate rather than dump. An agent that loads the entire repository into context because it can will often perform worse than one that loads the twenty relevant files, because attention spreads thin and irrelevant code competes with the code that matters. Use the window for depth on the right material, not breadth on everything.
+
+**ALEX:** Second.
+
+**RILEY:** Structure for caching, which we covered. Stable things first: the system prompt, tool definitions, project conventions, the files you will reference repeatedly. Volatile things last: the latest tool output, the current question. And avoid accidentally invalidating the cache by inserting a timestamp or a changing value near the top of the prompt. I have seen a single date string at the top of a system prompt cost a team a large share of its cache hits.
+
+**ALEX:** That is painful.
+
+**RILEY:** It is very common. Third habit: plan for compaction. Long agent sessions eventually fill even a million tokens, especially when they read large logs or test output. A good harness summarizes older parts of the session and keeps going. But summaries lose detail, so important facts, like the decision you made an hour ago about which approach to take, should be written somewhere durable, like a notes file or the ticket, not just left in the conversation.
+
+**ALEX:** So the window is working memory, not storage.
+
+**RILEY:** Exactly. Anything that has to survive belongs on disk or in a system of record.
+
+---
+
+### SEGMENT 12: Running Open Weights for Real
+
+**ALEX:** Let us get practical on open weights, because I think people underestimate what it takes to run them.
+
+**RILEY:** They do. Downloading the weights is the easy part. Serving a large mixture-of-experts model well needs serious GPU memory, an inference server that supports the architecture, batching to keep the hardware busy, and someone on call when it falls over. For a model in the hundreds of billions of parameters, that is a real infrastructure project.
+
+**ALEX:** What about smaller or quantized versions?
+
+**RILEY:** That is where most teams should start. Many open families come in smaller sizes, and quantized versions trade a little quality for much lower memory. For the fleet lane tasks we described, like triage and summarization, a mid-sized open model on modest hardware is often good enough. Measure it on your eval suite, the same as any hosted model.
+
+**ALEX:** And the hidden costs.
+
+**RILEY:** Utilization is the big one. A GPU you own costs the same whether it is busy or idle. If your agent workload is bursty, mostly business hours and spiky around releases, your effective cost per token can end up higher than a hosted API. Hosted open-weight providers are a middle path: you get the open model and its license terms, but someone else runs the servers.
+
+**ALEX:** And security review.
+
+**RILEY:** Treat model weights like any other third-party dependency. Know where they came from, verify checksums, read the license, and have your security team look at the serving stack. And remember that the license question we discussed is not only legal. It affects whether you can ship a product on top of the model, which matters if your internal tool ever becomes an external one.
+
+---
+
+### SEGMENT 13: Mixing Models Inside One Agent
+
+**ALEX:** There is a pattern I keep seeing where a single agent run uses more than one model. A strong planner, a cheaper executor, maybe a separate reviewer. Is that worth the complexity?
+
+**RILEY:** Often, yes, and it is the natural extension of the lane idea. Instead of routing whole tickets to one lane, you route steps within a ticket. The planner reads the ticket and the code, writes a plan with specific files and steps, and hands it off. The executor follows the plan, edits code and runs tests. The reviewer, ideally a different model or at least a fresh context, reads the diff against the plan and the ticket and flags problems.
+
+**ALEX:** Why a different model for review?
+
+**RILEY:** Because a model reviewing its own work in the same context tends to agree with itself. A fresh context, and ideally a model from a different family, is more likely to notice a wrong assumption. It is the same reason human teams do code review instead of asking the author to check their own work twice.
+
+**ALEX:** What breaks in that setup?
+
+**RILEY:** The handoffs. If the plan is vague, the executor fills the gaps with guesses. If the executor deviates from the plan, the reviewer needs to know why. So the handoff artifacts matter: a plan with explicit files, steps and acceptance criteria, and an execution log that notes deviations and their reasons. Those are just text files, but they are the contract between the steps.
+
+**ALEX:** And cost?
+
+**RILEY:** It usually goes down, because the expensive model only does the short, high-value planning step, and the long execution loop runs on the cheaper model. But measure it. If the cheaper executor needs the planner to intervene three times per ticket, you have not saved anything.
+
+**ALEX:** Does this connect to the subagent features that the harnesses shipped this year?
+
+**RILEY:** Directly. Most serious coding harnesses now let a main agent start helpers with their own context and, often, their own model setting. That is the same pattern built into the tool. Our sister show, Claude Code Mastery, goes into how one harness does it in detail.
+
+---
+
+### SEGMENT 14: A Model Inventory
+
+**ALEX:** Last practical piece. Governance. If I asked an engineering leader today which models their organization uses, where, and under which terms, how many could answer?
+
+**RILEY:** Very few, in my experience. Models arrive through many doors. The coding harness developers use. The CI pipeline. Product features. A data team experimenting with an open model on a spare GPU. A vendor tool that calls a model under the hood. Each of those is a model dependency with its own data terms.
+
+**ALEX:** So what should the inventory contain?
+
+**RILEY:** Keep it simple. For each use: which model and version, through which provider and contract, what data it sees, who owns it, which lane or product it serves, and when it was last evaluated. A spreadsheet is fine to start. The point is that when a new model ships, or a vendor changes its terms, or a model is retired, you can answer "where are we affected" in minutes rather than weeks.
+
+**ALEX:** And when a regulator or a customer asks?
+
+**RILEY:** Then the inventory is your answer. Enterprise customers increasingly ask suppliers which AI models touch their data. Regulations in several places expect organizations to know which AI systems they use and for what. Having that list already is much easier than building it under a deadline.
+
+**ALEX:** Who should own it?
+
+**RILEY:** Whoever owns the agent platform, with security and legal as reviewers. And tie it to the eval suite and the configuration, so that changing a model in configuration prompts an update to the inventory. If it depends on someone remembering, it will drift.
+
+**ALEX:** That is a lot of process for a fast-moving field.
+
+**RILEY:** It is less than it sounds, and it is what lets you move fast safely. Teams that know what they run can switch models in a week. Teams that do not are stuck, because nobody is sure what will break.
+
+---
+
+### SEGMENT 15: Listener Questions
+
+**ALEX:** Let us close the new material with a few questions we got after season one.
+
+**RILEY:** Go ahead.
+
+**ALEX:** First: "Should a small team bother with multiple models at all, or just pick one?"
+
+**RILEY:** For a team of five, pick one strong workhorse for most work and one small model for anything high-volume. That is two models, two configurations, and one eval suite. The four-lane playbook is for organizations running agents at scale. Do not build routing infrastructure you do not need yet.
+
+**ALEX:** Second: "How do I explain model choice to leadership without drowning them in benchmarks?"
+
+**RILEY:** Show them cost per resolved task and escape rate, over time, for each lane. Leaders understand unit economics and quality. They do not need to know what a terminal coding benchmark is.
+
+**ALEX:** Third: "What happens when a model we depend on is retired?"
+
+**RILEY:** It will happen, so plan for it. Vendors publish deprecation schedules, usually with months of notice. Track them in the same place you track other dependency end-of-life dates. If your model names are in configuration and your eval suite is current, a retirement is a routine migration rather than an emergency.
+
+**ALEX:** And last: "Is it worth fine-tuning a model on our codebase?"
+
+**RILEY:** Less often than people think. With large context windows, good retrieval and well-written project instructions, a general model usually gets most of the benefit. Fine-tuning makes sense for narrow, high-volume tasks with lots of examples, especially in the fleet lane with open-weight models. For the planning and execution lanes, invest in instructions, tools and evals first.
+
+---
+
+### SEGMENT 16: Talking to Your Vendors
+
+**ALEX:** One last practical topic for the model map. Procurement. What should a team ask a model vendor beyond price?
+
+**RILEY:** A short list. What are the rate limits at our tier, and how do we raise them? What is the deprecation policy, and how much notice do we get before a model is retired? What data is retained, for how long, and is any of it used for training? Which regions can our data be processed in? What happens to our requests when a safeguard triggers, and is that logged? And is the same model available through a cloud provider we already have a contract with?
+
+**ALEX:** That last one matters for resilience.
+
+**RILEY:** And for procurement speed. Many large organizations can turn on a model through their existing cloud contract in days, while a new vendor contract takes months. If the model you want is available through both routes, you can start through the cloud and negotiate a direct contract later if the volume justifies it.
+
+**ALEX:** Any negotiating advice?
+
+**RILEY:** Bring your own numbers. If you know your cost per resolved task and your monthly volume, you can have a concrete conversation about committed spend and discounts. And keep at least one credible alternative evaluated and ready, because that is what gives you leverage when prices change.
 
 ---
 

@@ -1,0 +1,19 @@
+{
+  "id": "real-economy-ai",
+  "title": "AI in the Real Economy",
+  "subtitle": "AI value creation in the businesses that make, fix, deliver and care for things",
+  "description": "Two hosts look at where AI actually moves EBITDA in non-software portfolio companies: field and business services, healthcare services and other regulated work, manufacturing and consumer franchise systems, plus a 100-day plan a fund can run. Built from public sources; not legal advice.",
+  "author": "Maya & Grant",
+  "color": "#2F7D5B",
+  "icon": "🏭",
+  "lang": "en",
+  "ttsEngine": "kokoro",
+  "voiceMap": { "MAYA": "F3", "GRANT": "M3" },
+  "kokoroVoiceMap": { "MAYA": "bf_emma", "GRANT": "bm_george" },
+  "episodes": [
+    { "id": 1, "file": "episode-01-the-other-ninety-percent.md", "title": "The Other Ninety Percent", "subtitle": "Why AI Value in Private Equity Lives Outside Software" },
+    { "id": 2, "file": "episode-02-answer-every-call.md", "title": "Answer Every Call", "subtitle": "Field Services, Business Services, and the AI-Enabled Roll-Up" },
+    { "id": 3, "file": "episode-03-when-the-paperwork-is-the-product.md", "title": "When the Paperwork Is the Product", "subtitle": "Healthcare Services and Other Regulated Work" },
+    { "id": 4, "file": "episode-04-factories-franchises-and-the-100-day-plan.md", "title": "Factories, Franchises, and the 100-Day Plan", "subtitle": "Industrial and Consumer AI, Data Rights, and a Plan a Fund Can Run" }
+  ]
+}

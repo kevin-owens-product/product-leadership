@@ -1,7 +1,7 @@
 // Bookmarks: per-episode saved positions with notes, stored in app state.
 
-import { renderBookmarkItem } from './render.js?v=2.6.0%2B20261114T190501Z';
-import { activateCardWithKeyboard } from './dom.js?v=2.6.0%2B20261114T190501Z';
+import { renderBookmarkItem } from './render.js?v=2.6.1%2B20261114T213803Z';
+import { activateCardWithKeyboard } from './dom.js?v=2.6.1%2B20261114T213803Z';
 
 export function createBookmarksPanel({
     loadState,

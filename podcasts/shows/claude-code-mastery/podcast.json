@@ -17,6 +17,7 @@
       "description": "What changed in 2026: new models and effort, auto mode, subagents and workflows, cloud sessions and routines, artifacts, the browser and computer use."
     }
   ],
+  "kokoroSpeed": 0.63,
   "kokoroVoiceMap": {
     "ALEX": "am_fenrir",
     "JAMIE": "af_bella"

@@ -1,8 +1,8 @@
 // Play queue: persisted list of upcoming episodes + the queue panel UI.
 
-import { loadQueue, saveQueue } from '../state/storage.js?v=2.5.3%2B20261114T175623Z';
-import { renderQueueItem } from './render.js?v=2.5.3%2B20261114T175623Z';
-import { activateCardWithKeyboard } from './dom.js?v=2.5.3%2B20261114T175623Z';
+import { loadQueue, saveQueue } from '../state/storage.js?v=2.6.0%2B20261114T211355Z';
+import { renderQueueItem } from './render.js?v=2.6.0%2B20261114T211355Z';
+import { activateCardWithKeyboard } from './dom.js?v=2.6.0%2B20261114T211355Z';
 
 export function createQueuePanel({ getPodcasts, isCurrentItem, onOpenItem }) {
     const playQueue = loadQueue();

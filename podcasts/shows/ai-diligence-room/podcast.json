@@ -1,0 +1,20 @@
+{
+  "id": "ai-diligence-room",
+  "title": "The AI Diligence Room",
+  "subtitle": "Buying companies when every seller has an AI story",
+  "description": "Two hosts work through AI due diligence the way a deal team does it: testing AI claims, looking under the hood at data rights, models, cost and security, running the disruption test, and turning findings into price, contract terms, insurance and a hundred-day plan. Built from public sources; not legal or investment advice.",
+  "author": "Nadia & Owen",
+  "color": "#3D5A99",
+  "icon": "🔍",
+  "lang": "en",
+  "ttsEngine": "kokoro",
+  "voiceMap": { "NADIA": "F2", "OWEN": "M2" },
+  "kokoroVoiceMap": { "NADIA": "af_kore", "OWEN": "am_puck" },
+  "kokoroSpeed": 0.7,
+  "episodes": [
+    { "id": 1, "file": "episode-01-kicking-the-tires-on-ai-native.md", "title": "Kicking the Tires on \"AI-Native\"", "subtitle": "Why AI Diligence Now, and How to Test an AI Claim" },
+    { "id": 2, "file": "episode-02-under-the-hood.md", "title": "Under the Hood", "subtitle": "Data Rights, Models, Costs, Security and AI Technical Debt" },
+    { "id": 3, "file": "episode-03-the-disruption-test.md", "title": "The Disruption Test", "subtitle": "Is AI a Threat to the Business You're Buying?" },
+    { "id": 4, "file": "episode-04-from-findings-to-price.md", "title": "From Findings to Price", "subtitle": "Valuation, Contract Terms, Insurance and the First Hundred Days" }
+  ]
+}

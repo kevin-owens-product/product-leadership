@@ -1,0 +1,20 @@
+{
+  "id": "the-rulebook",
+  "title": "The Rulebook",
+  "subtitle": "AI regulation and governance for operators, boards and investors",
+  "description": "Two hosts map the AI rules that reach ordinary businesses in late 2026: the global landscape, the EU AI Act after the Digital Omnibus, the American patchwork of federal enforcement and state laws, and governance that works for boards, management teams and private equity funds. Built from public sources; not legal advice.",
+  "author": "Hana & Theo",
+  "color": "#8A4B2A",
+  "icon": "⚖️",
+  "lang": "en",
+  "ttsEngine": "kokoro",
+  "voiceMap": { "HANA": "F4", "THEO": "M4" },
+  "kokoroVoiceMap": { "HANA": "af_sarah", "THEO": "bm_fable" },
+  "kokoroSpeed": 0.7,
+  "episodes": [
+    { "id": 1, "file": "episode-01-the-map.md", "title": "The Map", "subtitle": "The Global AI Rulebook in Late 2026, and Why Operators Should Care" },
+    { "id": 2, "file": "episode-02-the-eu-ai-act-for-operators.md", "title": "The EU AI Act for Operators", "subtitle": "Roles, Risk Tiers, Deadlines, and What the Omnibus Changed" },
+    { "id": 3, "file": "episode-03-the-american-patchwork.md", "title": "The American Patchwork", "subtitle": "Federal Agencies, State Laws, and One Compliance Program for Fifty States" },
+    { "id": 4, "file": "episode-04-governance-that-works.md", "title": "Governance That Works", "subtitle": "Boards, Policies, Standards, Funds, and a Program Sized to the Business" }
+  ]
+}

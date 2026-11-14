@@ -1,0 +1,20 @@
+{
+  "id": "talking-ai-to-the-board",
+  "title": "Talking AI to the Board and LPs",
+  "subtitle": "Reporting AI value to boards, investment committees, LPs and buyers",
+  "description": "Two hosts on how private equity firms and portfolio company leaders tell the AI story to the people who hold them accountable: board reporting with evidence instead of vanity metrics, the fund's portfolio view, what to tell limited partners under the marketing rules, and presenting AI at exit so it adds value instead of inviting a discount. Built from public sources; not legal or investment advice.",
+  "author": "Claire & Marcus",
+  "color": "#2F6B5E",
+  "icon": "📊",
+  "lang": "en",
+  "ttsEngine": "kokoro",
+  "voiceMap": { "CLAIRE": "F3", "MARCUS": "M3" },
+  "kokoroVoiceMap": { "CLAIRE": "af_aoede", "MARCUS": "am_onyx" },
+  "kokoroSpeed": 0.7,
+  "episodes": [
+    { "id": 1, "file": "episode-01-the-board-wants-a-number.md", "title": "The Board Wants a Number", "subtitle": "Reporting AI Value to a Portfolio Company Board" },
+    { "id": 2, "file": "episode-02-the-portfolio-view.md", "title": "The Portfolio View", "subtitle": "Reporting AI Across a Fund: Metrics, Maturity, Risk and the Marks" },
+    { "id": 3, "file": "episode-03-what-you-tell-your-lps.md", "title": "What You Tell Your LPs", "subtitle": "Letters, Annual Meetings, Questionnaires, Fundraising, and the Rules on Claims" },
+    { "id": 4, "file": "episode-04-the-exit-story.md", "title": "The Exit Story", "subtitle": "Presenting AI to Buyers So It Adds Value Instead of Inviting a Discount" }
+  ]
+}

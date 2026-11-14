@@ -1,7 +1,7 @@
 # Episode 17: USA Water
 ## "The People Who Keep the Taps Running"
 
-**Duration:** ~49 minutes
+**Duration:** ~48 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

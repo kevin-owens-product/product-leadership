@@ -1,7 +1,7 @@
 # Episode 25: Schülerhilfe
 ## "Can a Tutor Beat a Free Chatbot?"
 
-**Duration:** ~48 minutes
+**Duration:** ~46 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

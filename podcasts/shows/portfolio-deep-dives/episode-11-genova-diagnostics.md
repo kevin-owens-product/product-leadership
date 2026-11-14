@@ -1,7 +1,7 @@
 # Episode 11: Genova Diagnostics
 ## "Three Hundred Biomarkers and the Question of What They Mean"
 
-**Duration:** ~48 minutes
+**Duration:** ~49 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

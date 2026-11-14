@@ -1,7 +1,7 @@
 # Episode 20: In-Place Machining
 ## "Bringing the Machine Shop to the Machine"
 
-**Duration:** ~48 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

@@ -1,7 +1,7 @@
 # Episode 4: Signature Resolution
 ## "Retired Judges, New Rooms"
 
-**Duration:** ~49 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

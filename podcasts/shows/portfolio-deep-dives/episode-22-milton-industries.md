@@ -1,7 +1,7 @@
 # Episode 22: Milton Industries
 ## "The Business of Compressed Air"
 
-**Duration:** ~48 minutes
+**Duration:** ~45 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

@@ -1,7 +1,7 @@
 # Episode 23: Brass Smith Innovations
 ## "The Glass Between You and the Buffet"
 
-**Duration:** ~48 minutes
+**Duration:** ~46 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

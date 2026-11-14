@@ -1,7 +1,7 @@
 # Episode 27: Club Champion
 ## "The Fitter and the Co-Pilot"
 
-**Duration:** ~50 minutes
+**Duration:** ~46 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

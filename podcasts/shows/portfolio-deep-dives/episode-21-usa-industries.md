@@ -1,7 +1,7 @@
 # Episode 21: USA Industries
 ## "The Right Plug at Two in the Morning"
 
-**Duration:** ~49 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

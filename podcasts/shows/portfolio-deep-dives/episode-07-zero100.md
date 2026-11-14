@@ -1,7 +1,7 @@
 # Episode 7: Zero100
 ## "Selling Answers to the People Who Run Supply Chains"
 
-**Duration:** ~50 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

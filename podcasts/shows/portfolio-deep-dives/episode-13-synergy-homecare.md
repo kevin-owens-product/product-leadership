@@ -1,7 +1,7 @@
 # Episode 13: SYNERGY HomeCare
 ## "Care at Home, Listening In"
 
-**Duration:** ~49 minutes
+**Duration:** ~48 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

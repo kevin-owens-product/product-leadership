@@ -1,7 +1,7 @@
 # Episode 19: Colt Group
 ## "Fixing the Pipe Without Stopping the Plant"
 
-**Duration:** ~49 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

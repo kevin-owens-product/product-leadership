@@ -1,7 +1,7 @@
 # Episode 30: Kilwins
 ## "Fudge, Forecasts and the Final Scoop"
 
-**Duration:** ~48 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

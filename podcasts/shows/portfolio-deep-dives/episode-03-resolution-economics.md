@@ -1,7 +1,7 @@
 # Episode 3: Resolution Economics
 ## "The Economists in the Room"
 
-**Duration:** ~49 minutes
+**Duration:** ~48 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

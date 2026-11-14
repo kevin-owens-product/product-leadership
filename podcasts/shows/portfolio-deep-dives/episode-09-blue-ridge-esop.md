@@ -1,7 +1,7 @@
 # Episode 9: Blue Ridge ESOP Associates
 ## "The Paperwork Behind Employee Ownership"
 
-**Duration:** ~49 minutes
+**Duration:** ~48 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

@@ -1,8 +1,8 @@
 // Chapters: the chapter list panel, the current-chapter badge, and the tick
 // marks on the scrubber track.
 
-import { renderChapterItem } from './render.js?v=2.5.1%2B20261114T173458Z';
-import { activateCardWithKeyboard } from './dom.js?v=2.5.1%2B20261114T173458Z';
+import { renderChapterItem } from './render.js?v=2.6.0%2B20261114T190501Z';
+import { activateCardWithKeyboard } from './dom.js?v=2.6.0%2B20261114T190501Z';
 
 export function createChaptersPanel({
     getChapters,

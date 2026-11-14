@@ -1,7 +1,7 @@
 # Episode 6: cleversoft
 ## "Software for the Rulebook"
 
-**Duration:** ~49 minutes
+**Duration:** ~50 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

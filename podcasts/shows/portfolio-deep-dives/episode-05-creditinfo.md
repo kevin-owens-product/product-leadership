@@ -1,7 +1,7 @@
 # Episode 5: Creditinfo
 ## "Who Gets a Loan, and Who Decides"
 
-**Duration:** ~49 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

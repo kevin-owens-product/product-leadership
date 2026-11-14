@@ -1,7 +1,7 @@
 # Episode 8: AGDATA
 ## "Fifty-Six Million Receipts from the Farm Economy"
 
-**Duration:** ~49 minutes
+**Duration:** ~48 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

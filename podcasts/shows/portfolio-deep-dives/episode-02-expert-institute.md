@@ -1,7 +1,7 @@
 # Episode 2: Expert Institute
 ## "The Expert, the Record and the Fifty-Dollar Question"
 
-**Duration:** ~50 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

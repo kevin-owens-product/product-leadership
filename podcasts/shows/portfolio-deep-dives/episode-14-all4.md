@@ -1,7 +1,7 @@
 # Episode 14: ALL4
 ## "The Permit Writers and the Machines"
 
-**Duration:** ~48 minutes
+**Duration:** ~51 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

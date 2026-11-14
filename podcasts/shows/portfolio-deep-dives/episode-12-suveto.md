@@ -1,7 +1,7 @@
 # Episode 12: Suveto
 ## "The Vets Who Want to Own the Clinic"
 
-**Duration:** ~49 minutes
+**Duration:** ~46 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

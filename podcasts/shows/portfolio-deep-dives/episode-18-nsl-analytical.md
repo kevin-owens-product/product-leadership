@@ -1,7 +1,7 @@
 # Episode 18: NSL Analytical
 ## "The Report Is the Product"
 
-**Duration:** ~49 minutes
+**Duration:** ~47 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

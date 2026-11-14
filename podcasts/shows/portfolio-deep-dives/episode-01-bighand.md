@@ -1,7 +1,7 @@
 # Episode 1: BigHand
 ## "Pricing the Law Firm of the Future"
 
-**Duration:** ~46 minutes
+**Duration:** ~44 minutes
 **Hosts:** Nora & James
 **Podcast:** Portfolio Deep Dives
 

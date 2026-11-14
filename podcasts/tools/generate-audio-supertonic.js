@@ -3,7 +3,7 @@
  * Audio Generation Script for PodLearn — Supertonic backend.
  *
  * Renders each dialogue line to a WAV file using a local Supertonic checkout
- * (https://github.com/supertone-inc/supertonic), then optionally concatenates
+ * (https://github.com/supertone-oss-archive/supertonic), then optionally concatenates
  * the WAVs into a single MP3 per episode using ffmpeg.
  *
  * Output layout:
@@ -122,7 +122,7 @@ function checkSupertonic() {
   }
   const exampleScript = path.join(SUPERTONIC_DIR, 'nodejs', 'example_onnx.js');
   if (!fs.existsSync(exampleScript)) {
-    die(`Could not find ${exampleScript}. Did you clone https://github.com/supertone-inc/supertonic to SUPERTONIC_DIR?`);
+    die(`Could not find ${exampleScript}. Did you clone https://github.com/supertone-oss-archive/supertonic to SUPERTONIC_DIR?`);
   }
   const onnxDir = path.join(SUPERTONIC_DIR, 'assets', 'onnx');
   if (!fs.existsSync(onnxDir)) {

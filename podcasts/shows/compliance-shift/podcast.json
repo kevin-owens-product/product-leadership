@@ -1,0 +1,14 @@
+{
+  "id": "compliance-shift",
+  "title": "Compliance Shift",
+  "subtitle": "How regulation, data and AI are reshaping workforce compliance",
+  "description": "Two hosts unpack the businesses that keep employers on the right side of employment law, and what happens to them when the rules change. Built from public sources; not legal advice.",
+  "author": "Nora & James",
+  "color": "#B45A16",
+  "icon": "⚖️",
+  "lang": "en",
+  "voiceMap": { "JAMES": "M1", "NORA": "F2" },
+  "episodes": [
+    { "id": 1, "file": "episode-01-after-the-mandate.md", "title": "After the Mandate", "subtitle": "Berkshire Associates and the Future of Workforce Compliance" }
+  ]
+}

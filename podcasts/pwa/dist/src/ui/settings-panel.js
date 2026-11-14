@@ -1,7 +1,7 @@
 // Settings panel: theme toggle, configurable skip intervals, voice boost /
 // silence trim toggles, and the clear-local-data escape hatch.
 
-import { updateToggleButton } from './dom.js?v=2.3.0%2B20260811T211033Z';
+import { updateToggleButton } from './dom.js?v=2.4.0%2B20261114T133136Z';
 
 export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysToClear }) {
     let skipForwardInterval = parseInt(localStorage.getItem('skipForwardInterval') || '10');

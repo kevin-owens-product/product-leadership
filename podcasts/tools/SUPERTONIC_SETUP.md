@@ -1,7 +1,7 @@
 # Supertonic audio generation
 
 `generate-audio-supertonic.js` renders each dialogue line in an episode to a
-WAV (then optionally MP3) using [Supertonic](https://github.com/supertone-inc/supertonic) —
+WAV (then optionally MP3) using [Supertonic](https://github.com/supertone-oss-archive/supertonic) —
 an on-device ONNX voice synthesis engine. Output drops into `podcasts/pwa/audio/<show>/<episode>/`.
 The PWA picks it up automatically: it fetches `audio/<show>/<episode>/manifest.json`
 on episode open and attaches a URL to each dialogue line. Generated audio is
@@ -9,6 +9,11 @@ REQUIRED for playback — there is no browser speechSynthesis fallback — so
 every published episode must have a generated manifest before the PWA is
 built, and `dist/audio/` must be committed (Netlify serves the committed
 `dist/`; the player stops with an error toast if episode audio is missing).
+
+> **Upstream status (Nov 2026):** Supertone archived Supertonic in September 2026; there will be no
+> further releases. Supertonic 3 is the final model. Source and weights now live under the
+> `supertone-oss-archive` organization on GitHub and Hugging Face (the URLs below). The old
+> `supertone-inc` / `Supertone` URLs still redirect today but may stop working.
 
 ## One-time setup
 
@@ -29,7 +34,7 @@ the Supertonic repo, the ONNX model weights, and (optional but recommended)
 2. **Clone Supertonic** somewhere outside this repo:
 
    ```bash
-   git clone https://github.com/supertone-inc/supertonic.git ~/code/supertonic
+   git clone https://github.com/supertone-oss-archive/supertonic.git ~/code/supertonic
    cd ~/code/supertonic/nodejs
    npm install
    ```
@@ -47,7 +52,7 @@ the Supertonic repo, the ONNX model weights, and (optional but recommended)
    cd ~/code/supertonic
    brew install git-lfs # macOS, if git-lfs is not installed
    git lfs install
-   git clone https://huggingface.co/Supertone/supertonic-3 assets
+   git clone https://huggingface.co/supertone-oss-archive/supertonic-3 assets
    ```
 
    After this you should have `~/code/supertonic/assets/onnx/*.onnx` and

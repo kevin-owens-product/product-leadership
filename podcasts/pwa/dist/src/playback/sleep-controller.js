@@ -5,8 +5,8 @@
 // end-of-episode stop. Not persisted — a reload cancels the timer, which is
 // what every polished podcast app does.
 
-import { sleepFadeVolume, sleepRemainingSeconds } from './sleep-timer.js?v=2.6.0%2B20261114T205058Z';
-import { formatClock } from '../ui/format.js?v=2.6.0%2B20261114T205058Z';
+import { sleepFadeVolume, sleepRemainingSeconds } from './sleep-timer.js?v=2.6.0%2B20261114T211355Z';
+import { formatClock } from '../ui/format.js?v=2.6.0%2B20261114T211355Z';
 
 export function createSleepController({
     speechPlayers,

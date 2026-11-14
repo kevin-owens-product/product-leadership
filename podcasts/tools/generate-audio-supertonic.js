@@ -61,6 +61,7 @@
  *     "voiceMap": { "ALEX": "M1", "RILEY": "F2", "SAM": "F1" }
  *   Keys are matched case-insensitively against the **NAME:** label in each
  *   episode markdown. Falls back to alternating M1/F1 if the map is missing.
+ *   Kokoro pace comes from `kokoroSpeed` in podcast.json (default 1.0).
  *   The kokoro engine reads `kokoroVoiceMap` instead (same keys, Kokoro voice
  *   ids as values) and falls back to alternating am_michael/af_heart.
  */
@@ -460,7 +461,7 @@ function runSupertonicBatch({ exampleScript, lines, outDir, lang }) {
   return saved;
 }
 
-function runKokoroBatch({ lines, outDir }) {
+function runKokoroBatch({ lines, outDir, speed }) {
   ensureDir(outDir);
   for (const f of fs.readdirSync(outDir)) {
     if (f.endsWith('.wav')) fs.rmSync(path.join(outDir, f));
@@ -469,7 +470,8 @@ function runKokoroBatch({ lines, outDir }) {
   const jobPath = path.join(outDir, 'job.json');
   const job = {
     kokoroDir: KOKORO_DIR,
-    speed: Number(opt('speed', '1.0')),
+    // --speed wins; otherwise the show's podcast.json `kokoroSpeed`, else 1.0.
+    speed: Number(opt('speed', speed != null ? String(speed) : '1.0')),
     lines: lines.map((line, idx) => ({
       index: line.index,
       text: cleanText(line.text, 'kokoro'),
@@ -709,7 +711,7 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     const tmpDir = path.join(outDir, '.tmp', 'batch');
     try {
       const produced = engine === 'kokoro'
-        ? runKokoroBatch({ lines: pending, outDir: tmpDir })
+        ? runKokoroBatch({ lines: pending, outDir: tmpDir, speed: manifest.kokoroSpeed })
         : runSupertonicBatch({
           exampleScript: exampleScript || checkSupertonic(),
           lines: pending,

@@ -59,7 +59,7 @@ function installControlledAudio(page, { failFirstEpisode5Play = false } = {}) {
         if (
           shouldFailEpisode5
           && this === window.__sharedAudio
-          && this.src.includes('episode-05-supplier-management')
+          && this.src.includes('episode-05-build-the-revenue-engine')
           && !this.failedEpisode5
         ) {
           this.failedEpisode5 = true;
@@ -90,14 +90,14 @@ function installControlledAudio(page, { failFirstEpisode5Play = false } = {}) {
   }, { shouldFailEpisode5: failFirstEpisode5Play });
 }
 
-async function openApEpisode(page, number) {
-  await page.goto(`/?podcast=ap-finance-mastery&episode=${number}`, { waitUntil: 'domcontentloaded' });
+async function openShowEpisode(page, number) {
+  await page.goto(`/?podcast=operator-mode&episode=${number}`, { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#player-view')).toHaveClass(/active/, { timeout: 20000 });
 }
 
 test('background auto-advance keeps podcast audio on the native media path', async ({ page }) => {
   let nextManifestRequests = 0;
-  await page.route('**/audio/ap-finance-mastery/episode-05-supplier-management/manifest.json*', route => {
+  await page.route('**/audio/operator-mode/episode-05-build-the-revenue-engine/manifest.json*', route => {
     nextManifestRequests += 1;
     void route.continue();
   });
@@ -119,9 +119,9 @@ test('background auto-advance keeps podcast audio on the native media path', asy
     });
   });
   await installControlledAudio(page);
-  await openApEpisode(page, 4);
+  await openShowEpisode(page, 4);
   const nextManifestLoaded = page.waitForResponse(response =>
-    response.url().includes('/episode-05-supplier-management/manifest.json') && response.ok()
+    response.url().includes('/episode-05-build-the-revenue-engine/manifest.json') && response.ok()
   );
   await page.locator('#play-btn').click();
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
@@ -142,12 +142,12 @@ test('background auto-advance keeps podcast audio on the native media path', asy
   });
 
   await expect(page.locator('#player-episode-title')).toContainText(
-    'Supplier Management & Spend Analytics',
+    'Build the Revenue Engine',
     { timeout: 15000 }
   );
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
   await expect.poll(() => page.evaluate(() =>
-    window.__sharedAudio.playCalls.some((src) => src.includes('episode-05-supplier-management'))
+    window.__sharedAudio.playCalls.some((src) => src.includes('episode-05-build-the-revenue-engine'))
   )).toBe(true);
   expect(await page.evaluate(() => window.__audioContextConstructions)).toBe(0);
 });
@@ -168,7 +168,7 @@ test('native media retries a transient first-range failure during auto-advance',
   });
 
   let episode5CombinedRequests = 0;
-  await page.route('**/audio/ap-finance-mastery/episode-05-supplier-management/combined.mp3*', route => {
+  await page.route('**/audio/operator-mode/episode-05-build-the-revenue-engine/combined.mp3*', route => {
     episode5CombinedRequests += 1;
     if (episode5CombinedRequests === 1) {
       void route.abort('connectionfailed');
@@ -177,7 +177,7 @@ test('native media retries a transient first-range failure during auto-advance',
     }
   });
 
-  await openApEpisode(page, 4);
+  await openShowEpisode(page, 4);
   await page.locator('#play-btn').click();
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause', { timeout: 15000 });
   await page.evaluate(() => {
@@ -186,7 +186,7 @@ test('native media retries a transient first-range failure during auto-advance',
   });
 
   await expect(page.locator('#player-episode-title')).toContainText(
-    'Supplier Management & Spend Analytics',
+    'Build the Revenue Engine',
     { timeout: 15000 }
   );
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause', { timeout: 15000 });
@@ -198,7 +198,7 @@ test('native media retries a transient first-range failure during auto-advance',
 
 test('auto-advance retries one transition failure without creating line players', async ({ page }) => {
   await installControlledAudio(page, { failFirstEpisode5Play: true });
-  await openApEpisode(page, 4);
+  await openShowEpisode(page, 4);
   await page.locator('#play-btn').click();
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
 
@@ -208,12 +208,12 @@ test('auto-advance retries one transition failure without creating line players'
   // Let the real five-second auto-advance fire; this is deliberately not a
   // click/gesture, matching the reported end-of-episode handoff.
   await expect(page.locator('#player-episode-title')).toContainText(
-    'Supplier Management & Spend Analytics',
+    'Build the Revenue Engine',
     { timeout: 15000 }
   );
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause', { timeout: 10000 });
   await expect.poll(() => page.evaluate(() =>
-    window.__sharedAudio.playCalls.filter((src) => src.includes('episode-05-supplier-management')).length
+    window.__sharedAudio.playCalls.filter((src) => src.includes('episode-05-build-the-revenue-engine')).length
   )).toBe(2);
   expect(await page.evaluate(() => window.__audioInstances.filter((audio) => audio !== window.__sharedAudio).length)).toBe(0);
   await expect(page.locator('#toast-region .toast', { hasText: "Episode audio isn't loading" })).toHaveCount(0);
@@ -223,12 +223,12 @@ test('auto-advance retries one transition failure without creating line players'
 test('auto-advance follows the playing show while another show is being browsed', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem('speedByShow', JSON.stringify({
-      'ap-finance-mastery': 1.3,
+      'operator-mode': 1.3,
       'claude-code-mastery': 2.2
     }));
   });
   await installControlledAudio(page);
-  await openApEpisode(page, 5);
+  await openShowEpisode(page, 5);
   await page.locator('#play-btn').click();
   await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
   await expect.poll(() => page.evaluate(() => window.__sharedAudio.playbackRate)).toBe(1.3);
@@ -237,20 +237,20 @@ test('auto-advance follows the playing show while another show is being browsed'
   await page.locator('#back-to-podcasts').click();
   await page.locator('.podcast-card:has-text("Claude Code Mastery")').first().click();
   await expect(page.locator('#current-podcast-title')).toContainText('Claude Code Mastery');
-  await expect(page.locator('#mini-player-title')).toContainText('Supplier Management & Spend Analytics');
-  // Browsing Claude must not apply Claude's 2.2x preference to AP playback.
+  await expect(page.locator('#mini-player-title')).toContainText('Build the Revenue Engine');
+  // Browsing Claude must not apply Claude's 2.2x preference to Operator Mode playback.
   await expect.poll(() => page.evaluate(() => window.__sharedAudio.playbackRate)).toBe(1.3);
 
   await page.evaluate(() => window.__sharedAudio.finish());
-  await expect(page.locator('#complete-message')).toContainText('Compliance, Fraud Prevention & Internal Controls');
+  await expect(page.locator('#complete-message')).toContainText('Run the Company');
 
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('tlu_podcast_state') || '{}'));
-  expect(saved.completedEpisodes).toContain('ap-finance-mastery-5');
+  expect(saved.completedEpisodes).toContain('operator-mode-5');
   expect(saved.completedEpisodes).not.toContain('claude-code-mastery-5');
-  expect(saved.episodeProgress['ap-finance-mastery-5']).toBeTruthy();
+  expect(saved.episodeProgress['operator-mode-5']).toBeTruthy();
   expect(saved.episodeProgress['claude-code-mastery-5']).toBeUndefined();
 
   await page.locator('#play-next-episode').click();
-  await expect(page.locator('#player-episode-title')).toContainText('Compliance, Fraud Prevention & Internal Controls');
-  await expect(page.locator('#np-show-name')).toContainText('AP & Finance Mastery · Episode 6');
+  await expect(page.locator('#player-episode-title')).toContainText('Run the Company');
+  await expect(page.locator('#np-show-name')).toContainText('Operator Mode · Episode 6');
 });

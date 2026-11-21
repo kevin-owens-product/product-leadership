@@ -5,7 +5,6 @@
 export function createMediaSessionController({
     speechPlayers,
     getState,
-    getArtwork,
     estimateEpisodeDurationSeconds,
     estimateLineJumpFromSeconds,
     actions
@@ -19,19 +18,36 @@ export function createMediaSessionController({
     }
 
     function updateMetadata() {
-        if (!('mediaSession' in navigator)) return;
         const { currentPodcast, currentEpisode } = getState();
         if (!currentPodcast || !currentEpisode) return;
-        if (typeof window.MediaMetadata !== 'function') return;
-        const artwork = getArtwork(currentPodcast);
-        navigator.mediaSession.metadata = new MediaMetadata({
+        // Android can use the document title before the native media session
+        // acquires audio focus. Keep it tied to the track while browsing shows.
+        const label = `${currentEpisode.title} — ${currentPodcast.title}`;
+        if (document.title !== label) document.title = label;
+        if (!navigator.mediaSession || typeof window.MediaMetadata !== 'function') return;
+        const fields = {
             title: currentEpisode.title,
             artist: currentPodcast.title,
-            album: 'PodLearn',
-            artwork: artwork
-                ? [{ src: artwork, sizes: '1024x1024', type: 'image/png' }]
-                : [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' }]
-        });
+            album: currentEpisode.season
+                ? `${currentPodcast.title} · Season ${currentEpisode.season}`
+                : currentPodcast.title
+        };
+        const cover = currentPodcast.coverUrl;
+        try {
+            const image = {
+                src: new URL(cover || 'icon-512.png', document.baseURI).href,
+                sizes: '512x512',
+                type: cover ? 'image/jpeg' : 'image/png'
+            };
+            navigator.mediaSession.metadata = new window.MediaMetadata({ ...fields, artwork: [image] });
+        } catch {
+            // Some native media bridges accept the text fields alone.
+            try {
+                navigator.mediaSession.metadata = new window.MediaMetadata(fields);
+            } catch (error) {
+                console.debug('Media Session metadata unavailable:', error);
+            }
+        }
     }
 
     function updatePositionState() {
@@ -88,8 +104,7 @@ export function createMediaSessionController({
         setActionHandler('seekbackward', (details) => {
             const offset = Number(details?.seekOffset) || 10;
             if (speechPlayers.isContinuousReady()) {
-                speechPlayers.seek(speechPlayers.getCurrentTime() - offset);
-                updatePositionState();
+                actions.seekToSeconds(speechPlayers.getCurrentTime() - offset);
             } else {
                 const { isPlaying, isPaused, currentLineIndex } = getState();
                 const linesToJump = estimateLineJumpFromSeconds(offset);
@@ -99,8 +114,7 @@ export function createMediaSessionController({
         setActionHandler('seekforward', (details) => {
             const offset = Number(details?.seekOffset) || 10;
             if (speechPlayers.isContinuousReady()) {
-                speechPlayers.seek(speechPlayers.getCurrentTime() + offset);
-                updatePositionState();
+                actions.seekToSeconds(speechPlayers.getCurrentTime() + offset);
             } else {
                 const { isPlaying, isPaused, currentLineIndex } = getState();
                 const linesToJump = estimateLineJumpFromSeconds(offset);
@@ -110,8 +124,7 @@ export function createMediaSessionController({
         setActionHandler('seekto', (details) => {
             if (!Number.isFinite(details?.seekTime)) return;
             if (speechPlayers.isContinuousReady()) {
-                speechPlayers.seek(details.seekTime);
-                updatePositionState();
+                actions.seekToSeconds(details.seekTime);
             } else {
                 const { isPlaying, isPaused, dialogueLines } = getState();
                 const duration = estimateEpisodeDurationSeconds();
@@ -130,11 +143,11 @@ export function createMediaSessionController({
     }
 
     function sync({ includeMetadata = false, includePosition = false } = {}) {
-        if (!('mediaSession' in navigator)) return;
-        initializeHandlers();
         if (includeMetadata) {
             updateMetadata();
         }
+        if (!navigator.mediaSession) return;
+        initializeHandlers();
         updatePlaybackState();
         if (includePosition) {
             updatePositionState();

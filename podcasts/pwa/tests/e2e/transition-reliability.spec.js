@@ -95,6 +95,94 @@ async function openShowEpisode(page, number) {
   await expect(page.locator('#player-view')).toHaveClass(/active/, { timeout: 20000 });
 }
 
+test('first play preserves the time selected before playback', async ({ page }) => {
+  await installControlledAudio(page);
+  await openShowEpisode(page, 1);
+  await page.locator('#fwd-btn').click();
+  const selected = await page.evaluate(() => window.__sharedAudio.currentTime);
+  expect(selected).toBeGreaterThan(0);
+  await page.locator('#play-btn').click();
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
+  expect(await page.evaluate(() => window.__sharedAudio.currentTime)).toBe(selected);
+});
+
+test('an interrupted episode switch preserves the pending episode’s saved progress', async ({ page }) => {
+  await installControlledAudio(page);
+  await openShowEpisode(page, 1);
+  await page.locator('.transcript-line[data-index="24"]').click();
+  await page.locator('#back-to-list').click();
+  const oldProgress = await page.evaluate(() =>
+    JSON.parse(localStorage.getItem('tlu_podcast_state')).episodeProgress['operator-mode-2'] ?? null
+  );
+  const pendingUrl = '**/audio/operator-mode/episode-02-find-the-truth-in-the-numbers/manifest.json*';
+  let release;
+  const gate = new Promise(resolve => { release = resolve; });
+  await page.route(pendingUrl, async route => {
+    await gate;
+    await route.continue();
+  });
+  const request = page.waitForRequest(pendingUrl);
+  await page.locator('.episode-card[data-episode-id="2"] .ep-title').click();
+  await request;
+  const reply = page.waitForResponse(pendingUrl);
+  try {
+    await page.locator('.episode-card[data-episode-id="3"] .ep-title').click();
+    await expect(page.locator('#player-episode-title')).toHaveText('Choose the Bets');
+  } finally {
+    release();
+  }
+  await reply;
+  expect(await page.evaluate(() =>
+    JSON.parse(localStorage.getItem('tlu_podcast_state')).episodeProgress['operator-mode-2'] ?? null
+  )).toEqual(oldProgress);
+  await expect(page.locator('#player-episode-title')).toHaveText('Choose the Bets');
+});
+
+test('finishing a short episode records 100 percent and counts the completion once', async ({ page }) => {
+  await installControlledAudio(page);
+  await page.goto('/?podcast=the-decision-room&episode=1');
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+  await page.locator('#play-btn').click();
+  await page.evaluate(() => window.__sharedAudio.finish());
+  await expect(page.locator('#complete-modal')).toHaveClass(/show/);
+  await page.locator('#back-to-episodes').click();
+  const state = await page.evaluate(() => JSON.parse(localStorage.getItem('tlu_podcast_state')));
+  expect(state.episodeProgress['the-decision-room-1'].percent).toBe(100);
+  expect(state.completedEpisodes).toEqual(['the-decision-room-1']);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem('listeningStats')).episodesCompleted)).toBe(1);
+});
+
+test('a headset replay or Escape cancels the completion countdown before locking', async ({ page }) => {
+  await installControlledAudio(page);
+  await page.addInitScript(() => {
+    window.__mediaActions = {};
+    navigator.mediaSession.setActionHandler = (name, callback) => { window.__mediaActions[name] = callback; };
+  });
+  await openShowEpisode(page, 4);
+  await page.locator('#play-btn').click();
+  const finish = () => page.evaluate(() => window.__sharedAudio.finish());
+  const modal = page.locator('#complete-modal');
+  await finish();
+  await expect(modal).toHaveClass(/show/);
+  await page.evaluate(() => window.__mediaActions.play());
+  await expect(modal).not.toHaveClass(/show/);
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
+  expect(await page.evaluate(() => window.__sharedAudio.currentTime)).toBe(0);
+
+  await finish();
+  await expect(modal).toHaveClass(/show/);
+  await page.keyboard.press('Escape');
+  await expect(modal).not.toHaveClass(/show/);
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', { configurable: true, value: 'hidden' });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  // The background hand-off runs immediately if a countdown is still active.
+  await page.waitForTimeout(250);
+  await expect(page.locator('#np-show-name')).toContainText('Episode 4');
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Play');
+});
+
 test('background auto-advance keeps podcast audio on the native media path', async ({ page }) => {
   let nextManifestRequests = 0;
   await page.route('**/audio/operator-mode/episode-05-build-the-revenue-engine/manifest.json*', route => {

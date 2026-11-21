@@ -8,9 +8,9 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function loadServiceWorker({ fetchImpl, cacheImpl }) {
+function loadServiceWorker({ fetchImpl, cacheImpl, shell = [] }) {
   const source = fs.readFileSync(path.join(__dirname, '../../sw.js'), 'utf8')
-    .replace('const APP_SHELL_RAW = __APP_SHELL__;', 'const APP_SHELL_RAW = [];');
+    .replace('const APP_SHELL_RAW = __APP_SHELL__;', `const APP_SHELL_RAW = ${JSON.stringify(shell)};`);
   const listeners = new Map();
   const context = {
     console,
@@ -224,4 +224,77 @@ test('CACHE_AUDIO_URLS still rejects a genuinely truncated uncompressed body', a
   assert.equal(reply.results[0].ok, false);
   assert.match(reply.results[0].error, /Incomplete response/);
   assert.equal(cache.entries.size, 0);
+});
+
+test('quota failure rolls back a partial download, replies and permits a retry', async () => {
+  const base = 'https://example.test/audio/show/episode/';
+  const old = ['combined.mp3?v=old', 'manifest.json?v=old'].map((file) => base + file);
+  const urls = ['combined.mp3?v=current', 'manifest.json?v=current'].map((file) => base + file);
+  old.push('https://example.test/transcripts/show/episode.md?v=old-script');
+  urls.push('https://example.test/transcripts/show/episode.md?v=new-script');
+  const cache = createCache(old.map((url) => [url, new Response('previous download')]));
+  const put = cache.put;
+  cache.put = async (url, response) => {
+    if (url === urls[2]) throw new DOMException('Storage full', 'QuotaExceededError');
+    return put(url, response);
+  };
+  const { listeners } = loadServiceWorker({ cacheImpl: cache, fetchImpl: async () => new Response('new content') });
+  async function download() {
+    let completed;
+    let reply;
+    listeners.get('message')({
+      data: { type: 'CACHE_AUDIO_URLS', urls },
+      ports: [{ postMessage: (msg) => { reply = msg; } }],
+      waitUntil: (promise) => { completed = promise; }
+    });
+    await completed;
+    return reply.results;
+  }
+  const failed = await download();
+  assert.ok(failed.every((entry) => !entry.ok && entry.error.includes('Storage full')));
+  assert.deepEqual([...cache.entries.keys()], old);
+  cache.put = put;
+  assert.ok((await download()).every((entry) => entry.ok));
+  assert.deepEqual([...cache.entries.keys()], urls);
+});
+
+test('install fails if the batch of required shell assets cannot be cached', async () => {
+  const shell = ['https://example.test/index.html', 'https://example.test/src/main.js'];
+  const cache = {
+    async addAll(requests) {
+      assert.deepEqual(Array.from(requests, (req) => req.url), shell);
+      assert.ok(requests.every((req) => req.cache === 'reload'));
+      throw new Error('main.js unavailable');
+    }
+  };
+  const { context, listeners } = loadServiceWorker({ cacheImpl: cache, shell });
+  let skippedWaiting = false;
+  context.self.skipWaiting = () => { skippedWaiting = true; };
+  let install;
+  listeners.get('install')({ waitUntil: (promise) => { install = promise; } });
+  await assert.rejects(install, /main.js unavailable/);
+  assert.equal(skippedWaiting, false);
+});
+
+test('activation retires older app shells and keeps downloaded audio and unrelated caches', async () => {
+  const { context, listeners } = loadServiceWorker({ cacheImpl: createCache() });
+  const names = ['podlearn-shell-previous', 'podlearn-shell-__BUILD_VERSION__', 'podlearn-offline-audio-v1', 'podlearn-transcripts-v1', 'other-app-cache'];
+  const removed = [];
+  context.caches.keys = async () => names;
+  context.caches.delete = async (name) => removed.push(name);
+  let activation;
+  listeners.get('activate')({ waitUntil: (promise) => { activation = promise; } });
+  await activation;
+  assert.deepEqual(removed, ['podlearn-shell-previous']);
+});
+
+test('a full transcript cache still serves the online script and retains its offline copy', async () => {
+  const oldUrl = 'https://example.test/transcripts/show/one.md?v=old';
+  const old = new Response('previous episode script');
+  const cached = createCache([[oldUrl, old]]);
+  cached.put = async () => { throw new DOMException('Storage full', 'QuotaExceededError'); };
+  const { context } = loadServiceWorker({ cacheImpl: cached, fetchImpl: async () => new Response('current episode script') });
+  const response = await context.transcriptFetch(new Request('https://example.test/transcripts/show/one.md?v=new'));
+  assert.equal(await response.text(), 'current episode script');
+  assert.equal(cached.entries.get(oldUrl), old);
 });

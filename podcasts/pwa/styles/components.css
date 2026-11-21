@@ -292,6 +292,16 @@ body.has-mini-player .toast-region {
 .queue-info {
     flex: 1;
     min-width: 0;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    text-align: start;
+    cursor: pointer;
+}
+
+.queue-info span {
+    display: block;
 }
 
 .queue-title {

@@ -3,13 +3,23 @@
 
 import { loadListeningStats, saveListeningStats } from './storage.js';
 
-export function createStatsTracker({ getSpeechRate, isListening }) {
+export function createStatsTracker({ now = () => performance.now() } = {}) {
     const listeningStats = loadListeningStats();
+    let activeAudio = null;
+    let lastSample = 0;
+    let sampleRate = 1;
 
-    function recordListening(secondsListened) {
+    function checkpoint() {
+        if (!activeAudio) return;
+        const t = now();
+        const secondsListened = (t - lastSample) / 1000;
+        lastSample = t;
+        if (secondsListened <= 0) return;
         listeningStats.totalTime += secondsListened;
-        listeningStats.speedSum += getSpeechRate();
-        listeningStats.speedCount += 1;
+        // Older records have one speed sample per ten seconds of playback.
+        const weight = secondsListened / 10;
+        listeningStats.speedSum += sampleRate * weight;
+        listeningStats.speedCount += weight;
 
         const today = new Date().toDateString();
         if (listeningStats.lastListenDate !== today) {
@@ -24,12 +34,43 @@ export function createStatsTracker({ getSpeechRate, isListening }) {
         saveListeningStats(listeningStats);
     }
 
+    function stopTracking() {
+        checkpoint();
+        activeAudio = null;
+    }
+
+    function trackAudio(audio) {
+        function startTracking() {
+            if (audio.paused || audio.ended || activeAudio === audio) return;
+            checkpoint();
+            activeAudio = audio;
+            lastSample = now();
+            sampleRate = audio.playbackRate;
+        }
+        audio.addEventListener?.('playing', startTracking);
+        audio.addEventListener?.('seeked', () => {
+            // An already buffered seek can resume without another playing event.
+            if (audio.readyState >= 3) startTracking();
+        });
+        for (const event of ['waiting', 'pause', 'ended', 'error', 'emptied', 'seeking']) {
+            audio.addEventListener?.(event, () => {
+                if (activeAudio === audio) stopTracking();
+            });
+        }
+        audio.addEventListener?.('ratechange', () => {
+            if (activeAudio !== audio) return;
+            checkpoint();
+            sampleRate = audio.playbackRate;
+        });
+    }
+
     function noteEpisodeCompleted() {
         listeningStats.episodesCompleted += 1;
         saveListeningStats(listeningStats);
     }
 
     function updateDisplay() {
+        checkpoint();
         const hours = Math.floor(listeningStats.totalTime / 3600);
         const mins = Math.floor((listeningStats.totalTime % 3600) / 60);
         document.getElementById('stat-total-time').textContent = `${hours}h ${mins}m`;
@@ -57,17 +98,9 @@ export function createStatsTracker({ getSpeechRate, isListening }) {
             document.getElementById('stats-modal').classList.remove('show');
         });
 
-        // Track time listened
-        let lastStatsUpdate = Date.now();
-        setInterval(() => {
-            if (isListening()) {
-                const now = Date.now();
-                const elapsed = (now - lastStatsUpdate) / 1000;
-                recordListening(elapsed);
-                lastStatsUpdate = now;
-            }
-        }, 10000); // Update every 10 seconds
+        setInterval(checkpoint, 10000);
+        window.addEventListener('pagehide', checkpoint);
     }
 
-    return { recordListening, noteEpisodeCompleted, updateDisplay, bind };
+    return { trackAudio, stopTracking, noteEpisodeCompleted, updateDisplay, bind };
 }

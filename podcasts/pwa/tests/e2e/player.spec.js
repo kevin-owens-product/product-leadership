@@ -20,6 +20,22 @@ test('loads home and can open player shell', async ({ page }) => {
   await expect(page.locator('#play-btn')).toBeVisible();
 });
 
+test('clearing local data stays cleared after the player navigates home', async ({ page }) => {
+  await openEpisode(page);
+  await page.locator('.transcript-line').nth(5).click();
+  const stateKey = 'tlu_podcast_state';
+  await expect.poll(() => page.evaluate(key => JSON.parse(localStorage.getItem(key))?.currentLineIndex, stateKey)).toBe(5);
+  await page.locator('#player-more-btn').click();
+  await page.locator('#settings-panel .panel-header').click();
+  page.once('dialog', dialog => dialog.accept());
+  await Promise.all([
+    page.waitForNavigation(),
+    page.locator('#clear-local-data-btn').click()
+  ]);
+  await expect(page.locator('#podcasts-view')).toBeVisible();
+  expect(await page.evaluate(key => localStorage.getItem(key), stateKey)).toBeNull();
+});
+
 test('transcript search handles regex-like input without crash', async ({ page }) => {
   await openEpisode(page);
 
@@ -49,10 +65,9 @@ test('card navigation and player toggles are keyboard accessible', async ({ page
   // the list view before focusing an element inside it.
   await expect(page.locator('#list-view')).toHaveClass(/active/);
 
-  const episodeCard = page.locator('.episode-card:has-text("AI-Native Product Management")').first();
-  await expect(episodeCard).toHaveAttribute('role', 'button');
-  await expect(episodeCard).toBeVisible();
-  await episodeCard.focus();
+  const episodeButton = page.getByRole('button', { name: 'AI-Native Product Management', exact: true });
+  await expect(episodeButton).toBeVisible();
+  await episodeButton.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#player-view')).toHaveClass(/active/);
 

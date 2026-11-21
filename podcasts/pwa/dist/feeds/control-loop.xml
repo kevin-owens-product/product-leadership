@@ -19,7 +19,7 @@
       <itunes:subtitle>Control Flow, Termination, and Why Agents Diverge</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-01-the-loop-is-the-architecture</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=1</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-01-the-loop-is-the-architecture/combined.mp3" length="22958976" type="audio/mpeg"/>
       <itunes:duration>0:36:16</itunes:duration>
       <itunes:episode>1</itunes:episode>
@@ -31,7 +31,7 @@
       <itunes:subtitle>Compaction, Context Rot, and Cache-Aware Prompt Layout</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-02-context-is-a-budget</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=2</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-02-context-is-a-budget/combined.mp3" length="19850588" type="audio/mpeg"/>
       <itunes:duration>0:31:17</itunes:duration>
       <itunes:episode>2</itunes:episode>
@@ -43,7 +43,7 @@
       <itunes:subtitle>Fan-Out, Pipelines, Subagents, and Isolation</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-03-topology</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=3</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-03-topology/combined.mp3" length="17425517" type="audio/mpeg"/>
       <itunes:duration>0:27:25</itunes:duration>
       <itunes:episode>3</itunes:episode>
@@ -55,7 +55,7 @@
       <itunes:subtitle>Verifiers, Judge Panels, and the Economics of Being Right</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-04-verification-driven-loops</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=4</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-04-verification-driven-loops/combined.mp3" length="17482346" type="audio/mpeg"/>
       <itunes:duration>0:27:27</itunes:duration>
       <itunes:episode>4</itunes:episode>
@@ -67,7 +67,7 @@
       <itunes:subtitle>Parsing, Resolution, and Incremental Indexing</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-05-building-the-code-graph</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=5</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-05-building-the-code-graph/combined.mp3" length="18300058" type="audio/mpeg"/>
       <itunes:duration>0:28:34</itunes:duration>
       <itunes:episode>5</itunes:episode>
@@ -79,7 +79,7 @@
       <itunes:subtitle>Traversal, Ranking, and Where Vectors Stop Working</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-06-retrieval-over-graphs</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=6</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-06-retrieval-over-graphs/combined.mp3" length="18734875" type="audio/mpeg"/>
       <itunes:duration>0:29:25</itunes:duration>
       <itunes:episode>6</itunes:episode>
@@ -91,7 +91,7 @@
       <itunes:subtitle>The Interface Between a Model and the World</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-07-tools-permissions-sandboxes</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=7</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-07-tools-permissions-sandboxes/combined.mp3" length="17335931" type="audio/mpeg"/>
       <itunes:duration>0:27:10</itunes:duration>
       <itunes:episode>7</itunes:episode>
@@ -103,7 +103,7 @@
       <itunes:subtitle>Traces, Replay, Regression Gates, and Cost per Resolved Task</itunes:subtitle>
       <guid isPermaLink="false">control-loop/episode-08-observability-evals-economics</guid>
       <link>https://productleader.netlify.app/?podcast=control-loop&amp;episode=8</link>
-      <pubDate>Wed, 12 Aug 2026 05:38:37 GMT</pubDate>
+      <pubDate>Sun, 02 Aug 2026 16:24:11 GMT</pubDate>
       <enclosure url="https://productleader.netlify.app/audio/control-loop/episode-08-observability-evals-economics/combined.mp3" length="16638791" type="audio/mpeg"/>
       <itunes:duration>0:26:10</itunes:duration>
       <itunes:episode>8</itunes:episode>

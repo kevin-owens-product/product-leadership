@@ -1,11 +1,13 @@
-import { escapeHtml } from '../security/sanitize.js?v=2.7.0%2B20261114T232640Z';
-import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.7.0%2B20261114T232640Z';
+import { escapeHtml } from '../security/sanitize.js?v=2.7.1%2B20261121T195202Z';
+import { generatePodcastArtwork, getShowIdentity } from './artwork.js?v=2.7.1%2B20261121T195202Z';
 
 // Hand-drawn inline SVG glyphs (1.8px round strokes — the shared .icon
 // language from player.css). No emoji glyphs in list chrome.
 const ICON_DOWNLOAD = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5v10"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M5 19.5h14"/></svg>';
 const ICON_CHECK = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5.5 12.5 4.5 4.5 8.5-9.5"/></svg>';
 const ICON_CHECK_SMALL = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12.5 5 5 9-10"/></svg>';
+
+const ICON_QUEUE_ADD = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h14M3 11h10M3 16h6m8-4v8m-4-4h8"/></svg>';
 
 function formatClockFromMinutes(totalMinutes) {
   const safeMinutes = Number.isFinite(totalMinutes) ? Math.max(0, totalMinutes) : 0;
@@ -77,9 +79,12 @@ export function renderPodcastCard(card, podcast, epCount, avgProgress, { newCoun
   `;
 }
 
-export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState, { seasonNumber = null, isNew = false } = {}) {
+export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, downloadState, {
+  seasonNumber = null, isNew = false, queued = false
+} = {}) {
   const state = downloadState || 'none';
   const downloadGlyph = state === 'downloaded' ? ICON_CHECK : ICON_DOWNLOAD;
+  const queueLabel = escapeHtml(queued ? `${ep.title} is in the queue` : `Add ${ep.title} to queue`);
   const downloadTitle = state === 'downloaded'
     ? 'Downloaded — tap to remove'
     : state === 'downloading'
@@ -105,9 +110,10 @@ export function renderEpisodeCard(card, ep, progress, isComplete, inProgress, do
     <div class="ep-header">
       <span class="ep-number">${seasonNumber ? `Season ${seasonNumber} · ` : ''}Episode ${ep.id}</span>
       ${statusChip}
+      <button class="ep-queue-btn" type="button" aria-label="${queueLabel}" title="${queueLabel}" aria-disabled="${queued}">${queued ? ICON_CHECK : ICON_QUEUE_ADD}</button>
       <button class="ep-download-btn ${state}" type="button" data-action="download" data-ep-id="${ep.id}" title="${downloadTitle}" aria-label="${downloadTitle}">${downloadGlyph}</button>
     </div>
-    <div class="ep-title">${escapeHtml(ep.title)}</div>
+    <button type="button" class="ep-title">${escapeHtml(ep.title)}</button>
     <div class="ep-subtitle">${escapeHtml(ep.subtitle)}</div>
     <div class="ep-meta">
       <span>${totalLabel}</span>
@@ -147,12 +153,12 @@ export function renderTranscriptLine(div, line) {
 
 export function renderQueueItem(item, episode, podcast, isPlaying, index) {
   return `
-    <div class="queue-item ${isPlaying ? 'playing' : ''}" data-index="${index}" role="button" tabindex="0" aria-label="Play from queue: ${escapeHtml(episode.title)}">
+    <div class="queue-item ${isPlaying ? 'playing' : ''}" data-index="${index}">
       <div class="queue-number" aria-hidden="true">${index + 1}</div>
-      <div class="queue-info">
-        <div class="queue-title">${escapeHtml(episode.title)}</div>
-        <div class="queue-subtitle">${escapeHtml(podcast.title)}</div>
-      </div>
+      <button class="queue-info" type="button" aria-label="Play from queue: ${escapeHtml(episode.title)}">
+        <span class="queue-title">${escapeHtml(episode.title)}</span>
+        <span class="queue-subtitle">${escapeHtml(podcast.title)}</span>
+      </button>
       <button class="queue-remove" data-index="${index}" aria-label="Remove ${escapeHtml(episode.title)} from queue">×</button>
     </div>
   `;

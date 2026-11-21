@@ -35,22 +35,8 @@ if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir, { recursive: true });
 }
 
-// Pre-baked audio (e.g. produced by tools/generate-audio-supertonic.js) lives
-// at pwa/audio/<show>/<episode>/. We mirror it into the build output below
-// once the rest of the build has produced dist/. Wipe the previous copy first
-// so removed episodes don't linger.
-function removeDirRecursive(dir) {
-    if (!fs.existsSync(dir)) return;
-    const result = spawnSync('rm', ['-rf', dir], { stdio: 'ignore' });
-    if (result.status !== 0) {
-        fs.rmSync(dir, {
-            recursive: true,
-            force: true,
-            maxRetries: 10,
-            retryDelay: 200
-        });
-    }
-}
+const audioSrcDir = path.join(__dirname, 'audio');
+const audioDistDir = path.join(distDir, 'audio');
 
 // Validate all show Markdown + audio manifests before touching dist/ — a
 // broken episode should fail the build loudly, not ship silently truncated.
@@ -61,14 +47,6 @@ if (validation.errors > 0) {
     process.exit(1);
 }
 console.log(`✓ Validation passed${validation.warnings ? ` (${validation.warnings} warning(s))` : ''}.\n`);
-
-// Wipe-and-mirror dist/audio ONLY when the generated source exists. pwa/audio
-// is gitignored (a local build artifact), so on CI — Netlify runs this exact
-// script — it is absent and the committed dist/audio IS the source of truth;
-// wiping it there ships a completely silent catalog.
-if (fs.existsSync(path.join(__dirname, 'audio'))) {
-    removeDirRecursive(path.join(distDir, 'audio'));
-}
 
 console.log('Building PodLearn Multi-Podcast App...\n');
 
@@ -154,14 +132,14 @@ function firstCommitDate(filePath) {
     }
 }
 
-// Audio manifests live in pwa/audio while rendering and in the committed
-// dist/audio afterwards; read whichever exists.
+// The local render replaces the shipped episode once it has a manifest.
+// Feed enclosure sizes and durations must describe that same render.
 function findAudioFile(showId, basename, fileName) {
-    for (const root of [path.join(__dirname, 'audio'), path.join(distDir, 'audio')]) {
-        const candidate = path.join(root, showId, basename, fileName);
-        if (fs.existsSync(candidate)) return candidate;
-    }
-    return null;
+    const local = path.join(audioSrcDir, showId, basename);
+    const episodeDir = fs.existsSync(path.join(local, 'manifest.json'))
+        ? local : path.join(audioDistDir, showId, basename);
+    const candidate = path.join(episodeDir, fileName);
+    return fs.existsSync(candidate) ? candidate : null;
 }
 
 // Find all podcasts
@@ -189,6 +167,14 @@ if (fs.existsSync(showsDir)) {
                 icon: manifest.icon || '🎙️',
                 episodes: []
             };
+            const coverPath = path.join(podcastDir, 'cover.jpg');
+            if (fs.existsSync(coverPath)) {
+                const coverDir = path.join(distDir, 'covers');
+                fs.mkdirSync(coverDir, { recursive: true });
+                const coverName = dir.name + '.jpg';
+                fs.copyFileSync(coverPath, path.join(coverDir, coverName));
+                podcastData.coverUrl = 'covers/' + encodeURIComponent(coverName);
+            }
             if (Array.isArray(manifest.seasons) && manifest.seasons.length > 0) {
                 podcastData.seasons = manifest.seasons.map((season) => ({
                     number: season.number,
@@ -363,7 +349,9 @@ const buildStamp = buildTime
     .replace(/\.\d{3}Z$/, 'Z');
 const buildVersion = `${baseVersion}+${buildStamp}`;
 const generatedVersion = {
-    version: buildVersion,
+    // Older clients clear all offline audio when the old 'version' field
+    // changes. They can upgrade through service worker registration instead.
+    buildVersion,
     baseVersion,
     updated: buildTime.toISOString().slice(0, 10),
     builtAt: buildTime.toISOString()
@@ -436,37 +424,39 @@ function copyDirRecursive(src, dest, shouldCopy = () => true) {
     return count;
 }
 
-function copyAudioRecursive(src, dest) {
-    return copyDirRecursive(src, dest, (srcPath, fileName) => {
-        if (fileName.includes(' 2.')) return false;
-        if (fileName === 'manifest.json') return true;
-        if (fileName.endsWith('.mp3')) return true;
-        return false;
-    });
+// A fresh checkout already ships rendered audio in dist/. A local synthesis
+// may cover a single episode. Replace only episodes with a local manifest,
+// and remove directories for shows or episodes removed from the catalog.
+function copyEpisodeAudio(src, dest) {
+    const showDir = path.dirname(dest);
+    fs.mkdirSync(showDir, { recursive: true });
+    const staging = fs.mkdtempSync(path.join(showDir, '.render-'));
+    const next = path.join(staging, 'new');
+    const backup = path.join(staging, 'previous');
+    fs.mkdirSync(next);
+    try {
+        for (const file of fs.readdirSync(src)) {
+            if (file !== 'manifest.json' && (!file.endsWith('.mp3') || file.includes(' 2.'))) continue;
+            fs.copyFileSync(path.join(src, file), path.join(next, file));
+        }
+        if (fs.existsSync(dest)) fs.renameSync(dest, backup);
+        try {
+            fs.renameSync(next, dest);
+        } catch (err) {
+            if (fs.existsSync(backup)) fs.renameSync(backup, dest);
+            throw err;
+        }
+    } finally {
+        fs.rmSync(staging, { recursive: true, force: true });
+    }
 }
 
-function pruneEmptyDirs(dir) {
-    const entries = readdirSafe(dir);
-    if (!entries) return true; // vanished mid-scan == already gone
-    let isEmpty = true;
-    for (const entry of entries) {
-        const child = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-            if (pruneEmptyDirs(child)) {
-                try {
-                    fs.rmdirSync(child);
-                } catch (err) {
-                    if (err.code === 'ENOTEMPTY') isEmpty = false;
-                    else if (err.code !== 'ENOENT') throw err;
-                }
-            } else {
-                isEmpty = false;
-            }
-        } else {
-            isEmpty = false;
+function pruneAudioDirs(directory, keep) {
+    for (const entry of readdirSafe(directory) || []) {
+        if (entry.isDirectory() && !keep.has(entry.name)) {
+            fs.rmSync(path.join(directory, entry.name), { recursive: true, force: true });
         }
     }
-    return isEmpty;
 }
 
 // Copy ES module source files used by index.html
@@ -491,18 +481,18 @@ if (fs.existsSync(stylesDir)) {
     }
 }
 
-// Copy generated audio from tools/generate-audio-supertonic.js
-const audioSrcDir = path.join(__dirname, 'audio');
-const audioDistDir = path.join(distDir, 'audio');
-if (fs.existsSync(audioSrcDir)) {
-    const audioCount = copyAudioRecursive(audioSrcDir, audioDistDir);
-    pruneEmptyDirs(audioDistDir);
-    if (audioCount > 0) {
-        console.log(`✓ Copied: ${audioCount} generated Supertonic audio files`);
+for (const podcast of podcasts) {
+    const showDir = path.join(audioDistDir, podcast.id);
+    const basenames = new Set(podcast.episodes.map((episode) => episode.file.replace(/\.md$/, '')));
+    for (const basename of basenames) {
+        const src = path.join(audioSrcDir, podcast.id, basename);
+        if (fs.existsSync(path.join(src, 'manifest.json'))) {
+            copyEpisodeAudio(src, path.join(showDir, basename));
+        }
     }
-} else {
-    console.warn('⚠️  No generated Supertonic audio found. Run npm run audio:show before building.');
+    pruneAudioDirs(showDir, basenames);
 }
+if (podcasts.length) pruneAudioDirs(audioDistDir, new Set(podcasts.map((podcast) => podcast.id)));
 
 // === Service worker template substitution ===
 //

@@ -1,9 +1,9 @@
 // Library screens: the podcasts home grid and the per-show episode list,
 // including search, status filters, and sorting.
 
-import { updateVersionBadge } from '../app/version.js?v=2.7.0%2B20261114T232640Z';
-import { formatDurationLabel, renderPodcastCard, renderEpisodeCard, renderContinueCard } from './render.js?v=2.7.0%2B20261114T232640Z';
-import { activateCardWithKeyboard } from './dom.js?v=2.7.0%2B20261114T232640Z';
+import { updateVersionBadge } from '../app/version.js?v=2.7.1%2B20261121T195202Z';
+import { formatDurationLabel, renderPodcastCard, renderEpisodeCard, renderContinueCard } from './render.js?v=2.7.1%2B20261121T195202Z';
+import { activateCardWithKeyboard } from './dom.js?v=2.7.1%2B20261121T195202Z';
 import {
     getContinueListening,
     getPodcastSeasons,
@@ -12,7 +12,7 @@ import {
     isEpisodeComplete,
     resolveSeasonNumber,
     seasonNumberForEpisode
-} from './seasons.js?v=2.7.0%2B20261114T232640Z';
+} from './seasons.js?v=2.7.1%2B20261121T195202Z';
 
 export function createLibrary({
     getPodcasts,
@@ -24,6 +24,8 @@ export function createLibrary({
     downloads,
     newEpisodes = { isNew: () => false, countNew: () => 0 },
     toasts = { show: () => {} },
+    isQueued,
+    onAddToQueue,
     onOpenPodcast,
     onOpenEpisode,
     onResumeEpisode = () => {}
@@ -603,18 +605,26 @@ export function createLibrary({
             const inProgress = !complete && progress.percent > 0 && progress.percent < 98;
             const card = document.createElement('div');
             card.className = 'episode-card' + (complete ? ' completed' : '') + (inProgress ? ' in-progress' : '');
-            card.tabIndex = 0;
-            card.setAttribute('role', 'button');
             card.dataset.episodeId = String(episode.id);
             if (hasSeasons) card.dataset.season = String(episode.season);
             const downloadState = downloads.isDownloading(currentPodcast, episode)
                 ? 'downloading'
                 : downloads.isDownloaded(currentPodcast, episode) ? 'downloaded' : 'none';
-            renderEpisodeCard(card, episode, progress, complete, inProgress, downloadState, {
+            const renderCard = () => renderEpisodeCard(card, episode, progress, complete, inProgress, downloadState, {
                 seasonNumber: hasSeasons ? episode.season : null,
-                isNew: newEpisodes.isNew(currentPodcast, episode, state)
+                isNew: newEpisodes.isNew(currentPodcast, episode, state),
+                queued: isQueued(currentPodcast, episode)
             });
+            renderCard();
             const handleEpisodeCardActivation = (event) => {
+                const queueButton = event.target.closest('.ep-queue-btn');
+                if (queueButton) {
+                    if (queueButton.getAttribute('aria-disabled') === 'true') return;
+                    onAddToQueue(currentPodcast, episode);
+                    renderCard();
+                    card.querySelector('.ep-queue-btn').focus({ preventScroll: true });
+                    return;
+                }
                 const button = event.target.closest('.ep-download-btn');
                 if (button) {
                     event.stopPropagation();
@@ -629,7 +639,6 @@ export function createLibrary({
                 onOpenEpisode(episode);
             };
             card.addEventListener('click', handleEpisodeCardActivation);
-            activateCardWithKeyboard(card, handleEpisodeCardActivation);
             listEl.appendChild(card);
         });
 

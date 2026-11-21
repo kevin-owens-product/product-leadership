@@ -87,14 +87,36 @@ test('finishing an episode auto-advances to the next one after the countdown', a
   await expect(page.locator('#player-episode-title')).toContainText('Core Commands & Navigation', { timeout: 15000 });
 });
 
+test('chunked playback saves 100 percent when the last clip finishes', async ({ page }) => {
+  await installInstantAudio(page);
+  await page.route('**/audio/the-decision-room/episode-01-netflix-2007-streaming/manifest.json*', async route => {
+    const response = await route.fetch();
+    const items = await response.json();
+    for (const item of items) delete item.duration;
+    await route.fulfill({ json: items });
+  });
+  await page.goto('/?podcast=the-decision-room&episode=1');
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+  await page.locator('.transcript-line').last().click();
+  await page.locator('#play-btn').click();
+  await expect(page.locator('#complete-modal')).toHaveClass(/show/);
+  const state = await page.evaluate(() => JSON.parse(localStorage.getItem('tlu_podcast_state')));
+  expect(state.episodeProgress['the-decision-room-1'].percent).toBe(100);
+  expect(state.completedEpisodes).toContain('the-decision-room-1');
+});
+
 test('a queued episode takes precedence over the sequential next episode', async ({ page }) => {
   await installInstantAudio(page);
-  await page.addInitScript(() => {
-    localStorage.setItem('playQueue', JSON.stringify([
-      { podcastId: 'claude-code-mastery', episodeNum: 3, addedAt: Date.now() }
-    ]));
-  });
+  await page.goto('/?podcast=claude-code-mastery');
+  const queueButton = page.getByRole('button', { name: 'Add Code Reading & Editing to queue', exact: true });
+  await queueButton.press('Space');
+  await expect(page.locator('#list-view')).toHaveClass(/active/);
+  await expect(page.getByRole('button', { name: 'Code Reading & Editing is in the queue' })).toBeDisabled();
+
+  // Navigate afresh: the persisted queue renders once the catalog is available.
   await openEpisode(page);
+  await page.locator('#np-queue-btn').click();
+  await expect(page.getByRole('button', { name: 'Play from queue: Code Reading & Editing' })).toBeVisible();
   await page.locator('#play-btn').click();
 
   await expect(page.locator('#complete-modal')).toHaveClass(/show/, { timeout: 30000 });

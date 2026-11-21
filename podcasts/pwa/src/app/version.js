@@ -1,8 +1,8 @@
-// App-version state: the localStorage-persisted "seen" version, the header
-// badge, and the boot-time update check that clears caches and reloads when
-// the server's version.json disagrees with the version we last ran.
+// The badge describes the code running in this page. The service worker
+// installs updates while its previous shell and downloaded audio remain usable.
 
 export const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
+const BUILD_VERSION = '__BUILD_VERSION__';
 
 let appVersion = localStorage.getItem(VERSION_STORAGE_KEY) || '0.0.0';
 
@@ -28,9 +28,9 @@ export function setAppVersion(version) {
     updateVersionBadge();
 }
 
-// Runs immediately at boot - fetches version from server bypassing all caches.
-// If version mismatch, clears everything and reloads.
 export async function checkForUpdates() {
+    const runningVersion = BUILD_VERSION.includes('__') ? appVersion : BUILD_VERSION;
+    setAppVersion(runningVersion);
     try {
         const response = await fetch('version.json?_=' + Date.now(), {
             cache: 'no-store',
@@ -38,38 +38,17 @@ export async function checkForUpdates() {
         });
         if (response.ok) {
             const data = await response.json();
-            const serverVersion = (typeof data.version === 'string' && data.version.trim())
-                ? data.version.trim()
+            const version = data.buildVersion ?? data.version;
+            const serverVersion = (typeof version === 'string' && version.trim())
+                ? version.trim()
                 : appVersion;
-            const localVersion = localStorage.getItem(VERSION_STORAGE_KEY);
-            console.log('Version check - Local:', localVersion || appVersion, 'Server:', serverVersion);
-
-            if (localVersion && serverVersion !== localVersion) {
-                console.log('Update available! Clearing caches and reloading...');
-                localStorage.setItem(VERSION_STORAGE_KEY, serverVersion);
-
-                // Unregister all service workers
-                if ('serviceWorker' in navigator) {
-                    const registrations = await navigator.serviceWorker.getRegistrations();
-                    for (const reg of registrations) {
-                        await reg.unregister();
-                    }
-                }
-
-                // Clear all caches
-                if ('caches' in window) {
-                    const cacheNames = await caches.keys();
-                    for (const name of cacheNames) {
-                        await caches.delete(name);
-                    }
-                }
-
-                // Hard reload
-                window.location.reload();
-                return;
+            if (navigator.serviceWorker?.controller && serverVersion !== runningVersion) {
+                const registration = await navigator.serviceWorker.getRegistration();
+                await registration?.update();
+            } else if (BUILD_VERSION.includes('__')) {
+                // Unbuilt source has no bundle version to display.
+                setAppVersion(serverVersion);
             }
-
-            setAppVersion(serverVersion);
         }
     } catch (e) {
         console.log('Version check skipped (offline?):', e.message);

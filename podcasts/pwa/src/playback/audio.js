@@ -92,7 +92,8 @@ export function createSpeechPlayers({ getSpeechRate, getMediaTitle, onCreateAudi
   addAudioListener('error', () => emit('error', audio.error));
   addAudioListener('loadedmetadata', () => {
     if (pendingSeekTime === null) return;
-    const t = pendingSeekTime;
+    const t = Number.isFinite(audio.duration) && audio.duration > 0
+      ? Math.min(pendingSeekTime, audio.duration) : pendingSeekTime;
     pendingSeekTime = null;
     try { audio.currentTime = t; } catch { /* ignore */ }
   });
@@ -144,7 +145,9 @@ export function createSpeechPlayers({ getSpeechRate, getMediaTitle, onCreateAudi
 
   function seek(time) {
     const t = Math.max(0, Number(time) || 0);
-    const cap = audio.duration || totalDuration || t;
+    // Some combined tracks have an outro beyond the final transcript line.
+    // Wait for the native duration before clamping a pre-metadata resume.
+    const cap = audio.readyState === 0 ? Infinity : audio.duration || totalDuration || t;
     const target = Math.min(cap, t);
     // Preserve the latest seek (including a saved position or a scrub before
     // first play) on browsers that discard currentTime until metadata loads.
@@ -168,6 +171,7 @@ export function createSpeechPlayers({ getSpeechRate, getMediaTitle, onCreateAudi
   }
 
   function getDuration() {
+    if (audio.readyState >= 1 && Number.isFinite(audio.duration) && audio.duration > 0) return audio.duration;
     return totalDuration || audio.duration || 0;
   }
 

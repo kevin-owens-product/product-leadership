@@ -4,10 +4,23 @@ import assert from 'node:assert/strict';
 import {
   safeJSONParse,
   migrateState,
+  getResumePosition,
   STATE_SCHEMA_VERSION,
   loadQueue,
   loadListeningStats
 } from '../../src/state/storage.js';
+
+test('resume prefers exact seconds, supports legacy lines, and honors explicit destinations', () => {
+  const partial = { line: 11, positionSeconds: 2670.25, percent: 99, finished: false };
+  assert.deepEqual(getResumePosition(partial, 12), { line: 11, seconds: 2670.25, finished: false });
+  assert.deepEqual(getResumePosition(partial, 12, 2), { line: 2, seconds: null, finished: false });
+  assert.deepEqual(getResumePosition({ line: 6, percent: 50 }, 12), { line: 6, seconds: null, finished: false });
+  for (const saved of [{ ...partial, finished: true }, { line: 11, percent: 99 }]) {
+    assert.deepEqual(getResumePosition(saved, 12), { line: 0, seconds: null, finished: true });
+  }
+  assert.deepEqual(getResumePosition({ line: 11, percent: 99, finished: false }, 12),
+    { line: 11, seconds: null, finished: false });
+});
 
 test('safeJSONParse falls back on invalid json', () => {
   assert.deepEqual(safeJSONParse('{bad', { ok: false }), { ok: false });

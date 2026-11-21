@@ -3,11 +3,22 @@ import assert from 'node:assert/strict';
 
 import {
   getPodcastSeasons,
+  getContinueListening,
   getSeasonListeningAction,
   getSeasonStats,
   resolveSeasonNumber,
   seasonNumberForEpisode
 } from '../../src/ui/seasons.js';
+
+test('an unfinished final line remains resumable until playback actually ends', () => {
+  const podcast = { id: 'show', episodes: [{ id: 1 }, { id: 2 }] };
+  const state = { episodeProgress: {
+    'show-1': { percent: 99, positionSeconds: 2670, finished: false },
+    'show-2': { percent: 99 }
+  } };
+  assert.deepEqual(getContinueListening([podcast], state).map(item => item.episode.id), [1]);
+  assert.equal(getSeasonStats('show', podcast.episodes, state).completed, 1);
+});
 
 const podcast = {
   id: 'operator',

@@ -6,7 +6,8 @@ export function createMediaSessionController({
     speechPlayers,
     getState,
     estimateEpisodeDurationSeconds,
-    estimateLineJumpFromSeconds,
+    getSkipForward,
+    getSkipBackward,
     actions
 }) {
     let handlersInitialized = false;
@@ -101,25 +102,17 @@ export function createMediaSessionController({
         setActionHandler('stop', () => {
             void actions.stopPlayback();
         });
+        // A receiver may provide its own seek interval. When it omits one,
+        // use the same preference and transport path as the on-screen button.
+        function seekOffset(details, getDefault) {
+            const offset = details?.seekOffset;
+            return Number.isFinite(offset) && offset > 0 ? offset : getDefault();
+        }
         setActionHandler('seekbackward', (details) => {
-            const offset = Number(details?.seekOffset) || 10;
-            if (speechPlayers.isContinuousReady()) {
-                actions.seekToSeconds(speechPlayers.getCurrentTime() - offset);
-            } else {
-                const { isPlaying, isPaused, currentLineIndex } = getState();
-                const linesToJump = estimateLineJumpFromSeconds(offset);
-                void actions.jumpToLine(currentLineIndex - linesToJump, isPlaying && !isPaused);
-            }
+            actions.seekBySeconds(-seekOffset(details, getSkipBackward));
         });
         setActionHandler('seekforward', (details) => {
-            const offset = Number(details?.seekOffset) || 10;
-            if (speechPlayers.isContinuousReady()) {
-                actions.seekToSeconds(speechPlayers.getCurrentTime() + offset);
-            } else {
-                const { isPlaying, isPaused, currentLineIndex } = getState();
-                const linesToJump = estimateLineJumpFromSeconds(offset);
-                void actions.jumpToLine(currentLineIndex + linesToJump, isPlaying && !isPaused);
-            }
+            actions.seekBySeconds(seekOffset(details, getSkipForward));
         });
         setActionHandler('seekto', (details) => {
             if (!Number.isFinite(details?.seekTime)) return;

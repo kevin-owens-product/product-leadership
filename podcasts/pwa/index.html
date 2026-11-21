@@ -36,13 +36,18 @@
             </div>
             <div class="badges home-meta">
                 <span id="podcast-count" class="podcast-count"></span>
-                <span class="badge offline" id="offline-badge-home" style="display:none">Offline Ready</span>
                 <span class="badge version" id="version-badge">v--</span>
             </div>
             <div id="update-banner" class="update-banner" role="status" style="display:none">
                 New content available! <button type="button" id="apply-update-btn">Update Now</button>
             </div>
         </header>
+
+        <details id="home-downloads" class="home-downloads">
+            <summary>Downloads<span id="downloads-count"></span></summary>
+            <p id="downloads-status" role="status">Checking saved episodes…</p>
+            <ul id="downloads-list" aria-label="Downloaded episodes"></ul>
+        </details>
 
         <section class="continue-shelf" id="continue-listening" aria-labelledby="continue-listening-heading" hidden>
             <h2 class="continue-shelf-heading" id="continue-listening-heading">Continue listening</h2>
@@ -99,7 +104,7 @@
                 <p class="show-header-subtitle" id="current-podcast-subtitle">Subtitle</p>
                 <div class="badges show-header-badges">
                     <span class="badge progress" id="total-progress-badge">0% Complete</span>
-                    <span class="badge offline" id="offline-badge" style="display:none">Offline Ready</span>
+                    <span class="badge offline" id="show-download-count" hidden></span>
                 </div>
             </div>
         </header>

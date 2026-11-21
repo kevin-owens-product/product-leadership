@@ -41,11 +41,6 @@ export function registerServiceWorker({ onUpdateAvailable } = {}) {
 
   const registered = serviceWorker.register('sw.js').then((reg) => {
     registration = reg;
-    const homeBadge = document.getElementById('offline-badge-home');
-    const playerBadge = document.getElementById('offline-badge');
-    if (homeBadge) homeBadge.style.display = 'inline-flex';
-    if (playerBadge) playerBadge.style.display = 'inline-flex';
-
     setInterval(() => reg.update().catch(() => {}), 60000);
     reg.addEventListener('updatefound', () => watchInstallation(reg.installing));
     watchInstallation(reg.installing);

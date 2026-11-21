@@ -1,7 +1,7 @@
 // Bookmarks: per-episode saved positions with notes, stored in app state.
 
-import { renderBookmarkItem } from './render.js?v=2.7.0%2B20261114T232640Z';
-import { activateCardWithKeyboard } from './dom.js?v=2.7.0%2B20261114T232640Z';
+import { renderBookmarkItem } from './render.js?v=2.7.1%2B20261121T195202Z';
+import { activateCardWithKeyboard } from './dom.js?v=2.7.1%2B20261121T195202Z';
 
 export function createBookmarksPanel({
     loadState,
@@ -11,6 +11,8 @@ export function createBookmarksPanel({
     getCurrentLineIndex,
     jumpToLine
 }) {
+    let pendingBookmark = null;
+
     function getBookmarks() {
         const state = loadState();
         return state.bookmarks || {};
@@ -102,6 +104,9 @@ export function createBookmarksPanel({
         const modal = document.getElementById('bookmark-modal');
         const dialogueLines = getDialogueLines();
         const currentLineIndex = getCurrentLineIndex();
+        const epKey = getEpisodeKey();
+        if (!epKey || !dialogueLines[currentLineIndex]) return;
+        pendingBookmark = { epKey, lineIndex: currentLineIndex };
         document.getElementById('bookmark-position-text').textContent =
             `Line ${currentLineIndex + 1} of ${dialogueLines.length}`;
 
@@ -116,15 +121,16 @@ export function createBookmarksPanel({
 
     function bind() {
         document.getElementById('save-bookmark').addEventListener('click', () => {
-            const epKey = getEpisodeKey();
-            if (!epKey) return;
+            if (!pendingBookmark) return;
             const note = document.getElementById('bookmark-note-input').value;
-            saveBookmark(epKey, getCurrentLineIndex(), note);
+            saveBookmark(pendingBookmark.epKey, pendingBookmark.lineIndex, note);
+            pendingBookmark = null;
             document.getElementById('bookmark-modal').classList.remove('show');
             render();
         });
 
         document.getElementById('cancel-bookmark').addEventListener('click', () => {
+            pendingBookmark = null;
             document.getElementById('bookmark-modal').classList.remove('show');
         });
     }

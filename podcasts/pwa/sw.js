@@ -32,31 +32,24 @@ self.addEventListener('install', (event) => {
     event.waitUntil((async () => {
         if (APP_SHELL.length === 0) {
             // Dev / unsubstituted SW: skip precache; serve passthrough.
-            return self.skipWaiting();
+            return;
         }
         const cache = await caches.open(SHELL_CACHE);
         // `cache: 'reload'` forces each request past the browser HTTP cache so
         // we don't accidentally precache a stale main.js the browser is still
         // holding from the previous deploy.
-        await Promise.all(APP_SHELL.map((url) => {
-            const req = new Request(url, { cache: 'reload' });
-            return fetch(req).then((res) => {
-                if (!res || !res.ok) throw new Error(`Precache fetch failed: ${url} (${res && res.status})`);
-                return cache.put(url, res);
-            }).catch((err) => {
-                console.warn('[sw] precache miss:', url, err.message);
-            });
-        }));
-        return self.skipWaiting();
+        // addAll commits the entire batch or rejects installation. A new
+        // worker waits for the Update action while an older client is open.
+        await cache.addAll(APP_SHELL.map((url) => new Request(url, { cache: 'reload' })));
     })());
 });
 
 self.addEventListener('activate', (event) => {
     console.log('[sw] activate', BUILD_VERSION);
     event.waitUntil((async () => {
-        const keep = new Set([SHELL_CACHE, OFFLINE_AUDIO_CACHE, TRANSCRIPT_CACHE]);
         const names = await caches.keys();
-        await Promise.all(names.map((name) => keep.has(name) ? null : caches.delete(name)));
+        await Promise.all(names.filter((name) => name.startsWith('podlearn-shell-') && name !== SHELL_CACHE)
+            .map((name) => caches.delete(name)));
         await self.clients.claim();
         const clients = await self.clients.matchAll();
         clients.forEach((client) => client.postMessage({ type: 'SW_UPDATED', version: BUILD_VERSION }));
@@ -165,12 +158,22 @@ async function transcriptFetch(req) {
     }
     try {
         const res = await fetch(req);
-        if (res && res.ok && stores[0]) {
-            // Drop older versions of this script before storing the new one.
-            await stores[0].delete(req, { ignoreSearch: true });
-            await stores[0].put(req, res.clone());
+        if (res && res.ok) {
+            if (stores[0]) {
+                try {
+                    const previous = await stores[0].keys(req, { ignoreSearch: true });
+                    await stores[0].put(req, res.clone());
+                    for (const key of previous) {
+                        if (key.url !== req.url) await stores[0].delete(key);
+                    }
+                } catch (err) {
+                    // Storage can be full. The network response still opens the
+                    // episode, and a failed write leaves the previous script intact.
+                    console.warn('[sw] could not cache transcript:', err.message);
+                }
+            }
+            return res;
         }
-        if (res && res.ok) return res;
         const stale = await matchAny(stores, req);
         return stale || res;
     } catch (err) {
@@ -327,17 +330,67 @@ async function validatedAudioCacheResponse(url, res) {
     });
 }
 
+// Multiple tabs can download, remove, or reconcile at the same time. Only
+// serialize cache access during the commit; the network transfers can overlap.
+let audioCacheOperation = Promise.resolve();
+function withAudioCache(operation) {
+    const result = audioCacheOperation.then(async () => operation(await caches.open(OFFLINE_AUDIO_CACHE)));
+    audioCacheOperation = result.catch(() => {});
+    return result;
+}
+
+async function cacheEpisode(urls) {
+    const results = [];
+    const fetched = [];
+    for (const url of urls) {
+        try {
+            const res = await fetch(url, { cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            fetched.push({ url, response: await validatedAudioCacheResponse(url, res) });
+            results.push({ url, ok: true });
+        } catch (err) {
+            results.push({ url, ok: false, error: String(err.message || err) });
+        }
+    }
+    if (results.some((r) => !r.ok)) return results;
+
+    await withAudioCache(async (cache) => {
+        const previous = await cache.keys();
+        const existing = new Set(previous.map((request) => request.url));
+        const added = [];
+        try {
+            for (const { url, response } of fetched) {
+                // Exact keys are immutable content versions. Keep existing
+                // entries available if the remaining files cannot fit.
+                if (existing.has(url)) continue;
+                await cache.put(url, response);
+                added.push(url);
+            }
+        } catch (err) {
+            await Promise.all(added.map((url) => cache.delete(url)));
+            throw err;
+        }
+        // Retire old versions only after every new file is available.
+        const current = new Set(urls);
+        const paths = new Set(urls.map((url) => url.split('?')[0]));
+        for (const { url } of previous) {
+            if (!current.has(url) && paths.has(url.split('?')[0])) await cache.delete(url);
+        }
+    });
+    return results;
+}
+
 self.addEventListener('message', (event) => {
     const data = event.data;
     if (data === 'SKIP_WAITING') {
-        self.skipWaiting();
+        event.waitUntil(self.skipWaiting());
         return;
     }
     if (data === 'CLEAR_CACHE') {
         event.waitUntil((async () => {
             const names = await caches.keys();
             await Promise.all(names
-                .filter((n) => n !== OFFLINE_AUDIO_CACHE && n !== TRANSCRIPT_CACHE)
+                .filter((n) => n.startsWith('podlearn-shell-'))
                 .map((n) => caches.delete(n)));
         })());
         return;
@@ -348,48 +401,26 @@ self.addEventListener('message', (event) => {
     };
     if (data && typeof data === 'object') {
         if (data.type === 'CACHE_AUDIO_URLS' && Array.isArray(data.urls)) {
-            event.waitUntil((async () => {
-                const cache = await caches.open(OFFLINE_AUDIO_CACHE);
-                const results = [];
-                const fetched = [];
-                for (const url of data.urls) {
-                    try {
-                        const res = await fetch(url, { cache: 'no-store' });
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        const stored = await validatedAudioCacheResponse(url, res);
-                        fetched.push({ url, response: stored });
-                        results.push({ url, ok: true });
-                    } catch (err) {
-                        results.push({ url, ok: false, error: String(err && err.message || err) });
-                    }
-                }
-                if (results.every((r) => r.ok)) {
-                    for (const item of fetched) {
-                        await cache.delete(item.url, { ignoreSearch: true });
-                        await cache.put(item.url, item.response);
-                    }
-                }
-                reply({ type: 'CACHE_AUDIO_URLS_RESULT', results });
-            })());
+            event.waitUntil(cacheEpisode(data.urls)
+                .catch((err) => data.urls.map((url) => ({ url, ok: false, error: String(err.message || err) })))
+                .then((results) => reply({ type: 'CACHE_AUDIO_URLS_RESULT', results })));
             return;
         }
         if (data.type === 'DELETE_AUDIO_URLS' && Array.isArray(data.urls)) {
-            event.waitUntil((async () => {
-                const cache = await caches.open(OFFLINE_AUDIO_CACHE);
+            event.waitUntil(withAudioCache(async (cache) => {
                 let removed = 0;
                 for (const url of data.urls) {
                     if (await cache.delete(url, { ignoreSearch: true })) removed += 1;
                 }
                 reply({ type: 'DELETE_AUDIO_URLS_RESULT', removed });
-            })());
+            }).catch(() => reply({ type: 'DELETE_AUDIO_URLS_RESULT', error: 'Unable to remove download' })));
             return;
         }
         if (data.type === 'LIST_OFFLINE_AUDIO') {
-            event.waitUntil((async () => {
-                const cache = await caches.open(OFFLINE_AUDIO_CACHE);
+            event.waitUntil(withAudioCache(async (cache) => {
                 const reqs = await cache.keys();
                 reply({ type: 'LIST_OFFLINE_AUDIO_RESULT', urls: reqs.map((r) => r.url) });
-            })());
+            }).catch(() => reply({ type: 'LIST_OFFLINE_AUDIO_RESULT', error: 'Unable to read downloads' })));
             return;
         }
     }

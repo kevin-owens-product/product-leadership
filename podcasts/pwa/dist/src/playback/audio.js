@@ -7,7 +7,7 @@
 // manifest doesn't ship a combined.mp3 or per-line durations — used as a
 // graceful degradation path during the rollout.
 
-export function createSpeechPlayers({ getSpeechRate }) {
+export function createSpeechPlayers({ getSpeechRate, getMediaTitle, onCreateAudio }) {
   const audio = new Audio();
   audio.preload = 'auto';
   audio.playsInline = true;
@@ -15,19 +15,23 @@ export function createSpeechPlayers({ getSpeechRate }) {
     audio.setAttribute('playsinline', 'playsinline');
   }
   audio.crossOrigin = 'anonymous';
+  onCreateAudio?.(audio);
 
   let lineOffsets = [];      // cumulative seconds per dialogue line (length === N lines)
   let totalDuration = 0;     // sum of line durations (seconds)
   let activeChunkAudio = null; // for the legacy chunked fallback
+  let pendingSeekTime = null;
 
   const handlers = {
     timeupdate: [],
     ended: [],
     play: [],
+    playing: [],
     pause: [],
     error: [],
     linechange: [],
-    progress: []
+    progress: [],
+    seek: []
   };
   let lastEmittedLine = -1;
 
@@ -69,7 +73,7 @@ export function createSpeechPlayers({ getSpeechRate }) {
 
   addAudioListener('timeupdate', () => {
     syncRate();
-    const t = audio.currentTime || 0;
+    const t = getCurrentTime();
     const line = lineFromTime(t);
     if (line !== lastEmittedLine) {
       lastEmittedLine = line;
@@ -81,12 +85,22 @@ export function createSpeechPlayers({ getSpeechRate }) {
   // Buffered-range changes (used by the scrubber's buffered indicator).
   addAudioListener('progress', () => emit('progress'));
   addAudioListener('play', () => emit('play'));
+  addAudioListener('playing', () => {
+    if (isContinuousReady()) emit('playing');
+  });
   addAudioListener('pause', () => emit('pause'));
   addAudioListener('error', () => emit('error', audio.error));
+  addAudioListener('loadedmetadata', () => {
+    if (pendingSeekTime === null) return;
+    const t = pendingSeekTime;
+    pendingSeekTime = null;
+    try { audio.currentTime = t; } catch { /* ignore */ }
+  });
 
   // ---- continuous-audio mode ----
 
   function setEpisode({ combinedUrl, lineOffsets: offsets, totalDuration: dur } = {}) {
+    pendingSeekTime = null;
     lineOffsets = Array.isArray(offsets) ? offsets.slice() : [];
     totalDuration = typeof dur === 'number' ? dur : (lineOffsets.length > 0 ? lineOffsets[lineOffsets.length - 1] : 0);
     lastEmittedLine = -1;
@@ -113,6 +127,7 @@ export function createSpeechPlayers({ getSpeechRate }) {
 
   function play() {
     syncRate();
+    if (getMediaTitle) audio.title = getMediaTitle() || '';
     const promise = audio.play();
     return promise && typeof promise.then === 'function' ? promise : Promise.resolve();
   }
@@ -123,13 +138,19 @@ export function createSpeechPlayers({ getSpeechRate }) {
 
   function stop() {
     try { audio.pause(); } catch { /* ignore */ }
+    pendingSeekTime = null;
     try { audio.currentTime = 0; } catch { /* ignore */ }
   }
 
   function seek(time) {
     const t = Math.max(0, Number(time) || 0);
     const cap = audio.duration || totalDuration || t;
-    try { audio.currentTime = Math.min(cap, t); } catch { /* ignore */ }
+    const target = Math.min(cap, t);
+    // Preserve the latest seek (including a saved position or a scrub before
+    // first play) on browsers that discard currentTime until metadata loads.
+    pendingSeekTime = audio.readyState === 0 ? target : null;
+    try { audio.currentTime = target; } catch { /* applied on loadedmetadata */ }
+    if (isContinuousReady()) emit('seek', lineFromTime(target));
   }
 
   function seekToLine(index) {
@@ -139,11 +160,11 @@ export function createSpeechPlayers({ getSpeechRate }) {
   }
 
   function getCurrentLine() {
-    return lineFromTime(audio.currentTime || 0);
+    return lineFromTime(getCurrentTime());
   }
 
   function getCurrentTime() {
-    return audio.currentTime || 0;
+    return pendingSeekTime ?? (audio.currentTime || 0);
   }
 
   function getDuration() {
@@ -193,6 +214,11 @@ export function createSpeechPlayers({ getSpeechRate }) {
       const chunk = new Audio(url);
       chunk.preload = 'auto';
       chunk.playbackRate = Math.max(0.5, Math.min(4, Number(getSpeechRate()) || 1));
+      if (getMediaTitle) chunk.title = getMediaTitle() || '';
+      onCreateAudio?.(chunk);
+      chunk.addEventListener?.('playing', () => {
+        if (chunk === activeChunkAudio) emit('playing');
+      });
       let settled = false;
       const settle = (fn, value) => {
         if (settled) return;

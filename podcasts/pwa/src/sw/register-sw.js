@@ -1,81 +1,94 @@
 export function registerServiceWorker({ onUpdateAvailable } = {}) {
+  const reload = () => window.location.reload();
   if (!('serviceWorker' in navigator)) {
-    return { registration: null, unregister: async () => {} };
+    return { registration: null, refresh: reload, applyUpdate: reload };
   }
 
-  let swRegistration = null;
-  let reloadedForUpdate = false;
+  const serviceWorker = navigator.serviceWorker;
+  let registration = null;
+  let requestedUpdate = false;
+  let announcedWorker = null;
+  let hadController = Boolean(serviceWorker.controller);
 
-  const reloadOnce = () => {
-    if (reloadedForUpdate) return;
-    reloadedForUpdate = true;
-    window.location.reload();
-  };
-
-  // A new version is installed and waiting: show the home-screen banner and
-  // let the app surface it wherever the user actually is (toast with an
-  // Update action — the banner only exists on the home view).
-  const announceUpdate = () => {
+  function announceUpdate(worker) {
+    if (!worker || worker === announcedWorker) return;
+    announcedWorker = worker;
     const banner = document.getElementById('update-banner');
     if (banner) banner.style.display = 'flex';
-    if (typeof onUpdateAvailable === 'function') onUpdateAvailable();
-  };
+    onUpdateAvailable?.();
+  }
 
-  navigator.serviceWorker.register('sw.js').then((reg) => {
-    swRegistration = reg;
+  function watchInstallation(worker) {
+    if (!worker) return;
+    const installed = () => {
+      if (worker.state === 'installed' && serviceWorker.controller) announceUpdate(worker);
+    };
+    worker.addEventListener('statechange', installed);
+    installed();
+  }
+
+  serviceWorker.addEventListener('controllerchange', () => {
+    if (requestedUpdate) {
+      requestedUpdate = false;
+      reload();
+    } else if (hadController) {
+      // Another tab applied an update. This tab can keep playing until its
+      // listener chooses to reload it.
+      announceUpdate(serviceWorker.controller);
+    }
+    hadController = Boolean(serviceWorker.controller);
+  });
+
+  const registered = serviceWorker.register('sw.js').then((reg) => {
+    registration = reg;
     const homeBadge = document.getElementById('offline-badge-home');
     const playerBadge = document.getElementById('offline-badge');
     if (homeBadge) homeBadge.style.display = 'inline-flex';
     if (playerBadge) playerBadge.style.display = 'inline-flex';
 
-    setInterval(() => reg.update(), 60000);
-
-    reg.addEventListener('updatefound', () => {
-      const newWorker = reg.installing;
-      if (!newWorker) return;
-      newWorker.addEventListener('statechange', () => {
-        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-          announceUpdate();
-        }
-      });
-    });
-  }).catch((err) => console.log('SW error:', err));
-
-  // True when this page loaded under an existing service worker. When false,
-  // the activation we're about to observe is the very first install — the
-  // page already has the freshest assets, so it's neither an "update" to
-  // announce nor a reason to reload. (Two flags: controlledAtLoad stays
-  // fixed for the SW_UPDATED gate, because the first claim flips
-  // hadController before the activate-time postMessage arrives.)
-  const controlledAtLoad = Boolean(navigator.serviceWorker.controller);
-  let hadController = controlledAtLoad;
-
-  navigator.serviceWorker.addEventListener('message', (event) => {
-    if (event.data?.type === 'SW_UPDATED' && controlledAtLoad) {
-      announceUpdate();
-    }
+    setInterval(() => reg.update().catch(() => {}), 60000);
+    reg.addEventListener('updatefound', () => watchInstallation(reg.installing));
+    watchInstallation(reg.installing);
+    announceUpdate(reg.waiting);
+    return reg;
+  }).catch((err) => {
+    console.log('SW error:', err);
+    return null;
   });
 
-  // Reload when a NEW service worker takes over from an old one (an update
-  // was applied), but not on the very first claim after install — reloading
-  // a page that was just fetched from the network doubles every first
-  // visit's load time (and tanks LCP).
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!hadController) {
-      hadController = true;
-      return;
+  async function applyUpdate() {
+    const reg = await registered;
+    if (reg?.waiting) {
+      requestedUpdate = true;
+      reg.waiting.postMessage('SKIP_WAITING');
+    } else {
+      reload();
     }
-    reloadOnce();
-  });
+  }
 
-  return {
-    get registration() {
-      return swRegistration;
-    },
-    unregister: async () => {
-      if (swRegistration) {
-        await swRegistration.unregister();
+  async function refresh() {
+    const reg = await registered;
+    if (reg && !reg.waiting) {
+      await reg.update();
+      const worker = reg.installing;
+      if (worker) {
+        await new Promise((resolve, reject) => {
+          const check = () => {
+            if (worker.state === 'redundant') {
+              worker.removeEventListener('statechange', check);
+              reject(new Error('App update could not be installed'));
+            } else if (['installed', 'activating', 'activated'].includes(worker.state)) {
+              worker.removeEventListener('statechange', check);
+              resolve();
+            }
+          };
+          worker.addEventListener('statechange', check);
+          check();
+        });
       }
     }
-  };
+    return applyUpdate();
+  }
+
+  return { get registration() { return registration; }, applyUpdate, refresh };
 }

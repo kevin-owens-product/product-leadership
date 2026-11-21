@@ -239,3 +239,57 @@ test('on("ended") fires when the shared element ends', () => {
     env.restore();
   }
 });
+
+test('the latest pre-metadata seek survives browsers resetting currentTime on load', () => {
+  const env = installFakeAudio();
+  try {
+    const players = createSpeechPlayers({ getSpeechRate: () => 1 });
+    const audio = env.sharedAudio();
+    audio.readyState = 0;
+    players.setEpisode({ combinedUrl: 'ep.mp3', lineOffsets: [0, 8, 20], totalDuration: 45 });
+    players.seekToLine(1);
+    players.seek(27);
+    audio.currentTime = 0;
+    assert.equal(players.getCurrentTime(), 27);
+    assert.equal(players.getCurrentLine(), 2);
+    audio.readyState = 1;
+    audio._dispatch('loadedmetadata');
+    assert.equal(audio.currentTime, 27);
+  } finally {
+    env.restore();
+  }
+});
+
+test('shared audio and active clips report native playing with the episode title', async () => {
+  const env = installFakeAudio();
+  try {
+    const observed = [];
+    const players = createSpeechPlayers({
+      getSpeechRate: () => 1,
+      getMediaTitle: () => 'Episode One',
+      onCreateAudio: audio => observed.push(audio)
+    });
+    let playing = 0;
+    players.on('playing', () => { playing++; });
+    players.setEpisode({ combinedUrl: 'all.mp3', lineOffsets: [0], totalDuration: 10 });
+    await players.play();
+    const shared = env.sharedAudio();
+    shared._dispatch('playing');
+    assert.equal(shared.title, 'Episode One');
+    assert.equal(playing, 1);
+    players.setEpisode({});
+    const playback = players.playGeneratedAudio('clip.mp3');
+    const [clip] = env.chunkAudios();
+    assert.deepEqual(observed, [shared, clip]);
+    assert.equal(clip.title, 'Episode One');
+    clip._dispatch('playing');
+    assert.equal(playing, 2);
+    clip.triggerEnded();
+    await playback;
+    clip._dispatch('playing');
+    shared._dispatch('playing');
+    assert.equal(playing, 2);
+  } finally {
+    env.restore();
+  }
+});

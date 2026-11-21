@@ -1,9 +1,10 @@
 // Settings panel: theme toggle, configurable skip intervals, voice boost /
 // silence trim toggles, and the clear-local-data escape hatch.
 
-import { updateToggleButton } from './dom.js?v=2.7.0%2B20261114T232640Z';
+import { updateToggleButton } from './dom.js?v=2.7.1%2B20261121T195202Z';
 
 export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysToClear }) {
+    let resettingLocalData = false;
     let skipForwardInterval = parseInt(localStorage.getItem('skipForwardInterval') || '10');
     let skipBackwardInterval = parseInt(localStorage.getItem('skipBackwardInterval') || '10');
     let skipLargeForwardInterval = parseInt(localStorage.getItem('skipLargeForwardInterval') || '30');
@@ -99,28 +100,34 @@ export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysT
         });
 
         document.getElementById('clear-local-data-btn').addEventListener('click', async () => {
+            if (resettingLocalData) return;
             const confirmed = window.confirm(
                 'Clear local app data and cache? This resets saved progress, bookmarks, queue, and settings on this device.'
             );
             if (!confirmed) return;
 
-            await stopPlayback();
-
-            localStorageKeysToClear.forEach((key) => {
-                localStorage.removeItem(key);
-            });
-
-            if ('caches' in window) {
-                const cacheNames = await caches.keys();
-                await Promise.all(cacheNames.map((cacheName) => caches.delete(cacheName)));
+            resettingLocalData = true;
+            try {
+                await stopPlayback();
+                if ('caches' in window) {
+                    const names = await caches.keys();
+                    const appCaches = names.filter(name => name.startsWith('podlearn-shell-') || name.startsWith('podlearn-offline-audio-'));
+                    await Promise.all(appCaches.map(name => caches.delete(name)));
+                }
+                if ('serviceWorker' in navigator) {
+                    const reg = await navigator.serviceWorker.getRegistration();
+                    const appWorker = new URL('sw.js', window.location.href).href;
+                    if ([reg?.active, reg?.waiting, reg?.installing].some(worker => worker?.scriptURL === appWorker)) {
+                        await reg.unregister();
+                    }
+                }
+                localStorageKeysToClear.forEach(key => localStorage.removeItem(key));
+                window.location.replace(window.location.pathname);
+            } catch (error) {
+                resettingLocalData = false;
+                setStatus('Could not clear local data. Try again.');
+                console.warn('Local data reset failed:', error);
             }
-
-            if ('serviceWorker' in navigator) {
-                const registrations = await navigator.serviceWorker.getRegistrations();
-                await Promise.all(registrations.map((registration) => registration.unregister()));
-            }
-
-            window.location.href = window.location.pathname;
         });
     }
 
@@ -139,6 +146,7 @@ export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysT
     return {
         bind,
         initControls,
+        isResettingLocalData: () => resettingLocalData,
         updateSkipButtonTitles,
         skipForward: () => skipForwardInterval,
         skipBackward: () => skipBackwardInterval,

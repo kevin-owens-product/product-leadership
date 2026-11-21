@@ -66,14 +66,27 @@ test('404 combined audio demotes to per-chunk playback and still plays', async (
   // file is missing but the per-line clips exist, the player must demote to
   // chunked playback and play — not strand the episode behind a retry toast
   // that re-fetches the same dead URL.
-  await page.route('**/audio/deadwater/deadwater_s01e01/combined.mp3*', route =>
-    route.fulfill({ status: 404, contentType: 'text/plain', body: 'not found' })
-  );
+  let combinedRequests = 0;
+  await page.route('**/audio/deadwater/deadwater_s01e01/combined.mp3*', async route => {
+    combinedRequests++;
+    await route.fulfill({ status: 404, contentType: 'text/plain', body: 'not found' });
+  });
+  await page.addInitScript(() => {
+    const NativeAudio = window.Audio;
+    window.Audio = function (...args) {
+      const audio = new NativeAudio(...args);
+      if (args[0]) window.__chunkAudio = audio;
+      return audio;
+    };
+  });
 
   await openEpisode(page, 'Deadwater', 'The Find');
   await page.locator('#play-btn').click();
 
-  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause', { timeout: 15000 });
+  await expect.poll(() => page.evaluate(() => window.__chunkAudio?.currentTime || 0), { timeout: 15000 })
+    .toBeGreaterThan(0);
+  expect(combinedRequests).toBeLessThanOrEqual(3);
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
   await expect(page.locator('#toast-region .toast', {
     hasText: /Audio failed to load|Playback failed to start/
   })).toHaveCount(0);

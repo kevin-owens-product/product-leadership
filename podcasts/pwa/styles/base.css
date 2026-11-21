@@ -612,8 +612,12 @@ textarea:focus-visible,
     margin-bottom: var(--space-2);
 }
 
-.ep-download-btn {
+.ep-queue-btn {
     margin-left: auto;
+}
+
+.ep-queue-btn,
+.ep-download-btn {
     background: transparent;
     border: 1px solid var(--border);
     color: var(--text-tertiary);
@@ -630,17 +634,21 @@ textarea:focus-visible,
                 background var(--dur-2) var(--ease-out),
                 transform var(--dur-1) var(--ease-out);
 }
+.ep-queue-btn .icon,
 .ep-download-btn .icon {
     width: 16px;
     height: 16px;
 }
+.ep-queue-btn:hover,
 .ep-download-btn:hover {
     color: var(--show-text);
     border-color: var(--show-accent);
 }
+.ep-queue-btn:active,
 .ep-download-btn:active {
     transform: scale(0.9);
 }
+.ep-queue-btn[aria-disabled="true"],
 .ep-download-btn.downloaded {
     color: var(--success-text);
     border-color: transparent;
@@ -659,9 +667,11 @@ textarea:focus-visible,
     to { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
+    .ep-queue-btn,
     .ep-download-btn {
         transition: none;
     }
+    .ep-queue-btn:active,
     .ep-download-btn:active {
         transform: none;
     }
@@ -759,6 +769,14 @@ textarea:focus-visible,
 }
 
 .episode-card .ep-title {
+    display: block;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+    text-align: start;
+    cursor: pointer;
     font-size: var(--fs-body);
     font-weight: 650;
     line-height: 1.35;

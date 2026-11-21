@@ -21,12 +21,17 @@ export function sendSwMessage(message) {
     }
     return new Promise((resolve) => {
         const channel = new MessageChannel();
-        channel.port1.onmessage = (event) => resolve(event.data);
+        const finish = (data) => {
+            channel.port1.close();
+            resolve(data);
+        };
+        channel.port1.onmessage = (event) => finish(event.data);
+        channel.port1.onmessageerror = () => finish(null);
         try {
             navigator.serviceWorker.controller.postMessage(message, [channel.port2]);
         } catch (err) {
             console.warn('SW message failed:', err);
-            resolve(null);
+            finish(null);
         }
     });
 }
@@ -115,7 +120,11 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
         ];
         const scriptUrl = transcriptUrl(podcast.id, episode);
         if (scriptUrl && episode.transcriptHash) urls.push(new URL(scriptUrl, location.href).toString());
-        await sendSwMessage({ type: 'DELETE_AUDIO_URLS', urls });
+        const reply = await sendSwMessage({ type: 'DELETE_AUDIO_URLS', urls });
+        if (typeof reply?.removed !== 'number') {
+            setStatus('Could not remove download — try again');
+            return;
+        }
         downloadedEpisodes.delete(epKey);
         persist();
         onChange();
@@ -162,9 +171,12 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
         // only meaningful once there is something to reconcile against.
         if (getPodcasts().length === 0) return;
         const haveSet = new Set();
-        for (const fullUrl of reply.urls) {
-            const m = fullUrl.match(/\/audio\/([^/]+)\/([^/]+)\/combined\.mp3/);
+        const cachedUrls = new Set(reply.urls);
+        for (const fullUrl of cachedUrls) {
+            const m = fullUrl.match(/\/audio\/([^/]+)\/([^/]+)\/combined\.mp3(?:\?|$)/);
             if (!m) continue;
+            const manifestUrl = fullUrl.replace(/\/combined\.mp3(?=\?|$)/, '/manifest.json');
+            if (!cachedUrls.has(manifestUrl)) continue;
             const podcastId = m[1];
             const basename = m[2];
             const podcasts = getPodcasts();
@@ -173,12 +185,11 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
             const ep = podcast.episodes.find((e) => episodeBasename(e) === basename);
             if (ep) haveSet.add(`${podcastId}-${ep.id}`);
         }
-        const before = downloadedEpisodes.size;
+        const changed = downloadedEpisodes.size !== haveSet.size
+            || [...haveSet].some((key) => !downloadedEpisodes.has(key));
         downloadedEpisodes = haveSet;
         persist();
-        if (haveSet.size !== before) {
-            onChange();
-        }
+        if (changed) onChange();
         await backfillTranscripts(reply.urls);
     }
 

@@ -90,7 +90,7 @@ test('a downloaded episode survives going offline', async ({ page, context }) =>
   expect(fetched['combined.mp3'].bytes).toBeGreaterThan(1000);
 });
 
-test('a downloaded episode still opens and arms playback offline', async ({ page, context }) => {
+test('a downloaded episode plays offline with system media metadata and artwork', async ({ page, context }) => {
   await bootOnline(page);
   await openShow(page);
   await downloadEpisode(page);
@@ -113,4 +113,14 @@ test('a downloaded episode still opens and arms playback offline', async ({ page
   // remaining-time readout means the episode's timeline resolved offline.
   await expect(page.locator('#time-remaining')).not.toHaveText(/^\s*$/, { timeout: 20_000 });
   await expect(page.locator('#time-remaining')).toContainText(/\d/);
+  await page.locator('#play-btn').click();
+  await expect(page.locator('#current-pos')).toHaveText(/^0:0[1-9]$/);
+  const track = await page.evaluate(async () => {
+    const { title, artist, artwork } = navigator.mediaSession.metadata;
+    const image = new Image();
+    image.src = artwork[0].src;
+    await image.decode();
+    return { title, artist, coverSize: image.naturalWidth };
+  });
+  expect(track).toEqual({ title: EPISODE, artist: PODCAST, coverSize: 512 });
 });

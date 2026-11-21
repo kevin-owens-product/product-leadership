@@ -1,12 +1,12 @@
 // podcasts.js loader — the episode catalog is a classic script that sets
 // window.PODCASTS. Loaded with a cache-buster pinned to the deployed build.
 
-import { getAppVersion } from './version.js?v=2.7.2%2B20261121T201527Z';
+import { getAppVersion } from './version.js?v=2.7.3%2B20261121T204056Z';
 
 // build-episodes.js substitutes the real version into the placeholder below
 // (same mechanism as sw.js); when running unbuilt source, fall back to the
 // last-seen app version so the URL is still stable across reloads.
-const BUILD_VERSION = '2.7.2+20261121T201527Z';
+const BUILD_VERSION = '2.7.3+20261121T204056Z';
 
 export function getPodcasts() {
     return Array.isArray(window.PODCASTS) ? window.PODCASTS : [];

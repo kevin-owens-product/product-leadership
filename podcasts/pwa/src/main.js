@@ -40,7 +40,7 @@ import {
     attachAudioUrls,
     buildLineOffsets
 } from './playback/manifest.js';
-import { createDownloadsManager, sendSwMessage } from './downloads/downloads.js';
+import { createDownloadsManager } from './downloads/downloads.js';
 import { ensureEpisodeContent } from './app/transcripts.js';
 import { createNewEpisodeTracker, NEW_EPISODES_KEY } from './state/new-episodes.js';
 import { createMediaSessionController } from './playback/media-session.js';
@@ -74,6 +74,7 @@ const LOCAL_STORAGE_KEYS_TO_CLEAR = [
     'playQueue',
     'listeningStats',
     'downloadedEpisodes',
+    'downloadSelections',
     NEW_EPISODES_KEY,
     'skipForwardInterval',
     'skipBackwardInterval',
@@ -1049,7 +1050,6 @@ let combinedRecoveryInFlight = false;
 let combinedRecoveryAttemptFailure = null;
 let combinedRecoveryShouldResume = false;
 let combinedRecoveryPrefersFallback = false;
-let combinedRecoveryCacheEvicted = false;
 let combinedRecoveryFinalizing = false;
 
 function snapshotAudioFailure(error) {
@@ -1071,7 +1071,6 @@ function resetCombinedRecovery(generation = audioSourceGeneration) {
     combinedRecoveryAttemptFailure = null;
     combinedRecoveryShouldResume = false;
     combinedRecoveryPrefersFallback = false;
-    combinedRecoveryCacheEvicted = false;
     combinedRecoveryFinalizing = false;
 }
 
@@ -1102,20 +1101,6 @@ function pauseForUserAction(status, toastMessage, {
                 onAction();
             }
         });
-    }
-}
-
-async function evictCurrentCombinedCache(generation) {
-    if (generation !== audioSourceGeneration || combinedRecoveryCacheEvicted) return;
-    combinedRecoveryCacheEvicted = true;
-    const rawSrc = speechPlayers.audio?.currentSrc || speechPlayers.audio?.src;
-    if (!rawSrc) return;
-    try {
-        const url = new URL(rawSrc, location.href).toString();
-        const reply = await sendSwMessage({ type: 'DELETE_AUDIO_URLS', urls: [url] });
-        if (reply?.removed > 0) void downloads.reconcile();
-    } catch (err) {
-        console.debug('Could not evict failed combined audio cache entry:', err);
     }
 }
 
@@ -1174,11 +1159,15 @@ async function runCombinedRecoveryAttempt(generation) {
     combinedRecoveryInFlight = true;
     combinedRecoveryAttemptFailure = null;
     const position = continuousPosition();
-    if (combinedRecoveryPrefersFallback && combinedRecoveryAttempts > 1) {
-        await evictCurrentCombinedCache(generation);
+    const audio = speechPlayers.audio;
+    if (combinedRecoveryPrefersFallback && combinedRecoveryAttempts > 1 && audio?.src) {
+        // A format error can also be a transient range failure. Retry from the
+        // network while keeping the saved MP3 available when the phone is offline.
+        const retryUrl = new URL(audio.src, document.baseURI);
+        retryUrl.searchParams.set('podlearnRetry', '1');
+        audio.src = retryUrl.href;
     }
-    if (generation !== audioSourceGeneration) return;
-    try { speechPlayers.audio?.load(); } catch { /* ignore */ }
+    try { audio?.load(); } catch { /* ignore */ }
     speechPlayers.seek(position);
     try {
         if (combinedRecoveryShouldResume) {
@@ -2084,6 +2073,9 @@ function reconcileDownloads() {
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('controllerchange', reconcileDownloads);
+    document.getElementById('home-downloads')?.addEventListener('toggle', event => {
+        if (event.currentTarget.open) reconcileDownloads();
+    });
     window.addEventListener('online', reconcileDownloads);
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) reconcileDownloads();

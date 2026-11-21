@@ -2,13 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test('home Downloads reflects verified episodes across shows and opens them offline', async ({ page, context }) => {
   test.setTimeout(90000);
-  await page.addInitScript(() => {
-    if (!sessionStorage.getItem('downloads-seeded')) {
-      sessionStorage.setItem('downloads-seeded', '1');
-      // Stale saved flags must not be reported as playable downloads.
-      localStorage.setItem('downloadedEpisodes', JSON.stringify(['claude-code-mastery-1']));
-    }
-  });
   await page.goto('/');
   const summary = page.locator('#home-downloads summary');
   await expect(summary).toHaveText('Downloads (0)');
@@ -43,4 +36,43 @@ test('home Downloads reflects verified episodes across shows and opens them offl
   await list.getByRole('button', { name: /Play Being Right Is Not a Strategy/ }).click();
   await expect(offlinePage.locator('#player-episode-title')).toHaveText('Being Right Is Not a Strategy');
   await expect(offlinePage.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
+});
+
+test('restores a lost saved MP3 from its remaining manifest without counting it as playable', async ({ page, context }) => {
+  test.setTimeout(90000);
+  await page.goto('/');
+  const summary = page.locator('#home-downloads summary');
+  await expect(summary).toHaveText('Downloads (0)');
+  await page.locator('.podcast-card[data-podcast-id="claude-code-mastery"]').click();
+  const episode = page.locator('.episode-card[data-episode-id="1"]');
+  await episode.locator('.ep-download-btn').click();
+  await expect(episode.locator('.ep-download-btn')).toHaveClass(/downloaded/, { timeout: 30000 });
+
+  // The previous player could remove the MP3 during playback recovery and
+  // overwrite the verified index. Its saved manifest still identifies the episode.
+  await page.evaluate(async () => {
+    const cache = await caches.open('podlearn-offline-audio-v1');
+    const audio = (await cache.keys()).find(key => new URL(key.url).pathname.endsWith('/combined.mp3'));
+    if (!audio || !await cache.delete(audio)) throw new Error('Missing saved MP3 fixture');
+    localStorage.setItem('downloadedEpisodes', '[]');
+    localStorage.removeItem('downloadSelections');
+  });
+  await page.close();
+  await context.setOffline(true);
+  const restoredPage = await context.newPage();
+  await restoredPage.goto('/', { waitUntil: 'domcontentloaded' });
+  const downloads = restoredPage.locator('#home-downloads summary');
+  await expect(downloads).toHaveText('Downloads (0 ready, 1 to restore)');
+  await downloads.click();
+  const list = restoredPage.locator('#downloads-list');
+  const restore = list.getByRole('button', { name: /Restore Getting Started with Claude Code/ });
+  await restore.click();
+  await expect(restoredPage.getByText('Connect to the internet to restore this download.')).toBeVisible();
+  await context.setOffline(false);
+  await restore.click();
+  await expect(downloads).toHaveText('Downloads (1)', { timeout: 30000 });
+  await expect(list.getByRole('button', { name: /Play Getting Started with Claude Code/ })).toBeVisible();
+  await context.setOffline(true);
+  await list.getByRole('button', { name: /Play Getting Started with Claude Code/ }).click();
+  await expect(restoredPage.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
 });

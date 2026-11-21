@@ -1,34 +1,66 @@
-// Per-episode offline downloads, backed by the service worker's
-// offline-audio cache. The downloaded set is persisted in localStorage;
-// downloading is transient so a refresh-mid-download just shows the episode
-// as undownloaded.
+// The service worker owns the files. Keep the user's download selections
+// separately from the index of episodes last verified as playable.
 
 import {
     epKeyOf,
-    episodeBasename,
     combinedAudioUrl,
     manifestAudioUrl,
     withCacheKey
-} from '../playback/manifest.js?v=2.7.2%2B20261121T201527Z';
-import { transcriptUrl } from '../app/transcripts.js?v=2.7.2%2B20261121T201527Z';
+} from '../playback/manifest.js?v=2.7.3%2B20261121T204056Z';
+import { transcriptUrl } from '../app/transcripts.js?v=2.7.3%2B20261121T204056Z';
+
+const SELECTIONS = 'downloadSelections';
+const PLAYABLE = 'downloadedEpisodes';
+
+function readKeys(key) {
+    try {
+        const list = JSON.parse(localStorage.getItem(key));
+        return Array.isArray(list) ? new Set(list.filter(value => typeof value === 'string')) : null;
+    } catch {
+        return null;
+    }
+}
+
+function sameKeys(a, b) {
+    return a === b || Boolean(a && b && a.size === b.size && [...a].every(key => b.has(key)));
+}
+
+function writeKeys(key, values) {
+    if (sameKeys(readKeys(key), values)) return true;
+    try {
+        localStorage.setItem(key, JSON.stringify([...values]));
+        return true;
+    } catch (err) {
+        console.warn('Could not persist', key, err);
+        return false;
+    }
+}
 
 // Send a message to the active service worker and wait for its reply via
 // MessageChannel. Resolves to null if there's no controller (e.g. SW not yet
 // installed) so callers can fall back to a no-op gracefully.
-export function sendSwMessage(message) {
-    if (!('serviceWorker' in navigator) || !navigator.serviceWorker.controller) {
-        return Promise.resolve(null);
-    }
+export function sendSwMessage(message, { timeout = 0 } = {}) {
+    const workers = navigator.serviceWorker;
+    const controller = workers?.controller;
+    if (!controller) return Promise.resolve(null);
     return new Promise((resolve) => {
         const channel = new MessageChannel();
+        let timer;
         const finish = (data) => {
+            clearTimeout(timer);
+            workers.removeEventListener?.('controllerchange', controllerChanged);
             channel.port1.close();
             resolve(data);
         };
+        const controllerChanged = () => {
+            if (controller !== workers.controller) finish(null);
+        };
+        workers.addEventListener?.('controllerchange', controllerChanged);
+        if (timeout) timer = setTimeout(() => finish(null), timeout);
         channel.port1.onmessage = (event) => finish(event.data);
         channel.port1.onmessageerror = () => finish(null);
         try {
-            navigator.serviceWorker.controller.postMessage(message, [channel.port2]);
+            controller.postMessage(message, [channel.port2]);
         } catch (err) {
             console.warn('SW message failed:', err);
             finish(null);
@@ -36,44 +68,89 @@ export function sendSwMessage(message) {
     });
 }
 
+async function readInventory() {
+    const reply = await sendSwMessage({ type: 'LIST_OFFLINE_AUDIO' }, { timeout: 10000 });
+    const isUrlList = list => Array.isArray(list) && list.every(url => typeof url === 'string');
+    if (reply?.error || !isUrlList(reply?.urls)) return null;
+    if (reply.recoverableTranscriptUrls !== undefined && !isUrlList(reply.recoverableTranscriptUrls)) return null;
+    if (reply.transcriptUrls !== undefined) return isUrlList(reply.transcriptUrls) ? reply : null;
+
+    // Earlier workers list only the explicit download cache. They can also
+    // serve scripts from the shared transcript cache without including it in
+    // their reply. A storage error is inconclusive, not an empty inventory.
+    try {
+        const cache = await caches.open('podlearn-transcripts-v1');
+        return { ...reply, transcriptUrls: (await cache.keys()).map(key => key.url) };
+    } catch {
+        return null;
+    }
+}
+
 function inspectCachedEpisodes(podcasts, reply) {
-    const urls = new Set(reply.urls);
-    // The worker can serve an older script with the same path when offline.
-    const paths = new Set([...urls, ...(reply.transcriptUrls || [])].map((url) => url.split('?')[0]));
+    const pinnedVersions = new Map();
+    for (const url of reply.urls) {
+        const path = url.split('?')[0];
+        if (!pinnedVersions.has(path)) pinnedVersions.set(path, new Set());
+        pinnedVersions.get(path).add(url.slice(path.length));
+    }
+    const scripts = new Set(reply.transcriptUrls.map(url => url.split('?')[0]));
+    const recoverableScripts = new Set((reply.recoverableTranscriptUrls || []).map(url => url.split('?')[0]));
+    const catalogKeys = new Set();
+    const pinned = new Set();
     const playable = new Set();
     const missingScripts = new Set();
-    for (const url of urls) {
-        const audio = url.match(/\/audio\/([^/]+)\/([^/]+)\/combined\.mp3(?:\?|$)/);
-        if (!audio || !urls.has(url.replace(/\/combined\.mp3(?=\?|$)/, '/manifest.json'))) continue;
-        const podcast = podcasts.find((p) => p.id === audio[1]);
-        const episode = podcast?.episodes.find((ep) => episodeBasename(ep) === audio[2]);
-        if (!episode) continue;
-        const script = episode.transcriptHash && new URL(transcriptUrl(podcast.id, episode), location.href).href;
-        if (script && !paths.has(script.split('?')[0])) missingScripts.add(script);
-        else playable.add(epKeyOf(podcast, episode));
+    for (const podcast of podcasts) {
+        for (const episode of podcast.episodes) {
+            const key = epKeyOf(podcast, episode);
+            catalogKeys.add(key);
+            const audio = pinnedVersions.get(new URL(combinedAudioUrl(podcast.id, episode), location.href).href);
+            const manifest = pinnedVersions.get(new URL(manifestAudioUrl(podcast.id, episode), location.href).href);
+            if (audio || manifest) pinned.add(key);
+            if (!audio || !manifest || ![...audio].some(version => manifest.has(version))) continue;
+            if (episode.transcriptHash) {
+                const script = new URL(transcriptUrl(podcast.id, episode), location.href).href;
+                const path = script.split('?')[0];
+                if (!scripts.has(path) && !pinnedVersions.has(path)) {
+                    missingScripts.add(script);
+                    if (!recoverableScripts.has(path)) continue;
+                }
+            }
+            playable.add(key);
+        }
     }
-    return { playable, missingScripts };
+    return { catalogKeys, pinned, playable, missingScripts };
 }
 
 export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadManifest, onChange }) {
     // epKey strings (`${podcast.id}-${episode.id}`) the user has downloaded
     // or is currently downloading.
-    let downloadedEpisodes = new Set(JSON.parse(localStorage.getItem('downloadedEpisodes') || '[]'));
+    let downloadedEpisodes = readKeys(PLAYABLE) || new Set();
+    let selections = readKeys(SELECTIONS) || new Set(downloadedEpisodes);
+    writeKeys(SELECTIONS, selections);
     const downloadingEpisodes = new Set();
     let verified = false;
     let revision = 0;
     let reconciliation = null;
 
-    function persist() {
-        try {
-            localStorage.setItem('downloadedEpisodes', JSON.stringify([...downloadedEpisodes]));
-        } catch (err) {
-            console.warn('Could not persist downloadedEpisodes:', err);
+    function recordSelection(key, saved) {
+        // Another tab may have changed other episodes during the transfer.
+        selections = readKeys(SELECTIONS) || selections;
+        downloadedEpisodes = readKeys(PLAYABLE) || downloadedEpisodes;
+        for (const keys of [selections, downloadedEpisodes]) {
+            if (saved) keys.add(key);
+            else keys.delete(key);
         }
+        if (writeKeys(SELECTIONS, selections)) writeKeys(PLAYABLE, downloadedEpisodes);
+        revision++;
     }
 
     function isDownloaded(podcast, episode) {
         return downloadedEpisodes.has(epKeyOf(podcast, episode));
+    }
+
+    function isRecoverable(podcast, episode) {
+        const key = epKeyOf(podcast, episode);
+        return verified && selections.has(key) && !downloadedEpisodes.has(key);
     }
 
     function isDownloading(podcast, episode) {
@@ -123,9 +200,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
                 }
                 return false;
             }
-            downloadedEpisodes.add(epKey);
-            revision++;
-            persist();
+            recordSelection(epKey, true);
             setStatus(`Downloaded "${episode.title}"`);
             return true;
         } finally {
@@ -136,7 +211,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
 
     async function remove(podcast, episode) {
         const epKey = epKeyOf(podcast, episode);
-        if (!downloadedEpisodes.has(epKey)) return;
+        if (!selections.has(epKey) && !downloadedEpisodes.has(epKey)) return;
         const urls = [
             new URL(combinedAudioUrl(podcast.id, episode), location.href).toString(),
             new URL(manifestAudioUrl(podcast.id, episode), location.href).toString()
@@ -148,9 +223,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
             setStatus('Could not remove download — try again');
             return;
         }
-        downloadedEpisodes.delete(epKey);
-        revision++;
-        persist();
+        recordSelection(epKey, false);
         onChange();
         setStatus(`Removed download "${episode.title}"`);
     }
@@ -183,7 +256,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
 
     async function removeMany(podcast, episodes) {
         for (const episode of episodes) {
-            if (isDownloaded(podcast, episode)) await remove(podcast, episode);
+            await remove(podcast, episode);
         }
     }
 
@@ -193,22 +266,29 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
         const attemptedScripts = new Set();
         while (true) {
             const snapshotRevision = revision;
-            const reply = await sendSwMessage({ type: 'LIST_OFFLINE_AUDIO' });
+            const controller = navigator.serviceWorker?.controller;
+            const storedSelections = readKeys(SELECTIONS);
+            const storedPlayable = readKeys(PLAYABLE);
+            const reply = await readInventory();
             const podcasts = getPodcasts();
-            if (!Array.isArray(reply?.urls) || !podcasts.length) {
-                if (verified) {
-                    verified = false;
-                    onChange();
-                }
-                return;
+            if (controller !== navigator.serviceWorker?.controller || revision !== snapshotRevision
+                || !sameKeys(storedSelections, readKeys(SELECTIONS))
+                || !sameKeys(storedPlayable, readKeys(PLAYABLE))) continue;
+            if (!reply || !podcasts.length) return;
+            const { catalogKeys, pinned, playable, missingScripts } = inspectCachedEpisodes(podcasts, reply);
+            const nextSelections = new Set(storedSelections || selections);
+            for (const key of pinned) nextSelections.add(key);
+            // Mixed-version tabs may have different catalogs. Only update
+            // the playable index for episodes this catalog can identify.
+            for (const key of storedPlayable || downloadedEpisodes) {
+                if (!catalogKeys.has(key) && nextSelections.has(key)) playable.add(key);
             }
-            if (revision !== snapshotRevision) continue;
-            const { playable, missingScripts } = inspectCachedEpisodes(podcasts, reply);
-            const changed = !verified || downloadedEpisodes.size !== playable.size
-                || [...playable].some((key) => !downloadedEpisodes.has(key));
+            const changed = !verified || !sameKeys(downloadedEpisodes, playable) || !sameKeys(selections, nextSelections);
             verified = true;
             downloadedEpisodes = playable;
-            persist();
+            selections = nextSelections;
+            // Keep the old receipt if a full storage area prevented migration.
+            if (writeKeys(SELECTIONS, selections)) writeKeys(PLAYABLE, downloadedEpisodes);
             if (changed) onChange();
 
             // Publish verified downloads immediately. An older download only
@@ -218,10 +298,10 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
                 if (navigator.onLine === false || revision !== snapshotRevision) break;
                 if (attemptedScripts.has(script)) continue;
                 attemptedScripts.add(script);
-                const saved = await sendSwMessage({ type: 'CACHE_AUDIO_URLS', urls: [script] });
+                const saved = await sendSwMessage({ type: 'CACHE_AUDIO_URLS', urls: [script] }, { timeout: 15000 });
                 if (saved?.results?.length === 1 && saved.results[0].ok) repaired = true;
             }
-            if (!repaired && revision === snapshotRevision) return;
+            if (!repaired && revision === snapshotRevision && controller === navigator.serviceWorker?.controller) return;
         }
     }
 
@@ -232,8 +312,23 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
         return reconciliation;
     }
 
+    globalThis.window?.addEventListener?.('storage', (event) => {
+        if (event.key !== SELECTIONS && event.key !== PLAYABLE && event.key !== null) return;
+        revision++;
+        if (event.newValue === null && !readKeys(SELECTIONS)) {
+            // Another tab explicitly cleared local data, including our intent
+            // key. Its formerly selected episodes must not be written back.
+            selections = new Set();
+            downloadedEpisodes = readKeys(PLAYABLE) || new Set();
+            verified = false;
+            onChange();
+        }
+        void reconcile();
+    });
+
     return {
         isDownloaded,
+        isRecoverable,
         hasVerifiedDownloads: () => verified && Boolean(navigator.serviceWorker?.controller),
         isDownloading,
         isBatchRunning: () => batchRunning,

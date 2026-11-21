@@ -1,4 +1,4 @@
-import { loadLegacyBookmarks, STATE_SCHEMA_VERSION } from '../state/storage.js?v=2.7.2%2B20261121T201527Z';
+import { loadLegacyBookmarks, STATE_SCHEMA_VERSION } from '../state/storage.js?v=2.7.3%2B20261121T204056Z';
 
 export function buildBookmarksExport({ state, currentPodcast, currentEpisode, dialogueLines }) {
   const epKey = `${currentPodcast.id}-${currentEpisode.id}`;

@@ -2,7 +2,7 @@
 // installs updates while its previous shell and downloaded audio remain usable.
 
 export const VERSION_STORAGE_KEY = 'tlu_app_seen_version';
-const BUILD_VERSION = '2.7.2+20261121T201527Z';
+const BUILD_VERSION = '2.7.3+20261121T204056Z';
 
 let appVersion = localStorage.getItem(VERSION_STORAGE_KEY) || '0.0.0';
 

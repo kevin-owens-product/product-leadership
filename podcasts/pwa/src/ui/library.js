@@ -35,6 +35,7 @@ export function createLibrary({
     let lastRenderedPodcastId = null;
     let searchAllSeasons = false;
     const selectedSeasonByPodcast = new Map();
+    let visibleDownloads = [];
 
     // Content-shaped skeleton placeholders (same markup as the initial
     // index.html state; see .skeleton-* in components.css).
@@ -53,6 +54,7 @@ export function createLibrary({
     }
 
     function renderPodcastsList(filter = '') {
+        renderDownloads();
         // Update version badge
         updateVersionBadge();
 
@@ -144,6 +146,71 @@ export function createLibrary({
         listEl.appendChild(addCard);
     }
 
+    function renderDownloads() {
+        const list = document.getElementById('downloads-list');
+        const verified = downloads.hasVerifiedDownloads();
+        const supported = 'serviceWorker' in navigator;
+        const entries = [];
+        if (verified) {
+            for (const podcast of getPodcasts()) {
+                for (const episode of podcast.episodes) {
+                    if (downloads.isDownloaded(podcast, episode)) entries.push({ podcast, episode });
+                }
+            }
+        }
+        document.getElementById('downloads-count').textContent = verified || !supported ? ` (${entries.length})` : '';
+        const status = document.getElementById('downloads-status');
+        status.hidden = entries.length > 0;
+        if (!status.hidden) {
+            if (!supported) status.textContent = 'This browser can’t save episodes for offline listening.';
+            else if (!verified && !navigator.serviceWorker.controller) status.textContent = 'Offline storage is not available in this tab yet.';
+            else if (!verified) status.textContent = 'Checking saved episodes…';
+            else status.textContent = 'No episodes downloaded. Use the download button beside an episode to listen offline.';
+        }
+        const showCount = entries.filter(entry => entry.podcast.id === getCurrentPodcast()?.id).length;
+        const badge = document.getElementById('show-download-count');
+        badge.hidden = showCount === 0;
+        badge.textContent = showCount ? `${showCount} downloaded` : '';
+
+        // Leave the rows in place during unrelated library updates so keyboard
+        // and screen-reader users keep their position in the list.
+        if (entries.length === visibleDownloads.length && entries.every((entry, i) =>
+            entry.episode === visibleDownloads[i].episode && entry.podcast === visibleDownloads[i].podcast)) return;
+        const focusedButton = list.contains(document.activeElement) ? document.activeElement : null;
+        const focusIndex = focusedButton ? Array.from(list.children).indexOf(focusedButton.closest('li')) : -1;
+        const focusEntry = visibleDownloads[focusIndex];
+        visibleDownloads = entries;
+        list.replaceChildren();
+        for (const { podcast, episode } of entries) {
+            const row = document.createElement('li');
+            const play = document.createElement('button');
+            play.type = 'button';
+            play.className = 'download-play';
+            play.textContent = episode.title;
+            play.setAttribute('aria-label', `Play ${episode.title} from ${podcast.title}`);
+            const meta = document.createElement('small');
+            const duration = formatDurationLabel(episode.durationSeconds);
+            meta.textContent = duration ? `${podcast.title} · ${duration}` : podcast.title;
+            play.appendChild(meta);
+            play.addEventListener('click', () => onResumeEpisode(podcast, episode));
+            const remove = document.createElement('button');
+            remove.type = 'button';
+            remove.className = 'bulk-btn';
+            remove.textContent = 'Remove';
+            remove.setAttribute('aria-label', `Remove download of ${episode.title} from ${podcast.title}`);
+            remove.addEventListener('click', () => { void downloads.remove(podcast, episode); });
+            row.append(play, remove);
+            list.appendChild(row);
+        }
+        if (focusIndex >= 0) {
+            const retained = entries.findIndex(entry => entry.episode === focusEntry.episode && entry.podcast === focusEntry.podcast);
+            const row = list.children[retained >= 0 ? retained : Math.min(focusIndex, entries.length - 1)];
+            const focusTarget = row?.querySelector(focusedButton.classList.contains('download-play') ? '.download-play' : '.bulk-btn')
+                || document.querySelector('#home-downloads summary');
+            focusTarget.focus({ preventScroll: true });
+        }
+    }
+
     // Half-finished episodes from any show, one tap to resume. Hidden while
     // searching so the results sit right under the search box.
     function renderContinueShelf(podcasts, state, filter) {
@@ -178,6 +245,41 @@ export function createLibrary({
         return `${Math.max(1, Math.round(bytes / 1e6))} MB`;
     }
 
+    // A Retry toast can outlive this view. Keep its original show, season
+    // and failed episode objects even if the visible button now says Remove.
+    let downloadBatch = Promise.resolve();
+    function requestBulkDownload(podcast, episodes, scopeLabel) {
+        const run = downloadBatch.then(async () => {
+            const pending = episodes.filter((episode) => !downloads.isDownloaded(podcast, episode));
+            if (!pending.length) return;
+            bulkProgress = { podcastId: podcast.id, scopeLabel, done: 0, total: pending.length };
+            refreshEpisodeList();
+            let result;
+            try {
+                result = await downloads.downloadMany(podcast, pending, {
+                    onProgress: (done, total) => {
+                        Object.assign(bulkProgress, { done, total });
+                        refreshEpisodeList();
+                    }
+                });
+            } finally {
+                bulkProgress = null;
+                refreshEpisodeList();
+            }
+            if (result.failed > 0) {
+                toasts.show(`${podcast.title} · ${scopeLabel}: downloaded ${result.ok} of ${result.ok + result.failed}`, {
+                    actionLabel: 'Retry',
+                    onAction: () => requestBulkDownload(podcast, result.failedEpisodes, scopeLabel)
+                });
+            } else if (result.ok > 0) {
+                toasts.show(`${podcast.title} · ${scopeLabel} saved for offline listening`);
+            }
+        });
+        // A retry requested during another transfer runs after it finishes.
+        downloadBatch = run.catch((err) => console.warn('Episode batch failed:', err));
+        return run;
+    }
+
     function renderBulkActions(podcast, scopeEpisodes, scopeLabel) {
         const row = document.getElementById('bulk-actions');
         const button = document.getElementById('bulk-download-btn');
@@ -194,7 +296,7 @@ export function createLibrary({
         row.hidden = false;
         button.hidden = false;
         const pending = withAudio.filter((episode) => !downloads.isDownloaded(podcast, episode));
-        const busy = bulkProgress && bulkProgress.podcastId === podcast.id;
+        const busy = bulkProgress?.podcastId === podcast.id && bulkProgress.scopeLabel === scopeLabel;
         button.disabled = Boolean(busy) || (downloads.isBatchRunning?.() && !busy);
         button.classList.toggle('downloaded', pending.length === 0);
         delete button.dataset.mode;
@@ -216,29 +318,7 @@ export function createLibrary({
                 toasts.show(`Removed ${scopeLabel.toLowerCase()} downloads`);
                 return;
             }
-            if (mode !== 'download') return;
-            bulkProgress = { podcastId: podcast.id, done: 0, total: pending.length };
-            refreshEpisodeList();
-            let result;
-            try {
-                result = await downloads.downloadMany(podcast, pending, {
-                    onProgress: (done, total) => {
-                        bulkProgress = { podcastId: podcast.id, done, total };
-                        refreshEpisodeList();
-                    }
-                });
-            } finally {
-                bulkProgress = null;
-                refreshEpisodeList();
-            }
-            if (result.failed > 0) {
-                toasts.show(`Downloaded ${result.ok} of ${result.ok + result.failed}. Some episodes failed`, {
-                    actionLabel: 'Retry',
-                    onAction: () => button.click()
-                });
-            } else if (result.ok > 0) {
-                toasts.show(`${scopeLabel} saved for offline listening`);
-            }
+            if (mode === 'download') await requestBulkDownload(podcast, pending, scopeLabel);
         };
         if (feedBtn) {
             feedBtn.onclick = async () => {
@@ -440,6 +520,7 @@ export function createLibrary({
         const title = document.getElementById('continue-episode-title');
         const meta = document.getElementById('continue-episode-meta');
         button.disabled = !action.episode;
+        button.dataset.kind = action.kind;
         delete button.dataset.episodeId;
         delete button.dataset.season;
         if (!action.episode) {
@@ -481,7 +562,7 @@ export function createLibrary({
             const key = `${podcast.id}-${episode.id}`;
             const progress = Number(state.episodeProgress?.[key]?.percent) || 0;
             if (isEpisodeComplete(state, podcast.id, episode)) counts.completed += 1;
-            else if (progress > 0 && progress < 98) counts['in-progress'] += 1;
+            else if (progress > 0) counts['in-progress'] += 1;
             else counts.unplayed += 1;
         });
         const labels = { all: 'All', unplayed: 'Unplayed', 'in-progress': 'In Progress', completed: 'Completed' };
@@ -492,6 +573,7 @@ export function createLibrary({
     }
 
     function renderEpisodeList(filter = null) {
+        renderDownloads();
         const currentPodcast = getCurrentPodcast();
         if (!currentPodcast || !Array.isArray(currentPodcast.episodes)) {
             document.getElementById('episode-list').innerHTML = '<p class="loading-text">No episodes found</p>';
@@ -538,7 +620,7 @@ export function createLibrary({
             const progress = Number(state.episodeProgress?.[key]?.percent) || 0;
             return isEpisodeComplete(state, currentPodcast.id, episode)
                 ? 'completed'
-                : progress > 0 && progress < 98 ? 'in-progress' : 'unplayed';
+                : progress > 0 ? 'in-progress' : 'unplayed';
         };
         const matchesStatus = (episode) => currentFilter === 'all' || currentFilter === statusOf(episode);
         const scopedMatches = searchAllSeasons && queryLower ? allMatches : selectedMatches;
@@ -602,7 +684,7 @@ export function createLibrary({
             const key = `${currentPodcast.id}-${episode.id}`;
             const progress = state.episodeProgress?.[key] || { percent: 0 };
             const complete = isEpisodeComplete(state, currentPodcast.id, episode);
-            const inProgress = !complete && progress.percent > 0 && progress.percent < 98;
+            const inProgress = !complete && progress.percent > 0;
             const card = document.createElement('div');
             card.className = 'episode-card' + (complete ? ' completed' : '') + (inProgress ? ' in-progress' : '');
             card.dataset.episodeId = String(episode.id);
@@ -720,7 +802,8 @@ export function createLibrary({
             const episode = podcast.episodes.find((candidate) => candidate.id === episodeId);
             if (!episode) return;
             if (Number.isInteger(seasonNumber)) selectSeason(podcast, seasonNumber);
-            onOpenEpisode(episode);
+            if (event.currentTarget.dataset.kind === 'continue') onResumeEpisode(podcast, episode);
+            else onOpenEpisode(episode);
         });
     }
 

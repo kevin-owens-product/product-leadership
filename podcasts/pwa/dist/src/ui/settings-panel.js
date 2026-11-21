@@ -1,14 +1,30 @@
 // Settings panel: theme toggle, configurable skip intervals, voice boost /
 // silence trim toggles, and the clear-local-data escape hatch.
 
-import { updateToggleButton } from './dom.js?v=2.7.1%2B20261121T195202Z';
+import { updateToggleButton } from './dom.js?v=2.7.2%2B20261121T201527Z';
+
+function isSkipInterval(seconds) {
+    return Number.isSafeInteger(seconds) && seconds > 0;
+}
 
 export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysToClear }) {
     let resettingLocalData = false;
-    let skipForwardInterval = parseInt(localStorage.getItem('skipForwardInterval') || '10');
-    let skipBackwardInterval = parseInt(localStorage.getItem('skipBackwardInterval') || '10');
-    let skipLargeForwardInterval = parseInt(localStorage.getItem('skipLargeForwardInterval') || '30');
-    let skipLargeBackwardInterval = parseInt(localStorage.getItem('skipLargeBackwardInterval') || '30');
+    // Keep the phone and system media controls on the same validated values,
+    // including when an older installation saved a blank or invalid setting.
+    const skipIntervals = {};
+    const skipInputs = [
+        ['skip-forward-interval', 'skipForwardInterval'],
+        ['skip-backward-interval', 'skipBackwardInterval'],
+        ['skip-large-forward-interval', 'skipLargeForwardInterval'],
+        ['skip-large-backward-interval', 'skipLargeBackwardInterval']
+    ];
+    for (const [id, key] of skipInputs) {
+        const input = document.getElementById(id);
+        input.value = localStorage.getItem(key) ?? input.defaultValue;
+        skipIntervals[key] = isSkipInterval(input.valueAsNumber)
+            ? input.valueAsNumber
+            : Number(input.defaultValue);
+    }
     let voiceBoostEnabled = localStorage.getItem('voiceBoostEnabled') === 'true';
     let silenceTrimEnabled = localStorage.getItem('silenceTrimEnabled') === 'true';
     let currentTheme = localStorage.getItem('theme') || 'dark';
@@ -28,10 +44,10 @@ export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysT
             if (num) num.textContent = String(seconds);
             else btn.textContent = `${direction < 0 ? '−' : '+'}${seconds}`;
         };
-        setSkipLabel('prev-btn', skipLargeBackwardInterval, -1);
-        setSkipLabel('back-btn', skipBackwardInterval, -1);
-        setSkipLabel('fwd-btn', skipForwardInterval, 1);
-        setSkipLabel('next-btn', skipLargeForwardInterval, 1);
+        setSkipLabel('prev-btn', skipIntervals.skipLargeBackwardInterval, -1);
+        setSkipLabel('back-btn', skipIntervals.skipBackwardInterval, -1);
+        setSkipLabel('fwd-btn', skipIntervals.skipForwardInterval, 1);
+        setSkipLabel('next-btn', skipIntervals.skipLargeForwardInterval, 1);
     }
 
     function bind() {
@@ -57,30 +73,17 @@ export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysT
             localStorage.setItem('theme', currentTheme);
         });
 
-        // Skip interval inputs
-        document.getElementById('skip-forward-interval').addEventListener('change', e => {
-            skipForwardInterval = parseInt(e.target.value);
-            localStorage.setItem('skipForwardInterval', skipForwardInterval);
-            updateSkipButtonTitles();
-        });
-
-        document.getElementById('skip-backward-interval').addEventListener('change', e => {
-            skipBackwardInterval = parseInt(e.target.value);
-            localStorage.setItem('skipBackwardInterval', skipBackwardInterval);
-            updateSkipButtonTitles();
-        });
-
-        document.getElementById('skip-large-forward-interval').addEventListener('change', e => {
-            skipLargeForwardInterval = parseInt(e.target.value);
-            localStorage.setItem('skipLargeForwardInterval', skipLargeForwardInterval);
-            updateSkipButtonTitles();
-        });
-
-        document.getElementById('skip-large-backward-interval').addEventListener('change', e => {
-            skipLargeBackwardInterval = parseInt(e.target.value);
-            localStorage.setItem('skipLargeBackwardInterval', skipLargeBackwardInterval);
-            updateSkipButtonTitles();
-        });
+        for (const [id, key] of skipInputs) {
+            const input = document.getElementById(id);
+            input.addEventListener('change', () => {
+                if (isSkipInterval(input.valueAsNumber)) {
+                    skipIntervals[key] = input.valueAsNumber;
+                    localStorage.setItem(key, String(input.valueAsNumber));
+                    updateSkipButtonTitles();
+                }
+                input.value = skipIntervals[key];
+            });
+        }
 
         // Voice Boost Toggle
         document.getElementById('voice-boost-toggle').addEventListener('click', () => {
@@ -134,10 +137,9 @@ export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysT
     // Sync inputs + toggle labels to the stored values (called once at init,
     // mirroring the original bottom-of-file initialization block).
     function initControls() {
-        document.getElementById('skip-forward-interval').value = skipForwardInterval;
-        document.getElementById('skip-backward-interval').value = skipBackwardInterval;
-        document.getElementById('skip-large-forward-interval').value = skipLargeForwardInterval;
-        document.getElementById('skip-large-backward-interval').value = skipLargeBackwardInterval;
+        for (const [id, key] of skipInputs) {
+            document.getElementById(id).value = skipIntervals[key];
+        }
         updateToggleButton('voice-boost-toggle', voiceBoostEnabled, voiceBoostEnabled ? 'On' : 'Off');
         updateToggleButton('silence-trim-toggle', silenceTrimEnabled, silenceTrimEnabled ? 'On' : 'Off');
         updateSkipButtonTitles();
@@ -148,9 +150,9 @@ export function createSettingsPanel({ setStatus, stopPlayback, localStorageKeysT
         initControls,
         isResettingLocalData: () => resettingLocalData,
         updateSkipButtonTitles,
-        skipForward: () => skipForwardInterval,
-        skipBackward: () => skipBackwardInterval,
-        skipLargeForward: () => skipLargeForwardInterval,
-        skipLargeBackward: () => skipLargeBackwardInterval
+        skipForward: () => skipIntervals.skipForwardInterval,
+        skipBackward: () => skipIntervals.skipBackwardInterval,
+        skipLargeForward: () => skipIntervals.skipLargeForwardInterval,
+        skipLargeBackward: () => skipIntervals.skipLargeBackwardInterval
     };
 }

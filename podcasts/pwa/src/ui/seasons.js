@@ -31,8 +31,9 @@ export function seasonNumberForEpisode(podcast, episodeOrId) {
 
 export function isEpisodeComplete(state, podcastId, episode) {
   const key = episodeKey(podcastId, episode.id);
+  const progress = state?.episodeProgress?.[key];
   return state?.completedEpisodes?.includes(key)
-    || clampPercent(state?.episodeProgress?.[key]?.percent) >= 98;
+    || (typeof progress?.finished === 'boolean' ? progress.finished : clampPercent(progress?.percent) >= 98);
 }
 
 function episodeProgress(state, podcastId, episode) {
@@ -52,7 +53,7 @@ export function getSeasonStats(podcastId, episodes, state) {
 
   for (const episode of safeEpisodes) {
     const progress = episodeProgress(state, podcastId, episode);
-    if (progress.percent >= 98) completed += 1;
+    if (progress.percent === 100) completed += 1;
     progressTotal += progress.percent;
     if (Number.isFinite(episode.durationSeconds)) durationSeconds += episode.durationSeconds;
   }
@@ -94,7 +95,7 @@ export function resolveSeasonNumber({
   let latestInProgress = null;
   for (const episode of podcast.episodes || []) {
     const progress = episodeProgress(state, podcast.id, episode);
-    if (progress.percent <= 0 || progress.percent >= 98) continue;
+    if (progress.percent <= 0 || progress.percent === 100) continue;
     if (!latestInProgress || progress.timestamp > latestInProgress.timestamp) {
       latestInProgress = { season: episode.season, timestamp: progress.timestamp };
     }
@@ -110,7 +111,7 @@ export function resolveSeasonNumber({
 function preferredEpisode(podcastId, episodes, state) {
   const inProgress = episodes
     .map((episode) => ({ episode, ...episodeProgress(state, podcastId, episode) }))
-    .filter((item) => item.percent > 0 && item.percent < 98)
+    .filter((item) => item.percent > 0 && item.percent < 100)
     .sort((a, b) => b.timestamp - a.timestamp);
   if (inProgress.length > 0) return { kind: 'continue', episode: inProgress[0].episode };
 
@@ -149,7 +150,7 @@ export function getContinueListening(podcasts, state = {}, limit = 6) {
   for (const podcast of Array.isArray(podcasts) ? podcasts : []) {
     for (const episode of podcast.episodes || []) {
       const progress = episodeProgress(state, podcast.id, episode);
-      if (progress.percent <= 0 || progress.percent >= 98) continue;
+      if (progress.percent <= 0 || progress.percent === 100) continue;
       items.push({ podcast, episode, percent: progress.percent, timestamp: progress.timestamp });
     }
   }

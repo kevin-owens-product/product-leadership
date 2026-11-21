@@ -1,5 +1,5 @@
 export const STORAGE_KEY = 'tlu_podcast_state';
-export const STATE_SCHEMA_VERSION = 3;
+export const STATE_SCHEMA_VERSION = 4;
 
 const LISTENING_STATS_DEFAULT = {
   totalTime: 0,
@@ -90,6 +90,21 @@ export function loadAppState() {
 
 export function saveAppState(state) {
   saveJSON(STORAGE_KEY, migrateState(state));
+}
+
+export function getResumePosition(progress, lineCount, preferredLine) {
+  const lastLine = Math.max(0, lineCount - 1);
+  if (Number.isInteger(preferredLine)) {
+    return { line: Math.max(0, Math.min(lastLine, preferredLine)), seconds: null, finished: false };
+  }
+  const savedLine = Number.isInteger(progress?.line) ? Math.max(0, progress.line) : 0;
+  // Old players recorded the last line on completion without an ended flag.
+  const finished = typeof progress?.finished === 'boolean'
+    ? progress.finished : progress?.percent >= 98 || (savedLine > 0 && savedLine >= lastLine);
+  if (finished) return { line: 0, seconds: null, finished: true };
+  const seconds = Number.isFinite(progress?.positionSeconds) && progress.positionSeconds >= 0
+    ? progress.positionSeconds : null;
+  return { line: Math.min(lastLine, savedLine), seconds, finished: false };
 }
 
 export function loadLegacyBookmarks(podcastId, episodeId) {

@@ -419,7 +419,12 @@ self.addEventListener('message', (event) => {
         if (data.type === 'LIST_OFFLINE_AUDIO') {
             event.waitUntil(withAudioCache(async (cache) => {
                 const reqs = await cache.keys();
-                reply({ type: 'LIST_OFFLINE_AUDIO_RESULT', urls: reqs.map((r) => r.url) });
+                const transcripts = await (await caches.open(TRANSCRIPT_CACHE)).keys();
+                reply({
+                    type: 'LIST_OFFLINE_AUDIO_RESULT',
+                    urls: reqs.map((r) => r.url),
+                    transcriptUrls: transcripts.map((r) => r.url)
+                });
             }).catch(() => reply({ type: 'LIST_OFFLINE_AUDIO_RESULT', error: 'Unable to read downloads' })));
             return;
         }

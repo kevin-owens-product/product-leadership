@@ -36,11 +36,33 @@ export function sendSwMessage(message) {
     });
 }
 
+function inspectCachedEpisodes(podcasts, reply) {
+    const urls = new Set(reply.urls);
+    // The worker can serve an older script with the same path when offline.
+    const paths = new Set([...urls, ...(reply.transcriptUrls || [])].map((url) => url.split('?')[0]));
+    const playable = new Set();
+    const missingScripts = new Set();
+    for (const url of urls) {
+        const audio = url.match(/\/audio\/([^/]+)\/([^/]+)\/combined\.mp3(?:\?|$)/);
+        if (!audio || !urls.has(url.replace(/\/combined\.mp3(?=\?|$)/, '/manifest.json'))) continue;
+        const podcast = podcasts.find((p) => p.id === audio[1]);
+        const episode = podcast?.episodes.find((ep) => episodeBasename(ep) === audio[2]);
+        if (!episode) continue;
+        const script = episode.transcriptHash && new URL(transcriptUrl(podcast.id, episode), location.href).href;
+        if (script && !paths.has(script.split('?')[0])) missingScripts.add(script);
+        else playable.add(epKeyOf(podcast, episode));
+    }
+    return { playable, missingScripts };
+}
+
 export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadManifest, onChange }) {
     // epKey strings (`${podcast.id}-${episode.id}`) the user has downloaded
     // or is currently downloading.
     let downloadedEpisodes = new Set(JSON.parse(localStorage.getItem('downloadedEpisodes') || '[]'));
     const downloadingEpisodes = new Set();
+    let verified = false;
+    let revision = 0;
+    let reconciliation = null;
 
     function persist() {
         try {
@@ -88,7 +110,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
                 urls.push(new URL(scriptUrl, location.href).toString());
             }
             const reply = await sendSwMessage({ type: 'CACHE_AUDIO_URLS', urls });
-            const allOk = reply && Array.isArray(reply.results) && reply.results.every((r) => r.ok);
+            const allOk = reply?.results?.length === urls.length && reply.results.every((r) => r.ok);
             if (!allOk) {
                 const failed = reply && reply.results ? reply.results.filter((r) => !r.ok).map((r) => r.url).join(', ') : '(no SW)';
                 console.warn('Episode download failed for', failed);
@@ -102,6 +124,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
                 return false;
             }
             downloadedEpisodes.add(epKey);
+            revision++;
             persist();
             setStatus(`Downloaded "${episode.title}"`);
             return true;
@@ -126,6 +149,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
             return;
         }
         downloadedEpisodes.delete(epKey);
+        revision++;
         persist();
         onChange();
         setStatus(`Removed download "${episode.title}"`);
@@ -136,21 +160,25 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
     // `onProgress(done, total)` fires after each episode.
     let batchRunning = false;
     async function downloadMany(podcast, episodes, { onProgress = () => {} } = {}) {
-        if (batchRunning) return { ok: 0, failed: 0, busy: true };
+        if (batchRunning) return { ok: 0, failed: 0, failedEpisodes: [], busy: true };
         batchRunning = true;
         const pending = episodes.filter((episode) => !isDownloaded(podcast, episode));
         let ok = 0;
-        let failed = 0;
+        const failedEpisodes = [];
         try {
             for (const episode of pending) {
-                if (await download(podcast, episode, { quiet: true })) ok += 1;
-                else failed += 1;
-                onProgress(ok + failed, pending.length);
+                const saved = await download(podcast, episode, { quiet: true }).catch((err) => {
+                    console.warn('Episode download failed:', episode.title, err);
+                    return false;
+                });
+                if (saved) ok += 1;
+                else failedEpisodes.push(episode);
+                onProgress(ok + failedEpisodes.length, pending.length);
             }
         } finally {
             batchRunning = false;
         }
-        return { ok, failed, busy: false };
+        return { ok, failed: failedEpisodes.length, failedEpisodes, busy: false };
     }
 
     async function removeMany(podcast, episodes) {
@@ -159,63 +187,54 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
         }
     }
 
-    // Reconcile our localStorage set against what's actually in the SW cache so
-    // the UI doesn't show stale "downloaded" badges after a cache eviction.
-    async function reconcile() {
-        const reply = await sendSwMessage({ type: 'LIST_OFFLINE_AUDIO' });
-        if (!reply || !Array.isArray(reply.urls)) return;
-        // Every cached URL is resolved against the loaded library below, so
-        // running before the library exists resolves nothing and the result is
-        // indistinguishable from "the cache is empty" — except it then gets
-        // persisted, destroying the record of every download. Reconciling is
-        // only meaningful once there is something to reconcile against.
-        if (getPodcasts().length === 0) return;
-        const haveSet = new Set();
-        const cachedUrls = new Set(reply.urls);
-        for (const fullUrl of cachedUrls) {
-            const m = fullUrl.match(/\/audio\/([^/]+)\/([^/]+)\/combined\.mp3(?:\?|$)/);
-            if (!m) continue;
-            const manifestUrl = fullUrl.replace(/\/combined\.mp3(?=\?|$)/, '/manifest.json');
-            if (!cachedUrls.has(manifestUrl)) continue;
-            const podcastId = m[1];
-            const basename = m[2];
+    async function verifyDownloads() {
+        // A download or removal may finish while the cache snapshot or a
+        // legacy transcript request is in flight. Repeat against fresh keys.
+        const attemptedScripts = new Set();
+        while (true) {
+            const snapshotRevision = revision;
+            const reply = await sendSwMessage({ type: 'LIST_OFFLINE_AUDIO' });
             const podcasts = getPodcasts();
-            const podcast = podcasts.find((p) => p.id === podcastId);
-            if (!podcast) continue;
-            const ep = podcast.episodes.find((e) => episodeBasename(e) === basename);
-            if (ep) haveSet.add(`${podcastId}-${ep.id}`);
+            if (!Array.isArray(reply?.urls) || !podcasts.length) {
+                if (verified) {
+                    verified = false;
+                    onChange();
+                }
+                return;
+            }
+            if (revision !== snapshotRevision) continue;
+            const { playable, missingScripts } = inspectCachedEpisodes(podcasts, reply);
+            const changed = !verified || downloadedEpisodes.size !== playable.size
+                || [...playable].some((key) => !downloadedEpisodes.has(key));
+            verified = true;
+            downloadedEpisodes = playable;
+            persist();
+            if (changed) onChange();
+
+            // Publish verified downloads immediately. An older download only
+            // joins the list once a fresh snapshot verifies all its files.
+            let repaired = false;
+            for (const script of missingScripts) {
+                if (navigator.onLine === false || revision !== snapshotRevision) break;
+                if (attemptedScripts.has(script)) continue;
+                attemptedScripts.add(script);
+                const saved = await sendSwMessage({ type: 'CACHE_AUDIO_URLS', urls: [script] });
+                if (saved?.results?.length === 1 && saved.results[0].ok) repaired = true;
+            }
+            if (!repaired && revision === snapshotRevision) return;
         }
-        const changed = downloadedEpisodes.size !== haveSet.size
-            || [...haveSet].some((key) => !downloadedEpisodes.has(key));
-        downloadedEpisodes = haveSet;
-        persist();
-        if (changed) onChange();
-        await backfillTranscripts(reply.urls);
     }
 
-    // Episodes downloaded before transcripts moved out of the catalog have
-    // audio cached but no script. Fetch the missing scripts while online so
-    // those downloads keep working offline.
-    async function backfillTranscripts(cachedUrls) {
-        if (typeof navigator !== 'undefined' && navigator.onLine === false) return;
-        const cachedPaths = new Set(cachedUrls.map((u) => {
-            try { return new URL(u).pathname; } catch { return u; }
-        }));
-        const missing = [];
-        for (const podcast of getPodcasts()) {
-            for (const episode of podcast.episodes || []) {
-                if (!episode.transcriptHash || !downloadedEpisodes.has(epKeyOf(podcast, episode))) continue;
-                const url = new URL(transcriptUrl(podcast.id, episode), location.href);
-                if (!cachedPaths.has(url.pathname)) missing.push(url.toString());
-            }
+    function reconcile() {
+        if (!reconciliation) {
+            reconciliation = verifyDownloads().finally(() => { reconciliation = null; });
         }
-        for (const url of missing) {
-            await sendSwMessage({ type: 'CACHE_AUDIO_URLS', urls: [url] });
-        }
+        return reconciliation;
     }
 
     return {
         isDownloaded,
+        hasVerifiedDownloads: () => verified && Boolean(navigator.serviceWorker?.controller),
         isDownloading,
         isBatchRunning: () => batchRunning,
         download,

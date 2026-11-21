@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.use({ serviceWorkers: 'block', reducedMotion: 'reduce' });
 
-test('native playback publishes the playing track to system media controls', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => {
         const NativeAudio = window.Audio;
         window.Audio = function (...args) {
@@ -18,6 +18,9 @@ test('native playback publishes the playing track to system media controls', asy
             return register.call(this, name, callback);
         };
     });
+});
+
+test('native playback publishes the playing track to system media controls', async ({ page }) => {
     await page.goto('/?podcast=agentic-coding-frontier&episode=4');
     await expect(page.locator('#player-view')).toHaveClass(/active/);
     const firstTitle = await page.locator('#player-episode-title').textContent();
@@ -64,4 +67,32 @@ test('native playback publishes the playing track to system media controls', asy
     await expect.poll(async () => (await systemMetadata()).title).toBe('Memory, Context, and Long-Horizon Execution');
     expect((await systemMetadata()).artist).toBe(show);
     await expect.poll(() => page.evaluate(() => navigator.mediaSession.playbackState)).toBe('playing');
+});
+
+test('system seek controls follow current skip preferences and honor receiver offsets', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('skipForwardInterval', 'NaN'));
+    await page.goto('/?podcast=agentic-coding-frontier&episode=4');
+    await expect(page.locator('#player-view')).toHaveClass(/active/);
+    await page.locator('#player-more-btn').click();
+    await page.locator('#settings-panel .panel-header').click();
+    const forward = page.locator('#skip-forward-interval');
+    await expect(forward).toHaveValue('10');
+    await forward.fill('30');
+    await forward.press('Tab');
+    const backward = page.locator('#skip-backward-interval');
+    await backward.fill('15');
+    await backward.press('Tab');
+
+    const seek = (action, details = {}) => page.evaluate(({ action, details }) => {
+        window.mediaActions[action]({ action, ...details });
+    }, { action, details });
+    await seek('seekto', { seekTime: 60 });
+    await seek('seekforward');
+    await expect(page.locator('#current-pos')).toHaveText('1:30');
+    await seek('seekbackward');
+    await expect(page.locator('#current-pos')).toHaveText('1:15');
+    await seek('seekbackward', { seekOffset: 5 });
+    await expect(page.locator('#current-pos')).toHaveText('1:10');
+    await seek('seekforward', { seekOffset: 12 });
+    await expect(page.locator('#current-pos')).toHaveText('1:22');
 });

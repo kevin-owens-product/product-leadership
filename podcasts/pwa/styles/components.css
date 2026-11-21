@@ -1840,6 +1840,67 @@ body.light-theme .podcast-card {
     }
 }
 
+.home-downloads {
+    margin-bottom: var(--space-4);
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+    box-shadow: var(--edge-highlight);
+}
+
+.home-downloads summary {
+    padding: var(--space-3) 0;
+    color: var(--text-primary);
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.home-downloads summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.home-downloads p {
+    margin: 0;
+    padding-bottom: var(--space-3);
+    font-size: var(--fs-small);
+    color: var(--text-secondary);
+}
+
+.home-downloads ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.home-downloads li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    border-top: 1px solid var(--border);
+}
+
+.download-play {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-3) 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+}
+
+.download-play small {
+    display: block;
+    color: var(--text-secondary);
+}
+
+#show-download-count[hidden] {
+    display: none;
+}
+
 /* ===== Continue listening shelf (home) ===== */
 .continue-shelf {
     margin-bottom: var(--space-5);

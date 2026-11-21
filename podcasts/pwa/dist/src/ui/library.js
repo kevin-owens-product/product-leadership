@@ -1,9 +1,9 @@
 // Library screens: the podcasts home grid and the per-show episode list,
 // including search, status filters, and sorting.
 
-import { updateVersionBadge } from '../app/version.js?v=2.7.2%2B20261121T201527Z';
-import { formatDurationLabel, renderPodcastCard, renderEpisodeCard, renderContinueCard } from './render.js?v=2.7.2%2B20261121T201527Z';
-import { activateCardWithKeyboard } from './dom.js?v=2.7.2%2B20261121T201527Z';
+import { updateVersionBadge } from '../app/version.js?v=2.7.3%2B20261121T204056Z';
+import { formatDurationLabel, renderPodcastCard, renderEpisodeCard, renderContinueCard } from './render.js?v=2.7.3%2B20261121T204056Z';
+import { activateCardWithKeyboard } from './dom.js?v=2.7.3%2B20261121T204056Z';
 import {
     getContinueListening,
     getPodcastSeasons,
@@ -12,7 +12,7 @@ import {
     isEpisodeComplete,
     resolveSeasonNumber,
     seasonNumberForEpisode
-} from './seasons.js?v=2.7.2%2B20261121T201527Z';
+} from './seasons.js?v=2.7.3%2B20261121T204056Z';
 
 export function createLibrary({
     getPodcasts,
@@ -154,11 +154,18 @@ export function createLibrary({
         if (verified) {
             for (const podcast of getPodcasts()) {
                 for (const episode of podcast.episodes) {
-                    if (downloads.isDownloaded(podcast, episode)) entries.push({ podcast, episode });
+                    const ready = downloads.isDownloaded(podcast, episode);
+                    if (ready || downloads.isRecoverable(podcast, episode)) {
+                        entries.push({ podcast, episode, ready, restoring: !ready && downloads.isDownloading(podcast, episode) });
+                    }
                 }
             }
         }
-        document.getElementById('downloads-count').textContent = verified || !supported ? ` (${entries.length})` : '';
+        const readyCount = entries.filter(entry => entry.ready).length;
+        const restoreCount = entries.length - readyCount;
+        let countLabel = verified || !supported ? ` (${readyCount})` : '';
+        if (restoreCount) countLabel = ` (${readyCount} ready, ${restoreCount} to restore)`;
+        document.getElementById('downloads-count').textContent = countLabel;
         const status = document.getElementById('downloads-status');
         status.hidden = entries.length > 0;
         if (!status.hidden) {
@@ -167,7 +174,7 @@ export function createLibrary({
             else if (!verified) status.textContent = 'Checking saved episodes…';
             else status.textContent = 'No episodes downloaded. Use the download button beside an episode to listen offline.';
         }
-        const showCount = entries.filter(entry => entry.podcast.id === getCurrentPodcast()?.id).length;
+        const showCount = entries.filter(entry => entry.ready && entry.podcast.id === getCurrentPodcast()?.id).length;
         const badge = document.getElementById('show-download-count');
         badge.hidden = showCount === 0;
         badge.textContent = showCount ? `${showCount} downloaded` : '';
@@ -175,31 +182,40 @@ export function createLibrary({
         // Leave the rows in place during unrelated library updates so keyboard
         // and screen-reader users keep their position in the list.
         if (entries.length === visibleDownloads.length && entries.every((entry, i) =>
-            entry.episode === visibleDownloads[i].episode && entry.podcast === visibleDownloads[i].podcast)) return;
+            entry.episode === visibleDownloads[i].episode && entry.podcast === visibleDownloads[i].podcast
+            && entry.ready === visibleDownloads[i].ready && entry.restoring === visibleDownloads[i].restoring)) return;
         const focusedButton = list.contains(document.activeElement) ? document.activeElement : null;
         const focusIndex = focusedButton ? Array.from(list.children).indexOf(focusedButton.closest('li')) : -1;
         const focusEntry = visibleDownloads[focusIndex];
         visibleDownloads = entries;
         list.replaceChildren();
-        for (const { podcast, episode } of entries) {
+        for (const { podcast, episode, ready, restoring } of entries) {
             const row = document.createElement('li');
-            const play = document.createElement('button');
-            play.type = 'button';
-            play.className = 'download-play';
-            play.textContent = episode.title;
-            play.setAttribute('aria-label', `Play ${episode.title} from ${podcast.title}`);
+            const primary = document.createElement('button');
+            primary.type = 'button';
+            primary.className = 'download-play';
+            primary.textContent = episode.title;
+            primary.setAttribute('aria-label', `${ready ? 'Play' : 'Restore'} ${episode.title} from ${podcast.title}`);
+            primary.setAttribute('aria-disabled', String(restoring));
             const meta = document.createElement('small');
             const duration = formatDurationLabel(episode.durationSeconds);
-            meta.textContent = duration ? `${podcast.title} · ${duration}` : podcast.title;
-            play.appendChild(meta);
-            play.addEventListener('click', () => onResumeEpisode(podcast, episode));
+            const show = duration ? `${podcast.title} · ${duration}` : podcast.title;
+            meta.textContent = ready ? show : `${restoring ? 'Restoring…' : 'Restore download'} · ${show}`;
+            primary.appendChild(meta);
+            primary.addEventListener('click', () => {
+                if (ready) onResumeEpisode(podcast, episode);
+                else if (restoring) return;
+                else if (navigator.onLine === false) toasts.show('Connect to the internet to restore this download.');
+                else void downloads.download(podcast, episode);
+            });
             const remove = document.createElement('button');
             remove.type = 'button';
             remove.className = 'bulk-btn';
             remove.textContent = 'Remove';
             remove.setAttribute('aria-label', `Remove download of ${episode.title} from ${podcast.title}`);
             remove.addEventListener('click', () => { void downloads.remove(podcast, episode); });
-            row.append(play, remove);
+            remove.disabled = restoring;
+            row.append(primary, remove);
             list.appendChild(row);
         }
         if (focusIndex >= 0) {

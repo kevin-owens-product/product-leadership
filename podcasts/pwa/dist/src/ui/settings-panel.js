@@ -1,7 +1,7 @@
 // Settings panel: theme toggle, configurable skip intervals, voice boost /
 // silence trim toggles, and the clear-local-data escape hatch.
 
-import { updateToggleButton } from './dom.js?v=2.7.2%2B20261121T201527Z';
+import { updateToggleButton } from './dom.js?v=2.7.3%2B20261121T204056Z';
 
 function isSkipInterval(seconds) {
     return Number.isSafeInteger(seconds) && seconds > 0;

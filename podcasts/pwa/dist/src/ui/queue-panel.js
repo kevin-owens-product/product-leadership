@@ -1,7 +1,7 @@
 // Play queue: persisted list of upcoming episodes + the queue panel UI.
 
-import { loadQueue, saveQueue } from '../state/storage.js?v=2.7.2%2B20261121T201527Z';
-import { renderQueueItem } from './render.js?v=2.7.2%2B20261121T201527Z';
+import { loadQueue, saveQueue } from '../state/storage.js?v=2.7.3%2B20261121T204056Z';
+import { renderQueueItem } from './render.js?v=2.7.3%2B20261121T204056Z';
 
 export function createQueuePanel({ getPodcasts, isCurrentItem, onOpenItem }) {
     const playQueue = loadQueue();

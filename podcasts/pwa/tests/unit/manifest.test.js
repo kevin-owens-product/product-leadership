@@ -8,6 +8,7 @@ import {
     withCacheKey,
     epKeyOf,
     stableCacheKey,
+    loadSupertonicAudioManifest,
     attachAudioUrls,
     buildLineOffsets
 } from '../../src/playback/manifest.js';
@@ -33,6 +34,21 @@ test('stableCacheKey is deterministic and input-sensitive', () => {
     assert.equal(stableCacheKey('abc'), stableCacheKey('abc'));
     assert.notEqual(stableCacheKey('abc'), stableCacheKey('abd'));
     assert.match(stableCacheKey(''), /^[0-9a-z]+$/);
+});
+
+test('unchanged manifests keep their audio key across deploys and honor pinned legacy keys', async (t) => {
+    const body = JSON.stringify([{ rawLine: 1, file: '0000.mp3' }]);
+    const headers = new Headers({ etag: 'first' });
+    t.mock.method(globalThis, 'fetch', async () => new Response(body, { headers }));
+    const key = async () => (await loadSupertonicAudioManifest('show', 'ep.md')).cacheKey;
+    const first = await key();
+    headers.set('etag', 'second');
+    headers.set('last-modified', 'Fri, 20 Nov 2026 00:00:00 GMT');
+    assert.equal(await key(), first);
+    headers.set('X-PodLearn-Audio-Cache-Key', 'previous-download');
+    assert.equal(await key(), 'previous-download');
+    headers.set('X-PodLearn-Audio-Cache-Key', '');
+    assert.equal(await key(), '');
 });
 
 test('attachAudioUrls matches by rawLine when every item has one', () => {

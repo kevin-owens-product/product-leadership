@@ -1,6 +1,6 @@
 // Service worker — atomic versioned precache.
 //
-// The build script substitutes 2.7.2+20261121T201527Z and ["/covers/agentic-coding-frontier.jpg","/covers/ai-diligence-room.jpg","/covers/claude-code-mastery.jpg","/covers/compliance-shift.jpg","/covers/control-loop.jpg","/covers/deadwater.jpg","/covers/foreign-service-prep.jpg","/covers/operator-mode.jpg","/covers/portfolio-deep-dives.jpg","/covers/real-economy-ai.jpg","/covers/talking-ai-to-the-board.jpg","/covers/tech-leadership.jpg","/covers/the-decision-room.jpg","/covers/the-forge-podcast.jpg","/covers/the-harness.jpg","/covers/the-influence-brief.jpg","/covers/the-rulebook.jpg","/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/transcripts.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/new-episodes.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/seasons.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
+// The build script substitutes 2.7.3+20261121T204056Z and ["/covers/agentic-coding-frontier.jpg","/covers/ai-diligence-room.jpg","/covers/claude-code-mastery.jpg","/covers/compliance-shift.jpg","/covers/control-loop.jpg","/covers/deadwater.jpg","/covers/foreign-service-prep.jpg","/covers/operator-mode.jpg","/covers/portfolio-deep-dives.jpg","/covers/real-economy-ai.jpg","/covers/talking-ai-to-the-board.jpg","/covers/tech-leadership.jpg","/covers/the-decision-room.jpg","/covers/the-forge-podcast.jpg","/covers/the-harness.jpg","/covers/the-influence-brief.jpg","/covers/the-rulebook.jpg","/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/transcripts.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/new-episodes.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/seasons.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
 // time. Each deploy gets a unique cache name and pre-fetches the entire app
 // shell during install. Activation atomically deletes any older shell cache
 // (preserving the user-downloaded audio cache). After activation + clients.claim,
@@ -12,7 +12,7 @@
 // shell list, which means precache is skipped and the SW just passes
 // requests through to the network. Audio downloads still work.
 
-const BUILD_VERSION = '2.7.2+20261121T201527Z';
+const BUILD_VERSION = '2.7.3+20261121T204056Z';
 const APP_SHELL_RAW = ["/covers/agentic-coding-frontier.jpg","/covers/ai-diligence-room.jpg","/covers/claude-code-mastery.jpg","/covers/compliance-shift.jpg","/covers/control-loop.jpg","/covers/deadwater.jpg","/covers/foreign-service-prep.jpg","/covers/operator-mode.jpg","/covers/portfolio-deep-dives.jpg","/covers/real-economy-ai.jpg","/covers/talking-ai-to-the-board.jpg","/covers/tech-leadership.jpg","/covers/the-decision-room.jpg","/covers/the-forge-podcast.jpg","/covers/the-harness.jpg","/covers/the-influence-brief.jpg","/covers/the-rulebook.jpg","/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/transcripts.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/new-episodes.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/seasons.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"];
 
 const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
@@ -85,8 +85,8 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Transcripts: cache-first by exact (hash-versioned) URL, then network,
-    // then any older cached copy of the same script when offline.
+    // A saved recording keeps its script. Other transcripts use the current
+    // catalog hash, then fall back to an older copy when offline.
     if (url.pathname.includes('/transcripts/')) {
         event.respondWith(transcriptFetch(req));
         return;
@@ -152,8 +152,15 @@ async function transcriptFetch(req) {
         caches.open(TRANSCRIPT_CACHE),
         caches.open(OFFLINE_AUDIO_CACHE)
     ]).catch(() => []);
-    for (const cache of stores) {
-        const hit = await cache.match(req);
+    const [transcripts, downloads] = stores;
+    if (downloads) {
+        const exact = await downloads.match(req);
+        if (exact) return exact;
+        const saved = await downloads.match(req, { ignoreSearch: true });
+        if (saved && await pinnedManifestForScript(downloads, req.url)) return saved;
+    }
+    if (transcripts) {
+        const hit = await transcripts.match(req);
         if (hit) return hit;
     }
     try {
@@ -174,58 +181,135 @@ async function transcriptFetch(req) {
             }
             return res;
         }
-        const stale = await matchAny(stores, req);
+        const stale = await offlineTranscript(stores, req);
         return stale || res;
     } catch (err) {
-        const stale = await matchAny(stores, req);
+        const stale = await offlineTranscript(stores, req);
         if (stale) return stale;
         return new Response('Offline', { status: 503, statusText: 'Offline' });
     }
 }
 
-async function matchAny(cacheList, req) {
-    for (const cache of cacheList) {
+async function offlineTranscript(stores, req) {
+    for (const cache of stores) {
         const hit = await cache.match(req, { ignoreSearch: true });
         if (hit) return hit;
     }
-    return null;
+    if (!stores[1]) return null;
+    const key = await pinnedManifestForScript(stores[1], req.url);
+    const markdown = key && await readManifestTranscript(stores[1], key);
+    return markdown ? new Response(markdown, { headers: { 'Content-Type': 'text/markdown; charset=utf-8' } }) : null;
+}
+
+const manifestPath = /\/audio\/([^/]+)\/([^/]+)\/manifest\.json$/;
+const combinedPath = /\/audio\/([^/]+)\/([^/]+)\/combined\.mp3$/;
+
+function counterpartUrl(url) {
+    const other = new URL(url);
+    if (manifestPath.test(other.pathname)) other.pathname = other.pathname.replace(/manifest\.json$/, 'combined.mp3');
+    else if (combinedPath.test(other.pathname)) other.pathname = other.pathname.replace(/combined\.mp3$/, 'manifest.json');
+    else return null;
+    return other.href;
+}
+
+function transcriptPath(manifestUrl) {
+    const url = new URL(manifestUrl);
+    return url.origin + url.pathname.replace(manifestPath, '/transcripts/$1/$2.md');
+}
+
+function pinnedManifestForScript(cache, scriptUrl) {
+    const manifest = new URL(scriptUrl);
+    const scriptPath = /\/transcripts\/([^/]+)\/([^/]+)\.md$/;
+    if (!scriptPath.test(manifest.pathname)) return null;
+    manifest.pathname = manifest.pathname.replace(scriptPath, '/audio/$1/$2/manifest.json');
+    return pinnedAssetKey(cache, manifest);
+}
+
+// Probe keys only. Cache.match() on a combined MP3 can open a large response
+// body even when the caller just needs to know whether its version is saved.
+async function pinnedAssetKey(cache, url) {
+    const counterpart = counterpartUrl(url);
+    if (!counterpart) return null;
+    const [candidates, peers] = await Promise.all([
+        cache.keys(url.href, { ignoreSearch: true }),
+        cache.keys(counterpart, { ignoreSearch: true })
+    ]);
+    const peerUrls = new Set(peers.map((req) => req.url));
+    return candidates.reverse().find((req) => peerUrls.has(counterpartUrl(req.url)))?.url || null;
+}
+
+// Before transcripts moved out of the app shell, downloads saved only the MP3
+// and its manifest. The manifest contains the recorded script, including the
+// source line numbers the player uses to attach audio offsets and chapters.
+async function readManifestTranscript(cache, key) {
+    const response = await cache.match(key);
+    if (!response) return null;
+    const items = await response.json().catch(() => null);
+    if (!Array.isArray(items)) return null;
+    const lines = [];
+    let chapter;
+    let hasDialogue = false;
+    for (const item of items) {
+        if (!Number.isSafeInteger(item?.rawLine) || item.rawLine < lines.length || item.rawLine > 100000
+            || typeof item.text !== 'string' || !item.text.trim() || /[\r\n]/.test(item.text)) return null;
+        if (item.chapter && item.chapter !== chapter && item.rawLine > lines.length) {
+            lines[item.rawLine - 1] = '### ' + item.chapter;
+        }
+        chapter = item.chapter;
+        if (item.type === 'cue') {
+            lines[item.rawLine] = item.text;
+        } else {
+            if (!/^[A-Z][A-Z0-9 '&()./-]*$/.test(item.speaker || '')) return null;
+            lines[item.rawLine] = '**' + item.speaker + ':** ' + item.text;
+            hasDialogue = true;
+        }
+    }
+    return hasDialogue ? lines.join('\n') : null;
+}
+
+async function cachedAudio(cache, req, allowUnpaired = false) {
+    const url = new URL(req.url);
+    let key = req.url;
+    let response = await cache.match(key);
+    if (!response) {
+        key = await pinnedAssetKey(cache, url);
+        if (key) response = await cache.match(key);
+        else if (allowUnpaired) response = await cache.match(req, { ignoreSearch: true });
+    }
+    if (!response) return null;
+    if (key && manifestPath.test(url.pathname)) {
+        const headers = new Headers(response.headers);
+        headers.set('X-PodLearn-Audio-Cache-Key', new URL(key).searchParams.get('v') || '');
+        return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+    }
+    return rangeAwareAudioResponse(req, response);
 }
 
 async function audioFetch(req) {
-    let cache = null;
-    try {
-        cache = await caches.open(OFFLINE_AUDIO_CACHE);
-        const cached = await cache.match(req);
-        if (cached) return rangeAwareAudioResponse(req, cached);
-    } catch (err) {
-        console.warn('[sw] offline audio lookup failed:', err);
-    }
-
-    try {
-        const network = await fetch(req);
-        if (network && network.ok) return network;
-        // fetch() resolves for HTTP failures. Treat a transient 4xx/5xx like
-        // an offline network error so a user-downloaded episode remains
-        // playable; valid audio range responses (206) are `ok` and return
-        // above.
-        if (cache) {
-            const cachedFallback = await cache.match(req, { ignoreSearch: true });
-            if (cachedFallback) {
-                console.warn('[sw] using downloaded audio after network HTTP failure:', req.url, network?.status);
-                return rangeAwareAudioResponse(req, cachedFallback);
-            }
+    const retry = new URL(req.url).searchParams.has('podlearnRetry');
+    const cache = await caches.open(OFFLINE_AUDIO_CACHE).catch(() => null);
+    if (cache && !retry) {
+        try {
+            const saved = await cachedAudio(cache, req);
+            if (saved) return saved;
+        } catch (err) {
+            console.warn('[sw] offline audio lookup failed:', err);
         }
-        return network;
-    } catch (err) {
-        if (cache) {
-            const cachedFallback = await cache.match(req, { ignoreSearch: true });
-            if (cachedFallback) {
-                console.warn('[sw] using older offline audio after network failure:', req.url);
-                return rangeAwareAudioResponse(req, cachedFallback);
-            }
-        }
-        throw err;
     }
+    let network;
+    let networkError;
+    try {
+        network = retry ? await fetch(req, { cache: 'reload' }) : await fetch(req);
+        if (network.ok) return network;
+    } catch (err) {
+        networkError = err;
+    }
+    if (cache) {
+        const fallback = await cachedAudio(cache, req, true);
+        if (fallback) return fallback;
+    }
+    if (networkError) throw networkError;
+    return network;
 }
 
 async function rangeAwareAudioResponse(req, cached) {
@@ -380,6 +464,47 @@ async function cacheEpisode(urls) {
     return results;
 }
 
+// A v2.7.2 (or older) tab also sends DELETE_AUDIO_URLS on playback errors,
+// containing only the failed MP3. Every shipped user-initiated Remove sends
+// the episode's MP3 and manifest together, optionally followed by its script.
+function isEpisodeRemoval(urls) {
+    if (urls.length !== 2 && urls.length !== 3) return false;
+    try {
+        const [audio, manifest, script] = urls.map((value) => new URL(value));
+        return audio.origin === self.location.origin && combinedPath.test(audio.pathname)
+            && manifest.origin === audio.origin && manifest.pathname === new URL(counterpartUrl(audio)).pathname
+            && (!script || script.origin + script.pathname === transcriptPath(manifest));
+    } catch {
+        return false;
+    }
+}
+
+// A recovered script is generated on demand, so a full device can still play
+// it. Validate only manifests whose original script is missing. Subsequent
+// inventories of immutable, versioned manifests need only their cache keys.
+const verifiedScriptManifests = new Set();
+async function listDownloads(cache) {
+    const urls = (await cache.keys()).map((request) => request.url);
+    const transcriptUrls = (await (await caches.open(TRANSCRIPT_CACHE)).keys()).map((request) => request.url);
+    const keys = new Set(urls);
+    const paths = new Set([...urls, ...transcriptUrls].map((url) => url.split('?')[0]));
+    const recoverableTranscriptUrls = new Set();
+    for (const key of verifiedScriptManifests) {
+        if (!keys.has(key)) verifiedScriptManifests.delete(key);
+    }
+    for (const key of urls) {
+        const url = new URL(key);
+        if (!manifestPath.test(url.pathname) || !keys.has(counterpartUrl(url))) continue;
+        const script = transcriptPath(url);
+        if (paths.has(script) || recoverableTranscriptUrls.has(script)) continue;
+        if (verifiedScriptManifests.has(key) || await readManifestTranscript(cache, key)) {
+            if (url.searchParams.has('v')) verifiedScriptManifests.add(key);
+            recoverableTranscriptUrls.add(script);
+        }
+    }
+    return { type: 'LIST_OFFLINE_AUDIO_RESULT', urls, transcriptUrls, recoverableTranscriptUrls: [...recoverableTranscriptUrls] };
+}
+
 self.addEventListener('message', (event) => {
     const data = event.data;
     if (data === 'SKIP_WAITING') {
@@ -407,6 +532,10 @@ self.addEventListener('message', (event) => {
             return;
         }
         if (data.type === 'DELETE_AUDIO_URLS' && Array.isArray(data.urls)) {
+            if (!isEpisodeRemoval(data.urls)) {
+                reply({ type: 'DELETE_AUDIO_URLS_RESULT', removed: 0 });
+                return;
+            }
             event.waitUntil(withAudioCache(async (cache) => {
                 let removed = 0;
                 for (const url of data.urls) {
@@ -417,15 +546,8 @@ self.addEventListener('message', (event) => {
             return;
         }
         if (data.type === 'LIST_OFFLINE_AUDIO') {
-            event.waitUntil(withAudioCache(async (cache) => {
-                const reqs = await cache.keys();
-                const transcripts = await (await caches.open(TRANSCRIPT_CACHE)).keys();
-                reply({
-                    type: 'LIST_OFFLINE_AUDIO_RESULT',
-                    urls: reqs.map((r) => r.url),
-                    transcriptUrls: transcripts.map((r) => r.url)
-                });
-            }).catch(() => reply({ type: 'LIST_OFFLINE_AUDIO_RESULT', error: 'Unable to read downloads' })));
+            event.waitUntil(withAudioCache(listDownloads).then(reply)
+                .catch(() => reply({ type: 'LIST_OFFLINE_AUDIO_RESULT', error: 'Unable to read downloads' })));
             return;
         }
     }

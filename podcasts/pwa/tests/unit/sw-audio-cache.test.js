@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
+import { parseMarkdown } from '../../src/parse/dialogue.js';
+import { attachAudioUrls, buildLineOffsets } from '../../src/playback/manifest.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,17 +42,18 @@ function loadServiceWorker({ fetchImpl, cacheImpl, shell = [] }) {
 function createCache(initial = []) {
   const entries = new Map(initial);
   const requestUrl = (req) => typeof req === 'string' ? req : req.url;
+  const matches = (key, req, options) => {
+    if (!req) return true;
+    if (!options.ignoreSearch) return key === requestUrl(req);
+    const a = new URL(key);
+    const b = new URL(requestUrl(req));
+    return a.origin === b.origin && a.pathname === b.pathname;
+  };
   return {
     entries,
     async match(req, options = {}) {
-      const url = requestUrl(req);
-      if (!options.ignoreSearch) return entries.get(url) || undefined;
-      const wanted = new URL(url);
       for (const [key, response] of entries) {
-        const cached = new URL(key);
-        if (cached.origin === wanted.origin && cached.pathname === wanted.pathname) {
-          return response;
-        }
+        if (matches(key, req, options)) return response.clone();
       }
       return undefined;
     },
@@ -58,23 +61,149 @@ function createCache(initial = []) {
       entries.set(requestUrl(req), response);
     },
     async delete(req, options = {}) {
-      const url = requestUrl(req);
-      if (!options.ignoreSearch) return entries.delete(url);
-      const wanted = new URL(url);
       let removed = false;
       for (const key of [...entries.keys()]) {
-        const cached = new URL(key);
-        if (cached.origin === wanted.origin && cached.pathname === wanted.pathname) {
-          removed = entries.delete(key) || removed;
-        }
+        if (matches(key, req, options)) removed = entries.delete(key) || removed;
       }
       return removed;
     },
-    async keys() {
-      return [...entries.keys()].map((url) => new Request(url));
+    async keys(req, options = {}) {
+      return [...entries.keys()].filter((url) => matches(url, req, options)).map((url) => new Request(url));
     }
   };
 }
+
+async function sendMessage(listeners, data) {
+  let reply;
+  let work;
+  listeners.get('message')({
+    data,
+    ports: [{ postMessage(value) { reply = value; } }],
+    waitUntil(promise) { work = promise; }
+  });
+  await work;
+  return reply;
+}
+
+test('a complete legacy or versioned download supplies its own manifest and media after a deploy', async () => {
+  const base = 'https://example.test/audio/show/one/';
+  for (const version of ['', '?v=installed']) {
+    const cache = createCache([
+      [base + 'combined.mp3' + version, new Response('saved recording')],
+      [base + 'manifest.json' + version, new Response('saved timings')]
+    ]);
+    let requests = 0;
+    const { context } = loadServiceWorker({
+      cacheImpl: cache, fetchImpl: async () => { requests++; return new Response('new release'); }
+    });
+    const manifest = await context.audioFetch(new Request(base + 'manifest.json?v=new-timestamp'));
+    assert.equal(manifest.headers.get('X-PodLearn-Audio-Cache-Key'), version ? 'installed' : '');
+    assert.equal(await manifest.text(), 'saved timings');
+    const media = await context.audioFetch(new Request(base + 'combined.mp3?v=new-header-derived-key', {
+      headers: { Range: 'bytes=0-4' }
+    }));
+    assert.equal(media.status, 206);
+    assert.equal(await media.text(), 'saved');
+    assert.equal(requests, 0);
+  }
+});
+
+test('a retry prefers a fresh recording and still plays saved bytes on offline or HTTP failure', async () => {
+  const base = 'https://example.test/audio/show/one/';
+  const cache = createCache([
+    [base + 'combined.mp3?v=saved', new Response('saved recording')],
+    [base + 'manifest.json?v=saved', new Response('saved timings')]
+  ]);
+  let error;
+  let requests = 0;
+  const { context } = loadServiceWorker({ cacheImpl: cache, fetchImpl: async (req, options) => {
+    requests++;
+    assert.equal(options.cache, 'reload');
+    if (error === 'offline') throw new Error(error);
+    return error ? new Response('', { status: 503 }) : new Response('fresh recording');
+  } });
+  const retry = new Request(base + 'combined.mp3?v=saved&podlearnRetry=1');
+  assert.equal(await (await context.audioFetch(retry)).text(), 'fresh recording');
+  for (error of ['origin unavailable', 'offline']) {
+    assert.equal(await (await context.audioFetch(retry)).text(), 'saved recording');
+  }
+  assert.equal(requests, 3);
+  assert.equal(cache.entries.size, 2);
+});
+
+test('old-tab single-file eviction is ignored and an explicit Remove clears all versions of that episode', async () => {
+  const base = 'https://example.test/audio/show/one/';
+  const audio = base + 'combined.mp3';
+  const manifest = base + 'manifest.json';
+  const script = 'https://example.test/transcripts/show/one.md';
+  const other = 'https://example.test/audio/show/two/combined.mp3?v=saved';
+  const keys = [audio, audio + '?v=old', audio + '?v=saved', manifest + '?v=saved', script + '?v=saved', other];
+  const cache = createCache(keys.map((url) => [url, new Response('saved')]));
+  const { listeners } = loadServiceWorker({ cacheImpl: cache });
+  const remove = (urls) => sendMessage(listeners, { type: 'DELETE_AUDIO_URLS', urls });
+  assert.equal((await remove([audio + '?v=other-build'])).removed, 0);
+  assert.deepEqual([...cache.entries.keys()], keys);
+  assert.equal((await remove([audio, manifest, script])).removed, 3);
+  assert.deepEqual([...cache.entries.keys()], [other]);
+  await cache.put(audio, new Response('pre-v2.7'));
+  await cache.put(manifest, new Response('pre-v2.7'));
+  assert.equal((await remove([audio, manifest])).removed, 2);
+});
+
+test('a legacy recording recovers its dialogue, chapters and line offsets offline, then prefers the original script online', async () => {
+  const base = 'https://example.test/audio/show/one/';
+  const manifest = [
+    { rawLine: 2, type: 'cue', text: '[INTRO MUSIC]', chapter: 'Intro', startTime: 0, duration: 2 },
+    { rawLine: 4, speaker: 'ALEX', text: 'Hello', chapter: 'Intro', startTime: 2, duration: 8 },
+    { rawLine: 8, speaker: 'SAM', text: 'Goodbye', chapter: 'Wrap-up', startTime: 10, duration: 1 }
+  ];
+  const cache = createCache([
+    [base + 'combined.mp3?v=legacy', new Response('audio')], [base + 'manifest.json?v=legacy', Response.json(manifest)],
+    [base.replace('one/', 'broken/') + 'combined.mp3', new Response('audio')],
+    [base.replace('one/', 'broken/') + 'manifest.json', Response.json([{ rawLine: 0, text: 'missing speaker' }])],
+    [base.replace('one/', 'unpaired/') + 'manifest.json', Response.json(manifest)]
+  ]);
+  const scripts = createCache();
+  let online = false;
+  const { context, listeners } = loadServiceWorker({ cacheImpl: cache, fetchImpl: async () => {
+    if (!online) throw new Error('offline');
+    return new Response('original authored script');
+  } });
+  context.caches.open = async (name) => name === 'podlearn-transcripts-v1' ? scripts : cache;
+  const script = 'https://example.test/transcripts/show/one.md';
+  const inventory = await sendMessage(listeners, { type: 'LIST_OFFLINE_AUDIO' });
+  assert.deepEqual(Array.from(inventory.recoverableTranscriptUrls), [script]);
+  assert.deepEqual(Array.from(inventory.transcriptUrls), []);
+  const req = new Request(script + '?v=release');
+  const markdown = await (await context.transcriptFetch(req)).text();
+  assert.equal(markdown.split('\n')[1], '### Intro');
+  assert.equal(markdown.split('\n')[7], '### Wrap-up');
+  const dialogue = parseMarkdown(markdown);
+  assert.deepEqual(dialogue.map(({ rawLine, text }) => [rawLine, text]), [[4, 'Hello'], [8, 'Goodbye']]);
+  assert.equal(attachAudioUrls(dialogue, { base, items: manifest }), 2);
+  assert.deepEqual(buildLineOffsets(dialogue).offsets, [2, 10]);
+  assert.equal(scripts.entries.size, 0);
+  online = true;
+  assert.equal(await (await context.transcriptFetch(req)).text(), 'original authored script');
+  assert.equal((await sendMessage(listeners, { type: 'LIST_OFFLINE_AUDIO' })).recoverableTranscriptUrls.length, 0);
+});
+
+test('a saved recording continues to use its authored transcript when a release changes the script', async () => {
+  const base = 'https://example.test/audio/show/one/';
+  const script = 'https://example.test/transcripts/show/one.md';
+  const cache = createCache([
+    [base + 'combined.mp3?v=pinned', new Response('saved recording')],
+    [base + 'manifest.json?v=pinned', new Response('saved timings')],
+    [script + '?v=old', new Response('dialogue for the saved recording')]
+  ]);
+  const scripts = createCache([[script + '?v=current', new Response('dialogue for the new recording')]]);
+  const { context } = loadServiceWorker({ cacheImpl: cache, fetchImpl: () => assert.fail('script already available') });
+  context.caches.open = async name => name === 'podlearn-transcripts-v1' ? scripts : cache;
+  const req = new Request(script + '?v=current');
+  assert.equal(await (await context.transcriptFetch(req)).text(), 'dialogue for the saved recording');
+  await cache.delete(base + 'combined.mp3?v=pinned');
+  assert.equal(await (await context.transcriptFetch(req)).text(), 'dialogue for the new recording');
+});
 
 test('audioFetch uses network before stale ignoreSearch audio cache entries', async () => {
   const staleUrl = 'https://example.test/audio/show/ep/combined.mp3';

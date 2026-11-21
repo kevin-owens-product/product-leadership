@@ -28,7 +28,7 @@ export function epKeyOf(podcast, episode) {
     return `${podcast.id}-${episode.id}`;
 }
 
-// FNV-1a over the manifest response (etag/last-modified/body) — a compact,
+// FNV-1a over the manifest content — a compact,
 // deterministic cache-buster for the audio URLs.
 export function stableCacheKey(input) {
     const text = String(input || '');
@@ -54,11 +54,9 @@ export async function loadSupertonicAudioManifest(podcastId, episodeFile) {
         const raw = await res.text();
         const items = JSON.parse(raw);
         if (!Array.isArray(items) || items.length === 0) return null;
-        const cacheKey = stableCacheKey([
-            res.headers.get('etag') || '',
-            res.headers.get('last-modified') || '',
-            raw
-        ].join('|'));
+        // A saved manifest belongs with its saved audio, including downloads
+        // from releases that used HTTP validators to generate their keys.
+        const cacheKey = res.headers.get('X-PodLearn-Audio-Cache-Key') ?? stableCacheKey(raw);
         return { base, cacheKey, items };
     } catch {
         return null;

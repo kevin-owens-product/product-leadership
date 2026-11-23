@@ -59,6 +59,11 @@ function relPath(absPath) {
 export function runValidation({
     showsDir = DEFAULT_SHOWS_DIR,
     audioRoot = DEFAULT_AUDIO_ROOT,
+    resolveAudioDir = (id, basename) => {
+        const local = path.join(audioRoot, id, basename);
+        if (audioRoot !== DEFAULT_AUDIO_ROOT || fs.existsSync(path.join(local, 'manifest.json'))) return local;
+        return path.join(PWA_DIR, 'dist', 'audio', id, basename);
+    },
     showFilter = null,
     episodeFilter = null,
     checkAudio = true,
@@ -123,12 +128,12 @@ export function runValidation({
 
             if (!checkAudio) continue;
             const basename = ep.file.replace(/\.md$/, '');
-            const audioDir = path.join(audioRoot, manifest.id || showName, basename);
+            const audioDir = resolveAudioDir(manifest.id || showName, basename);
             if (!fs.existsSync(audioDir)) continue; // audio not generated yet — fine
 
             const audioManifestPath = path.join(audioDir, 'manifest.json');
             if (!fs.existsSync(audioManifestPath)) {
-                report(audioDir, null, 'warning', 'audio directory exists but has no manifest.json — regenerate this episode');
+                report(audioDir, null, 'error', 'audio directory exists but has no manifest.json — regenerate this episode');
                 continue;
             }
 
@@ -142,22 +147,32 @@ export function runValidation({
 
             const combinedPath = path.join(audioDir, 'combined.mp3');
             let combinedDurationSeconds = null;
-            if (fs.existsSync(combinedPath)) {
+            const hasCombined = fs.existsSync(combinedPath);
+            if (hasCombined) {
                 if (hasFfprobe()) combinedDurationSeconds = ffprobeDuration(combinedPath);
+                if (!fs.statSync(combinedPath).size || (hasFfprobe() && combinedDurationSeconds == null)) {
+                    report(combinedPath, null, 'error', 'combined recording is empty or unreadable');
+                }
             } else {
                 report(audioDir, null, 'warning', 'combined.mp3 missing — streaming playback will fall back to per-chunk mode');
             }
 
+            const alignment = checkManifestAlignment(markdown, items);
+            const timed = Array.isArray(items) && items.every(item => Number.isFinite(item?.startTime) && item.duration > 0);
+            const combinedPlayable = hasCombined && timed && alignment.length === 0;
             for (const issue of checkAudioManifest(items, {
-                fileExists: (file) => fs.existsSync(path.join(audioDir, file)),
+                fileExists(file) {
+                    const chunk = path.join(audioDir, file);
+                    const stat = fs.statSync(chunk, { throwIfNoEntry: false });
+                    if (!stat) return combinedPlayable;
+                    return stat.isFile() && stat.size > 0 &&
+                        (hasCombined || !hasFfprobe() || ffprobeDuration(chunk) != null);
+                },
                 combinedDurationSeconds
             })) {
                 report(audioManifestPath, null, issue.level, issue.message);
             }
-
-            for (const issue of checkManifestAlignment(markdown, items)) {
-                report(audioManifestPath, null, issue.level, issue.message);
-            }
+            for (const issue of alignment) report(audioManifestPath, null, issue.level, issue.message);
         }
     }
 

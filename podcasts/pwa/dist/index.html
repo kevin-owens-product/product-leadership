@@ -16,9 +16,9 @@
     <!-- App styles, split by concern (was one inline <style> block).
          Load order matters: base -> player -> components preserves the
          original cascade. All three are precached in the SW app shell. -->
-    <link rel="stylesheet" href="styles/base.css?v=2.7.3%2B20261121T204056Z">
-    <link rel="stylesheet" href="styles/player.css?v=2.7.3%2B20261121T204056Z">
-    <link rel="stylesheet" href="styles/components.css?v=2.7.3%2B20261121T204056Z">
+    <link rel="stylesheet" href="styles/base.css?v=2.7.4%2B20261123T141526Z">
+    <link rel="stylesheet" href="styles/player.css?v=2.7.4%2B20261123T141526Z">
+    <link rel="stylesheet" href="styles/components.css?v=2.7.4%2B20261123T141526Z">
 </head>
 <body>
     <!-- Podcasts Home View -->
@@ -371,11 +371,11 @@
 
             <!-- Transcript Panel -->
             <div class="panel transcript-panel" id="transcript-panel">
-                <div class="panel-header">
+                <div class="panel-header" aria-controls="transcript-search transcript-content transcript-resync">
                     <h3>Transcript</h3>
                     <span class="panel-toggle">▼</span>
                 </div>
-                <div class="transcript-search">
+                <div class="transcript-search" id="transcript-search">
                     <input type="text" id="transcript-search-input" placeholder="Search transcript..." aria-label="Search transcript">
                     <div class="search-nav">
                         <button id="search-prev" aria-label="Previous transcript search result">↑</button>
@@ -510,7 +510,7 @@
             <div class="timer-display" id="timer-display">No timer set</div>
             <div class="btns" style="margin-top: var(--space-4);">
                 <button class="secondary-btn" id="cancel-timer">Cancel Timer</button>
-                <button class="primary-btn" id="close-sleep-modal">Done</button>
+                <button class="primary-btn" id="close-sleep-modal" data-dismiss-dialog>Done</button>
             </div>
         </div>
     </div>
@@ -675,6 +675,6 @@
         </div>
     </div>
 
-    <script type="module" src="./src/main.js?v=2.7.3%2B20261121T204056Z"></script>
+    <script type="module" src="./src/main.js?v=2.7.4%2B20261123T141526Z"></script>
 </body>
 </html>

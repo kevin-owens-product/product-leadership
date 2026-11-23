@@ -5,7 +5,7 @@
 // previous FIRST_RUN_GRACE_HOURS, so a fresh install doesn't light up the
 // whole library but a show that landed today still gets flagged.
 
-import { safeJSONParse } from './storage.js?v=2.7.3%2B20261121T204056Z';
+import { safeJSONParse } from './storage.js?v=2.7.4%2B20261123T141526Z';
 
 export const NEW_EPISODES_KEY = 'newEpisodes';
 export const NEW_WINDOW_DAYS = 30;

@@ -67,7 +67,13 @@ def main() -> int:
         if peak > 0:
             audio = audio * (TARGET_PEAK / peak)
         os.makedirs(os.path.dirname(line["outputPath"]), exist_ok=True)
-        sf.write(line["outputPath"], audio, OUT_RATE, subtype="PCM_16")
+        pending = f"{line['outputPath']}.{os.getpid()}.tmp.wav"
+        try:
+            sf.write(pending, audio, OUT_RATE, subtype="PCM_16")
+            os.replace(pending, line["outputPath"])
+        finally:
+            if os.path.exists(pending):
+                os.remove(pending)
     return 0
 
 

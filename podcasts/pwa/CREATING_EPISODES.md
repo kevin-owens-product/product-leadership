@@ -99,9 +99,8 @@ add an entry to `SHOW_OVERRIDES` in that file:
 ```
 
 `mode` is `majorPentatonic` or `minorPentatonic`; `brightness` (0–1) controls
-pluck damping and pad shimmer. Cue WAVs are cached like dialogue, so after
-changing a theme delete the show's cue clips (or pass `--force`) and re-run
-`npm run audio:show` to hear it.
+pluck damping and pad shimmer. After changing a theme, re-run `npm run audio:show`
+to render its updated cues.
 
 ### `podcast.json`
 
@@ -198,7 +197,8 @@ Chains the whole pipeline for one episode:
 3. duration backfill via `../tools/backfill-manifest-durations.js`
 4. `node build-episodes.js` (which re-validates everything, audio included)
 
-TTS is slow but **resumable**: one WAV is cached per line, so if a run is
-interrupted, re-running the command skips every already-rendered line (the
-plan output shows the cached/total count). `--dry-run` prints the plan and
-runs the lint without executing TTS. `--force` re-renders cached lines.
+A retry reuses completed dialogue with the same spoken text, voice, model and
+synthesis settings. This also works when lines move within an episode. The
+first render after upgrading the generator rebuilds older clips once to record
+their inputs. The encoder checks the resulting waveform before reusing an MP3.
+`--dry-run` prints the plan and runs the lint. `--force` re-renders cached lines.

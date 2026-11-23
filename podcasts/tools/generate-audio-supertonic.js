@@ -71,6 +71,8 @@
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const { createHash } = require('node:crypto');
+const { replaceDirectory, withRenderLock } = require('./render-storage');
 const { isMusicCue, renderCueWav, MUSIC_CUE_SECONDS } = require('./cue-music');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -320,10 +322,44 @@ function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
 }
 
-function safeRename(src, dest) {
-  if (path.resolve(src) === path.resolve(dest)) return;
-  if (fs.existsSync(dest)) fs.rmSync(dest);
-  fs.renameSync(src, dest);
+// Hash large model files in chunks and reuse their identity across --all.
+const modelHashes = new Map();
+function hashFile(file) {
+  const hash = createHash('sha256');
+  const buffer = Buffer.allocUnsafe(256 * 1024);
+  const fd = fs.openSync(file, 'r');
+  try {
+    let bytes;
+    while ((bytes = fs.readSync(fd, buffer)) > 0) hash.update(buffer.subarray(0, bytes));
+  } finally {
+    fs.closeSync(fd);
+  }
+  return hash.digest('hex');
+}
+
+function modelFileHash(file) {
+  if (!modelHashes.has(file)) modelHashes.set(file, hashFile(file));
+  return modelHashes.get(file);
+}
+
+function digest(inputs) {
+  return createHash('sha256').update(JSON.stringify(inputs)).digest('hex');
+}
+
+function modelSignature(engine) {
+  if (engine === 'kokoro') {
+    return digest([
+      modelFileHash(path.join(__dirname, 'kokoro-episode-worker.py')),
+      modelFileHash(path.join(KOKORO_DIR, 'kokoro-v1.0.onnx')),
+      modelFileHash(path.join(KOKORO_DIR, 'voices-v1.0.bin')),
+    ]);
+  }
+  const dir = path.join(SUPERTONIC_DIR, 'assets', 'onnx');
+  const assets = fs.readdirSync(dir, { recursive: true }).sort()
+    .filter(file => fs.statSync(path.join(dir, file)).isFile())
+    .map(file => [file, modelFileHash(path.join(dir, file))]);
+  return digest([assets, modelFileHash(path.join(SUPERTONIC_DIR, 'nodejs', 'helper.js')),
+    modelFileHash(path.join(__dirname, 'supertonic-episode-worker.mjs'))]);
 }
 
 // Safety net: peak-normalize mono PCM16 WAVs that still hit full scale
@@ -371,74 +407,19 @@ function peakNormalizeWavFile(wavPath) {
   return true;
 }
 
-function runSupertonicLine({ exampleScript, voiceName, text, outDir, lang }) {
-  // Supertonic writes WAVs to --save-dir. We scan that dir afterwards because
-  // the upstream filename convention is not officially documented.
-  ensureDir(outDir);
-  for (const f of fs.readdirSync(outDir)) {
-    if (f.endsWith('.wav')) fs.rmSync(path.join(outDir, f));
-  }
-
-  const voiceStylePath = resolveVoiceStyle(voiceName);
-  // Use absolute paths so cwd doesn't matter. Supertonic example resolves
-  // its `--onnx-dir` default relative to its own location, so we explicitly
-  // pass an absolute path to be safe.
-  const onnxDir = path.join(SUPERTONIC_DIR, 'assets', 'onnx');
-
-  const result = spawnSync(
-    'node',
-    [
-      exampleScript,
-      '--onnx-dir', onnxDir,
-      '--voice-style', voiceStylePath,
-      '--text', text,
-      '--lang', lang || 'en',
-      '--save-dir', outDir,
-      '--total-step', TOTAL_STEP,
-      '--speed', SPEED,
-      '--n-test', '1',
-    ],
-    { stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8' }
-  );
-
-  if (result.status !== 0) {
-    process.stdout.write(result.stdout || '');
-    process.stderr.write(result.stderr || '');
-    throw new Error(`Supertonic exited with status ${result.status}`);
-  }
-
-  const wavs = fs.readdirSync(outDir).filter((f) => f.endsWith('.wav')).sort();
-  if (wavs.length === 0) {
-    throw new Error('Supertonic finished but no .wav file was produced');
-  }
-  // The example may produce one or more WAVs (e.g. long-form chunked). Concat
-  // them in name order so each dialogue line yields a single audio file.
-  if (wavs.length === 1) {
-    return path.join(outDir, wavs[0]);
-  }
-  const concatPath = path.join(outDir, 'concat.wav');
-  concatWavs(wavs.map((w) => path.join(outDir, w)), concatPath);
-  return concatPath;
-}
-
-function runSupertonicBatch({ exampleScript, lines, outDir, lang }) {
-  ensureDir(outDir);
-  for (const f of fs.readdirSync(outDir)) {
-    if (f.endsWith('.wav')) fs.rmSync(path.join(outDir, f));
-  }
-
+function runSupertonicBatch({ lines, outDir, lang, speed }) {
   const workerPath = path.join(__dirname, 'supertonic-episode-worker.mjs');
   const jobPath = path.join(outDir, 'job.json');
   const job = {
     supertonicDir: SUPERTONIC_DIR,
     totalStep: Number(TOTAL_STEP),
-    speed: Number(SPEED),
+    speed,
     lang: lang || 'en',
-    lines: lines.map((line, idx) => ({
+    lines: lines.map(line => ({
       index: line.index,
       text: line.text,
       voiceStylePath: resolveVoiceStyle(line.voice),
-      outputPath: path.join(outDir, `${String(idx).padStart(4, '0')}.wav`),
+      outputPath: line.cachedWav,
     })),
   };
   fs.writeFileSync(jobPath, JSON.stringify(job, null, 2));
@@ -455,28 +436,19 @@ function runSupertonicBatch({ exampleScript, lines, outDir, lang }) {
   }
 
   process.stdout.write(result.stdout || '');
-
-  const saved = job.lines.map((line) => line.outputPath);
-
-  return saved;
 }
 
 function runKokoroBatch({ lines, outDir, speed }) {
-  ensureDir(outDir);
-  for (const f of fs.readdirSync(outDir)) {
-    if (f.endsWith('.wav')) fs.rmSync(path.join(outDir, f));
-  }
   const workerPath = path.join(__dirname, 'kokoro-episode-worker.py');
   const jobPath = path.join(outDir, 'job.json');
   const job = {
     kokoroDir: KOKORO_DIR,
-    // --speed wins; otherwise the show's podcast.json `kokoroSpeed`, else 1.0.
-    speed: Number(opt('speed', speed != null ? String(speed) : '1.0')),
-    lines: lines.map((line, idx) => ({
+    speed,
+    lines: lines.map(line => ({
       index: line.index,
-      text: cleanText(line.text, 'kokoro'),
+      text: line.text,
       voice: line.voice,
-      outputPath: path.join(outDir, `${String(idx).padStart(4, '0')}.wav`),
+      outputPath: line.cachedWav,
     })),
   };
   fs.writeFileSync(jobPath, JSON.stringify(job, null, 2));
@@ -484,65 +456,6 @@ function runKokoroBatch({ lines, outDir, speed }) {
     stdio: ['ignore', 'inherit', 'inherit'],
   });
   if (result.status !== 0) throw new Error(`Kokoro worker exited with status ${result.status}`);
-  return job.lines.map((line) => line.outputPath);
-}
-
-// Minimal WAV concatenator. Assumes all inputs share the same 16-bit PCM
-// format that Supertonic produces. Reads PCM data following the `data` chunk
-// header and rewrites a fresh header for the combined file.
-function concatWavs(inputs, outputPath) {
-  const pcmChunks = [];
-  let fmtHeader = null;
-  let sampleRate = 0;
-  let numChannels = 0;
-  let bitsPerSample = 0;
-
-  for (const inputPath of inputs) {
-    const buf = fs.readFileSync(inputPath);
-    if (buf.toString('ascii', 0, 4) !== 'RIFF' || buf.toString('ascii', 8, 12) !== 'WAVE') {
-      throw new Error(`Not a RIFF/WAVE file: ${inputPath}`);
-    }
-    let offset = 12;
-    while (offset < buf.length) {
-      const id = buf.toString('ascii', offset, offset + 4);
-      const size = buf.readUInt32LE(offset + 4);
-      const dataStart = offset + 8;
-      if (id === 'fmt ') {
-        if (!fmtHeader) {
-          fmtHeader = buf.slice(dataStart, dataStart + size);
-          numChannels = buf.readUInt16LE(dataStart + 2);
-          sampleRate = buf.readUInt32LE(dataStart + 4);
-          bitsPerSample = buf.readUInt16LE(dataStart + 14);
-        }
-      } else if (id === 'data') {
-        pcmChunks.push(buf.slice(dataStart, dataStart + size));
-      }
-      offset = dataStart + size + (size % 2);
-    }
-  }
-
-  if (!fmtHeader) throw new Error('No fmt chunk found in input WAVs');
-
-  const pcm = Buffer.concat(pcmChunks);
-  const byteRate = sampleRate * numChannels * (bitsPerSample / 8);
-  const blockAlign = numChannels * (bitsPerSample / 8);
-
-  const header = Buffer.alloc(44);
-  header.write('RIFF', 0, 'ascii');
-  header.writeUInt32LE(36 + pcm.length, 4);
-  header.write('WAVE', 8, 'ascii');
-  header.write('fmt ', 12, 'ascii');
-  header.writeUInt32LE(16, 16);
-  header.writeUInt16LE(1, 20); // PCM
-  header.writeUInt16LE(numChannels, 22);
-  header.writeUInt32LE(sampleRate, 24);
-  header.writeUInt32LE(byteRate, 28);
-  header.writeUInt16LE(blockAlign, 32);
-  header.writeUInt16LE(bitsPerSample, 34);
-  header.write('data', 36, 'ascii');
-  header.writeUInt32LE(pcm.length, 40);
-
-  fs.writeFileSync(outputPath, Buffer.concat([header, pcm]));
 }
 
 function writeSilenceWav(outputPath, seconds, sampleRate = SILENCE_SAMPLE_RATE) {
@@ -619,7 +532,7 @@ function concatToMp3(wavs, mp3Path) {
   }
 }
 
-async function generateEpisode({ exampleScript, showId, episode, manifest }) {
+async function generateEpisode({ showId, episode, manifest }) {
   const engine = episodeEngine(episode, manifest);
   log(`${episode.basename}: engine ${engine}`);
   const events = parseEpisode(episode.path);
@@ -640,14 +553,38 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     return;
   }
 
-  const outDir = path.join(OUTPUT_ROOT, showId, episode.basename);
-  ensureDir(outDir);
+  const parent = path.join(OUTPUT_ROOT, showId);
+  const dest = path.join(parent, episode.basename);
+  const cacheDir = path.join(OUTPUT_ROOT, '.render-cache', showId, episode.basename);
+  ensureDir(parent);
+  ensureDir(cacheDir);
+  withRenderLock(cacheDir, () => {
+    const staging = fs.mkdtempSync(path.join(parent, '.render-'));
+    const next = path.join(staging, 'next');
+    try {
+      ensureDir(next);
+      const used = renderEpisode({ showId, events, engine, manifest, outDir: next, cacheDir });
+      replaceDirectory(next, dest, path.join(staging, 'previous'));
+      for (const name of fs.readdirSync(cacheDir)) {
+        if (/^[a-f0-9]{64}\.(wav|mp3)$/.test(name) && !used.has(name)) fs.unlinkSync(path.join(cacheDir, name));
+      }
+    } finally {
+      fs.rmSync(staging, { recursive: true, force: true });
+    }
+  });
+}
 
+function renderEpisode({ showId, events, engine, manifest, outDir, cacheDir }) {
+  const used = new Set();
+  const model = modelSignature(engine);
+  const lang = manifest.lang || 'en';
+  const speed = engine === 'kokoro' ? Number(opt('speed', manifest.kokoroSpeed ?? 1.0)) : Number(SPEED);
   const voiceMap = (engine === 'kokoro' ? manifest.kokoroVoiceMap : manifest.voiceMap) || {};
   const speakerOrder = new Map();
   const items = [];
   const wavs = [];
-  const pending = [];
+  const pending = new Map();
+  const dialogueFiles = [];
 
   let dialogueIndex = 0;
   for (let i = 0; i < events.length; i++) {
@@ -656,15 +593,8 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     const wavPath = path.join(outDir, wavName);
 
     if (event.type === 'cue') {
-      const music = isMusicCue(event.cue);
-      if (music) {
-        // Always re-render: synthesis costs milliseconds and is deterministic
-        // (same bytes every run), whereas an existence check would keep the
-        // pre-music silence clip — or a stale theme — forever.
-        renderCueWav(wavPath, event.cue, showId);
-      } else if (!fs.existsSync(wavPath) || FLAGS.force) {
-        writeSilenceWav(wavPath, event.duration);
-      }
+      if (isMusicCue(event.cue)) renderCueWav(wavPath, event.cue, showId);
+      else writeSilenceWav(wavPath, event.duration);
       wavs.push(wavPath);
       items.push({
         index: i,
@@ -674,9 +604,6 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
         text: `[${event.cue}]`,
         chapter: event.chapter,
         file: wavName,
-        // Music WAVs are re-rendered every run, so their MP3 must be too —
-        // otherwise the cached per-line MP3 keeps playing the old silence.
-        reencode: music,
       });
       continue;
     }
@@ -685,11 +612,16 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     if (!speakerOrder.has(line.speaker)) speakerOrder.set(line.speaker, speakerOrder.size);
     const voice = pickVoice(line.speaker, voiceMap, speakerOrder.get(line.speaker), engine);
 
-    if (fs.existsSync(wavPath) && !FLAGS.force) {
-      process.stdout.write(`\r  line ${dialogueIndex + 1}/${dialogue.length} (cached)        `);
-    } else {
-      pending.push({ ...line, index: dialogueIndex, voice, wavPath });
+    const text = engine === 'kokoro' ? cleanText(line.text, engine) : line.text;
+    const style = engine === 'supertonic' ? modelFileHash(resolveVoiceStyle(voice)) : null;
+    const key = digest({ engine, model, text, voice, style, speed,
+      ...(engine === 'supertonic' ? { lang, totalStep: Number(TOTAL_STEP) } : {}) });
+    const cachedWav = path.join(cacheDir, key + '.wav');
+    used.add(path.basename(cachedWav));
+    if (FLAGS.force || !fs.existsSync(cachedWav)) {
+      pending.set(key, { index: dialogueIndex, text, voice, cachedWav });
     }
+    dialogueFiles.push({ cachedWav, wavPath });
 
     wavs.push(wavPath);
     items.push({
@@ -706,38 +638,20 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     dialogueIndex += 1;
   }
 
-  if (pending.length > 0) {
-    console.log(`\n  rendering ${pending.length}/${dialogue.length} uncached lines with one ${engine} worker`);
-    const tmpDir = path.join(outDir, '.tmp', 'batch');
-    try {
-      const produced = engine === 'kokoro'
-        ? runKokoroBatch({ lines: pending, outDir: tmpDir, speed: manifest.kokoroSpeed })
-        : runSupertonicBatch({
-          exampleScript: exampleScript || checkSupertonic(),
-          lines: pending,
-          outDir: tmpDir,
-          lang: manifest.lang || 'en',
-        });
-      produced.forEach((producedPath, idx) => {
-        safeRename(producedPath, pending[idx].wavPath);
-        peakNormalizeWavFile(pending[idx].wavPath);
-      });
-    } finally {
-      fs.rmSync(tmpDir, { recursive: true, force: true });
-    }
+  if (pending.size) {
+    console.log(`  rendering ${pending.size} uncached lines with one ${engine} worker`);
+    const job = { lines: [...pending.values()], outDir, lang, speed };
+    if (engine === 'kokoro') runKokoroBatch(job);
+    else runSupertonicBatch(job);
+    fs.unlinkSync(path.join(outDir, 'job.json'));
   }
-
-  // Cached lines / music cues: still enforce headroom so a prior hot render
-  // cannot ship again just because --force was omitted for some lines.
-  for (const wavPath of wavs) {
-    if (fs.existsSync(wavPath)) peakNormalizeWavFile(wavPath);
+  for (const { cachedWav, wavPath } of dialogueFiles) {
+    fs.copyFileSync(cachedWav, wavPath, fs.constants.COPYFILE_FICLONE);
   }
-
-  fs.rmSync(path.join(outDir, '.tmp'), { recursive: true, force: true });
-  console.log('');
-
-  if (items.length !== events.length) {
-    throw new Error(`Generated ${items.length}/${events.length} events for ${episode.basename}; refusing to write partial manifest.`);
+  for (const item of items) {
+    const wav = wavs[item.index];
+    peakNormalizeWavFile(wav);
+    item.audioHash = hashFile(wav);
   }
 
   // Per-line MP3 (smaller, what the PWA prefers)
@@ -745,24 +659,22 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
     for (const item of items) {
       const wav = path.join(outDir, item.file);
       const mp3 = wav.replace(/\.wav$/, '.mp3');
-      if (!fs.existsSync(mp3) || FLAGS.force || item.reencode) {
-        try {
-          wavToMp3(wav, mp3);
-        } catch (err) {
-          log(`MP3 encode failed for ${item.file}: ${err.message}`, 'warn');
-          continue;
-        }
+      // Derive the encoded cache key from the normalized PCM. This also
+      // invalidates edited cues, regenerated voices and changed render settings.
+      const cachedMp3 = path.join(cacheDir, digest(['libmp3lame-q4', item.audioHash]) + '.mp3');
+      if (FLAGS.force || !fs.existsSync(cachedMp3)) {
+        wavToMp3(wav, mp3);
+        const tmp = path.join(outDir, 'encoded.tmp');
+        fs.copyFileSync(mp3, tmp, fs.constants.COPYFILE_FICLONE);
+        fs.renameSync(tmp, cachedMp3);
+      } else {
+        fs.copyFileSync(cachedMp3, mp3, fs.constants.COPYFILE_FICLONE);
       }
+      used.add(path.basename(cachedMp3));
       item.file = path.basename(mp3);
     }
-    // Combined episode MP3 (handy for download / scrubbing)
-    try {
-      const combined = path.join(outDir, 'combined.mp3');
-      concatToMp3(wavs, combined);
-      log(`Wrote ${path.relative(ROOT, combined)}`, 'ok');
-    } catch (err) {
-      log(`Combined MP3 failed: ${err.message}`, 'warn');
-    }
+    const combined = path.join(outDir, 'combined.mp3');
+    concatToMp3(wavs, combined);
   } else if (!FLAGS.noMp3) {
     log('ffmpeg not found on PATH; leaving WAV files in place. Install ffmpeg for MP3 output.', 'warn');
   }
@@ -784,10 +696,8 @@ async function generateEpisode({ exampleScript, showId, episode, manifest }) {
   }
 
   const manifestPath = path.join(outDir, 'manifest.json');
-  // `reencode` is build bookkeeping, not part of the shipped manifest.
-  const published = items.map(({ reencode, ...item }) => item);
-  fs.writeFileSync(manifestPath, JSON.stringify(published, null, 2) + '\n');
-  log(`Wrote ${path.relative(ROOT, manifestPath)}`, 'ok');
+  fs.writeFileSync(manifestPath, JSON.stringify(items, null, 2) + '\n');
+  return used;
 }
 
 async function main() {
@@ -812,12 +722,12 @@ async function main() {
   }
 
   const engines = new Set(targets.map((ep) => episodeEngine(ep, manifest)));
-  const exampleScript = !FLAGS.dryRun && engines.has('supertonic') ? checkSupertonic() : null;
+  if (!FLAGS.dryRun && engines.has('supertonic')) checkSupertonic();
   if (!FLAGS.dryRun && engines.has('kokoro')) checkKokoro();
 
   for (const ep of targets) {
     console.log(`\n--- ${SHOW_ID}/${ep.file} ---`);
-    await generateEpisode({ exampleScript, showId: SHOW_ID, episode: ep, manifest });
+    await generateEpisode({ showId: SHOW_ID, episode: ep, manifest });
   }
 
   console.log('\nDone.');

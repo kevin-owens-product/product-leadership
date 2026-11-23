@@ -21,6 +21,7 @@ function loadServiceWorker({ fetchImpl, cacheImpl, shell = [] }) {
     Response,
     Headers,
     Blob,
+    parseMarkdown,
     fetch: fetchImpl,
     caches: {
       open: async () => cacheImpl,
@@ -116,18 +117,25 @@ test('a retry prefers a fresh recording and still plays saved bytes on offline o
   ]);
   let error;
   let requests = 0;
+  let currentManifest = 'saved timings';
   const { context } = loadServiceWorker({ cacheImpl: cache, fetchImpl: async (req, options) => {
+    if (typeof req === 'string' && req.includes('manifest.json')) return new Response(currentManifest);
     requests++;
-    assert.equal(options.cache, 'reload');
+    if (req.url.includes('podlearnRetry')) assert.equal(options.cache, 'reload');
     if (error === 'offline') throw new Error(error);
     return error ? new Response('', { status: 503 }) : new Response('fresh recording');
   } });
   const retry = new Request(base + 'combined.mp3?v=saved&podlearnRetry=1');
   assert.equal(await (await context.audioFetch(retry)).text(), 'fresh recording');
+  const clip = new Request(base + '0000.mp3?v=saved');
+  assert.equal(await (await context.audioFetch(clip)).text(), 'fresh recording');
+  currentManifest = 'a different recording';
+  assert.equal(await (await context.audioFetch(retry)).text(), 'saved recording');
+  assert.equal((await context.audioFetch(clip)).status, 409);
   for (error of ['origin unavailable', 'offline']) {
     assert.equal(await (await context.audioFetch(retry)).text(), 'saved recording');
   }
-  assert.equal(requests, 3);
+  assert.equal(requests, 6);
   assert.equal(cache.entries.size, 2);
 });
 
@@ -150,7 +158,7 @@ test('old-tab single-file eviction is ignored and an explicit Remove clears all 
   assert.equal((await remove([audio, manifest])).removed, 2);
 });
 
-test('a legacy recording recovers its dialogue, chapters and line offsets offline, then prefers the original script online', async () => {
+test('a legacy recording keeps its dialogue, chapters and line offsets offline and after a release changes the script', async () => {
   const base = 'https://example.test/audio/show/one/';
   const manifest = [
     { rawLine: 2, type: 'cue', text: '[INTRO MUSIC]', chapter: 'Intro', startTime: 0, duration: 2 },
@@ -184,8 +192,19 @@ test('a legacy recording recovers its dialogue, chapters and line offsets offlin
   assert.deepEqual(buildLineOffsets(dialogue).offsets, [2, 10]);
   assert.equal(scripts.entries.size, 0);
   online = true;
-  assert.equal(await (await context.transcriptFetch(req)).text(), 'original authored script');
-  assert.equal((await sendMessage(listeners, { type: 'LIST_OFFLINE_AUDIO' })).recoverableTranscriptUrls.length, 0);
+  assert.equal(await (await context.transcriptFetch(req)).text(), markdown);
+  await scripts.put(req, new Response('**ALEX:** A different release.'));
+  const repair = await sendMessage(listeners, { type: 'CACHE_AUDIO_URLS', urls: [req.url] });
+  assert.equal(repair.results[0].ok, true);
+  assert.equal(await (await cache.match(req)).text(), markdown);
+  // Also repair reads on devices that already ran 2.7.3's online backfill.
+  await cache.put(req, new Response(markdown + '\n**ALEX:** Dialogue that is absent from this recording.'));
+  assert.equal(await (await context.transcriptFetch(req)).text(), markdown);
+  await cache.put(req, new Response(markdown.replace('Hello', 'Changed')));
+  assert.equal(await (await context.transcriptFetch(req)).text(), markdown);
+  const authored = '# Original notes\n' + markdown.slice(1);
+  await cache.put(req, new Response(authored));
+  assert.equal(await (await context.transcriptFetch(req)).text(), authored);
 });
 
 test('a saved recording continues to use its authored transcript when a release changes the script', async () => {
@@ -203,6 +222,35 @@ test('a saved recording continues to use its authored transcript when a release 
   assert.equal(await (await context.transcriptFetch(req)).text(), 'dialogue for the saved recording');
   await cache.delete(base + 'combined.mp3?v=pinned');
   assert.equal(await (await context.transcriptFetch(req)).text(), 'dialogue for the new recording');
+});
+
+test('overlapping probes and seeks share one cached body, and re-downloading a removed URL serves new bytes', async () => {
+  const audio = 'https://example.test/audio/show/ep/combined.mp3';
+  const manifest = audio.replace('combined.mp3', 'manifest.json');
+  const cache = createCache([[audio, new Response('0123456789')], [manifest, Response.json([])]]);
+  const lookup = cache.match.bind(cache);
+  let reads = 0;
+  cache.match = async (key, options) => {
+    const response = await lookup(key, options);
+    if (key === audio && response) {
+      const read = response.blob.bind(response);
+      response.blob = () => { reads++; return read(); };
+    }
+    return response;
+  };
+  const { context, listeners } = loadServiceWorker({ cacheImpl: cache, fetchImpl: async () => new Response('new audio') });
+  const request = (range) => context.audioFetch(new Request(audio + '?v=current', { headers: { Range: range } }));
+  const [probe, seek] = await Promise.all([request('bytes=0-1'), request('bytes=6-9')]);
+  assert.equal(await probe.text(), '01');
+  assert.equal(await seek.text(), '6789');
+  assert.equal(seek.headers.get('content-range'), 'bytes 6-9/10');
+  assert.equal(await (await request('bytes=-2')).text(), '89');
+  assert.equal((await request('bytes=20-')).status, 416);
+  assert.equal(reads, 1);
+  assert.equal((await sendMessage(listeners, { type: 'DELETE_AUDIO_URLS', urls: [audio, manifest] })).removed, 2);
+  assert.equal((await sendMessage(listeners, { type: 'CACHE_AUDIO_URLS', urls: [audio, manifest] })).results[0].ok, true);
+  assert.equal(await (await request('bytes=0-2')).text(), 'new');
+  assert.equal(reads, 2);
 });
 
 test('audioFetch uses network before stale ignoreSearch audio cache entries', async () => {

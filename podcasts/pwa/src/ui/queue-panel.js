@@ -1,29 +1,45 @@
 // Play queue: persisted list of upcoming episodes + the queue panel UI.
 
-import { loadQueue, saveQueue } from '../state/storage.js';
+import { loadQueue, saveQueue, withStorageLock } from '../state/storage.js';
 import { renderQueueItem } from './render.js';
 
-export function createQueuePanel({ getPodcasts, isCurrentItem, onOpenItem }) {
-    const playQueue = loadQueue();
+export function createQueuePanel({ getPodcasts, isCurrentItem, onOpenItem, onExternalChange }) {
+    let playQueue = loadQueue();
+
+    function matches(item, podcastId, episodeNum) {
+        return item?.podcastId === podcastId && item.episodeNum === episodeNum;
+    }
 
     function contains(podcast, episode) {
-        return playQueue.some(item => item?.podcastId === podcast.id && item.episodeNum === episode.id);
+        return playQueue.some(item => matches(item, podcast.id, episode.id));
     }
 
     function add(podcast, episode) {
-        if (contains(podcast, episode)) return;
-        playQueue.push({ podcastId: podcast.id, episodeNum: episode.id, addedAt: Date.now() });
-        saveQueue(playQueue);
-        update();
+        return withStorageLock('playQueue', () => {
+            playQueue = loadQueue();
+            if (contains(podcast, episode)) return;
+            playQueue.push({ podcastId: podcast.id, episodeNum: episode.id, addedAt: Date.now() });
+            saveQueue(playQueue);
+            update();
+        });
     }
 
-    function removeItem(item) {
-        const index = playQueue.indexOf(item);
-        if (index < 0) return;
-        playQueue.splice(index, 1);
-        saveQueue(playQueue);
-        update();
+    function removeItem({ podcastId, episodeNum }) {
+        return withStorageLock('playQueue', () => {
+            const latest = loadQueue();
+            playQueue = latest.filter(item => !matches(item, podcastId, episodeNum));
+            if (playQueue.length === latest.length) return;
+            saveQueue(playQueue);
+            update();
+        });
     }
+
+    window.addEventListener('storage', event => {
+        if (event.key !== 'playQueue' && event.key !== null) return;
+        playQueue = loadQueue();
+        update();
+        onExternalChange?.();
+    });
 
     function update() {
         const queueList = document.getElementById('queue-list');
@@ -46,7 +62,7 @@ export function createQueuePanel({ getPodcasts, isCurrentItem, onOpenItem }) {
             const { item, episode, podcast } = entries[index];
             row.addEventListener('click', (e) => {
                 if (e.target.closest('.queue-remove')) removeItem(item);
-                else onOpenItem(podcast, episode, item);
+                else onOpenItem(podcast, episode);
             });
         });
     }

@@ -2,33 +2,41 @@
 // "resync" pill), tap/keyboard seek, and transcript search with match
 // navigation.
 
-import { applyLiteralHighlight, includesQuery } from '../search/transcript-search.js?v=2.7.3%2B20261121T204056Z';
-import { renderTranscriptLine } from './render.js?v=2.7.3%2B20261121T204056Z';
-import { createTranscriptFollow } from './transcript-follow.js?v=2.7.3%2B20261121T204056Z';
-import { prefersReducedMotion } from './motion.js?v=2.7.3%2B20261121T204056Z';
+import { applyLiteralHighlight, includesQuery } from '../search/transcript-search.js?v=2.7.4%2B20261123T141526Z';
+import { renderTranscriptLine } from './render.js?v=2.7.4%2B20261123T141526Z';
+import { createTranscriptFollow } from './transcript-follow.js?v=2.7.4%2B20261123T141526Z';
+import { prefersReducedMotion } from './motion.js?v=2.7.4%2B20261123T141526Z';
 
 export function createTranscriptPanel({ getDialogueLines, onSeekLine, onAfterRender }) {
     let searchMatches = [];
     let searchIndex = 0;
+    const container = document.getElementById('transcript-content');
 
     // Follow mode: the transcript tracks the current line until the user
     // scrolls away, which surfaces the "resync" pill; tapping the pill (or any
     // line) puts the transcript back in follow mode.
     const transcriptFollow = createTranscriptFollow({
-        container: document.getElementById('transcript-content'),
+        container,
         pill: document.getElementById('transcript-resync'),
         onResync: () => scrollCurrentIntoView(true)
     });
+
+    function centerLine(line) {
+        if (!container.clientHeight) return;
+        const target = line.getBoundingClientRect();
+        const offset = target.top - container.getBoundingClientRect().top - container.clientTop;
+        container.scrollTo({
+            top: container.scrollTop + offset + (target.height - container.clientHeight) / 2,
+            behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+        });
+    }
 
     function scrollCurrentIntoView(force = false) {
         if (!force && !transcriptFollow.isFollowing()) return;
         const currentEl = document.querySelector('.transcript-line.current');
         if (!currentEl) return;
         transcriptFollow.notifyAutoScroll();
-        currentEl.scrollIntoView({
-            behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-            block: 'center'
-        });
+        centerLine(currentEl);
     }
 
     function render() {
@@ -113,7 +121,7 @@ export function createTranscriptPanel({ getDialogueLines, onSeekLine, onAfterRen
             // Browsing search results leaves follow mode (the pill offers the way
             // back) so playback auto-scroll doesn't yank the view away.
             transcriptFollow.suspend();
-            el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' });
+            centerLine(el);
         }
     }
 

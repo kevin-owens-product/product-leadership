@@ -82,6 +82,19 @@ test('transcripts are fetched once, cached on the episode, and versioned by hash
   assert.equal(calls, 1);
 });
 
+test('a controlled tab reopens the transcript paired with the current offline recording', async (t) => {
+  const original = Object.getOwnPropertyDescriptor(navigator, 'serviceWorker');
+  Object.defineProperty(navigator, 'serviceWorker', { configurable: true, value: { controller: {} } });
+  t.after(() => original ? Object.defineProperty(navigator, 'serviceWorker', original) : delete navigator.serviceWorker);
+  const episode = { file: 'one.md', transcriptHash: 'current' };
+  let script = 'Older downloaded recording';
+  const fetchImpl = async () => new Response(script);
+  assert.equal(await ensureEpisodeContent('show', episode, { fetchImpl }), script);
+  script = 'Current cut after removing download';
+  assert.equal(await ensureEpisodeContent('show', episode, { fetchImpl }), script);
+  assert.equal(episode.content, script);
+});
+
 test('a failed transcript fetch resolves to null and can be retried', async () => {
   const episode = { id: 2, file: 'episode-02-y.md', transcriptHash: 'def' };
   assert.equal(await ensureEpisodeContent('s', episode, { fetchImpl: async () => { throw new Error('offline'); } }), null);

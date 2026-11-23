@@ -371,11 +371,11 @@
 
             <!-- Transcript Panel -->
             <div class="panel transcript-panel" id="transcript-panel">
-                <div class="panel-header">
+                <div class="panel-header" aria-controls="transcript-search transcript-content transcript-resync">
                     <h3>Transcript</h3>
                     <span class="panel-toggle">▼</span>
                 </div>
-                <div class="transcript-search">
+                <div class="transcript-search" id="transcript-search">
                     <input type="text" id="transcript-search-input" placeholder="Search transcript..." aria-label="Search transcript">
                     <div class="search-nav">
                         <button id="search-prev" aria-label="Previous transcript search result">↑</button>
@@ -510,7 +510,7 @@
             <div class="timer-display" id="timer-display">No timer set</div>
             <div class="btns" style="margin-top: var(--space-4);">
                 <button class="secondary-btn" id="cancel-timer">Cancel Timer</button>
-                <button class="primary-btn" id="close-sleep-modal">Done</button>
+                <button class="primary-btn" id="close-sleep-modal" data-dismiss-dialog>Done</button>
             </div>
         </div>
     </div>

@@ -1,5 +1,29 @@
 import { test, expect } from '@playwright/test';
 
+test('home Downloads can remove files from a show withdrawn from the catalog', async ({ page }) => {
+  await page.goto('/');
+  const summary = page.locator('#home-downloads summary');
+  await expect(summary).toHaveText('Downloads (0)');
+  await page.evaluate(async () => {
+    const cache = await caches.open('podlearn-offline-audio-v1');
+    for (const slug of ['episode-01-ap-fundamentals', 'episode-02-procure-to-pay']) {
+      const base = '/audio/ap-finance-mastery/' + slug + '/';
+      await cache.put(base + 'combined.mp3?v=old', new Response('recording'));
+      await cache.put(base + 'manifest.json?v=old', Response.json([]));
+      await cache.put('/transcripts/ap-finance-mastery/' + slug + '.md?v=old', new Response('script'));
+    }
+  });
+  await summary.click();
+  await expect(summary).toHaveText('Downloads (0 ready, 2 unavailable)');
+  const list = page.locator('#downloads-list');
+  await list.getByRole('button', { name: /Remove download of Episode 01/ }).click();
+  await expect(summary).toHaveText('Downloads (0 ready, 1 unavailable)');
+  await expect(list.locator('li')).toHaveCount(1);
+  await expect(list.locator('li')).toContainText('Procure To Pay');
+  expect(await page.evaluate(async () => (await (await caches.open('podlearn-offline-audio-v1')).keys())
+    .map(key => key.url).every(url => url.includes('episode-02-procure-to-pay')))).toBe(true);
+});
+
 test('home Downloads reflects verified episodes across shows and opens them offline', async ({ page, context }) => {
   test.setTimeout(90000);
   await page.goto('/');

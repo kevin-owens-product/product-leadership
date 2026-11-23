@@ -1,13 +1,13 @@
 // Listening statistics: total time, completed episodes, streaks, average
 // speed — persisted via state/storage.js and surfaced in the stats modal.
 
-import { loadListeningStats, saveListeningStats } from './storage.js?v=2.7.3%2B20261121T204056Z';
+import { loadListeningStats, saveListeningStats, withStorageLock } from './storage.js?v=2.7.4%2B20261123T141526Z';
 
 export function createStatsTracker({ now = () => performance.now() } = {}) {
-    const listeningStats = loadListeningStats();
     let activeAudio = null;
     let lastSample = 0;
     let sampleRate = 1;
+    let pendingWrite;
 
     function checkpoint() {
         if (!activeAudio) return;
@@ -15,28 +15,30 @@ export function createStatsTracker({ now = () => performance.now() } = {}) {
         const secondsListened = (t - lastSample) / 1000;
         lastSample = t;
         if (secondsListened <= 0) return;
-        listeningStats.totalTime += secondsListened;
         // Older records have one speed sample per ten seconds of playback.
         const weight = secondsListened / 10;
-        listeningStats.speedSum += sampleRate * weight;
-        listeningStats.speedCount += weight;
-
-        const today = new Date().toDateString();
-        if (listeningStats.lastListenDate !== today) {
-            if (listeningStats.lastListenDate === new Date(Date.now() - 86400000).toDateString()) {
-                listeningStats.currentStreak += 1;
-            } else {
-                listeningStats.currentStreak = 1;
+        const weightedSpeed = sampleRate * weight;
+        const date = new Date();
+        const today = date.toDateString();
+        date.setDate(date.getDate() - 1);
+        const yesterday = date.toDateString();
+        pendingWrite = withStorageLock('listeningStats', () => {
+            const stats = loadListeningStats();
+            stats.totalTime += secondsListened;
+            stats.speedSum += weightedSpeed;
+            stats.speedCount += weight;
+            if (stats.lastListenDate !== today) {
+                stats.currentStreak = stats.lastListenDate === yesterday ? stats.currentStreak + 1 : 1;
+                stats.lastListenDate = today;
             }
-            listeningStats.lastListenDate = today;
-        }
-
-        saveListeningStats(listeningStats);
+            saveListeningStats(stats);
+        });
     }
 
     function stopTracking() {
         checkpoint();
         activeAudio = null;
+        return pendingWrite;
     }
 
     function trackAudio(audio) {
@@ -65,12 +67,17 @@ export function createStatsTracker({ now = () => performance.now() } = {}) {
     }
 
     function noteEpisodeCompleted() {
-        listeningStats.episodesCompleted += 1;
-        saveListeningStats(listeningStats);
+        pendingWrite = withStorageLock('listeningStats', () => {
+            const stats = loadListeningStats();
+            stats.episodesCompleted += 1;
+            saveListeningStats(stats);
+        });
     }
 
-    function updateDisplay() {
+    async function updateDisplay() {
         checkpoint();
+        await pendingWrite;
+        const listeningStats = loadListeningStats();
         const hours = Math.floor(listeningStats.totalTime / 3600);
         const mins = Math.floor((listeningStats.totalTime % 3600) / 60);
         document.getElementById('stat-total-time').textContent = `${hours}h ${mins}m`;
@@ -99,6 +106,9 @@ export function createStatsTracker({ now = () => performance.now() } = {}) {
         });
 
         setInterval(checkpoint, 10000);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) checkpoint();
+        });
         window.addEventListener('pagehide', checkpoint);
     }
 

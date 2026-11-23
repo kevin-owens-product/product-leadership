@@ -10,6 +10,8 @@
 // the last back — the one taken at the root screen — finds no sentinel and
 // leaves the app, which is what a user expects from the root of an app.
 
+import { dismissModal } from '../ui/modal-a11y.js';
+
 const SENTINEL = 'podlearn-back';
 
 /**
@@ -98,9 +100,7 @@ export function performBack(doc) {
         case 'overlay': {
             const open = doc.querySelectorAll('.modal-overlay.show');
             const modal = open[open.length - 1];
-            const dismiss = modal.querySelector('[id^="cancel-"], [id^="close-"], [id^="dismiss-"]');
-            if (dismiss) dismiss.click();
-            else modal.classList.remove('show');
+            dismissModal(modal);
             return;
         }
         case 'player':

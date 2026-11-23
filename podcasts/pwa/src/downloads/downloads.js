@@ -96,6 +96,7 @@ function inspectCachedEpisodes(podcasts, reply) {
     const scripts = new Set(reply.transcriptUrls.map(url => url.split('?')[0]));
     const recoverableScripts = new Set((reply.recoverableTranscriptUrls || []).map(url => url.split('?')[0]));
     const catalogKeys = new Set();
+    const catalogFiles = new Set();
     const pinned = new Set();
     const playable = new Set();
     const missingScripts = new Set();
@@ -103,6 +104,7 @@ function inspectCachedEpisodes(podcasts, reply) {
         for (const episode of podcast.episodes) {
             const key = epKeyOf(podcast, episode);
             catalogKeys.add(key);
+            catalogFiles.add(new URL(manifestAudioUrl(podcast.id, episode), location.href).href);
             const audio = pinnedVersions.get(new URL(combinedAudioUrl(podcast.id, episode), location.href).href);
             const manifest = pinnedVersions.get(new URL(manifestAudioUrl(podcast.id, episode), location.href).href);
             if (audio || manifest) pinned.add(key);
@@ -110,18 +112,42 @@ function inspectCachedEpisodes(podcasts, reply) {
             if (episode.transcriptHash) {
                 const script = new URL(transcriptUrl(podcast.id, episode), location.href).href;
                 const path = script.split('?')[0];
-                if (!scripts.has(path) && !pinnedVersions.has(path)) {
+                if (!scripts.has(path) && !pinnedVersions.has(path) && !recoverableScripts.has(path)) {
                     missingScripts.add(script);
-                    if (!recoverableScripts.has(path)) continue;
+                    continue;
                 }
             }
             playable.add(key);
         }
     }
-    return { catalogKeys, pinned, playable, missingScripts };
+    // Old catalogs stored only show/episode IDs locally. The actual files
+    // remain identifiable by their cache paths after an episode is withdrawn.
+    const withdrawn = new Map();
+    for (const path of pinnedVersions.keys()) {
+        const url = new URL(path);
+        if (url.origin !== location.origin) continue;
+        const audio = url.pathname.match(/^(.*)\/audio\/([^/]+)\/([^/]+)\/(?:combined\.mp3|manifest\.json)$/);
+        const script = url.pathname.match(/^(.*)\/transcripts\/([^/]+)\/([^/]+)\.md$/);
+        const parts = audio || script;
+        if (!parts) continue;
+        const [, prefix, show, slug] = parts;
+        const base = url.origin + prefix + '/audio/' + show + '/' + slug + '/';
+        const manifest = base + 'manifest.json';
+        if (catalogFiles.has(manifest) || withdrawn.has(manifest)) continue;
+        const label = (value) => value.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        const id = slug.match(/^episode-(\d+)(?:-|$)/i)?.[1];
+        const receipt = id === undefined ? null : show + '-' + Number(id);
+        withdrawn.set(manifest, {
+            withdrawn: true, key: manifest,
+            podcast: { id: show, title: label(show) }, episode: { title: label(slug) },
+            receipt: catalogKeys.has(receipt) ? null : receipt,
+            urls: [base + 'combined.mp3', manifest, url.origin + prefix + '/transcripts/' + show + '/' + slug + '.md']
+        });
+    }
+    return { catalogKeys, pinned, playable, missingScripts, withdrawn };
 }
 
-export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadManifest, onChange }) {
+export function createDownloadsManager({ toasts, setStatus, getPodcasts, isCatalogLoaded = () => true, loadManifest, onChange }) {
     // epKey strings (`${podcast.id}-${episode.id}`) the user has downloaded
     // or is currently downloading.
     let downloadedEpisodes = readKeys(PLAYABLE) || new Set();
@@ -131,6 +157,7 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
     let verified = false;
     let revision = 0;
     let reconciliation = null;
+    let withdrawn = new Map();
 
     function recordSelection(key, saved) {
         // Another tab may have changed other episodes during the transfer.
@@ -228,6 +255,20 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
         setStatus(`Removed download "${episode.title}"`);
     }
 
+    async function removeWithdrawn(item) {
+        if (!withdrawn.has(item.key)) return;
+        const reply = await sendSwMessage({ type: 'DELETE_AUDIO_URLS', urls: item.urls });
+        if (typeof reply?.removed !== 'number') {
+            setStatus('Could not remove download — try again');
+            return;
+        }
+        if (item.receipt) recordSelection(item.receipt, false);
+        else revision++;
+        withdrawn.delete(item.key);
+        onChange();
+        setStatus(`Removed download "${item.episode.title}"`);
+    }
+
     // Whole-season (or whole-show) downloads run one episode at a time so a
     // phone on cellular isn't asked to pull several 40 MB files at once.
     // `onProgress(done, total)` fires after each episode.
@@ -274,8 +315,8 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
             if (controller !== navigator.serviceWorker?.controller || revision !== snapshotRevision
                 || !sameKeys(storedSelections, readKeys(SELECTIONS))
                 || !sameKeys(storedPlayable, readKeys(PLAYABLE))) continue;
-            if (!reply || !podcasts.length) return;
-            const { catalogKeys, pinned, playable, missingScripts } = inspectCachedEpisodes(podcasts, reply);
+            if (!reply || !isCatalogLoaded()) return;
+            const { catalogKeys, pinned, playable, missingScripts, withdrawn: unknown } = inspectCachedEpisodes(podcasts, reply);
             const nextSelections = new Set(storedSelections || selections);
             for (const key of pinned) nextSelections.add(key);
             // Mixed-version tabs may have different catalogs. Only update
@@ -283,7 +324,9 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
             for (const key of storedPlayable || downloadedEpisodes) {
                 if (!catalogKeys.has(key) && nextSelections.has(key)) playable.add(key);
             }
-            const changed = !verified || !sameKeys(downloadedEpisodes, playable) || !sameKeys(selections, nextSelections);
+            const withdrawnChanged = withdrawn.size !== unknown.size || [...unknown.keys()].some(key => !withdrawn.has(key));
+            if (withdrawnChanged) withdrawn = unknown;
+            const changed = !verified || withdrawnChanged || !sameKeys(downloadedEpisodes, playable) || !sameKeys(selections, nextSelections);
             verified = true;
             downloadedEpisodes = playable;
             selections = nextSelections;
@@ -336,6 +379,8 @@ export function createDownloadsManager({ toasts, setStatus, getPodcasts, loadMan
         downloadMany,
         remove,
         removeMany,
+        getWithdrawn: () => [...withdrawn.values()],
+        removeWithdrawn,
         reconcile
     };
 }

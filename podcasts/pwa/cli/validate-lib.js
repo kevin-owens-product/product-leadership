@@ -337,8 +337,12 @@ export function checkAudioManifest(items, { fileExists, combinedDurationSeconds 
 
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        if (!item || typeof item !== 'object' || !item.file) {
+        if (!item || typeof item.file !== 'string' || !item.file) {
             issues.push({ level: 'error', message: `item ${i}: missing "file" field` });
+            continue;
+        }
+        if (!/^[^/\\]+\.(mp3|wav)$/i.test(item.file)) {
+            issues.push({ level: 'error', message: `item ${i}: unsupported audio filename "${item.file}"` });
             continue;
         }
         if (!fileExists(item.file)) {
@@ -346,7 +350,7 @@ export function checkAudioManifest(items, { fileExists, combinedDurationSeconds 
         }
     }
 
-    const timed = items.filter((it) => typeof it.duration === 'number' && typeof it.startTime === 'number');
+    const timed = items.filter((it) => Number.isFinite(it?.duration) && it.duration > 0 && Number.isFinite(it.startTime) && it.startTime >= 0);
     if (timed.length < items.length) {
         issues.push({
             level: 'warning',
@@ -510,12 +514,12 @@ export function checkManifestAlignment(markdown, items) {
     if (dialogue.length === 0) return [];
 
     const byRaw = new Map(
-        items.filter((it) => typeof it.rawLine === 'number').map((it) => [it.rawLine, it])
+        items.filter((it) => typeof it?.rawLine === 'number').map((it) => [it.rawLine, it])
     );
     const matched = dialogue.filter((l) => byRaw.has(l.rawLine)).length;
     if (matched === dialogue.length) return checkMatchedTextAgrees(dialogue, byRaw);
 
-    const nonCue = items.filter((it) => it.type !== 'cue').length;
+    const nonCue = items.filter((it) => it?.type !== 'cue').length;
     const positionalOk = matched === 0 &&
         (nonCue === dialogue.length || items.length === dialogue.length);
     if (positionalOk) {

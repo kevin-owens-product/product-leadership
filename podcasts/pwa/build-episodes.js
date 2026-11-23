@@ -8,6 +8,7 @@ import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 
 import { runValidation } from './cli/validate.js';
+import renderStorage from '../tools/render-storage.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,15 +39,46 @@ if (!fs.existsSync(distDir)) {
 const audioSrcDir = path.join(__dirname, 'audio');
 const audioDistDir = path.join(distDir, 'audio');
 
-// Validate all show Markdown + audio manifests before touching dist/ — a
-// broken episode should fail the build loudly, not ship silently truncated.
+// Check the exact files this build will serve, including audio carried over
+// from an earlier release. Do not replace any episode until every check passes.
 console.log('Validating shows...\n');
-const validation = runValidation({ showsDir, audioRoot: path.join(__dirname, 'audio') });
-if (validation.errors > 0) {
-    console.error(`\n✗ Validation failed: ${validation.errors} error(s), ${validation.warnings} warning(s). Fix the issues above (or run: npm run validate).`);
-    process.exit(1);
+const staging = fs.mkdtempSync(path.join(distDir, '.audio-build-'));
+try {
+    const replacements = [];
+    function resolveAudioDir(showId, basename) {
+        const src = path.join(audioSrcDir, showId, basename);
+        const dest = path.join(audioDistDir, showId, basename);
+        if (!fs.existsSync(path.join(src, 'manifest.json'))) return dest;
+        const next = path.join(staging, showId, basename);
+        const cacheDir = path.join(audioSrcDir, '.render-cache', showId, basename);
+        if (fs.existsSync(cacheDir)) renderStorage.withRenderLock(cacheDir, () => stageEpisodeAudio(src, next));
+        else stageEpisodeAudio(src, next);
+        replacements.push({ next, dest });
+        return next;
+    }
+    const validation = runValidation({ showsDir, resolveAudioDir });
+    if (validation.errors) {
+        throw new Error(`Validation failed: ${validation.errors} error(s), ${validation.warnings} warning(s).`);
+    }
+    const installed = [];
+    try {
+        for (const [index, { next, dest }] of replacements.entries()) {
+            fs.mkdirSync(path.dirname(dest), { recursive: true });
+            const backup = path.join(staging, 'previous-' + index);
+            renderStorage.replaceDirectory(next, dest, backup);
+            installed.push({ next, dest, backup });
+        }
+    } catch (error) {
+        for (const { next, dest, backup } of installed.reverse()) {
+            fs.renameSync(dest, next);
+            if (fs.existsSync(backup)) fs.renameSync(backup, dest);
+        }
+        throw error;
+    }
+    console.log(`✓ Validation passed${validation.warnings ? ` (${validation.warnings} warning(s))` : ''}.\n`);
+} finally {
+    fs.rmSync(staging, { recursive: true, force: true });
 }
-console.log(`✓ Validation passed${validation.warnings ? ` (${validation.warnings} warning(s))` : ''}.\n`);
 
 console.log('Building PodLearn Multi-Podcast App...\n');
 
@@ -132,13 +164,8 @@ function firstCommitDate(filePath) {
     }
 }
 
-// The local render replaces the shipped episode once it has a manifest.
-// Feed enclosure sizes and durations must describe that same render.
 function findAudioFile(showId, basename, fileName) {
-    const local = path.join(audioSrcDir, showId, basename);
-    const episodeDir = fs.existsSync(path.join(local, 'manifest.json'))
-        ? local : path.join(audioDistDir, showId, basename);
-    const candidate = path.join(episodeDir, fileName);
+    const candidate = path.join(audioDistDir, showId, basename, fileName);
     return fs.existsSync(candidate) ? candidate : null;
 }
 
@@ -198,16 +225,10 @@ if (fs.existsSync(showsDir)) {
                     const audioManifestPath = findAudioFile(manifest.id, basename, 'manifest.json');
                     let durationSeconds = null;
                     if (audioManifestPath) {
-                        try {
-                            const items = JSON.parse(fs.readFileSync(audioManifestPath, 'utf8'));
-                            if (Array.isArray(items) && items.length > 0) {
-                                const last = items[items.length - 1];
-                                if (typeof last.startTime === 'number' && typeof last.duration === 'number') {
-                                    durationSeconds = Math.round(last.startTime + last.duration);
-                                }
-                            }
-                        } catch (err) {
-                            console.warn(`     ⚠ Could not parse audio manifest for ${epMeta.file}: ${err.message}`);
+                        const items = JSON.parse(fs.readFileSync(audioManifestPath, 'utf8'));
+                        const last = items.at(-1);
+                        if (Number.isFinite(last?.startTime) && Number.isFinite(last.duration)) {
+                            durationSeconds = Math.round(last.startTime + last.duration);
                         }
                     }
 
@@ -424,30 +445,29 @@ function copyDirRecursive(src, dest, shouldCopy = () => true) {
     return count;
 }
 
-// A fresh checkout already ships rendered audio in dist/. A local synthesis
-// may cover a single episode. Replace only episodes with a local manifest,
-// and remove directories for shows or episodes removed from the catalog.
-function copyEpisodeAudio(src, dest) {
-    const showDir = path.dirname(dest);
-    fs.mkdirSync(showDir, { recursive: true });
-    const staging = fs.mkdtempSync(path.join(showDir, '.render-'));
-    const next = path.join(staging, 'new');
-    const backup = path.join(staging, 'previous');
-    fs.mkdirSync(next);
+// Include only the declared chunks and enclosure. In particular, a WAV-only
+// render keeps its WAVs and an MP3 render leaves its source PCM behind.
+function stageEpisodeAudio(src, dest) {
+    fs.mkdirSync(dest, { recursive: true });
+    const manifest = path.join(dest, 'manifest.json');
+    fs.copyFileSync(path.join(src, 'manifest.json'), manifest);
+    let items;
     try {
-        for (const file of fs.readdirSync(src)) {
-            if (file !== 'manifest.json' && (!file.endsWith('.mp3') || file.includes(' 2.'))) continue;
-            fs.copyFileSync(path.join(src, file), path.join(next, file));
+        items = JSON.parse(fs.readFileSync(manifest, 'utf8'));
+    } catch (cause) {
+        throw new Error('Invalid audio manifest at ' + path.join(src, 'manifest.json'), { cause });
+    }
+    const files = new Set(['combined.mp3']);
+    if (Array.isArray(items)) {
+        for (const item of items) {
+            if (typeof item?.file === 'string' && item.file === path.basename(item.file) && /\.(mp3|wav)$/i.test(item.file)) {
+                files.add(item.file);
+            }
         }
-        if (fs.existsSync(dest)) fs.renameSync(dest, backup);
-        try {
-            fs.renameSync(next, dest);
-        } catch (err) {
-            if (fs.existsSync(backup)) fs.renameSync(backup, dest);
-            throw err;
-        }
-    } finally {
-        fs.rmSync(staging, { recursive: true, force: true });
+    }
+    for (const file of files) {
+        const source = path.join(src, file);
+        if (fs.existsSync(source)) fs.copyFileSync(source, path.join(dest, file), fs.constants.COPYFILE_FICLONE);
     }
 }
 
@@ -484,12 +504,6 @@ if (fs.existsSync(stylesDir)) {
 for (const podcast of podcasts) {
     const showDir = path.join(audioDistDir, podcast.id);
     const basenames = new Set(podcast.episodes.map((episode) => episode.file.replace(/\.md$/, '')));
-    for (const basename of basenames) {
-        const src = path.join(audioSrcDir, podcast.id, basename);
-        if (fs.existsSync(path.join(src, 'manifest.json'))) {
-            copyEpisodeAudio(src, path.join(showDir, basename));
-        }
-    }
     pruneAudioDirs(showDir, basenames);
 }
 if (podcasts.length) pruneAudioDirs(audioDistDir, new Set(podcasts.map((podcast) => podcast.id)));
@@ -613,9 +627,13 @@ const swDestPath = path.join(distDir, 'sw.js');
 if (fs.existsSync(swSrcPath)) {
     const appShell = listAppShellFiles(distDir);
     const swSource = fs.readFileSync(swSrcPath, 'utf8');
+    // The classic worker must compare legacy downloads with exactly the same
+    // dialogue parser as the player, including when the origin is offline.
+    const dialogueParser = fs.readFileSync(path.join(__dirname, 'src/parse/dialogue.js'), 'utf8').replace(/^export /gm, '');
     const populated = swSource
         .replaceAll('__BUILD_VERSION__', buildVersion)
-        .replaceAll('__APP_SHELL__', JSON.stringify(appShell));
+        .replaceAll('__APP_SHELL__', JSON.stringify(appShell))
+        .replace('/*__DIALOGUE_PARSER__*/', () => dialogueParser);
     fs.writeFileSync(swDestPath, populated);
     console.log(`✓ Generated: sw.js (precache version=${buildVersion}, files=${appShell.length})`);
 }

@@ -38,6 +38,13 @@ export function saveJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+// Serialize read/modify/write operations between tabs of the installed player.
+// The synchronous fallback also works for a local, non-secure development URL.
+export function withStorageLock(key, update) {
+  const locks = globalThis.navigator?.locks;
+  return locks ? locks.request('podlearn:' + key, update) : update();
+}
+
 export function loadQueue() {
   const parsed = loadJSON('playQueue', []);
   return Array.isArray(parsed) ? parsed : [];

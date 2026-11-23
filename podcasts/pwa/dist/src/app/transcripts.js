@@ -11,13 +11,17 @@ export function transcriptUrl(podcastId, episode) {
 }
 
 const inflight = new Map();
+const fetchedContent = new WeakSet();
 
 // Resolves to the episode's script text, or null when it can't be loaded.
 // Episodes that already carry `content` (user-created shows, or an unbuilt
 // catalog) resolve immediately.
 export async function ensureEpisodeContent(podcastId, episode, { fetchImpl = (...args) => fetch(...args) } = {}) {
     if (!episode) return null;
-    if (typeof episode.content === 'string') return episode.content;
+    // A saved recording may be removed or replaced in another tab. Ask the
+    // controlling worker which revision to play on every open, while retaining
+    // embedded content and the in-memory fallback in browsers without a worker.
+    if (typeof episode.content === 'string' && (!fetchedContent.has(episode) || !globalThis.navigator?.serviceWorker?.controller)) return episode.content;
     const url = transcriptUrl(podcastId, episode);
     if (!url) return null;
     if (inflight.has(url)) return inflight.get(url);
@@ -27,6 +31,7 @@ export async function ensureEpisodeContent(podcastId, episode, { fetchImpl = (..
             if (!res || !res.ok) return null;
             const text = await res.text();
             episode.content = text;
+            fetchedContent.add(episode);
             return text;
         } catch {
             return null;

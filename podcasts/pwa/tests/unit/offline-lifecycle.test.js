@@ -230,7 +230,7 @@ test('workers with an audio-only inventory can still serve scripts from their tr
     assert.equal(manager.isRecoverable(podcast, episode), true);
 });
 
-test('offline manifest dialogue is immediately playable while an original script remains eligible for repair', async (t) => {
+test('a recording with recoverable dialogue stays playable without pinning a newer online script', async (t) => {
     storageWithDownloads(t, []);
     const origin = 'https://example.test/';
     const episode = { id: 1, file: 'one.md', transcriptHash: 'current' };
@@ -239,26 +239,47 @@ test('offline manifest dialogue is immediately playable while an original script
     const urls = ['combined.mp3?v=old', 'manifest.json?v=old'].map(file => origin + 'audio/show/one/' + file);
     stub(t, globalThis, 'location', new URL(origin));
     stub(t, navigator, 'onLine', false);
-    let repairs = 0;
     stub(t, navigator, 'serviceWorker', { controller: {
         postMessage(message, [port]) {
-            if (message.type === 'LIST_OFFLINE_AUDIO') {
-                return port.postMessage({ urls, transcriptUrls: [], recoverableTranscriptUrls: [script.split('?')[0]] });
-            }
-            assert.deepEqual(message.urls, [script], 'only the small missing original script is repaired online');
-            urls.push(script);
-            repairs++;
-            port.postMessage({ results: [{ url: script, ok: true }] });
+            assert.equal(message.type, 'LIST_OFFLINE_AUDIO');
+            port.postMessage({ urls, transcriptUrls: [], recoverableTranscriptUrls: [script.split('?')[0]] });
         }
     } });
     const manager = createDownloadsManager({ getPodcasts: () => [podcast], onChange() {} });
     await manager.reconcile();
     assert.equal(manager.isDownloaded(podcast, episode), true);
-    assert.equal(repairs, 0);
     stub(t, navigator, 'onLine', true);
     await manager.reconcile();
-    assert.equal(repairs, 1);
     assert.equal(manager.isDownloaded(podcast, episode), true);
+});
+
+test('withdrawn downloads can be removed individually with an empty catalog', async (t) => {
+    const stored = storageWithDownloads(t, ['retired-1', 'retired-2']);
+    const origin = 'https://example.test/';
+    const files = ['episode-01-old', 'episode-02-also-old'];
+    let urls = files.flatMap(slug => [
+        origin + 'audio/retired/' + slug + '/combined.mp3?v=1',
+        origin + 'audio/retired/' + slug + '/manifest.json?v=1',
+        origin + 'transcripts/retired/' + slug + '.md?v=old'
+    ]);
+    stub(t, globalThis, 'location', new URL(origin));
+    stub(t, navigator, 'serviceWorker', { controller: {
+        postMessage(message, [port]) {
+            if (message.type === 'LIST_OFFLINE_AUDIO') return port.postMessage({ urls, transcriptUrls: [] });
+            assert.equal(message.type, 'DELETE_AUDIO_URLS');
+            urls = urls.filter(url => !message.urls.includes(url.split('?')[0]));
+            port.postMessage({ removed: 3 });
+        }
+    } });
+    const manager = createDownloadsManager({ getPodcasts: () => [], onChange() {}, setStatus() {} });
+    await manager.reconcile();
+    assert.equal(manager.getWithdrawn().length, 2);
+    await manager.removeWithdrawn(manager.getWithdrawn()[0]);
+    await manager.reconcile();
+    assert.deepEqual(stored('downloadSelections'), ['retired-2']);
+    assert.deepEqual(stored('downloadedEpisodes'), ['retired-2']);
+    assert.deepEqual(manager.getWithdrawn().map(entry => entry.episode.title), ['Episode 02 Also Old']);
+    assert.equal(urls.length, 3);
 });
 
 test('a controller change abandons an unanswered inventory and retries against the new worker', async (t) => {

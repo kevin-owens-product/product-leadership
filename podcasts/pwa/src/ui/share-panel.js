@@ -46,6 +46,7 @@ export function createSharePanel({
             const url = new URL(window.location.href);
             url.searchParams.set('podcast', currentPodcast.id);
             url.searchParams.set('episode', currentEpisode.id);
+            url.searchParams.delete('line');
 
             if (navigator.share) {
                 navigator.share({

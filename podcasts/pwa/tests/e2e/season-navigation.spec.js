@@ -60,6 +60,14 @@ test('deep-linked episode wins and Back returns to its season', async ({ page })
   expect(ids.at(-1)).toBe(16);
 });
 
+test('Start Season plays the selected episode', async ({ page }) => {
+  await openShow(page, 'operator-mode');
+  const start = page.locator('#continue-episode');
+  await expect(start).toContainText('Start Season 1');
+  await start.click();
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
+});
+
 test('season-only deep link opens the requested season list', async ({ page }) => {
   await page.goto('/?podcast=operator-mode&season=2', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('#list-view')).toHaveClass(/active/);

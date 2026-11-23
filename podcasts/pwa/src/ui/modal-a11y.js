@@ -3,6 +3,13 @@
 
 const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+export function dismissModal(modal) {
+    const button = modal.querySelector('[data-dismiss-dialog]')
+        || modal.querySelector('[id^="close-"], [id^="cancel-"], [id^="dismiss-"]');
+    if (button) button.click();
+    else modal.classList.remove('show');
+}
+
 export function initModalA11y() {
     const modalReturnFocus = new WeakMap();
 
@@ -41,17 +48,8 @@ export function initModalA11y() {
         const modal = open[open.length - 1];
 
         if (e.key === 'Escape') {
-            // Prefer the modal's explicit cancel/close/dismiss button so its handler runs.
-            const closeBtn = modal.querySelector(
-                '[id^="cancel-"], [id^="close-"], [id^="dismiss-"]'
-            );
-            if (closeBtn) {
-                e.preventDefault();
-                closeBtn.click();
-            } else {
-                e.preventDefault();
-                modal.classList.remove('show');
-            }
+            e.preventDefault();
+            dismissModal(modal);
             return;
         }
 

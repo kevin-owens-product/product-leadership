@@ -10,9 +10,11 @@ import httpServer from 'http-server';
 const app = fileURLToPath(new URL('../../', import.meta.url));
 const shipped = {
   '2.7.1': '6d2114f5898c07874fea7a8fe9f20686aa8d1135',
-  '2.7.2': '496b9f91300ed4fe4d55bc5a02078f96ac44ab66'
+  '2.7.2': '496b9f91300ed4fe4d55bc5a02078f96ac44ab66',
+  '2.7.3': 'b96ac4603c962758475e8339c241ca9fd6151ca1'
 };
 const episode = 'claude-code-mastery/episode-01-getting-started';
+const revisedEpisode = 'agentic-coding-frontier/episode-07-the-model-map-autumn-2026';
 const offlineCache = 'podlearn-offline-audio-v1';
 
 // Materialize the actual previously shipped worker, shell and one episode.
@@ -22,11 +24,20 @@ async function previousRelease(temp, version) {
   if (process.env.PODLEARN_PREVIOUS_DIST) return path.resolve(process.env.PODLEARN_PREVIOUS_DIST);
   const previous = path.join(temp, 'previous');
   await fs.mkdir(previous);
-  const archive = execFileSync('git', ['archive', '--format=tar', shipped[version] + ':podcasts/pwa/dist', '--',
+  function extract(commit, files) {
+    const archive = execFileSync('git', ['archive', '--format=tar', commit + ':podcasts/pwa/dist', '--', ...files],
+      { cwd: path.resolve(app, '../..'), maxBuffer: 32 * 1024 * 1024 });
+    execFileSync('tar', ['-xf', '-', '-C', previous], { input: archive });
+  }
+  const target = version === '2.7.3' ? revisedEpisode : episode;
+  extract(shipped[version], [
     'sw.js', 'version.json', 'index.html', 'manifest.json', 'podcasts.js', 'icon*', 'covers', 'src', 'styles',
-    `transcripts/${episode}.md`, `audio/${episode}/combined.mp3`, `audio/${episode}/manifest.json`
-  ], { cwd: path.resolve(app, '../..'), maxBuffer: 32 * 1024 * 1024 });
-  execFileSync('tar', ['-xf', '-', '-C', previous], { input: archive });
+    `transcripts/${target}.md`
+  ]);
+  // 2.7.3 could store its current script alongside a recording saved before
+  // the episode was lengthened. Recreate that exact on-device combination.
+  const recording = version === '2.7.3' ? 'a565b7d8fa99153c6e4608bb326929eb1b493f70' : shipped[version];
+  extract(recording, [`audio/${target}/combined.mp3`, `audio/${target}/manifest.json`]);
   return previous;
 }
 
@@ -83,6 +94,53 @@ const cachedEpisodeUrls = page => page.evaluate(async name => {
   const cache = await caches.open(name);
   return (await cache.keys()).map(request => request.url).sort();
 }, offlineCache);
+
+test.describe('previously downloaded short cut of Agentic Coding Frontier episode 7', () => {
+  test.use({ baseline: '2.7.3' });
+
+  for (const missing of [false, true]) {
+    test(`plays online and offline after upgrade with a ${missing ? 'missing' : 'mismatched'} saved script`, async ({ site, page, context }) => {
+      await page.goto(site.origin);
+      await page.waitForFunction(() => Boolean(navigator.serviceWorker.controller));
+      await page.locator('.podcast-card[data-podcast-id="agentic-coding-frontier"]').click();
+      await page.locator('.season-tab[data-season="2"]').click();
+      const download = page.locator('.episode-card[data-episode-id="7"] .ep-download-btn');
+      await download.click();
+      await expect(download).toHaveClass(/downloaded/);
+      if (missing) {
+        await page.evaluate(async name => {
+          const cache = await caches.open(name);
+          const script = (await cache.keys()).find(request => request.url.includes('/transcripts/'));
+          await cache.delete(script);
+        }, offlineCache);
+      }
+      await page.locator('#back-to-podcasts').click();
+      await page.waitForFunction(() => !history.state?.['podlearn-back']);
+      await site.publish();
+      await page.locator('#refresh-btn').click();
+      await expect(page.locator('#version-badge')).toHaveAttribute('title', 'v' + site.newVersion);
+      await page.goto(site.origin);
+
+      async function playSavedCut(tab) {
+        const downloads = tab.locator('#home-downloads summary');
+        await expect(downloads).toHaveText('Downloads (1)');
+        await downloads.click();
+        await tab.locator('#downloads-list').getByRole('button', { name: /^Play / }).click();
+        await expect(tab.locator('.transcript-line')).toHaveCount(78);
+        await expect(tab.locator('#play-btn')).toHaveAttribute('aria-label', 'Pause');
+        await expect(tab.locator('#current-pos')).toHaveText(/^0:0[1-9]$/);
+      }
+      await playSavedCut(page);
+      await page.close();
+      expect(site.newAudioRequests()).toBe(0);
+      await site.disconnect();
+      await context.setOffline(true);
+      const offline = await context.newPage();
+      await offline.goto(site.origin);
+      await playSavedCut(offline);
+    });
+  }
+});
 
 for (const [baseline, action] of [['2.7.1', 'Refresh'], ['2.7.1', 'Update Now'], ['2.7.2', 'Refresh']]) {
   test.describe(`${baseline} via ${action}`, () => {

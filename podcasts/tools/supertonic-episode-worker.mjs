@@ -61,5 +61,11 @@ for (let i = 0; i < job.lines.length; i += 1) {
     job.speed,
   );
   fs.mkdirSync(path.dirname(line.outputPath), { recursive: true });
-  writeWavFile(line.outputPath, peakNormalize(wav), textToSpeech.sampleRate);
+  const pending = line.outputPath + '.' + process.pid + '.tmp.wav';
+  try {
+    writeWavFile(pending, peakNormalize(wav), textToSpeech.sampleRate);
+    fs.renameSync(pending, line.outputPath);
+  } finally {
+    fs.rmSync(pending, { force: true });
+  }
 }

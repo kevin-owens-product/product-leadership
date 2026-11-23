@@ -39,6 +39,7 @@ function installInstantAudio(page) {
       play() {
         this.paused = false;
         this._emit('play');
+        this._emit('playing');
         setTimeout(() => { if (!this.paused) { this.paused = true; this._emit('ended'); } }, 20);
         return Promise.resolve();
       }
@@ -128,6 +129,25 @@ test('a queued episode takes precedence over the sequential next episode', async
   await expect.poll(() =>
     page.evaluate(() => JSON.parse(localStorage.getItem('playQueue') || '[]').length)
   ).toBe(0);
+});
+
+test('queue edits from two tabs survive and playing from the show consumes only that episode', async ({ page, context }) => {
+  const other = await context.newPage();
+  await installInstantAudio(page);
+  const url = '/?podcast=claude-code-mastery';
+  await Promise.all([page.goto(url), other.goto(url)]);
+  const card = (tab, id) => tab.locator(`.episode-card[data-episode-id="${id}"]`);
+  const ids = () => page.evaluate(() => JSON.parse(localStorage.getItem('playQueue') || '[]').map(item => item.episodeNum).sort());
+  await Promise.all([card(page, 1).locator('.ep-queue-btn').click(), card(other, 3).locator('.ep-queue-btn').click()]);
+  await expect.poll(ids).toEqual([1, 3]);
+  await expect(card(other, 1).locator('.ep-queue-btn')).toBeDisabled();
+  await card(page, 1).locator('.ep-title').click();
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+  expect(await ids()).toEqual([1, 3]);
+  await page.locator('#play-btn').click();
+  await expect.poll(ids).toEqual([3]);
+  await expect(card(other, 1).locator('.ep-queue-btn')).toBeEnabled();
+  await expect(page.locator('#complete-message')).toContainText('Code Reading & Editing');
 });
 
 test('auto-advance is suppressed when the Auto toggle is off', async ({ page }) => {

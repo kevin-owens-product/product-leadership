@@ -803,7 +803,14 @@ body.light-theme .podcast-card {
     transform: translateX(-50%) scale(0.95);
 }
 
-.panel.collapsed .transcript-resync {
+.transcript-panel.collapsed {
+    min-height: 0;
+    flex: 0 0 auto;
+}
+
+.transcript-panel.collapsed .transcript-search,
+.transcript-panel.collapsed .transcript-content,
+.transcript-panel.collapsed .transcript-resync {
     display: none;
 }
 
@@ -1890,6 +1897,10 @@ body.light-theme .podcast-card {
     font: inherit;
     text-align: start;
     cursor: pointer;
+}
+
+span.download-play {
+    cursor: default;
 }
 
 .download-play small {

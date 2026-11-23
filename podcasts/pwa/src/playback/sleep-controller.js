@@ -13,9 +13,7 @@ export function createSleepController({
     getSpeechRate,
     getEpisodeAudioDuration,
     setStatus,
-    saveState,
-    stopPlayback,
-    syncMediaSession
+    stopPlayback
 }) {
     let sleepTimerEndTime = null;
     let sleepAtEpisodeEnd = false;
@@ -79,21 +77,14 @@ export function createSleepController({
         return false;
     }
 
-    // Timer fired: pause (keeping position) rather than stop, restore the faded
-    // volume, and make sure the lockscreen reflects the paused state.
+    // Stop the whole playback session, including pending advances and media
+    // retries. stopPlayback pauses the current track at its existing position.
     async function finish() {
         sleepTimerEndTime = null;
         sleepAtEpisodeEnd = false;
-        if (speechPlayers.isContinuousReady()) {
-            speechPlayers.pause();
-        } else {
-            await stopPlayback();
-        }
-        restoreVolume();
+        await stopPlayback();
         setStatus('Sleep timer ended');
         updateUI();
-        saveState();
-        syncMediaSession({ includePosition: true });
     }
 
     // End-of-episode mode resolved naturally (the episode finished). Clears the

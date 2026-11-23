@@ -107,9 +107,9 @@ function main() {
     if (FORCE) {
         console.log('  cache:     --force, all lines will be re-rendered');
     } else if (cached > 0) {
-        console.log(`  cache:     ${cached}/${totalEvents} lines already rendered — TTS will resume and skip them`);
+        console.log(`  cache:     ${cached}/${totalEvents} previous WAVs — TTS checks the current script, voice and render settings for reuse`);
     } else {
-        console.log('  cache:     no cached lines — full render');
+        console.log('  cache:     TTS will reuse any completed lines from earlier attempts');
     }
 
     const ttsArgs = ['--show', showId, '--episode', String(episodeNum), ...(FORCE ? ['--force'] : [])];
@@ -158,10 +158,7 @@ function main() {
     if (!runNode(path.join(TOOLS_DIR, 'generate-audio-supertonic.js'), ttsArgs, {
         env: engineEnv
     })) {
-        const nowCached = fs.existsSync(audioDir)
-            ? fs.readdirSync(audioDir).filter((f) => /^\d{4}\.wav$/.test(f)).length
-            : 0;
-        console.error(`\n✗ TTS failed after ${formatElapsed(startedAt)}. ${nowCached}/${totalEvents} lines are cached — re-run to resume from there.`);
+        console.error(`\n✗ TTS failed after ${formatElapsed(startedAt)}. Re-run to reuse completed lines.`);
         process.exit(1);
     }
     console.log(`✓ TTS complete (${formatElapsed(startedAt)} elapsed).`);

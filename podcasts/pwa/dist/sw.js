@@ -1,6 +1,6 @@
 // Service worker — atomic versioned precache.
 //
-// The build script substitutes 2.7.3+20261121T204056Z and ["/covers/agentic-coding-frontier.jpg","/covers/ai-diligence-room.jpg","/covers/claude-code-mastery.jpg","/covers/compliance-shift.jpg","/covers/control-loop.jpg","/covers/deadwater.jpg","/covers/foreign-service-prep.jpg","/covers/operator-mode.jpg","/covers/portfolio-deep-dives.jpg","/covers/real-economy-ai.jpg","/covers/talking-ai-to-the-board.jpg","/covers/tech-leadership.jpg","/covers/the-decision-room.jpg","/covers/the-forge-podcast.jpg","/covers/the-harness.jpg","/covers/the-influence-brief.jpg","/covers/the-rulebook.jpg","/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/transcripts.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/new-episodes.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/seasons.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
+// The build script substitutes 2.7.4+20261123T141526Z and ["/covers/agentic-coding-frontier.jpg","/covers/ai-diligence-room.jpg","/covers/claude-code-mastery.jpg","/covers/compliance-shift.jpg","/covers/control-loop.jpg","/covers/deadwater.jpg","/covers/foreign-service-prep.jpg","/covers/operator-mode.jpg","/covers/portfolio-deep-dives.jpg","/covers/real-economy-ai.jpg","/covers/talking-ai-to-the-board.jpg","/covers/tech-leadership.jpg","/covers/the-decision-room.jpg","/covers/the-forge-podcast.jpg","/covers/the-harness.jpg","/covers/the-influence-brief.jpg","/covers/the-rulebook.jpg","/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/transcripts.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/new-episodes.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/seasons.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"] at deploy
 // time. Each deploy gets a unique cache name and pre-fetches the entire app
 // shell during install. Activation atomically deletes any older shell cache
 // (preserving the user-downloaded audio cache). After activation + clients.claim,
@@ -12,7 +12,7 @@
 // shell list, which means precache is skipped and the SW just passes
 // requests through to the network. Audio downloads still work.
 
-const BUILD_VERSION = '2.7.3+20261121T204056Z';
+const BUILD_VERSION = '2.7.4+20261123T141526Z';
 const APP_SHELL_RAW = ["/covers/agentic-coding-frontier.jpg","/covers/ai-diligence-room.jpg","/covers/claude-code-mastery.jpg","/covers/compliance-shift.jpg","/covers/control-loop.jpg","/covers/deadwater.jpg","/covers/foreign-service-prep.jpg","/covers/operator-mode.jpg","/covers/portfolio-deep-dives.jpg","/covers/real-economy-ai.jpg","/covers/talking-ai-to-the-board.jpg","/covers/tech-leadership.jpg","/covers/the-decision-room.jpg","/covers/the-forge-podcast.jpg","/covers/the-harness.jpg","/covers/the-influence-brief.jpg","/covers/the-rulebook.jpg","/icon-192.png","/icon-512.png","/icon-maskable-192.png","/icon-maskable-512.png","/icon.svg","/index.html","/manifest.json","/podcasts.js","/src/app/back-nav.js","/src/app/podcasts-loader.js","/src/app/transcripts.js","/src/app/version.js","/src/app/wake-lock.js","/src/downloads/downloads.js","/src/main.js","/src/parse/dialogue.js","/src/playback/audio-errors.js","/src/playback/audio.js","/src/playback/chapters.js","/src/playback/controller.js","/src/playback/manifest.js","/src/playback/media-session.js","/src/playback/sleep-controller.js","/src/playback/sleep-timer.js","/src/playback/visualizer.js","/src/search/transcript-search.js","/src/security/sanitize.js","/src/share-export/export.js","/src/state/new-episodes.js","/src/state/queue-next.js","/src/state/speed-prefs.js","/src/state/stats.js","/src/state/storage.js","/src/sw/register-sw.js","/src/ui/artwork.js","/src/ui/bookmarks-panel.js","/src/ui/chapters-panel.js","/src/ui/dom.js","/src/ui/format.js","/src/ui/library.js","/src/ui/long-press.js","/src/ui/mini-player.js","/src/ui/modal-a11y.js","/src/ui/motion.js","/src/ui/queue-panel.js","/src/ui/render.js","/src/ui/scrubber.js","/src/ui/seasons.js","/src/ui/settings-panel.js","/src/ui/share-panel.js","/src/ui/shortcuts.js","/src/ui/swipe.js","/src/ui/tabs.js","/src/ui/toast.js","/src/ui/transcript-follow.js","/src/ui/transcript-panel.js","/styles/base.css","/styles/components.css","/styles/player.css"];
 
 const SHELL_CACHE = `podlearn-shell-${BUILD_VERSION}`;
@@ -154,10 +154,20 @@ async function transcriptFetch(req) {
     ]).catch(() => []);
     const [transcripts, downloads] = stores;
     if (downloads) {
-        const exact = await downloads.match(req);
-        if (exact) return exact;
-        const saved = await downloads.match(req, { ignoreSearch: true });
-        if (saved && await pinnedManifestForScript(downloads, req.url)) return saved;
+        const key = await pinnedManifestForScript(downloads, req.url);
+        if (key) {
+            const saved = await downloads.match(req, { ignoreSearch: true });
+            const recorded = await readManifestTranscript(downloads, key);
+            if (recorded) {
+                // A 2.7.3 repair could pin a newer script alongside older audio.
+                // Retain authored formatting only when its dialogue still lines
+                // up with the saved recording, including every source line.
+                const candidate = saved || await transcripts?.match(req, { ignoreSearch: true });
+                if (candidate && sameRecordedDialogue(await candidate.clone().text(), recorded)) return candidate;
+                return markdownResponse(recorded);
+            }
+            if (saved) return saved;
+        }
     }
     if (transcripts) {
         const hit = await transcripts.match(req);
@@ -195,14 +205,196 @@ async function offlineTranscript(stores, req) {
         const hit = await cache.match(req, { ignoreSearch: true });
         if (hit) return hit;
     }
-    if (!stores[1]) return null;
-    const key = await pinnedManifestForScript(stores[1], req.url);
-    const markdown = key && await readManifestTranscript(stores[1], key);
-    return markdown ? new Response(markdown, { headers: { 'Content-Type': 'text/markdown; charset=utf-8' } }) : null;
+    return null;
+}
+
+function markdownResponse(markdown) {
+    return new Response(markdown, { headers: { 'Content-Type': 'text/markdown; charset=utf-8' } });
+}
+
+function recordedDialogue(markdown) {
+    // Markdown dialogue parsing — pure functions, no DOM.
+//
+// Episodes are Markdown with `**SPEAKER:** text` lines (or the audio-drama
+// `[NAME] text` form), production cues like `[PAUSE]`, and an optional
+// `**Speaker Voices:**` map assigning speakers to the alex/sam voices.
+
+const SPEAKER_LINE_RE = /^\*\*([A-Z][A-Z0-9 '&()./-]*):\*\*\s*(.*)$/;
+const BRACKET_SPEAKER_LINE_RE = /^\[([A-Z][A-Z0-9 '&()./-]*)\]\s+(.+)$/;
+const BRACKET_CUE_LINE_RE = /^\[(PAUSE|LONG PAUSE|MUSIC STING|MUSIC FADES?|INTRO MUSIC|OUTRO MUSIC|SFX|SOUND|AMBIENCE|AMBIENT BED)(?:\s*[-:]\s*[^\]]+)?\]$/i;
+
+function normalizeSpeakerName(speakerName) {
+    return String(speakerName || '').trim().toUpperCase();
+}
+
+function isContinuationDialogueLine(trimmed) {
+    return Boolean(trimmed) &&
+        !trimmed.startsWith('*') &&
+        !trimmed.startsWith('-') &&
+        !trimmed.startsWith('|') &&
+        !trimmed.startsWith('#') &&
+        trimmed !== '---';
+}
+
+function parseSpeakerVoiceMap(content) {
+    const voiceMap = {};
+    const mapLine = content.split('\n').find((line) =>
+        /^\*\*(?:Speaker\s+Voices?|Voice\s*Map):\*\*/i.test(line.trim())
+    );
+    if (!mapLine) return voiceMap;
+
+    const matches = mapLine.trim().match(/^\*\*(?:Speaker\s+Voices?|Voice\s*Map):\*\*\s*(.+)$/i);
+    if (!matches || !matches[1]) return voiceMap;
+
+    const entries = matches[1].split(/[;,]+/);
+    entries.forEach((entry) => {
+        const parsed = entry.trim().match(/^(.+?)\s*(?:=|:|->)\s*(alex|sam)\s*$/i);
+        if (!parsed) return;
+        const speakerName = normalizeSpeakerName(parsed[1]);
+        const speakerVoice = parsed[2].toLowerCase();
+        if (speakerName) {
+            voiceMap[speakerName] = speakerVoice;
+        }
+    });
+
+    return voiceMap;
+}
+
+function parseMarkdown(content, voiceOverrides = {}) {
+    const lines = content.split('\n');
+    const dialogue = [];
+    let currentSpeakerType = null;
+    let currentSpeakerLabel = null;
+    const speakerMap = {};
+    Object.entries(voiceOverrides).forEach(([speaker, voiceType]) => {
+        const normalizedSpeaker = normalizeSpeakerName(speaker);
+        if ((voiceType === 'alex' || voiceType === 'sam') && normalizedSpeaker) {
+            speakerMap[normalizedSpeaker] = voiceType;
+        }
+    });
+    let speakerCount = Object.keys(speakerMap).length;
+
+    for (let i = 0; i < lines.length; i += 1) {
+        const line = lines[i];
+        const trimmed = line.trim();
+        if (!trimmed) {
+            continue;
+        }
+
+        if (trimmed.startsWith('#') || trimmed.startsWith('|') ||
+            trimmed.startsWith('---') || trimmed.startsWith('*Next') || trimmed.startsWith('[Read')) {
+            currentSpeakerType = null;
+            currentSpeakerLabel = null;
+            continue;
+        }
+
+        // Match dialogue patterns:
+        // - **NAME:** text (standard PodLearn format)
+        // - [NAME] text (audio-drama/script format)
+        const speakerMatch = trimmed.match(SPEAKER_LINE_RE) || trimmed.match(BRACKET_SPEAKER_LINE_RE);
+        const dirMatch = trimmed.match(/^\*?\*?\[(.+)\]\*?\*?$/);
+
+        if (speakerMatch) {
+            const speakerName = speakerMatch[1].trim();
+            const normalizedSpeaker = normalizeSpeakerName(speakerName);
+            const text = (speakerMatch[2] || '').trim();
+
+            // Ignore metadata-like bold labels that are not dialogue lines.
+            if (!text) {
+                currentSpeakerType = null;
+                currentSpeakerLabel = null;
+                continue;
+            }
+
+            // Assign voice type (alternating between alex and sam voices)
+            if (!speakerMap[normalizedSpeaker]) {
+                speakerMap[normalizedSpeaker] = speakerCount % 2 === 0 ? 'alex' : 'sam';
+                speakerCount++;
+            }
+
+            const voiceType = speakerMap[normalizedSpeaker];
+            dialogue.push({
+                speaker: speakerName,
+                text: cleanText(text),
+                type: voiceType,
+                rawLine: i
+            });
+            currentSpeakerType = voiceType;
+            currentSpeakerLabel = speakerName;
+        } else if (dirMatch || BRACKET_CUE_LINE_RE.test(trimmed)) {
+            // Stage directions and production cues like [PAUSE] / [MUSIC STING]
+            // are not spoken by the TTS layer.
+            currentSpeakerType = null;
+            currentSpeakerLabel = null;
+            continue;
+        } else if (currentSpeakerType && isContinuationDialogueLine(trimmed)) {
+            const continuation = cleanText(trimmed);
+            if (continuation) {
+                dialogue.push({
+                    speaker: currentSpeakerLabel || 'Narration',
+                    text: continuation,
+                    type: currentSpeakerType,
+                    rawLine: i
+                });
+            }
+        }
+    }
+    return dialogue;
+}
+
+function cleanText(text) {
+    return text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/`/g, '')
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/```[\s\S]*?```/g, 'code block')
+        // TTS expression tags (<laugh>, <breath>, <sigh>) are audio-only
+        // directives — never show them in the transcript.
+        .replace(/<\s*[a-zA-Z_]+\s*>/g, ' ')
+        .replace(/ {2,}/g, ' ')
+        .trim();
+}
+
+// Align chapter entries (parsed from headings) to the dialogue line that
+// follows each heading, keeping indexes monotonically non-decreasing.
+function alignChapterLineIndexes(chapterList, lines) {
+    if (!Array.isArray(chapterList) || chapterList.length === 0 || !Array.isArray(lines)) return;
+    if (lines.length === 0) {
+        chapterList.forEach((chapter) => { chapter.lineIndex = 0; });
+        return;
+    }
+
+    chapterList.forEach((chapter, idx) => {
+        const nextRawLine = chapterList[idx + 1]?.rawLine ?? Number.POSITIVE_INFINITY;
+        const lineIndex = lines.findIndex((line) =>
+            Number.isInteger(line.rawLine) &&
+            line.rawLine > chapter.rawLine &&
+            line.rawLine < nextRawLine
+        );
+        if (lineIndex >= 0) {
+            chapter.lineIndex = lineIndex;
+        }
+    });
+
+    chapterList[0].lineIndex = Math.max(0, chapterList[0].lineIndex || 0);
+    for (let i = 1; i < chapterList.length; i += 1) {
+        if (chapterList[i].lineIndex < chapterList[i - 1].lineIndex) {
+            chapterList[i].lineIndex = chapterList[i - 1].lineIndex;
+        }
+    }
+}
+
+    return parseMarkdown(markdown);
+}
+
+function sameRecordedDialogue(markdown, recorded) {
+    const candidate = recordedDialogue(markdown);
+    const expected = recordedDialogue(recorded);
+    return candidate.length === expected.length && expected.every((line, i) =>
+        candidate[i].rawLine === line.rawLine && candidate[i].speaker === line.speaker && candidate[i].text === line.text);
 }
 
 const manifestPath = /\/audio\/([^/]+)\/([^/]+)\/manifest\.json$/;
 const combinedPath = /\/audio\/([^/]+)\/([^/]+)\/combined\.mp3$/;
+const clipPath = /\/audio\/[^/]+\/[^/]+\/\d+\.(?:mp3|wav)$/;
 
 function counterpartUrl(url) {
     const other = new URL(url);
@@ -269,24 +461,27 @@ async function readManifestTranscript(cache, key) {
 
 async function cachedAudio(cache, req, allowUnpaired = false) {
     const url = new URL(req.url);
-    let key = req.url;
-    let response = await cache.match(key);
-    if (!response) {
-        key = await pinnedAssetKey(cache, url);
-        if (key) response = await cache.match(key);
-        else if (allowUnpaired) response = await cache.match(req, { ignoreSearch: true });
+    let key = (await cache.keys(req.url))[0]?.url || await pinnedAssetKey(cache, url);
+    if (!key && allowUnpaired) key = (await cache.keys(req, { ignoreSearch: true }))[0]?.url;
+    if (!key) return null;
+    const range = req.headers.get('range')?.match(/^bytes=(\d*)-(\d*)$/);
+    if (range && (range[1] || range[2]) && !manifestPath.test(url.pathname)) {
+        const media = await savedRangeMedia(cache, key);
+        return media && rangeAwareAudioResponse(range, media);
     }
+    const response = await cache.match(key);
     if (!response) return null;
-    if (key && manifestPath.test(url.pathname)) {
+    if (manifestPath.test(url.pathname)) {
         const headers = new Headers(response.headers);
         headers.set('X-PodLearn-Audio-Cache-Key', new URL(key).searchParams.get('v') || '');
         return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
     }
-    return rangeAwareAudioResponse(req, response);
+    return response;
 }
 
 async function audioFetch(req) {
-    const retry = new URL(req.url).searchParams.has('podlearnRetry');
+    const url = new URL(req.url);
+    const retry = url.searchParams.has('podlearnRetry');
     const cache = await caches.open(OFFLINE_AUDIO_CACHE).catch(() => null);
     if (cache && !retry) {
         try {
@@ -300,7 +495,33 @@ async function audioFetch(req) {
     let networkError;
     try {
         network = retry ? await fetch(req, { cache: 'reload' }) : await fetch(req);
-        if (network.ok) return network;
+        if (network.ok) {
+            // A cache-busting query does not identify an immutable recording
+            // on the static host. Only use fresh bytes to repair a saved cut
+            // if its validator or its published manifest still matches.
+            if (retry && cache && combinedPath.test(url.pathname)) {
+                const key = await pinnedAssetKey(cache, url);
+                if (key && !await sameNetworkRecording(cache, key, network)) {
+                    const saved = await cachedAudio(cache, req, true);
+                    if (saved) {
+                        void network.body?.cancel().catch(() => {});
+                        return saved;
+                    }
+                }
+            }
+            // A failed combined recording can also trigger individual clip
+            // playback. The same file number in a new cut may be different speech.
+            if (cache && clipPath.test(url.pathname)) {
+                const manifest = new URL(url);
+                manifest.pathname = manifest.pathname.replace(/[^/]+$/, 'manifest.json');
+                const key = await pinnedAssetKey(cache, manifest);
+                if (key && !await sameNetworkManifest(cache, key)) {
+                    void network.body?.cancel().catch(() => {});
+                    return new Response('Recording revision changed', { status: 409 });
+                }
+            }
+            return network;
+        }
     } catch (err) {
         networkError = err;
     }
@@ -312,21 +533,51 @@ async function audioFetch(req) {
     return network;
 }
 
-async function rangeAwareAudioResponse(req, cached) {
-    const range = req.headers.get('range');
-    if (!range) return cached;
+async function sameNetworkRecording(cache, audioKey, network) {
+    const etag = network.headers.get('etag');
+    if (etag && !etag.startsWith('W/')) {
+        const saved = await cache.match(audioKey);
+        if (saved?.headers.get('etag') === etag) return true;
+    }
+    return sameNetworkManifest(cache, counterpartUrl(audioKey));
+}
 
-    const match = range.match(/^bytes=(\d*)-(\d*)$/);
-    if (!match) return cached;
+async function sameNetworkManifest(cache, key) {
+    const savedManifest = await cache.match(key);
+    if (!savedManifest) return false;
+    const latest = await fetch(key, { cache: 'reload' }).catch(() => null);
+    return Boolean(latest?.ok && await latest.text() === await savedManifest.text());
+}
 
-    const blob = await cached.blob();
+// Chrome may probe a recording and then issue overlapping seek requests.
+// Share one in-flight read and keep at most one episode (up to 64 MiB) warm.
+let rangeMedia = null;
+function savedRangeMedia(cache, key) {
+    if (rangeMedia?.key === key) return rangeMedia.media;
+    const entry = { key };
+    rangeMedia = entry;
+    entry.media = (async () => {
+        try {
+            const response = await cache.match(key);
+            if (!response) return null;
+            const blob = await response.blob();
+            if (blob.size <= 64 * 1024 * 1024) entry.reusable = true;
+            return { blob, headers: response.headers };
+        } finally {
+            if (rangeMedia === entry && !entry.reusable) rangeMedia = null;
+        }
+    })();
+    return entry.media;
+}
+
+function forgetRangeMedia(url) {
+    if (rangeMedia && rangeMedia.key.split('?')[0] === url.split('?')[0]) rangeMedia = null;
+}
+
+function rangeAwareAudioResponse(match, { blob, headers: originalHeaders }) {
     const size = blob.size;
     let start;
     let end;
-
-    if (match[1] === '' && match[2] === '') {
-        return cached;
-    }
 
     if (match[1] === '') {
         const suffixLength = Number(match[2]);
@@ -352,7 +603,7 @@ async function rangeAwareAudioResponse(req, cached) {
 
     end = Math.min(end, size - 1);
     const body = blob.slice(start, end + 1);
-    const headers = new Headers(cached.headers);
+    const headers = new Headers(originalHeaders);
     headers.set('Accept-Ranges', 'bytes');
     headers.set('Content-Length', String(body.size));
     headers.set('Content-Range', `bytes ${start}-${end}/${size}`);
@@ -424,6 +675,18 @@ function withAudioCache(operation) {
 }
 
 async function cacheEpisode(urls) {
+    // Older clients backfill missing scripts with a single-file cache request.
+    // Pin the recorded dialogue, never the script currently served by the host.
+    if (urls.length === 1 && new URL(urls[0]).pathname.includes('/transcripts/')) {
+        const [url] = urls;
+        return withAudioCache(async cache => {
+            const key = await pinnedManifestForScript(cache, url);
+            const markdown = key && await readManifestTranscript(cache, key);
+            if (!markdown) return [{ url, ok: false, error: 'Recorded transcript unavailable' }];
+            if (!await cache.match(url, { ignoreSearch: true })) await cache.put(url, markdownResponse(markdown));
+            return [{ url, ok: true }];
+        });
+    }
     const results = [];
     const fetched = [];
     for (const url of urls) {
@@ -448,6 +711,7 @@ async function cacheEpisode(urls) {
                 // entries available if the remaining files cannot fit.
                 if (existing.has(url)) continue;
                 await cache.put(url, response);
+                forgetRangeMedia(url);
                 added.push(url);
             }
         } catch (err) {
@@ -539,6 +803,7 @@ self.addEventListener('message', (event) => {
             event.waitUntil(withAudioCache(async (cache) => {
                 let removed = 0;
                 for (const url of data.urls) {
+                    forgetRangeMedia(url);
                     if (await cache.delete(url, { ignoreSearch: true })) removed += 1;
                 }
                 reply({ type: 'DELETE_AUDIO_URLS_RESULT', removed });

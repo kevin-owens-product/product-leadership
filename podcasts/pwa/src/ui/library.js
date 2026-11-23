@@ -160,11 +160,18 @@ export function createLibrary({
                     }
                 }
             }
+            entries.push(...downloads.getWithdrawn());
         }
         const readyCount = entries.filter(entry => entry.ready).length;
-        const restoreCount = entries.length - readyCount;
+        const withdrawnCount = entries.filter(entry => entry.withdrawn).length;
+        const restoreCount = entries.length - readyCount - withdrawnCount;
         let countLabel = verified || !supported ? ` (${readyCount})` : '';
-        if (restoreCount) countLabel = ` (${readyCount} ready, ${restoreCount} to restore)`;
+        if (restoreCount || withdrawnCount) {
+            const counts = [`${readyCount} ready`];
+            if (restoreCount) counts.push(`${restoreCount} to restore`);
+            if (withdrawnCount) counts.push(`${withdrawnCount} unavailable`);
+            countLabel = ` (${counts.join(', ')})`;
+        }
         document.getElementById('downloads-count').textContent = countLabel;
         const status = document.getElementById('downloads-status');
         status.hidden = entries.length > 0;
@@ -189,31 +196,38 @@ export function createLibrary({
         const focusEntry = visibleDownloads[focusIndex];
         visibleDownloads = entries;
         list.replaceChildren();
-        for (const { podcast, episode, ready, restoring } of entries) {
+        for (const entry of entries) {
+            const { podcast, episode, ready, restoring, withdrawn } = entry;
             const row = document.createElement('li');
-            const primary = document.createElement('button');
-            primary.type = 'button';
+            const primary = document.createElement(withdrawn ? 'span' : 'button');
             primary.className = 'download-play';
             primary.textContent = episode.title;
-            primary.setAttribute('aria-label', `${ready ? 'Play' : 'Restore'} ${episode.title} from ${podcast.title}`);
-            primary.setAttribute('aria-disabled', String(restoring));
             const meta = document.createElement('small');
             const duration = formatDurationLabel(episode.durationSeconds);
             const show = duration ? `${podcast.title} · ${duration}` : podcast.title;
-            meta.textContent = ready ? show : `${restoring ? 'Restoring…' : 'Restore download'} · ${show}`;
+            meta.textContent = withdrawn ? `${show} · Removed from catalog`
+                : ready ? show : `${restoring ? 'Restoring…' : 'Restore download'} · ${show}`;
             primary.appendChild(meta);
-            primary.addEventListener('click', () => {
-                if (ready) onResumeEpisode(podcast, episode);
-                else if (restoring) return;
-                else if (navigator.onLine === false) toasts.show('Connect to the internet to restore this download.');
-                else void downloads.download(podcast, episode);
-            });
+            if (!withdrawn) {
+                primary.type = 'button';
+                primary.setAttribute('aria-label', `${ready ? 'Play' : 'Restore'} ${episode.title} from ${podcast.title}`);
+                primary.setAttribute('aria-disabled', String(restoring));
+                primary.addEventListener('click', () => {
+                    if (ready) onResumeEpisode(podcast, episode);
+                    else if (restoring) return;
+                    else if (navigator.onLine === false) toasts.show('Connect to the internet to restore this download.');
+                    else void downloads.download(podcast, episode);
+                });
+            }
             const remove = document.createElement('button');
             remove.type = 'button';
             remove.className = 'bulk-btn';
             remove.textContent = 'Remove';
             remove.setAttribute('aria-label', `Remove download of ${episode.title} from ${podcast.title}`);
-            remove.addEventListener('click', () => { void downloads.remove(podcast, episode); });
+            remove.addEventListener('click', () => {
+                if (withdrawn) void downloads.removeWithdrawn(entry);
+                else void downloads.remove(podcast, episode);
+            });
             remove.disabled = restoring;
             row.append(primary, remove);
             list.appendChild(row);
@@ -221,7 +235,8 @@ export function createLibrary({
         if (focusIndex >= 0) {
             const retained = entries.findIndex(entry => entry.episode === focusEntry.episode && entry.podcast === focusEntry.podcast);
             const row = list.children[retained >= 0 ? retained : Math.min(focusIndex, entries.length - 1)];
-            const focusTarget = row?.querySelector(focusedButton.classList.contains('download-play') ? '.download-play' : '.bulk-btn')
+            const focusTarget = row?.querySelector(focusedButton.classList.contains('download-play') ? 'button.download-play' : '.bulk-btn')
+                || row?.querySelector('.bulk-btn')
                 || document.querySelector('#home-downloads summary');
             focusTarget.focus({ preventScroll: true });
         }
@@ -714,11 +729,11 @@ export function createLibrary({
                 queued: isQueued(currentPodcast, episode)
             });
             renderCard();
-            const handleEpisodeCardActivation = (event) => {
+            const handleEpisodeCardActivation = async (event) => {
                 const queueButton = event.target.closest('.ep-queue-btn');
                 if (queueButton) {
                     if (queueButton.getAttribute('aria-disabled') === 'true') return;
-                    onAddToQueue(currentPodcast, episode);
+                    await onAddToQueue(currentPodcast, episode);
                     renderCard();
                     card.querySelector('.ep-queue-btn').focus({ preventScroll: true });
                     return;
@@ -818,8 +833,7 @@ export function createLibrary({
             const episode = podcast.episodes.find((candidate) => candidate.id === episodeId);
             if (!episode) return;
             if (Number.isInteger(seasonNumber)) selectSeason(podcast, seasonNumber);
-            if (event.currentTarget.dataset.kind === 'continue') onResumeEpisode(podcast, episode);
-            else onOpenEpisode(episode);
+            onResumeEpisode(podcast, episode);
         });
     }
 

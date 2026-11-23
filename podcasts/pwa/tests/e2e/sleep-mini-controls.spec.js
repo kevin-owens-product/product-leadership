@@ -145,6 +145,36 @@ test('end-of-episode sleep stop suppresses queue auto-advance', async ({ page })
   await expect(page.locator('#sleep-timer-btn')).not.toHaveClass(/sleep-active/);
 });
 
+test('Escape and browser Back dismiss the sleep dialog and keep its timer', async ({ page }) => {
+  await openEpisode(page);
+  await page.locator('#sleep-timer-btn').click();
+  await page.locator('.timer-btn[data-minutes="15"]').click();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#sleep-modal')).toBeHidden();
+  await expect(page.locator('#sleep-chip')).toBeVisible();
+  await page.locator('#sleep-timer-btn').click();
+  await page.evaluate(() => history.back());
+  await expect(page.locator('#sleep-modal')).toBeHidden();
+  await expect(page.locator('#sleep-chip')).toBeVisible();
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+});
+
+test('minute timer expiring during the completion countdown stops the handoff', async ({ page }) => {
+  await installInstantAudio(page);
+  await openEpisode(page);
+  await page.clock.setFixedTime(new Date('2026-01-01T00:00:00Z'));
+  await page.locator('#sleep-timer-btn').click();
+  await page.locator('.timer-btn[data-minutes="5"]').click();
+  await page.locator('#close-sleep-modal').click();
+  await page.locator('#play-btn').click();
+  await expect(page.locator('#complete-message')).toContainText('in 5 seconds');
+  await page.clock.setFixedTime(new Date('2026-01-01T00:05:00Z'));
+  await expect(page.locator('#sleep-chip')).toBeHidden();
+  await expect(page.locator('#complete-modal')).toBeHidden();
+  await expect(page.locator('#player-episode-title')).toHaveText('Getting Started with Claude Code');
+  await expect(page.locator('#play-btn')).toHaveAttribute('aria-label', 'Play');
+});
+
 test('mini player play button toggles playback without expanding', async ({ page }) => {
   await installLingeringAudio(page);
   await openEpisode(page);

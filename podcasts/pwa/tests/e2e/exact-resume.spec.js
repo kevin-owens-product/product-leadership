@@ -39,6 +39,85 @@ async function returnHome(page) {
 
 const continueCard = (page, id) => page.locator(`#continue-listening .continue-card[data-podcast-id="${show}"][data-episode-id="${id}"]`);
 
+test('an idle tab preserves newer progress on exit, and a deliberate rewind wins', async ({ page, context }) => {
+  const url = `/?podcast=${show}&episode=4`;
+  await page.goto(url);
+  await page.locator('.transcript-line[data-index="9"]').click();
+  const newer = await context.newPage();
+  await captureNativePlayer(newer);
+  await newer.goto(url);
+  await expect(newer.locator('#player-view')).toHaveClass(/active/);
+  await pauseAt(newer, 2670);
+  const latest = await savedPosition(newer, 4);
+  expect(latest.positionSeconds).toBeCloseTo(2670, 0);
+
+  await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')));
+  expect(await savedPosition(newer, 4)).toEqual(latest);
+  await page.locator('.transcript-line[data-index="2"]').click();
+  const rewind = await savedPosition(page, 4);
+  expect(rewind.line).toBe(2);
+  expect(rewind.positionSeconds).toBeLessThan(latest.positionSeconds);
+  await newer.close({ runBeforeUnload: true });
+  expect(await savedPosition(page, 4)).toEqual(rewind);
+});
+
+test('going Home cancels an in-flight episode selection while preserving the mini player', async ({ page }) => {
+  await page.goto(`/?podcast=${show}&episode=4`);
+  await expect(page.locator('#player-view')).toHaveClass(/active/);
+  await page.locator('#back-to-list').click();
+  const script = '**/transcripts/**/episode-05-*.md*';
+  let release;
+  const gate = new Promise(resolve => { release = resolve; });
+  await page.route(script, async route => { await gate; await route.continue(); });
+  const pending = page.waitForRequest(script);
+  await page.locator('.episode-card[data-episode-id="5"]').click();
+  await pending;
+  await page.locator('#back-to-podcasts').click();
+  const finished = page.waitForResponse(script);
+  release();
+  await (await finished).finished();
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+  await expect(page.locator('#podcasts-view')).toHaveClass(/active/);
+  await page.locator('#mini-player-open').click();
+  await expect(page.locator('#player-episode-title')).toHaveText('Evals, Guardrails, and Reliability');
+});
+
+test('whole-episode sharing drops a deep link position while timestamp sharing preserves it', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'share', { value: async ({ url }) => { window.sharedURL = url; } });
+  });
+  await page.goto(`/?podcast=${show}&episode=4&line=9`);
+  await page.locator('#share-btn').click();
+  await page.locator('#share-timestamp-btn').click();
+  expect(new URL(await page.evaluate(() => window.sharedURL)).searchParams.get('line')).toBe('9');
+  await page.locator('#share-episode-btn').click();
+  const url = new URL(await page.evaluate(() => window.sharedURL));
+  expect(url.searchParams.get('line')).toBeNull();
+  expect(url.searchParams.get('episode')).toBe('4');
+});
+
+test('following playback scrolls only the transcript, and collapse hides its controls', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await captureNativePlayer(page);
+  await page.goto(`/?podcast=${show}&episode=4`);
+  await page.locator('#play-btn').click();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const line = page.locator('.transcript-line.current');
+  const previous = await line.getAttribute('data-index');
+  await page.evaluate(() => { window.podcastAudio.currentTime = 240; });
+  await expect(line).not.toHaveAttribute('data-index', previous);
+  await expect.poll(() => page.locator('#transcript-content').evaluate(el => el.scrollTop)).toBeGreaterThan(0);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  const header = page.locator('#transcript-panel .panel-header');
+  await header.click();
+  await expect(header).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#transcript-content')).toBeHidden();
+  await expect(page.locator('#transcript-search-input')).toBeHidden();
+  await header.click();
+  await expect(page.locator('#transcript-content')).toBeVisible();
+  await expect(page.locator('#transcript-search-input')).toBeVisible();
+});
+
 test('Continue plays at 44:30 after reopening and reuses an already playing or paused MP3', async ({ page }) => {
   await captureNativePlayer(page);
   await page.goto(`/?podcast=${show}&episode=4`);

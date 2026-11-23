@@ -154,10 +154,20 @@ async function transcriptFetch(req) {
     ]).catch(() => []);
     const [transcripts, downloads] = stores;
     if (downloads) {
-        const exact = await downloads.match(req);
-        if (exact) return exact;
-        const saved = await downloads.match(req, { ignoreSearch: true });
-        if (saved && await pinnedManifestForScript(downloads, req.url)) return saved;
+        const key = await pinnedManifestForScript(downloads, req.url);
+        if (key) {
+            const saved = await downloads.match(req, { ignoreSearch: true });
+            const recorded = await readManifestTranscript(downloads, key);
+            if (recorded) {
+                // A 2.7.3 repair could pin a newer script alongside older audio.
+                // Retain authored formatting only when its dialogue still lines
+                // up with the saved recording, including every source line.
+                const candidate = saved || await transcripts?.match(req, { ignoreSearch: true });
+                if (candidate && sameRecordedDialogue(await candidate.clone().text(), recorded)) return candidate;
+                return markdownResponse(recorded);
+            }
+            if (saved) return saved;
+        }
     }
     if (transcripts) {
         const hit = await transcripts.match(req);
@@ -195,14 +205,28 @@ async function offlineTranscript(stores, req) {
         const hit = await cache.match(req, { ignoreSearch: true });
         if (hit) return hit;
     }
-    if (!stores[1]) return null;
-    const key = await pinnedManifestForScript(stores[1], req.url);
-    const markdown = key && await readManifestTranscript(stores[1], key);
-    return markdown ? new Response(markdown, { headers: { 'Content-Type': 'text/markdown; charset=utf-8' } }) : null;
+    return null;
+}
+
+function markdownResponse(markdown) {
+    return new Response(markdown, { headers: { 'Content-Type': 'text/markdown; charset=utf-8' } });
+}
+
+function recordedDialogue(markdown) {
+    /*__DIALOGUE_PARSER__*/
+    return parseMarkdown(markdown);
+}
+
+function sameRecordedDialogue(markdown, recorded) {
+    const candidate = recordedDialogue(markdown);
+    const expected = recordedDialogue(recorded);
+    return candidate.length === expected.length && expected.every((line, i) =>
+        candidate[i].rawLine === line.rawLine && candidate[i].speaker === line.speaker && candidate[i].text === line.text);
 }
 
 const manifestPath = /\/audio\/([^/]+)\/([^/]+)\/manifest\.json$/;
 const combinedPath = /\/audio\/([^/]+)\/([^/]+)\/combined\.mp3$/;
+const clipPath = /\/audio\/[^/]+\/[^/]+\/\d+\.(?:mp3|wav)$/;
 
 function counterpartUrl(url) {
     const other = new URL(url);
@@ -269,24 +293,27 @@ async function readManifestTranscript(cache, key) {
 
 async function cachedAudio(cache, req, allowUnpaired = false) {
     const url = new URL(req.url);
-    let key = req.url;
-    let response = await cache.match(key);
-    if (!response) {
-        key = await pinnedAssetKey(cache, url);
-        if (key) response = await cache.match(key);
-        else if (allowUnpaired) response = await cache.match(req, { ignoreSearch: true });
+    let key = (await cache.keys(req.url))[0]?.url || await pinnedAssetKey(cache, url);
+    if (!key && allowUnpaired) key = (await cache.keys(req, { ignoreSearch: true }))[0]?.url;
+    if (!key) return null;
+    const range = req.headers.get('range')?.match(/^bytes=(\d*)-(\d*)$/);
+    if (range && (range[1] || range[2]) && !manifestPath.test(url.pathname)) {
+        const media = await savedRangeMedia(cache, key);
+        return media && rangeAwareAudioResponse(range, media);
     }
+    const response = await cache.match(key);
     if (!response) return null;
-    if (key && manifestPath.test(url.pathname)) {
+    if (manifestPath.test(url.pathname)) {
         const headers = new Headers(response.headers);
         headers.set('X-PodLearn-Audio-Cache-Key', new URL(key).searchParams.get('v') || '');
         return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
     }
-    return rangeAwareAudioResponse(req, response);
+    return response;
 }
 
 async function audioFetch(req) {
-    const retry = new URL(req.url).searchParams.has('podlearnRetry');
+    const url = new URL(req.url);
+    const retry = url.searchParams.has('podlearnRetry');
     const cache = await caches.open(OFFLINE_AUDIO_CACHE).catch(() => null);
     if (cache && !retry) {
         try {
@@ -300,7 +327,33 @@ async function audioFetch(req) {
     let networkError;
     try {
         network = retry ? await fetch(req, { cache: 'reload' }) : await fetch(req);
-        if (network.ok) return network;
+        if (network.ok) {
+            // A cache-busting query does not identify an immutable recording
+            // on the static host. Only use fresh bytes to repair a saved cut
+            // if its validator or its published manifest still matches.
+            if (retry && cache && combinedPath.test(url.pathname)) {
+                const key = await pinnedAssetKey(cache, url);
+                if (key && !await sameNetworkRecording(cache, key, network)) {
+                    const saved = await cachedAudio(cache, req, true);
+                    if (saved) {
+                        void network.body?.cancel().catch(() => {});
+                        return saved;
+                    }
+                }
+            }
+            // A failed combined recording can also trigger individual clip
+            // playback. The same file number in a new cut may be different speech.
+            if (cache && clipPath.test(url.pathname)) {
+                const manifest = new URL(url);
+                manifest.pathname = manifest.pathname.replace(/[^/]+$/, 'manifest.json');
+                const key = await pinnedAssetKey(cache, manifest);
+                if (key && !await sameNetworkManifest(cache, key)) {
+                    void network.body?.cancel().catch(() => {});
+                    return new Response('Recording revision changed', { status: 409 });
+                }
+            }
+            return network;
+        }
     } catch (err) {
         networkError = err;
     }
@@ -312,21 +365,51 @@ async function audioFetch(req) {
     return network;
 }
 
-async function rangeAwareAudioResponse(req, cached) {
-    const range = req.headers.get('range');
-    if (!range) return cached;
+async function sameNetworkRecording(cache, audioKey, network) {
+    const etag = network.headers.get('etag');
+    if (etag && !etag.startsWith('W/')) {
+        const saved = await cache.match(audioKey);
+        if (saved?.headers.get('etag') === etag) return true;
+    }
+    return sameNetworkManifest(cache, counterpartUrl(audioKey));
+}
 
-    const match = range.match(/^bytes=(\d*)-(\d*)$/);
-    if (!match) return cached;
+async function sameNetworkManifest(cache, key) {
+    const savedManifest = await cache.match(key);
+    if (!savedManifest) return false;
+    const latest = await fetch(key, { cache: 'reload' }).catch(() => null);
+    return Boolean(latest?.ok && await latest.text() === await savedManifest.text());
+}
 
-    const blob = await cached.blob();
+// Chrome may probe a recording and then issue overlapping seek requests.
+// Share one in-flight read and keep at most one episode (up to 64 MiB) warm.
+let rangeMedia = null;
+function savedRangeMedia(cache, key) {
+    if (rangeMedia?.key === key) return rangeMedia.media;
+    const entry = { key };
+    rangeMedia = entry;
+    entry.media = (async () => {
+        try {
+            const response = await cache.match(key);
+            if (!response) return null;
+            const blob = await response.blob();
+            if (blob.size <= 64 * 1024 * 1024) entry.reusable = true;
+            return { blob, headers: response.headers };
+        } finally {
+            if (rangeMedia === entry && !entry.reusable) rangeMedia = null;
+        }
+    })();
+    return entry.media;
+}
+
+function forgetRangeMedia(url) {
+    if (rangeMedia && rangeMedia.key.split('?')[0] === url.split('?')[0]) rangeMedia = null;
+}
+
+function rangeAwareAudioResponse(match, { blob, headers: originalHeaders }) {
     const size = blob.size;
     let start;
     let end;
-
-    if (match[1] === '' && match[2] === '') {
-        return cached;
-    }
 
     if (match[1] === '') {
         const suffixLength = Number(match[2]);
@@ -352,7 +435,7 @@ async function rangeAwareAudioResponse(req, cached) {
 
     end = Math.min(end, size - 1);
     const body = blob.slice(start, end + 1);
-    const headers = new Headers(cached.headers);
+    const headers = new Headers(originalHeaders);
     headers.set('Accept-Ranges', 'bytes');
     headers.set('Content-Length', String(body.size));
     headers.set('Content-Range', `bytes ${start}-${end}/${size}`);
@@ -424,6 +507,18 @@ function withAudioCache(operation) {
 }
 
 async function cacheEpisode(urls) {
+    // Older clients backfill missing scripts with a single-file cache request.
+    // Pin the recorded dialogue, never the script currently served by the host.
+    if (urls.length === 1 && new URL(urls[0]).pathname.includes('/transcripts/')) {
+        const [url] = urls;
+        return withAudioCache(async cache => {
+            const key = await pinnedManifestForScript(cache, url);
+            const markdown = key && await readManifestTranscript(cache, key);
+            if (!markdown) return [{ url, ok: false, error: 'Recorded transcript unavailable' }];
+            if (!await cache.match(url, { ignoreSearch: true })) await cache.put(url, markdownResponse(markdown));
+            return [{ url, ok: true }];
+        });
+    }
     const results = [];
     const fetched = [];
     for (const url of urls) {
@@ -448,6 +543,7 @@ async function cacheEpisode(urls) {
                 // entries available if the remaining files cannot fit.
                 if (existing.has(url)) continue;
                 await cache.put(url, response);
+                forgetRangeMedia(url);
                 added.push(url);
             }
         } catch (err) {
@@ -539,6 +635,7 @@ self.addEventListener('message', (event) => {
             event.waitUntil(withAudioCache(async (cache) => {
                 let removed = 0;
                 for (const url of data.urls) {
+                    forgetRangeMedia(url);
                     if (await cache.delete(url, { ignoreSearch: true })) removed += 1;
                 }
                 reply({ type: 'DELETE_AUDIO_URLS_RESULT', removed });

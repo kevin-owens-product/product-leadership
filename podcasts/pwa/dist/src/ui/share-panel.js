@@ -1,7 +1,7 @@
 // Share & export: timestamp/episode share links plus bookmark/progress JSON
 // exports, all launched from the share modal.
 
-import { buildBookmarksExport, buildProgressExport, downloadJSON } from '../share-export/export.js?v=2.7.3%2B20261121T204056Z';
+import { buildBookmarksExport, buildProgressExport, downloadJSON } from '../share-export/export.js?v=2.7.4%2B20261123T141526Z';
 
 export function createSharePanel({
     loadState,
@@ -46,6 +46,7 @@ export function createSharePanel({
             const url = new URL(window.location.href);
             url.searchParams.set('podcast', currentPodcast.id);
             url.searchParams.set('episode', currentEpisode.id);
+            url.searchParams.delete('line');
 
             if (navigator.share) {
                 navigator.share({
